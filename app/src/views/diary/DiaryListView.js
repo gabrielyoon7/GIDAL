@@ -1,15 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
-const MainView = () =>{
+const DiaryListView = () =>{
     return (
         <View style={styles.container}>
-            <Text>텍스트 테스트</Text>
-            <StatusBar style="auto" />
+            <Text>다이어리 리스트 뷰</Text>
         </View>
     )
 }
-export default MainView;
+export default DiaryListView;
 
 const styles = StyleSheet.create({
     container: {

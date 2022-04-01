@@ -9,6 +9,7 @@ import { AntDesign } from "@expo/vector-icons";
 function DiaryListScreen(props) {
     return (
         <>
+            <DiaryView />
             <DiaryListView/>
             <Fab renderInPortal={false} shadow={2} size="md" 
                 icon={<Icon color="white" as={AntDesign} name="plus" size="md" />} 

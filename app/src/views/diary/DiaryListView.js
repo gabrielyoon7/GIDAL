@@ -11,7 +11,7 @@ export default DiaryListView;
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
+      flex: 0.5,
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',

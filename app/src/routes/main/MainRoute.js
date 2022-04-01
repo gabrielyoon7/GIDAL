@@ -15,7 +15,7 @@ const TestScreen = ({navigation}) => {
     return (
       <TestRoute navigation={navigation}/>
     );
-  }
+}
 
 const Stack = createNativeStackNavigator();
 

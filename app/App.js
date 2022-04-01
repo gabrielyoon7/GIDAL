@@ -4,6 +4,8 @@ import MainRoute from './src/routes/main/MainRoute';
 // import { SafeAreaView, StatusBar, StyleSheet } from 'react-native';
 import { SafeAreaView} from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import 'react-native-gesture-handler';
+
 
 export default function App() {
   return (

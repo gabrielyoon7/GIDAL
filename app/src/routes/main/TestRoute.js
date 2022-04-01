@@ -77,14 +77,16 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 12,
-    borderRadius: 4,
-    backgroundColor: 'green',
+    paddingVertical: 8,
+    borderRadius: 100,
+    backgroundColor: '#dcdde1',
     width: 80
   },
   btnView: {
     borderWidth: StyleSheet.hairlineWidth,
-    borderColor: 'white',
+    borderColor: 'black',
+    borderRadius: 100,
+    borderWidth: 2,
     margin: 5
   }
 });

@@ -1,21 +1,19 @@
-import MainView from '../../views/main/MainView';
 import * as React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import DiaryRoute from '../../routes/diary/DiaryRoute';
+import TestRoute from './TestRoute';
 
 
 
-const HomeScreen = () =>{
+const HomeScreen = ({navigation}) => {
     return(
-        <DiaryRoute/>
+        <DiaryRoute navigation={navigation}/>
     )
 }
 
-const DetailsScreen = () => {
+const TestScreen = ({navigation}) => {
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>나중에 쓸 일 있으면 쓸 것</Text>
-      </View>
+      <TestRoute navigation={navigation}/>
     );
   }
 
@@ -28,7 +26,7 @@ const MainRoute = () =>{
             screenOptions={{ headerShown: false }}             
         >
             <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen name="Details" component={DetailsScreen} />
+            <Stack.Screen name="Test" component={TestScreen} />
         </Stack.Navigator>
     )
 }

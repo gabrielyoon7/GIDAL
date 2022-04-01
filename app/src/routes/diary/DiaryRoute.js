@@ -5,11 +5,12 @@ import DiaryListView from '../../views/diary/DiaryListView';
 import DiaryView from '../../views/diary/DiaryView';
 import { Fab, Icon } from "native-base";
 import { AntDesign } from "@expo/vector-icons";
+import CalendarView from '../../views/diary/CalendarView';
 
 function DiaryListScreen(props) {
     return (
         <>
-            <DiaryView />
+            <CalendarView />
             <DiaryListView/>
             <Fab renderInPortal={false} shadow={2} size="md" 
                 icon={<Icon color="white" as={AntDesign} name="plus" size="md" />} 

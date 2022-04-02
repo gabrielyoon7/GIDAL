@@ -7,13 +7,12 @@ import Carousel from 'react-native-snap-carousel';
 import TestMainView from '../../views/test/TestMainView';
 import CarouselTestView from '../../views/test/CarouselTestView';
 import SliderTestView from '../../views/test/SliderTestView';
-import TimePickerTestView from '../../views/test/TimePickerTestView';
 
   
 const TestMainScreen = (props) => {
-    return (
-        <TestMainView navigation={props.navigation}/>
-    );
+  return (
+      <TestMainView navigation={props.navigation}/>
+  );
 }
 
 
@@ -29,11 +28,6 @@ function SliderTestScreen() {
   );
 }
 
-function TimePickerTestScreen() {
-  return (
-    <TimePickerTestView/>
-  )
-}
 
 const Drawer = createDrawerNavigator();
 
@@ -43,7 +37,6 @@ const MyDrawer = (props) => {
       <Drawer.Screen name="TestMain" component={TestMainScreen} />
       <Drawer.Screen name="CarouselTest" component={CarouselTestScreen} />
       <Drawer.Screen name="SliderTest" component={SliderTestScreen} />
-      <Drawer.Screen name="TimePickerTest" component={TimePickerTestScreen} />
     </Drawer.Navigator>
   );
 }

@@ -54,7 +54,6 @@ const exampleItems = [
     ), []);
   
     return (
-    //   <SafeAreaView style={{ flex: 1 }}>
         <View>
           <Carousel
             layout="default"
@@ -66,7 +65,6 @@ const exampleItems = [
             onSnapToItem={(index) => setActiveIndex(index)}
           />
         </View>
-    //   </SafeAreaView>
     );
   };
   
@@ -92,16 +90,9 @@ const exampleItems = [
 
 const CarouselTestView = () => {
     return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <Text>Test!</Text>
             <CustomCarousel />
-            {/* <View>
-                <Button
-                    title="홈으로 이동하기"
-                    onPress={() => props.navigation.navigate('Home')}
-                // onPress={() => console.log(props)}
-                />
-            </View> */}
         </View>
 
     )

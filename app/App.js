@@ -14,7 +14,7 @@ export default function App() {
     <NativeBaseProvider>
       <NavigationContainer>
         <MainRoute/>
-        <StatusBar style="auto" />
+        {/* <StatusBar style="auto" /> */}
       </NavigationContainer>
     </NativeBaseProvider>
     // </SafeAreaView>

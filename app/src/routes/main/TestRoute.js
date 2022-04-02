@@ -1,149 +1,55 @@
 import React, { useState, useCallback, useRef } from 'react';
-import { Button, View, Text, SafeAreaView, StyleSheet, Pressable, Alert } from 'react-native';
+import { Button, View, Text, SafeAreaView, ScrollView, StyleSheet, Pressable, Alert } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Carousel from 'react-native-snap-carousel';
+import TestMainView from '../../views/test/TestMainView';
+import CarouselTestView from '../../views/test/CarouselTestView';
+import SliderTestView from '../../views/test/SliderTestView';
+import TimePickerTestView from '../../views/test/TimePickerTestView';
 
-const exampleItems = [
-  {
-    title: 'Item 1',
-  },
-  {
-    title: 'Item 2',
-  },
-  {
-    title: 'Item 3',
-  },
-  {
-    title: 'Item 4',
-  },
-  {
-    title: 'Item 5',
-  },
-];
-
-const CustomCarousel = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [carouselItems, setCarouselItems] = useState(exampleItems);
-  const ref = useRef(null);
-
-  const onPressFunction = () => {
-    Alert.alert('press!')
-  }
-
-  const renderItem = useCallback(({ item, index }) => (
-    <View style={{ backgroundColor: 'gray',}}>
-      <Text style={{ fontSize: 30 }}>{item.title}</Text>
-      <View style={{ justifyContent: 'center', flexDirection : "row" }} >
-        <View style={styles.btnView}>
-          <Pressable style={styles.button} onPress={onPressFunction}>
-              <Text>1</Text>
-          </Pressable>
-        </View>
-        <View style={styles.btnView}>
-          <Pressable style={styles.button} onPress={onPressFunction}>
-              <Text>2</Text>
-          </Pressable>
-        </View>
-        <View style={styles.btnView}>
-          <Pressable style={styles.button} onPress={onPressFunction}>
-              <Text>3</Text>
-          </Pressable>
-        </View>
-      </View>
-      
-    </View>
-  ), []);
-
-  return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View>
-        <Carousel
-          layout="default"
-          ref={ref}
-          data={carouselItems}
-          sliderWidth={300}
-          itemWidth={300}
-          renderItem={renderItem}
-          onSnapToItem={(index) => setActiveIndex(index)}
-        />
-      </View>
-    </SafeAreaView>
-  );
-};
-
-const styles = StyleSheet.create({
-  button: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 8,
-    borderRadius: 100,
-    backgroundColor: '#dcdde1',
-    width: 80
-  },
-  btnView: {
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: 'black',
-    borderRadius: 100,
-    borderWidth: 2,
-    margin: 5
-  }
-});
   
 const TestMainScreen = (props) => {
     return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Test!</Text>
-            <CustomCarousel/>
-            <View style={{ flex: 1 }}>
-              <Button
-                  title="홈으로 이동하기"
-                  onPress={() => props.navigation.navigate('Home')}
-              />  
-            </View>
-        </View>
+        <TestMainView navigation={props.navigation}/>
     );
 }
 
 
-function Feed() {
+function CarouselTestScreen() {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Feed Screen</Text>
-    </View>
+    <CarouselTestView/>
   );
 }
 
-function Article() {
+function SliderTestScreen() {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Article Screen</Text>
-    </View>
+    <SliderTestView/>
   );
+}
+
+function TimePickerTestScreen() {
+  return (
+    <TimePickerTestView/>
+  )
 }
 
 const Drawer = createDrawerNavigator();
 
-function MyDrawer() {
+const MyDrawer = (props) => {
   return (
     <Drawer.Navigator>
       <Drawer.Screen name="TestMain" component={TestMainScreen} />
-      <Drawer.Screen name="Feed" component={Feed} />
-      <Drawer.Screen name="Article" component={Article} />
+      <Drawer.Screen name="CarouselTest" component={CarouselTestScreen} />
+      <Drawer.Screen name="SliderTest" component={SliderTestScreen} />
+      <Drawer.Screen name="TimePickerTest" component={TimePickerTestScreen} />
     </Drawer.Navigator>
   );
 }
 
-const Tab = createBottomTabNavigator();
-
-const TestRoute = () =>{
+const TestRoute = (props) =>{
     return (
-        // <Tab.Navigator
-        //     screenOptions={{ headerShown: false }} 
-        // >
-        //     <Tab.Screen name="TestMain" component={TestMainScreen} />
-        // </Tab.Navigator>
         <MyDrawer/>
     )
 }

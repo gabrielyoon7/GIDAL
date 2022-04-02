@@ -8,3 +8,7 @@ ex) C://GIDAL
 터미널로 app폴더와 server 폴더에 각각 접근하여 npm install을 해주세요
 
 둘 다 시작방법은 npm start
+
+
+!캐시 비우고 재실행 하는 방법!
+npm start --reset-cache

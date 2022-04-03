@@ -74,7 +74,7 @@ const exampleItems = [
         </View>
         <View style={{ justifyContent: 'center', flexDirection : "row" }} >
         {item.tags.map((tag) => (
-          <View style={styles.btnView}>
+          <View key={tag.id} style={styles.btnView}>
             <Pressable style={styles.button} onPress={onPressFunction}>
                 <Text>{tag.name}</Text>
             </Pressable>

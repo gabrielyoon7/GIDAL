@@ -25,7 +25,7 @@ const IndexRoute = () =>{
             initialRouteName="Home"
             screenOptions={{ headerShown: false }}             
         >
-            <Stack.Screen name="DiaryList" component={HomeScreen} />
+            <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Test" component={TestScreen} />
         </Stack.Navigator>
     )

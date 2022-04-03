@@ -6,26 +6,61 @@ import { Center } from 'native-base';
 const exampleItems = [
     {
       question: '어떤 종류의 일기인가요?',
-    },
+      tags: [{
+        id: 1,
+        name: 'a'
+       }, {
+        id: 2,
+        name: 'b'
+        }]
+      },
     {
       question: '오늘 하루 기분이 어땠나요?',
-    },
+      tags: [{
+        id: 3,
+        name: 'c'
+       }, {
+        id: 4,
+        name: 'd'
+        }]
+      },
     {
       question: '오늘 날씨는 어땠나요?',
-    },
+      tags: [{
+        id: 5,
+        name: 'e'
+       }, {
+        id: 6,
+        name: 'f'
+        }]
+      },
     {
       question: '일기를 작성하는 위치가 어디인가요?',
-    },
+      tags: [{
+        id: 7,
+        name: 'g'
+       }, {
+        id: 8,
+        name: 'h'
+        }]
+      },
     {
       question: '오늘의 수면시간',
-    },
+      tags: [{
+        id: 9,
+        name: 'i'
+       }, {
+        id: 10,
+        name: 'j'
+        }]
+      },
   ];
   
   const CustomCarousel = () => {
     const [activeIndex, setActiveIndex] = useState(0);
     const [carouselItems, setCarouselItems] = useState(exampleItems);
     const ref = useRef(null);
-  
+
     const onPressFunction = () => {
       Alert.alert('press!')
     }
@@ -38,21 +73,13 @@ const exampleItems = [
           <View style={styles.lineView}/>
         </View>
         <View style={{ justifyContent: 'center', flexDirection : "row" }} >
+        {item.tags.map((tag) => (
           <View style={styles.btnView}>
             <Pressable style={styles.button} onPress={onPressFunction}>
-                <Text>1</Text>
+                <Text>{tag.name}</Text>
             </Pressable>
-          </View>
-          <View style={styles.btnView}>
-            <Pressable style={styles.button} onPress={onPressFunction}>
-                <Text>2</Text>
-            </Pressable>
-          </View>
-          <View style={styles.btnView}>
-            <Pressable style={styles.button} onPress={onPressFunction}>
-                <Text>3</Text>
-            </Pressable>
-          </View>
+            </View>
+        ))}
         </View>
         
       </View>

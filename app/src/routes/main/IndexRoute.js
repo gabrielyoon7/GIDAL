@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import DiaryRoute from '../../routes/diary/DiaryRoute';
+import HomeRoute from './HomeRoute';
 import TestRoute from './TestRoute';
 
 
 
 const HomeScreen = ({navigation}) => {
     return(
-        <DiaryRoute navigation={navigation}/>
+        <HomeRoute navigation={navigation}/>
     )
 }
 
@@ -19,15 +19,15 @@ const TestScreen = ({navigation}) => {
 
 const Stack = createNativeStackNavigator();
 
-const MainRoute = () =>{
+const IndexRoute = () =>{
     return (
         <Stack.Navigator 
             initialRouteName="Home"
             screenOptions={{ headerShown: false }}             
         >
-            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="DiaryList" component={HomeScreen} />
             <Stack.Screen name="Test" component={TestScreen} />
         </Stack.Navigator>
     )
 }
-export default MainRoute;
+export default IndexRoute;

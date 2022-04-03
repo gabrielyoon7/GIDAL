@@ -1,9 +1,7 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import MainRoute from './src/routes/main/MainRoute';
+import IndexRoute from './src/routes/main/IndexRoute';
 import { SafeAreaView, StatusBar, StyleSheet } from 'react-native';
-// import { SafeAreaView} from 'react-native';
-// import { StatusBar } from 'expo-status-bar';
 import { NativeBaseProvider } from "native-base";
 import 'react-native-gesture-handler';
 
@@ -13,7 +11,7 @@ export default function App() {
     <SafeAreaView style={styles.AndroidSafeArea}>
       <NativeBaseProvider>
         <NavigationContainer>
-          <MainRoute/>
+          <IndexRoute/>
         </NavigationContainer>
       </NativeBaseProvider>
     </SafeAreaView>

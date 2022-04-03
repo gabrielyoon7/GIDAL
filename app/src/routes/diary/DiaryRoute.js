@@ -1,76 +1,42 @@
 import * as React from 'react';
-import { Button,Text, View } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import DiaryListView from '../../views/diary/DiaryListView';
-import DiaryView from '../../views/diary/DiaryView';
-import { Fab, Icon } from "native-base";
-import { AntDesign } from "@expo/vector-icons";
-import CalendarView from '../../views/diary/CalendarView';
+import { View, Text, Button } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import DiaryListView from '../../views/diary/list/DiaryListView';
+import DiaryReadView from '../../views/diary/read/DiaryReadView';
+import DiaryWriteView from '../../views/diary/write/DiaryWriteView';
 
-Date.prototype.format = function (f) {
-    if (!this.valueOf()) return " ";
-
-    const weekName = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
-    let d = this;
-
-    return f.replace(/(yyyy|yy|MM|dd|E|hh|mm|ss|a\/p)/gi, function ($1) {
-        switch ($1) {
-            case "yyyy": return d.getFullYear();
-            case "yy": return (d.getFullYear() % 1000).zf(2);
-            case "MM": return (d.getMonth() + 1).zf(2);
-            case "dd": return d.getDate().zf(2);
-            case "E": return weekName[d.getDay()];
-            case "HH": return d.getHours().zf(2);
-            case "hh": return ((h = d.getHours() % 12) ? h : 12).zf(2);
-            case "mm": return d.getMinutes().zf(2);
-            case "ss": return d.getSeconds().zf(2);
-            case "a/p": return d.getHours() < 12 ? "오전" : "오후";
-            default: return $1;
-        }
-    });
+const DiaryListScreen = ({ navigation }) => {
+  return (
+    <DiaryListView navigation={navigation}/>
+  );
 }
 
-String.prototype.string = function (len) { var s = '', i = 0; while (i++ < len) { s += this; } return s; };
-String.prototype.zf = function (len) { return "0".string(len - this.length) + this; };
-Number.prototype.zf = function (len) { return this.toString().zf(len); };
+const DiaryWriteScreen = ({ navigation }) => {
+  return (
+    <DiaryWriteView navigation={navigation}/>
+  );
+}
 
-function DiaryListScreen(props) {
-    const [selectedDate, setSelectedDate] = React.useState(new Date().format("yyyy-MM-dd"));
+const DiaryReadScreen = ({ navigation }) => {
     return (
-        <>
-            <CalendarView selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
-            <DiaryListView selectedDate={selectedDate}/>
-            <Fab renderInPortal={false} shadow={2} size="md" 
-                icon={<Icon color="white" as={AntDesign} name="plus" size="md" />} 
-                onPress={() => props.navigation.navigate('Test')}
-                // 다이어리 쓰기 페이지로 넘어가기 (스택을 어디에 추가해야할 지 모르겠음)
-            />
-        </>
+      <DiaryReadView navigation={navigation}/>
     );
-}
+  }
   
-const SettingsScreen = (props) => {
-    return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Settings!</Text>
-            <Button
-                title="테스트 메뉴로 이동하기"
-                onPress={() => props.navigation.navigate('Test')}
-            />
-        </View>
-    );
+
+const RootStack = createNativeStackNavigator();
+
+const DiaryRoute = () => {
+  return (
+    <RootStack.Navigator>
+        <RootStack.Group>
+            <RootStack.Screen name="DiaryList" component={DiaryListScreen} />
+            <RootStack.Screen name="DiaryRead" component={DiaryReadScreen} />
+            <RootStack.Screen name="DiaryWrite" component={DiaryWriteScreen} />
+        </RootStack.Group>
+    </RootStack.Navigator>
+  );
 }
 
-const Tab = createBottomTabNavigator();
-
-const DiaryRoute = () =>{
-    return (
-        <Tab.Navigator
-            screenOptions={{ headerShown: false }} 
-        >
-            <Tab.Screen name="DiaryList" component={DiaryListScreen} />
-            <Tab.Screen name="Settings" component={SettingsScreen} />
-        </Tab.Navigator>
-    )
-}
 export default DiaryRoute;

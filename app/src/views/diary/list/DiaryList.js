@@ -37,7 +37,8 @@ const DiaryListView = (props) =>{
         return (
             <Item
                 item={item}
-                onPress={() => setSelectedId(item.id)}
+                // onPress={() => setSelectedId(item.id)}
+                onPress={() => props.navigation.navigate('DiaryRead')}
                 // 해당 일기로 넘어가기 구현
                 backgroundColor={{ backgroundColor }}
                 textColor={{ color }}

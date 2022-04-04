@@ -17,8 +17,8 @@ const InputTitle = () => {
 
 const DiaryWriteView = (props) => {
    
-      const [Date,setDate] = useState();
-      const [Title,setTitle] = useState();
+      const [Date,setDate] = useState(Date);
+      const [Title,setTitle] = useState(Title);
       
     return (
        
@@ -26,12 +26,12 @@ const DiaryWriteView = (props) => {
             {/* <TextInput
                 placeholder="제목을 입력하세요"
             
-                onChangeTitle ={(Title)=>this.setTitle(Title: Title)}
-                    }}
+                onChangeTitle ={(Title)=>this.setTitle(Title)}
+                    
                 /> */}
             <Text>2022.04.05</Text>
             <Text>Title</Text>
-            <InputTitle />
+            <InputTitle  onChangeTitle ={(Title)=>this.setTitle(Title)} />
             <WriteDiaryButton/>
             </>
            

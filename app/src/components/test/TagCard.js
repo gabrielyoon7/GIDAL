@@ -6,7 +6,7 @@ import ButtonTags from './interaction/ButtonTags';
 import SearchTags from './interaction/SearchTags';
 import Slider1 from './interaction/Slider1';
 import Slider2 from './interaction/Slider2';
-
+import TimePicker from './interaction/TimePicker';
 
 
 const onPressFunction = (tag) => {
@@ -20,6 +20,9 @@ const TagCard = (props) => {
         },
         search: {
             interaction:<SearchTags tags={props.item.tags} />,
+        },
+        time: {
+            interaction:<TimePicker tags={props.item.tags} />,
         },
         slider1: {
             interaction:<Slider1 tags={props.item.tags} />,

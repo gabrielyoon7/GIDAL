@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Button,Text, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import DiaryRoute from '../diary/DiaryRoute';
+import SnsRoute from '../sns/SnsRoute';
 
 
 const DiaryScreen = (props) => {
@@ -22,6 +23,12 @@ const SettingsScreen = (props) => {
     );
 }
 
+const SnsScreen = (props) => {
+    return (
+        <SnsRoute navigation={props.navigation}/>
+    )
+}
+
 const Tab = createBottomTabNavigator();
 
 const HomeRoute = () =>{
@@ -30,6 +37,7 @@ const HomeRoute = () =>{
             screenOptions={{ headerShown: false }} 
         >
             <Tab.Screen name="Diary" component={DiaryScreen} />
+            <Tab.Screen name="Sns" component={SnsScreen} />
             <Tab.Screen name="Settings" component={SettingsScreen} />
         </Tab.Navigator>
     )

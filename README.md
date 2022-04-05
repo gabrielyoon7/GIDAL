@@ -12,3 +12,5 @@ ex) C://GIDAL
 
 !캐시 비우고 재실행 하는 방법!
 npm start --reset-cache
+
+처음에 install 에러 뜰 때npm install --legacy-peer-deps

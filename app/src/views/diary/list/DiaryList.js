@@ -22,12 +22,20 @@ const DiaryListView = (props) =>{
     ]
     const [data, setData] = useState(0);
     const [selectedId, setSelectedId] = useState(null);
+    const [ref, setRef] = useState(null);    
 
     useEffect(() => {
         const index = items.findIndex((item, idx) => {
             return item.date === props.selectedDate
         })
         setData(index);
+        if(ref === null) {
+            return;
+        }
+        ref.scrollToIndex({animated: true, index: 0, viewPosition: 0});
+        if(index > 0) {
+            ref.scrollToIndex({animated: true, index: index, viewPosition: 0});
+        }
     })
 
     const renderItem = ({ item }) => {
@@ -50,10 +58,13 @@ const DiaryListView = (props) =>{
         <View style={styles.container}>
             <FlatList
                 data={items}
+                ref={(ref) => {
+                    setRef(ref);
+                }}
                 renderItem={renderItem}
                 keyExtractor={(item) => item.id}
                 extraData={selectedId}
-                initialScrollIndex ={data}
+                // initialScrollIndex ={data}
             />
         </View>
     )

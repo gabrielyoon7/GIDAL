@@ -3,23 +3,23 @@ import { FlatList, View, StatusBar, StyleSheet, Text, TouchableOpacity, TextInpu
 import CalendarView from '../../../../src/views/diary/list/CalendarView';
 import  { useState, useEffect, Component } from 'react'; 
 import { Box, Input, Button, Modal, Center, NativeBaseProvider } from "native-base"
-const InputTitle = () => {
+const InputTitle = (props) => {
     return <Box alignItems="center">
-        <Input mx="3" placeholder="title" w="75%" maxWidth="300px" />
+        <Input mx="3" placeholder="title" w="75%" maxWidth="300px" onChangeText={(title)=>{props.setTitle(title);}} />
       </Box>;
   };
 
-  const WriteDiaryButton = () => {
-    return <Box alignItems="center">
-    <Button onPress={() => console.log("hello world")}>작성하기</Button>
-  </Box>;
-  };
 
 const DiaryWriteView = (props) => {
    
-      const [Date,setDate] = useState(Date);
-      const [Title,setTitle] = useState(Title);
-      
+      const [Date,setDate] = useState('');
+      const [Title,setTitle] = useState('');
+
+      const WriteDiaryButton = () => {
+        return <Box alignItems="center">
+        <Button onPress={() => console.log(Title)}>작성하기</Button>
+      </Box>;
+      };
     return (
        
             <>
@@ -31,8 +31,8 @@ const DiaryWriteView = (props) => {
                 /> */}
             <Text>2022.04.05</Text>
             <Text>Title</Text>
-            <InputTitle  onChangeTitle ={(Title)=>this.setTitle(Title)} />
-            <WriteDiaryButton/>
+            <InputTitle  setTitle={setTitle} Title={Title} />
+            <WriteDiaryButton />
             </>
            
 

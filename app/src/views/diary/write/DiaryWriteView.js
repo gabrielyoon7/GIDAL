@@ -16,7 +16,7 @@ const InputTitle = (props) => {
  
 const DiaryWriteView = (props) => {
    
-      const [Date,setDate] = useState('');
+      const [Date,setDate] = useState(props.selectedDate);
       const [Title,setTitle] = useState('');
       const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
@@ -43,7 +43,7 @@ const DiaryWriteView = (props) => {
 
             <>
        
-            <Text  title="Show Date Picker" ShonPress={showDatePicker} >날짜 어떻게 오는지 모르겠음</Text>
+            <Text  title="Show Date Picker" ShonPress={showDatePicker} >{Date}</Text>
             <Text>Title</Text>
             <InputTitle  setTitle={setTitle} Title={Title} />
            

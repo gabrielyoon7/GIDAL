@@ -2,7 +2,7 @@ import * as React from 'react';
 import { FlatList, View, StatusBar, StyleSheet, Text, TouchableOpacity, TextInput } from 'react-native';
 import CalendarView from '../../../../src/views/diary/list/CalendarView';
 import  { useState, useEffect, Component } from 'react'; 
-import { Box, Input, Button, Modal, Center, NativeBaseProvider } from "native-base"
+import { Box, Input, Button, TextArea, Modal, Center, NativeBaseProvider } from "native-base"
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 const InputTitle = (props) => {
@@ -11,8 +11,11 @@ const InputTitle = (props) => {
       </Box>;
   };
 
-  
-
+  const WriteDiaryArea = () => {
+    return <Box alignItems="center" w="100%">
+        <TextArea h="80%" placeholder="Write Diary Right Now!" w="100%" maxW="300" />
+      </Box>;
+  };
  
 const DiaryWriteView = (props) => {
    
@@ -34,7 +37,7 @@ const DiaryWriteView = (props) => {
         setDate(date.format("yyyy-MM-dd"))
     };
   
-  
+
     const WriteDiaryButton = () => {
         return <Box alignItems="center">
         <Button onPress={() => console.log(Title)}>작성하기</Button>
@@ -43,6 +46,17 @@ const DiaryWriteView = (props) => {
     return (
 
             <>
+            {/* <TextInput
+                placeholder="제목을 입력하세요"
+            
+                onChangeTitle ={(Title)=>this.setTitle(Title)}
+                    
+                /> */}
+            <Text>2022.04.05</Text>
+            <Text>Title</Text>
+            <InputTitle  onChangeTitle ={(Title)=>this.setTitle(Title)} />
+            <WriteDiaryArea/>
+            <WriteDiaryButton/>
        
             <Text  style={styles.dateText} onPress={showDatePicker} >{Date}</Text>
             <Text style={styles.textStyle} >Title</Text>

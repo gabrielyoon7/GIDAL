@@ -16,13 +16,6 @@ const InputTitle = (props) => {
         <TextArea h="80%" placeholder="Write Diary Right Now!" w="100%" maxW="300" />
       </Box>;
   };
-
-  const WriteDiaryButton = () => {
-    return <Box alignItems="center">
-    <Button onPress={() => console.log("hello world")}>작성하기</Button>
-  </Box>;
-  };
-
  
 const DiaryWriteView = (props) => {
    
@@ -44,7 +37,7 @@ const DiaryWriteView = (props) => {
         setDate(date.format("yyyy-MM-dd"))
     };
   
-  
+
     const WriteDiaryButton = () => {
         return <Box alignItems="center">
         <Button onPress={() => console.log(Title)}>작성하기</Button>

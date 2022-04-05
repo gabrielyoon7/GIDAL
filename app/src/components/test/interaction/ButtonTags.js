@@ -3,6 +3,10 @@ import Carousel from 'react-native-snap-carousel';
 import { Button, View, Text, SafeAreaView, ScrollView, StyleSheet, Pressable, Alert } from 'react-native';
 import { Center } from 'native-base';
 
+const onPressFunction = (tag) => {
+    Alert.alert(tag+' pressed!')
+  }
+
 const ButtonTags = (props) => {
     return (
         <View style={{ justifyContent: 'center', flexDirection: "row" }} >

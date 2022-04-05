@@ -14,6 +14,18 @@ router.get('/find', function(req, res, next) {
     });
 });
 
+router.post('/findOwn', function(req, res, next) {
+    console.log(req.body.data.user_id);
+    // 전체 데이터 가져오기
+    Diary.find().where('user_id').equals(req.body.data.user_id).then( (diaries) => {
+        res.json(diaries)
+        console.log(diaries);
+    }).catch( (err) => {
+        console.log(err);
+        next(err)
+    });
+});
+
 /* POST*/
 router.post('/save', function(req, res) {
     console.log(req.body);

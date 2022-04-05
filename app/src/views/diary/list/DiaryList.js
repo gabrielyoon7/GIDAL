@@ -1,35 +1,64 @@
 import { useEffect, useState } from 'react';
 import { FlatList, View, StatusBar, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import axios from 'axios';
 
 const Item = ({ item, onPress, backgroundColor, textColor }) => (
     <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
         <Text>{item.date}</Text>
         <Text style={[styles.title, textColor]}>{item.title}</Text>
+        <Text>{item.content}</Text>
     </TouchableOpacity>
 );
   
 
 const DiaryListView = (props) =>{
-    const items = [
-        { id:"1",  title: 'item 1 - any js object', date: '2022-04-22' },
-        { id:"2",  title: 'item 2 - any js object', date: '2022-04-23' },
-        { id:"3",  title: 'no name', date: '2022-04-23' },
-        { id:"4",  title: 'item 3 - any js object', date: '2022-04-24' },
-        { id:"5",  title: 'item 1 - any js object', date: '2022-04-25' },
-        { id:"6",  title: 'item 2 - any js object', date: '2022-04-26' },
-        { id:"7",  title: 'no name', date: '2022-04-26' },
-        { id:"8",  title: 'item 3 - any js object', date: '2022-04-27' }
-    ]
+    const [items, setItems] = useState([]);
+    const user_id = '202212069';
+    let num = 0;
+
+    const getitems = () => {
+        let result = []
+        // if(items.length > 0){
+        //     return;
+        // }
+        if(num > 0){
+            return;
+        }
+        axios.post('http://' + '172.30.1.4' + ':5000/diariesRouter/findOwn',{
+            data: {
+                user_id: user_id
+            }
+        }).then((response) => {
+            num++;
+            console.log(response.data);
+            if (response.data.length < 1){
+                return;
+            }
+            response.data.forEach((item) => {
+                const diary = {id: item._id, date: item.date, title: item.title, content: item.content}
+                result.push(diary);
+            });
+            setItems(result);
+        }).catch(function (error) {
+            console.log(error);
+        })
+    }
+
     const [data, setData] = useState(0);
     const [selectedId, setSelectedId] = useState(null);
     const [ref, setRef] = useState(null);    
+
+    //첫 렌더링에만 호출됨
+    useEffect(() => {
+        getitems();
+    }, []);
 
     useEffect(() => {
         const index = items.findIndex((item, idx) => {
             return item.date === props.selectedDate
         })
         setData(index);
-        if(ref === null) {
+        if(ref === null || index < 1) {
             return;
         }
         ref.scrollToIndex({animated: true, index: 0, viewPosition: 0});

@@ -4,7 +4,6 @@ const diarySchema = mongoose.Schema({
     user_id: {
         type: String,
         maxlength: 30,
-        unique: 1,
         required: true
     },
     date: {

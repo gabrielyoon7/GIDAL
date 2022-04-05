@@ -2,10 +2,16 @@ import * as React from 'react';
 import { FlatList, View, StatusBar, StyleSheet, Text, TouchableOpacity, TextInput } from 'react-native';
 import CalendarView from '../../../../src/views/diary/list/CalendarView';
 import  { useState, useEffect, Component } from 'react'; 
-import { Box, Input, Button, Modal, Center, NativeBaseProvider } from "native-base"
+import { Box, Input, Button, TextArea, Modal, Center, NativeBaseProvider } from "native-base"
 const InputTitle = () => {
     return <Box alignItems="center">
         <Input mx="3" placeholder="title" w="75%" maxWidth="300px" />
+      </Box>;
+  };
+
+  const WriteDiaryArea = () => {
+    return <Box alignItems="center" w="100%">
+        <TextArea h="80%" placeholder="Write Diary Right Now!" w="100%" maxW="300" />
       </Box>;
   };
 
@@ -32,6 +38,7 @@ const DiaryWriteView = (props) => {
             <Text>2022.04.05</Text>
             <Text>Title</Text>
             <InputTitle  onChangeTitle ={(Title)=>this.setTitle(Title)} />
+            <WriteDiaryArea/>
             <WriteDiaryButton/>
             </>
            

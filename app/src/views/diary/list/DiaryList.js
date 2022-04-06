@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { FlatList, View, StatusBar, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import axios from 'axios';
+import {config} from '../../../../config'
 
 const Item = ({ item, onPress, backgroundColor, textColor }) => (
     <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
@@ -24,7 +25,7 @@ const DiaryListView = (props) =>{
         if(num > 0){
             return;
         }
-        axios.post('http://' + '172.30.1.4' + ':5000/diariesRouter/findOwn',{
+        axios.post(config.ip + ':5000/diariesRouter/findOwn',{
             data: {
                 user_id: user_id
             }

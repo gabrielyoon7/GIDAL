@@ -6,16 +6,20 @@ import { Box, Input, Button, TextArea, Modal, Center, NativeBaseProvider } from 
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 const InputTitle = (props) => {
-  return <Box alignItems="center">
-    {/* <Input mx="3" placeholder="제목을 입력해주세요" w="75%" maxWidth="1000px" onChangeText={(title)=>{props.setTitle(title);}} /> */}
-    <Input mx="3" placeholder="제목을 입력해주세요" w="75%" maxWidth="1000px" />
-  </Box>;
+  return (
+    <Box alignItems="center">
+      {/* <Input mx="3" placeholder="제목을 입력해주세요" w="75%" maxWidth="1000px" onChangeText={(title)=>{props.setTitle(title);}} /> */}
+      <Input mx="3" placeholder="제목을 입력해주세요" w="75%" maxWidth="1000px" />
+    </Box>
+  );
 };
 
 const WriteDiaryArea = () => {
-  return <Box alignItems="center" w="100%">
-    <TextArea h="80%" placeholder="Write Diary Right Now!" w="100%" maxW="300" />
-  </Box>;
+  return (
+    <Box alignItems="center" w="100%">
+      <TextArea h="80%" placeholder="Write Diary Right Now!" w="100%" maxW="300" />
+    </Box>
+  );
 };
 
 const DiaryWriteView = (props) => {
@@ -40,9 +44,11 @@ const DiaryWriteView = (props) => {
 
 
   const WriteDiaryButton = () => {
-    return <Box alignItems="center">
-      <Button onPress={() => console.log(Title)}>작성하기</Button>
-    </Box>;
+    return (
+      <Box alignItems="center">
+        <Button onPress={() => console.log(Title)}>작성하기</Button>
+      </Box>
+    );
   };
   return (
 

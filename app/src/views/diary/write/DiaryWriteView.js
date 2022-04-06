@@ -8,16 +8,15 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 const InputTitle = (props) => {
   return (
     <Box alignItems="center">
-      {/* <Input mx="3" placeholder="제목을 입력해주세요" w="75%" maxWidth="1000px" onChangeText={(title)=>{props.setTitle(title);}} /> */}
-      <Input mx="3" placeholder="제목을 입력해주세요" w="75%" maxWidth="1000px" />
+      <Input mx="3" placeholder="제목을 입력해주세요" w="75%" maxWidth="1000px" onChangeText={(title)=>{props.setTitle(title);}} />
     </Box>
   );
 };
 
-const WriteDiaryArea = () => {
+const WriteDiaryArea = (props) => {
   return (
     <Box alignItems="center" w="100%">
-      <TextArea h="80%" placeholder="Write Diary Right Now!" w="100%" maxW="300" />
+      <TextArea h="45%" placeholder="Write Diary Right Now!" w="100%" maxW="310" onChangeText={(content)=>{props.setContent(content);}} />
     </Box>
   );
 };
@@ -26,6 +25,7 @@ const DiaryWriteView = (props) => {
 
   const [Date, setDate] = useState(props.selectedDate);
   const [Title, setTitle] = useState('');
+  const [Content, setContent] = useState('');
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
   const showDatePicker = () => {
@@ -46,29 +46,20 @@ const DiaryWriteView = (props) => {
   const WriteDiaryButton = () => {
     return (
       <Box alignItems="center">
-        <Button onPress={() => console.log(Title)}>작성하기</Button>
+        <Button onPress={() => console.log(Content)}>작성하기</Button>
       </Box>
     );
   };
   return (
 
     <>
-      {/* <TextInput
-                placeholder="제목을 입력하세요"
-            
-                onChangeTitle ={(Title)=>this.setTitle(Title)}
-                    
-                /> */}
-      <Text>2022.04.05</Text>
-      <Text>Title</Text>
-      <InputTitle onChangeTitle={(Title) => this.setTitle(Title)} />
-      <WriteDiaryArea />
-      <WriteDiaryButton />
-
+  
       <Text style={styles.dateText} onPress={showDatePicker} >{Date}</Text>
       <Text style={styles.textStyle} >Title</Text>
+      
       <InputTitle setTitle={setTitle} Title={Title} />
-
+      <Text style={styles.textStyle} >Content</Text>
+      <WriteDiaryArea setContent={setContent} Content={Content} />
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode="date"
@@ -95,10 +86,11 @@ const styles = StyleSheet.create({
     textAlign: "left",
     fontSize: 17,
     marginLeft: 50,
+    margin: 10,
 
   },
   buttonContainer: {
-    margin: 20,
+    // margin: 20,
 
   },
 })

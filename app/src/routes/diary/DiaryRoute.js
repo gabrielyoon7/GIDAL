@@ -61,7 +61,9 @@ const RootStack = createNativeStackNavigator();
 const DiaryRoute = () => {
   const [selectedDate, setSelectedDate] = React.useState(new Date().format("yyyy-MM-dd"));
   return (
-    <RootStack.Navigator>
+    <RootStack.Navigator
+      screenOptions={{ headerShown: false }}     
+    >
         <RootStack.Group>
             <RootStack.Screen name="DiaryList" component={DiaryListScreen} initialParams={{ selectedDate: selectedDate }} />
             <RootStack.Screen name="DiaryRead" component={DiaryReadScreen} initialParams={{ selectedDate: selectedDate }} />

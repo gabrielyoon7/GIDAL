@@ -12,7 +12,9 @@ const RootStack = createNativeStackNavigator();
 
 const SnsRoute = () => {
   return (
-    <RootStack.Navigator>
+    <RootStack.Navigator
+      screenOptions={{ headerShown: false }}     
+    >
         <RootStack.Group>
             <RootStack.Screen name="FeedList" component={FeedScreen} />
         </RootStack.Group>

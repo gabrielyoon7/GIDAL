@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, FlatList } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList } from 'react-native';
+import { Link } from 'native-base';
 
 const friendsData = [
     {id:1, image: "https://bootdey.com/img/Content/avatar/avatar6.png", username:"gidal1"},
@@ -10,7 +11,7 @@ const friendsData = [
     {id:6, image: "https://bootdey.com/img/Content/avatar/avatar6.png", username:"gidal6"},
 ]
 
-const ProfileList = () =>{
+export default function ProfileView(props) {
         return (
             <View style={styles.container}>
             <View style={styles.header}>
@@ -31,9 +32,11 @@ const ProfileList = () =>{
                 renderItem={({item}) => {
                   return (
                     <TouchableOpacity>
-                      <View style={styles.box}>
+                      <View style={styles.box} >
+                      <Link href="#"  onPress={() => props.navigation.navigate('DmRead')}>
                         <Image style={styles.image} source={{uri: item.image}}/>
                          <Text style={styles.username}>{item.username}</Text>
+                      </Link>
                       </View>
                     </TouchableOpacity>
                   )
@@ -95,15 +98,14 @@ const styles = StyleSheet.create({
   },
 });
 
-const ProfileView = () => {
-    return (
-      <View style={{ flex: 1 }}>
-        <ProfileList/>
-      </View>
-    )
-  }
+// const ProfileView = () => {
+//     return (
+//       <View style={{ flex: 1 }}>
+//         <ProfileList/>
+//       </View>
+//     )
+//   }
   
-  export default ProfileView;
   
 
 // import { Button, FlatList, View, StatusBar, StyleSheet, Text, TouchableOpacity } from 'react-native';

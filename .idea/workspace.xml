@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0114b293-1a65-469b-a311-2b8be34d37c3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/views/sns/profile/ProfileView.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/views/sns/profile/ProfileView.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -41,7 +40,7 @@
       <option name="presentableId" value="Default" />
       <updated>1648976583638</updated>
       <workItem from="1648976589279" duration="1058000" />
-      <workItem from="1649337323725" duration="842000" />
+      <workItem from="1649337323725" duration="1483000" />
     </task>
     <servers />
   </component>

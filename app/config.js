@@ -9,4 +9,22 @@
 */
 export const config = {
 	ip:"http://192.168.98.48",
+	user:[
+		{
+			_id : "0",
+			user_id : "testAccount00",
+			user_pw : "1234",
+			name : "user_name_00",
+			gender : "?",
+			bday : "2022-04-07",
+			location : "경기도 수원시",
+			following : "",
+			follower : "",
+			profile_image : "",
+			points : 10000,
+			count_diary_total : 0,
+			count_diary_everyday : 0,
+			items : {},
+		},
+	],
 };

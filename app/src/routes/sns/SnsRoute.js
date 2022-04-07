@@ -5,6 +5,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import FeedView from '../../views/sns/feed/FeedView';
 import FeedSearchView from '../../views/sns/feed/FeedSearchView';
 import ProfileView from '../../views/sns/profile/ProfileView';
+import DmReadView from '../../views/sns/dm/DmReadView';
+import DmWriteView from '../../views/sns/dm/DmWriteView';
 
 const FeedScreen = ({ navigation }) => {
     return (
@@ -24,6 +26,19 @@ const ProfileScreen = ({ navigation }) => {
   )
 }
 
+const DmReadScreen = ({ navigation }) => {
+  return (
+    <DmReadView navigation={navigation} />
+  )
+}
+
+const DmWriteScreen = ({ navigation }) => {
+  return (
+    <DmWriteView navigation={navigation} />
+  )
+}
+
+
 const RootStack = createNativeStackNavigator();
 
 const SnsRoute = () => {
@@ -35,6 +50,8 @@ const SnsRoute = () => {
           <RootStack.Screen name="FeedList" component={FeedScreen} />
           <RootStack.Screen name="FeedSearch" component={FeedSearchScreen} />
           <RootStack.Screen name="Profile" component={ProfileScreen} />
+          <RootStack.Screen name="DmRead" component={DmReadScreen} />
+          <RootStack.Screen name="DmWrite" component={DmWriteScreen} />          
         </RootStack.Group>
     </RootStack.Navigator>
   );

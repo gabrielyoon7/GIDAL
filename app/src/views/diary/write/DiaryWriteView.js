@@ -76,8 +76,9 @@ const DiaryWriteView = (props) => {
           disclosure: disclosure
       }
   }).then((response) => {
-      if (response.data === 'success') {
-        console.log('페이지이동');
+      if (response.data.status === 'success') {
+        props.navigation.replace('DiaryRead');
+        // 스택 쌓지 않고 화면 이동 => 읽기 페이지에서 뒤로가기하면 리스트 페이지 뜸
       }
   }).catch(function (error) {
       console.log(error);
@@ -87,7 +88,7 @@ const DiaryWriteView = (props) => {
   const WriteDiaryButton = () => {
     return (
       <Box alignItems="center">
-        <Button onPress={() => {saveDiary();  props.navigation.navigate('DiaryRead') } } >작성하기</Button>
+        <Button onPress={() => {saveDiary(); } } >작성하기</Button>
       </Box>
     );
   };

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { FlatList, View, StatusBar, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { useIsFocused } from '@react-navigation/native';
 import axios from 'axios';
 import {config} from '../../../../config'
 
@@ -15,22 +16,15 @@ const Item = ({ item, onPress, backgroundColor, textColor }) => (
 const DiaryListView = (props) =>{
     const [items, setItems] = useState([]);
     const user_id = '202212069';
-    let num = 0;
+    const isFocused = useIsFocused(); // isFoucesd Define
 
     const getitems = () => {
         let result = []
-        // if(items.length > 0){
-        //     return;
-        // }
-        if(num > 0){
-            return;
-        }
         axios.post(config.ip + ':5000/diariesRouter/findOwn',{
             data: {
                 user_id: user_id
             }
         }).then((response) => {
-            num++;
             console.log(response.data);
             if (response.data.length < 1){
                 return;
@@ -52,7 +46,7 @@ const DiaryListView = (props) =>{
     //첫 렌더링에만 호출됨
     useEffect(() => {
         getitems();
-    }, []);
+    }, [isFocused]);
 
     useEffect(() => {
         const index = items.findIndex((item, idx) => {

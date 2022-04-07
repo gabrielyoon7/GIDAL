@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList } from 'react-native';
 import { Link } from 'native-base';
+import { config } from '../../../../config'
+import DmReadView from '../dm/DmReadView'
 
 const friendsData = [
     {id:1, image: "https://bootdey.com/img/Content/avatar/avatar6.png", username:"gidal1"},
@@ -17,7 +19,7 @@ export default function ProfileView(props) {
             <View style={styles.header}>
               <View style={styles.headerContent}>
                   <Image style={styles.avatar} source={{uri: 'https://bootdey.com/img/Content/avatar/avatar1.png'}}/>
-                  <Text style={styles.name}>GIDAL</Text>
+                  <Text style={styles.name}>{config.user[0].name}</Text>
               </View>
             </View>
   
@@ -31,12 +33,12 @@ export default function ProfileView(props) {
                 }}
                 renderItem={({item}) => {
                   return (
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => props.navigation.navigate('DmRead', {
+                        userName: item.username
+                    })} >
                       <View style={styles.box} >
-                      <Link href="#"  onPress={() => props.navigation.navigate('DmRead')}>
                         <Image style={styles.image} source={{uri: item.image}}/>
                          <Text style={styles.username}>{item.username}</Text>
-                      </Link>
                       </View>
                     </TouchableOpacity>
                   )

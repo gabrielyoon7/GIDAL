@@ -20,15 +20,16 @@ const FeedSearchScreen = ({ navigation }) => {
   )
 }
 
-const ProfileScreen = ({ navigation }) => {
+const ProfileScreen = ({ route, navigation }) => {
   return (
     <ProfileView navigation={navigation} />
   )
 }
 
-const DmReadScreen = ({ navigation }) => {
+const DmReadScreen = ({ route, navigation }) => {
+  const { userName } = route.params;
   return (
-    <DmReadView navigation={navigation} />
+    <DmReadView navigation={navigation} userName = {userName}/>
   )
 }
 

@@ -18,15 +18,15 @@ mongoose.connect(`mongodb://localhost:27017/gidal`, {})
 .catch(err => console.log(err))
 
 //저장 테스트
-// var newDiary = new Diary({user_id:'202212069', date:'2022-04-05', title:'다이어리1', content:'내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용', disclosure:'private'});
+var newDiary = new Diary({user_id:'202212069', date:'2022-04-05', title:'다이어리1', content:'내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용', disclosure:'private'});
 
-// newDiary.save(function(error, data){
-//   if(error){
-//       console.log(error);
-//   }else{
-//       console.log('Saved!');
-//   }
-// });
+newDiary.save(function(error, data){
+  if(error){
+      console.log(error);
+  }else{
+      console.log('Saved!');
+  }
+});
 
 app.get('/', (req, res) => {
     res.send('Hello World!')

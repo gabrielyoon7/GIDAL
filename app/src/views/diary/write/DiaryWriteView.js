@@ -4,6 +4,8 @@ import CalendarView from '../../../../src/views/diary/list/CalendarView';
 import { useState, useEffect, Component } from 'react';
 import { Box, Input, Button, TextArea, Modal, Center, NativeBaseProvider } from "native-base"
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import axios from 'axios';
+import {config} from '../../../../config'
 
 const InputTitle = (props) => {
   return (
@@ -42,11 +44,28 @@ const DiaryWriteView = (props) => {
     setDate(date.format("yyyy-MM-dd"))
   };
 
+  const saveDiary = () => {
+    axios.post(config.ip + ':5000/diariesRouter/save',{
+      data: {
+          user_id: '202212069',
+          date: Date,
+          title: Title,
+          content: Content,
+          disclosure: 'private'
+      }
+  }).then((response) => {
+      if (response.data === 'success') {
+        console.log('페이지이동');
+      }
+  }).catch(function (error) {
+      console.log(error);
+  })
+  }
 
   const WriteDiaryButton = () => {
     return (
       <Box alignItems="center">
-        <Button onPress={() => console.log(Content)}>작성하기</Button>
+        <Button onPress={() => saveDiary()}>작성하기</Button>
       </Box>
     );
   };

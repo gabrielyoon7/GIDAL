@@ -1,0 +1,18 @@
+Index: app/config.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>//각종 변수 제어 (env 어케 쓰는지 몰라서 이렇게 관리함)\r\n/*\r\n\r\n\t원본\r\n\tip:\"http://192.168.0.0\",\r\n\r\n\tip 숫자만 수정하고 형식 수정하지 마세요\r\n\r\n*/\r\nexport const config = {\r\n\tip:\"http://192.168.43.142\",\r\n};
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/config.js b/app/config.js
+--- a/app/config.js	(revision d7083a87a628bdcbf4e715910e3412291ce9e4cb)
++++ b/app/config.js	(date 1649292045193)
+@@ -8,5 +8,5 @@
+ 
+ */
+ export const config = {
+-	ip:"http://192.168.43.142",
++	ip:"http://172.20.10.2",
+ };
+\ No newline at end of file

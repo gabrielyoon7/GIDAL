@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0114b293-1a65-469b-a311-2b8be34d37c3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/routes/sns/SnsRoute.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/routes/sns/SnsRoute.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/views/sns/dm/DmReadView.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/views/sns/dm/DmReadView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/views/sns/profile/ProfileView.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/views/sns/profile/ProfileView.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,7 +25,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../hologachi" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -40,6 +43,7 @@
       <option name="presentableId" value="Default" />
       <updated>1648976583638</updated>
       <workItem from="1648976589279" duration="1058000" />
+      <workItem from="1649337323725" duration="3750000" />
     </task>
     <servers />
   </component>
@@ -56,5 +60,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

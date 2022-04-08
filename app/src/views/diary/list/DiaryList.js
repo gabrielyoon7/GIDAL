@@ -73,11 +73,9 @@ const DiaryListView = (props, navigation) =>{
                 onPress={
                     () => {
                         props.navigation.navigate('DiaryRead', {
-                            // itemId: item.id, 
-                            // title: item.title, 
-                            // content:item.content
-                            itemId: 86,
-                            otherParam: 'anything you want here',
+                            itemId: item.id, 
+                            title: item.title, 
+                            content:item.content
                         })
                     }                
                 }

@@ -42,7 +42,7 @@ const DiaryReadView = (props) => {
                 base: "auto",
                 md: "0"
             }}>
-                <Button size="md" variant="outline">
+                <Button size="md" variant="">
                     수정
                 </Button>
                 <Button size="md" onPress={() => deleteDiary()} >

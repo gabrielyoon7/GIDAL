@@ -8,7 +8,7 @@
 
 */
 export const config = {
-	ip:"http://172.30.1.55",
+	ip:"http://192.168.0.65",
 	user:[
 		{
 			_id : "0",

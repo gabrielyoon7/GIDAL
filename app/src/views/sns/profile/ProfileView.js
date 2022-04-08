@@ -1,8 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList } from 'react-native';
-import { Link } from 'native-base';
 import { config } from '../../../../config'
-import DmReadView from '../dm/DmReadView'
 
 const friendsData = [
     {id:1, image: "https://bootdey.com/img/Content/avatar/avatar6.png", username:"gidal1"},

@@ -1,15 +1,28 @@
 import { Box, Input, Text, TextArea, Stack, Button } from 'native-base';
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-
-
+import axios from 'axios';
+import {config} from '../../../../config'
 
 const DiaryReadView = (props) => {
     // const { id } = route.params;
     // const { title } = route.params;
     // const { content } = route.params;
-    console.log(props.navigation.getState().routes[1].params);
     const item = props.navigation.getState().routes[1].params;
+    console.log(item.itemId);
+
+    const deleteDiary = () => {
+        console.log("l",item.itemId);
+        axios.post(config.ip + ':5000/diariesRouter/delete/',{
+            data: {
+                id: item.itemId
+            }
+        }).then((response) => {
+            props.navigation.pop();
+        }).catch(function (error) {
+            console.log(error);
+        })
+    }
     return (
         <>
             <Text style={styles.dateText} >{item.selectedDate}</Text>
@@ -32,7 +45,7 @@ const DiaryReadView = (props) => {
                 <Button size="md" variant="outline">
                     수정
                 </Button>
-                <Button size="md" variant="outline" colorScheme="secondary">
+                <Button size="md" onPress={() => deleteDiary()} >
                     삭제
                 </Button>
             </Stack>

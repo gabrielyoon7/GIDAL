@@ -76,7 +76,7 @@ const DiaryWriteView = (props) => {
       }
   }).then((response) => {
       if (response.data.status === 'success') {
-        props.navigation.replace('DiaryRead');
+        props.navigation.pop();
         // 스택 쌓지 않고 화면 이동 => 읽기 페이지에서 뒤로가기하면 리스트 페이지 뜸
       }
   }).catch(function (error) {

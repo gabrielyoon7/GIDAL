@@ -52,8 +52,6 @@ const DiaryListView = (props, navigation) =>{
         let index = items.findIndex((item, idx) => {
             return item.date.substr(0,10) === props.selectedDate
         })
-        // index -= 1;
-        console.log(index)
 
         setData(index);
         if(ref === null || items.length < 1) {

@@ -19,7 +19,6 @@ router.post('/findOwn', function(req, res, next) {
     // 전체 데이터 가져오기
     Diary.find().where('user_id').equals(req.body.data.user_id).sort({date: -1}).then( (diaries) => {
         res.json(diaries)
-        console.log(diaries);
     }).catch( (err) => {
         console.log(err);
         next(err)
@@ -60,7 +59,7 @@ router.post('/findOne/', function(req, res, next) {
 router.post('/modify/', function(req, res, next) {
     console.log(req.body);
     // 특정아이디 수정하기
-    Area.findById({_id:req.body.id}, function(error,diary){
+    Diary.findById({_id:req.body.id}, function(error,diary){
         console.log('--- Update(PUT) ---');
         if(error){
             console.log(error);
@@ -81,7 +80,7 @@ router.post('/modify/', function(req, res, next) {
 router.post('/delete/', function(req, res, next) {
     console.log(req.body);
     // 삭제
-    Area.remove({_id:req.body.id}, function(error,output){
+    Diary.deleteOne({_id: req.body.data.id}, function(error,output){
         console.log('--- Delete ---');
         if(error){
             console.log(error);
@@ -92,6 +91,7 @@ router.post('/delete/', function(req, res, next) {
             이부분에 대한 처리는 필요없다. 그냥 삭제 된것으로 처리
             */
         console.log('--- deleted ---');
+        return res.json({status: 'success'})
     });
 });
 

@@ -17,7 +17,7 @@ router.get('/find', function(req, res, next) {
 router.post('/findOwn', function(req, res, next) {
     console.log(req.body.data.user_id);
     // 전체 데이터 가져오기
-    Diary.find().where('user_id').equals(req.body.data.user_id).then( (diaries) => {
+    Diary.find().where('user_id').equals(req.body.data.user_id).sort({date: -1}).then( (diaries) => {
         res.json(diaries)
         console.log(diaries);
     }).catch( (err) => {

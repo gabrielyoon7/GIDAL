@@ -49,15 +49,19 @@ const DiaryListView = (props, navigation) =>{
     }, [isFocused]);
 
     useEffect(() => {
-        const index = items.findIndex((item, idx) => {
-            return item.date === props.selectedDate
+        let index = items.findIndex((item, idx) => {
+            return item.date.substr(0,10) === props.selectedDate
         })
+        // index -= 1;
+        console.log(index)
+
         setData(index);
-        if(ref === null || index < 1) {
+        if(ref === null || items.length < 1) {
             return;
         }
-        ref.scrollToIndex({animated: true, index: 0, viewPosition: 0});
-        if(index > 0) {
+        if(index <= 0){
+            ref.scrollToIndex({animated: true, index: 0, viewPosition: 0});
+        } else {
             ref.scrollToIndex({animated: true, index: index, viewPosition: 0});
         }
     })

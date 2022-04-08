@@ -13,7 +13,7 @@ const Item = ({ item, onPress, backgroundColor, textColor }) => (
 );
   
 
-const DiaryListView = (props) =>{
+const DiaryListView = (props, navigation) =>{
     const [items, setItems] = useState([]);
     const user_id = '202212069';
     const isFocused = useIsFocused(); // isFoucesd Define
@@ -25,7 +25,7 @@ const DiaryListView = (props) =>{
                 user_id: user_id
             }
         }).then((response) => {
-            console.log(response.data);
+            // console.log(response.data);
             if (response.data.length < 1){
                 return;
             }
@@ -70,7 +70,17 @@ const DiaryListView = (props) =>{
             <Item
                 item={item}
                 // onPress={() => setSelectedId(item.id)}
-                onPress={() => props.navigation.navigate('DiaryRead')}
+                onPress={
+                    () => {
+                        props.navigation.navigate('DiaryRead', {
+                            // itemId: item.id, 
+                            // title: item.title, 
+                            // content:item.content
+                            itemId: 86,
+                            otherParam: 'anything you want here',
+                        })
+                    }                
+                }
                 // 해당 일기로 넘어가기 구현
                 backgroundColor={{ backgroundColor }}
                 textColor={{ color }}

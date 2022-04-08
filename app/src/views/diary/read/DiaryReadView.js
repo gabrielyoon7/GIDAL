@@ -4,7 +4,11 @@ import { StyleSheet } from 'react-native';
 
 
 
-const DiaryReadView = (props) => {
+const DiaryReadView = ({route}) => {
+    // const { id } = route.params;
+    // const { title } = route.params;
+    // const { content } = route.params;
+    console.log(route)
     return (
         <>
             <Text style={styles.dateText} >Date</Text>

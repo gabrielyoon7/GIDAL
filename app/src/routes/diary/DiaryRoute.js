@@ -48,10 +48,9 @@ const DiaryWriteScreen = ({ route, navigation }) => {
   );
 }
 
-const DiaryReadScreen = ({ route, navigation }) => {
-  const { selectedDate } = route.params;
+const DiaryReadScreen = ({ navigation }) => {
     return (
-      <DiaryReadView navigation={navigation} selectedDate={selectedDate} />
+      <DiaryReadView navigation={navigation} />
     );
   }
   

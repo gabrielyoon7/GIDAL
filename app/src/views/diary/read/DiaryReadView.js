@@ -1,8 +1,8 @@
-import { Box, Input, Text, TextArea, Stack, Button } from 'native-base';
+import { Box, Input, Text, TextArea, Stack, Button, HStack, Badge, Spacer, Avatar } from 'native-base';
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import axios from 'axios';
-import {config} from '../../../../config'
+import { config } from '../../../../config'
 
 const DiaryReadView = (props) => {
     // const { id } = route.params;
@@ -12,8 +12,8 @@ const DiaryReadView = (props) => {
     console.log(item.itemId);
 
     const deleteDiary = () => {
-        console.log("l",item.itemId);
-        axios.post(config.ip + ':5000/diariesRouter/delete/',{
+        console.log("l", item.itemId);
+        axios.post(config.ip + ':5000/diariesRouter/delete/', {
             data: {
                 id: item.itemId
             }
@@ -24,8 +24,8 @@ const DiaryReadView = (props) => {
         })
     }
     return (
-        <>
-            <Text style={styles.dateText} >{item.selectedDate}</Text>
+        <View style={styles.container}>
+            {/* <Text style={styles.dateText} >{item.selectedDate}</Text>
             <Text style={styles.textStyle} >Title</Text>
             <Box alignItems="center" w="100%">
                 <Input mx="3" variant="underlined" value={item.title} w="75%" isDisabled  />
@@ -33,8 +33,41 @@ const DiaryReadView = (props) => {
             <Text style={styles.textStyle} >Content</Text>
             <Box alignItems="center" w="100%" >
                 <TextArea h="45%" value={item.content} w="75%" isDisabled  />
-            </Box>
-
+            </Box> */}
+            <HStack alignItems="center">
+                <Badge colorScheme="darkBlue" _text={{
+                    color: "white"
+                }} variant="solid" rounded="4">
+                    태그명
+                </Badge>
+                <Spacer />
+                <Button size="md" variant="">
+                    수정
+                </Button>
+                <Button size="md" onPress={() => deleteDiary()} >
+                    삭제
+                </Button>
+            </HStack>
+            <Text color="coolGray.800" mt="3" fontWeight="medium" fontSize="3xl">
+                {item.title}
+            </Text>
+            <HStack alignItems="center">
+                <Avatar bg="green.500" alignSelf="center" size="xs" source={{
+                    uri: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+                }}>
+                    AJ
+                </Avatar>
+                <Text mx={2} fontSize="sm" color="coolGray.700">
+                    작성자
+                </Text>
+                <Spacer />
+                <Text fontSize="sm" color="coolGray.700">
+                    {item.selectedDate}
+                </Text>
+            </HStack>
+            <Text mt="2" fontSize="md" color="coolGray.700">
+                {item.content}
+            </Text>
             <Stack mb="2.5" mt="1.5" direction={{
                 base: "column",
                 md: "row"
@@ -42,37 +75,16 @@ const DiaryReadView = (props) => {
                 base: "auto",
                 md: "0"
             }}>
-                <Button size="md" variant="">
-                    수정
-                </Button>
-                <Button size="md" onPress={() => deleteDiary()} >
-                    삭제
-                </Button>
+
             </Stack>
-        </>
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
-    dateText: {
-  
-      fontWeight: "bold",
-      textAlign: "center",
-      fontSize: 30,
+    container: {
+        margin: 20,
     },
-    textStyle: {
-  
-      fontWeight: "bold",
-      textAlign: "left",
-      fontSize: 17,
-      marginLeft: 50,
-      margin: 10,
-  
-    },
-    buttonContainer: {
-      // margin: 20,
-  
-    },
-  })
+})
 
 export default DiaryReadView;

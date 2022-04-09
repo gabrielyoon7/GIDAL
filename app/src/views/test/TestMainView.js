@@ -10,8 +10,8 @@ const makeDiaryData = () => {
         data: {
           user_id: '202212069',
           date: new Date().format("yyyy-MM-dd"),
-          title: '자동 생성된 일기 제목',
-          content: '자동 생성된 일기 내용',
+          title: '자동 생성된 일기',
+          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
           disclosure: 'public'
         }
       }).then((response) => {

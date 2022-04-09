@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Button, FlatList, View, StatusBar, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import axios from 'axios';
 import { config } from '../../../../config'
+import FancyDiaryCard from '../../../components/diary/FancyDiaryCard';
 
 const Item = ({ item, onPress, backgroundColor, textColor }) => (
     <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
@@ -79,10 +80,17 @@ const FeedView = (props) => {
         const color = item.id === selectedId ? 'white' : 'black';
 
         return (
-            <Item
+            <FancyDiaryCard
                 item={item}
-                // onPress={() => setSelectedId(item.id)}
-                onPress={() => props.navigation.navigate('DiaryRead')}
+                onPress={
+                    () => {
+                        props.navigation.navigate('DiaryRead', {
+                            itemId: item.id,
+                            title: item.title,
+                            content: item.content
+                        })
+                    }
+                }
                 // 해당 일기로 넘어가기 구현
                 backgroundColor={{ backgroundColor }}
                 textColor={{ color }}
@@ -120,7 +128,7 @@ export default FeedView;
 
 const styles = StyleSheet.create({
     container: {
-        flex: 0.5,
+        flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',

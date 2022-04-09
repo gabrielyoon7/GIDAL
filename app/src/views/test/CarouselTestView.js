@@ -109,7 +109,6 @@ const CustomCarousel = () => {
 const CarouselTestView = () => {
   return (
     <View style={{ flex: 1 }}>
-      <ScrollView><></></ScrollView>
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <CustomCarousel />
       </View>

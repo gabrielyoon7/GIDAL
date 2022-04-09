@@ -1,0 +1,49 @@
+Index: app/config.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>//각종 변수 제어 (env 어케 쓰는지 몰라서 이렇게 관리함)\r\n/*\r\n\r\n\t원본\r\n\tip:\"http://192.168.0.0\",\r\n\r\n\tip 숫자만 수정하고 형식 수정하지 마세요\r\n\r\n*/\r\nexport const config = {\r\n\tip:\"http://192.168.0.65\",\r\n\tuser:[\r\n\t\t{\r\n\t\t\t_id : \"0\",\r\n\t\t\tuser_id : \"testAccount00\",\r\n\t\t\tuser_pw : \"1234\",\r\n\t\t\tname : \"user_name_00\",\r\n\t\t\tgender : \"?\",\r\n\t\t\tbday : \"2022-04-07\",\r\n\t\t\tlocation : \"경기도 수원시\",\r\n\t\t\tfollowing : \"\",\r\n\t\t\tfollower : \"\",\r\n\t\t\tprofile_image : \"\",\r\n\t\t\tpoints : 10000,\r\n\t\t\tcount_diary_total : 0,\r\n\t\t\tcount_diary_everyday : 0,\r\n\t\t\titems : {},\r\n\t\t},\r\n\t],\r\n};
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/config.js b/app/config.js
+--- a/app/config.js	(revision 04492749da7156c4c929037d20edea0e7642491d)
++++ b/app/config.js	(date 1649479290448)
+@@ -8,7 +8,7 @@
+ 
+ */
+ export const config = {
+-	ip:"http://192.168.0.65",
++	ip:"http://172.20.10.2",
+ 	user:[
+ 		{
+ 			_id : "0",
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"0114b293-1a65-469b-a311-2b8be34d37c3\" name=\"Default Changelist\" comment=\"\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/routes/sns/SnsRoute.js\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/routes/sns/SnsRoute.js\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/views/sns/dm/DmReadView.js\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/views/sns/dm/DmReadView.js\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/views/sns/profile/ProfileView.js\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/views/sns/profile/ProfileView.js\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"27HUaqzaE7u4urOumq7Ag6mwqLa\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\r\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\r\n    <property name=\"aspect.path.notification.shown\" value=\"true\" />\r\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$\" />\r\n    <property name=\"node.js.detected.package.eslint\" value=\"true\" />\r\n    <property name=\"node.js.detected.package.tslint\" value=\"true\" />\r\n    <property name=\"node.js.path.for.package.eslint\" value=\"project\" />\r\n    <property name=\"node.js.path.for.package.tslint\" value=\"project\" />\r\n    <property name=\"node.js.selected.package.eslint\" value=\"(autodetect)\" />\r\n    <property name=\"node.js.selected.package.tslint\" value=\"(autodetect)\" />\r\n    <property name=\"nodejs_package_manager_path\" value=\"yarn\" />\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"0114b293-1a65-469b-a311-2b8be34d37c3\" name=\"Default Changelist\" comment=\"\" />\r\n      <created>1648976583638</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1648976583638</updated>\r\n      <workItem from=\"1648976589279\" duration=\"1058000\" />\r\n      <workItem from=\"1649337323725\" duration=\"3750000\" />\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 04492749da7156c4c929037d20edea0e7642491d)
++++ b/.idea/workspace.xml	(date 1649479551905)
+@@ -3,9 +3,7 @@
+   <component name="ChangeListManager">
+     <list default="true" id="0114b293-1a65-469b-a311-2b8be34d37c3" name="Default Changelist" comment="">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/routes/sns/SnsRoute.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/routes/sns/SnsRoute.js" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/views/sns/dm/DmReadView.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/views/sns/dm/DmReadView.js" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/views/sns/profile/ProfileView.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/views/sns/profile/ProfileView.js" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/config.js" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -44,6 +42,8 @@
+       <updated>1648976583638</updated>
+       <workItem from="1648976589279" duration="1058000" />
+       <workItem from="1649337323725" duration="3750000" />
++      <workItem from="1649383287380" duration="622000" />
++      <workItem from="1649479043754" duration="503000" />
+     </task>
+     <servers />
+   </component>

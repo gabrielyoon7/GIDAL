@@ -31,6 +31,12 @@ const DmReadView = (props) => {
     const partner = props.userName;
     return(
         <View>
+        <Button
+                title="새로운 교환일기 작성"
+                onPress={() => props.navigation.navigate('DmWrite',{
+                    userName: partner
+                })}
+            />
             <View>
             <FlatList 
                 enableEmptySections={true}
@@ -63,10 +69,7 @@ const DmReadView = (props) => {
                   )
               }}/>
             </View>
-            <Button
-                title="새로운 교환일기 작성"
-                onPress={() => props.navigation.navigate('DmWrite')}
-            />
+            
         </View>
     )
 }

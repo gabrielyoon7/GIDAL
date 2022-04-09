@@ -33,9 +33,10 @@ const DmReadScreen = ({ route, navigation }) => {
   )
 }
 
-const DmWriteScreen = ({ navigation }) => {
+const DmWriteScreen = ({ navigation, route }) => {
+  const { userName } = route.params;
   return (
-    <DmWriteView navigation={navigation} />
+    <DmWriteView navigation={navigation} userName = {userName}/>
   )
 }
 

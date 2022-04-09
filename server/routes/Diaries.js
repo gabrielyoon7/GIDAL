@@ -41,6 +41,22 @@ router.post('/save', function(req, res) {
     });
 });
 
+/* POST*/
+router.post('/saveTemp', function(req, res) {
+    console.log(req.body);
+    // 데이터 저장
+    var newDiary = new Diary(req.body.data);
+    newDiary.save(function(error, data){
+        if(error){
+            console.log(error);
+            return res.json({status: 'fail', error})
+        }else{
+            console.log('Saved!')
+            return res.json({status: 'success'})
+        }
+    });
+});
+
 //작동하는지 확인 안해봄
 router.post('/findOne/', function(req, res, next) {
     console.log(req.body);

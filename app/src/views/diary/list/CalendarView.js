@@ -8,7 +8,8 @@ const CalendarView = ( props ) => {
         props.setSelectedDate(date.dateString);
     }
     return (
-        <View style={{ flex: 0.5 }}>
+        <View style={{ height: 310 }}>
+        {/* <View style={{ flex: 0.7 }}> */}
             <Calendar
                 onDayPress={(date) => changeDate(date)}
                 markedDates={{

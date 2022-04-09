@@ -7,6 +7,7 @@ import Carousel from 'react-native-snap-carousel';
 import TestMainView from '../../views/test/TestMainView';
 import CarouselTestView from '../../views/test/CarouselTestView';
 import SliderTestView from '../../views/test/SliderTestView';
+import RichTextTestView from '../../views/test/RichTextTestView';
 
   
 const TestMainScreen = (props) => {
@@ -28,6 +29,12 @@ function SliderTestScreen() {
   );
 }
 
+function RichTextTestScreen() {
+  return (
+    <RichTextTestView/>
+  );
+}
+
 
 const Drawer = createDrawerNavigator();
 
@@ -37,6 +44,7 @@ const MyDrawer = (props) => {
       <Drawer.Screen name="TestMain" component={TestMainScreen} />
       <Drawer.Screen name="CarouselTest" component={CarouselTestScreen} />
       <Drawer.Screen name="SliderTest" component={SliderTestScreen} />
+      <Drawer.Screen name="RichTextTest" component={RichTextTestScreen} />
     </Drawer.Navigator>
   );
 }

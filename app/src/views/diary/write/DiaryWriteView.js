@@ -25,29 +25,30 @@ const WriteDiaryArea = (props) => {
 
 const SelectDisclosure = (props) => {
 
-  return <Center>
-    <Box w="3/4" maxW="310">
-      <Select
-        selectedValue={props.disclosure}
-        minWidth="200"
-        accessibilityLabel="Choose Disclosure"
-        placeholder="공개범위를 선택해주세요"
-        _selectedItem={{
-          bg: "teal.600",
-          endIcon: <CheckIcon size="5" />
-        }}
-        mt={1}
-        onValueChange={
-          (itemValue) => props.setDisclosure(itemValue)
-        }
-        key={0}
-      >
-        <Select.Item label="전체공개" value="public" />
-        <Select.Item label="나만보기" value="private" />
-        <Select.Item label="친구공개" value="friend" />
-      </Select>
-    </Box>
-  </Center>;
+  return (
+    <Center>
+      <Box w="3/4" maxW="310">
+        <Select
+          selectedValue={props.disclosure}
+          minWidth="200"
+          accessibilityLabel="Choose Disclosure"
+          placeholder="공개범위를 선택해주세요"
+          _selectedItem={{
+            bg: "teal.600",
+            endIcon: <CheckIcon size="5" />
+          }}
+          mt={1}
+          onValueChange={
+            (itemValue) => props.setDisclosure(itemValue)
+          }
+        >
+          <Select.Item label="전체공개" value="public" />
+          <Select.Item label="나만보기" value="private" />
+          <Select.Item label="친구공개" value="friend" />
+        </Select>
+      </Box>
+    </Center>
+  );
 };
 
 const DiaryWriteView = (props) => {

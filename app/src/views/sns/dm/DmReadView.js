@@ -4,38 +4,6 @@ import {Modal} from 'native-base'
 import { Card, CardTitle, CardContent, CardAction, CardButton } from 'react-native-material-cards'
 import Carousel from 'react-native-snap-carousel';
 
-const exampleItems = [
-    {
-      type : 'button',
-      question: '버튼형 질문',
-      tags: [{
-        id: 1,
-        name: 'a'
-      }, {
-        id: 2,
-        name: 'b'
-      }, {
-        id: 3,
-        name: 'b'
-      }]
-    },
-    {
-      type : 'search',
-      question: '검색형 질문',
-      tags: [{
-        id: 1,
-        name: 'a'
-      }, {
-        id: 2,
-        name: 'b'
-      }, {
-        id: 3,
-        name: 'b'
-      }]
-    }
-  ];
-  
-
 const example = [
     {
         id: 1,
@@ -63,7 +31,7 @@ const example = [
 
 const CustomCarousel = () => {
     const [activeIndex, setActiveIndex] = useState(0);
-    const [carouselItems, setCarouselItems] = useState(exampleItems);
+    const [carouselItems, setCarouselItems] = useState(example);
     const ref = useRef(null);
   
     const onPressFunction = () => {
@@ -71,19 +39,11 @@ const CustomCarousel = () => {
       }
 
       const renderItem = useCallback(({ item, index }) => (
-        <View style={{ backgroundColor: '#dcdde1', marginTop: 20, borderRadius: 10}}>
-          <Text style={{ fontSize: 20, fontWeight: 'bold', margin: 10 }}>{item.question}</Text>
-          <View style={{ alignItems: 'center', justifyContent: 'center'}}>
-            <View style={styles.lineView}/>
-          </View>
-          <View style={{ justifyContent: 'center', flexDirection : "row" }} >
-          {item.tags.map((tag) => (
-            <View style={styles.btnView}>
-              <Pressable style={styles.button} onPress={onPressFunction}>
-              <Text>{tag.name}</Text>
-            </Pressable>
-             </View>
-        ))}
+        <View style={{ backgroundColor: 'orange', marginTop: 20, borderRadius: 10, flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <Text style={{ fontSize: 20, fontWeight: 'bold', margin: 10 }}>{item.title}</Text>
+          <View style={{ justifyContent: 'center', flexDirection : "column" }} >
+          <Text>{item.content}</Text>
+          <Text>{item.date}</Text>
         </View>
 
       </View>
@@ -95,8 +55,8 @@ const CustomCarousel = () => {
             layout="default"
             ref={ref}
             data={carouselItems}
-            sliderWidth={200}
-            itemWidth={200}
+            sliderWidth={250}
+            itemWidth={250}
             renderItem={renderItem}
             onSnapToItem={(index) => setActiveIndex(index)}
           />
@@ -203,11 +163,6 @@ const styles = StyleSheet.create({
       borderWidth: 2,
       margin: 5,
       marginTop: 15
-    },
-    lineView: {
-      borderBottomColor: 'black',
-      borderBottomWidth: 3,
-      width: '90%',
     }
   });
 

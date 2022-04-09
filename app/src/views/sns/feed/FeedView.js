@@ -4,20 +4,6 @@ import axios from 'axios';
 import { config } from '../../../../config'
 import FancyDiaryCard from '../../../components/diary/FancyDiaryCard';
 
-const Item = ({ item, onPress, backgroundColor, textColor }) => (
-    <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
-        <Text>{item.date}</Text>
-        <Text style={[styles.title, textColor]}>{item.title}</Text>
-        <Text>{item.content}</Text>
-    </TouchableOpacity>
-);
-
-{/**
-
-제 생각엔 위의 Item의 TouchableOpacity 부분은 components 폴더로 모듈화 시켜서 다이어리 메인과 피드 등 여러 곳에서 사용할 수 있도록 하는게 좋을 것 같습니다.
-
-*/}
-
 
 const FeedView = (props) => {
     const [items, setItems] = useState([]);
@@ -130,7 +116,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        alignItems: 'center',
+        // alignItems: 'center',
         justifyContent: 'center',
     },
     item: {

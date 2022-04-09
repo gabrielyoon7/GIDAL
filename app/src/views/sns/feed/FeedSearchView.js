@@ -1,22 +1,23 @@
 import { Button, FlatList, View, StatusBar, StyleSheet, Text, TouchableOpacity, TextInput } from 'react-native';
+import { Badge, HStack, Spacer, } from 'native-base';
 import { config } from '../../../../config'
 import SearchBar from "react-native-dynamic-search-bar";
 import { useState } from 'react';
 
 const staticData = [
-  {id:0, tag:'d33'},
-  {id:1, tag:'d33123'},
-  {id:2, tag:'d0'},
-  {id:3, tag:'d9'},
-  {id:4, tag:'8d'},
-  {id:5, tag:'7d'},
-  {id:6, tag:'d6'},
-  {id:7, tag:'5d'},
-  {id:8, tag:'d5'},
-  {id:9, tag:'d4'},
-  {id:10, tag:'d3'},
-  {id:11, tag:'d2'},
-  {id:12, tag:'d1'},
+  { id: 0, tag: '아구찜' },
+  { id: 1, tag: '아구탕' },
+  { id: 2, tag: '축구' },
+  { id: 3, tag: '농구' },
+  { id: 4, tag: '야구' },
+  { id: 5, tag: '운동' },
+  { id: 6, tag: '일상' },
+  { id: 7, tag: '팀프로젝트' },
+  { id: 8, tag: '친구' },
+  { id: 9, tag: '여자친구' },
+  { id: 10, tag: '남자친구' },
+  { id: 11, tag: '해외여행' },
+  { id: 12, tag: '국내여행' },
 ]
 
 
@@ -24,7 +25,7 @@ const FeedSearchView = () => {
   const [dataSource, setDataSource] = useState(staticData);
   const filterList = (text) => {
     let newData = staticData;
-    newData = staticData.filter((item)=>{
+    newData = staticData.filter((item) => {
       const itemData = item.tag.toLowerCase();
       const textData = text.toLowerCase();
       return itemData.indexOf(textData) > -1;
@@ -32,13 +33,23 @@ const FeedSearchView = () => {
     setDataSource(newData);
   }
   const renderItem = (item) => {
-    return(
-      <Text>{item.tag}</Text>
+    return (
+      <HStack alignItems="center" >
+        <Badge colorScheme="darkBlue" _text={{
+          color: "white"
+        }} variant="solid" rounded="4">
+          {item.tag}
+        </Badge>
+        <Spacer />
+        <Text fontSize={10} color="coolGray.800">
+          x
+        </Text>
+      </HStack>
     )
   }
 
   return (
-    <View>
+    <View style={styles.container}>
       <SearchBar
         placeholder="Search here"
         onPress={() => alert("onPress")}
@@ -63,7 +74,15 @@ const FeedSearchView = () => {
 export default FeedSearchView;
 
 const styles = StyleSheet.create({
-  flatListStyle: {
+  container: {
     marginTop: 12,
+    // flex: 1,
+    // backgroundColor: '#fff',
+    // alignItems: 'center',
+    justifyContent: 'center',
+  },
+  flatListStyle: {
+    // backgroundColor: '#fff',
+    margin: 20,
   },
 })

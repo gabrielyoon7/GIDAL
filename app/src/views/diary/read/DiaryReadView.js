@@ -1,4 +1,4 @@
-import { Box, Input, Text, TextArea, Stack, Button, HStack, Badge, Spacer, Avatar } from 'native-base';
+import { Box, Input, Text, TextArea, Stack, Button, HStack, Badge, Spacer, Avatar, Divider } from 'native-base';
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import axios from 'axios';
@@ -37,7 +37,7 @@ const DiaryReadView = (props) => {
                 <Badge colorScheme="darkBlue" _text={{
                     color: "white"
                 }} variant="solid" rounded="4">
-                    태그명
+                    태그명(카테고리)
                 </Badge>
                 <Spacer />
                 <Button size="md" variant="">
@@ -47,31 +47,29 @@ const DiaryReadView = (props) => {
                     삭제
                 </Button>
             </HStack>
-            <Text color="coolGray.800" mt="3" fontWeight="medium" fontSize="3xl">
+            <Text color="coolGray.800" mt="3" fontWeight="bold" fontSize="4xl">
                 {diary.title}
             </Text>
-            <HStack alignItems="center">
-                <Avatar bg="green.500" alignSelf="center" size="xs" source={{
+            <Text fontSize="sm" color="coolGray.700" my="1">
+                    {diary.date}
+            </Text>
+            <HStack alignItems="center" my="1">
+                <Avatar bg="green.500" alignSelf="center" size="sm" source={{
                     uri: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
                 }}>
                     AJ
                 </Avatar>
-                <Text mx={2} fontSize="sm" color="coolGray.700">
+                <Text mx={2} fontSize="md" color="coolGray.700">
                     {diary.user_id}
                 </Text>
                 <Spacer />
-                <Text fontSize="sm" color="coolGray.700">
-                    {diary.date}
-                </Text>
             </HStack>
-            {/* <Text mt="2" fontSize="md" color="coolGray.700">
-                {item.content}
-            </Text> */}
+            <Divider my="2"/>
             <RenderHtml
                 contentWidth={width}
                 source={source}
             />
-            <Stack mb="2.5" mt="1.5" direction={{
+            {/* <Stack mb="2.5" mt="1.5" direction={{
                 base: "column",
                 md: "row"
             }} space={2} mx={{
@@ -79,7 +77,7 @@ const DiaryReadView = (props) => {
                 md: "0"
             }}>
 
-            </Stack>
+            </Stack> */}
         </View>
     )
 }

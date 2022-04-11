@@ -3,14 +3,13 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import axios from 'axios';
 import { config } from '../../../../config'
+import { useWindowDimensions } from 'react-native';
+import RenderHtml from 'react-native-render-html';
 
 const DiaryReadView = (props) => {
-    // const { id } = route.params;
-    // const { title } = route.params;
-    // const { content } = route.params;
+    const { width } = useWindowDimensions();
     const item = props.navigation.getState().routes[1].params;
-    console.log(item.itemId);
-
+    // console.log(item.itemId);
     const deleteDiary = () => {
         console.log("l", item.itemId);
         axios.post(config.ip + ':5000/diariesRouter/delete/', {
@@ -23,17 +22,14 @@ const DiaryReadView = (props) => {
             console.log(error);
         })
     }
+
+    const source = {
+        html: item.content
+      };
+
+
     return (
         <View style={styles.container}>
-            {/* <Text style={styles.dateText} >{item.selectedDate}</Text>
-            <Text style={styles.textStyle} >Title</Text>
-            <Box alignItems="center" w="100%">
-                <Input mx="3" variant="underlined" value={item.title} w="75%" isDisabled  />
-            </Box>
-            <Text style={styles.textStyle} >Content</Text>
-            <Box alignItems="center" w="100%" >
-                <TextArea h="45%" value={item.content} w="75%" isDisabled  />
-            </Box> */}
             <HStack alignItems="center">
                 <Badge colorScheme="darkBlue" _text={{
                     color: "white"
@@ -65,9 +61,13 @@ const DiaryReadView = (props) => {
                     {item.selectedDate}
                 </Text>
             </HStack>
-            <Text mt="2" fontSize="md" color="coolGray.700">
+            {/* <Text mt="2" fontSize="md" color="coolGray.700">
                 {item.content}
-            </Text>
+            </Text> */}
+            <RenderHtml
+                contentWidth={width}
+                source={source}
+            />
             <Stack mb="2.5" mt="1.5" direction={{
                 base: "column",
                 md: "row"

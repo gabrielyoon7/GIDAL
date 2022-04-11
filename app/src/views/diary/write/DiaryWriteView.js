@@ -256,32 +256,34 @@ const DiaryWriteView = (props) => {
 
         <SelectDisclosure disclosure={disclosure} setDisclosure={setDisclosure} />
         <InputTitle setTitle={setTitle} Title={Title} />
-        <RichEditor
-          // initialFocus={true}
-          // disabled={disabled}
-          // editorStyle={contentStyle} // default light style
-          ref={richText}
-          // style={styles.rich}
-          useContainer={true}
-          initialHeight={200}
-          enterKeyHint={'done'}
-          // containerStyle={{borderRadius: 24}}
-          placeholder={'please input content'}
-          // initialContentHTML={initHTML}
-          // editorInitializedCallback={editorInitializedCallback}
-          // onChange={handleChange}
-          // onHeightChange={handleHeightChange}
-          // onPaste={handlePaste}
-          // onKeyUp={handleKeyUp}
-          // onKeyDown={handleKeyDown}
-          // onInput={handleInput}
-          // onMessage={handleMessage}
-          // onFocus={handleFocus}
-          // onBlur={handleBlur}
-          // onCursorPosition={handleCursorPosition}
-          pasteAsPlainText={true}
-          onChange={(content) => { setContent(content); }}
-        />
+        <ScrollView>
+          <RichEditor
+            // initialFocus={true}
+            // disabled={disabled}
+            // editorStyle={contentStyle} // default light style
+            ref={richText}
+            // style={styles.rich}
+            useContainer={true}
+            initialHeight={200}
+            enterKeyHint={'done'}
+            // containerStyle={{borderRadius: 24}}
+            placeholder={'please input content'}
+            // initialContentHTML={initHTML}
+            // editorInitializedCallback={editorInitializedCallback}
+            // onChange={handleChange}
+            // onHeightChange={handleHeightChange}
+            // onPaste={handlePaste}
+            // onKeyUp={handleKeyUp}
+            // onKeyDown={handleKeyDown}
+            // onInput={handleInput}
+            // onMessage={handleMessage}
+            // onFocus={handleFocus}
+            // onBlur={handleBlur}
+            // onCursorPosition={handleCursorPosition}
+            pasteAsPlainText={true}
+            onChange={(content) => { setContent(content); }}
+          />
+        </ScrollView>
         {/* <RichToolbar
           // 현재 잘 동작이 안됨
           style={[styles.richBar, dark && styles.richBarDark]}

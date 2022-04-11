@@ -59,6 +59,7 @@ const DiaryListView = (props, navigation) => {
     })
 
     const renderItem = ({ item }) => {
+        // 아래 item.id 검토가 필요함
         const backgroundColor = item.id === selectedId ? "#6e3b6e" : "#f9c2ff";
         const color = item.id === selectedId ? 'white' : 'black';
 

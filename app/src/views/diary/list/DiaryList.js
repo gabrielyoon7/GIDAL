@@ -24,7 +24,8 @@ const DiaryListView = (props, navigation) => {
             }
             response.data.forEach((item) => {
                 const diary = { id: item._id, date: item.date, title: item.title, content: item.content }
-                result.push(diary);
+                result.push(item);
+                // result.push(diary);
             });
             setItems(result);
         }).catch(function (error) {
@@ -67,6 +68,7 @@ const DiaryListView = (props, navigation) => {
                 onPress={
                     () => {
                         props.navigation.navigate('DiaryRead', {
+                            diary : item,
                             itemId: item.id,
                             title: item.title,
                             content: item.content

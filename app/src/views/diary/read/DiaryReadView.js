@@ -8,13 +8,16 @@ import RenderHtml from 'react-native-render-html';
 
 const DiaryReadView = (props) => {
     const { width } = useWindowDimensions();
-    const item = props.navigation.getState().routes[1].params;
+    // const item = props.navigation.getState().routes[1].params;
+    const diary = props.navigation.getState().routes[1].params.diary;
+    console.log(diary);
     // console.log(item.itemId);
     const deleteDiary = () => {
-        console.log("l", item.itemId);
+        console.log("l", diary._id);
         axios.post(config.ip + ':5000/diariesRouter/delete/', {
             data: {
-                id: item.itemId
+                // id: item.itemId,
+                id: diary._id,
             }
         }).then((response) => {
             props.navigation.pop();
@@ -24,7 +27,7 @@ const DiaryReadView = (props) => {
     }
 
     const source = {
-        html: item.content
+        html: diary.content
       };
 
 
@@ -45,7 +48,7 @@ const DiaryReadView = (props) => {
                 </Button>
             </HStack>
             <Text color="coolGray.800" mt="3" fontWeight="medium" fontSize="3xl">
-                {item.title}
+                {diary.title}
             </Text>
             <HStack alignItems="center">
                 <Avatar bg="green.500" alignSelf="center" size="xs" source={{
@@ -54,11 +57,11 @@ const DiaryReadView = (props) => {
                     AJ
                 </Avatar>
                 <Text mx={2} fontSize="sm" color="coolGray.700">
-                    작성자
+                    {diary.user_id}
                 </Text>
                 <Spacer />
                 <Text fontSize="sm" color="coolGray.700">
-                    {item.selectedDate}
+                    {diary.date}
                 </Text>
             </HStack>
             {/* <Text mt="2" fontSize="md" color="coolGray.700">

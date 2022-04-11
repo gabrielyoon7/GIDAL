@@ -31,12 +31,14 @@ const userSchema = mongoose.Schema({
         maxlength: 100,
         required: true
     },
-    // following: [{
-    //     user_id: String
-    // }],
-    // follower: [{
-    //     user_id: String
-    // }],
+    following: [{
+        user_id: String,
+        img: String,
+    }],
+    follower: [{
+        user_id: String,
+        img: String,
+    }],
     profile_image : {
         type: String
     },

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FlatList, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, TextInput, View } from 'react-native';
+import { FlatList, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, TextInput, View, Alert } from 'react-native';
 import CalendarView from '../../../../src/views/diary/list/CalendarView';
 import { useState, useEffect, Component } from 'react';
 import { Box, Input, Button, TextArea, Modal, Center, NativeBaseProvider, Select, CheckIcon } from "native-base"
@@ -24,18 +24,19 @@ const WriteDiaryArea = (props) => {
 };
 
 const DmWriteView = (props) => {
-  const [Date, setDate] = useState(props.selectedDate);
+  // const [Date, setDate] = useState(props.selectedDate);
+  let todayDate = new Date();
   const [Title, setTitle] = useState('');
   const [Content, setContent] = useState('');
 
   const saveDiary = () => {
-    axios.post(config.ip + ':5000/diariesRouter/save', {
+    axios.post(config.ip + ':5000/usersRouter/userUpdate', {
       data: {
-        user_id: '202212069',
-        date: Date,
+        user_id: config.user[0].user_id,
+        dmRecipient_id: props.userName,
         title: Title,
         content: Content,
-        disclosure: disclosure
+        date: todayDate
       }
     }).then((response) => {
       if (response.data.status === 'success') {
@@ -50,7 +51,7 @@ const DmWriteView = (props) => {
   const WriteDiaryButton = () => {
     return (
       <Box alignItems="center">
-        <Button onPress={() => { }} >작성하기</Button>
+        <Button onPress={() => saveDiary()} >작성하기</Button>
       </Box>
     );
   };

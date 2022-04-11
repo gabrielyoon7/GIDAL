@@ -25,6 +25,12 @@ export const config = {
 			count_diary_total : 0,
 			count_diary_everyday : 0,
 			items : {},
+			sentDm: [{
+				"dmRecipient_id": 'gidal1',
+        		"title": "test",
+				"content": "test content",
+        		"date": "2022-04-11"
+			}]
 		},
 	],
 };

@@ -6,7 +6,7 @@ const { User } = require("../models/User");
 /* POST*/
 router.post('/save', function(req, res) {
     console.log(req.body);
-    // µ¥ÀÌÅÍ ÀúÀå
+    // ë°ì´í„° ì €ìž¥
     var newUser = new User(req.body.data);
     newUser.save(function(error, data){
         if(error){
@@ -17,6 +17,27 @@ router.post('/save', function(req, res) {
             return res.json({status: 'success'})
         }
     });
+});
+
+/*ìœ ì € ì—…ë°ì´íŠ¸ */
+router.post('/userUpdate', function(req, res) {
+    User.updateOne(
+        { user_id: req.body.data.user_id }, 
+        {$push: {sentDm: {
+            "dmRecipient_id": req.body.data.dmRecipient_id, 
+            "title": req.body.data.title,
+            "content": req.body.data.content,
+            "date": req.body.data.date,
+        }}}).exec();
+        (error, user)=>{
+            if(error){
+                console.log(error);
+                return res.json({status: 'error', error})
+            }else{
+                console.log('Saved!')
+                return res.json({status: 'success'})
+            }
+        };
 });
 
 module.exports = router;

@@ -23,7 +23,7 @@ const DiaryListView = (props, navigation) => {
                 return;
             }
             response.data.forEach((item) => {
-                const diary = { id: item._id, date: item.date, title: item.title, content: item.content }
+                // const diary = { id: item._id, date: item.date, title: item.title, content: item.content }
                 result.push(item);
                 // result.push(diary);
             });
@@ -69,9 +69,9 @@ const DiaryListView = (props, navigation) => {
                     () => {
                         props.navigation.navigate('DiaryRead', {
                             diary : item,
-                            itemId: item.id,
-                            title: item.title,
-                            content: item.content
+                            // itemId: item.id,
+                            // title: item.title,
+                            // content: item.content
                         })
                     }
                 }

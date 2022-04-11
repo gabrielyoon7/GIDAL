@@ -32,12 +32,25 @@ router.post('/userUpdate', function(req, res) {
         (error, user)=>{
             if(error){
                 console.log(error);
-                return res.json({status: 'error', error})
+                res.json({status: 'error', error})
             }else{
                 console.log('Saved!')
-                return res.json({status: 'success'})
+                res.json({status: 'success'})
             }
         };
+});
+
+router.get('/findOne/', function(req, res, next) {
+    // 특정 아이디값 가져오기
+    const user_id = req.query.user_id;
+ 
+    User.findOne({user_id: user_id}, function(error,users){
+        if(error){
+            console.log(error);
+        }else{
+            res.json(users)
+        }
+    });
 });
 
 module.exports = router;

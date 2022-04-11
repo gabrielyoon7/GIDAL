@@ -33,10 +33,12 @@ const userSchema = mongoose.Schema({
     },
     following: [{
         user_id: String,
+        name: String,
         img: String,
     }],
     follower: [{
         user_id: String,
+        name: String,
         img: String,
     }],
     profile_image : {

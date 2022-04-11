@@ -38,14 +38,9 @@ const DmWriteView = (props) => {
         content: Content,
         date: todayDate
       }
-    }).then((response) => {
-      if (response.data.status === 'success') {
-        props.navigation.pop();
-        // 스택 쌓지 않고 화면 이동 => 읽기 페이지에서 뒤로가기하면 리스트 페이지 뜸
-      }
-    }).catch(function (error) {
-      console.log(error);
     })
+    Alert.alert("작성 완료")
+    props.navigation.pop();
   }
 
   const WriteDiaryButton = () => {

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList } from 'react-native';
+import axios from 'axios'
 import { config } from '../../../../config'
 
 const friendsData = [
@@ -12,11 +13,32 @@ const friendsData = [
 ]
 
 export default function ProfileView(props) {
+  const [following, setFollowing] = useState();
+  const [profileImg, setProfileImg] = useState();
+
+  const callback = (data) => {
+    console.log(data);
+    setFollowing(data.following);
+    setProfileImg(data.profile_image)
+  }
+
+  useEffect(()=>{
+    axios.get(config.ip+':5000/usersRouter/findOne/',{
+      params: {
+        user_id: config.user[0].user_id,
+      }
+    })
+  .then((response) => {
+    callback(response.data);
+  }).catch(function (error) {
+    console.log(error);
+  });
+},[])
         return (
             <View style={styles.container}>
             <View style={styles.header}>
               <View style={styles.headerContent}>
-                  <Image style={styles.avatar} source={{uri: 'https://bootdey.com/img/Content/avatar/avatar1.png'}}/>
+                  <Image style={styles.avatar} source={{uri: profileImg}}/>
                   <Text style={styles.name}>{config.user[0].name}</Text>
               </View>
             </View>
@@ -25,18 +47,18 @@ export default function ProfileView(props) {
             <FlatList 
                 style={styles.container} 
                 enableEmptySections={true}
-                data={friendsData}
+                data={following}
                 keyExtractor= {(item) => {
-                  return item.id;
+                  return item.user_id;
                 }}
                 renderItem={({item}) => {
                   return (
                     <TouchableOpacity onPress={() => props.navigation.navigate('DmRead', {
-                        userName: item.username
+                        userName: item.name
                     })} >
                       <View style={styles.box} >
-                        <Image style={styles.image} source={{uri: item.image}}/>
-                         <Text style={styles.username}>{item.username}</Text>
+                        <Image style={styles.image} source={{uri: item.img}}/>
+                         <Text style={styles.username}>{item.name}</Text>
                       </View>
                     </TouchableOpacity>
                   )

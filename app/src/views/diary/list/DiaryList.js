@@ -90,7 +90,7 @@ const DiaryListView = (props, navigation) => {
                     setRef(ref);
                 }}
                 renderItem={renderItem}
-                keyExtractor={(item) => item.id}
+                keyExtractor={(item) => item._id}
                 extraData={selectedId}
             />
         </View>

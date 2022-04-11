@@ -39,6 +39,7 @@
     "react-native-modal-datetime-picker": "^13.1.2",
     "react-native-pell-rich-editor": "^1.8.8",
     "react-native-reanimated": "~2.3.1",
+    "react-native-render-html": "^6.3.4",
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "~3.10.1",
     "react-native-simple-alarm": "^2.0.2",

@@ -22,41 +22,41 @@ mongoose.connect(`mongodb://localhost:27017/gidal`, {})
 //저장 테스트
 var newDiary = new Diary({user_id:'202212069', date:'2022-04-05', title:'다이어리1', content:'내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용', disclosure:'private'});
 
-var newUser = new User({
-  user_id : "testAccount11",
-			password : "1234",
-			name : "user_name_11",
-			gender : "?",
-			bday : "2022-04-07",
-			location : "경기도 수원시",
-			following : [{}],
-			follower : [{}],
-			profile_image : "",
-			points : 10000,
-			count_diary_total : 0,
-			count_diary_everyday : 0,
-			items : {},
-			sentDm: [{
-				"dmRecipient_id": 'testAccount00',
-        "title": "test send",
-				"content": "test content2",
-        "date": "2022-04-11"
-			}],
-      receivedDm: [{
-				"dmSender_id": 'testAccount00',
-        "title": "test 22",
-				"content": "test content",
-        "date": "2022-04-12"
-			}]
-});
+// var newUser = new User({
+//   user_id : "testAccount11",
+// 			password : "1234",
+// 			name : "user_name_11",
+// 			gender : "?",
+// 			bday : "2022-04-07",
+// 			location : "경기도 수원시",
+// 			following : [{}],
+// 			follower : [{}],
+// 			profile_image : "",
+// 			points : 10000,
+// 			count_diary_total : 0,
+// 			count_diary_everyday : 0,
+// 			items : {},
+// 			sentDm: [{
+// 				"dmRecipient_id": 'testAccount00',
+//         "title": "test send",
+// 				"content": "test content2",
+//         "date": "2022-04-11"
+// 			}],
+//       receivedDm: [{
+// 				"dmSender_id": 'testAccount00',
+//         "title": "test 22",
+// 				"content": "test content",
+//         "date": "2022-04-12"
+// 			}]
+// });
 
-newUser.save(function(error, data){
-  if(error){
-      console.log(error);
-  }else{
-      console.log('Saved!');
-  }
-});
+// newUser.save(function(error, data){
+//   if(error){
+//       console.log(error);
+//   }else{
+//       console.log('Saved!');
+//   }
+// });
 
 app.get('/', (req, res) => {
     res.send('Hello World!')

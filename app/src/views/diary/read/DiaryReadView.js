@@ -40,6 +40,11 @@ const DiaryReadView = (props) => {
                     }} variant="solid" rounded="4">
                         태그명(카테고리)
                     </Badge>
+                    <Badge colorScheme="darkBlue" _text={{
+                        color: "white"
+                    }} variant="solid" rounded="4">
+                        {diary.disclosure}
+                    </Badge>
                     <Spacer />
                     <Button size="md" variant="">
                         수정

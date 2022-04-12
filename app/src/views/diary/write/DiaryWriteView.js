@@ -47,7 +47,7 @@ const SelectDisclosure = (props) => {
 
 const RadioDisclosure = (props) => {
   return (
-    <RadioButton.Group onValueChange={newValue => props.setValue(newValue)} value={props.value}>
+    <RadioButton.Group onValueChange={newValue => props.setDisclosure(newValue)} value={props.disclosure}>
       <View>
         <Text>전체공개</Text>
         <RadioButton value="public" />
@@ -71,8 +71,8 @@ const DiaryWriteView = (props) => {
   const [Title, setTitle] = useState('');
   const [Content, setContent] = useState('');
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-  const [disclosure, setDisclosure] = useState('');
-  const [value, setValue] = React.useState('public');
+  // const [disclosure, setDisclosure] = useState('');
+  const [disclosure, setDisclosure] = React.useState('public');
   let dark = true;
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -121,8 +121,8 @@ const DiaryWriteView = (props) => {
     <>
       <View>
         <Text style={styles.dateText} onPress={showDatePicker} >{Date}</Text>
-        <RadioDisclosure value={value} setValue={setValue}/>
-        <SelectDisclosure disclosure={disclosure} setDisclosure={setDisclosure} />
+        <RadioDisclosure disclosure={disclosure} setDisclosure={setDisclosure} />
+        {/* <SelectDisclosure disclosure={disclosure} setDisclosure={setDisclosure} /> */}
         <InputTitle setTitle={setTitle} Title={Title} />
         <ScrollView>
           <RichEditor

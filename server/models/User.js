@@ -64,6 +64,12 @@ const userSchema = mongoose.Schema({
         title: String,
         content: String,
         date: Date
+    }],
+    receivedDm: [{
+        dmSender_id: String,
+        title: String,
+        content: String,
+        date: Date
     }]
 })
 

@@ -23,9 +23,9 @@ mongoose.connect(`mongodb://localhost:27017/gidal`, {})
 var newDiary = new Diary({user_id:'202212069', date:'2022-04-05', title:'다이어리1', content:'내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용', disclosure:'private'});
 
 // var newUser = new User({
-//   user_id : "testAccount00",
+//   user_id : "testAccount11",
 // 			password : "1234",
-// 			name : "user_name_00",
+// 			name : "user_name_11",
 // 			gender : "?",
 // 			bday : "2022-04-07",
 // 			location : "경기도 수원시",
@@ -37,10 +37,16 @@ var newDiary = new Diary({user_id:'202212069', date:'2022-04-05', title:'다이�
 // 			count_diary_everyday : 0,
 // 			items : {},
 // 			sentDm: [{
-// 				"dmRecipient_id": 'gidal1',
-//         		"title": "test",
+// 				"dmRecipient_id": 'testAccount00',
+//         "title": "test send",
+// 				"content": "test content2",
+//         "date": "2022-04-11"
+// 			}],
+//       receivedDm: [{
+// 				"dmSender_id": 'testAccount00',
+//         "title": "test 22",
 // 				"content": "test content",
-//         		"date": "2022-04-11"
+//         "date": "2022-04-12"
 // 			}]
 // });
 

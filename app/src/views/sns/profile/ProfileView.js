@@ -17,7 +17,6 @@ export default function ProfileView(props) {
   const [profileImg, setProfileImg] = useState();
 
   const callback = (data) => {
-    console.log(data);
     setFollowing(data.following);
     setProfileImg(data.profile_image)
   }

@@ -33,10 +33,29 @@ const CustomCarousel = () => {
     const [activeIndex, setActiveIndex] = useState(0);
     const [carouselItems, setCarouselItems] = useState(example);
     const ref = useRef(null);
+    const [dmList, setDmList] = useState();
   
     const onPressFunction = () => {
         Alert.alert('press!')
       }
+
+      // const callback = (data) => {
+      //     setDmList(data.sentDm);
+      //   }
+  
+      // useEffect(()=>{
+      //     axios.get(config.ip+':5000/usersRouter/findDm/',{
+      //       params: {
+      //         user_id: config.user[0].user_id,
+      //         recipient_id: props.userName,
+      //       }
+      //     })
+      //   .then((response) => {
+      //     callback(response.data);
+      //   }).catch(function (error) {
+      //     console.log(error);
+      //   });
+      // },[])
 
       const renderItem = useCallback(({ item, index }) => (
         <View style={{ backgroundColor: 'orange', marginTop: 20, borderRadius: 10, flex: 1, alignItems: 'center', justifyContent: 'center'}}>

@@ -1,155 +1,3 @@
-// import * as React from 'react';
-// import { FlatList, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, TextInput, View } from 'react-native';
-// import CalendarView from '../../../../src/views/diary/list/CalendarView';
-// import { useState, useEffect, Component } from 'react';
-// import { Box, Input, Button, TextArea, Modal, Center, NativeBaseProvider, Select, CheckIcon } from "native-base"
-// import DateTimePickerModal from "react-native-modal-datetime-picker";
-// import axios from 'axios';
-// import { config } from '../../../../config'
-
-// const InputTitle = (props) => {
-//   return (
-//     <Box alignItems="center">
-//       <Input mx="3" placeholder="제목을 입력해주세요" w="75%" maxWidth="310" onChangeText={(title) => { props.setTitle(title); }} />
-//     </Box>
-//   );
-// };
-
-// const WriteDiaryArea = (props) => {
-//   return (
-//     <Box alignItems="center" w="100%">
-//       <TextArea h="45%" placeholder="Write Diary Right Now!" w="100%" maxW="310" onChangeText={(content) => { props.setContent(content); }} />
-//     </Box>
-//   );
-// };
-
-// const SelectDisclosure = (props) => {
-
-//   return (
-//     <Center>
-//       <Box w="3/4" maxW="310">
-//         <Select
-//           selectedValue={props.disclosure}
-//           minWidth="200"
-//           accessibilityLabel="Choose Disclosure"
-//           placeholder="공개범위를 선택해주세요"
-//           _selectedItem={{
-//             bg: "teal.600",
-//             endIcon: <CheckIcon size="5" />
-//           }}
-//           mt={1}
-//           onValueChange={
-//             (itemValue) => props.setDisclosure(itemValue)
-//           }
-//         >
-//           <Select.Item label="전체공개" value="public" />
-//           <Select.Item label="나만보기" value="private" />
-//           <Select.Item label="친구공개" value="friend" />
-//         </Select>
-//       </Box>
-//     </Center>
-//   );
-// };
-
-// const DiaryWriteView = (props) => {
-
-
-//   const [Date, setDate] = useState(props.selectedDate);
-//   const [Title, setTitle] = useState('');
-//   const [Content, setContent] = useState('');
-//   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-//   const [disclosure, setDisclosure] = useState('');
-
-//   const showDatePicker = () => {
-//     setDatePickerVisibility(true);
-//   };
-
-//   const hideDatePicker = () => {
-//     setDatePickerVisibility(false);
-//   };
-
-//   const handleConfirm = (date) => {
-//     console.warn("dateFormat: ", date.format("yyyy/MM/dd"));
-//     hideDatePicker();
-//     setDate(date.format("yyyy-MM-dd"))
-//   };
-
-
-
-//   const saveDiary = () => {
-//     axios.post(config.ip + ':5000/diariesRouter/save', {
-//       data: {
-//         user_id: '202212069',
-//         date: Date,
-//         title: Title,
-//         content: Content,
-//         disclosure: disclosure
-//       }
-//     }).then((response) => {
-//       if (response.data.status === 'success') {
-//         props.navigation.pop();
-//         // 스택 쌓지 않고 화면 이동 => 읽기 페이지에서 뒤로가기하면 리스트 페이지 뜸
-//       }
-//     }).catch(function (error) {
-//       console.log(error);
-//     })
-//   }
-
-//   const WriteDiaryButton = () => {
-//     return (
-//       <Box alignItems="center">
-//         <Button onPress={() => { saveDiary(); }} >작성하기</Button>
-//       </Box>
-//     );
-//   };
-//   return (
-
-//     <>
-
-//       <Text style={styles.dateText} onPress={showDatePicker} >{Date}</Text>
-//       <Text style={styles.textStyle} >Disclosure</Text>
-//       <SelectDisclosure disclosure={disclosure} setDisclosure={setDisclosure} />
-//       <Text style={styles.textStyle} >Title</Text>
-
-//       <InputTitle setTitle={setTitle} Title={Title} />
-//       <Text style={styles.textStyle} >Content</Text>
-//       <WriteDiaryArea setContent={setContent} Content={Content} />
-//       <DateTimePickerModal
-//         isVisible={isDatePickerVisible}
-//         mode="date"
-//         onConfirm={handleConfirm}
-//         onCancel={hideDatePicker}
-//       />
-
-//       <View style={styles.buttonContainer}>
-//         <WriteDiaryButton />
-//       </View>
-//     </>
-//   )
-// }
-// const styles = StyleSheet.create({
-//   dateText: {
-
-//     fontWeight: "bold",
-//     textAlign: "center",
-//     fontSize: 30,
-//   },
-//   textStyle: {
-
-//     fontWeight: "bold",
-//     textAlign: "left",
-//     fontSize: 17,
-//     marginLeft: 50,
-//     margin: 10,
-
-//   },
-//   buttonContainer: {
-//     // margin: 20,
-
-//   },
-// })
-// export default DiaryWriteView;
-
 import React from "react";
 import { actions, RichEditor, RichToolbar } from "react-native-pell-rich-editor";
 import { FlatList, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, TextInput, View } from 'react-native';
@@ -157,6 +5,7 @@ import { Box, Input, Button, TextArea, Modal, Center, NativeBaseProvider, Select
 import CalendarView from '../../../../src/views/diary/list/CalendarView';
 import { useState, useEffect, Component } from 'react';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { RadioButton } from 'react-native-paper';
 import axios from 'axios';
 import { config } from '../../../../config'
 
@@ -196,6 +45,24 @@ const SelectDisclosure = (props) => {
   );
 };
 
+const RadioDisclosure = (props) => {
+  return (
+    <RadioButton.Group onValueChange={newValue => props.setValue(newValue)} value={props.value}>
+      <View>
+        <Text>전체공개</Text>
+        <RadioButton value="public" />
+      </View>
+      <View>
+        <Text>나만보기</Text>
+        <RadioButton value="private" />
+      </View>
+      <View>
+        <Text>친구공개</Text>
+        <RadioButton value="friend" />
+      </View>
+    </RadioButton.Group>
+  )
+}
 
 
 const DiaryWriteView = (props) => {
@@ -205,6 +72,7 @@ const DiaryWriteView = (props) => {
   const [Content, setContent] = useState('');
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [disclosure, setDisclosure] = useState('');
+  const [value, setValue] = React.useState('public');
   let dark = true;
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -253,7 +121,7 @@ const DiaryWriteView = (props) => {
     <>
       <View>
         <Text style={styles.dateText} onPress={showDatePicker} >{Date}</Text>
-
+        <RadioDisclosure value={value} setValue={setValue}/>
         <SelectDisclosure disclosure={disclosure} setDisclosure={setDisclosure} />
         <InputTitle setTitle={setTitle} Title={Title} />
         <ScrollView>

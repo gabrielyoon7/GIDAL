@@ -8,7 +8,7 @@
 
 */
 export const config = {
-	ip:"http://192.168.0.3",
+	ip:"http://192.168.0.65",
 	user:[
 		{
 			_id : "0",
@@ -30,6 +30,9 @@ export const config = {
         		"title": "test",
 				"content": "test content",
         		"date": "2022-04-11"
+			}],
+			receivedDm:[{
+
 			}]
 		},
 	],

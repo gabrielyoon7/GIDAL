@@ -1,27 +1,100 @@
 import React from "react";
 import { Text, Platform, KeyboardAvoidingView, SafeAreaView, ScrollView } from "react-native";
-import {actions, RichEditor, RichToolbar} from "react-native-pell-rich-editor";
+import { actions, RichEditor, RichToolbar } from "react-native-pell-rich-editor";
 
 const RichTextTestView = () => {
-	const richText = React.useRef();
-	return (
+    const richText = React.useRef();
+    return (
         <SafeAreaView>
             <ScrollView>
-                <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}	style={{ flex: 1 }}>
-                    <Text>Description:</Text>
-                    <RichEditor
-                        ref={richText}
-                        onChange={ descriptionText => {
-                            console.log("descriptionText:", descriptionText);
-                        }}
-                    />
-                </KeyboardAvoidingView>
+                <RichEditor
+                    // initialFocus={true}
+                    // disabled={disabled}
+                    // editorStyle={contentStyle} // default light style
+                    ref={richText}
+                    // style={styles.rich}
+                    useContainer={true}
+                    initialHeight={200}
+                    enterKeyHint={'done'}
+                    // containerStyle={{borderRadius: 24}}
+                    placeholder={'please input content'}
+                    // initialContentHTML={initHTML}
+                    // editorInitializedCallback={editorInitializedCallback}
+                    // onChange={handleChange}
+                    // onHeightChange={handleHeightChange}
+                    // onPaste={handlePaste}
+                    // onKeyUp={handleKeyUp}
+                    // onKeyDown={handleKeyDown}
+                    // onInput={handleInput}
+                    // onMessage={handleMessage}
+                    // onFocus={handleFocus}
+                    // onBlur={handleBlur}
+                    // onCursorPosition={handleCursorPosition}
+                    pasteAsPlainText={true}
+                    onChange={(content) => { props.setContent(content); }}
+                />
             </ScrollView>
+            {/* <RichToolbar
+          // 현재 잘 동작이 안됨
+          style={[styles.richBar, dark && styles.richBarDark]}
+          flatContainerStyle={styles.flatStyle}
+          editor={richText}
+          disabled={'enabled'}
+          // iconTint={color}
+          selectedIconTint={'#2095F2'}
+          disabledIconTint={'#bfbfbf'}
+          // onPressAddImage={onPressAddImage}
+          // onInsertLink={onInsertLink}
+          // iconSize={24}
+          // iconGap={10}
+          actions={[
+            actions.undo,
+            actions.redo,
+            actions.insertVideo,
+            actions.insertImage,
+            actions.setStrikethrough,
+            // actions.checkboxList,
+            actions.insertOrderedList,
+            actions.blockquote,
+            actions.alignLeft,
+            actions.alignCenter,
+            actions.alignRight,
+            actions.code,
+            actions.line,
 
+            actions.foreColor,
+            actions.hiliteColor,
+            actions.heading1,
+            actions.heading4,
+            'insertEmoji',
+            'insertHTML',
+            'fontSize',
+          ]} // default defaultActions
+          iconMap={{
+            // insertEmoji: phizIcon,
+            [actions.foreColor]: ({ tintColor }) => <Text style={[styles.tib, { color: 'blue' }]}>FC</Text>,
+            [actions.hiliteColor]: ({ tintColor }) => (
+              <Text style={[styles.tib, { color: tintColor, backgroundColor: 'red' }]}>BC</Text>
+            ),
+            [actions.heading1]: ({ tintColor }) => (
+              <Text style={[styles.tib, { color: tintColor }]}>H1</Text>
+            ),
+            [actions.heading4]: ({ tintColor }) => (
+              <Text style={[styles.tib, { color: tintColor }]}>H4</Text>
+            ),
+            // insertHTML: htmlIcon,
+          }}
+        // insertEmoji={handleEmoji}
+        // insertHTML={handleInsertHTML}
+        // insertVideo={handleInsertVideo}
+        // fontSize={handleFontSize}
+        // foreColor={handleForeColor}
+        // hiliteColor={handleHiliteColor}
+        /> */}
             <RichToolbar
                 editor={richText}
-                actions={[ actions.setBold, actions.setItalic, actions.setUnderline, actions.heading1, ]}
-                iconMap={{ [actions.heading1]: ({tintColor}) => (<Text style={[{color: tintColor}]}>H1</Text>), }}
+                actions={[actions.setBold, actions.setItalic, actions.setUnderline, actions.heading1,]}
+                iconMap={{ [actions.heading1]: ({ tintColor }) => (<Text style={[{ color: tintColor }]}>H1</Text>), }}
             />
         </SafeAreaView>
     );

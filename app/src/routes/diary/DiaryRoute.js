@@ -5,7 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import DiaryListView from '../../views/diary/list/DiaryListView';
 import DiaryReadView from '../../views/diary/read/DiaryReadView';
 import DiaryWriteView from '../../views/diary/write/DiaryWriteView';
-
+import DiaryModifyView from '../../views/diary/modify/DiaryModifyView';
 Date.prototype.format = function (f) {
   if (!this.valueOf()) return " ";
 
@@ -54,6 +54,11 @@ const DiaryReadScreen = ({ navigation }) => {
     );
   }
   
+  const DiaryModifyScreen = ({ navigation }) => {
+    return (
+      <DiaryModifyView navigation={navigation} />
+    );
+  }
 
 const RootStack = createNativeStackNavigator();
 
@@ -67,6 +72,7 @@ const DiaryRoute = () => {
             <RootStack.Screen name="DiaryList" component={DiaryListScreen} initialParams={{ selectedDate: selectedDate }} />
             <RootStack.Screen name="DiaryRead" component={DiaryReadScreen} initialParams={{ selectedDate: selectedDate }} />
             <RootStack.Screen name="DiaryWrite" component={DiaryWriteScreen} initialParams={{ selectedDate: selectedDate }} />
+            <RootStack.Screen name="DiaryModify" component={DiaryModifyScreen} initialParams={{ selectedDate: selectedDate }} />
         {/* </RootStack.Group> */}
     </RootStack.Navigator>
   );

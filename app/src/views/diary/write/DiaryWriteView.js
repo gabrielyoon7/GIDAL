@@ -1,11 +1,12 @@
-import React from "react";
 import { actions, RichEditor, RichToolbar } from "react-native-pell-rich-editor";
 import { FlatList, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, TextInput, View } from 'react-native';
 import { Box, Input, Button, TextArea, Modal, Center, NativeBaseProvider, Select, CheckIcon } from "native-base"
 import CalendarView from '../../../../src/views/diary/list/CalendarView';
-import { useState, useEffect, Component } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { RadioButton } from 'react-native-paper';
+import Carousel from 'react-native-snap-carousel';
+import TagCard from '../../../components/tag/TagCard';
 import axios from 'axios';
 import { config } from '../../../../config'
 
@@ -14,34 +15,6 @@ const InputTitle = (props) => {
     <Box alignItems="center">
       <Input mx="3" placeholder="제목을 입력해주세요" w="75%" maxWidth="310" onChangeText={(title) => { props.setTitle(title); }} />
     </Box>
-  );
-};
-
-const SelectDisclosure = (props) => {
-  // Selection 오류가 있으니 다른 기능으로 수정 바랍니다.
-  return (
-    <Center>
-      <Box w="3/4" maxW="310">
-        <Select
-          selectedValue={props.disclosure}
-          minWidth="200"
-          accessibilityLabel="Choose Disclosure"
-          placeholder="공개범위를 선택해주세요"
-          _selectedItem={{
-            bg: "teal.600",
-            endIcon: <CheckIcon size="5" />
-          }}
-          mt={1}
-          onValueChange={
-            (itemValue) => props.setDisclosure(itemValue)
-          }
-        >
-          <Select.Item label="전체공개" value="public" />
-          <Select.Item label="나만보기" value="private" />
-          <Select.Item label="친구공개" value="friend" />
-        </Select>
-      </Box>
-    </Center>
   );
 };
 
@@ -64,6 +37,103 @@ const RadioDisclosure = (props) => {
   )
 }
 
+const TagSelector = (props) =>{
+  const exampleItems = [
+    {
+      type : 'button',
+      question: '버튼형 질문',
+      tags: [{
+        id: 1,
+        name: 'a'
+      }, {
+        id: 2,
+        name: 'b'
+      }, {
+        id: 3,
+        name: 'b'
+      }]
+    },
+    {
+      type : 'search',
+      question: '검색형 질문',
+      tags: [{
+        id: 1,
+        name: 'a'
+      }, {
+        id: 2,
+        name: 'b'
+      }, {
+        id: 3,
+        name: 'b'
+      }]
+    },
+    {
+      type : 'time',
+      question: '시간형 질문',
+      tags: [{
+        id: 1,
+        name: 'a'
+      }, {
+        id: 2,
+        name: 'b'
+      }, {
+        id: 3,
+        name: 'b'
+      }]
+    },
+    {
+      type : 'slider1',
+      question: '수치형 질문1',
+      tags: [{
+        id: 1,
+        name: 'a'
+      }, {
+        id: 2,
+        name: 'b'
+      }, {
+        id: 3,
+        name: 'b'
+      }]
+    },
+    {
+      type : 'slider2',
+      question: '수치형 질문2',
+      tags: [{
+        id: 1,
+        name: 'a'
+      }, {
+        id: 2,
+        name: 'b'
+      }, {
+        id: 3,
+        name: 'b'
+      }]
+    },
+  ];
+  
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [carouselItems, setCarouselItems] = useState(exampleItems);
+  const ref = useRef(null);
+
+  const renderItem = useCallback(({ item, index }) => (
+    <TagCard item={item} />
+  ), []);
+
+  return (
+    <View>
+      <Carousel
+        layout="default"
+        ref={ref}
+        data={carouselItems}
+        sliderWidth={350}
+        itemWidth={350}
+        renderItem={renderItem}
+        onSnapToItem={(index) => setActiveIndex(index)}
+      />
+    </View>
+  );
+}
+
 
 const DiaryWriteView = (props) => {
   const richText = React.useRef();
@@ -71,7 +141,6 @@ const DiaryWriteView = (props) => {
   const [Title, setTitle] = useState('');
   const [Content, setContent] = useState('');
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-  // const [disclosure, setDisclosure] = useState('');
   const [disclosure, setDisclosure] = React.useState('public');
   let dark = true;
   const showDatePicker = () => {
@@ -119,10 +188,9 @@ const DiaryWriteView = (props) => {
 
   return (
     <>
-      <View>
+      <ScrollView>
         <Text style={styles.dateText} onPress={showDatePicker} >{Date}</Text>
         <RadioDisclosure disclosure={disclosure} setDisclosure={setDisclosure} />
-        {/* <SelectDisclosure disclosure={disclosure} setDisclosure={setDisclosure} /> */}
         <InputTitle setTitle={setTitle} Title={Title} />
         <ScrollView>
           <RichEditor
@@ -220,11 +288,11 @@ const DiaryWriteView = (props) => {
           onConfirm={handleConfirm}
           onCancel={hideDatePicker}
         />
-
+        <TagSelector/>
         <View style={styles.buttonContainer}>
           <WriteDiaryButton />
         </View>
-      </View>
+      </ScrollView>
     </>
   );
 };

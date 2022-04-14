@@ -7,6 +7,7 @@ import { useWindowDimensions } from 'react-native';
 import RenderHtml from 'react-native-render-html';
 
 const DiaryReadView = (props) => {
+    const [date, setSelectedDate] = React.useState(props.selectedDate);    
     const { width } = useWindowDimensions();
     // const item = props.navigation.getState().routes[1].params;
     const diary = props.navigation.getState().routes[1].params.diary;
@@ -46,7 +47,7 @@ const DiaryReadView = (props) => {
                         {diary.disclosure}
                     </Badge>
                     <Spacer />
-                    <Button size="md" variant="">
+                    <Button size="md"  onPress={() => props.navigation.navigate('DiaryModify')}>
                         수정
                     </Button>
                     <Button size="md" onPress={() => deleteDiary()} >

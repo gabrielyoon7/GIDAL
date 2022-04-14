@@ -1,0 +1,109 @@
+Index: server/index.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>const express = require('express');\r\nconst app = express();\r\nconst port = 5000\r\nconst bodyParser = require('body-parser');\r\nconst mongoose = require('mongoose');\r\n\r\nconst  diariesRouter = require('./routes/diaries');\r\nconst  usersRouter = require('./routes/users');\r\nconst { Diary } = require(\"./models/Diary\");\r\nconst { User } = require(\"./models/User\");\r\n\r\n//application/x-www-form-urlencoded\r\napp.use(bodyParser.urlencoded({limit: \"50mb\", extended: true}));\r\n\r\n//application/json\r\napp.use(bodyParser.json({limit: \"50mb\"}));\r\n\r\nmongoose.connect(`mongodb://localhost:27017/gidal`, {})\r\n.then(() => console.log('MongoDB Connected!!'))\r\n.catch(err => console.log(err))\r\n\r\n//저장 테스트\r\nvar newDiary = new Diary({user_id:'202212069', date:'2022-04-05', title:'다이어리1', content:'내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용', disclosure:'private'});\r\n\r\n// var newUser = new User({\r\n//   user_id : \"testAccount11\",\r\n// \t\t\tpassword : \"1234\",\r\n// \t\t\tname : \"user_name_11\",\r\n// \t\t\tgender : \"?\",\r\n// \t\t\tbday : \"2022-04-07\",\r\n// \t\t\tlocation : \"경기도 수원시\",\r\n// \t\t\tfollowing : [{}],\r\n// \t\t\tfollower : [{}],\r\n// \t\t\tprofile_image : \"\",\r\n// \t\t\tpoints : 10000,\r\n// \t\t\tcount_diary_total : 0,\r\n// \t\t\tcount_diary_everyday : 0,\r\n// \t\t\titems : {},\r\n// \t\t\tsentDm: [{\r\n// \t\t\t\t\"dmRecipient_id\": 'testAccount00',\r\n//         \"title\": \"test send\",\r\n// \t\t\t\t\"content\": \"test content2\",\r\n//         \"date\": \"2022-04-11\"\r\n// \t\t\t}],\r\n//       receivedDm: [{\r\n// \t\t\t\t\"dmSender_id\": 'testAccount00',\r\n//         \"title\": \"test 22\",\r\n// \t\t\t\t\"content\": \"test content\",\r\n//         \"date\": \"2022-04-12\"\r\n// \t\t\t}]\r\n// });\r\n\r\n// newUser.save(function(error, data){\r\n//   if(error){\r\n//       console.log(error);\r\n//   }else{\r\n//       console.log('Saved!');\r\n//   }\r\n// });\r\n\r\napp.get('/', (req, res) => {\r\n    res.send('Hello World!')\r\n  })\r\n\r\napp.listen(port, function(){\r\n    console.log('listening on 5000');\r\n});\r\n\r\napp.use('/diariesRouter', diariesRouter);\r\napp.use('/usersRouter', usersRouter);
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/server/index.js b/server/index.js
+--- a/server/index.js	(revision 15d6e4a0195a9887f16768d782b7641841592385)
++++ b/server/index.js	(date 1649896596609)
+@@ -22,41 +22,45 @@
+ //저장 테스트
+ var newDiary = new Diary({user_id:'202212069', date:'2022-04-05', title:'다이어리1', content:'내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용', disclosure:'private'});
+ 
+-// var newUser = new User({
+-//   user_id : "testAccount11",
+-// 			password : "1234",
+-// 			name : "user_name_11",
+-// 			gender : "?",
+-// 			bday : "2022-04-07",
+-// 			location : "경기도 수원시",
+-// 			following : [{}],
+-// 			follower : [{}],
+-// 			profile_image : "",
+-// 			points : 10000,
+-// 			count_diary_total : 0,
+-// 			count_diary_everyday : 0,
+-// 			items : {},
+-// 			sentDm: [{
+-// 				"dmRecipient_id": 'testAccount00',
+-//         "title": "test send",
+-// 				"content": "test content2",
+-//         "date": "2022-04-11"
+-// 			}],
+-//       receivedDm: [{
+-// 				"dmSender_id": 'testAccount00',
+-//         "title": "test 22",
+-// 				"content": "test content",
+-//         "date": "2022-04-12"
+-// 			}]
+-// });
++var newUser = new User({
++  user_id : "testAccount11",
++			password : "1234",
++			name : "user_name_11",
++			gender : "여",
++			bday : "2022-04-07",
++			location : "경기도 수원시",
++			following : [{
++        user_id: "201912067",
++        img: "https://bootdey.com/img/Content/avatar/avatar6.png",
++        name: "seonae"
++      }],
++			follower : [{}],
++			profile_image : "",
++			points : 10000,
++			count_diary_total : 0,
++			count_diary_everyday : 0,
++			items : {},
++			sentDm: [{
++				"dmRecipient_id": 'testAccount00',
++        "title": "test send",
++				"content": "test content2",
++        "date": "2022-04-11"
++			}],
++      receivedDm: [{
++				"dmSender_id": 'testAccount00',
++        "title": "test 22",
++				"content": "test content",
++        "date": "2022-04-12"
++			}]
++});
+ 
+-// newUser.save(function(error, data){
+-//   if(error){
+-//       console.log(error);
+-//   }else{
+-//       console.log('Saved!');
+-//   }
+-// });
++newUser.save(function(error, data){
++  if(error){
++      console.log(error);
++  }else{
++      console.log('Saved!');
++  }
++});
+ 
+ app.get('/', (req, res) => {
+     res.send('Hello World!')
+Index: app/config.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>//각종 변수 제어 (env 어케 쓰는지 몰라서 이렇게 관리함)\r\n/*\r\n\r\n\t원본\r\n\tip:\"http://192.168.0.0\",\r\n\r\n\tip 숫자만 수정하고 형식 수정하지 마세요\r\n\r\n*/\r\nexport const config = {\r\n\tip:\"http://192.168.0.65\",\r\n\tuser:[\r\n\t\t{\r\n\t\t\t_id : \"0\",\r\n\t\t\tuser_id : \"testAccount00\",\r\n\t\t\tuser_pw : \"1234\",\r\n\t\t\tname : \"user_name_00\",\r\n\t\t\tgender : \"?\",\r\n\t\t\tbday : \"2022-04-07\",\r\n\t\t\tlocation : \"경기도 수원시\",\r\n\t\t\tfollowing : \"\",\r\n\t\t\tfollower : \"\",\r\n\t\t\tprofile_image : \"\",\r\n\t\t\tpoints : 10000,\r\n\t\t\tcount_diary_total : 0,\r\n\t\t\tcount_diary_everyday : 0,\r\n\t\t\titems : {},\r\n\t\t\tsentDm: [{\r\n\t\t\t\t\"dmRecipient_id\": 'gidal1',\r\n        \t\t\"title\": \"test\",\r\n\t\t\t\t\"content\": \"test content\",\r\n        \t\t\"date\": \"2022-04-11\"\r\n\t\t\t}],\r\n\t\t\treceivedDm:[{\r\n\r\n\t\t\t}]\r\n\t\t},\r\n\t],\r\n};
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/config.js b/app/config.js
+--- a/app/config.js	(revision 15d6e4a0195a9887f16768d782b7641841592385)
++++ b/app/config.js	(date 1649896243556)
+@@ -8,7 +8,7 @@
+ 
+ */
+ export const config = {
+-	ip:"http://192.168.0.65",
++	ip:"http://172.20.10.2",
+ 	user:[
+ 		{
+ 			_id : "0",

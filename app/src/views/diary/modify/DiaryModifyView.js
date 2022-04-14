@@ -11,6 +11,8 @@ import axios from 'axios';
 import { config } from '../../../../config'
 
 const DiaryModifyView  = (props) => {
+    const diary = props.navigation.getState().routes[1].params.diary;
+    console.log(diary);
     const saveDiary = () => {
         axios.post(config.ip + ':5000/diariesRouter/save', {
           data: {

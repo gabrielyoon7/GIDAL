@@ -47,7 +47,11 @@ const DiaryReadView = (props) => {
                         {diary.disclosure}
                     </Badge>
                     <Spacer />
-                    <Button size="md"  onPress={() => props.navigation.navigate('DiaryModify')}>
+                    <Button size="md"  onPress={
+                        () => props.navigation.navigate('DiaryModify', {
+                            diary : diary,
+                        })
+                    }>
                         수정
                     </Button>
                     <Button size="md" onPress={() => deleteDiary()} >

@@ -1,17 +1,29 @@
 import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList } from 'react-native';
+import { Box, Button, HStack } from "native-base"
 import axios from 'axios'
 import { config } from '../../../../config'
+import DiaryList from '../../diary/list/DiaryList';
 
 export default function OtherUsersProfileView(props) {
   const [following, setFollowing] = useState();
   const [profileImg, setProfileImg] = useState();
+  const [date, setSelectedDate] = React.useState(props.selectedDate);    
+  const [followText, setFollowText] = useState('팔로우');
 
-  console.log(props.user_id);
+  // console.log(props.user_id);
 
   const callback = (data) => {
     setFollowing(data.following);
     setProfileImg(data.profile_image)
+  }
+
+  const follow = () => {
+    if(followText=="팔로잉"){
+      setFollowText("✔")
+    } else{
+      setFollowText("팔로잉")
+    }
   }
 
   useEffect(()=>{
@@ -27,42 +39,29 @@ export default function OtherUsersProfileView(props) {
   });
 },[])
         return (
-            <View style={styles.container}>
-            <View style={styles.header}>
-              <View style={styles.headerContent}>
-                  <Image style={styles.avatar} source={{uri: profileImg}}/>
-                  <Text style={styles.name}>{props.user_id}</Text>
-              </View>
-            </View>
-  
-            <View style={styles.body} >
-            <FlatList 
-                style={styles.container} 
-                enableEmptySections={true}
-                data={following}
-                keyExtractor= {(item) => {
-                  return item.user_id;
-                }}
-                renderItem={({item}) => {
-                  return (
-                    <TouchableOpacity onPress={() => props.navigation.navigate('DmRead', {
-                        userName: item.name
-                    })} >
-                      <View style={styles.box} >
-                        <Image style={styles.image} source={{uri: item.img}}/>
-                         <Text style={styles.username}>{item.name}</Text>
-                      </View>
-                    </TouchableOpacity>
-                  )
-              }}/>
-            </View>
-        </View>
+          <>
+          <View style={styles.header}>
+            <View style={styles.headerContent}>
+                <Image style={styles.avatar} source={{uri: profileImg}}/>
+                  <Text style={styles.name}>{config.user[0].user_id}</Text>
+                  <HStack alignItems="center" my="1">
+                  <Button mt="3" mr="3" onPress={() => follow()}>
+                        <Text>{followText}</Text>
+                  </Button>
+                  {followText == "팔로잉" && <Button mt="3">
+                        <Text>DM 보내기</Text>
+                  </Button>}
+                  </HStack>
+             </View>
+           </View>
+           <DiaryList selectedDate={date} navigation={props.navigation} />
+        </>
         )
 }
 
 const styles = StyleSheet.create({
   header:{
-    backgroundColor: "#0abde3",
+    backgroundColor: "#2980b9",
   },
   headerContent:{
     padding:30,
@@ -109,5 +108,5 @@ const styles = StyleSheet.create({
     fontSize:22,
     alignSelf:'center',
     marginLeft:10
-  },
+  }
 });

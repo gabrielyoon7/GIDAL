@@ -43,12 +43,14 @@ export default function OtherUsersProfileView(props) {
           <View style={styles.header}>
             <View style={styles.headerContent}>
                 <Image style={styles.avatar} source={{uri: profileImg}}/>
-                  <Text style={styles.name}>{config.user[0].user_id}</Text>
+                  <Text style={styles.name}>{props.user_id}</Text>
                   <HStack alignItems="center" my="1">
                   <Button mt="3" mr="3" onPress={() => follow()}>
                         <Text>{followText}</Text>
                   </Button>
-                  {followText == "팔로잉" && <Button mt="3">
+                  {followText == "✔" && <Button mt="3" onPress={() => props.navigation.navigate('DmWrite',{
+                    userName: props.user_id
+                })}>
                         <Text>DM 보내기</Text>
                   </Button>}
                   </HStack>

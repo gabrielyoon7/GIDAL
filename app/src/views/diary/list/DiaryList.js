@@ -18,14 +18,11 @@ const DiaryListView = (props, navigation) => {
                 user_id: user_id
             }
         }).then((response) => {
-            // console.log(response.data);
             if (response.data.length < 1) {
                 return;
             }
             response.data.forEach((item) => {
-                // const diary = { id: item._id, date: item.date, title: item.title, content: item.content }
                 result.push(item);
-                // result.push(diary);
             });
             setItems(result);
         }).catch(function (error) {

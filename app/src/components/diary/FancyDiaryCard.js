@@ -20,7 +20,7 @@ const FancyDiaryCard = ({ item, onPress, backgroundColor, textColor }) => {
                     </Badge>
                     <Spacer />
                     <Text fontSize={10} color="coolGray.800">
-                        {item.date}
+                        {item.date.substr(0, 10)}
                     </Text>
                 </HStack>
                 <Text color="coolGray.800" mt="3" fontWeight="medium" fontSize="xl">

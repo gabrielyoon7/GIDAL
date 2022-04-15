@@ -7,6 +7,7 @@ import FeedSearchView from '../../views/sns/feed/FeedSearchView';
 import ProfileView from '../../views/sns/profile/ProfileView';
 import DmReadView from '../../views/sns/dm/DmReadView';
 import DmWriteView from '../../views/sns/dm/DmWriteView';
+import OtherUsersProfileView from '../../views/sns/profile/OtherUsersProfileView';
 
 const FeedScreen = ({ navigation }) => {
     return (
@@ -22,7 +23,14 @@ const FeedSearchScreen = ({ navigation }) => {
 
 const ProfileScreen = ({ route, navigation }) => {
   return (
-    <ProfileView navigation={navigation} />
+    <ProfileView navigation={navigation}/>
+  )
+}
+
+const OtherUsersProfileScreen = ({ route, navigation }) => {
+  const { user_id } = route.params;
+  return (
+    <OtherUsersProfileView navigation={navigation} user_id={user_id}/>
   )
 }
 
@@ -40,7 +48,6 @@ const DmWriteScreen = ({ navigation, route }) => {
   )
 }
 
-
 const RootStack = createNativeStackNavigator();
 
 const SnsRoute = () => {
@@ -52,6 +59,7 @@ const SnsRoute = () => {
           <RootStack.Screen name="FeedList" component={FeedScreen} />
           <RootStack.Screen name="FeedSearch" component={FeedSearchScreen} />
           <RootStack.Screen name="Profile" component={ProfileScreen} />
+          <RootStack.Screen name="OtherUsersProfile" component={OtherUsersProfileScreen} />
           <RootStack.Screen name="DmRead" component={DmReadScreen} />
           <RootStack.Screen name="DmWrite" component={DmWriteScreen} />          
         </RootStack.Group>

@@ -6,6 +6,7 @@ import DiaryListView from '../../views/diary/list/DiaryListView';
 import DiaryReadView from '../../views/diary/read/DiaryReadView';
 import DiaryWriteView from '../../views/diary/write/DiaryWriteView';
 import DiaryModifyView from '../../views/diary/modify/DiaryModifyView';
+
 Date.prototype.format = function (f) {
   if (!this.valueOf()) return " ";
 

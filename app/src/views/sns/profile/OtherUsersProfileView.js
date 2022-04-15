@@ -3,19 +3,12 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList } from 'react
 import axios from 'axios'
 import { config } from '../../../../config'
 
-// const friendsData = [
-//     {id:1, image: "https://bootdey.com/img/Content/avatar/avatar6.png", username:"gidal1"},
-//     {id:2, image: "https://bootdey.com/img/Content/avatar/avatar2.png", username:"gidal2"},
-//     {id:3, image: "https://bootdey.com/img/Content/avatar/avatar3.png", username:"gidal3"},
-//     {id:4, image: "https://bootdey.com/img/Content/avatar/avatar4.png", username:"gidal4"},
-//     {id:5, image: "https://bootdey.com/img/Content/avatar/avatar1.png", username:"gidal5"},
-//     {id:6, image: "https://bootdey.com/img/Content/avatar/avatar6.png", username:"gidal6"},
-// ]
-
-export default function ProfileView(props) {
+export default function OtherUsersProfileView(props) {
   const [following, setFollowing] = useState();
   const [profileImg, setProfileImg] = useState();
-  
+
+  console.log(props.user_id);
+
   const callback = (data) => {
     setFollowing(data.following);
     setProfileImg(data.profile_image)
@@ -24,7 +17,7 @@ export default function ProfileView(props) {
   useEffect(()=>{
     axios.get(config.ip+':5000/usersRouter/findOne/',{
       params: {
-        user_id: config.user[0].user_id,
+        user_id: props.user_id,
       }
     })
   .then((response) => {
@@ -38,7 +31,7 @@ export default function ProfileView(props) {
             <View style={styles.header}>
               <View style={styles.headerContent}>
                   <Image style={styles.avatar} source={{uri: profileImg}}/>
-                  <Text style={styles.name}>{config.user[0].user_id}</Text>
+                  <Text style={styles.name}>{props.user_id}</Text>
               </View>
             </View>
   

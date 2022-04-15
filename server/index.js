@@ -54,13 +54,13 @@ var newUser = new User({
 			}]
 });
 
-newUser.save(function(error, data){
-  if(error){
-      console.log(error);
-  }else{
-      console.log('Saved!');
-  }
-});
+// newUser.save(function(error, data){
+//   if(error){
+//       console.log(error);
+//   }else{
+//       console.log('Saved!');
+//   }
+// });
 
 app.get('/', (req, res) => {
     res.send('Hello World!')

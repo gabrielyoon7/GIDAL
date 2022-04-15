@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList } from 'react-native';
 import axios from 'axios'
 import { config } from '../../../../config'
+import DiaryList from '../../diary/list/DiaryList';
 
 // const friendsData = [
 //     {id:1, image: "https://bootdey.com/img/Content/avatar/avatar6.png", username:"gidal1"},
@@ -15,7 +16,8 @@ import { config } from '../../../../config'
 export default function ProfileView(props) {
   const [following, setFollowing] = useState();
   const [profileImg, setProfileImg] = useState();
-  
+  const [date, setSelectedDate] = React.useState(props.selectedDate);    
+
   const callback = (data) => {
     setFollowing(data.following);
     setProfileImg(data.profile_image)
@@ -34,36 +36,49 @@ export default function ProfileView(props) {
   });
 },[])
         return (
-            <View style={styles.container}>
+          <>
             <View style={styles.header}>
               <View style={styles.headerContent}>
                   <Image style={styles.avatar} source={{uri: profileImg}}/>
-                  <Text style={styles.name}>{config.user[0].user_id}</Text>
-              </View>
-            </View>
+                    <Text style={styles.name}>{config.user[0].user_id}</Text>
+               </View>
+             </View>
+             <DiaryList selectedDate={date} navigation={props.navigation} />
+          </>
+                   
+          
+            
+        //     <View style={styles.container}>
+            
+            // <View style={styles.header}>
+            //   <View style={styles.headerContent}>
+            //       <Image style={styles.avatar} source={{uri: profileImg}}/>
+            //       <Text style={styles.name}>{config.user[0].user_id}</Text>
+            //   </View>
+            // </View>
   
-            <View style={styles.body} >
-            <FlatList 
-                style={styles.container} 
-                enableEmptySections={true}
-                data={following}
-                keyExtractor= {(item) => {
-                  return item.user_id;
-                }}
-                renderItem={({item}) => {
-                  return (
-                    <TouchableOpacity onPress={() => props.navigation.navigate('DmRead', {
-                        userName: item.name
-                    })} >
-                      <View style={styles.box} >
-                        <Image style={styles.image} source={{uri: item.img}}/>
-                         <Text style={styles.username}>{item.name}</Text>
-                      </View>
-                    </TouchableOpacity>
-                  )
-              }}/>
-            </View>
-        </View>
+        //     <View style={styles.body} >
+        //     <FlatList 
+        //         style={styles.container} 
+        //         enableEmptySections={true}
+        //         data={following}
+        //         keyExtractor= {(item) => {
+        //           return item.user_id;
+        //         }}
+        //         renderItem={({item}) => {
+        //           return (
+        //             <TouchableOpacity onPress={() => props.navigation.navigate('DmRead', {
+        //                 userName: item.name
+        //             })} >
+        //               <View style={styles.box} >
+        //                 <Image style={styles.image} source={{uri: item.img}}/>
+        //                  <Text style={styles.username}>{item.name}</Text>
+        //               </View>
+        //             </TouchableOpacity>
+        //           )
+        //       }}/>
+        //     </View>
+        // </View>
         )
 }
 

@@ -68,7 +68,7 @@ const DiaryWriteView = (props) => {
         <Text style={styles.dateText} onPress={showDatePicker} >{Date}</Text>
         <RadioDisclosure disclosure={disclosure} setDisclosure={setDisclosure} />
         <InputTitle setTitle={setTitle} Title={Title} />
-        <InputContent setContent={setContent} />
+        <InputContent setContent={setContent} content={Content} />
         <DateTimePickerModal
           isVisible={isDatePickerVisible}
           mode="date"

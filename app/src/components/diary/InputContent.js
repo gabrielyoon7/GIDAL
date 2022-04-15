@@ -18,7 +18,7 @@ const InputContent = (props) => {
                     enterKeyHint={'done'}
                     // containerStyle={{borderRadius: 24}}
                     placeholder={'please input content'}
-                    // initialContentHTML={initHTML}
+                    initialContentHTML={props.content}
                     // editorInitializedCallback={editorInitializedCallback}
                     // onChange={handleChange}
                     // onHeightChange={handleHeightChange}

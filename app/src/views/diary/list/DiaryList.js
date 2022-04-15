@@ -59,10 +59,6 @@ const DiaryListView = (props, navigation) => {
     })
 
     const renderItem = ({ item }) => {
-        // 아래 item.id 검토가 필요함
-        const backgroundColor = item.id === selectedId ? "#6e3b6e" : "#f9c2ff";
-        const color = item.id === selectedId ? 'white' : 'black';
-
         return (
             <FancyDiaryCard
                 item={item}
@@ -70,15 +66,11 @@ const DiaryListView = (props, navigation) => {
                     () => {
                         props.navigation.navigate('DiaryRead', {
                             diary : item,
-                            // itemId: item.id,
-                            // title: item.title,
-                            // content: item.content
                         })
                     }
                 }
                 // 해당 일기로 넘어가기 구현
-                backgroundColor={{ backgroundColor }}
-                textColor={{ color }}
+                textColor="black"
             />
         );
     };
@@ -92,7 +84,7 @@ const DiaryListView = (props, navigation) => {
                 }}
                 renderItem={renderItem}
                 keyExtractor={(item) => item._id}
-                extraData={selectedId}
+                // extraData={selectedId}
             />
         </View>
     )

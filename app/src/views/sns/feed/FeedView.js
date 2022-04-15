@@ -1,103 +1,17 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, FlatList, View, StatusBar, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { useIsFocused } from '@react-navigation/native';
 import axios from 'axios';
 import { config } from '../../../../config'
 import FancyDiaryCard from '../../../components/diary/FancyDiaryCard';
+import DiaryList from '../../diary/list/DiaryList';
 
 
 const FeedView = (props) => {
-    const [items, setItems] = useState([]);
-    const user_id = '202212069';
-    let num = 0;
-
-    const getitems = () => {
-        let result = []
-        // if(items.length > 0){
-        //     return;
-        // }
-        if (num > 0) {
-            return;
-        }
-        axios.post(config.ip + ':5000/diariesRouter/findOwn', {
-            data: {
-                user_id: user_id
-            }
-        }).then((response) => {
-            num++;
-            console.log(response.data);
-            if (response.data.length < 1) {
-                return;
-            }
-            response.data.forEach((item) => {
-                const diary = { id: item._id, date: item.date, title: item.title, content: item.content }
-                result.push(diary);
-            });
-            setItems(result);
-        }).catch(function (error) {
-            console.log(error);
-        })
-    }
-
-    const [data, setData] = useState(0);
-    const [selectedId, setSelectedId] = useState(null);
-    const [ref, setRef] = useState(null);
-
-    //첫 렌더링에만 호출됨
-    useEffect(() => {
-        getitems();
-    }, []);
-
-    useEffect(() => {
-        const index = items.findIndex((item, idx) => {
-            return item.date === props.selectedDate
-        })
-        setData(index);
-        if (ref === null || index < 1) {
-            return;
-        }
-        ref.scrollToIndex({ animated: true, index: 0, viewPosition: 0 });
-        if (index > 0) {
-            ref.scrollToIndex({ animated: true, index: index, viewPosition: 0 });
-        }
-    })
-
-    const renderItem = ({ item }) => {
-        const backgroundColor = item.id === selectedId ? "#6e3b6e" : "#f9c2ff";
-        const color = item.id === selectedId ? 'white' : 'black';
-
-        return (
-            <FancyDiaryCard
-                item={item}
-                onPress={
-                    () => {
-                        props.navigation.navigate('DiaryRead', {
-                            itemId: item.id,
-                            title: item.title,
-                            content: item.content
-                        })
-                    }
-                }
-                // 해당 일기로 넘어가기 구현
-                backgroundColor={{ backgroundColor }}
-                textColor={{ color }}
-            />
-        );
-    };
-
+    const [date, setSelectedDate] = React.useState(props.selectedDate);    
     return (
         <>
-            <View style={styles.container}>
-                <FlatList
-                    data={items}
-                    ref={(ref) => {
-                        setRef(ref);
-                    }}
-                    renderItem={renderItem}
-                    keyExtractor={(item) => item.id}
-                    extraData={selectedId}
-                // initialScrollIndex ={data}
-                />
-            </View>
+            <DiaryList selectedDate={date} navigation={props.navigation} />
             <Button
                 title="프로필 페이지로 가기(임시)"
                 onPress={() => props.navigation.navigate('Profile')}

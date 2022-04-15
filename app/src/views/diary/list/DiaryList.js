@@ -6,7 +6,7 @@ import { config } from '../../../../config'
 import FancyDiaryCard from '../../../components/diary/FancyDiaryCard';
 
 
-const DiaryListView = (props, navigation) => {
+const DiaryList = (props, navigation) => {
     const [items, setItems] = useState([]);
     const user_id = '202212069';
     const isFocused = useIsFocused(); // isFoucesd Define
@@ -86,7 +86,7 @@ const DiaryListView = (props, navigation) => {
         </View>
     )
 }
-export default DiaryListView;
+export default DiaryList;
 
 const styles = StyleSheet.create({
     container: {

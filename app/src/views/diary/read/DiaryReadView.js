@@ -48,7 +48,7 @@ const DiaryReadView = (props) => {
                     </Badge>
                     <Spacer />
                     <Button size="md"  onPress={
-                        () => props.navigation.navigate('DiaryModify', {
+                        () => props.navigation.replace('DiaryModify', {
                             diary : diary,
                         })
                     }>

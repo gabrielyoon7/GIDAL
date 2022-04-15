@@ -91,17 +91,27 @@ router.post('/findOne/', function(req, res, next) {
 //         }
 //     });
 // });
+
 router.post('/modify', function(req, res, next) {
-    console.log(req.body);
+    const diary = req.body.data;
+    console.log(diary);
     // 데이터 수정
-    Diary.modifyOne({_id: req.body.data.id}, function(error, data){
+    Diary.findOneAndUpdate({_id: diary._id}, {$set:{user_id:diary.user_id, date:diary.date, title:diary.title, content:diary.content, disclosure:diary.disclosure}}, function(error, data){
         console.log('--- UPDATE ---');
         if(error){
             console.log(error);
         }
-
         console.log('--- updated ---');
-        return res.json({status: 'success'})
+        Diary.findOne({_id: diary._id}, function(error,diary){
+            console.log('--- Read one ---');
+            if(error){
+                console.log(error);
+            }else{
+                console.log(diary);
+                return res.json(diary)
+            }
+        });
+        // return res.json({status: 'fail'})
     });
 });
 

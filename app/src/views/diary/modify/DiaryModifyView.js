@@ -15,7 +15,6 @@ import { config } from '../../../../config'
 
 const DiaryModifyView = (props) => {
   const diary = props.navigation.getState().routes[1].params.diary;
-  console.log(diary);
 
   const [Date, setDate] = useState(diary.date);
   const [Title, setTitle] = useState(diary.title);
@@ -37,20 +36,27 @@ const DiaryModifyView = (props) => {
     setDate(date.format("yyyy-MM-dd"))
   };
 
-  const saveDiary = () => {
-    axios.post(config.ip + ':5000/diariesRouter/save', {
+  const modifyDiary = () => {
+
+    axios.post(config.ip + ':5000/diariesRouter/modify', {
       data: {
-        user_id: '202212069',
+        _id: diary._id,
+        user_id: diary.user_id,
         date: Date,
         title: Title,
         content: Content,
         disclosure: disclosure
       }
     }).then((response) => {
-      if (response.data.status === 'success') {
-        props.navigation.pop();
-        // 스택 쌓지 않고 화면 이동 => 읽기 페이지에서 뒤로가기하면 리스트 페이지 뜸
-      }
+      props.navigation.replace('DiaryRead', {
+        diary : response.data,
+    });
+      // if (response.data.status !== 'fail') {
+      //   props.navigation.replace('DiaryRead', {
+      //     diary : diary,
+      // });
+      //   // 스택 쌓지 않고 화면 이동 => 읽기 페이지에서 뒤로가기하면 리스트 페이지 뜸
+      // }
     }).catch(function (error) {
       console.log(error);
     })
@@ -59,7 +65,7 @@ const DiaryModifyView = (props) => {
   const WriteDiaryButton = () => {
     return (
       <Box alignItems="center">
-        <Button onPress={() => { saveDiary(); }} >수정하기</Button>
+        <Button onPress={() => { modifyDiary(); }} >수정하기</Button>
       </Box>
     );
   };

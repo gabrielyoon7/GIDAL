@@ -19,10 +19,10 @@ export default function OtherUsersProfileView(props) {
   }
 
   const follow = () => {
-    if(followText=="팔로잉"){
+    if(followText=="팔로우"){
       setFollowText("✔")
     } else{
-      setFollowText("팔로잉")
+      setFollowText("팔로우")
     }
   }
 
@@ -54,6 +54,20 @@ export default function OtherUsersProfileView(props) {
                         <Text>DM 보내기</Text>
                   </Button>}
                   </HStack>
+                  <HStack alignItems="center" my="1">
+                  <View style={styles.buttonStyle}>
+                  <TouchableOpacity  onPress={() => props.navigation.navigate('FollowList')} >
+                        <Text>팔로워</Text>
+                        <Text>100</Text>
+                  </TouchableOpacity>
+                  </View>
+                  <View style={styles.buttonStyle}>
+                 <TouchableOpacity onPress={() => props.navigation.navigate('FollowList')} >
+                        <Text>팔로우</Text>
+                        <Text>100</Text>
+                  </TouchableOpacity>
+                  </View>
+                  </HStack>
              </View>
            </View>
            <DiaryList selectedDate={date} navigation={props.navigation} />
@@ -62,6 +76,12 @@ export default function OtherUsersProfileView(props) {
 }
 
 const styles = StyleSheet.create({
+  buttonStyle:{
+    alignItems:'center',
+    width:50,
+    marginRight:20,
+    padding:5,
+  },
   header:{
     backgroundColor: "#2980b9",
   },

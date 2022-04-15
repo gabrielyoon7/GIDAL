@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import FeedView from '../../views/sns/feed/FeedView';
 import FeedSearchView from '../../views/sns/feed/FeedSearchView';
 import ProfileView from '../../views/sns/profile/ProfileView';
+import FollowListView from '../../views/sns/profile/FollowListView';
 import DmReadView from '../../views/sns/dm/DmReadView';
 import DmWriteView from '../../views/sns/dm/DmWriteView';
 import OtherUsersProfileView from '../../views/sns/profile/OtherUsersProfileView';
@@ -48,6 +49,12 @@ const DmWriteScreen = ({ navigation, route }) => {
   )
 }
 
+const FollowListScreen = ({ navigation, route }) => {
+  return (
+    <FollowListView navigation={navigation}/>
+  )
+}
+
 const RootStack = createNativeStackNavigator();
 
 const SnsRoute = () => {
@@ -61,7 +68,8 @@ const SnsRoute = () => {
           <RootStack.Screen name="Profile" component={ProfileScreen} />
           <RootStack.Screen name="OtherUsersProfile" component={OtherUsersProfileScreen} />
           <RootStack.Screen name="DmRead" component={DmReadScreen} />
-          <RootStack.Screen name="DmWrite" component={DmWriteScreen} />          
+          <RootStack.Screen name="DmWrite" component={DmWriteScreen} />         
+          <RootStack.Screen name="FollowList" component={FollowListScreen} />    
         </RootStack.Group>
     </RootStack.Navigator>
   );

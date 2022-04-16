@@ -93,7 +93,29 @@ const InputContent = (props) => {
         /> */}
             <RichToolbar
                 editor={richText}
-                actions={[actions.setBold, actions.setItalic, actions.setUnderline, actions.heading1,]}
+                actions={[
+                  actions.undo,
+                  actions.redo,
+                  actions.insertVideo,
+                  actions.insertImage,
+                  actions.setStrikethrough,
+                  // actions.checkboxList,
+                  actions.insertOrderedList,
+                  actions.blockquote,
+                  actions.alignLeft,
+                  actions.alignCenter,
+                  actions.alignRight,
+                  actions.code,
+                  actions.line,
+      
+                  actions.foreColor,
+                  actions.hiliteColor,
+                  actions.heading1,
+                  actions.heading4,
+                  'insertEmoji',
+                  'insertHTML',
+                  'fontSize',
+                ]} // default defaultActions
                 iconMap={{ [actions.heading1]: ({ tintColor }) => (<Text style={[{ color: tintColor }]}>H1</Text>), }}
             />
         </>

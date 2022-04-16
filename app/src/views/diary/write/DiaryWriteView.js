@@ -130,16 +130,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 15,
   },
-
   input: {
     flex: 1,
   },
-
   tib: {
     textAlign: 'center',
     color: '#515156',
   },
-
   flatStyle: {
     paddingHorizontal: 12,
   },

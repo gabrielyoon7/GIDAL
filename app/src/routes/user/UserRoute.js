@@ -1,12 +1,12 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import LogInView from '../../views/user/login/LoginView';
+import SignInView from '../../views/user/signIn/signInView';
 import SignUpView from '../../views/user/signUp/SignUpView';
 
 const RootStack = createNativeStackNavigator();
 
-const LogInScreen = ({ navigation }) => {
+const SignInScreen = ({ navigation }) => {
   return (
-    <LogInView navigation={navigation} />
+    <SignInView navigation={navigation} />
   );
 }
 
@@ -21,7 +21,7 @@ const UserRoute = () => {
       <RootStack.Navigator
         screenOptions={{ headerShown: false }}     
       >
-              <RootStack.Screen name="LogIn" component={LogInScreen} />
+              <RootStack.Screen name="SignIn" component={SignInScreen} />
               <RootStack.Screen name="SignUp" component={SignUpScreen} />
       </RootStack.Navigator>
     );

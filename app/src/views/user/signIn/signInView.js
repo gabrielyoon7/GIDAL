@@ -1,6 +1,6 @@
 import { Box, Text, Heading, VStack, FormControl, Input, Link, Button, HStack, Center, NativeBaseProvider } from "native-base";
 
-const LogInView = (props) => {
+const SignInView = (props) => {
     return (
         <Center w="100%" h="100%">
             <Box safeArea p="2" py="8" w="90%" maxW="290">
@@ -54,4 +54,4 @@ const LogInView = (props) => {
     );
 }
 
-export default LogInView;
+export default SignInView;

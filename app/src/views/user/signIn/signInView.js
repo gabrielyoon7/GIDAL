@@ -1,18 +1,19 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { Box, Text, Heading, VStack, FormControl, Input, Link, Button, HStack, Center, NativeBaseProvider } from "native-base";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { config } from '../../../../config'
 
 const SignInView = (props) => {
     const [userId, setUserId] = useState('');
     const [password, setPassword] = useState('');
 
-    const SignIn =() => {
-        if(!userId){
+    const SignIn = () => {
+        if (!userId) {
             alert('아이디를 입력해주세요.');
             return;
         }
-        if(!password){
+        if (!password) {
             alert('비밀번호를 입력해주세요.');
             return;
         }
@@ -22,12 +23,12 @@ const SignInView = (props) => {
                 user_id: userId
             }
         }).then((response) => {
-            if (!response.data){
+            if (!response.data) {
                 alert('존재하지 않는 아이디입니다.');
             } else {
-                if(response.data.password === password){
-                    props.navigation.replace('Home')
-                }else {
+                if (response.data.password === password) {
+                    setDate(response.data);
+                } else {
                     alert('비밀번호가 일치하지 않습니다.');
                 }
             }
@@ -35,6 +36,35 @@ const SignInView = (props) => {
             console.log(error);
         })
     }
+
+    const setDate = async (user) => {
+        try {
+            await AsyncStorage.setItem('userInfo', JSON.stringify(user), () => {
+                console.log('유저정보 저장 완료')
+            });
+            props.navigation.navigate('Home');
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        getData();
+    }, [])
+
+    const getData = () => {
+        try {
+            AsyncStorage.getItem('userInfo')
+                .then(value => {
+                    if (value != null) {
+                        props.navigation.replace('Home');
+                    }
+                })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <Center w="100%" h="100%">
             <Box safeArea p="2" py="8" w="90%" maxW="290">

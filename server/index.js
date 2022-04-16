@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({limit: "50mb", extended: true}));
 //application/json
 app.use(bodyParser.json({limit: "50mb"}));
 
-mongoose.connect(`mongodb://localhost:27017/gidal`, {})
+mongoose.connect(`mongodb+srv://soyoung:qnstksalcqudfufcjfl@cluster0.c7eeq.mongodb.net/gidal?authSource=admin&replicaSet=atlas-rkqtpg-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true`, {})
 .then(() => console.log('MongoDB Connected!!'))
 .catch(err => console.log(err))
 
@@ -54,13 +54,13 @@ var newUser = new User({
 			}]
 });
 
-// newUser.save(function(error, data){
-//   if(error){
-//       console.log(error);
-//   }else{
-//       console.log('Saved!');
-//   }
-// });
+newUser.save(function(error, data){
+  if(error){
+      console.log(error);
+  }else{
+      console.log('Saved!');
+  }
+});
 
 app.get('/', (req, res) => {
     res.send('Hello World!')

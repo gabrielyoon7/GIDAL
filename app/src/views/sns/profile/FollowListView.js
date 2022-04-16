@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList } from 'react-native';
+import { StyleSheet, Text, TextInput, View, TouchableOpacity, SafeAreaView, ScrollView, Image, Alert, Modal, Pressable, ImageBackground, FlatList } from 'react-native';
 import SearchBar from "react-native-dynamic-search-bar";
 import axios from 'axios'
 import { config } from '../../../../config'
@@ -12,20 +12,34 @@ const friendsData = [
     {id:5, image: "https://bootdey.com/img/Content/avatar/avatar1.png", username:"gidal5"},
     {id:6, image: "https://bootdey.com/img/Content/avatar/avatar6.png", username:"gidal6"},
 ]
-
-const FeedSearchView = () => {
   
-    return (
-      <View>
-        <SearchBar
-          placeholder="Search here"
-        />
-      </View>
-    );
-  }
-  
-
 export default function FollowListView(props) {
+  const [search, setSearch] = useState('');
+  const [filteredDataSource, setFilteredDataSource] = useState([]);
+  const [masterDataSource, setMasterDataSource] = useState([]);
+
+  useEffect(() => {
+        setFilteredDataSource(friendsData);
+        setMasterDataSource(friendsData);
+  }, []);
+
+  const searchFilter = (text) => {
+    if (text) {
+      const newData = masterDataSource.filter(function (item) {
+        const itemData = item.username
+          ? item.username.toUpperCase()
+          : ''.toUpperCase();
+        const textData = text.toUpperCase();
+        return itemData.indexOf(textData) > -1;
+      });
+      setFilteredDataSource(newData);
+      setSearch(text);
+    } else {
+      setFilteredDataSource(masterDataSource);
+      setSearch(text);
+    }
+  };
+
 //     const [following, setFollowing] = useState();
 //     const [profileImg, setProfileImg] = useState();
 //     const [date, setSelectedDate] = React.useState(props.selectedDate);    
@@ -49,12 +63,20 @@ export default function FollowListView(props) {
 //   },[])
           return (         
             <View style={styles.container} >
-            <FeedSearchView/>
+            {/* <FeedSearchView/> */}
+            <SearchBar
+              round
+              searchIcon={{ size: 24 }}
+              onChangeText={(text) => searchFilter(text)}
+              onClear={(text) => searchFilter('')}
+              placeholder="Type Here..."
+              value={search}
+            />
               <View style={styles.body} >
               <FlatList 
                   style={styles.container} 
                   enableEmptySections={true}
-                  data={friendsData}
+                  data={filteredDataSource}
                   keyExtractor= {(item) => {
                     return item.id;
                   }}
@@ -129,4 +151,11 @@ export default function FollowListView(props) {
       alignSelf:'center',
       marginLeft:10
     },
+    textInput: {
+      height: 40,
+      borderWidth: 1,
+      paddingLeft: 20,
+      margin: 5,
+      backgroundColor: 'white'
+    }
   });

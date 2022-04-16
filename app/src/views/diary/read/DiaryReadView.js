@@ -5,6 +5,7 @@ import axios from 'axios';
 import { config } from '../../../../config'
 import { useWindowDimensions } from 'react-native';
 import RenderHtml from 'react-native-render-html';
+import { LinearGradient } from 'expo-linear-gradient'
 
 const DiaryReadView = (props) => {
     const [date, setSelectedDate] = React.useState(props.selectedDate);    
@@ -34,9 +35,7 @@ const DiaryReadView = (props) => {
 
     return (
         <ScrollView style={styles.scroll}>
-            <View style={styles.header}>
-                {/* <Text>dds</Text> */}
-            </View>
+            <LinearGradient style={styles.header} colors={['#A6A6A6', 'black']} />
             <View style={styles.background}>
                 <View style={styles.container}>
                     <HStack alignItems="center">
@@ -128,7 +127,7 @@ const styles = StyleSheet.create({
     },
     header : {
         height:windowHeight*0.5,
-        backgroundColor: "black",
+        // backgroundColor: "black",
         // textAlign: "center",
         // justifyContent: 'center',
         // color: "white",

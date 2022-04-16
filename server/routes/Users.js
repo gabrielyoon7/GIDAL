@@ -40,15 +40,15 @@ router.post('/userUpdate', function(req, res) {
         };
 });
 
-router.get('/findOne/', function(req, res, next) {
+router.post('/findOne/', function(req, res, next) {
     // 특정 아이디값 가져오기
-    const user_id = req.query.user_id;
+    const user_id = req.body.data.user_id;
  
-    User.findOne({user_id: user_id}, function(error,users){
+    User.findOne({user_id: user_id}, function(error,user){
         if(error){
             console.log(error);
         }else{
-            res.json(users)
+            res.json(user)
         }
     });
 });

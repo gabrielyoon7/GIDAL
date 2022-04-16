@@ -1,6 +1,40 @@
+import axios from "axios";
 import { Box, Text, Heading, VStack, FormControl, Input, Link, Button, HStack, Center, NativeBaseProvider } from "native-base";
+import { useState } from "react";
+import { config } from '../../../../config'
 
 const SignInView = (props) => {
+    const [userId, setUserId] = useState('');
+    const [password, setPassword] = useState('');
+
+    const SignIn =() => {
+        if(!userId){
+            alert('아이디를 입력해주세요.');
+            return;
+        }
+        if(!password){
+            alert('비밀번호를 입력해주세요.');
+            return;
+        }
+
+        axios.post(config.ip + ':5000/usersRouter/findOne', {
+            data: {
+                user_id: userId
+            }
+        }).then((response) => {
+            if (!response.data){
+                alert('존재하지 않는 아이디입니다.');
+            } else {
+                if(response.data.password === password){
+                    props.navigation.replace('Home')
+                }else {
+                    alert('비밀번호가 일치하지 않습니다.');
+                }
+            }
+        }).catch(function (error) {
+            console.log(error);
+        })
+    }
     return (
         <Center w="100%" h="100%">
             <Box safeArea p="2" py="8" w="90%" maxW="290">
@@ -18,11 +52,11 @@ const SignInView = (props) => {
                 <VStack space={3} mt="5">
                     <FormControl>
                         <FormControl.Label>Email ID</FormControl.Label>
-                        <Input />
+                        <Input onChangeText={(value) => setUserId(value)} />
                     </FormControl>
                     <FormControl>
                         <FormControl.Label>Password</FormControl.Label>
-                        <Input type="password" />
+                        <Input type="password" onChangeText={(value) => setPassword(value)} />
                         {/* <Link _text={{
                             fontSize: "xs",
                             fontWeight: "500",
@@ -31,7 +65,7 @@ const SignInView = (props) => {
                             Forget Password?
                         </Link> */}
                     </FormControl>
-                    <Button mt="2" colorScheme="indigo" onPress={() => props.navigation.replace('Home')}>
+                    <Button mt="2" colorScheme="indigo" onPress={() => SignIn()}>
                         Sign in
                     </Button>
                     <HStack mt="6" justifyContent="center">

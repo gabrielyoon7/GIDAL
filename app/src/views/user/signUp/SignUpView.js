@@ -13,7 +13,7 @@ const SignUpView = (props) => {
     const [residence, setResidence] = useState('');
 
     const signUp = () => {
-        if (!id) {
+        if (!userId) {
             alert('아이디를 입력해주세요');
             return;
         }

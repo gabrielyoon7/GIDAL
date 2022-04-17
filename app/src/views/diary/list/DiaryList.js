@@ -5,7 +5,6 @@ import axios from 'axios';
 import { config } from '../../../../config'
 import FancyDiaryCard from '../../../components/diary/FancyDiaryCard';
 
-
 const DiaryList = (props, navigation) => {
     const [items, setItems] = useState([]);
     const user_id = props.user_Id;

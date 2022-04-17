@@ -4,12 +4,30 @@ import { Box, Button, HStack } from "native-base"
 import axios from 'axios'
 import { config } from '../../../../config'
 import DiaryList from '../../diary/list/DiaryList';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function OtherUsersProfileView(props) {
   const [following, setFollowing] = useState();
   const [profileImg, setProfileImg] = useState();
   const [date, setSelectedDate] = React.useState(props.selectedDate);    
   const [followText, setFollowText] = useState('팔로우');
+  const [user_Id, setUserId] = React.useState('');
+
+    React.useEffect(() => {
+        // getData();
+        try {
+            AsyncStorage.getItem('userInfo')
+                .then(value => {
+                    if (value != null) {
+                        const UserInfo = JSON.parse(value);
+                        setUserId(UserInfo.user_id);
+                    }
+                }
+                )
+        } catch (error) {
+            console.log(error);
+        }
+    }) 
 
   // console.log(props.user_id);
 
@@ -44,16 +62,17 @@ export default function OtherUsersProfileView(props) {
             <View style={styles.headerContent}>
                 <Image style={styles.avatar} source={{uri: profileImg}}/>
                   <Text style={styles.name}>{props.user_id}</Text>
-                  <HStack alignItems="center" my="1">
-                  <Button mt="3" mr="3" onPress={() => follow()}>
-                        <Text>{followText}</Text>
-                  </Button>
-                  {followText == "✔" && <Button mt="3" onPress={() => props.navigation.navigate('DmWrite',{
-                    userName: props.user_id
-                })}>
-                        <Text>DM 보내기</Text>
-                  </Button>}
-                  </HStack>
+                  {props.user_id !== user_Id && <HStack alignItems="center" my="1">
+                 
+                 <Button mt="3" mr="3" onPress={() => follow()}>
+                       <Text>{followText}</Text>
+                 </Button>
+                 {followText == "✔" && <Button mt="3" onPress={() => props.navigation.navigate('DmWrite',{
+                   userName: props.user_id
+               })}>
+                       <Text>DM 보내기</Text>
+                 </Button>}
+                 </HStack>}
                   <HStack alignItems="center" my="1">
                   <View style={styles.buttonStyle}>
                   <TouchableOpacity  onPress={() => props.navigation.navigate('FollowList')} >
@@ -70,7 +89,7 @@ export default function OtherUsersProfileView(props) {
                   </HStack>
              </View>
            </View>
-           <DiaryList selectedDate={date} navigation={props.navigation} />
+           <DiaryList selectedDate={date} navigation={props.navigation} user_Id={props.user_id} />
         </>
         )
 }

@@ -5,7 +5,6 @@ import { Fab, Icon } from "native-base";
 import { AntDesign } from "@expo/vector-icons";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-
 const DiaryListView = (props) => {
     const [date, setSelectedDate] = React.useState(props.selectedDate);    
     const [user_Id, setUserId] = React.useState('');

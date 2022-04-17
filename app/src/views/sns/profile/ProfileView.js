@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList } from 'react-native';
+import { Box, Button, HStack } from "native-base"
 import axios from 'axios'
 import { config } from '../../../../config'
 import DiaryList from '../../diary/list/DiaryList';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // const friendsData = [
 //     {id:1, image: "https://bootdey.com/img/Content/avatar/avatar6.png", username:"gidal1"},
@@ -16,7 +18,26 @@ import DiaryList from '../../diary/list/DiaryList';
 export default function ProfileView(props) {
   const [following, setFollowing] = useState();
   const [profileImg, setProfileImg] = useState();
-  const [date, setSelectedDate] = React.useState(props.selectedDate);    
+  const [date, setSelectedDate] = React.useState(props.selectedDate);   
+  const [user_Id, setUserId] = React.useState('');
+  const [name, setName] = React.useState('');
+
+    React.useEffect(() => {
+        // getData();
+        try {
+            AsyncStorage.getItem('userInfo')
+                .then(value => {
+                    if (value != null) {
+                        const UserInfo = JSON.parse(value);
+                        setUserId(UserInfo.user_id);
+                        setName(UserInfo.name)
+                    }
+                }
+                )
+        } catch (error) {
+            console.log(error);
+        }
+    }) 
 
   const callback = (data) => {
     setFollowing(data.following);
@@ -26,7 +47,7 @@ export default function ProfileView(props) {
   useEffect(()=>{
     axios.get(config.ip+':5000/usersRouter/findOne/',{
       params: {
-        user_id: config.user[0].user_id,
+        user_id: user_Id,
       }
     })
   .then((response) => {
@@ -40,10 +61,25 @@ export default function ProfileView(props) {
             <View style={styles.header}>
               <View style={styles.headerContent}>
                   <Image style={styles.avatar} source={{uri: profileImg}}/>
-                    <Text style={styles.name}>{config.user[0].user_id}</Text>
-               </View>
+                    <Text style={styles.name}>{name}</Text>
+               
+               <HStack alignItems="center" my="1">
+                  <View style={styles.buttonStyle}>
+                  <TouchableOpacity  onPress={() => props.navigation.navigate('FollowList')} >
+                        <Text>팔로워</Text>
+                        <Text>100</Text>
+                  </TouchableOpacity>
+                  </View>
+                  <View style={styles.buttonStyle}>
+                 <TouchableOpacity onPress={() => props.navigation.navigate('FollowList')} >
+                        <Text>팔로우</Text>
+                        <Text>100</Text>
+                  </TouchableOpacity>
+                  </View>
+                  </HStack>
+                  </View>
              </View>
-             <DiaryList selectedDate={date} navigation={props.navigation} />
+             <DiaryList selectedDate={date} navigation={props.navigation} user_Id={user_Id} />
           </>
                    
           
@@ -83,8 +119,14 @@ export default function ProfileView(props) {
 }
 
 const styles = StyleSheet.create({
+  buttonStyle:{
+    alignItems:'center',
+    width:50,
+    marginRight:20,
+    padding:5,
+  },
   header:{
-    backgroundColor: "#0abde3",
+    backgroundColor: "#2980b9",
   },
   headerContent:{
     padding:30,
@@ -131,5 +173,5 @@ const styles = StyleSheet.create({
     fontSize:22,
     alignSelf:'center',
     marginLeft:10
-  },
+  }
 });

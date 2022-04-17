@@ -3,6 +3,7 @@ import { StyleSheet, Text, TextInput, View, TouchableOpacity, SafeAreaView, Scro
 import SearchBar from "react-native-dynamic-search-bar";
 import axios from 'axios'
 import { config } from '../../../../config'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const friendsData = [
     {id:1, image: "https://bootdey.com/img/Content/avatar/avatar6.png", username:"gidal1"},
@@ -17,6 +18,23 @@ export default function FollowListView(props) {
   const [search, setSearch] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
+  const [user_Id, setUserId] = React.useState('');
+
+    React.useEffect(() => {
+        // getData();
+        try {
+            AsyncStorage.getItem('userInfo')
+                .then(value => {
+                    if (value != null) {
+                        const UserInfo = JSON.parse(value);
+                        setUserId(UserInfo.user_id);
+                    }
+                }
+                )
+        } catch (error) {
+            console.log(error);
+        }
+    })
 
   useEffect(() => {
         setFilteredDataSource(friendsData);
@@ -69,7 +87,7 @@ export default function FollowListView(props) {
               searchIcon={{ size: 24 }}
               onChangeText={(text) => searchFilter(text)}
               onClear={(text) => searchFilter('')}
-              placeholder="Type Here..."
+              placeholder="search Here..."
               value={search}
             />
               <View style={styles.body} >

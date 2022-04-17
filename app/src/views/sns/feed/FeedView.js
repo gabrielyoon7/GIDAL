@@ -15,11 +15,11 @@ const FeedView = (props) => {
     return (
         <>
             <FeedDiaryList selectedDate={date} navigation={props.navigation} />
-            <Button
+            {/* <Button
                 title="프로필 페이지로 가기(임시)"
                 onPress={() => props.navigation.navigate('Profile')}
             />
-            <Text> </Text>
+            <Text> </Text> */}
             <Button
                 title="일기 검색하기(임시)"
                 onPress={() => props.navigation.navigate('FeedSearch')}

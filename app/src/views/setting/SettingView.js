@@ -1,13 +1,13 @@
-// import {  } from 'native-base';
 import { Center, Container, Heading, Link } from 'native-base';
 import React from 'react';
-import { Button, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Button, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
+//아래 처럼 기괴하게 설계된 이유는 React Native 자체에 버그가 있기 때문임
 const menu = [
-    { key: 0, menu: '테스트 페이지', nav: 'Test' },
-    { key: 1, menu: '마이페이지', nav: 'Test' },
-    { key: 2, menu: '로그아웃', nav: 'Test' },
-    { key: 3, menu: '앱 소개', nav: 'Test' },
+    { key: 0, type: 'nav_index', menu: '테스트 페이지', argument: 'Test', extra: null },
+    { key: 1, type: 'nav', menu: '마이페이지', argument: 'Sns', extra: 'Profile' },
+    { key: 2, type: 'nav', menu: '로그아웃(미구현)', argument: 'User', extra: null },
+    { key: 3, type: 'link', menu: '앱 소개 : Github', argument: 'https://github.com/gabrielyoon7/GIDAL', extra: null },
 ]
 
 const SettingHeader = () => {
@@ -26,18 +26,57 @@ const SettingHeader = () => {
                 <Heading pt={4} fontWeight="500" size="sm">
                     통계와 SNS를 기반으로 한 일기작성 SNS
                 </Heading>
-                <Link href="https://github.com/gabrielyoon7/GIDAL" isExternal _text={{
-                    color: "blue.400"
-                }} mt={-0.5} _web={{
-                    mb: -2
-                }}>
-                    Github README
-                </Link>
             </Container>
 
         </Center>
     );
 } // Example template which wraps component with NativeBaseProvider
+
+const SettingMenu = ({ item, props }) => {
+    const expr = item.type;
+    switch (expr) {
+        case "nav_index":
+            return (
+                <TouchableOpacity
+                    onPress={
+                        () => props.navigation.navigate(item.argument)
+                    }
+                >
+                    <Text style={styles.item}>{item.menu}</Text>
+                </TouchableOpacity>
+            )
+        case "nav":
+            return (
+                <TouchableOpacity
+                    onPress={
+                        () => props.navigation.navigate('Home', {
+                            screen: item.argument,
+                            params: {
+                                screen: item.extra
+                            }})
+                    }
+                >
+                    <Text style={styles.item}>{item.menu}</Text>
+                </TouchableOpacity>
+            )
+        case "link":
+            return (
+                <Link href={item.argument} isExternal >
+                    <Text style={styles.item}>{item.menu}</Text>
+                </Link>
+            )
+        default:
+            return (
+                <TouchableOpacity
+                    onPress={
+                        () => Alert.alert('아직 없는 메뉴입니다.')
+                    }
+                >
+                    <Text style={styles.item}>{item.menu}</Text>
+                </TouchableOpacity>
+            )
+    }
+}
 
 const SettingView = (props) => {
     return (
@@ -48,20 +87,10 @@ const SettingView = (props) => {
                     data={menu}
                     renderItem={
                         ({ item }) => (
-                            <TouchableOpacity
-                                onPress={
-                                    () => props.navigation.navigate(item.nav)
-                                }
-                            >
-                                <Text style={styles.item}>{item.menu}</Text>
-                            </TouchableOpacity>
+                            <SettingMenu props={props} item={item} />
                         )}
                 />
             </View>
-            {/* <Button
-                title="테스트 메뉴로 이동하기"
-                onPress={() => props.navigation.navigate('Test')}
-            /> */}
         </>
     );
 }
@@ -73,7 +102,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingHorizontal: 30,
-        //    paddingTop: 22
     },
     item: {
         padding: 10,

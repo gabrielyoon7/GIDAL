@@ -6,7 +6,7 @@ import { config } from '../../../../config'
 import { useWindowDimensions } from 'react-native';
 import RenderHtml from 'react-native-render-html';
 import { LinearGradient } from 'expo-linear-gradient'
-
+import moment from 'moment';
 const DiaryReadView = (props) => {
     const [date, setSelectedDate] = React.useState(props.selectedDate);    
     const { width } = useWindowDimensions();
@@ -50,16 +50,7 @@ const DiaryReadView = (props) => {
                             {diary.disclosure}
                         </Badge>
                         <Spacer />
-                        <Button size="md"  onPress={
-                            () => props.navigation.replace('DiaryModify', {
-                                diary : diary,
-                            })
-                        }>
-                            수정
-                        </Button>
-                        <Button size="md" onPress={() => deleteDiary()} >
-                            삭제
-                        </Button>
+                        
                     </HStack>
                     <Text color="coolGray.800" mt="3" fontWeight="bold" fontSize="4xl">
                         {diary.title}
@@ -84,12 +75,15 @@ const DiaryReadView = (props) => {
                         <Spacer />
                     </HStack>
                     </TouchableOpacity>
+                    
                     <Divider my="2" />
                     <RenderHtml
                         contentWidth={width}
                         source={source}
                     />
+                    
                     <Divider my="5"/>
+                    
                     <HStack alignItems="center">
                         <Badge colorScheme="darkBlue" _text={{
                             color: "white"
@@ -108,6 +102,26 @@ const DiaryReadView = (props) => {
                         </Badge>
                     </HStack>
                 </View>
+                <HStack >
+                <Spacer />
+                <Spacer />  
+             
+               
+                <Button style={styles.button} size="md"  variant="subtle" onPress={
+                            () => props.navigation.replace('DiaryModify', {
+                                diary : diary,
+                            })
+                        }>
+                            수정
+                        </Button>
+                    
+                        <Button  style={styles.button} size="md" variant="subtle" onPress={() => deleteDiary()} >
+                            삭제
+                        </Button>
+                
+                        </HStack>
+                 
+       
             </View>
         </ScrollView>
     )
@@ -134,6 +148,11 @@ const styles = StyleSheet.create({
     },
     scroll : {
         flex:1.0,
+    },
+    button : {
+        flex:0.5,
+        marginLeft: 20,
+       
     },
 })
 

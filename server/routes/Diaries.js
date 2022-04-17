@@ -71,6 +71,17 @@ router.post('/findOne/', function(req, res, next) {
     });
 });
 
+router.post('/findPublic', function(req, res, next) {
+    // 전체 데이터 가져오기
+    Diary.find().where('disclosure').equals('public').sort({date: -1}).then( (diaries) => {
+        console.log(diaries);
+        res.json(diaries)
+    }).catch( (err) => {
+        console.log(err);
+        next(err)
+    });
+});
+
 // //작동하는지 확인 안해봄
 // router.post('/modify/', function(req, res, next) {
 //     console.log(req.body);

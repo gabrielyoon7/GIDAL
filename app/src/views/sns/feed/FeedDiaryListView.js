@@ -5,35 +5,31 @@ import axios from 'axios';
 import { config } from '../../../../config'
 import FancyDiaryCard from '../../../components/diary/FancyDiaryCard';
 
-
-const DiaryList = (props, navigation) => {
+const FeedDiaryList = (props, navigation) => {
     const [items, setItems] = useState([]);
-    const user_id = props.user_Id;
     const isFocused = useIsFocused(); // isFoucesd Define
 
     const getitems = () => {
         let result = []
-        axios.post(config.ip + ':5000/diariesRouter/findOwn', {
-            data: {
-                user_id: user_id
-            }
-        }).then((response) => {
-            if (response.data.length > 0) {
-                response.data.forEach((item) => {
-                    result.push(item);
-                });
-            }
-            setItems(result);
-        }).catch(function (error) {
-            console.log(error);
-        })
+
+        axios.post(config.ip + ':5000/diariesRouter/findPublic')
+        .then((response) => {
+                if (response.data.length > 0) {
+                    response.data.forEach((item) => {
+                        result.push(item);
+                    });
+                }
+                setItems(result);
+            }).catch(function (error) {
+                console.log(error);
+            })
     }
 
     const [data, setData] = useState(0);
     const [selectedId, setSelectedId] = useState(null);
     const [ref, setRef] = useState(null);
 
-    //ì²« ë Œë”ë§ì—ë§Œ í˜¸ì¶œë¨
+    //Ã¹ ·»´õ¸µ¿¡¸¸ È£ÃâµÊ
     useEffect(() => {
         getitems();
     }, [isFocused]);
@@ -65,7 +61,7 @@ const DiaryList = (props, navigation) => {
                         })
                     }
                 }
-                // í•´ë‹¹ ì¼ê¸°ë¡œ ë„˜ì–´ê°€ê¸° êµ¬í˜„
+                // ÇØ´ç ÀÏ±â·Î ³Ñ¾î°¡±â ±¸Çö
                 textColor="black"
             />
         );
@@ -85,7 +81,7 @@ const DiaryList = (props, navigation) => {
         </View>
     )
 }
-export default DiaryList;
+export default FeedDiaryList;
 
 const styles = StyleSheet.create({
     container: {

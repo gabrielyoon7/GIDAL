@@ -22,6 +22,8 @@ export default function ProfileView(props) {
   const [user_Id, setUserId] = React.useState('');
   const [name, setName] = React.useState('');
 
+  console.log(user_Id);
+
     React.useEffect(() => {
         // getData();
         try {

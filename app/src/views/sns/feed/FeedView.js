@@ -4,14 +4,17 @@ import { useIsFocused } from '@react-navigation/native';
 import axios from 'axios';
 import { config } from '../../../../config'
 import FancyDiaryCard from '../../../components/diary/FancyDiaryCard';
-import DiaryList from '../../diary/list/DiaryList';
-
+import FeedDiaryList from '../../sns/feed/FeedDiaryListView';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const FeedView = (props) => {
     const [date, setSelectedDate] = React.useState(props.selectedDate);    
+    // const [user_Id, setUserId] = React.useState('');
+    const user_Id = ""
+
     return (
         <>
-            <DiaryList selectedDate={date} navigation={props.navigation} />
+            <FeedDiaryList selectedDate={date} navigation={props.navigation} />
             <Button
                 title="프로필 페이지로 가기(임시)"
                 onPress={() => props.navigation.navigate('Profile')}

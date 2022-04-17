@@ -8,7 +8,7 @@ import FancyDiaryCard from '../../../components/diary/FancyDiaryCard';
 
 const DiaryList = (props, navigation) => {
     const [items, setItems] = useState([]);
-    const user_id = '202212069';
+    const user_id = props.user_Id;
     const isFocused = useIsFocused(); // isFoucesd Define
 
     const getitems = () => {
@@ -18,12 +18,11 @@ const DiaryList = (props, navigation) => {
                 user_id: user_id
             }
         }).then((response) => {
-            if (response.data.length < 1) {
-                return;
+            if (response.data.length > 0) {
+                response.data.forEach((item) => {
+                    result.push(item);
+                });
             }
-            response.data.forEach((item) => {
-                result.push(item);
-            });
             setItems(result);
         }).catch(function (error) {
             console.log(error);

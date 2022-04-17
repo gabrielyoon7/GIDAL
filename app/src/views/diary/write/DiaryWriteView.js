@@ -36,9 +36,11 @@ const DiaryWriteView = (props) => {
 
 
   const saveDiary = () => {
+    const user_Id = props.navigation.getState().routes[1].params.user_Id
+    // console.log(user_Id);
     axios.post(config.ip + ':5000/diariesRouter/save', {
       data: {
-        user_id: '202212069',
+        user_id: user_Id,
         date: Date,
         title: Title,
         content: Content,

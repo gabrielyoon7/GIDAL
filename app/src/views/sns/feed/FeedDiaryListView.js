@@ -4,6 +4,7 @@ import { useIsFocused } from '@react-navigation/native';
 import axios from 'axios';
 import { config } from '../../../../config'
 import FancyDiaryCard from '../../../components/diary/FancyDiaryCard';
+import SearchBar from "react-native-dynamic-search-bar";
 
 const FeedDiaryList = (props, navigation) => {
     const [items, setItems] = useState([]);
@@ -13,7 +14,7 @@ const FeedDiaryList = (props, navigation) => {
         let result = []
 
         axios.post(config.ip + ':5000/diariesRouter/findPublic')
-        .then((response) => {
+            .then((response) => {
                 if (response.data.length > 0) {
                     response.data.forEach((item) => {
                         result.push(item);
@@ -29,7 +30,7 @@ const FeedDiaryList = (props, navigation) => {
     const [selectedId, setSelectedId] = useState(null);
     const [ref, setRef] = useState(null);
 
-    //Ã¹ ·»´õ¸µ¿¡¸¸ È£ÃâµÊ
+    //ì²« ë Œë”ë§ì—ë§Œ í˜¸ì¶œë¨
     useEffect(() => {
         getitems();
     }, [isFocused]);
@@ -50,6 +51,17 @@ const FeedDiaryList = (props, navigation) => {
         }
     })
 
+    const [dataSource, setDataSource] = useState(items);
+    const filterList = (text) => {
+      let newData = items;
+      newData = items.filter((item) => {
+        const itemData = item.content.toLowerCase();
+        const textData = text.toLowerCase();
+        return itemData.indexOf(textData) > -1;
+      })
+      setDataSource(newData);
+    }
+
     const renderItem = ({ item }) => {
         return (
             <FancyDiaryCard
@@ -57,28 +69,41 @@ const FeedDiaryList = (props, navigation) => {
                 onPress={
                     () => {
                         props.navigation.navigate('DiaryRead', {
-                            diary : item,
+                            diary: item,
                         })
                     }
                 }
-                // ÇØ´ç ÀÏ±â·Î ³Ñ¾î°¡±â ±¸Çö
+                // í•´ë‹¹ ì¼ê¸°ë¡œ ë„˜ì–´ê°€ê¸° êµ¬í˜„
                 textColor="black"
             />
         );
     };
 
     return (
-        <View style={styles.container}>
-            <FlatList
-                data={items}
-                ref={(ref) => {
-                    setRef(ref);
+        <>
+            <View style={styles.container}>
+                <FlatList
+                    data={items}
+                    ref={(ref) => {
+                        setRef(ref);
+                    }}
+                    renderItem={renderItem}
+                    // renderItem={({ item }) => renderItem(item)}
+                    keyExtractor={(item) => item._id}
+                />
+            </View>
+            <SearchBar
+                placeholder="Search here"
+                onPress={() => alert("onPress")}
+                onChangeText={(text) => {
+                    console.log(text)
+                    filterList(text);
                 }}
-                renderItem={renderItem}
-                keyExtractor={(item) => item._id}
-                // extraData={selectedId}
+                onClearPress={() => {
+                    filterList("");
+                }}
             />
-        </View>
+        </>
     )
 }
 export default FeedDiaryList;
@@ -87,7 +112,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        // alignItems: 'center',
         justifyContent: 'center',
     },
 });

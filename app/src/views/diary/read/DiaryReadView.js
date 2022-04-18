@@ -31,20 +31,28 @@ const DiaryReadView = (props) => {
     const source = {
         html: diary.content,
     };
+    const sdate = diary.date;
+    const  showDate = sdate.substring(0,10);
+    const  showTime = sdate.substring(11,19);
 
-
+    const generateColor = () => { //컬러 랜덤 지정
+        const randomColor = Math.floor(Math.random() * 16777215)
+          .toString(16)
+          .padStart(6, '0');
+        return `#${randomColor}`;
+      };
     return (
         <ScrollView style={styles.scroll}>
             <LinearGradient style={styles.header} colors={['#A6A6A6', 'black']} />
             <View style={styles.background}>
                 <View style={styles.container}>
                     <HStack alignItems="center">
-                        <Badge colorScheme="darkBlue" _text={{
+                        <Badge backgroundColor={generateColor()}  _text={{
                             color: "white"
                         }} variant="solid" rounded="4">
                             태그명(카테고리)
                         </Badge>
-                        <Badge colorScheme="darkBlue" _text={{
+                        <Badge backgroundColor={generateColor()} _text={{
                             color: "white"
                         }} variant="solid" rounded="4">
                             {diary.disclosure}
@@ -56,7 +64,7 @@ const DiaryReadView = (props) => {
                         {diary.title}
                     </Text>
                     <Text fontSize="sm" color="coolGray.700" my="1">
-                        {diary.date}
+                   <Text>{showDate}</Text> <Text>{showTime}</Text> 
                     </Text>
                     <TouchableOpacity onPress={
                             () => props.navigation.navigate('OtherUsersProfile', {
@@ -77,7 +85,8 @@ const DiaryReadView = (props) => {
                     </TouchableOpacity>
                     
                     <Divider my="2" />
-                    <RenderHtml
+                    <RenderHtml 
+                    
                         contentWidth={width}
                         source={source}
                     />
@@ -85,24 +94,25 @@ const DiaryReadView = (props) => {
                     <Divider my="5"/>
                     
                     <HStack alignItems="center">
-                        <Badge colorScheme="darkBlue" _text={{
+                        
+                        <Badge backgroundColor={generateColor()} _text={{
                             color: "white"
                         }} variant="solid" rounded="4">
                             태그1
                         </Badge>
-                        <Badge colorScheme="darkBlue" _text={{
+                        <Badge backgroundColor={generateColor()} _text={{
                             color: "white"
                         }} variant="solid" rounded="4">
                             태그2
                         </Badge>
-                        <Badge colorScheme="darkBlue" _text={{
+                        <Badge backgroundColor={generateColor()} _text={{
                             color: "white"
                         }} variant="solid" rounded="4">
                             태그3
                         </Badge>
                     </HStack>
                 </View>
-                <HStack >
+                <HStack margin ='5' >
                 <Spacer />
                 <Spacer />  
              

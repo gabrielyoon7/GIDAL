@@ -1,9 +1,10 @@
 
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import { Box, Button, } from "native-base"
+import { Box, Button, Center, Icon} from "native-base"
 import React, { useState, } from 'react';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import axios from 'axios';
+import { AntDesign } from '@expo/vector-icons';
 import { config } from '../../../../config'
 import InputTitle from "../../../components/diary/InputTitle";
 import RadioDisclosure from "../../../components/diary/RadioDisclosure";
@@ -67,7 +68,11 @@ const DiaryWriteView = (props) => {
   return (
     <>
       <ScrollView>
-        <Text style={styles.dateText} onPress={showDatePicker} >{Date}</Text>
+        <Box style={styles.test} justifyContent="center" display="flex">
+          <AntDesign style={styles.allowIcon} name="left" size={24} color="black"/>
+          <Text style={styles.dateText} onPress={showDatePicker} >{Date}</Text>
+          <AntDesign style={styles.allowIcon} name="right" size={24} color="black" />
+        </Box>
         <RadioDisclosure disclosure={disclosure} setDisclosure={setDisclosure} />
         <InputTitle setTitle={setTitle} Title={Title} />
         <InputContent setContent={setContent} content={Content} />
@@ -142,4 +147,22 @@ const styles = StyleSheet.create({
   flatStyle: {
     paddingHorizontal: 12,
   },
+  dateText: {
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+    margin: 10,
+    //backgroundColor: 'skyblue',
+    width: 'auto',
+    alignSelf: 'center'
+  },
+  allowIcon: {
+   // backgroundColor: 'steelblue',
+    width: 'auto',
+    alignSelf: 'center'
+  },
+  test:{
+    flex: 1,
+    marginTop: 8
+  }
 });

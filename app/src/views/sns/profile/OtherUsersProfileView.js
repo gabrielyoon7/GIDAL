@@ -38,6 +38,13 @@ export default function OtherUsersProfileView(props) {
 
   const follow = () => {
     if(followText=="팔로우"){
+      axios.post(config.ip + ':5000/usersRouter/userFollwing', {
+        data: {
+          user_id: user_Id,
+          following_user_id: props.user_id,
+          img: ""
+        }
+      })
       setFollowText("✔")
     } else{
       setFollowText("팔로우")

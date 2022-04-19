@@ -40,6 +40,25 @@ router.post('/userUpdate', function(req, res) {
         };
 });
 
+router.post('/userFollwing', function(req, res) {
+    User.updateOne(
+        { user_id: req.body.data.user_id }, 
+        {$push: {following: {
+            "user_id": req.body.data.following_user_id,
+            "name": req.body.data.following_user_id,
+            "img": req.body.data.img,
+        }}}).exec();
+        (error, user)=>{
+            if(error){
+                console.log(error);
+                res.json({status: 'error', error})
+            }else{
+                console.log('Saved!')
+                res.json({status: 'success'})
+            }
+        };
+});
+
 router.post('/findOne/', function(req, res, next) {
     // 특정 아이디값 가져오기
     const user_id = req.body.data.user_id;

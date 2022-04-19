@@ -18,7 +18,6 @@ const DiaryList = (props, navigation) => {
                 user_id: user_id
             }
         }).then((response) => {
-            console.log(response.data)
             if (response.data.length > 0) {
                 response.data.forEach((item) => {
                     result.push(item);

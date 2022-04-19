@@ -47,8 +47,45 @@ router.post('/userFollwing', function(req, res) {
             "user_id": req.body.data.following_user_id,
             "name": req.body.data.following_user_id,
             "img": req.body.data.img,
-        }}}).exec();
-        (error, user)=>{
+        }}}).exec((error, user)=>{
+            if(error){
+                console.log(error);
+                return res.json({status: 'error', error})
+            }else{
+                console.log('Saved!')
+                return res.json({status: 'success'})
+            }
+        });
+});
+
+router.post('/findOne/', function(req, res, next) {
+    // 특정 아이디값 가져오기
+    const user_id = req.body.data.user_id
+
+    User.find().where('user_id').equals(user_id)
+    .then( (users) => {
+        res.json(users)
+    }).catch( (err) => {
+        console.log(err);
+        next(err)
+    });
+    // User.findOne({"user_id": bmName}, function(error,news){
+    //     console.log('--- Read one ---');
+    //     if(error){
+    //         console.log(error);
+    //     }else{
+    //         res.json(news)
+            
+    //     }
+    // });
+});
+
+router.post('/userFollwingDelete', (req,res) => {
+    User.updateOne(
+        { user_id: req.body.data.user_id }, 
+        {following:  {$elemMatch: {
+            user_id: req.body.data.following_user_id,
+        }}}).exec((error, user)=>{
             if(error){
                 console.log(error);
                 res.json({status: 'error', error})
@@ -56,21 +93,7 @@ router.post('/userFollwing', function(req, res) {
                 console.log('Saved!')
                 res.json({status: 'success'})
             }
-        };
-});
-
-router.post('/findOne/', function(req, res, next) {
-    // 특정 아이디값 가져오기
-    const user_id = req.body.data.user_id;
- 
-    User.findOne({user_id: user_id}, function(error,user){
-        if(error){
-            console.log(error);
-        }else{
-            res.json(user)
-        }
-    });
-});
-
+        });
+  })
 
 module.exports = router;

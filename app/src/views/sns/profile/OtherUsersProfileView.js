@@ -7,10 +7,11 @@ import DiaryList from '../../diary/list/DiaryList';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function OtherUsersProfileView(props) {
-  const [following, setFollowing] = useState();
+  const [following, setFollowing] = useState(); // 내가 팔로우
+  const [userFollowing, setUserFollowing] = useState(); // 다른 유저가 팔로우
   const [profileImg, setProfileImg] = useState();
   const [date, setSelectedDate] = React.useState(props.selectedDate);    
-  const [followText, setFollowText] = useState('팔로우');
+  const [followText, setFollowText] = useState('');
   const [user_Id, setUserId] = React.useState('');
 
     React.useEffect(() => {
@@ -23,7 +24,7 @@ export default function OtherUsersProfileView(props) {
                         setUserId(UserInfo.user_id);
                     }
                 }
-                )
+          )
         } catch (error) {
             console.log(error);
         }
@@ -32,9 +33,22 @@ export default function OtherUsersProfileView(props) {
   // console.log(props.user_id);
 
   const callback = (data) => {
-    setFollowing(data.following);
-    setProfileImg(data.profile_image)
+    console.log(data);
+    setFollowing(data);
+    let objectFollowing = Object.values(following).map(item => item.user_id)
+    if(objectFollowing.includes(props.user_id)){
+      setFollowText("✔")
+    } else {
+      setFollowText("팔로우")
+    }
+    // setProfileImg(data.profile_image)
   }
+
+  // console.log(following);
+
+
+// console.log(objectFollowing.includes(props.user_id));
+
 
   const follow = () => {
     if(followText=="팔로우"){
@@ -45,23 +59,42 @@ export default function OtherUsersProfileView(props) {
           img: ""
         }
       })
-      setFollowText("✔")
+      .then((response) => {
+        setFollowText("✔")
+    }).catch(function (error) {
+      console.log(error);
+    });
     } else{
-      setFollowText("팔로우")
+       setFollowText("팔로우")
+    //   axios.post(config.ip + ':5000/usersRouter/userFollwingDelete', {
+    //     data: {
+    //       user_id: user_Id,
+    //       _id: props._id,
+    //       following_user_id: props.user_id
+    //     }
+    //   })
+    //   .then((response) => {
+    //     setFollowText("팔로우")
+    // }).catch(function (error) {
+    //   console.log(error);
+    // });
     }
   }
 
   useEffect(()=>{
-    axios.get(config.ip+':5000/usersRouter/findOne/',{
-      params: {
-        user_id: props.user_id,
+    console.log(user_Id);
+    axios.post(config.ip + ':5000/usersRouter/findOne', {
+      data: {
+        user_id: user_Id,
       }
     })
-  .then((response) => {
-    callback(response.data);
+    .then((response) => {
+      console.log(response.data[0].following);
+      callback(response.data[0].following)
   }).catch(function (error) {
     console.log(error);
   });
+  
 },[])
         return (
           <>

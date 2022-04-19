@@ -22,9 +22,7 @@ const FeedDiaryList = (props, navigation) => {
                     });
                 }
                 setItems(result);
-                // console.log("getitems/items : "+items);
                 setBackupData(result);
-                // console.log("getitems/dataSource : "+dataSource);
             }).catch(function (error) {
                 console.log(error);
             })
@@ -57,14 +55,12 @@ const FeedDiaryList = (props, navigation) => {
 
 
     const filterList = (text) => {
-        // console.log(backupData);
       let newData = backupData;
       newData = backupData.filter((item) => {
         const itemData = item.content.toLowerCase();
         const textData = text.toLowerCase();
         return itemData.indexOf(textData) > -1;
       })
-    //   setDataSource(newData);
         setItems(newData);
     }
 
@@ -94,12 +90,11 @@ const FeedDiaryList = (props, navigation) => {
                         setRef(ref);
                     }}
                     renderItem={renderItem}
-                    // renderItem={({ item }) => renderItem(item)}
                     keyExtractor={(item) => item._id}
                 />
             </View>
             <SearchBar
-                placeholder="Search here"
+                placeholder="어떤 일기를 찾으시나요?"
                 onPress={() => alert("onPress")}
                 onChangeText={(text) => {
                     console.log(text)

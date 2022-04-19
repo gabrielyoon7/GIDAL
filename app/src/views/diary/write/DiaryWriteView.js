@@ -45,7 +45,8 @@ const DiaryWriteView = (props) => {
         date: Date,
         title: Title,
         content: Content,
-        disclosure: disclosure
+        disclosure: disclosure,
+        tags:tags,
       }
     }).then((response) => {
       if (response.data.status === 'success') {

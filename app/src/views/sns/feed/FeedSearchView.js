@@ -4,6 +4,9 @@ import { config } from '../../../../config'
 import SearchBar from "react-native-dynamic-search-bar";
 import { useState } from 'react';
 
+// 삭제가 임박한 페이지
+// 아니면 레퍼런스로 활용할 수 있게 테스트 페이지로 이동할 수도 있음. (일단 존치)
+
 const staticData = [
   { id: 0, tag: '아구찜' },
   { id: 1, tag: '아구탕' },

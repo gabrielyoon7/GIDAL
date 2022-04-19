@@ -5,7 +5,6 @@ import { Center } from 'native-base';
 
 const SearchTags = (props) => {
 
-    // const [text, onChangeText] = React.useState("Useless Text");
     const [number, onChangeNumber] = React.useState(null);
 
     return (
@@ -17,13 +16,6 @@ const SearchTags = (props) => {
                 placeholder="useless placeholder"
                 keyboardType="numeric"
             />
-            {/* {props.tags.map((tag) => (
-                <View key={tag.id} style={styles.btnView}>
-                    <Pressable style={styles.button} onPress={() => onPressFunction(tag.name)}>
-                        <Text>{tag.name}</Text>
-                    </Pressable>
-                </View>
-            ))} */}
         </View>
     )
 }

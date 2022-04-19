@@ -17,10 +17,6 @@ const FeedView = (props) => {
         <>
             <Heading style={styles.heading}>모두의 일기</Heading>
             <FeedDiaryList selectedDate={date} navigation={props.navigation} />
-            {/* <Button
-                title="일기 검색하기(임시)"
-                onPress={() => props.navigation.navigate('FeedSearch')}
-            /> */}
         </>
     )
 }

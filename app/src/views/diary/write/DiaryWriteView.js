@@ -67,13 +67,14 @@ const DiaryWriteView = (props) => {
 
   return (
     <>
-      <ScrollView>
+      <ScrollView style={{backgroundColor:'white'}}>
         <Box style={styles.row} justifyContent="center" display="flex">
           <AntDesign style={styles.allowIcon} name="left" size={24} color="black"/>
           <Text style={styles.dateText} onPress={showDatePicker} >{Date}</Text>
           <AntDesign style={styles.allowIcon} name="right" size={24} color="black" />
         </Box>
         <RadioDisclosure disclosure={disclosure} setDisclosure={setDisclosure} />
+        <Divider/>
         <InputTitle setTitle={setTitle} Title={Title} />
         <Divider/>
         <InputContent setContent={setContent} content={Content} />

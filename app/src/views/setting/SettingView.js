@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Center, Container, Heading, Link } from 'native-base';
 import React from 'react';
 import { Alert, Button, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
@@ -6,7 +7,7 @@ import { Alert, Button, FlatList, StyleSheet, Text, TouchableOpacity, View } fro
 const menu = [
     { key: 0, type: 'nav_index', menu: '테스트 페이지', argument: 'Test', extra: null },
     { key: 1, type: 'nav', menu: '마이페이지', argument: 'Sns', extra: 'Profile' },
-    { key: 2, type: 'nav', menu: '로그아웃(미구현)', argument: 'User', extra: null },
+    { key: 2, type: 'logout', menu: '로그아웃(미구현)', argument: 'User', extra: null },
     { key: 3, type: 'link', menu: '앱 소개 : Github', argument: 'https://github.com/gabrielyoon7/GIDAL', extra: null },
 ]
 
@@ -54,6 +55,16 @@ const SettingMenu = ({ item, props }) => {
                             params: {
                                 screen: item.extra
                             }})
+                    }
+                >
+                    <Text style={styles.item}>{item.menu}</Text>
+                </TouchableOpacity>
+            )
+        case "logout":
+            return (
+                <TouchableOpacity
+                    onPress={
+                        () => {AsyncStorage.clear(); props.navigation.replace('User')}
                     }
                 >
                     <Text style={styles.item}>{item.menu}</Text>

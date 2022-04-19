@@ -18,6 +18,7 @@ const DiaryList = (props, navigation) => {
                 user_id: user_id
             }
         }).then((response) => {
+            console.log(response.data)
             if (response.data.length > 0) {
                 response.data.forEach((item) => {
                     result.push(item);
@@ -36,7 +37,7 @@ const DiaryList = (props, navigation) => {
     //첫 렌더링에만 호출됨
     useEffect(() => {
         getitems();
-    }, [isFocused]);
+    }, [isFocused, user_id]);
 
     useEffect(() => {
         let index = items.findIndex((item, idx) => {

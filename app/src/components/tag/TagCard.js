@@ -11,24 +11,24 @@ import TimePicker from './interaction/TimePicker';
 
 const onPressFunction = (tag) => {
     Alert.alert(tag+' pressed!')
-  }
+}
 
 const TagCard = (props) => {
     const type = {
         button: {
-          interaction:<ButtonTags tags={props.item.tags} />,
+          interaction:<ButtonTags tags={props.item.tags} setTags={props.setTags}/>,
         },
         search: {
-            interaction:<SearchTags tags={props.item.tags} />,
+            interaction:<SearchTags tags={props.item.tags} setTags={props.setTags} />,
         },
         time: {
-            interaction:<TimePicker tags={props.item.tags} />,
+            interaction:<TimePicker tags={props.item.tags} setTags={props.setTags} />,
         },
         slider1: {
-            interaction:<Slider1 tags={props.item.tags} />,
+            interaction:<Slider1 tags={props.item.tags} setTags={props.setTags} />,
         },
         slider2: {
-            interaction:<Slider2 tags={props.item.tags} />,
+            interaction:<Slider2 tags={props.item.tags} setTags={props.setTags} />,
         },
     };
     const card_type = type[props.item.type];
@@ -38,7 +38,7 @@ const TagCard = (props) => {
             <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                 <View style={styles.lineView} />
             </View>
-            {card_type?(card_type.interaction):(<View><Text>Wrong type</Text></View>)}
+            {card_type?(<View style={styles.interaction}>{card_type.interaction}</View>):(<View><Text>Wrong type</Text></View>)}
             {/* <ButtonTags tags={props.item.tags} /> */}
         </View>
     )
@@ -52,5 +52,10 @@ const styles = StyleSheet.create({
       borderBottomColor: 'black',
       borderBottomWidth: 3,
       width: '90%',
-    }
+    },
+
+    interaction:{
+        height: 200,
+    },
+
   });

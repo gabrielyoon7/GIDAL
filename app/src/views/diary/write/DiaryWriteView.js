@@ -1,5 +1,5 @@
 
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Box, Button, Center, Divider, Icon} from "native-base"
 import React, { useState, } from 'react';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
@@ -19,7 +19,7 @@ const DiaryWriteView = (props) => {
   const [Content, setContent] = useState('');
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [disclosure, setDisclosure] = React.useState('public');
-  let dark = true;
+  const [tags, setTags] = useState('');
   const showDatePicker = () => {
     setDatePickerVisibility(true);
   };
@@ -38,7 +38,7 @@ const DiaryWriteView = (props) => {
 
   const saveDiary = () => {
     const user_Id = props.navigation.getState().routes[1].params.user_Id
-    // console.log(user_Id);
+    console.log('selected tags : '+tags);
     axios.post(config.ip + ':5000/diariesRouter/save', {
       data: {
         user_id: user_Id,
@@ -69,9 +69,9 @@ const DiaryWriteView = (props) => {
     <>
       <ScrollView style={{backgroundColor:'white'}}>
         <Box style={styles.row} justifyContent="center" display="flex">
-          <AntDesign style={styles.allowIcon} name="left" size={24} color="black"/>
+          <AntDesign style={styles.allowIcon} name="left" size={24} color="black" onPress={()=> Alert.alert('< pressed!')}/>
           <Text style={styles.dateText} onPress={showDatePicker} >{Date}</Text>
-          <AntDesign style={styles.allowIcon} name="right" size={24} color="black" />
+          <AntDesign style={styles.allowIcon} name="right" size={24} color="black" onPress={()=> Alert.alert('> pressed!')}/>
         </Box>
         <RadioDisclosure disclosure={disclosure} setDisclosure={setDisclosure} />
         <Divider/>
@@ -84,7 +84,7 @@ const DiaryWriteView = (props) => {
           onConfirm={handleConfirm}
           onCancel={hideDatePicker}
         />
-        <TagSelector/>
+        <TagSelector setTags={setTags} />
         <View style={styles.buttonContainer}>
           <WriteDiaryButton />
         </View>
@@ -168,6 +168,7 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     justifyContent: "space-between",
     marginVertical: 16,
+    paddingHorizontal:15,
     // borderWidth:1
   },
 });

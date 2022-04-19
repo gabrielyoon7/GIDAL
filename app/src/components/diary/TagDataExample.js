@@ -4,17 +4,23 @@ export const TagDataExample = [
         question: '어떤 종류의 일기인가요?',
         tags: [
             {
-                id: 1,
-                name: 'a'
+                name: '일상'
             }, 
             {
-                id: 2,
-                name: 'b'
+                name: '관찰'
             }, 
             {
-                id: 3,
-                name: 'b'
-            }
+                name: '운동'
+            },
+            {
+                name: '연애'
+            }, 
+            {
+                name: '공부'
+            }, 
+            {
+                name: '여행'
+            },
         ]
     },
     {

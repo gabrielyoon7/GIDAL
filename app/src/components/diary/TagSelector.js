@@ -12,7 +12,7 @@ const TagSelector = (props) =>{
     const ref = useRef(null);
   
     const renderItem = useCallback(({ item, index }) => (
-      <TagCard item={item} />
+      <TagCard item={item} setTags={props.setTags}/>
     ), []);
   
     return (

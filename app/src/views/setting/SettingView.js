@@ -7,13 +7,13 @@ import { Alert, Button, FlatList, StyleSheet, Text, TouchableOpacity, View } fro
 const menu = [
     { key: 0, type: 'nav_index', menu: '테스트 페이지', argument: 'Test', extra: null },
     { key: 1, type: 'nav', menu: '마이페이지', argument: 'Sns', extra: 'Profile' },
-    { key: 2, type: 'logout', menu: '로그아웃(미구현)', argument: 'User', extra: null },
+    { key: 2, type: 'logout', menu: '로그아웃', argument: 'User', extra: null },
     { key: 3, type: 'link', menu: '앱 소개 : Github', argument: 'https://github.com/gabrielyoon7/GIDAL', extra: null },
 ]
 
 const SettingHeader = () => {
     return (
-        <Center flex={1}>
+        <Center flex={1} backgroundColor={"white"}>
             <Container>
                 <Heading>
                     경기대학교
@@ -94,6 +94,8 @@ const SettingView = (props) => {
         <>
             <SettingHeader />
             <View style={styles.container}>
+            {/* <Center flex={1} backgroundColor={"white"}> */}
+            {/* <Container> */}
                 <FlatList
                     data={menu}
                     renderItem={
@@ -101,6 +103,8 @@ const SettingView = (props) => {
                             <SettingMenu props={props} item={item} />
                         )}
                 />
+                {/* </Container> */}
+                {/* </Center> */}
             </View>
         </>
     );
@@ -112,10 +116,11 @@ export default SettingView;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingHorizontal: 30,
+        paddingHorizontal: 50,
+        backgroundColor:"white",
     },
     item: {
-        padding: 10,
+        // padding: 10,
         fontSize: 18,
         height: 44,
     },

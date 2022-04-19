@@ -53,13 +53,14 @@ const FeedDiaryList = (props, navigation) => {
 
     const [dataSource, setDataSource] = useState(items);
     const filterList = (text) => {
-      let newData = items;
-      newData = items.filter((item) => {
+    //   let newData = dataSource;
+      let newData = dataSource.filter((item) => {
         const itemData = item.content.toLowerCase();
         const textData = text.toLowerCase();
         return itemData.indexOf(textData) > -1;
       })
-      setDataSource(newData);
+    //   setDataSource(newData);
+        setItems(newData);
     }
 
     const renderItem = ({ item }) => {

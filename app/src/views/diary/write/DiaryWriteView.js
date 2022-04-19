@@ -1,6 +1,6 @@
 
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import { Box, Button, Center, Icon} from "native-base"
+import { Box, Button, Center, Divider, Icon} from "native-base"
 import React, { useState, } from 'react';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import axios from 'axios';
@@ -67,14 +67,16 @@ const DiaryWriteView = (props) => {
 
   return (
     <>
-      <ScrollView>
-        <Box style={styles.test} justifyContent="center" display="flex">
+      <ScrollView style={{backgroundColor:'white'}}>
+        <Box style={styles.row} justifyContent="center" display="flex">
           <AntDesign style={styles.allowIcon} name="left" size={24} color="black"/>
           <Text style={styles.dateText} onPress={showDatePicker} >{Date}</Text>
           <AntDesign style={styles.allowIcon} name="right" size={24} color="black" />
         </Box>
         <RadioDisclosure disclosure={disclosure} setDisclosure={setDisclosure} />
+        <Divider/>
         <InputTitle setTitle={setTitle} Title={Title} />
+        <Divider/>
         <InputContent setContent={setContent} content={Content} />
         <DateTimePickerModal
           isVisible={isDatePickerVisible}
@@ -148,21 +150,24 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
   },
   dateText: {
-    textAlign: 'center',
+    // textAlign: 'center',
     fontSize: 20,
     fontWeight: 'bold',
-    margin: 10,
+    // margin: 10,
     //backgroundColor: 'skyblue',
     width: 'auto',
-    alignSelf: 'center'
+    // alignSelf: 'center'
   },
   allowIcon: {
    // backgroundColor: 'steelblue',
     width: 'auto',
-    alignSelf: 'center'
+    // alignSelf: 'center'
   },
-  test:{
-    flex: 1,
-    marginTop: 8
-  }
+  row: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    marginVertical: 16,
+    // borderWidth:1
+  },
 });

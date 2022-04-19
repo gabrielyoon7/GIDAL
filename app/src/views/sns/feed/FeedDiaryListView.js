@@ -8,6 +8,7 @@ import SearchBar from "react-native-dynamic-search-bar";
 
 const FeedDiaryList = (props, navigation) => {
     const [items, setItems] = useState([]);
+    const [backupData, setBackupData] = useState([]);
     const isFocused = useIsFocused(); // isFoucesd Define
 
     const getitems = () => {
@@ -21,6 +22,9 @@ const FeedDiaryList = (props, navigation) => {
                     });
                 }
                 setItems(result);
+                // console.log("getitems/items : "+items);
+                setBackupData(result);
+                // console.log("getitems/dataSource : "+dataSource);
             }).catch(function (error) {
                 console.log(error);
             })
@@ -51,10 +55,11 @@ const FeedDiaryList = (props, navigation) => {
         }
     })
 
-    const [dataSource, setDataSource] = useState(items);
+
     const filterList = (text) => {
-    //   let newData = dataSource;
-      let newData = dataSource.filter((item) => {
+        // console.log(backupData);
+      let newData = backupData;
+      newData = backupData.filter((item) => {
         const itemData = item.content.toLowerCase();
         const textData = text.toLowerCase();
         return itemData.indexOf(textData) > -1;

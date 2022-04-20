@@ -81,11 +81,15 @@ router.post('/findOne/', function(req, res, next) {
 });
 
 router.post('/userFollwingDelete', (req,res) => {
+    console.log( req.body.data.following_user_id);
     User.updateOne(
         { user_id: req.body.data.user_id }, 
-        {following:  {$elemMatch: {
-            user_id: req.body.data.following_user_id,
-        }}}).exec((error, user)=>{
+        {$pull : {
+            following : {
+                "user_id": req.body.data.following_user_id
+            }
+        }})
+        .exec((error, user)=>{
             if(error){
                 console.log(error);
                 res.json({status: 'error', error})

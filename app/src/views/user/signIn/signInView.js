@@ -26,7 +26,8 @@ const SignInView = (props) => {
             if (!response.data) {
                 alert('존재하지 않는 아이디입니다.');
             } else {
-                if (response.data.password === password) {
+                console.log(response.data[0].password);
+                if (response.data[0].password === password) {
                     setDate(response.data);
                 } else {
                     alert('비밀번호가 일치하지 않습니다.');

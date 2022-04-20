@@ -20,7 +20,8 @@ router.post('/save', function(req, res) {
 });
 
 /*유저 업데이트 */
-router.post('/userUpdate', function(req, res) {
+router.post('/userSentDm', function(req, res) {
+    console.log(req.body.data.user_id);
     User.updateOne(
         { user_id: req.body.data.user_id }, 
         {$push: {sentDm: {
@@ -28,8 +29,7 @@ router.post('/userUpdate', function(req, res) {
             "title": req.body.data.title,
             "content": req.body.data.content,
             "date": req.body.data.date,
-        }}}).exec();
-        (error, user)=>{
+        }}}).exec((error, user)=>{
             if(error){
                 console.log(error);
                 res.json({status: 'error', error})
@@ -37,8 +37,29 @@ router.post('/userUpdate', function(req, res) {
                 console.log('Saved!')
                 res.json({status: 'success'})
             }
-        };
+        });
 });
+
+router.post('/userReceivedDm', function(req, res) {
+    console.log(req.body.data.user_id);
+    User.updateOne(
+        { user_id: req.body.data.dmRecipient_id }, 
+        {$push: {receivedDm: {
+            "dmSender_id": req.body.data.user_id, 
+            "title": req.body.data.title,
+            "content": req.body.data.content,
+            "date": req.body.data.date,
+        }}}).exec((error, user)=>{
+            if(error){
+                console.log(error);
+                res.json({status: 'error', error})
+            }else{
+                console.log('Saved!')
+                res.json({status: 'success'})
+            }
+        });
+});
+
 
 router.post('/userFollowing', function(req, res) {
     User.updateOne(

@@ -1,8 +1,11 @@
-import React, { useState, useCallback, useRef } from 'react';
-import { Button, FlatList, View, StatusBar, StyleSheet, Text, TouchableOpacity, Pressable } from 'react-native';
-import {Modal} from 'native-base'
+import React, { useState, useCallback, useRef, useEffect } from 'react';
+import { Button, FlatList, View, StatusBar, StyleSheet, Text, TouchableOpacity, Pressable, Alert } from 'react-native';
+import {Modal, HStack} from 'native-base'
 import { Card, CardTitle, CardContent, CardAction, CardButton } from 'react-native-material-cards'
 import Carousel from 'react-native-snap-carousel';
+import axios from 'axios'
+import { config } from '../../../../config'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const example = [
     {
@@ -33,7 +36,7 @@ const CustomCarousel = () => {
     const [activeIndex, setActiveIndex] = useState(0);
     const [carouselItems, setCarouselItems] = useState(example);
     const ref = useRef(null);
-    const [dmList, setDmList] = useState();
+    
   
     const onPressFunction = () => {
         Alert.alert('press!')
@@ -86,7 +89,40 @@ const CustomCarousel = () => {
 const DmReadView = (props) => {
     const partner = props.userName;
     const [modal, setModal] = useState(false);
+    const [user_Id, setUserId] = React.useState('');
+    const [sentDmList, setSentDmList] = useState([]);
+    const [receivedDmList, setReceivedDmList] = useState([]);
 
+    React.useEffect(() => {
+      // getData();
+      try {
+          AsyncStorage.getItem('userInfo')
+              .then(value => {
+                  if (value != null) {
+                      const UserInfo = JSON.parse(value);
+                      setUserId(UserInfo[0].user_id);
+                  }
+              }
+        )
+      } catch (error) {
+          console.log(error);
+      }
+  },[]) 
+
+  useEffect(()=>{
+    axios.post(config.ip + ':5000/usersRouter/findOne', {
+      data: {
+        user_id: user_Id,
+      }
+    })
+    .then((response) => {
+      console.log(response.data[0].sentDm);
+      setSentDmList(response.data[0].sentDm)
+      setReceivedDmList(response.data[0].receivedDm)
+  }).catch(function (error) {
+    console.log(error);
+  });
+},[])
 
      const hideModal = () => {
       setModal(false);
@@ -96,35 +132,9 @@ const DmReadView = (props) => {
         setModal(true)
     }
 
-
-const ModalView = () => {
+  const DmListView = () => {
     return (
-        <Modal isOpen={modal} onClose={() => hideModal()}>
-        <Modal.Content maxWidth="400px">
-          <Modal.CloseButton />
-          <Modal.Header>교환일기</Modal.Header>
-          <Modal.Body>
-          <CustomCarousel />
-          </Modal.Body>
-          <Modal.Footer>
-            
-          </Modal.Footer>
-        </Modal.Content>
-      </Modal> 
-    )
-}
-    return(
-        
-     <View>
-        <Button
-                title="새로운 교환일기 작성"
-                onPress={() => props.navigation.navigate('DmWrite',{
-                    userName: partner
-                })}
-            />
-            
-            <View>
-            <FlatList 
+      <FlatList 
                 enableEmptySections={true}
                 data={example}
                 keyExtractor= {(item) => {
@@ -156,13 +166,64 @@ const ModalView = () => {
                     </TouchableOpacity>
                   )
               }}/>
-              
+    )
+  }
+
+  const receivedDm = () => {
+    axios.post(config.ip + ':5000/usersRouter/findOne', {
+      data: {
+        user_id: user_Id,
+      }
+    })
+    .then((response) => {
+      console.log(response.data[0].sentDm);
+      // setDmList
+  }).catch(function (error) {
+    console.log(error);
+  });
+    Alert.alert('hi')
+  }
+
+  const sentDm = () => {
+    Alert.alert('hgg')
+  }
+
+const ModalView = () => {
+    return (
+        <Modal isOpen={modal} onClose={() => hideModal()}>
+        <Modal.Content maxWidth="400px">
+          <Modal.CloseButton />
+          <Modal.Header>교환일기</Modal.Header>
+          <Modal.Body>
+          <CustomCarousel />
+          </Modal.Body>
+          <Modal.Footer>
+            
+          </Modal.Footer>
+        </Modal.Content>
+      </Modal> 
+    )
+}
+    return(
+        
+     <View>
+        <Button
+                title="새로운 교환일기 작성"
+                onPress={() => props.navigation.navigate('DmWrite',{
+                    userName: partner
+                })}
+            />
+            
+            <View>
+            <HStack>
+            <Button title='받은 DM' onPress={() => receivedDm()}/>
+            <Button title='보낸 DM' onPress={() => sentDm()} />
+            </HStack>
+              <DmListView/>
             </View>
             <ModalView/>
         </View>
         
-
-   
     )
 }
 

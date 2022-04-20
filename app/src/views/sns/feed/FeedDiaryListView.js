@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { FlatList, View, StatusBar, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { FlatList, View, StatusBar, StyleSheet, Text, TouchableOpacity, RefreshControl } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import axios from 'axios';
 import { config } from '../../../../config'
@@ -23,6 +23,7 @@ const FeedDiaryList = (props, navigation) => {
                 }
                 setItems(result);
                 setBackupData(result);
+                setRefreshing(false);
             }).catch(function (error) {
                 console.log(error);
             })
@@ -81,6 +82,20 @@ const FeedDiaryList = (props, navigation) => {
         );
     };
 
+
+    const wait = (timeout) => {
+        return new Promise(resolve => setTimeout(resolve, timeout));
+      }
+
+    const [refreshing, setRefreshing] = React.useState(false);
+
+    const onRefresh = React.useCallback(() => {
+      setRefreshing(true);
+      getitems();
+      //setRefreshing(false)를 getitems 내부에서 해주도록 변경 (데이터 수신 성공 시 로딩 표시를 강제로 종료하게 함)
+    //   wait(2000).then(() => setRefreshing(false));
+    }, []);
+
     return (
         <>
             <View style={styles.container}>
@@ -91,6 +106,12 @@ const FeedDiaryList = (props, navigation) => {
                     }}
                     renderItem={renderItem}
                     keyExtractor={(item) => item._id}
+                    refreshControl={
+                        <RefreshControl
+                          refreshing={refreshing}
+                          onRefresh={onRefresh}
+                        />
+                    }
                 />
             </View>
             <SearchBar

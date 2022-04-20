@@ -32,6 +32,8 @@ export default function FollowListView(props) {
   const [followers, setFollowers] = useState([]);
   const [data, setData] = useState(followings)
 
+  console.log(props.user_id);
+
   React.useEffect(() => {
     // getData();
     try {
@@ -51,17 +53,17 @@ export default function FollowListView(props) {
   useEffect(() => {
     axios.post(config.ip + ':5000/usersRouter/findOne/', {
       data: {
-        user_id: user_Id,
+        user_id: props.user_id,
       }
     })
       .then((response) => {
-        console.log(response.data);
-        setFollowings(response.data.following);
-        setFollowers(response.data.follower);
+        console.log(response.data[0].following);
+        setFollowings(response.data[0].following);
+        setFollowers(response.data[0].follower);
       }).catch(function (error) {
         console.log(error);
       });
-  }, [user_Id]);
+  }, []);
 
 
   useEffect(() => {
@@ -111,7 +113,7 @@ export default function FollowListView(props) {
                 userName: item.name
               })} >
                 <View style={styles.box} >
-                  <Image style={styles.image} source={{ uri: item.img }} />
+                  <Image style={styles.image} source={{ uri: following[0].image }} />
                   <Text style={styles.username}>{item.name}</Text>
                 </View>
               </TouchableOpacity>

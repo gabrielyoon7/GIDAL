@@ -135,13 +135,17 @@ export default function OtherUsersProfileView(props) {
                  </HStack>}
                   <HStack alignItems="center" my="1">
                   <View style={styles.buttonStyle}>
-                  <TouchableOpacity  onPress={() => props.navigation.navigate('FollowList')} >
+                  <TouchableOpacity  onPress={() => props.navigation.navigate('FollowList', {
+                            user_id: props.user_id
+                        })} >
                         <Text>팔로워</Text>
                         <Text>{userFollowerNum}</Text>
                   </TouchableOpacity>
                   </View>
                   <View style={styles.buttonStyle}>
-                 <TouchableOpacity onPress={() => props.navigation.navigate('FollowList')} >
+                 <TouchableOpacity onPress={() => props.navigation.navigate('FollowList', {
+                            user_id: props.user_id
+                        })} >
                         <Text>팔로우</Text>
                         <Text>{userFollowNum}</Text>
                   </TouchableOpacity>

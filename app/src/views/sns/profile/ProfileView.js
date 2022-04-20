@@ -16,11 +16,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 // ]
 
 export default function ProfileView(props) {
-  const [following, setFollowing] = useState();
   const [profileImg, setProfileImg] = useState();
   const [date, setSelectedDate] = React.useState(props.selectedDate);   
   const [user_Id, setUserId] = React.useState('');
   const [name, setName] = React.useState('');
+  const [userFollowerNum, setuserFollowerNum] = useState(0);
+  const [userFollowNum, setuserFollowNum] = useState(0);
 
   console.log(user_Id);
 
@@ -31,8 +32,8 @@ export default function ProfileView(props) {
                 .then(value => {
                     if (value != null) {
                         const UserInfo = JSON.parse(value);
-                        setUserId(UserInfo.user_id);
-                        setName(UserInfo.name)
+                        setUserId(UserInfo[0].user_id);
+                        setName(UserInfo[0].name)
                     }
                 }
                 )
@@ -41,19 +42,25 @@ export default function ProfileView(props) {
         }
     }) 
 
-  const callback = (data) => {
-    setFollowing(data.following);
-    setProfileImg(data.profile_image)
-  }
+  // const callback = (data) => {
+  //   setFollowing(data.following);
+  //   setProfileImg(data.profile_image)
+  // }
 
   useEffect(()=>{
-    axios.get(config.ip+':5000/usersRouter/findOne/',{
-      params: {
+    axios.post(config.ip + ':5000/usersRouter/findOne', {
+      data: {
         user_id: user_Id,
       }
     })
   .then((response) => {
-    callback(response.data);
+    console.log(response.data);
+    const followNum = response.data[0].following;
+    const followerNum = response.data[0].follower;
+    // console.log(followNum);
+    // console.log(followerNum);
+    setuserFollowerNum(followerNum.length)
+    setuserFollowNum(followNum.length)
   }).catch(function (error) {
     console.log(error);
   });
@@ -67,15 +74,19 @@ export default function ProfileView(props) {
                
                <HStack alignItems="center" my="1">
                   <View style={styles.buttonStyle}>
-                  <TouchableOpacity  onPress={() => props.navigation.navigate('FollowList')} >
+                  <TouchableOpacity  onPress={() => props.navigation.navigate('FollowList', {
+                            user_id: user_Id
+                        })} >
                         <Text>팔로워</Text>
-                        <Text>100</Text>
+                        <Text>{userFollowerNum}</Text>
                   </TouchableOpacity>
                   </View>
                   <View style={styles.buttonStyle}>
-                 <TouchableOpacity onPress={() => props.navigation.navigate('FollowList')} >
+                 <TouchableOpacity onPress={() => props.navigation.navigate('FollowList', {
+                            user_id: user_Id
+                        })} >
                         <Text>팔로우</Text>
-                        <Text>100</Text>
+                        <Text>{userFollowNum}</Text>
                   </TouchableOpacity>
                   </View>
                   </HStack>

@@ -51,8 +51,9 @@ const DmWriteScreen = ({ navigation, route }) => {
 }
 
 const FollowListScreen = ({ navigation, route }) => {
+  const { user_id } = route.params;
   return (
-    <FollowListView navigation={navigation}/>
+    <FollowListView navigation={navigation} user_id={user_id}/>
   )
 }
 

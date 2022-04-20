@@ -127,9 +127,9 @@ export default function OtherUsersProfileView(props) {
                  <Button mt="3" mr="3" onPress={() => follow()}>
                        <Text>{followText}</Text>
                  </Button>
-                 {followText == "✔" && <Button mt="3" onPress={() => props.navigation.navigate('DmWrite',{
-                   userName: props.user_id
-               })}>
+                 {followText == "✔" && <Button mt="3" onPress={() => props.navigation.navigate('DmRead', {
+                userName: props.user_id
+              })} >
                        <Text>DM 보내기</Text>
                  </Button>}
                  </HStack>}

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList, Alert } from 'react-native';
 import { Box, Button, HStack } from "native-base"
 import axios from 'axios'
 import { config } from '../../../../config'
@@ -13,6 +13,8 @@ export default function OtherUsersProfileView(props) {
   const [date, setSelectedDate] = React.useState(props.selectedDate);    
   const [followText, setFollowText] = useState('팔로우');
   const [user_Id, setUserId] = React.useState('');
+  const [userFollowerNum, setuserFollowerNum] = useState(0);
+  const [userFollowNum, setuserFollowNum] = useState(0);
 
     React.useEffect(() => {
         // getData();
@@ -40,6 +42,7 @@ export default function OtherUsersProfileView(props) {
       .then((response) => {
         console.log(response.data[0].following);
         setFollowing(response.data[0].following);
+        getOtherUserData();
     }).catch(function (error) {
       console.log(error);
     });
@@ -51,48 +54,57 @@ export default function OtherUsersProfileView(props) {
       setFollowText("팔로우")
     }
   },[])
-  console.log(following);
-  
-  // const callback = (data) => {
-  //   console.log(data);
-  //   setFollowing(data);
-
-  //   if(objectFollowing.includes(props.user_id)){
-  //     setFollowText("✔")
-  //   } else {
-  //     setFollowText("팔로우")
-  //   }
-  //   // setProfileImg(data.profile_image)
-  // }
-
-  // console.log(following);
 
 
-// console.log(objectFollowing.includes(props.user_id));
-
+  const getOtherUserData = () => {
+    axios.post(config.ip + ':5000/usersRouter/findOne', {
+      data: {
+        user_id: props.user_id,
+      }
+    })
+    .then((response) => {
+      const followNum = response.data[0].following;
+      const followerNum = response.data[0].follower;
+      // console.log(response.data[0].following);
+      setuserFollowerNum(followerNum.length)
+      setuserFollowNum(followNum.length)
+  }).catch(function (error) {
+    console.log(error);
+  });
+  }
 
   const follow = () => {
-
     console.log(user_Id);
+    let objectFollowing = Object.values(following).map(item => item.user_id)
+
+    const data = {
+      user_id: user_Id,
+      following_user_id: props.user_id,
+      img: ""
+    }
+
     if(followText=="팔로우"){
-      axios.post(config.ip + ':5000/usersRouter/userFollwing', {
-        data: {
-          user_id: user_Id,
-          following_user_id: props.user_id,
-          img: ""
-        }
-      })
-      .then((response) => {
-        setFollowText("✔")
-    }).catch(function (error) {
-      console.log(error);
-    });
+      if(objectFollowing.includes(props.user_id)){
+        Alert.alert("이미 팔로우했습니다.")
+      }else{
+        axios.post(config.ip + ':5000/usersRouter/userFollowing', {
+          data: data
+        })
+        axios.post(config.ip + ':5000/usersRouter/userFollower', {
+          data: data
+        })
+        .then((response) => {
+          setFollowText("✔")
+      }).catch(function (error) {
+        console.log(error);
+      });
+      }
     } else{
-      axios.post(config.ip + ':5000/usersRouter/userFollwingDelete', {
-        data: {
-          user_id: user_Id,
-          following_user_id: props.user_id
-        }
+      axios.post(config.ip + ':5000/usersRouter/userFollowingDelete', {
+        data: data
+      })
+      axios.post(config.ip + ':5000/usersRouter/userFollowerDelete', {
+        data: data
       })
       .then((response) => {
         setFollowText("팔로우")
@@ -125,13 +137,13 @@ export default function OtherUsersProfileView(props) {
                   <View style={styles.buttonStyle}>
                   <TouchableOpacity  onPress={() => props.navigation.navigate('FollowList')} >
                         <Text>팔로워</Text>
-                        <Text>100</Text>
+                        <Text>{userFollowerNum}</Text>
                   </TouchableOpacity>
                   </View>
                   <View style={styles.buttonStyle}>
                  <TouchableOpacity onPress={() => props.navigation.navigate('FollowList')} >
                         <Text>팔로우</Text>
-                        <Text>100</Text>
+                        <Text>{userFollowNum}</Text>
                   </TouchableOpacity>
                   </View>
                   </HStack>

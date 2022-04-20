@@ -40,12 +40,30 @@ router.post('/userUpdate', function(req, res) {
         };
 });
 
-router.post('/userFollwing', function(req, res) {
+router.post('/userFollowing', function(req, res) {
     User.updateOne(
         { user_id: req.body.data.user_id }, 
         {$push: {following: {
             "user_id": req.body.data.following_user_id,
             "name": req.body.data.following_user_id,
+            "img": req.body.data.img,
+        }}}).exec((error, user)=>{
+            if(error){
+                console.log(error);
+                return res.json({status: 'error', error})
+            }else{
+                console.log('Saved!')
+                return res.json({status: 'success'})
+            }
+        });
+});
+
+router.post('/userFollower', function(req, res) {
+    User.updateOne(
+        { user_id: req.body.data.following_user_id }, 
+        {$push: {follower: {
+            "user_id": req.body.data.user_id,
+            "name": req.body.data.user_id,
             "img": req.body.data.img,
         }}}).exec((error, user)=>{
             if(error){
@@ -80,13 +98,33 @@ router.post('/findOne/', function(req, res, next) {
     // });
 });
 
-router.post('/userFollwingDelete', (req,res) => {
+router.post('/userFollowingDelete', (req,res) => {
     console.log( req.body.data.following_user_id);
-    User.updateOne(
+    User.updateMany(
         { user_id: req.body.data.user_id }, 
         {$pull : {
             following : {
                 "user_id": req.body.data.following_user_id
+            }
+        }})
+        .exec((error, user)=>{
+            if(error){
+                console.log(error);
+                res.json({status: 'error', error})
+            }else{
+                console.log('Saved!')
+                res.json({status: 'success'})
+            }
+        });
+  })
+
+  router.post('/userFollowerDelete', (req,res) => {
+    console.log( req.body.data.following_user_id);
+    User.updateMany(
+        { user_id: req.body.data.following_user_id }, 
+        {$pull : {
+            follower : {
+                "user_id": req.body.data.user_id
             }
         }})
         .exec((error, user)=>{

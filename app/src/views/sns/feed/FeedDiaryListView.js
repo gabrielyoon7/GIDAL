@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, View, StatusBar, StyleSheet, Text, TouchableOpacity, RefreshControl } from 'react-native';
+import { FlatList, View, StatusBar, StyleSheet, Text, TouchableOpacity, RefreshControl, KeyboardAvoidingView } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import axios from 'axios';
 import { config } from '../../../../config'
@@ -56,12 +56,12 @@ const FeedDiaryList = (props, navigation) => {
 
 
     const filterList = (text) => {
-      let newData = backupData;
-      newData = backupData.filter((item) => {
-        const itemData = item.content.toLowerCase();
-        const textData = text.toLowerCase();
-        return itemData.indexOf(textData) > -1;
-      })
+        let newData = backupData;
+        newData = backupData.filter((item) => {
+            const itemData = item.content.toLowerCase();
+            const textData = text.toLowerCase();
+            return itemData.indexOf(textData) > -1;
+        })
         setItems(newData);
     }
 
@@ -85,15 +85,15 @@ const FeedDiaryList = (props, navigation) => {
 
     const wait = (timeout) => {
         return new Promise(resolve => setTimeout(resolve, timeout));
-      }
+    }
 
     const [refreshing, setRefreshing] = React.useState(false);
 
     const onRefresh = React.useCallback(() => {
-      setRefreshing(true);
-      getitems();
-      //setRefreshing(false)를 getitems 내부에서 해주도록 변경 (데이터 수신 성공 시 로딩 표시를 강제로 종료하게 함)
-    //   wait(2000).then(() => setRefreshing(false));
+        setRefreshing(true);
+        getitems();
+        //setRefreshing(false)를 getitems 내부에서 해주도록 변경 (데이터 수신 성공 시 로딩 표시를 강제로 종료하게 함)
+        //   wait(2000).then(() => setRefreshing(false));
     }, []);
 
     return (
@@ -108,23 +108,29 @@ const FeedDiaryList = (props, navigation) => {
                     keyExtractor={(item) => item._id}
                     refreshControl={
                         <RefreshControl
-                          refreshing={refreshing}
-                          onRefresh={onRefresh}
+                            refreshing={refreshing}
+                            onRefresh={onRefresh}
                         />
                     }
                 />
             </View>
-            <SearchBar
-                placeholder="어떤 일기를 찾으시나요?"
-                onPress={() => alert("onPress")}
-                onChangeText={(text) => {
-                    console.log(text)
-                    filterList(text);
-                }}
-                onClearPress={() => {
-                    filterList("");
-                }}
-            />
+            <KeyboardAvoidingView
+                behavior={Platform.OS === "ios" ? "padding" : "height"}
+                // style={styles.container}
+            >
+                <SearchBar
+                    placeholder="어떤 일기를 찾으시나요?"
+                    // onPress={() => alert("onPress")}
+                    onChangeText={(text) => {
+                        console.log(text)
+                        filterList(text);
+                    }}
+                    onClearPress={() => {
+                        filterList("");
+                    }}
+                />
+
+            </KeyboardAvoidingView>
         </>
     )
 }

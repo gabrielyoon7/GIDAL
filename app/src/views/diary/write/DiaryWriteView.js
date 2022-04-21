@@ -1,7 +1,7 @@
 
 import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Box, Button, Center, Divider, Icon} from "native-base"
-import React, { useEffect, useState, } from 'react';
+import React, { useState, } from 'react';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import axios from 'axios';
 import { AntDesign } from '@expo/vector-icons';
@@ -20,8 +20,6 @@ const DiaryWriteView = (props) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [disclosure, setDisclosure] = React.useState('public');
   const [tags, setTags] = useState('');
-  const user_Id = props.navigation.getState().routes[1].params.user_Id
-
   const showDatePicker = () => {
     setDatePickerVisibility(true);
   };
@@ -36,7 +34,10 @@ const DiaryWriteView = (props) => {
     setDate(date.format("yyyy-MM-dd"))
   };
 
+
+
   const saveDiary = () => {
+    const user_Id = props.navigation.getState().routes[1].params.user_Id
     console.log('selected tags : '+tags);
     axios.post(config.ip + ':5000/diariesRouter/save', {
       data: {
@@ -150,18 +151,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
   },
   dateText: {
-    // textAlign: 'center',
     fontSize: 20,
     fontWeight: 'bold',
-    // margin: 10,
-    //backgroundColor: 'skyblue',
     width: 'auto',
-    // alignSelf: 'center'
   },
   allowIcon: {
-   // backgroundColor: 'steelblue',
     width: 'auto',
-    // alignSelf: 'center'
   },
   row: {
     flexDirection: "row",
@@ -169,6 +164,5 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginVertical: 16,
     paddingHorizontal:15,
-    // borderWidth:1
   },
 });

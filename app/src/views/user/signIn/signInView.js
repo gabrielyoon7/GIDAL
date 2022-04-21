@@ -72,21 +72,23 @@ const SignInView = (props) => {
                 <Heading size="lg" fontWeight="600" color="coolGray.800" _dark={{
                     color: "warmGray.50"
                 }}>
-                    Welcome
+                    {/* Welcome */}
+                    기록의 달인
                 </Heading>
                 <Heading mt="1" _dark={{
                     color: "warmGray.200"
                 }} color="coolGray.600" fontWeight="medium" size="xs">
-                    Sign in to continue!
+                    {/* Sign in to continue! */}
+                    당신의 인생을 기록하세요!
                 </Heading>
 
                 <VStack space={3} mt="5">
                     <FormControl>
-                        <FormControl.Label>Email ID</FormControl.Label>
+                        <FormControl.Label>아이디</FormControl.Label>
                         <Input onChangeText={(value) => setUserId(value)} />
                     </FormControl>
                     <FormControl>
-                        <FormControl.Label>Password</FormControl.Label>
+                        <FormControl.Label>비밀번호</FormControl.Label>
                         <Input type="password" onChangeText={(value) => setPassword(value)} />
                         {/* <Link _text={{
                             fontSize: "xs",
@@ -96,21 +98,25 @@ const SignInView = (props) => {
                             Forget Password?
                         </Link> */}
                     </FormControl>
-                    <Button mt="2" colorScheme="indigo" onPress={() => SignIn()}>
-                        Sign in
+                    {/* <Button mt="2" colorScheme="indigo" onPress={() => SignIn()}> */}
+                    <Button mt="2" colorScheme="green" onPress={() => SignIn()}>
+                        {/* Sign in */}
+                        로그인
                     </Button>
                     <HStack mt="6" justifyContent="center">
                         <Text fontSize="sm" color="coolGray.600" _dark={{
                             color: "warmGray.200"
                         }}>
-                            I'm a new user.{" "}
+                            {/* I'm a new user.{" "} */}
+                            기록의 달인이 처음이신가요?{" "}
                         </Text>
                         <Link _text={{
-                            color: "indigo.500",
+                            color: "green.500",
                             fontWeight: "medium",
                             fontSize: "sm"
                         }} onPress={() => props.navigation.navigate('SignUp')}>
-                            Sign Up
+                            {/* Sign Up */}
+                            회원가입
                         </Link>
                     </HStack>
                 </VStack>

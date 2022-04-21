@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList, Alert } from 'react-native';
 import { Box, Button, HStack } from "native-base"
 import axios from 'axios'
@@ -10,50 +10,55 @@ export default function OtherUsersProfileView(props) {
   const [following, setFollowing] = useState([]); // 내가 팔로우
   const [userFollowing, setUserFollowing] = useState([]); // 다른 유저가 팔로우
   const [profileImg, setProfileImg] = useState();
-  const [date, setSelectedDate] = React.useState(props.selectedDate);    
+  const [date, setSelectedDate] = React.useState(props.selectedDate);
   const [followText, setFollowText] = useState('팔로우');
   const [user_Id, setUserId] = React.useState('');
   const [userFollowerNum, setuserFollowerNum] = useState(0);
   const [userFollowNum, setuserFollowNum] = useState(0);
 
-    React.useEffect(() => {
-        // getData();
-        try {
-            AsyncStorage.getItem('userInfo')
-                .then(value => {
-                    if (value != null) {
-                        const UserInfo = JSON.parse(value);
-                        setUserId(UserInfo[0].user_id);
-                    }
-                }
-          )
-        } catch (error) {
-            console.log(error);
+
+  React.useEffect(() => {
+    console.log('123');
+  }, [userFollowerNum, userFollowNum, followText])
+
+  React.useEffect(() => {
+    // getData();
+    try {
+      AsyncStorage.getItem('userInfo')
+        .then(value => {
+          if (value != null) {
+            const UserInfo = JSON.parse(value);
+            setUserId(UserInfo[0].user_id);
+          }
         }
-    },[]) 
-    
-    useEffect(()=>{
-      console.log(user_Id);
-      axios.post(config.ip + ':5000/usersRouter/findOne', {
-        data: {
-          user_id: user_Id,
-        }
-      })
+        )
+    } catch (error) {
+      console.log(error);
+    }
+  }, [])
+
+  useEffect(() => {
+    console.log(user_Id);
+    axios.post(config.ip + ':5000/usersRouter/findOne', {
+      data: {
+        user_id: user_Id,
+      }
+    })
       .then((response) => {
         console.log(response.data[0].following);
         setFollowing(response.data[0].following);
         getOtherUserData();
-    }).catch(function (error) {
-      console.log(error);
-    });
+      }).catch(function (error) {
+        console.log(error);
+      });
     let objectFollowing = Object.values(following).map(item => item.user_id)
     console.log(objectFollowing);
-    if(objectFollowing.includes(props.user_id)){
+    if (objectFollowing.includes(props.user_id)) {
       setFollowText("✔")
     } else {
       setFollowText("팔로우")
     }
-  },[])
+  }, [user_Id])
 
 
   const getOtherUserData = () => {
@@ -62,15 +67,15 @@ export default function OtherUsersProfileView(props) {
         user_id: props.user_id,
       }
     })
-    .then((response) => {
-      const followNum = response.data[0].following;
-      const followerNum = response.data[0].follower;
-      // console.log(response.data[0].following);
-      setuserFollowerNum(followerNum.length)
-      setuserFollowNum(followNum.length)
-  }).catch(function (error) {
-    console.log(error);
-  });
+      .then((response) => {
+        const followNum = response.data[0].following;
+        const followerNum = response.data[0].follower;
+        // console.log(response.data[0].following);
+        setuserFollowerNum(followerNum.length)
+        setuserFollowNum(followNum.length)
+      }).catch(function (error) {
+        console.log(error);
+      });
   }
 
   const follow = () => {
@@ -83,93 +88,93 @@ export default function OtherUsersProfileView(props) {
       img: ""
     }
 
-    if(followText=="팔로우"){
-      if(objectFollowing.includes(props.user_id)){
+    if (followText == "팔로우") {
+      if (objectFollowing.includes(props.user_id)) {
         Alert.alert("이미 팔로우했습니다.")
-      }else{
+      } else {
         axios.post(config.ip + ':5000/usersRouter/userFollowing', {
           data: data
         })
         axios.post(config.ip + ':5000/usersRouter/userFollower', {
           data: data
         })
-        .then((response) => {
-          setFollowText("✔")
-      }).catch(function (error) {
-        console.log(error);
-      });
+          .then((response) => {
+            setFollowText("✔")
+          }).catch(function (error) {
+            console.log(error);
+          });
       }
-    } else{
+    } else {
       axios.post(config.ip + ':5000/usersRouter/userFollowingDelete', {
         data: data
       })
       axios.post(config.ip + ':5000/usersRouter/userFollowerDelete', {
         data: data
       })
-      .then((response) => {
-        setFollowText("팔로우")
-    }).catch(function (error) {
-      console.log(error);
-    });
+        .then((response) => {
+          setFollowText("팔로우")
+        }).catch(function (error) {
+          console.log(error);
+        });
     }
     // setFollowText("팔로우")
   }
 
-  
-        return (
-          <>
-          <View style={styles.header}>
-            <View style={styles.headerContent}>
-                <Image style={styles.avatar} source={{uri: profileImg}}/>
-                  <Text style={styles.name}>{props.user_id}</Text>
-                  {props.user_id !== user_Id && <HStack alignItems="center" my="1">
-                 
-                 <Button mt="3" mr="3" onPress={() => follow()}>
-                       <Text>{followText}</Text>
-                 </Button>
-                 {followText == "✔" && <Button mt="3" onPress={() => props.navigation.navigate('DmRead', {
-                userName: props.user_id
+
+  return (
+    <>
+      <View style={styles.header}>
+        <View style={styles.headerContent}>
+          <Image style={styles.avatar} source={{ uri: profileImg }} />
+          <Text style={styles.name}>{props.user_id}</Text>
+          {props.user_id !== user_Id && <HStack alignItems="center" my="1">
+
+            <Button mt="3" mr="3" onPress={() => follow()}>
+              <Text>{followText}</Text>
+            </Button>
+            {followText == "✔" && <Button mt="3" onPress={() => props.navigation.navigate('DmRead', {
+              userName: props.user_id
+            })} >
+              <Text>DM 보내기</Text>
+            </Button>}
+          </HStack>}
+          <HStack alignItems="center" my="1">
+            <View style={styles.buttonStyle}>
+              <TouchableOpacity onPress={() => props.navigation.navigate('FollowList', {
+                user_id: props.user_id
               })} >
-                       <Text>DM 보내기</Text>
-                 </Button>}
-                 </HStack>}
-                  <HStack alignItems="center" my="1">
-                  <View style={styles.buttonStyle}>
-                  <TouchableOpacity  onPress={() => props.navigation.navigate('FollowList', {
-                            user_id: props.user_id
-                        })} >
-                        <Text>팔로워</Text>
-                        <Text>{userFollowerNum}</Text>
-                  </TouchableOpacity>
-                  </View>
-                  <View style={styles.buttonStyle}>
-                 <TouchableOpacity onPress={() => props.navigation.navigate('FollowList', {
-                            user_id: props.user_id
-                        })} >
-                        <Text>팔로우</Text>
-                        <Text>{userFollowNum}</Text>
-                  </TouchableOpacity>
-                  </View>
-                  </HStack>
-             </View>
-           </View>
-           <DiaryList selectedDate={date} navigation={props.navigation} user_Id={props.user_id} />
-        </>
-        )
+                <Text>팔로워</Text>
+                <Text>{userFollowerNum}</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.buttonStyle}>
+              <TouchableOpacity onPress={() => props.navigation.navigate('FollowList', {
+                user_id: props.user_id
+              })} >
+                <Text>팔로우</Text>
+                <Text>{userFollowNum}</Text>
+              </TouchableOpacity>
+            </View>
+          </HStack>
+        </View>
+      </View>
+      <DiaryList selectedDate={date} navigation={props.navigation} user_Id={props.user_id} />
+    </>
+  )
 }
 
 const styles = StyleSheet.create({
-  buttonStyle:{
-    alignItems:'center',
-    width:50,
-    marginRight:20,
-    padding:5,
+  buttonStyle: {
+    alignItems: 'center',
+    width: 50,
+    marginRight: 20,
+    padding: 5,
   },
-  header:{
+  header: {
     backgroundColor: "#2980b9",
   },
-  headerContent:{
-    padding:30,
+  headerContent: {
+    padding: 30,
     alignItems: 'center',
   },
   avatar: {
@@ -178,40 +183,40 @@ const styles = StyleSheet.create({
     borderRadius: 63,
     borderWidth: 4,
     borderColor: "#FFFFFF",
-    marginBottom:10,
+    marginBottom: 10,
   },
-  image:{
+  image: {
     width: 60,
     height: 60,
   },
-  name:{
-    fontSize:22,
-    color:"#FFFFFF",
-    fontWeight:'600',
+  name: {
+    fontSize: 22,
+    color: "#FFFFFF",
+    fontWeight: '600',
   },
   body: {
-    padding:30,
-    backgroundColor :"#E6E6FA",
-    marginBottom:20
+    padding: 30,
+    backgroundColor: "#E6E6FA",
+    marginBottom: 20
   },
   box: {
-    padding:5,
-    marginTop:5,
-    marginBottom:5,
+    padding: 5,
+    marginTop: 5,
+    marginBottom: 5,
     backgroundColor: '#FFFFFF',
     flexDirection: 'row',
     shadowColor: 'black',
     shadowOpacity: .2,
     shadowOffset: {
-      height:1,
-      width:-2
+      height: 1,
+      width: -2
     },
-    elevation:2
+    elevation: 2
   },
-  username:{
+  username: {
     color: "#20B2AA",
-    fontSize:22,
-    alignSelf:'center',
-    marginLeft:10
+    fontSize: 22,
+    alignSelf: 'center',
+    marginLeft: 10
   }
 });

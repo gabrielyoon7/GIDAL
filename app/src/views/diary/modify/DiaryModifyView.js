@@ -3,6 +3,7 @@ import { FlatList, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, Te
 import { Box, Input, Button, TextArea, Modal, Center, NativeBaseProvider, Select, CheckIcon } from "native-base"
 import CalendarView from '../../../../src/views/diary/list/CalendarView';
 import React, { useState, useCallback, useRef } from 'react';
+import { AntDesign } from '@expo/vector-icons';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import RadioDisclosure from "../../../components/diary/RadioDisclosure";
 import InputTitle from "../../../components/diary/InputTitle";
@@ -72,8 +73,11 @@ const DiaryModifyView = (props) => {
 
   return (
     <ScrollView>
-
-      <Text style={styles.dateText} onPress={showDatePicker} >{Date.substr(0, 10)}</Text>
+      <Box style={styles.row} justifyContent="center" display="flex">
+        <AntDesign style={styles.allowIcon} name="left" size={24} color="black" onPress={() => Alert.alert('< pressed!')} />
+        <Text style={styles.dateText} onPress={showDatePicker} >{Date.substr(0, 10)}</Text>
+        <AntDesign style={styles.allowIcon} name="right" size={24} color="black" onPress={() => Alert.alert('> pressed!')} />
+      </Box>
       <RadioDisclosure disclosure={disclosure} setDisclosure={setDisclosure} />
       <InputTitle setTitle={setTitle} Title={Title} />
       <InputContent setContent={setContent} content={Content} />
@@ -138,7 +142,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 15,
   },
-
+  dateText: {
+    // textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+    // margin: 10,
+    //backgroundColor: 'skyblue',
+    width: 'auto',
+    // alignSelf: 'center'
+  },
   input: {
     flex: 1,
   },
@@ -151,4 +163,17 @@ const styles = StyleSheet.create({
   flatStyle: {
     paddingHorizontal: 12,
   },
+  allowIcon: {
+    // backgroundColor: 'steelblue',
+     width: 'auto',
+     // alignSelf: 'center'
+   },
+   row: {
+     flexDirection: "row",
+     flexWrap: "wrap",
+     justifyContent: "space-between",
+     marginVertical: 16,
+     paddingHorizontal:15,
+     // borderWidth:1
+   },
 });

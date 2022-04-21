@@ -9,6 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const DiaryListView = (props) => {
     const [date, setSelectedDate] = React.useState(props.selectedDate);    
     const [user_Id, setUserId] = React.useState('');
+    console.log(user_Id);
 
     React.useEffect(() => {
         // getData();
@@ -17,7 +18,7 @@ const DiaryListView = (props) => {
                 .then(value => {
                     if (value != null) {
                         const UserInfo = JSON.parse(value);
-                        setUserId(UserInfo.user_id);
+                        setUserId(UserInfo[0].user_id);
                     }
                 }
                 )
@@ -25,22 +26,6 @@ const DiaryListView = (props) => {
             console.log(error);
         }
     })
-
-    const getData = () => {
-        try {
-            AsyncStorage.getItem('userInfo')
-                .then(value => {
-                    if (value != null) {
-                        const UserInfo = JSON.parse(value);
-                        setUserId(UserInfo.user_id);
-                        // console.log(user_Id);
-                    }
-                }
-                )
-        } catch (error) {
-            console.log(error);
-        }
-    }
 
     // React.useEffect(() => {
     //     console.log(user_Id);

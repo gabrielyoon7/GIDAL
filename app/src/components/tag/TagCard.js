@@ -16,19 +16,19 @@ const onPressFunction = (tag) => {
 const TagCard = (props) => {
     const type = {
         button: {
-          interaction:<ButtonTags tags={props.item.tags} setTags={props.setTags}/>,
+          interaction:<ButtonTags tags={props.item.tags} selectTags={props.selectTags}/>,
         },
         search: {
-            interaction:<SearchTags tags={props.item.tags} setTags={props.setTags} />,
+            interaction:<SearchTags tags={props.item.tags} selectTags={props.selectTags} />,
         },
         time: {
-            interaction:<TimePicker tags={props.item.tags} setTags={props.setTags} />,
+            interaction:<TimePicker tags={props.item.tags} selectTags={props.selectTags} />,
         },
         slider1: {
-            interaction:<Slider1 tags={props.item.tags} setTags={props.setTags} />,
+            interaction:<Slider1 tags={props.item.tags} selectTags={props.selectTags} />,
         },
         slider2: {
-            interaction:<Slider2 tags={props.item.tags} setTags={props.setTags} />,
+            interaction:<Slider2 tags={props.item.tags} selectTags={props.selectTags} />,
         },
     };
     const card_type = type[props.item.type];
@@ -39,7 +39,6 @@ const TagCard = (props) => {
                 <View style={styles.lineView} />
             </View>
             {card_type?(<View style={styles.interaction}>{card_type.interaction}</View>):(<View><Text>Wrong type</Text></View>)}
-            {/* <ButtonTags tags={props.item.tags} /> */}
         </View>
     )
 }

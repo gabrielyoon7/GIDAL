@@ -19,7 +19,23 @@ const DiaryWriteView = (props) => {
   const [Content, setContent] = useState('');
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [disclosure, setDisclosure] = React.useState('public');
-  const [tags, setTags] = useState('');
+  const [tags, setTags] = useState([]);
+
+  const selectTags = (selectedTag) => {
+    let newSet = tags;
+    if (newSet.includes(selectedTag)) {
+      const idx = newSet.indexOf(selectedTag) 
+      if (idx > -1){
+        newSet.splice(idx, 1)
+      } 
+      setTags(newSet);
+    } else {
+      newSet.push(selectedTag);
+      setTags(newSet);
+    }
+    console.log(tags)
+  }
+
   const showDatePicker = () => {
     setDatePickerVisibility(true);
   };
@@ -33,8 +49,6 @@ const DiaryWriteView = (props) => {
     hideDatePicker();
     setDate(date.format("yyyy-MM-dd"))
   };
-
-
 
   const saveDiary = () => {
     const user_Id = props.navigation.getState().routes[1].params.user_Id
@@ -85,7 +99,7 @@ const DiaryWriteView = (props) => {
           onConfirm={handleConfirm}
           onCancel={hideDatePicker}
         />
-        <TagSelector setTags={setTags} />
+        <TagSelector selectTags={selectTags} />
         <View style={styles.buttonContainer}>
           <WriteDiaryButton />
         </View>

@@ -14,7 +14,7 @@ const ButtonTags = (props) => {
       {props.tags.map((tag) => (
         <View key={tag.name} style={styles.btnView}>
           {/* <Pressable style={styles.button} onPress={() => onPressFunction(tag.name)}> */}
-          <Pressable style={styles.button} onPress={() => props.setTags(tag.name)}>
+          <Pressable style={styles.button} onPress={() => props.selectTags(tag.name)}>
             <Text>{tag.name}</Text>
           </Pressable>
         </View>

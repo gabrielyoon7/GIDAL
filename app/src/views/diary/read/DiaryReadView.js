@@ -101,22 +101,20 @@ const DiaryReadView = (props) => {
                     <Divider my="5" />
 
                     <HStack alignItems="center">
-
-                        <Badge backgroundColor={generateColor()} _text={{
-                            color: "white"
-                        }} variant="solid" rounded="4">
-                            태그1
-                        </Badge>
-                        <Badge backgroundColor={generateColor()} _text={{
-                            color: "white"
-                        }} variant="solid" rounded="4">
-                            태그2
-                        </Badge>
-                        <Badge backgroundColor={generateColor()} _text={{
-                            color: "white"
-                        }} variant="solid" rounded="4">
-                            태그3
-                        </Badge>
+                        {diary.tags.map((tag) => (
+                            <Badge
+                                backgroundColor={generateColor()}
+                                _text={{
+                                    color: "white"
+                                }}
+                                variant="solid"
+                                rounded="4"
+                                key = {tag}
+                            >
+                                {tag}
+                            </Badge>
+                        ))
+                        }
                     </HStack>
                 </View>
                 <HStack margin='5' >
@@ -185,7 +183,7 @@ const styles = StyleSheet.create({
         // justifyContent: 'center',
     },
     header: {
-        height: windowHeight * 0.5,
+        height: windowHeight * 0.3,
         // backgroundColor: "black",
         // textAlign: "center",
         // justifyContent: 'center',

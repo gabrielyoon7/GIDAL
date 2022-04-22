@@ -9,18 +9,15 @@ import { LinearGradient } from 'expo-linear-gradient'
 import moment from 'moment';
 import { Path } from "react-native-svg";
 import { MaterialIcons, Ionicons } from "@expo/vector-icons";
+import DiaryReadStaggerButton from './DiaryReadStaggerButton';
 const DiaryReadView = (props) => {
     const [date, setSelectedDate] = React.useState(props.selectedDate);
     const { width } = useWindowDimensions();
-    // const item = props.navigation.getState().routes[1].params;
     const diary = props.navigation.getState().routes[1].params.diary;
-    console.log(diary);
-    // console.log(item.itemId);
     const deleteDiary = () => {
         console.log("l", diary._id);
         axios.post(config.ip + ':5000/diariesRouter/delete/', {
             data: {
-                // id: item.itemId,
                 id: diary._id,
             }
         }).then((response) => {
@@ -45,27 +42,27 @@ const DiaryReadView = (props) => {
     };
     const {
         isOpen,
-        onOpen,
-        onClose
-    } = useDisclose();
+        onToggle
+      } = useDisclose();
     return (
+        <>
         <ScrollView style={styles.scroll}>
             <LinearGradient style={styles.header} colors={['#A6A6A6', 'black']} />
             <View style={styles.background}>
                 <View style={styles.container}>
                     <HStack alignItems="center">
-                        <Badge backgroundColor={generateColor()} _text={{
-                            color: "white"
-                        }} variant="solid" rounded="4">
-                            태그명(카테고리)
-                        </Badge>
-                        <Badge backgroundColor={generateColor()} _text={{
-                            color: "white"
-                        }} variant="solid" rounded="4">
-                            {diary.disclosure}
-                        </Badge>
+                    <Badge
+                                backgroundColor="emerald.400"
+                                _text={{
+                                    color: "white"
+                                }}
+                                variant="solid"
+                                rounded="4"
+                                key = {diary.disclosure}
+                            >
+                                {diary.disclosure}
+                            </Badge>
                         <Spacer />
-                        <Button onPress={onOpen}>Actionsheet</Button>
                     </HStack>
                     <Text color="coolGray.800" mt="3" fontWeight="bold" fontSize="4xl">
                         {diary.title}
@@ -92,12 +89,12 @@ const DiaryReadView = (props) => {
                     </TouchableOpacity>
 
                     <Divider my="2" />
-                    <RenderHtml
-
-                        contentWidth={width}
-                        source={source}
-                    />
-
+                    <View style={styles.source}>
+                        <RenderHtml                            
+                            contentWidth={width}
+                            source={source}
+                        />
+                    </View>
                     <Divider my="5" />
 
                     <HStack alignItems="center">
@@ -135,38 +132,10 @@ const DiaryReadView = (props) => {
                     </Button>
 
                 </HStack>
-
-                <Actionsheet isOpen={isOpen} onClose={onClose} size="full">
-                    <Actionsheet.Content>
-                        <Box w="100%" h={60} px={4} justifyContent="center">
-                            <Text fontSize="16" color="gray.500" _dark={{
-                                color: "gray.300"
-                            }}>
-                                현재 아무런 기능을 연동하지 않은 상태임
-                            </Text>
-                        </Box>
-                        <Actionsheet.Item startIcon={<Icon as={MaterialIcons} color="trueGray.400" mr="1" size="6" name="delete" />}>
-                            Delete
-                        </Actionsheet.Item>
-                        <Actionsheet.Item startIcon={<Icon as={MaterialIcons} name="share" color="trueGray.400" mr="1" size="6" />}>
-                            Share
-                        </Actionsheet.Item>
-                        <Actionsheet.Item startIcon={<Icon as={Ionicons} name="play-circle" color="trueGray.400" mr="1" size="6" />}>
-                            Play
-                        </Actionsheet.Item>
-                        <Actionsheet.Item startIcon={<Icon as={MaterialIcons} color="trueGray.400" mr="1" size="6" name="favorite" />}>
-                            Favourite
-                        </Actionsheet.Item>
-                        <Actionsheet.Item p={3} startIcon={<Icon color="trueGray.400" mr="1" h="24" w="24" viewBox="0 0 24 24" fill="none">
-                            <Path d="M12.0007 10.5862L16.9507 5.63623L18.3647 7.05023L13.4147 12.0002L18.3647 16.9502L16.9507 18.3642L12.0007 13.4142L7.05072 18.3642L5.63672 16.9502L10.5867 12.0002L5.63672 7.05023L7.05072 5.63623L12.0007 10.5862Z" />
-                        </Icon>}>
-                            Cancel
-                        </Actionsheet.Item>
-                    </Actionsheet.Content>
-                </Actionsheet>
-
             </View>
         </ScrollView>
+        {/* <DiaryReadStaggerButton/> */}
+        </>
     )
 }
 
@@ -197,6 +166,9 @@ const styles = StyleSheet.create({
         marginLeft: 20,
 
     },
+    source: {
+        minHeight: windowHeight *0.4,
+    }
 })
 
 export default DiaryReadView;

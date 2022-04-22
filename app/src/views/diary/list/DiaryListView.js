@@ -7,7 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const DiaryListView = (props) => {
-    const [date, setSelectedDate] = React.useState(props.selectedDate);    
+    const [date, setSelectedDate] = React.useState(props.selectedDate);
     const [user_Id, setUserId] = React.useState('');
     console.log(user_Id);
 
@@ -30,17 +30,17 @@ const DiaryListView = (props) => {
     // React.useEffect(() => {
     //     console.log(user_Id);
     // }, [user_Id])
-    
+
     return (
         <>
             <CalendarView selectedDate={date} setSelectedDate={setSelectedDate} />
             <DiaryList selectedDate={date} navigation={props.navigation} user_Id={user_Id} />
             <Fab
-             renderInPortal={false} 
-             shadow={2} 
-             size="md" 
-             icon={<Icon color="white" as={AntDesign} name="plus" size="md" />} 
-             onPress={() => props.navigation.navigate('DiaryWrite', {selectedDate: date, user_Id: user_Id})}
+                renderInPortal={false}
+                shadow={2}
+                size="md"
+                icon={<Icon color="white" as={AntDesign} name="plus" size="md" />}
+                onPress={() => props.navigation.navigate('DiaryWrite', { selectedDate: date, user_Id: user_Id })}
             />
         </>
     )

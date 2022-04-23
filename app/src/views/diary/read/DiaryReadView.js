@@ -119,7 +119,7 @@ const DiaryReadView = (props) => {
                     <Spacer />
 
 
-                    <Button style={styles.button} size="md" variant="subtle" onPress={
+                    <Button style={styles.button}  colorScheme="green" size="md"  onPress={
                         () => props.navigation.replace('DiaryModify', {
                             diary: diary,
                         })
@@ -127,7 +127,7 @@ const DiaryReadView = (props) => {
                         수정
                     </Button>
 
-                    <Button style={styles.button} size="md" variant="subtle" onPress={() => deleteDiary()} >
+                    <Button style={styles.button}  colorScheme="green" size="md"  onPress={() => deleteDiary()} >
                         삭제
                     </Button>
 

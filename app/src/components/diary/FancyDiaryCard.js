@@ -13,7 +13,7 @@ const FancyDiaryCard = ({ item, onPress, backgroundColor, textColor }) => {
         <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
             <Box maxW="96" borderWidth="1" borderColor="coolGray.300" shadow="3" bg="coolGray.100" p="5" rounded="8">
                 <HStack alignItems="center">
-                    <Badge colorScheme="darkBlue" _text={{
+                    <Badge colorScheme="green" _text={{
                         color: "white"
                     }} variant="solid" rounded="4">
                         태그명

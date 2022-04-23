@@ -129,7 +129,7 @@ export default function OtherUsersProfileView(props) {
           <Text style={styles.name}>{props.user_id}</Text>
           {props.user_id !== user_Id && <HStack alignItems="center" my="1">
 
-            <Button mt="3" mr="3" onPress={() => follow()}>
+            <Button mt="3" mr="3" onPress={() => follow()} colorScheme="yellow">
               <Text>{followText}</Text>
             </Button>
             {followText == "✔" && <Button mt="3" onPress={() => props.navigation.navigate('DmRead', {
@@ -143,16 +143,16 @@ export default function OtherUsersProfileView(props) {
               <TouchableOpacity onPress={() => props.navigation.navigate('FollowList', {
                 user_id: props.user_id
               })} >
-                <Text>팔로워</Text>
-                <Text>{userFollowerNum}</Text>
+                <Text style={styles.followText}>팔로워</Text>
+                <Text style={styles.followText}>{userFollowerNum}</Text>
               </TouchableOpacity>
             </View>
             <View style={styles.buttonStyle}>
               <TouchableOpacity onPress={() => props.navigation.navigate('FollowList', {
                 user_id: props.user_id
               })} >
-                <Text>팔로우</Text>
-                <Text>{userFollowNum}</Text>
+                <Text style={styles.followText}>팔로우</Text>
+                <Text style={styles.followText}>{userFollowNum}</Text>
               </TouchableOpacity>
             </View>
           </HStack>
@@ -166,12 +166,12 @@ export default function OtherUsersProfileView(props) {
 const styles = StyleSheet.create({
   buttonStyle: {
     alignItems: 'center',
-    width: 50,
+    width: 80,
     marginRight: 20,
     padding: 5,
   },
   header: {
-    backgroundColor: "#2980b9",
+    backgroundColor: "#2ecc71",
   },
   headerContent: {
     padding: 30,
@@ -218,5 +218,10 @@ const styles = StyleSheet.create({
     fontSize: 22,
     alignSelf: 'center',
     marginLeft: 10
+  },
+  followText: {
+    fontSize :14,
+    color: 'white',
+    textAlign: 'center',
   }
 });

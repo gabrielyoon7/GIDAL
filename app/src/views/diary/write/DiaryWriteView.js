@@ -1,5 +1,5 @@
 
-import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Box, Button, Center, Divider, Icon} from "native-base"
 import React, { useState, } from 'react';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
@@ -75,7 +75,7 @@ const DiaryWriteView = (props) => {
   const WriteDiaryButton = () => {
     return (
       <Box alignItems="center">
-        <Button onPress={() => { saveDiary(); }} >작성하기</Button>
+        <Button onPress={() => { saveDiary(); }} style={{flex: 1, flexDirection: 'row'}} colorScheme="green" >작성하기</Button>
       </Box>
     );
   };
@@ -84,10 +84,14 @@ const DiaryWriteView = (props) => {
     <>
       <ScrollView style={{backgroundColor:'white'}}>
         <Box style={styles.row} justifyContent="center" display="flex">
-          <AntDesign style={styles.allowIcon} name="left" size={24} color="black" onPress={()=> Alert.alert('< pressed!')}/>
-          <Text style={styles.dateText} onPress={showDatePicker} >{Date}</Text>
-          <AntDesign style={styles.allowIcon} name="right" size={24} color="black" onPress={()=> Alert.alert('> pressed!')}/>
+        <TouchableOpacity onPress={()=> props.navigation.goBack()}style={{flex: 1, flexDirection: 'row'}} >
+        <AntDesign style={styles.allowIcon} name="left" size={24} color="black" />
+        </TouchableOpacity>
+        <Text style={styles.dateText} onPress={showDatePicker}>{Date}</Text>
+        <WriteDiaryButton />
+          {/* <AntDesign style={styles.allowIcon} name="right" size={24} color="black" onPress={()=> Alert.alert('> pressed!')}/> */}
         </Box>
+   
         <RadioDisclosure disclosure={disclosure} setDisclosure={setDisclosure} />
         <Divider/>
         <InputTitle setTitle={setTitle} Title={Title} />
@@ -101,7 +105,7 @@ const DiaryWriteView = (props) => {
         />
         <TagSelector selectTags={selectTags} />
         <View style={styles.buttonContainer}>
-          <WriteDiaryButton />
+
         </View>
       </ScrollView>
     </>
@@ -165,7 +169,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
   },
   dateText: {
-    fontSize: 20,
+   fontSize:20,
+    flex: 5, 
+    flexDirection: 'row',
     fontWeight: 'bold',
     width: 'auto',
   },

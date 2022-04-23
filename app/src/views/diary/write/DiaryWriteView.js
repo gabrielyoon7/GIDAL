@@ -1,6 +1,6 @@
 
 import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Box, Button, Center, Divider, HStack, Icon} from "native-base"
+import { Box, Button, Center, Divider, HStack, Icon } from "native-base"
 import React, { useState, } from 'react';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import axios from 'axios';
@@ -24,10 +24,10 @@ const DiaryWriteView = (props) => {
   const selectTags = (selectedTag) => {
     let newSet = tags;
     if (newSet.includes(selectedTag)) {
-      const idx = newSet.indexOf(selectedTag) 
-      if (idx > -1){
+      const idx = newSet.indexOf(selectedTag)
+      if (idx > -1) {
         newSet.splice(idx, 1)
-      } 
+      }
       setTags(newSet);
     } else {
       newSet.push(selectedTag);
@@ -52,7 +52,7 @@ const DiaryWriteView = (props) => {
 
   const saveDiary = () => {
     const user_Id = props.navigation.getState().routes[1].params.user_Id
-    console.log('selected tags : '+tags);
+    console.log('selected tags : ' + tags);
     axios.post(config.ip + ':5000/diariesRouter/save', {
       data: {
         user_id: user_Id,
@@ -60,7 +60,7 @@ const DiaryWriteView = (props) => {
         title: Title,
         content: Content,
         disclosure: disclosure,
-        tags:tags,
+        tags: tags,
       }
     }).then((response) => {
       if (response.data.status === 'success') {
@@ -75,32 +75,30 @@ const DiaryWriteView = (props) => {
   const WriteDiaryButton = () => {
     return (
       <Box alignItems="center">
-        <Button onPress={() => { saveDiary(); }} style={{flex: 1, flexDirection: 'row'}} colorScheme="green" >작성하기</Button>
+        <Button onPress={() => { saveDiary(); }} style={{ flex: 1, flexDirection: 'row' }} colorScheme="green" >작성하기</Button>
       </Box>
     );
   };
 
   return (
     <>
-      <ScrollView style={{backgroundColor:'white'}}>
+      <ScrollView style={{ backgroundColor: 'white' }}>
         <Box style={styles.row} justifyContent="center" display="flex">
-        <TouchableOpacity onPress={()=> props.navigation.goBack()}style={{flex: 1, flexDirection: 'row'}} >
-        <AntDesign style={styles.allowIcon} name="left" size={24} color="black" />
-        </TouchableOpacity>
-        <Text style={styles.dateText} onPress={showDatePicker}>{Date}</Text>
-        <WriteDiaryButton />
+          <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ flex: 1, flexDirection: 'row' }} >
+            <AntDesign style={styles.allowIcon} name="left" size={24} color="black" />
+          </TouchableOpacity>
+          <Text style={styles.dateText} onPress={showDatePicker}>{Date}</Text>
+          <WriteDiaryButton />
           {/* <AntDesign style={styles.allowIcon} name="right" size={24} color="black" onPress={()=> Alert.alert('> pressed!')}/> */}
         </Box>
-   
-        <RadioDisclosure disclosure={disclosure} setDisclosure={setDisclosure} />
         <Divider/>
         <Box style={styles.row} justifyContent="center" display="flex">
-        <TagSelector  selectTags={selectTags} />
-
+          <TagSelector selectTags={selectTags} />
         </Box>
-        
+
+        <Divider />
         <InputTitle setTitle={setTitle} Title={Title} />
-        <Divider/>
+        <Divider />
         <InputContent setContent={setContent} content={Content} />
         <DateTimePickerModal
           isVisible={isDatePickerVisible}
@@ -108,7 +106,8 @@ const DiaryWriteView = (props) => {
           onConfirm={handleConfirm}
           onCancel={hideDatePicker}
         />
-     
+        <RadioDisclosure disclosure={disclosure} setDisclosure={setDisclosure} />
+
       </ScrollView>
     </>
   );
@@ -171,8 +170,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
   },
   dateText: {
-   fontSize:20,
-    flex: 5, 
+    fontSize: 20,
+    flex: 5,
     flexDirection: 'row',
     fontWeight: 'bold',
     width: 'auto',
@@ -185,7 +184,8 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     justifyContent: "center",
     marginVertical: 16,
-    paddingHorizontal:15,
+    paddingHorizontal: 15,
+    // backgroundColor: 'black'
   },
 
 });

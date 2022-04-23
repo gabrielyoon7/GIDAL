@@ -23,6 +23,7 @@ const SignInView = (props) => {
                 user_id: userId
             }
         }).then((response) => {
+            // console.log("response : "+response);
             if (!response.data) {
                 alert('존재하지 않는 아이디입니다.');
             } else {

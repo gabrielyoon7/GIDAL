@@ -1,6 +1,6 @@
 
 import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Box, Button, Center, Divider, Icon} from "native-base"
+import { Box, Button, Center, Divider, HStack, Icon} from "native-base"
 import React, { useState, } from 'react';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import axios from 'axios';
@@ -94,6 +94,11 @@ const DiaryWriteView = (props) => {
    
         <RadioDisclosure disclosure={disclosure} setDisclosure={setDisclosure} />
         <Divider/>
+        <Box style={styles.row} justifyContent="center" display="flex">
+        <TagSelector  selectTags={selectTags} />
+
+        </Box>
+        
         <InputTitle setTitle={setTitle} Title={Title} />
         <Divider/>
         <InputContent setContent={setContent} content={Content} />
@@ -103,10 +108,7 @@ const DiaryWriteView = (props) => {
           onConfirm={handleConfirm}
           onCancel={hideDatePicker}
         />
-        <TagSelector selectTags={selectTags} />
-        <View style={styles.buttonContainer}>
-
-        </View>
+     
       </ScrollView>
     </>
   );
@@ -181,8 +183,9 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "space-between",
+    justifyContent: "center",
     marginVertical: 16,
     paddingHorizontal:15,
   },
+
 });

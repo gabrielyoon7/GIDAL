@@ -68,7 +68,7 @@ const SignUpView = (props) => {
     }
 
     return (
-        <ScrollView>
+        <ScrollView bg="white">
             <Center w="100%" h="100%">
                 <Box safeArea p="2" w="90%" maxW="290" py="8">
                     <Heading mt="1" color="coolGray.600" _dark={{

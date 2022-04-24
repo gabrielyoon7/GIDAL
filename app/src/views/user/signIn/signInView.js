@@ -67,7 +67,7 @@ const SignInView = (props) => {
     }
 
     return (
-        <Center w="100%" h="100%">
+        <Center w="100%" h="100%" bg="white">
             <Box safeArea p="2" py="8" w="90%" maxW="290">
                 <Heading
                  size="lg" 

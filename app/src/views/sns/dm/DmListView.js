@@ -1,38 +1,12 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
-import { Button, FlatList, View, StatusBar, StyleSheet, Text, TouchableOpacity, Pressable, Alert } from 'react-native';
+import { Button, FlatList, View, StyleSheet, Text, TouchableOpacity, RefreshControl } from 'react-native';
 import {Modal, HStack} from 'native-base'
 import { Card, CardTitle, CardContent, CardAction, CardButton } from 'react-native-material-cards'
 import Carousel from 'react-native-snap-carousel';
 import axios from 'axios'
 import { config } from '../../../../config'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-const example = [
-    {
-        id: 1,
-        user_id: "12345678",
-        date: "2022-04-01",
-        title: "다이어리1",
-        content: "다이어리1",
-        recipient: "11111111"
-    },{
-        id: 2,
-        user_id: "11111111",
-        date: "2022-04-02",
-        title: "다이어리2",
-        content: "다이어리2",
-        recipient: "12345678"
-    },{
-        id: 3,
-        user_id: "12345678",
-        date: "2022-04-03",
-        title: "다이어리3",
-        content: "다이어리3",
-        recipient: "11111111"
-    }
-]
-
-
+import { useIsFocused } from '@react-navigation/native';
 
 const DmListView = (props) => {
     const partner = props.userName;
@@ -41,6 +15,7 @@ const DmListView = (props) => {
     const [sentDmList, setSentDmList] = useState([]);
     const [receivedDmList, setReceivedDmList] = useState([]);
     const [dmData, setDmData] = useState([]);
+    const isFocused = useIsFocused(); // isFoucesd Define
 
     React.useEffect(() => {
       // getData();
@@ -50,33 +25,43 @@ const DmListView = (props) => {
                   if (value != null) {
                       const UserInfo = JSON.parse(value);
                       setUserId(UserInfo[0].user_id);
+                      getUserDmData()
                   }
               }
         )
       } catch (error) {
           console.log(error);
       }
-  },[]) 
+  },[isFocused]) 
 
   useEffect(()=>{
-    axios.post(config.ip + ':5000/usersRouter/findOne', {
-      data: {
-        user_id: user_Id,
-      }
-    })
-    .then((response) => {
-      console.log(response.data[0].sentDm);
-      setSentDmList(response.data[0].sentDm)
-      setReceivedDmList(response.data[0].receivedDm)
-      setDmData(response.data[0].receivedDm)
-  }).catch(function (error) {
-    console.log(error);
-  });
-},[])
+   getUserDmData()
+},[isFocused])
 
+const getUserDmData = () => {
+  let result = []
+  axios.post(config.ip + ':5000/usersRouter/findOne', {
+    data: {
+      user_id: user_Id,
+    }
+  })
+  .then((response) => {
+    if (response.data.length > 0) {
+      response.data.forEach((item) => {
+          result.push(item);
+      });
+  }
+    // console.log(result[0].receivedDm);
+    setReceivedDmList(result[0].receivedDm)
+    setDmData(result[0].receivedDm)
+    setSentDmList(result[0].sentDm)
+}).catch(function (error) {
+  console.log(error);
+});
+}
 const filteredPersonsId = dmData.filter( item => (item.opponent_id == props.userName ))
 
-console.log(filteredPersonsId);
+// console.log(filteredPersonsId);
 
      const hideModal = () => {
       setModal(false);
@@ -106,7 +91,7 @@ console.log(filteredPersonsId);
                         title={item.opponent_id}
                         />
                     </CardAction>
-                    <CardTitle title={item.title} subtitle={item.date}/>
+                    <CardTitle title={item.title} subtitle={(item.date).split('T')}/>
                     <CardContent text={item.content}/>
                     <CardAction seperator={true} inColumn={false} >
                         <CardButton

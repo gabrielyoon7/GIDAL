@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { FlatList, View, StatusBar, StyleSheet, Text, TouchableOpacity, RefreshControl, KeyboardAvoidingView } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import axios from 'axios';
@@ -33,7 +33,7 @@ const FeedDiaryList = (props, navigation) => {
     const [selectedId, setSelectedId] = useState(null);
     const [ref, setRef] = useState(null);
 
-    //첫 렌더링에만 호출됨
+    //泥� �젋�뜑留곸뿉留� �샇異쒕맖
     useEffect(() => {
         getitems();
     }, [isFocused]);
@@ -76,7 +76,7 @@ const FeedDiaryList = (props, navigation) => {
                         })
                     }
                 }
-                // 해당 일기로 넘어가기 구현
+                // �빐�떦 �씪湲곕줈 �꽆�뼱媛�湲� 援ы쁽
                 textColor="black"
             />
         );
@@ -92,7 +92,7 @@ const FeedDiaryList = (props, navigation) => {
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
         getitems();
-        //setRefreshing(false)를 getitems 내부에서 해주도록 변경 (데이터 수신 성공 시 로딩 표시를 강제로 종료하게 함)
+        //setRefreshing(false)瑜� getitems �궡遺��뿉�꽌 �빐二쇰룄濡� 蹂�寃� (�뜲�씠�꽣 �닔�떊 �꽦怨� �떆 濡쒕뵫 �몴�떆瑜� 媛뺤젣濡� 醫낅즺�븯寃� �븿)
         //   wait(2000).then(() => setRefreshing(false));
     }, []);
 
@@ -119,7 +119,7 @@ const FeedDiaryList = (props, navigation) => {
                 // style={styles.container}
             >
                 <SearchBar
-                    placeholder="어떤 일기를 찾으시나요?"
+                    placeholder="�뼱�뼡 �씪湲곕�� 李얠쑝�떆�굹�슂?"
                     // onPress={() => alert("onPress")}
                     onChangeText={(text) => {
                         console.log(text)

@@ -82,16 +82,15 @@ const DiaryWriteView = (props) => {
 
   return (
     <>
+      <Box style={styles.row} justifyContent="center" display="flex">
+        <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ flex: 1, flexDirection: 'row' }} >
+          <AntDesign style={styles.allowIcon} name="left" size={24} color="black" />
+        </TouchableOpacity>
+        <Text style={styles.dateText} onPress={showDatePicker}>{Date}</Text>
+        <WriteDiaryButton />
+      </Box>
+      <Divider />
       <ScrollView style={{ backgroundColor: 'white' }}>
-        <Box style={styles.row} justifyContent="center" display="flex">
-          <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ flex: 1, flexDirection: 'row' }} >
-            <AntDesign style={styles.allowIcon} name="left" size={24} color="black" />
-          </TouchableOpacity>
-          <Text style={styles.dateText} onPress={showDatePicker}>{Date}</Text>
-          <WriteDiaryButton />
-          {/* <AntDesign style={styles.allowIcon} name="right" size={24} color="black" onPress={()=> Alert.alert('> pressed!')}/> */}
-        </Box>
-        <Divider/>
         <Box style={styles.row} justifyContent="center" display="flex">
           <TagSelector selectTags={selectTags} />
         </Box>

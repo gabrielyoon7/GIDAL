@@ -32,36 +32,7 @@ const example = [
     }
 ]
 
-const CustomCarousel = () => {
-    const [activeIndex, setActiveIndex] = useState(0);
-    const [carouselItems, setCarouselItems] = useState(example);
-    const ref = useRef(null);
-  
-      const renderItem = useCallback(({ item, index }) => (
-        <View style={{ backgroundColor: 'orange', marginTop: 20, borderRadius: 10, flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-          <Text style={{ fontSize: 20, fontWeight: 'bold', margin: 10 }}>{item.title}</Text>
-          <View style={{ justifyContent: 'center', flexDirection : "column" }} >
-          <Text>{item.content}</Text>
-          <Text>{item.date}</Text>
-        </View>
 
-      </View>
-    ), []);
-      
-    return (
-        <View>
-          <Carousel
-            layout="default"
-            ref={ref}
-            data={carouselItems}
-            sliderWidth={250}
-            itemWidth={250}
-            renderItem={renderItem}
-            onSnapToItem={(index) => setActiveIndex(index)}
-          />
-        </View>
-    );
-  };
 
 const DmListView = (props) => {
     const partner = props.userName;
@@ -103,6 +74,10 @@ const DmListView = (props) => {
   });
 },[])
 
+const filteredPersonsId = dmData.filter( item => (item.opponent_id == props.userName ))
+
+console.log(filteredPersonsId);
+
      const hideModal = () => {
       setModal(false);
     }
@@ -112,6 +87,7 @@ const DmListView = (props) => {
     }
 
   const DmListReadView = () => {
+    
     return (
       <FlatList 
                 enableEmptySections={true}
@@ -170,6 +146,40 @@ const ModalView = () => {
       </Modal> 
     )
 }
+
+const CustomCarousel = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [carouselItems, setCarouselItems] = useState(filteredPersonsId);
+  const ref = useRef(null);
+
+    const renderItem = useCallback(({ item, index }) => (
+      <View>
+          {item.opponent_id == props.userName &&
+      <View style={{ backgroundColor: 'orange', marginTop: 20, borderRadius: 10, flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Text style={{ fontSize: 20, fontWeight: 'bold', margin: 10 }}>{item.title}</Text>
+        <View style={{ justifyContent: 'center', flexDirection : "column" }} >
+        <Text>{item.content}</Text>
+        <Text>{(item.date).split('T')[0]}</Text>
+      </View>
+      </View>
+      }
+    </View>
+    ), []);
+    
+  return (
+      <View>
+        <Carousel
+          layout="default"
+          ref={ref}
+          data={carouselItems}
+          sliderWidth={250}
+          itemWidth={250}
+          renderItem={renderItem}
+          onSnapToItem={(index) => setActiveIndex(index)}
+        />
+      </View>
+  );
+};
     return(
         
      <View>

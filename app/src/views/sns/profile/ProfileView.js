@@ -23,7 +23,7 @@ export default function ProfileView(props) {
   const [userFollowerNum, setuserFollowerNum] = useState(0);
   const [userFollowNum, setuserFollowNum] = useState(0);
 
-  console.log(user_Id);
+  console.log('ProfileView' + user_Id);
 
   useEffect(() => {
     console.log("rerender!");

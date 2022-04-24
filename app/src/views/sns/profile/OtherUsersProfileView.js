@@ -15,7 +15,7 @@ export default function OtherUsersProfileView(props) {
   const [user_Id, setUserId] = React.useState('');
   const [userFollowerNum, setuserFollowerNum] = useState(0);
   const [userFollowNum, setuserFollowNum] = useState(0);
-
+  console.log('OtherUsersProfileView' + user_Id);
 
   React.useEffect(() => {
     console.log('123');

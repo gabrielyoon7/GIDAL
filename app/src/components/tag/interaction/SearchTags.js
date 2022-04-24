@@ -3,26 +3,29 @@ import Carousel from 'react-native-snap-carousel';
 import { Button, View, Text, TextInput, SafeAreaView, ScrollView, StyleSheet, Pressable, Alert, FlatList } from 'react-native';
 import { Center } from 'native-base';
 import SearchBar from 'react-native-dynamic-search-bar';
+import PressableTag from './PressableTag';
 
 const SearchTags = (props) => {
 
-    // const [number, onChangeNumber] = React.useState(null);
     const [ref, setRef] = useState(null);
-    // console.log(props.tags);
     const renderItem = ({ item }) => {
+        // console.log(item)
         return (
-            <Text>{item.name}</Text>
+            <PressableTag key={item.name} tag={item} />
         );
     };
+    const [dataSource, setDataSource] = useState(props.tags);
+    const filterList = (text) => {
+        let newData = props.tags;
+        newData = props.tags.filter((item) => {
+            const itemData = item.name.toLowerCase();
+            const textData = text.toLowerCase();
+            return itemData.indexOf(textData) > -1;
+        })
+        setDataSource(newData);
+    }
     return (
         <View style={{ justifyContent: 'center', flexDirection: "column" }} >
-            {/* <TextInput
-                style={styles.input}
-                onChangeText={onChangeNumber}
-                value={number}
-                placeholder="useless placeholder"
-                keyboardType="numeric"
-            /> */}
             <View>
                 <SearchBar
                     placeholder="검색어를 입력하세요"
@@ -36,9 +39,11 @@ const SearchTags = (props) => {
                     }}
                 />
             </View>
-            <View>
+            <View style={
+                styles.btnContainer
+            }>
                 <FlatList
-                    data={props.tags}
+                    data={dataSource}
                     ref={(ref) => {
                         setRef(ref);
                     }}
@@ -54,27 +59,35 @@ const SearchTags = (props) => {
 export default SearchTags;
 
 
+// const styles = StyleSheet.create({
+//     input: {
+//         height: 40,
+//         margin: 12,
+//         borderWidth: 1,
+//         padding: 10,
+//     },
+//     button: {
+//         alignItems: 'center',
+//         justifyContent: 'center',
+//         paddingVertical: 8,
+//         borderRadius: 100,
+//         backgroundColor: '#dcdde1',
+//         width: 80
+//     },
+//     btnView: {
+//         borderWidth: StyleSheet.hairlineWidth,
+//         borderColor: 'black',
+//         borderRadius: 100,
+//         borderWidth: 2,
+//         margin: 5,
+//         marginTop: 15
+//     },
+// });
+
 const styles = StyleSheet.create({
-    input: {
-        height: 40,
-        margin: 12,
-        borderWidth: 1,
-        padding: 10,
-    },
-    button: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingVertical: 8,
-        borderRadius: 100,
-        backgroundColor: '#dcdde1',
-        width: 80
-    },
-    btnView: {
-        borderWidth: StyleSheet.hairlineWidth,
-        borderColor: 'black',
-        borderRadius: 100,
-        borderWidth: 2,
-        margin: 5,
-        marginTop: 15
+    btnContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
     },
 });

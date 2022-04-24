@@ -74,6 +74,12 @@ const DiaryList = (props, navigation) => {
     return (
         <View style={styles.container}>
             <FlatList
+              onScrollToIndexFailed={info => {
+                const wait = new Promise(resolve => setTimeout(resolve, 700));
+                wait.then(() => {
+                  fListRef.current?.scrollToIndex({ index: info.index, animated: true/false });
+                });
+              }}
                 data={items}
                 ref={(ref) => {
                     setRef(ref);

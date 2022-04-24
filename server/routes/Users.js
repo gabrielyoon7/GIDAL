@@ -25,7 +25,7 @@ router.post('/userSentDm', function(req, res) {
     User.updateOne(
         { user_id: req.body.data.user_id }, 
         {$push: {sentDm: {
-            "dmRecipient_id": req.body.data.dmRecipient_id, 
+            "opponent_id": req.body.data.dmRecipient_id, 
             "title": req.body.data.title,
             "content": req.body.data.content,
             "date": req.body.data.date,
@@ -45,7 +45,7 @@ router.post('/userReceivedDm', function(req, res) {
     User.updateOne(
         { user_id: req.body.data.dmRecipient_id }, 
         {$push: {receivedDm: {
-            "dmSender_id": req.body.data.user_id, 
+            "opponent_id": req.body.data.user_id, 
             "title": req.body.data.title,
             "content": req.body.data.content,
             "date": req.body.data.date,

@@ -10,8 +10,8 @@ import InputTitle from "../../../components/diary/InputTitle";
 import InputContent from "../../../components/diary/InputContent";
 
 const DmWriteView = (props) => {
-  // const [Date, setDate] = useState(props.selectedDate);
-  let todayDate = new Date();
+  var todayDate = new Date();
+
   const [Title, setTitle] = useState('');
   const [Content, setContent] = useState('');
   const [user_Id, setUserId] = React.useState('');

@@ -60,13 +60,13 @@ const userSchema = mongoose.Schema({
         id: String
     }],
     sentDm: [{
-        dmRecipient_id: String,
+        opponent_id: String,
         title: String,
         content: String,
         date: Date
     }],
     receivedDm: [{
-        dmSender_id: String,
+        opponent_id: String,
         title: String,
         content: String,
         date: Date

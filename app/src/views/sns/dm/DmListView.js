@@ -36,30 +36,7 @@ const CustomCarousel = () => {
     const [activeIndex, setActiveIndex] = useState(0);
     const [carouselItems, setCarouselItems] = useState(example);
     const ref = useRef(null);
-    
   
-    const onPressFunction = () => {
-        Alert.alert('press!')
-      }
-
-      // const callback = (data) => {
-      //     setDmList(data.sentDm);
-      //   }
-  
-      // useEffect(()=>{
-      //     axios.get(config.ip+':5000/usersRouter/findDm/',{
-      //       params: {
-      //         user_id: config.user[0].user_id,
-      //         recipient_id: props.userName,
-      //       }
-      //     })
-      //   .then((response) => {
-      //     callback(response.data);
-      //   }).catch(function (error) {
-      //     console.log(error);
-      //   });
-      // },[])
-
       const renderItem = useCallback(({ item, index }) => (
         <View style={{ backgroundColor: 'orange', marginTop: 20, borderRadius: 10, flex: 1, alignItems: 'center', justifyContent: 'center'}}>
           <Text style={{ fontSize: 20, fontWeight: 'bold', margin: 10 }}>{item.title}</Text>
@@ -92,6 +69,7 @@ const DmListView = (props) => {
     const [user_Id, setUserId] = React.useState('');
     const [sentDmList, setSentDmList] = useState([]);
     const [receivedDmList, setReceivedDmList] = useState([]);
+    const [dmData, setDmData] = useState([]);
 
     React.useEffect(() => {
       // getData();
@@ -119,6 +97,7 @@ const DmListView = (props) => {
       console.log(response.data[0].sentDm);
       setSentDmList(response.data[0].sentDm)
       setReceivedDmList(response.data[0].receivedDm)
+      setDmData(response.data[0].receivedDm)
   }).catch(function (error) {
     console.log(error);
   });
@@ -136,17 +115,19 @@ const DmListView = (props) => {
     return (
       <FlatList 
                 enableEmptySections={true}
-                data={example}
+                data={dmData}
                 keyExtractor= {(item) => {
-                  return item.id;
+                  return item._id;
                 }}
                 renderItem={({item}) => {
                   return (
                     <TouchableOpacity onPress={() => showDMList()}>
+                    {item.opponent_id == props.userName &&
                     <Card>
+                   
                     <CardAction seperator={true} inColumn={false} >
                         <CardButton
-                        title={item.user_id}
+                        title={item.opponent_id}
                         />
                     </CardAction>
                     <CardTitle title={item.title} subtitle={item.date}/>
@@ -158,6 +139,7 @@ const DmListView = (props) => {
                         />
                     </CardAction>
                     </Card>
+                    }
                     </TouchableOpacity>
                   )
               }}/>
@@ -165,22 +147,11 @@ const DmListView = (props) => {
   }
 
   const receivedDm = () => {
-  //   axios.post(config.ip + ':5000/usersRouter/findOne', {
-  //     data: {
-  //       user_id: user_Id,
-  //     }
-  //   })
-  //   .then((response) => {
-  //     console.log(response.data[0].sentDm);
-  //     // setDmList
-  // }).catch(function (error) {
-  //   console.log(error);
-  // });
-    Alert.alert('hi')
+    setDmData(receivedDmList)
   }
 
   const sentDm = () => {
-    Alert.alert('hgg')
+    setDmData(sentDmList)
   }
 
 const ModalView = () => {

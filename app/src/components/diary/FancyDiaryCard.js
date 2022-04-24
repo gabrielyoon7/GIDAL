@@ -27,7 +27,7 @@ const FancyDiaryCard = ({ item: diary, onPress, backgroundColor, textColor }) =>
                 <Text color="coolGray.800" mt="3" fontWeight="medium" fontSize="xl">
                     {diary.title}
                 </Text>
-                <Text mt="2" fontSize="sm" color="coolGray.700" numberOfLines={2} ellipsizeMode='tail' >
+                <Text mt="2" fontSize="sm" color="coolGray.700" numberOfLines={1} ellipsizeMode='tail' width={'90%'}>
                     {content}
                 </Text>
                 <TouchableOpacity style={styles.heart}>
@@ -51,6 +51,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row-reverse',
         alignSelf: 'center',
         position: 'absolute',
-        bottom: 20, right: 25
+        bottom: 20, right: 20
     }
 });

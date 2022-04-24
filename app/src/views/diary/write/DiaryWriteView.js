@@ -72,29 +72,28 @@ const DiaryWriteView = (props) => {
     })
   }
 
-  const WriteDiaryButton = () => {
+  const WriteDiaryHeader = () => {
     return (
-      <Box alignItems="center">
-        <Button onPress={() => { saveDiary(); }} style={{ flex: 1, flexDirection: 'row' }} colorScheme="green" >작성하기</Button>
-      </Box>
-    );
-  };
-
-  return (
-    <>
       <Box style={styles.row} justifyContent="center" display="flex">
         <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ flex: 1, flexDirection: 'row' }} >
           <AntDesign style={styles.allowIcon} name="left" size={24} color="black" />
         </TouchableOpacity>
         <Text style={styles.dateText} onPress={showDatePicker}>{Date}</Text>
-        <WriteDiaryButton />
+        <Box alignItems="center">
+          <Button onPress={() => { saveDiary(); }} colorScheme="green" >작성하기</Button>
+        </Box>
       </Box>
+    )
+  }
+
+  return (
+    <>
+      <WriteDiaryHeader/>
       <Divider />
       <ScrollView style={{ backgroundColor: 'white' }}>
         <Box style={styles.row} justifyContent="center" display="flex">
           <TagSelector selectTags={selectTags} />
         </Box>
-
         <Divider />
         <InputTitle setTitle={setTitle} Title={Title} />
         <Divider />
@@ -115,59 +114,6 @@ const DiaryWriteView = (props) => {
 export default DiaryWriteView;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#efefef',
-  },
-  nav: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginHorizontal: 5,
-  },
-  rich: {
-    minHeight: 300,
-    flex: 1,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderColor: '#e3e3e3',
-  },
-  topVi: {
-    backgroundColor: '#fafafa',
-  },
-  richBar: {
-    borderColor: '#efefef',
-    borderTopWidth: StyleSheet.hairlineWidth,
-  },
-  richBarDark: {
-    backgroundColor: '#191d20',
-    borderColor: '#696969',
-  },
-  scroll: {
-    backgroundColor: '#ffffff',
-  },
-  scrollDark: {
-    backgroundColor: '#2e3847',
-  },
-  darkBack: {
-    backgroundColor: '#191d20',
-  },
-  item: {
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderColor: '#e8e8e8',
-    flexDirection: 'row',
-    height: 40,
-    alignItems: 'center',
-    paddingHorizontal: 15,
-  },
-  input: {
-    flex: 1,
-  },
-  tib: {
-    textAlign: 'center',
-    color: '#515156',
-  },
-  flatStyle: {
-    paddingHorizontal: 12,
-  },
   dateText: {
     fontSize: 20,
     flex: 5,

@@ -1,5 +1,6 @@
 import { StyleSheet, TouchableOpacity, } from 'react-native';
 import { Badge, Box, HStack, Spacer, Text, } from 'native-base';
+import { Ionicons } from "@expo/vector-icons";
 
 const FancyDiaryCard = ({ item: diary, onPress, backgroundColor, textColor }) => {
     // 정규식을 이용한 HTML 태그 제거 시작
@@ -29,7 +30,11 @@ const FancyDiaryCard = ({ item: diary, onPress, backgroundColor, textColor }) =>
                 <Text mt="2" fontSize="sm" color="coolGray.700" numberOfLines={2} ellipsizeMode='tail' >
                     {content}
                 </Text>
+                <TouchableOpacity style={styles.heart}>
+                    <Ionicons name="md-heart-outline" size={24} color="grey"/>
+                </TouchableOpacity>
             </Box>
+            
         </TouchableOpacity>
     )
 
@@ -41,4 +46,11 @@ const styles = StyleSheet.create({
         marginVertical: 8,
         marginHorizontal: 16,
     },
+    heart: {
+        flex: 1,
+        flexDirection: 'row-reverse',
+        alignSelf: 'center',
+        position: 'absolute',
+        bottom: 20, right: 25
+    }
 });

@@ -23,7 +23,6 @@ const SignInView = (props) => {
                 user_id: userId
             }
         }).then((response) => {
-            // console.log("response : "+response);
             if (!response.data) {
                 alert('존재하지 않는 아이디입니다.');
             } else {
@@ -70,16 +69,19 @@ const SignInView = (props) => {
     return (
         <Center w="100%" h="100%">
             <Box safeArea p="2" py="8" w="90%" maxW="290">
-                <Heading size="lg" fontWeight="600" color="coolGray.800" _dark={{
-                    color: "warmGray.50"
-                }}>
-                    {/* Welcome */}
+                <Heading
+                 size="lg" 
+                 fontWeight="600" 
+                 color={config.color.main.primary}
+                >
                     기록의 달인
                 </Heading>
-                <Heading mt="1" _dark={{
-                    color: "warmGray.200"
-                }} color="coolGray.600" fontWeight="medium" size="xs">
-                    {/* Sign in to continue! */}
+                <Heading 
+                 mt="1" 
+                 color={config.color.main.secondary}
+                 fontWeight="medium" 
+                 size="xs"
+                >
                     당신의 인생을 기록하세요!
                 </Heading>
 
@@ -99,9 +101,7 @@ const SignInView = (props) => {
                             Forget Password?
                         </Link> */}
                     </FormControl>
-                    {/* <Button mt="2" colorScheme="indigo" onPress={() => SignIn()}> */}
                     <Button mt="2" colorScheme="green" onPress={() => SignIn()}>
-                        {/* Sign in */}
                         로그인
                     </Button>
                     <HStack mt="6" justifyContent="center">
@@ -111,12 +111,15 @@ const SignInView = (props) => {
                             {/* I'm a new user.{" "} */}
                             기록의 달인이 처음이신가요?{" "}
                         </Text>
-                        <Link _text={{
-                            color: "green.500",
-                            fontWeight: "medium",
-                            fontSize: "sm"
-                        }} onPress={() => props.navigation.navigate('SignUp')}>
-                            {/* Sign Up */}
+                        <Link 
+                            _text={{
+                                color: "green.500",
+                                fontWeight: "medium",
+                                fontSize: "sm"
+                            }}
+                            onPress={
+                                () => props.navigation.navigate('SignUp')}
+                            >
                             회원가입
                         </Link>
                     </HStack>

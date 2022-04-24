@@ -8,32 +8,28 @@
 
 */
 export const config = {
-	ip:"http://192.168.35.37",
-	// user:[ 
-	// 	{
-	// 		_id : "0",
-	// 		user_id : "testAccount00",
-	// 		user_pw : "1234",
-	// 		name : "user_name_00",
-	// 		gender : "?",
-	// 		bday : "2022-04-07",
-	// 		location : "경기도 수원시",
-	// 		following : "",
-	// 		follower : "",
-	// 		profile_image : "",
-	// 		points : 10000,
-	// 		count_diary_total : 0,
-	// 		count_diary_everyday : 0,
-	// 		items : {},
-	// 		sentDm: [{
-	// 			"dmRecipient_id": 'gidal1',
-    //     		"title": "test",
-	// 			"content": "test content",
-    //     		"date": "2022-04-11"
-	// 		}],
-	// 		receivedDm:[{
-
-	// 		}]
-	// 	},
-	// ],
+	ip : "http://192.168.0.11",
+	color : {
+		main : {
+			primary:	"#003399",
+			secondary:	"#BDBDBD",
+			success:	"#2F9D27",
+			info:		"#00D8FF",
+			warning:    "#FFE400",
+			danger:     "#FF0000",
+			dark:		"#000000",
+			light:		"#FFFFFF",
+		},
+		dark : {
+			primary:	"#003399",
+			secondary:	"#BDBDBD",
+			success:	"#2F9D27",
+			info:		"#00D8FF",
+			warning:    "#FFE400",
+			danger:     "#FF0000",
+			dark:		"#000000",
+			light:		"#FFFFFF",
+		}
+	},
 };
+

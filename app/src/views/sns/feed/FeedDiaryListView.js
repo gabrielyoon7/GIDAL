@@ -116,10 +116,9 @@ const FeedDiaryList = (props, navigation) => {
             </View>
             <KeyboardAvoidingView
                 behavior={Platform.OS === "ios" ? "padding" : "height"}
-                // style={styles.container}
             >
                 <SearchBar
-                    placeholder="�뼱�뼡 �씪湲곕�� 李얠쑝�떆�굹�슂?"
+                    placeholder="검색어를 입력하세요."
                     // onPress={() => alert("onPress")}
                     onChangeText={(text) => {
                         console.log(text)
@@ -129,7 +128,6 @@ const FeedDiaryList = (props, navigation) => {
                         filterList("");
                     }}
                 />
-
             </KeyboardAvoidingView>
         </>
     )

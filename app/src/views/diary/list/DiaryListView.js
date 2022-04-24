@@ -12,7 +12,6 @@ const DiaryListView = (props) => {
     console.log(user_Id);
 
     React.useEffect(() => {
-        // getData();
         try {
             AsyncStorage.getItem('userInfo')
                 .then(value => {
@@ -26,10 +25,6 @@ const DiaryListView = (props) => {
             console.log(error);
         }
     })
-
-    // React.useEffect(() => {
-    //     console.log(user_Id);
-    // }, [user_Id])
 
     return (
         <>

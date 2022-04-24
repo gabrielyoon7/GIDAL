@@ -11,7 +11,8 @@ const SearchTags = (props) => {
     const renderItem = ({ item }) => {
         // console.log(item)
         return (
-            <PressableTag key={item.name} tag={item} />
+            <PressableTag key={item.name} tag={item} selectTags={props.selectTags}/>
+            // <PressableTag key={tag.name} tag={tag} />
         );
     };
     const [dataSource, setDataSource] = useState(props.tags);

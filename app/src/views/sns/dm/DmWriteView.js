@@ -2,27 +2,12 @@ import * as React from 'react';
 import { FlatList, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, TextInput, View, Alert } from 'react-native';
 import CalendarView from '../../../../src/views/diary/list/CalendarView';
 import { useState, useEffect, Component } from 'react';
-import { Box, Input, Button, TextArea, Modal, Center, NativeBaseProvider, Select, CheckIcon } from "native-base"
-import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { Box, Input, Button, TextArea, Modal, Center, NativeBaseProvider, Select, CheckIcon, Divider } from "native-base"
 import axios from 'axios';
 import { config } from '../../../../config'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-const InputTitle = (props) => {
-  return (
-    <Box alignItems="center">
-      <Input mx="3" placeholder="제목을 입력해주세요" w="75%" maxWidth="310" onChangeText={(title) => { props.setTitle(title); }} />
-    </Box>
-  );
-};
-
-const WriteDiaryArea = (props) => {
-  return (
-    <Box alignItems="center" w="100%">
-      <TextArea h="45%" placeholder="Write Diary Right Now!" w="100%" maxW="310" onChangeText={(content) => { props.setContent(content); }} />
-    </Box>
-  );
-};
+import InputTitle from "../../../components/diary/InputTitle";
+import InputContent from "../../../components/diary/InputContent";
 
 const DmWriteView = (props) => {
   // const [Date, setDate] = useState(props.selectedDate);
@@ -80,12 +65,9 @@ const DmWriteView = (props) => {
     <View>
       <Text style={styles.textStyle} >받는사람</Text>
       <Text style={styles.recipientStyle}>{props.userName}</Text>
-      <Text style={styles.textStyle} >Title</Text>
-
       <InputTitle setTitle={setTitle} Title={Title} />
-      <Text style={styles.textStyle} >Content</Text>
-      <WriteDiaryArea setContent={setContent} Content={Content} />
-
+      <Divider />
+        <InputContent setContent={setContent} content={Content} />
       <View style={styles.buttonContainer}>
         <WriteDiaryButton />
       </View>

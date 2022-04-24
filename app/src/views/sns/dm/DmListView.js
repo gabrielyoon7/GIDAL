@@ -86,7 +86,7 @@ const CustomCarousel = () => {
     );
   };
 
-const DmReadView = (props) => {
+const DmListView = (props) => {
     const partner = props.userName;
     const [modal, setModal] = useState(false);
     const [user_Id, setUserId] = React.useState('');
@@ -132,7 +132,7 @@ const DmReadView = (props) => {
         setModal(true)
     }
 
-  const DmListView = () => {
+  const DmListReadView = () => {
     return (
       <FlatList 
                 enableEmptySections={true}
@@ -219,7 +219,7 @@ const ModalView = () => {
             <Button title='받은 DM' onPress={() => receivedDm()}/>
             <Button title='보낸 DM' onPress={() => sentDm()} />
             </HStack>
-              <DmListView/>
+              <DmListReadView/>
             </View>
             <ModalView/>
         </View>
@@ -247,4 +247,4 @@ const styles = StyleSheet.create({
   });
 
 
-export default DmReadView;
+export default DmListView;

@@ -7,7 +7,7 @@ import FeedSearchView from '../../views/sns/feed/FeedSearchView';
 import FeedDiaryListView from '../../views/sns/feed/FeedDiaryListView';
 import ProfileView from '../../views/sns/profile/ProfileView';
 import FollowListView from '../../views/sns/profile/FollowListView';
-import DmReadView from '../../views/sns/dm/DmReadView';
+import DmListView from '../../views/sns/dm/DmListView';
 import DmWriteView from '../../views/sns/dm/DmWriteView';
 import OtherUsersProfileView from '../../views/sns/profile/OtherUsersProfileView';
 
@@ -39,7 +39,7 @@ const OtherUsersProfileScreen = ({ route, navigation }) => {
 const DmReadScreen = ({ route, navigation }) => {
   const { userName } = route.params;
   return (
-    <DmReadView navigation={navigation} userName = {userName}/>
+    <DmListView navigation={navigation} userName = {userName}/>
   )
 }
 

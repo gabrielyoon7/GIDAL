@@ -36,7 +36,7 @@ const SearchTags = (props) => {
                     }}
                 />
             </View>
-            <View style={{ maxHeight:"200px" }}>
+            <View>
                 <FlatList
                     data={props.tags}
                     ref={(ref) => {

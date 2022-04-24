@@ -156,11 +156,6 @@ const DmListView = (props) => {
                         onPress={() => {}}
                         title="♥"
                         />
-                        <CardButton
-                        onPress={() => {}}
-                        title="답장하기"
-                        color='blue'
-                        />
                     </CardAction>
                     </Card>
                     </TouchableOpacity>
@@ -170,17 +165,17 @@ const DmListView = (props) => {
   }
 
   const receivedDm = () => {
-    axios.post(config.ip + ':5000/usersRouter/findOne', {
-      data: {
-        user_id: user_Id,
-      }
-    })
-    .then((response) => {
-      console.log(response.data[0].sentDm);
-      // setDmList
-  }).catch(function (error) {
-    console.log(error);
-  });
+  //   axios.post(config.ip + ':5000/usersRouter/findOne', {
+  //     data: {
+  //       user_id: user_Id,
+  //     }
+  //   })
+  //   .then((response) => {
+  //     console.log(response.data[0].sentDm);
+  //     // setDmList
+  // }).catch(function (error) {
+  //   console.log(error);
+  // });
     Alert.alert('hi')
   }
 

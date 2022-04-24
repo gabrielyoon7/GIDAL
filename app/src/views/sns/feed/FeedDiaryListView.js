@@ -58,7 +58,15 @@ const FeedDiaryList = (props, navigation) => {
     const filterList = (text) => {
         let newData = backupData;
         newData = backupData.filter((item) => {
-            const itemData = item.content.toLowerCase();
+            //통합 검색을 위한 처리 시작
+            let intergratedData = item.user_id+item.title+item.content;
+            item.tags.forEach(
+                (tag) => (
+                    intergratedData+=tag
+                )
+            )
+            //통합 검색을 위한 처리 끝
+            const itemData = intergratedData.toLowerCase();
             const textData = text.toLowerCase();
             return itemData.indexOf(textData) > -1;
         })

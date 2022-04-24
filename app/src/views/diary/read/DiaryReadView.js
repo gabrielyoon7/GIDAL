@@ -8,7 +8,7 @@ import RenderHtml from 'react-native-render-html';
 import { LinearGradient } from 'expo-linear-gradient'
 import moment from 'moment';
 import { Path } from "react-native-svg";
-import { MaterialIcons, Ionicons } from "@expo/vector-icons";
+import { AntDesign, MaterialIcons, Ionicons } from "@expo/vector-icons";
 import DiaryReadStaggerButton from './DiaryReadStaggerButton';
 const DiaryReadView = (props) => {
     const [date, setSelectedDate] = React.useState(props.selectedDate);
@@ -50,6 +50,11 @@ const DiaryReadView = (props) => {
             <LinearGradient style={styles.header} colors={['#A6A6A6', 'black']} />
             <View style={styles.background}>
                 <View style={styles.container}>
+                <Box  style={styles.row} justifyContent="center" display="flex">
+                    <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ flex: 1, flexDirection: 'row' }} >
+                        <AntDesign style={styles.allowIcon} name="left" size={24} color="black" />
+                    </TouchableOpacity>
+                </Box>
                     <HStack alignItems="center">
                     <Badge
                                 backgroundColor="emerald.400"
@@ -70,23 +75,29 @@ const DiaryReadView = (props) => {
                     <Text fontSize="sm" color="coolGray.700" my="1">
                         <Text>{showDate}</Text> <Text>{showTime}</Text>
                     </Text>
-                    <TouchableOpacity onPress={
-                        () => props.navigation.navigate('OtherUsersProfile', {
-                            user_id: diary.user_id
-                        })
-                    }>
-                        <HStack alignItems="center" my="1">
-                            <Avatar bg="green.500" alignSelf="center" size="sm" source={{
-                                uri: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-                            }}>
-                                AJ
-                            </Avatar>
-                            <Text mx={2} fontSize="md" color="coolGray.700">
-                                {diary.user_id}
-                            </Text>
-                            <Spacer />
-                        </HStack>
-                    </TouchableOpacity>
+                    <Box  style={styles.row} justifyContent="center" display="flex">
+                        <TouchableOpacity onPress={
+                            () => props.navigation.navigate('OtherUsersProfile', {
+                                user_id: diary.user_id
+                            })
+                        }>
+                            <HStack alignItems="center" my="1">
+                                <Avatar bg="green.500" alignSelf="center" size="sm" source={{
+                                    uri: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+                                }}>
+                                    AJ
+                                </Avatar>
+                                <Text mx={2} fontSize="md" color="coolGray.700">
+                                    {diary.user_id}
+                                </Text>
+                                <Spacer />
+                            </HStack>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ flex: 1, flexDirection: 'row-reverse', alignSelf: 'center', marginLeft: 10}}>
+                                    <Ionicons name="md-heart-outline" size={24} color="black"/>
+                        </TouchableOpacity>
+                    </Box>
+                    
 
                     <Divider my="2" />
                     <View style={styles.source}>
@@ -168,7 +179,14 @@ const styles = StyleSheet.create({
     },
     source: {
         minHeight: windowHeight *0.4,
-    }
+    },
+    row: {
+        flexDirection: "row",
+        flexWrap: "wrap",
+        justifyContent: "center",
+        marginBottom: 16,
+        // backgroundColor: 'black'
+      },
 })
 
 export default DiaryReadView;

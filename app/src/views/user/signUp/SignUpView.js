@@ -59,6 +59,7 @@ const SignUpView = (props) => {
         }).then((response) => {
             if (response.data.status === 'success') {
                 props.navigation.pop()
+                alert('로그인 되었습니다!');
             } else {
                 alert('이미 존재하는 아이디입니다.');
             }

@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useRef } from 'react';
 import Carousel from 'react-native-snap-carousel';
 import { Button, View, Text, TextInput, SafeAreaView, ScrollView, StyleSheet, Pressable, Alert, FlatList } from 'react-native';
-import { Center } from 'native-base';
+import { Center, Spacer } from 'native-base';
 import SearchBar from 'react-native-dynamic-search-bar';
 import PressableTag from './PressableTag';
 
@@ -26,7 +26,7 @@ const SearchTags = (props) => {
         setDataSource(newData);
     }
     return (
-        <View style={{ justifyContent: 'center', flexDirection: "column" }} >
+        <View style={{ justifyContent: 'center', flexDirection: "column", padding:23 }} >
             <View>
                 <SearchBar
                     placeholder="검색어를 입력하세요"
@@ -38,6 +38,7 @@ const SearchTags = (props) => {
                     onClearPress={() => {
                         filterList("");
                     }}
+                   
                 />
             </View>
             <View style={
@@ -87,8 +88,9 @@ export default SearchTags;
 
 const styles = StyleSheet.create({
     btnContainer: {
-        display: 'flex',
-        flexDirection: 'row',
+        // display: 'flex',
+        // flexDirection: 'column',
         flexWrap: 'wrap',
+        width: '27%',
     },
 });

@@ -17,14 +17,14 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       paddingVertical: 8,
       borderRadius: 100,
-      backgroundColor: '#dcdde1',
+      backgroundColor: '#78e08f',
       width: 80
     },
     btnView: {
       borderWidth: StyleSheet.hairlineWidth,
       borderColor: 'black',
       borderRadius: 100,
-      borderWidth: 2,
+      borderWidth: 1.5,
       margin: 5,
       marginTop: 15
     },

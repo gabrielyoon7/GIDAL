@@ -1,6 +1,6 @@
 import { actions, RichEditor, RichToolbar } from "react-native-pell-rich-editor";
 import { FlatList, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, TextInput, View, HStack } from 'react-native';
-import { Box, Input, Button, TextArea, Modal, Center, NativeBaseProvider, Select, CheckIcon } from "native-base"
+import { Box, Input, Button, Divider, TextArea, Modal, Center, NativeBaseProvider, Select, CheckIcon } from "native-base"
 import CalendarView from '../../../../src/views/diary/list/CalendarView';
 import React, { useState, useCallback, useRef } from 'react';
 import { AntDesign } from '@expo/vector-icons';
@@ -63,6 +63,20 @@ const DiaryModifyView = (props) => {
     })
   }
 
+  const ModifyDiaryHeader = () => {
+    return (
+      <Box style={styles.row} justifyContent="center" display="flex">
+        <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ flex: 1, flexDirection: 'row', alignSelf: 'center' }} >
+          <AntDesign style={styles.allowIcon} name="left" size={24} color="black" />
+        </TouchableOpacity>
+        <Text style={styles.dateText} onPress={showDatePicker}>{Date.substr(0, 10)}</Text>
+        <Box alignItems="center">
+          <Button onPress={() => { modifyDiary(); }} colorScheme="green">수정하기</Button>
+        </Box>
+      </Box>
+    )
+  }
+
   const WriteDiaryButton = () => {
     return (
       <Box alignItems="center">
@@ -72,14 +86,11 @@ const DiaryModifyView = (props) => {
   };
 
   return (
-    <ScrollView>
-      <Box style={styles.row} justifyContent="center" display="flex">
-        <AntDesign style={styles.allowIcon} name="left" size={24} color="black" onPress={() => Alert.alert('< pressed!')} />
-        <Text style={styles.dateText} onPress={showDatePicker} >{Date.substr(0, 10)}</Text>
-        <AntDesign style={styles.allowIcon} name="right" size={24} color="black" onPress={() => Alert.alert('> pressed!')} />
-      </Box>
-      <RadioDisclosure disclosure={disclosure} setDisclosure={setDisclosure} />
+    <>
+      <ModifyDiaryHeader/>
+      <ScrollView backgroundColor="white">
       <InputTitle setTitle={setTitle} Title={Title} />
+      <Divider />
       <InputContent setContent={setContent} content={Content} />
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
@@ -88,11 +99,13 @@ const DiaryModifyView = (props) => {
         onCancel={hideDatePicker}
       />
       {/* <TagSelector /> */}
-      <View style={styles.buttonContainer}>
+      {/* <View style={styles.buttonContainer}>
         <WriteDiaryButton />
-      </View>
-
+      </View> */}
+      <RadioDisclosure disclosure={disclosure} setDisclosure={setDisclosure} />
     </ScrollView>
+  </>
+    
 
   )
 }
@@ -143,13 +156,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   dateText: {
-    // textAlign: 'center',
     fontSize: 20,
+    flex: 5,
+    flexDirection: 'row',
     fontWeight: 'bold',
-    // margin: 10,
-    //backgroundColor: 'skyblue',
     width: 'auto',
-    // alignSelf: 'center'
+    alignSelf: 'center'
   },
   input: {
     flex: 1,
@@ -164,16 +176,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
   },
   allowIcon: {
-    // backgroundColor: 'steelblue',
      width: 'auto',
-     // alignSelf: 'center'
    },
    row: {
      flexDirection: "row",
      flexWrap: "wrap",
      justifyContent: "space-between",
-     marginVertical: 16,
-     paddingHorizontal:15,
+     marginVertical: 10,
+     paddingHorizontal: 15,
      // borderWidth:1
    },
 });

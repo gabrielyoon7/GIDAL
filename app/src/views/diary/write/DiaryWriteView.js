@@ -75,12 +75,12 @@ const DiaryWriteView = (props) => {
   const WriteDiaryHeader = () => {
     return (
       <Box style={styles.row} justifyContent="center" display="flex">
-        <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ flex: 1, flexDirection: 'row' }} >
+        <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ flex: 1, flexDirection: 'row', alignSelf: 'center' }} >
           <AntDesign style={styles.allowIcon} name="left" size={24} color="black" />
         </TouchableOpacity>
         <Text style={styles.dateText} onPress={showDatePicker}>{Date}</Text>
         <Box alignItems="center">
-          <Button onPress={() => { saveDiary(); }} colorScheme="green" >작성하기</Button>
+          <Button onPress={() => { saveDiary(); }} colorScheme="green">작성하기</Button>
         </Box>
       </Box>
     )
@@ -120,6 +120,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     fontWeight: 'bold',
     width: 'auto',
+    alignSelf: 'center',
   },
   allowIcon: {
     width: 'auto',
@@ -128,7 +129,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "center",
-    marginVertical: 16,
+    marginVertical: 10,
     paddingHorizontal: 15,
     // backgroundColor: 'black'
   },

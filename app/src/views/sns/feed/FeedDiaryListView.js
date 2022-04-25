@@ -123,6 +123,7 @@ const FeedDiaryList = (props, navigation) => {
                 />
             </View>
             <KeyboardAvoidingView
+                style={{backgroundColor:'#FFFFFF'}}
                 behavior={Platform.OS === "ios" ? "padding" : "height"}
             >
                 <SearchBar
@@ -135,6 +136,7 @@ const FeedDiaryList = (props, navigation) => {
                     onClearPress={() => {
                         filterList("");
                     }}
+                    style ={{margin:12, borderWidth:1,borderColor:'gray'}}
                 />
             </KeyboardAvoidingView>
         </>
@@ -145,7 +147,7 @@ export default FeedDiaryList;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#FFFFFF', //sns 화면 배경색
         justifyContent: 'center',
     },
 });

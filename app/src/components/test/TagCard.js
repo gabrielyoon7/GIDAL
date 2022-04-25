@@ -33,7 +33,7 @@ const TagCard = (props) => {
     };
     const card_type = type[props.item.type];
     return (
-        <View style={{ backgroundColor: '#dcdde1', marginTop: 20, borderRadius: 10 }}>
+        <View style={{ backgroundColor: '#dcdde1', marginTop: 20, borderRadius: 10 }}> //태그색 변경
             <Text style={{ fontSize: 20, fontWeight: 'bold', margin: 10 }} onPress={() => onPressFunction(props.item.type)}>{props.item.question}</Text>
             <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                 <View style={styles.lineView} />

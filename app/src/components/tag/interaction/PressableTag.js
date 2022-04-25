@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       paddingVertical: 8,
       borderRadius: 100,
-      backgroundColor: '#78e08f',
+      backgroundColor: '#78e08f', //태그버튼색 변경
       width: 80
     },
     btnView: {

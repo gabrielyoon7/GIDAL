@@ -15,7 +15,7 @@ export default function OtherUsersProfileView(props) {
   const [user_Id, setUserId] = React.useState('');
   const [userFollowerNum, setuserFollowerNum] = useState(0);
   const [userFollowNum, setuserFollowNum] = useState(0);
-  console.log('OtherUsersProfileView' + user_Id);
+  console.log('OtherUsersProfileView : ' + user_Id);
 
   React.useEffect(() => {
     console.log('123');
@@ -45,6 +45,7 @@ export default function OtherUsersProfileView(props) {
       }
     })
       .then((response) => {
+        console.log("response.data[0].following : ")
         console.log(response.data[0].following);
         setFollowing(response.data[0].following);
         getOtherUserData();
@@ -52,7 +53,7 @@ export default function OtherUsersProfileView(props) {
         console.log(error);
       });
     let objectFollowing = Object.values(following).map(item => item.user_id)
-    console.log(objectFollowing);
+    console.log("objectFollowing : "+objectFollowing);
     if (objectFollowing.includes(props.user_id)) {
       setFollowText("✔")
     } else {
@@ -117,12 +118,10 @@ export default function OtherUsersProfileView(props) {
           console.log(error);
         });
     }
-    // setFollowText("팔로우")
   }
 
-
-  return (
-    <>
+  const ProfileHeader = () => {
+    return (
       <View style={styles.header}>
         <View style={styles.headerContent}>
           <Image style={styles.avatar} source={{ uri: profileImg }} />
@@ -158,6 +157,12 @@ export default function OtherUsersProfileView(props) {
           </HStack>
         </View>
       </View>
+    )
+  }
+
+  return (
+    <>
+      <ProfileHeader />
       <DiaryList selectedDate={date} navigation={props.navigation} user_Id={props.user_id} />
     </>
   )
@@ -220,7 +225,7 @@ const styles = StyleSheet.create({
     marginLeft: 10
   },
   followText: {
-    fontSize :14,
+    fontSize: 14,
     color: 'white',
     textAlign: 'center',
   }

@@ -59,7 +59,7 @@ export default function OtherUsersProfileView(props) {
     } else {
       setFollowText("팔로우")
     }
-  }, [user_Id])
+  }, [user_Id, followText])
 
 
   const getOtherUserData = () => {

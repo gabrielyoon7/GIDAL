@@ -44,17 +44,19 @@ const getUserDmData = () => {
     data: {
       user_id: user_Id,
     }
-  })
-  .then((response) => {
+  }).then((response) => {
+    setReceivedDmList(result)
+    setDmData(result)
+    setSentDmList(result)
     if (response.data.length > 0) {
       response.data.forEach((item) => {
-          result.push(item);
+        result.push(item);
       });
-  }
+      setReceivedDmList(result[0].receivedDm)
+      setDmData(result[0].receivedDm)
+      setSentDmList(result[0].sentDm)
+    }
     // console.log(result[0].receivedDm);
-    setReceivedDmList(result[0].receivedDm)
-    setDmData(result[0].receivedDm)
-    setSentDmList(result[0].sentDm)
 }).catch(function (error) {
   console.log(error);
 });

@@ -1,7 +1,9 @@
 import axios from "axios";
 import { Box, Heading, VStack, FormControl, Input, Button, Center, NativeBaseProvider, ScrollView } from "native-base";
 import { useState } from "react";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { config } from '../../../../config'
+import { AntDesign, MaterialIcons, Ionicons } from "@expo/vector-icons";
 
 const SignUpView = (props) => {
     const [userId, setUserId] = useState('');
@@ -70,13 +72,11 @@ const SignUpView = (props) => {
 
     return (
         <ScrollView bg="white">
+            <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ paddingLeft:30, paddingTop:20 }} >
+                <AntDesign name="left" size={24} color="black" />
+            </TouchableOpacity>
             <Center w="100%" h="100%">
                 <Box safeArea p="2" w="90%" maxW="290" py="8">
-                    <Heading mt="1" color="coolGray.600" _dark={{
-                        color: "warmGray.200"
-                    }} fontWeight="medium" size="xs">
-                        {/* Sign up to continue! */}
-                    </Heading>
                     <Heading size="lg" color="coolGray.800" _dark={{
                         color: "warmGray.50"
                     }} fontWeight="semibold">
@@ -122,3 +122,7 @@ const SignUpView = (props) => {
 }
 
 export default SignUpView;
+
+const styles = StyleSheet.create({
+
+})

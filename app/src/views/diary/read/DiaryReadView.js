@@ -14,6 +14,7 @@ const DiaryReadView = (props) => {
     const [date, setSelectedDate] = React.useState(props.selectedDate);
     const { width } = useWindowDimensions();
     const diary = props.navigation.getState().routes[1].params.diary;
+    const [liked, setLiked] = React.useState(false)
     const deleteDiary = () => {
         console.log("l", diary._id);
         axios.post(config.ip + ':5000/diariesRouter/delete/', {
@@ -44,6 +45,11 @@ const DiaryReadView = (props) => {
         isOpen,
         onToggle
       } = useDisclose();
+
+    const pressHeart = () => {
+        setLiked(!liked);
+    }
+
     return (
         <>
         <ScrollView style={styles.scroll}>
@@ -93,8 +99,8 @@ const DiaryReadView = (props) => {
                                 <Spacer />
                             </HStack>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ flex: 1, flexDirection: 'row-reverse', alignSelf: 'center', marginLeft: 10}}>
-                                    <Ionicons name="md-heart-outline" size={24} color="black"/>
+                        <TouchableOpacity onPress={() => pressHeart()} style={{ flex: 1, flexDirection: 'row-reverse', alignSelf: 'center', marginLeft: 10}}>
+                                    {liked ? <Ionicons name="heart" size={24} color="black"/> : <Ionicons name="md-heart-outline" size={24} color="black"/>}
                         </TouchableOpacity>
                     </Box>
                     

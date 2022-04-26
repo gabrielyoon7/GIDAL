@@ -17,7 +17,7 @@ const DiaryListView = (props) => {
                 .then(value => {
                     if (value != null) {
                         const UserInfo = JSON.parse(value);
-                        setUserId(UserInfo[0].user_id);
+                        setUserId(UserInfo.user_id);
                     }
                 }
                 )

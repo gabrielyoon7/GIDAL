@@ -43,7 +43,7 @@ const SignInView = (props) => {
             await AsyncStorage.setItem('userInfo', JSON.stringify(user), () => {
                 console.log('유저정보 저장 완료')
             });
-            props.navigation.navigate('Home');
+            props.navigation.replace('Home');
         } catch (error) {
             console.log(error);
         }

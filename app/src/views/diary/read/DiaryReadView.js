@@ -14,6 +14,7 @@ const DiaryReadView = (props) => {
     const [date, setSelectedDate] = React.useState(props.selectedDate);
     const { width } = useWindowDimensions();
     const diary = props.navigation.getState().routes[1].params.diary;
+    const [likeCount, setLikeCount] = React.useState(diary.likes)
     const [liked, setLiked] = React.useState(false)
     const deleteDiary = () => {
         console.log("l", diary._id);
@@ -49,6 +50,25 @@ const DiaryReadView = (props) => {
     const pressHeart = () => {
         setLiked(!liked);
     }
+
+    React.useEffect(() => {
+        if(liked) {
+            setLikeCount(likeCount - 1)
+        } else {
+            setLikeCount(likeCount + 1)
+        }
+
+        axios.post(config.ip + ':5000/diariesRouter/modifyLikeCount/', {
+            data: {
+                id: diary._id,
+                likes: likeCount,
+            }
+        }).then((response) => {
+            console.log(likeCount);
+        }).catch(function (error) {
+            console.log(error);
+        })
+    }, [liked]);
 
     return (
         <>

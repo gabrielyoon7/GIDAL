@@ -81,27 +81,6 @@ router.post('/findPublic', function(req, res, next) {
     });
 });
 
-// //작동하는지 확인 안해봄
-// router.post('/modify/', function(req, res, next) {
-//     console.log(req.body);
-//     // 특정아이디 수정하기
-//     Diary.findById({_id:req.body.id}, function(error,diary){
-//         console.log('--- Update(PUT) ---');
-//         if(error){
-//             console.log(error);
-//         }else{
-//             diary.title = '--modified--';
-//             diary.save(function(error,modified_diary){
-//                 if(error){
-//                     console.log(error);
-//                 }else{
-//                     console.log(modified_diary);
-//                 }
-//             });
-//         }
-//     });
-// });
-
 router.post('/modify', function(req, res, next) {
     const diary = req.body.data;
     console.log(diary);
@@ -121,6 +100,30 @@ router.post('/modify', function(req, res, next) {
                 return res.json(diary)
             }
         });
+        // return res.json({status: 'fail'})
+    });
+});
+
+
+router.post('/modifyLikeCount', function(req, res, next) {
+    const diaryInfo = req.body.data;
+    console.log(diaryInfo);
+    // 데이터 수정
+    Diary.findOneAndUpdate({_id: diaryInfo._id}, {$set:{likes:diaryInfo.likes}}, function(error, data){
+        console.log('--- UPDATE ---');
+        if(error){
+            console.log(error);
+        }
+        console.log('--- updated ---');
+        // Diary.findOne({_id: diaryInfo._id}, function(error,diary){
+        //     console.log('--- Read one ---');
+        //     if(error){
+        //         console.log(error);
+        //     }else{
+        //         console.log(diary);
+        //         return res.json(diary)
+        //     }
+        // });
         // return res.json({status: 'fail'})
     });
 });

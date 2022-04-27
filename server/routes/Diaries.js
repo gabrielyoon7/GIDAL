@@ -147,4 +147,16 @@ router.post('/delete/', function(req, res, next) {
     });
 });
 
+router.post('/deleteMany/', function(req, res, next) {
+    // console.log(req.body);
+    // 삭제
+    Diary.deleteMany({ user_id: { $eq: req.body.data.id } }).then(function(){
+        console.log(req.body.data.id+"의 모든 데이터가 삭제됨."); // Success
+        return res.json({status: 'success'})
+    }).catch(function(error){
+        console.log(error); // Failure
+    });
+
+});
+
 module.exports = router;

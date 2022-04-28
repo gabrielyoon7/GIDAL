@@ -19,7 +19,7 @@ export default function OtherUsersProfileView(props) {
 
   React.useEffect(() => {
     console.log('123');
-  }, [userFollowerNum, userFollowNum, followText])
+  }, [userFollowerNum, userFollowNum])
 
   React.useEffect(() => {
     // getData();
@@ -52,6 +52,10 @@ export default function OtherUsersProfileView(props) {
       }).catch(function (error) {
         console.log(error);
       });
+  }, [user_Id])
+
+
+  useEffect(() => {
     let objectFollowing = Object.values(following).map(item => item.user_id)
     console.log("objectFollowing : "+objectFollowing);
     if (objectFollowing.includes(props.user_id)) {
@@ -59,8 +63,7 @@ export default function OtherUsersProfileView(props) {
     } else {
       setFollowText("팔로우")
     }
-  }, [user_Id, followText])
-
+  },[following])
 
   const getOtherUserData = () => {
     axios.post(config.ip + ':5000/usersRouter/findOne', {

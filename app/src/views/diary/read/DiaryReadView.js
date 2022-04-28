@@ -171,7 +171,7 @@ const DiaryReadView = (props) => {
                 </HStack>
             </View>
         </ScrollView>
-        {/* <DiaryReadStaggerButton/> */}
+        <DiaryReadStaggerButton/>
         </>
     )
 }

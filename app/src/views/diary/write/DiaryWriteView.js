@@ -96,7 +96,7 @@ const DiaryWriteView = (props) => {
         </Box>
         <Divider />
         <InputTitle setTitle={setTitle} Title={Title} />
-        <Divider />
+        {/* <Divider /> */}
         <InputContent setContent={setContent} content={Content} />
         <DateTimePickerModal
           isVisible={isDatePickerVisible}

@@ -71,11 +71,15 @@ export default function FollowListView(props) {
     }
   };
 
-  const selectOther = () => {
+  const selectOther = (item) => {
     if (props.user_id === user_Id){
       props.navigation.navigate('DmRead', {
         userName: item.name
       })
+    } else {
+      props.navigation.navigate('OtherUsersProfile', {
+        user_id: item.name
+    })
     }
   }
 
@@ -100,7 +104,7 @@ export default function FollowListView(props) {
           }}
           renderItem={({ item }) => {
             return (
-              <TouchableOpacity onPress={selectOther()} >
+              <TouchableOpacity onPress={() => selectOther(item)} >
                 <View style={styles.box} >
                   <Image style={styles.image} source={{ uri: followings[0].image }} />
                   <Text style={styles.username}>{item.name}</Text>

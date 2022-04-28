@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import DiaryRoute from '../diary/DiaryRoute';
 import SnsRoute from '../sns/SnsRoute';
 import SettingRoute from '../setting/SettingRoute';
+import TodoRoute from '../todo/TodoRoute';
 
 
 const DiaryScreen = (props) => {
@@ -15,13 +16,6 @@ const DiaryScreen = (props) => {
 const SettingsScreen = (props) => {
     return (
         <SettingRoute navigation={props.navigation}/>
-        // <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        //     <Text>Settings!</Text>
-        //     <Button
-        //         title="테스트 메뉴로 이동하기"
-        //         onPress={() => props.navigation.navigate('Test')}
-        //     />
-        // </View>
     );
 }
 
@@ -29,6 +23,18 @@ const SnsScreen = (props) => {
     return (
         <SnsRoute navigation={props.navigation}/>
     )
+}
+
+const TodoScreen = (props) => {
+    return (
+        <TodoRoute navigation={props.navigation}/>
+    );
+}
+
+const StatisticsScreen = (props) => {
+    return (
+        <SettingRoute navigation={props.navigation}/>
+    );
 }
 
 const Tab = createBottomTabNavigator();
@@ -40,6 +46,8 @@ const HomeRoute = () =>{
         >
             <Tab.Screen name="Diary" component={DiaryScreen} />
             <Tab.Screen name="Sns" component={SnsScreen} />
+            <Tab.Screen name="Todo" component={TodoScreen} />
+            <Tab.Screen name="Statistics" component={StatisticsScreen} />
             <Tab.Screen name="Settings" component={SettingsScreen} />
         </Tab.Navigator>
     )

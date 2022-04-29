@@ -6,7 +6,7 @@ const InputContent = (props) => {
     const richText = React.useRef();
     return (
         <>
-            <ScrollView>
+            <ScrollView style={{height:270}}>
                 <RichEditor
                     // initialFocus={true}
                     // disabled={disabled}
@@ -32,6 +32,7 @@ const InputContent = (props) => {
                     // onCursorPosition={handleCursorPosition}
                     pasteAsPlainText={true}
                     onChange={(content) => { props.setContent(content); }}
+            
                 />
             </ScrollView>
             {/* <RichToolbar

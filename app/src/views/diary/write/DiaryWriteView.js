@@ -30,10 +30,10 @@ const DiaryWriteView = (props) => {
       if (idx > -1) {
         newSet.splice(idx, 1)
       }
-      setTags(newSet);
+      setTags([...newSet]); //리렌더링 사용시 매우 중요함
     } else {
       newSet.push(selectedTag);
-      setTags(newSet);
+      setTags([...newSet]); //리렌더링 사용시 매우 중요함
     }
     console.log(tags)
   }
@@ -88,7 +88,7 @@ const DiaryWriteView = (props) => {
     )
   }
 
-  useEffect(() => { console.log("component did mount with useEffect!"); }, [tags]);
+  // useEffect(() => { console.log("component did mount with useEffect!"); }, [tags]);
 
   // const SelectedTagsView = () => {
   //   return (
@@ -97,6 +97,7 @@ const DiaryWriteView = (props) => {
   //     ))
   //   )
   // }
+  
   const renderItem = ({ item }) => {
     return (
       <PressableTag key={item} tag={item} selectTags={selectTags} styles={buttonStyles} />
@@ -122,6 +123,7 @@ const DiaryWriteView = (props) => {
             }}
             renderItem={renderItem}
             keyExtractor={(item) => item}
+            extraData={tags}
           />
 
           <Box style={styles.row} justifyContent="center" display="flex">

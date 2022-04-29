@@ -120,7 +120,7 @@ const DiaryReadView = (props) => {
                             </HStack>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => pressHeart()} style={{ flex: 1, flexDirection: 'row-reverse', alignSelf: 'center', marginLeft: 10}}>
-                                    {liked ? <Ionicons name="heart" size={24} color="black"/> : <Ionicons name="md-heart-outline" size={24} color="black"/>}
+                                    {liked ? <Ionicons name="heart" size={24} color="red"/> : <Ionicons name="md-heart-outline" size={24} color="gray"/>}
                         </TouchableOpacity>
                     </Box>
                     

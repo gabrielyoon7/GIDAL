@@ -74,7 +74,7 @@ const DiaryWriteView = (props) => {
 
   const WriteDiaryHeader = () => {
     return (
-      <Box style={styles.row} justifyContent="center" display="flex">
+      <Box style={styles.row} justifyContent="center" display="flex" >
         <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ flex: 1, flexDirection: 'row', alignSelf: 'center' }} >
           <AntDesign style={styles.allowIcon} name="left" size={24} color="black" />
         </TouchableOpacity>
@@ -88,6 +88,7 @@ const DiaryWriteView = (props) => {
 
   return (
     <>
+    <View style={{backgroundColor:'white'}}>
       <WriteDiaryHeader/>
       <Divider />
       <ScrollView style={{ backgroundColor: 'white' }}>
@@ -108,7 +109,7 @@ const DiaryWriteView = (props) => {
 
       </ScrollView>
       <RadioDisclosure disclosure={disclosure} setDisclosure={setDisclosure} />
-
+      </View>
     </>
   );
 };
@@ -123,6 +124,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     width: 'auto',
     alignSelf: 'center',
+
   },
   allowIcon: {
     width: 'auto',
@@ -133,7 +135,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginVertical: 10,
     paddingHorizontal: 15,
-    // backgroundColor: 'black'
   },
 
 });

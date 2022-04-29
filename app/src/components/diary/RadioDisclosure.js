@@ -3,6 +3,7 @@ import { RadioButton } from "react-native-paper";
 
 const RadioDisclosure = (props) => {
     return (
+      <View  style={{backgroundColor:'white'}} >
       <RadioButton.Group onValueChange={newValue => props.setDisclosure(newValue)} value={props.disclosure}>
         <HStack justifyContent="center" md="center">
           <RadioButton.Item label="전체공개" value="public"/>
@@ -10,6 +11,7 @@ const RadioDisclosure = (props) => {
           <RadioButton.Item label="친구공개" value="friend"/>
         </HStack>
       </RadioButton.Group>
+      </View>
     )
 }
 export default RadioDisclosure;

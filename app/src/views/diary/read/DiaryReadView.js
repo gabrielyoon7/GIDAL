@@ -11,7 +11,7 @@ import { Path } from "react-native-svg";
 import { AntDesign, MaterialIcons, Ionicons } from "@expo/vector-icons";
 import DiaryReadStaggerButton from './DiaryReadStaggerButton';
 const DiaryReadView = (props) => {
-    const [date, setSelectedDate] = React.useState(props.selectedDate);
+    // const [date, setSelectedDate] = React.useState(props.selectedDate);
     const { width } = useWindowDimensions();
     const diary = props.navigation.getState().routes[1].params.diary;
     const [likeCount, setLikeCount] = React.useState(diary.likes)
@@ -171,7 +171,7 @@ const DiaryReadView = (props) => {
                 </HStack>
             </View>
         </ScrollView>
-        <DiaryReadStaggerButton/>
+        {/* <DiaryReadStaggerButton/> */}
         </>
     )
 }

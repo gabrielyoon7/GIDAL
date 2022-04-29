@@ -6,23 +6,6 @@ import { config } from '../../../../config'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Button, Center } from 'native-base';
 
-const following = [
-  { id: 1, image: "https://bootdey.com/img/Content/avatar/avatar6.png", username: "gidal1" },
-  { id: 2, image: "https://bootdey.com/img/Content/avatar/avatar2.png", username: "gidal2" },
-  { id: 3, image: "https://bootdey.com/img/Content/avatar/avatar3.png", username: "gidal3" },
-  { id: 4, image: "https://bootdey.com/img/Content/avatar/avatar4.png", username: "gidal4" },
-  { id: 5, image: "https://bootdey.com/img/Content/avatar/avatar1.png", username: "gidal5" },
-  { id: 6, image: "https://bootdey.com/img/Content/avatar/avatar6.png", username: "gidal6" },
-]
-const followers = [
-  { id: 1, image: "https://bootdey.com/img/Content/avatar/avatar6.png", username: "gidal2" },
-  { id: 2, image: "https://bootdey.com/img/Content/avatar/avatar2.png", username: "gidal3" },
-  { id: 3, image: "https://bootdey.com/img/Content/avatar/avatar3.png", username: "gidal4" },
-  { id: 4, image: "https://bootdey.com/img/Content/avatar/avatar4.png", username: "gidal5" },
-  { id: 5, image: "https://bootdey.com/img/Content/avatar/avatar1.png", username: "gidal6" },
-  { id: 6, image: "https://bootdey.com/img/Content/avatar/avatar6.png", username: "gidal7" },
-]
-
 export default function FollowListView(props) {
   const [search, setSearch] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState([]);
@@ -30,7 +13,7 @@ export default function FollowListView(props) {
   const [user_Id, setUserId] = React.useState('');
   const [followings, setFollowings] = useState([]);
   const [followers, setFollowers] = useState([]);
-  const [data, setData] = useState(followings)
+  // const [data, setData] = useState(followings)
 
   console.log(props.user_id);
 
@@ -88,6 +71,18 @@ export default function FollowListView(props) {
     }
   };
 
+  const selectOther = (item) => {
+    if (props.user_id === user_Id){
+      props.navigation.navigate('DmRead', {
+        userName: item.name
+      })
+    } else {
+      props.navigation.navigate('OtherUsersProfile', {
+        user_id: item.name
+    })
+    }
+  }
+
   const Followings = (props) => {
     return <View style={styles.container} >
       {/* <FeedSearchView/> */}
@@ -109,11 +104,9 @@ export default function FollowListView(props) {
           }}
           renderItem={({ item }) => {
             return (
-              <TouchableOpacity onPress={() => props.navigation.navigate('DmRead', {
-                userName: item.name
-              })} >
+              <TouchableOpacity onPress={() => selectOther(item)} >
                 <View style={styles.box} >
-                  <Image style={styles.image} source={{ uri: following[0].image }} />
+                  <Image style={styles.image} source={{ uri: followings[0].image }} />
                   <Text style={styles.username}>{item.name}</Text>
                 </View>
               </TouchableOpacity>

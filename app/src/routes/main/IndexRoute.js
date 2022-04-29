@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeRoute from './HomeRoute';
 import TestRoute from './TestRoute';
 import UserRoute from '../user/UserRoute'
+import DiaryReadView from '../../views/diary/read/DiaryReadView';
 
 const UserScreen = ({navigation}) => {
     return(
@@ -22,6 +23,12 @@ const TestScreen = ({navigation}) => {
     );
 }
 
+const DiaryReadScreen = ({ navigation }) => {
+    return (
+      <DiaryReadView navigation={navigation} />
+    );
+  }
+
 const Stack = createNativeStackNavigator();
 
 const IndexRoute = () =>{
@@ -32,6 +39,7 @@ const IndexRoute = () =>{
         >
             <Stack.Screen name="User" component={UserScreen} />
             <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="DiaryRead" component={DiaryReadScreen} />
             <Stack.Screen name="Test" component={TestScreen} />
         </Stack.Navigator>
     )

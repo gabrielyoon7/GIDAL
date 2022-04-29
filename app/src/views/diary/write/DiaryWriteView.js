@@ -1,5 +1,5 @@
 
-import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Box, Button, Center, Divider, HStack, Icon } from "native-base"
 import React, { useEffect, useState, } from 'react';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
@@ -21,6 +21,7 @@ const DiaryWriteView = (props) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [disclosure, setDisclosure] = React.useState('public');
   const [tags, setTags] = useState([]);
+  const [ref, setRef] = useState(null);
 
   const selectTags = (selectedTag) => {
     let newSet = tags;
@@ -81,7 +82,7 @@ const DiaryWriteView = (props) => {
         </TouchableOpacity>
         <Text style={styles.dateText} onPress={showDatePicker}>{Date}</Text>
         <Box alignItems="center">
-          <Button onPress={() => { saveDiary(); }} colorScheme="green">작성하기</Button> 
+          <Button onPress={() => { saveDiary(); }} colorScheme="green">작성하기</Button>
         </Box>
       </Box>
     )
@@ -89,41 +90,57 @@ const DiaryWriteView = (props) => {
 
   useEffect(() => { console.log("component did mount with useEffect!"); }, [tags]);
 
-  const SelectedTagsView = () => {
-    return(
-      tags.map((tag)=>(
-        <PressableTag key={tag} tag={tag} selectTags={selectTags}/>     
-       ))
-    )
-  }
+  // const SelectedTagsView = () => {
+  //   return (
+  //     tags.map((tag) => (
+  //       <PressableTag key={tag} tag={tag} selectTags={selectTags} styles={buttonStyles} />
+  //     ))
+  //   )
+  // }
+  const renderItem = ({ item }) => {
+    return (
+      <PressableTag key={item} tag={item} selectTags={selectTags} styles={buttonStyles} />
+    );
+  };
 
   return (
     <>
-    <View style={{backgroundColor:'white'}}>
-      <WriteDiaryHeader/>
-      <Divider />
-      <ScrollView style={{ backgroundColor: 'white' }}>
-        <Box style={styles.row} justifyContent="center" display="flex">
-          <ScrollView
-           horizontal={true}>
-             <SelectedTagsView/>
-          </ScrollView>
-          <TagSelector selectTags={selectTags} />
-        </Box>
+      <View style={{ backgroundColor: 'white' }}>
+        <WriteDiaryHeader />
         <Divider />
-        <InputTitle setTitle={setTitle} Title={Title} />
-        {/* <Divider /> */}
-        <InputContent setContent={setContent} content={Content} />
-        <DateTimePickerModal
-          isVisible={isDatePickerVisible}
-          mode="date"
-          onConfirm={handleConfirm}
-          onCancel={hideDatePicker}
-        />
+        <ScrollView style={{ backgroundColor: 'white' }}>
+          {/* <ScrollView
+            horizontal={true}
+          >
+            <SelectedTagsView />
+          </ScrollView> */}
+          <FlatList
+            horizontal={true}
+            data={tags}
+            ref={(ref) => {
+              setRef(ref);
+            }}
+            renderItem={renderItem}
+            keyExtractor={(item) => item}
+          />
+
+          <Box style={styles.row} justifyContent="center" display="flex">
+            <TagSelector selectTags={selectTags} />
+          </Box>
+          <Divider />
+          <InputTitle setTitle={setTitle} Title={Title} />
+          {/* <Divider /> */}
+          <InputContent setContent={setContent} content={Content} />
+          <DateTimePickerModal
+            isVisible={isDatePickerVisible}
+            mode="date"
+            onConfirm={handleConfirm}
+            onCancel={hideDatePicker}
+          />
 
 
-      </ScrollView>
-      <RadioDisclosure disclosure={disclosure} setDisclosure={setDisclosure} />
+        </ScrollView>
+        <RadioDisclosure disclosure={disclosure} setDisclosure={setDisclosure} />
       </View>
     </>
   );
@@ -132,6 +149,9 @@ const DiaryWriteView = (props) => {
 export default DiaryWriteView;
 
 const styles = StyleSheet.create({
+  allowIcon: {
+    width: 'auto',
+  },
   dateText: {
     fontSize: 20,
     flex: 5,
@@ -141,9 +161,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
 
   },
-  allowIcon: {
-    width: 'auto',
-  },
   row: {
     flexDirection: "row",
     flexWrap: "wrap",
@@ -152,4 +169,22 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
 
+});
+
+const buttonStyles = StyleSheet.create({
+  button: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 8,
+    borderRadius: 100,
+    backgroundColor: 'yellow', //태그버튼색 변경
+    width: 80
+  },
+  btnView: {
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: 'black',
+    borderRadius: 100,
+    borderWidth: 1.5,
+    margin: 3,
+  },
 });

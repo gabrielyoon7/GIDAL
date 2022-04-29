@@ -13,7 +13,7 @@ const ButtonTags = (props) => {
       styles.btnContainer
     }>
       {props.tags.map((tag) => (
-        <PressableTag key={tag} tag={tag} selectTags={props.selectTags}/>
+        <PressableTag key={tag} tag={tag} selectTags={props.selectTags} styles={buttonStyles}/>
       ))}
     </View>
   )
@@ -28,5 +28,24 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center'
+  },
+});
+
+const buttonStyles = StyleSheet.create({
+  button: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 8,
+    borderRadius: 100,
+    backgroundColor: '#78e08f', //태그버튼색 변경
+    width: 80
+  },
+  btnView: {
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: 'black',
+    borderRadius: 100,
+    borderWidth: 1.5,
+    margin: 3,
+    // marginTop: 15
   },
 });

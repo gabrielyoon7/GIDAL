@@ -9,24 +9,22 @@ const SearchTags = (props) => {
 
     const [ref, setRef] = useState(null);
     const renderItem = ({ item }) => {
-        // console.log(item)
         return (
-            <PressableTag key={item} tag={item} selectTags={props.selectTags}/>
-            // <PressableTag key={tag.name} tag={tag} />
+            <PressableTag key={item} tag={item} selectTags={props.selectTags} styles={buttonStyles} />
         );
     };
     const [dataSource, setDataSource] = useState(props.tags);
     const filterList = (text) => {
         let newData = props.tags;
         newData = props.tags.filter((item) => {
-            const itemData = item.name.toLowerCase();
+            const itemData = item.toLowerCase();
             const textData = text.toLowerCase();
             return itemData.indexOf(textData) > -1;
         })
         setDataSource(newData);
     }
     return (
-        <View style={{ justifyContent: 'center', flexDirection: "column", padding:23 }} >
+        <View style={{ justifyContent: 'center', flexDirection: "column", padding: 23 }} >
             <View>
                 <SearchBar
                     placeholder="검색어를 입력하세요"
@@ -38,7 +36,6 @@ const SearchTags = (props) => {
                     onClearPress={() => {
                         filterList("");
                     }}
-                   
                 />
             </View>
             <View style={
@@ -51,6 +48,9 @@ const SearchTags = (props) => {
                     }}
                     renderItem={renderItem}
                     keyExtractor={(item) => item}
+                    initialNumToRender={3}
+                    maxToRenderPerBatch={1}
+                    windowSize={1}
                 />
             </View>
 
@@ -60,32 +60,6 @@ const SearchTags = (props) => {
 
 export default SearchTags;
 
-
-// const styles = StyleSheet.create({
-//     input: {
-//         height: 40,
-//         margin: 12,
-//         borderWidth: 1,
-//         padding: 10,
-//     },
-//     button: {
-//         alignItems: 'center',
-//         justifyContent: 'center',
-//         paddingVertical: 8,
-//         borderRadius: 100,
-//         backgroundColor: '#dcdde1',
-//         width: 80
-//     },
-//     btnView: {
-//         borderWidth: StyleSheet.hairlineWidth,
-//         borderColor: 'black',
-//         borderRadius: 100,
-//         borderWidth: 2,
-//         margin: 5,
-//         marginTop: 15
-//     },
-// });
-
 const styles = StyleSheet.create({
     btnContainer: {
         // display: 'flex',
@@ -94,3 +68,22 @@ const styles = StyleSheet.create({
         width: '27%',
     },
 });
+
+const buttonStyles = StyleSheet.create({
+    button: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingVertical: 8,
+      borderRadius: 100,
+      backgroundColor: '#78e08f', //태그버튼색 변경
+      width: 80
+    },
+    btnView: {
+      borderWidth: StyleSheet.hairlineWidth,
+      borderColor: 'white',
+      borderRadius: 100,
+      borderWidth: 1.5,
+      margin: 3,
+      // marginTop: 15
+    },
+  });

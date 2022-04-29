@@ -1,31 +1,13 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
 const PressableTag = (props) => {
+  //PressableTag의 스타일은 부모가 결정해준다. -윤주현
     return(
-        <View style={styles.btnView}>
-          <Pressable style={styles.button} onPress={() => props.selectTags(props.tag)}>
+        <View style={props.styles.btnView}>
+          <Pressable style={props.styles.button} onPress={() => props.selectTags(props.tag)}>
             <Text>{props.tag}</Text>
           </Pressable>
         </View>
     )
 }
 export default PressableTag;
-
-const styles = StyleSheet.create({
-    button: {
-      alignItems: 'center',
-      justifyContent: 'center',
-      paddingVertical: 8,
-      borderRadius: 100,
-      backgroundColor: '#78e08f', //태그버튼색 변경
-      width: 80
-    },
-    btnView: {
-      borderWidth: StyleSheet.hairlineWidth,
-      borderColor: 'black',
-      borderRadius: 100,
-      borderWidth: 1.5,
-      margin: 5,
-      marginTop: 15
-    },
-  });

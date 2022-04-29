@@ -1,7 +1,7 @@
 
 import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Box, Button, Center, Divider, HStack, Icon } from "native-base"
-import React, { useState, } from 'react';
+import React, { useEffect, useState, } from 'react';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import axios from 'axios';
 import { AntDesign } from '@expo/vector-icons';
@@ -10,6 +10,7 @@ import InputTitle from "../../../components/diary/InputTitle";
 import RadioDisclosure from "../../../components/diary/RadioDisclosure";
 import TagSelector from "../../../components/diary/TagSelector";
 import InputContent from "../../../components/diary/InputContent";
+import PressableTag from '../../../components/tag/interaction/PressableTag';
 
 
 const DiaryWriteView = (props) => {
@@ -80,9 +81,19 @@ const DiaryWriteView = (props) => {
         </TouchableOpacity>
         <Text style={styles.dateText} onPress={showDatePicker}>{Date}</Text>
         <Box alignItems="center">
-          <Button onPress={() => { saveDiary(); }} colorScheme="green">작성하기</Button>
+          <Button onPress={() => { saveDiary(); }} colorScheme="green">작성하기</Button> 
         </Box>
       </Box>
+    )
+  }
+
+  useEffect(() => { console.log("component did mount with useEffect!"); }, [tags]);
+
+  const SelectedTagsView = () => {
+    return(
+      tags.map((tag)=>(
+        <PressableTag key={tag} tag={tag} selectTags={selectTags}/>     
+       ))
     )
   }
 
@@ -92,6 +103,10 @@ const DiaryWriteView = (props) => {
       <Divider />
       <ScrollView style={{ backgroundColor: 'white' }}>
         <Box style={styles.row} justifyContent="center" display="flex">
+          <ScrollView
+           horizontal={true}>
+             <SelectedTagsView/>
+          </ScrollView>
           <TagSelector selectTags={selectTags} />
         </Box>
         <Divider />

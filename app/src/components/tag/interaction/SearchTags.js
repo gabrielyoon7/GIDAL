@@ -11,7 +11,7 @@ const SearchTags = (props) => {
     const renderItem = ({ item }) => {
         // console.log(item)
         return (
-            <PressableTag key={item.name} tag={item} selectTags={props.selectTags}/>
+            <PressableTag key={item} tag={item} selectTags={props.selectTags}/>
             // <PressableTag key={tag.name} tag={tag} />
         );
     };
@@ -50,7 +50,7 @@ const SearchTags = (props) => {
                         setRef(ref);
                     }}
                     renderItem={renderItem}
-                    keyExtractor={(item) => item.name}
+                    keyExtractor={(item) => item}
                 />
             </View>
 

@@ -13,7 +13,7 @@ const ButtonTags = (props) => {
       styles.btnContainer
     }>
       {props.tags.map((tag) => (
-        <PressableTag key={tag.name} tag={tag} selectTags={props.selectTags}/>
+        <PressableTag key={tag} tag={tag} selectTags={props.selectTags}/>
       ))}
     </View>
   )

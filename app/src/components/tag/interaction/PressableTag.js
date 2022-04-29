@@ -3,8 +3,8 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 const PressableTag = (props) => {
     return(
         <View style={styles.btnView}>
-          <Pressable style={styles.button} onPress={() => props.selectTags(props.tag.name)}>
-            <Text>{props.tag.name}</Text>
+          <Pressable style={styles.button} onPress={() => props.selectTags(props.tag)}>
+            <Text>{props.tag}</Text>
           </Pressable>
         </View>
     )

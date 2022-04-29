@@ -38,16 +38,34 @@ const IndexRoute = () =>{
             initialRouteName="User"
             screenOptions={{ headerShown: false }}             
         >
-            <Stack.Screen name="User" component={UserScreen} />
-            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen
+             name="User" 
+             component={UserScreen} 
+             options={{
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+             }}
+            />
+            <Stack.Screen 
+             name="Home" 
+             component={HomeScreen} 
+             options={{
+              cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS ,
+             }}
+            />
             <Stack.Screen 
               name="DiaryRead" 
               component={DiaryReadScreen} 
               options={{
-                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+                cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS ,
               }}
               />
-            <Stack.Screen name="Test" component={TestScreen} />
+            <Stack.Screen
+             name="Test" 
+             component={TestScreen}
+             options={{
+              cardStyleInterpolator: CardStyleInterpolators.forRevealFromBottomAndroid  ,
+             }}
+            />
         </Stack.Navigator>
     )
 }

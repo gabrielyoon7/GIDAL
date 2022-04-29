@@ -6,7 +6,7 @@ import { config } from '../../../../config'
 import DiaryList from '../../diary/list/DiaryList';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-//레거시 파일 (삭제예정)
+// 이걸로 통합 예정
 
 export default function OtherUsersProfileView(props) {
   const [following, setFollowing] = useState([]); // 내가 팔로우

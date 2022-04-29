@@ -17,24 +17,24 @@ const FeedScreen = ({ navigation }) => {
     )
 }
 
-const FeedSearchScreen = ({ navigation }) => {
-  return (
-    <FeedSearchView navigation={navigation} />
-  )
-}
+// const FeedSearchScreen = ({ navigation }) => {
+//   return (
+//     <FeedSearchView navigation={navigation} />
+//   )
+// }
 
-const ProfileScreen = ({ route, navigation }) => {
-  return (
-    <ProfileView navigation={navigation}/>
-  )
-}
+// const ProfileScreen = ({ route, navigation }) => {
+//   return (
+//     <ProfileView navigation={navigation}/>
+//   )
+// }
 
-const OtherUsersProfileScreen = ({ route, navigation }) => {
-  const { user_id } = route.params;
-  return (
-    <OtherUsersProfileView navigation={navigation} user_id={user_id}/>
-  )
-}
+// const OtherUsersProfileScreen = ({ route, navigation }) => {
+//   const { user_id } = route.params;
+//   return (
+//     <OtherUsersProfileView navigation={navigation} user_id={user_id}/>
+//   )
+// }
 
 const DmReadScreen = ({ route, navigation }) => {
   const { userName } = route.params;
@@ -72,9 +72,9 @@ const SnsRoute = () => {
     >
         <RootStack.Group>
           <RootStack.Screen name="FeedList" component={FeedScreen} />
-          <RootStack.Screen name="FeedSearch" component={FeedSearchScreen} />
-          <RootStack.Screen name="Profile" component={ProfileScreen} />
-          <RootStack.Screen name="OtherUsersProfile" component={OtherUsersProfileScreen} />
+          {/* <RootStack.Screen name="FeedSearch" component={FeedSearchScreen} /> */}
+          {/* <RootStack.Screen name="Profile" component={ProfileScreen} /> */}
+          {/* <RootStack.Screen name="OtherUsersProfile" component={OtherUsersProfileScreen} /> */}
           <RootStack.Screen name="DmRead" component={DmReadScreen} />
           <RootStack.Screen name="DmWrite" component={DmWriteScreen} />         
           <RootStack.Screen name="FollowList" component={FollowListScreen} />   

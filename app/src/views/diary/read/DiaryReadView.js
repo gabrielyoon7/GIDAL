@@ -103,7 +103,7 @@ const DiaryReadView = (props) => {
                     </Text>
                     <Box  style={styles.row} justifyContent="center" display="flex">
                         <TouchableOpacity onPress={
-                            () => props.navigation.navigate('OtherUsersProfile', {
+                            () => props.navigation.navigate('UserProfile', {
                                 user_id: diary.user_id
                             })
                         }>

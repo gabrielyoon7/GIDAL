@@ -77,7 +77,7 @@ export default function FollowListView(props) {
         userName: item.name
       })
     } else {
-      props.navigation.navigate('OtherUsersProfile', {
+      props.navigation.navigate('UserProfile', {
         user_id: item.name
     })
     }

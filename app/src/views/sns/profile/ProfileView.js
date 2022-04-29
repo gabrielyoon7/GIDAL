@@ -6,6 +6,8 @@ import { config } from '../../../../config'
 import DiaryList from '../../diary/list/DiaryList';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+//레거시 파일 (삭제예정)
+
 // const friendsData = [
 //     {id:1, image: "https://bootdey.com/img/Content/avatar/avatar6.png", username:"gidal1"},
 //     {id:2, image: "https://bootdey.com/img/Content/avatar/avatar2.png", username:"gidal2"},

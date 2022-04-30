@@ -1,7 +1,7 @@
 import { Agenda } from 'react-native-calendars';
 import { View, NativeBaseProvider, Divider } from "native-base";
 import { StyleSheet, TouchableOpacity, Text, Alert, TextInput } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AntDesign  } from "@expo/vector-icons";
 import AddTodo from '../todo/AddTodo';
 
@@ -14,12 +14,30 @@ const AgendaView = () => {
         "2022-04-30": [{ name: "item 3 - any js object",}, { name: "any js object"}]
     });
     const todayDate = new Date().toJSON().split('T')[0];
-    const [todo, setTodo] = useState("");
+    // const [todo, setTodo] = useState([
+    //     {date: "2022-04-16", contents: [{ name: "item 1 - any js object"}]},
+    //     {date: "2022-04-23", contents: [{ name: "item 2 - any js object"}]},
+    //     {date: "2022-04-25", contents: [{ name: "item 3 - any js object" }, { name: "any js object"}]},
+    //     {date: "2022-04-30", contents: [{ name: "item 3 - any js object",}, { name: "any js object"}]}
+    // ]);
     const [selectedDate, setSelectedDate] = useState(todayDate);
+
+    // useEffect (() => {
+    //     let val = {};
+    //     todo.forEach((item) => {
+    //         val[item.date] = item.contents
+    //     })
+    //     console.log(val);
+    //     // setItems(val)
+    // },[todo])
+
+    // useEffect (() => {
+    //     console.log(JSON.parse(val));
+    // },[itemStr])
 
     const renderItem = (item) => (
         <TouchableOpacity
-            style={[styles.item, { height: item.height }]}
+            style={[styles.item, { height: item }]}
             onPress={() => Alert.alert(item.name)}
         >
             <Text>{item.name}</Text>
@@ -46,7 +64,7 @@ const AgendaView = () => {
     }
 
     const loadItems = (day) => {
-        console.log(day);
+        // console.log(items);
         setTimeout(() => {
             for (let i = -15; i < 85; i++) {
                 const time = day.timestamp + i  * 24 * 60 * 60 * 1000;

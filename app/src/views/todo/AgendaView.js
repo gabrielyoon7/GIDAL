@@ -6,30 +6,24 @@ import { AntDesign  } from "@expo/vector-icons";
 import AddTodo from '../todo/AddTodo';
 
 const AgendaView = () => {
-    const [items, setItems] = useState({
-        "2022-04-16": [{ name: "item 1 - any js object"}],
-        "2022-04-23": [{ name: "item 2 - any js object", height: 80}],
-        "2022-04-24": [],
-        "2022-04-25": [{ name: "item 3 - any js object" }, { name: "any js object"}],
-        "2022-04-30": [{ name: "item 3 - any js object",}, { name: "any js object"}]
-    });
+    const [items, setItems] = useState({});
     const todayDate = new Date().toJSON().split('T')[0];
-    // const [todo, setTodo] = useState([
-    //     {date: "2022-04-16", contents: [{ name: "item 1 - any js object"}]},
-    //     {date: "2022-04-23", contents: [{ name: "item 2 - any js object"}]},
-    //     {date: "2022-04-25", contents: [{ name: "item 3 - any js object" }, { name: "any js object"}]},
-    //     {date: "2022-04-30", contents: [{ name: "item 3 - any js object",}, { name: "any js object"}]}
-    // ]);
+    const [todo, setTodo] = useState([
+        {date: "2022-04-16", contents: [{ name: "item 1 - any js object"}]},
+        {date: "2022-04-23", contents: [{ name: "item 2 - any js object"}]},
+        {date: "2022-04-25", contents: [{ name: "item 3 - any js object" }, { name: "any js object"}]},
+        {date: "2022-04-30", contents: [{ name: "item 3 - any js object",}, { name: "any js object"}]}
+    ]);
     const [selectedDate, setSelectedDate] = useState(todayDate);
 
-    // useEffect (() => {
-    //     let val = {};
-    //     todo.forEach((item) => {
-    //         val[item.date] = item.contents
-    //     })
-    //     console.log(val);
-    //     // setItems(val)
-    // },[todo])
+    useEffect (() => {
+        let val = {};
+        todo.forEach((item) => {
+            val[item.date] = item.contents
+        })
+        setItems(val)
+        console.log(items);
+    },[todo])
 
     // useEffect (() => {
     //     console.log(JSON.parse(val));
@@ -37,7 +31,7 @@ const AgendaView = () => {
 
     const renderItem = (item) => (
         <TouchableOpacity
-            style={[styles.item, { height: item }]}
+            style={[styles.item]}
             onPress={() => Alert.alert(item.name)}
         >
             <Text>{item.name}</Text>

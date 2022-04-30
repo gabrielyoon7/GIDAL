@@ -6,8 +6,10 @@ const mongoose = require('mongoose');
 
 const  diariesRouter = require('./routes/diaries');
 const  usersRouter = require('./routes/users');
+const  todoRouter = require('./routes/todo');
 const { Diary } = require("./models/Diary");
 const { User } = require("./models/User");
+const { UserTodo } = require("../models/UserTodo");
 
 //application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({limit: "50mb", extended: true}));
@@ -72,3 +74,4 @@ app.listen(port, function(){
 
 app.use('/diariesRouter', diariesRouter);
 app.use('/usersRouter', usersRouter);
+app.use('/todoRouter', todoRouter);

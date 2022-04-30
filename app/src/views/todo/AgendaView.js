@@ -1,5 +1,5 @@
 import { Agenda } from 'react-native-calendars';
-import { View, NativeBaseProvider } from "native-base";
+import { View, NativeBaseProvider, Divider } from "native-base";
 import { StyleSheet, TouchableOpacity, Text, Alert, TextInput } from 'react-native';
 import React, { useState } from 'react';
 import { AntDesign  } from "@expo/vector-icons";
@@ -15,7 +15,7 @@ const AgendaView = () => {
     });
     const todayDate = new Date().toJSON().split('T')[0];
     const [todo, setTodo] = useState("");
-    const [selectedDate, setSelectedDate] = useState('');
+    const [selectedDate, setSelectedDate] = useState(todayDate);
 
     const renderItem = (item) => (
         <TouchableOpacity
@@ -31,12 +31,35 @@ const AgendaView = () => {
     const renderEmptyDate = () => {
         return (
             <View style={styles.emptyDate}>
-                <Text>This is empty date!</Text>
+                <Divider />
             </View>
         );
     };
 
     const rowHasChanged = (r1, r2) => r1.name !== r2.name;
+
+    const timeToString = (time) => {
+        const date = new Date(time);
+        return date.toISOString().split('T')[0];
+    }
+
+    const loadItems = (day) => {
+        console.log(day);
+        setTimeout(() => {
+            for (let i = -15; i < 85; i++) {
+                const time = day.timestamp + i  * 24 * 60 * 60 * 1000;
+                const strTime = timeToString(time);
+                if(!items[strTime]) {
+                    items[strTime] = [];
+                }
+            }
+            const newItems = {};
+            Object.keys(items).forEach((key) => {
+                newItems[key] = items[key];
+            });
+            setItems(newItems);
+        }, 1000);
+    }
 
     return (
         <NativeBaseProvider>
@@ -44,7 +67,8 @@ const AgendaView = () => {
             <AddTodo date={selectedDate}/>
             <Agenda
                 items={items}
-                selected={todayDate}
+                loadItemsForMonth={loadItems}
+                selected={selectedDate}
                 renderItem={renderItem}
                 renderEmptyDate={renderEmptyDate}
                 rowHasChanged={rowHasChanged}

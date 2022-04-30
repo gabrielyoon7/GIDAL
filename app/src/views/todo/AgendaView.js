@@ -36,7 +36,9 @@ const AgendaView = () => {
         );
     };
 
-    const rowHasChanged = (r1, r2) => r1.name !== r2.name;
+    const rowHasChanged = (r1, r2) => {
+        return r1.name !== r2.name;
+    }
 
     const timeToString = (time) => {
         const date = new Date(time);
@@ -73,6 +75,9 @@ const AgendaView = () => {
                 renderEmptyDate={renderEmptyDate}
                 rowHasChanged={rowHasChanged}
                 onDayPress={(day) => {setSelectedDate(day.dateString)}}
+                onDayChange={(day) => {
+                    setSelectedDate(day.dateString)
+                  }}
             />
         </View>
         </NativeBaseProvider>

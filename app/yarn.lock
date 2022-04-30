@@ -2415,6 +2415,11 @@
     "mime-types" "~2.1.34"
     "negotiator" "0.6.3"
 
+"add@^2.0.6":
+  "integrity" "sha1-JI8Kn25aUo7yKV2+7DBTITCuIjU="
+  "resolved" "https://registry.npmjs.org/add/-/add-2.0.6.tgz"
+  "version" "2.0.6"
+
 "anser@^1.4.9":
   "integrity" "sha512-hCv9AqTQ8ycjpSd3upOJd7vFwW1JaoYQ7tpham03GJ1ca8/65rqn0RpaWpItOAd6ylW9wAw6luXYPJIyPFVOww=="
   "resolved" "https://registry.npmjs.org/anser/-/anser-1.4.10.tgz"
@@ -5553,6 +5558,11 @@
   "resolved" "https://registry.npmjs.org/options/-/options-0.0.6.tgz"
   "version" "0.0.6"
 
+"or@^0.2.0":
+  "integrity" "sha1-mQTqYeJZQ/k14g9PR0ngoUGoK2o="
+  "resolved" "https://registry.npmjs.org/or/-/or-0.2.0.tgz"
+  "version" "0.2.0"
+
 "ora@^3.4.0":
   "integrity" "sha512-eNwHudNbO1folBP3JsZ19v9azXWtQZjICdr3Q0TDPIaeBQ3mXLrh54wM+er0+hSp+dWKf+Z8KM58CYzEyIYxYg=="
   "resolved" "https://registry.npmjs.org/ora/-/ora-3.4.0.tgz"
@@ -5900,12 +5910,10 @@
     "nullthrows" "^1.1.1"
 
 "react-native-dynamic-search-bar@github:WrathChaos/react-native-dynamic-search-bar#expo":
-  "integrity" "sha512-ExxvCfFXC2RuGDDdGVjBChgnheTB7UR3wsJjv0cDjHfJBcm1ZAHi8ce7GIGWGMntOH2TJGVq58A0NQhqYjX5fQ=="
   "resolved" "git+ssh://git@github.com/WrathChaos/react-native-dynamic-search-bar.git#91f5aeeec42fb4f9cf0a41d5e1dcd17dd0f1968d"
   "version" "2.0.2"
 
 "react-native-dynamic-vector-icons@>= 1.1.4", "react-native-dynamic-vector-icons@github:WrathChaos/react-native-dynamic-vector-icons#expo":
-  "integrity" "sha512-nu0Es+f7id+Phm0uqOFNREUqWIkX0ckvYNSuE5GIn48qpzVIjQwPBCmM3EgP+gw0s9RMrSjvyX4CwgiCS3qokA=="
   "resolved" "git+ssh://git@github.com/WrathChaos/react-native-dynamic-vector-icons.git#5335e80080125505044e6d60bb7c79cb8afe5971"
   "version" "0.1.1"
 
@@ -7297,6 +7305,11 @@
     "string-width" "^4.2.0"
     "y18n" "^5.0.5"
     "yargs-parser" "^20.2.2"
+
+"yarn@^1.22.18":
+  "integrity" "sha512-oFffv6Jp2+BTUBItzx1Z0dpikTX+raRdqupfqzeMKnoh7WD6RuPAxcqDkMUy9vafJkrB0YaV708znpuMhEBKGQ=="
+  "resolved" "https://registry.npmjs.org/yarn/-/yarn-1.22.18.tgz"
+  "version" "1.22.18"
 
 "yocto-queue@^0.1.0":
   "integrity" "sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q=="

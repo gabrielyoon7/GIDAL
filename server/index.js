@@ -9,7 +9,7 @@ const  usersRouter = require('./routes/users');
 const  todoRouter = require('./routes/todo');
 const { Diary } = require("./models/Diary");
 const { User } = require("./models/User");
-const { UserTodo } = require("../models/UserTodo");
+const { UserTodo } = require("./models/UserTodo");
 
 //application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({limit: "50mb", extended: true}));
@@ -22,7 +22,7 @@ mongoose.connect(`mongodb+srv://soyoung:qnstksalcqudfufcjfl@cluster0.c7eeq.mongo
 .catch(err => console.log(err))
 
 //저장 테스트
-var newDiary = new Diary({user_id:'202212069', date:'2022-04-05', title:'다이어리1', content:'내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용', disclosure:'private'});
+// var newDiary = new Diary({user_id:'202212069', date:'2022-04-05', title:'다이어리1', content:'내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용', disclosure:'private'});
 
 // var newUser = new User({
 //   user_id : "202212069",

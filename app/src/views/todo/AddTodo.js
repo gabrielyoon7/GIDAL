@@ -4,10 +4,13 @@ import { AntDesign } from "@expo/vector-icons";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios'
 import { config } from '../../../config'
+import { useIsFocused } from '@react-navigation/native';
 
 const AddTodo = ({date}) => {
     const [user_Id, setUserId] = useState('');
     const [todo, setTodo] = useState("");
+    const [firstRecord, setFirstRecord] = useState(true); // 처음 todolist 사용하는 유저 구분
+    const isFocused = useIsFocused();
 
     React.useEffect(() => {
         // getData();
@@ -27,22 +30,72 @@ const AddTodo = ({date}) => {
     
    
     console.log("selected Date : "+date);
+    // console.log(user_Id);
 
-   console.log(user_Id);
+
+  const getItems = () => {
+        axios.post(config.ip + ':5000/todoRouter/findOwn', {
+          data: {
+              user_id: user_Id
+          }
+      }).then((response) => {
+        if(response.data[0]==null){
+          setFirstRecord(true)
+        } else{
+          setFirstRecord(false);
+        }
+          // console.log(response.data[0]==null);
+      }).catch(function (error) {
+          console.log(error);
+          setFirstRecord(true)
+      })
+      }
+
+      // console.log(firstRecord);
+  
+      useEffect(() => {
+        getItems();
+    }, [isFocused, user_Id]);
+
+    const addUserTodo = () => {
+      axios.post(config.ip + ':5000/todoRouter/todoSave', {
+        data: {
+          user_id: user_Id,
+          date: date,
+          todo: todo,
+        }
+      }).then((response) => {
+        if (response.data.status === 'success') {
+          console.log('to do save');
+        }
+      }).catch(function (error) {
+        console.log(error);
+      })
+    }
+
     const addTodoData = () => {
-        axios.post(config.ip + ':5000/todoRouter/todoSave', {
-            data: {
-              user_id: user_Id,
+      if(firstRecord == false){
+        console.log("기록 있는 유저");
+        addUserTodo()
+      } else {
+        axios.post(config.ip + ':5000/todoRouter/save', {
+          data: {
+            user_id: user_Id,
+            to_do_list: {
               date: date,
-              todo: todo,
+              contents: {
+                name: todo,
+              }
             }
-          }).then((response) => {
-            if (response.data.status === 'success') {
-              console.log('to do save');
-            }
-          }).catch(function (error) {
-            console.log(error);
-          })
+          }
+        }).then((response) => {
+          if (response.data.status === 'success') {
+            console.log('to do save');
+          }
+        }).catch(function (error) {
+          console.log(error);
+        })
+      }
         // console.log(todo);
         setTodo('')
     }

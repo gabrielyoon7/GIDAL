@@ -6,7 +6,7 @@ const { UserTodo } = require("../models/UserTodo");
 router.post('/save', function(req, res) {
     console.log(req.body);
     // 데이터 저장
-    var newTodo = new UserTodo(req.body.data.user_id);
+    var newTodo = new UserTodo(req.body.data);
     newTodo.save(function(error, data){
         if(error){
             console.log(error);
@@ -46,7 +46,7 @@ router.post('/findOwn', function(req, res, next) {
         res.json(todos)
     }).catch( (err) => {
         console.log(err);
-        next(err)
+        res.json({status: 'error', error})
     });
 });
 

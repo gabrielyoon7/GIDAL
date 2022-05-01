@@ -55,7 +55,7 @@ const AddTodo = ({date}) => {
   
       useEffect(() => {
         getItems();
-    }, [isFocused, user_Id]);
+    }, [isFocused, todo]);
 
     const addUserTodo = () => {
       axios.post(config.ip + ':5000/todoRouter/todoSave', {
@@ -67,6 +67,7 @@ const AddTodo = ({date}) => {
       }).then((response) => {
         if (response.data.status === 'success') {
           console.log('to do save');
+          getItems();
         }
       }).catch(function (error) {
         console.log(error);
@@ -98,6 +99,7 @@ const AddTodo = ({date}) => {
       }
         // console.log(todo);
         setTodo('')
+        getItems()
     }
 
     return (

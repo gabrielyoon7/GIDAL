@@ -20,13 +20,19 @@ router.post('/save', function(req, res) {
 
 router.post('/todoSave', function(req, res) {
     UserTodo.updateOne(
-        { user_id: req.body.data.user_id }, 
-        {$push: {to_do_list: {
-            "date": req.body.data.date,
-            "contents": {
-                "name": req.body.data.todo,
+        { user_id: req.body.data.user_id}, 
+        {
+            $set: {
+                to_do_list : {
+                    "date": req.body.data.date,
+                    "contents": {
+                        $push:{
+                            name: req.body.data.todo,
+                        }
+                    }
+                },  
             },
-        }}}).exec((error, user)=>{
+        }).exec((error, user)=>{
             if(error){
                 console.log(error);
                 return res.json({status: 'error', error})

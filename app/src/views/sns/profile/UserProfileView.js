@@ -9,15 +9,35 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 // 이걸로 통합 예정
 
 export default function UserProfileView(props) {
-  const [following, setFollowing] = useState([]); // 내가 팔로우
-  const [userFollowing, setUserFollowing] = useState([]); // 다른 유저가 팔로우
-  const [profileImg, setProfileImg] = useState();
-  const [date, setSelectedDate] = React.useState(props.selectedDate);
-  const [followText, setFollowText] = useState('팔로우');
-  const [user_Id, setUserId] = React.useState('');
-  const [userFollowerNum, setuserFollowerNum] = useState(0);
-  const [userFollowNum, setuserFollowNum] = useState(0);
+
   console.log('UserProfileView : ' + user_Id);
+
+  const [date, setSelectedDate] = React.useState(props.selectedDate);
+  const [profileImg, setProfileImg] = useState();
+  const [user_Id, setUserId] = useState('loading');
+  console.log(user_Id);
+
+  React.useEffect(() => {
+    try {
+      setUserId(props.navigation.getState().routes[2].params.user_id);
+    } catch (error) {
+      // console.log(error);
+      try{
+        AsyncStorage.getItem('userInfo')
+        .then(value => {
+          if (value != null) {
+            const UserInfo = JSON.parse(value);
+            setUserId(UserInfo[0].user_id);
+          }
+        }
+        )
+  
+      }
+      catch(e){
+        // console.log(e);
+      }
+    }
+  })
 
   const ProfileHeader = () => {
     return (

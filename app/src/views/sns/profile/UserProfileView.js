@@ -26,14 +26,14 @@ export default function UserProfileView(props) {
     try {
 
       console.log('other profile!');
-      const idx = new_routes.findIndex(r => r.name==="UserProfile")
+      const idx = new_routes.findIndex(r => r.name === "UserProfile")
       // console.log(new_routes[idx].params);
       // console.log(idx);
-      if(idx!=-1 && new_routes[idx].params!=undefined) {
+      if (idx != -1 && new_routes[idx].params != undefined) {
         // setUserId(props.navigation.getState().routes[2].params.user_id);
         setUserId(new_routes[idx].params.user_id);
       }
-      if(new_routes[idx].params==undefined) {
+      if (new_routes[idx].params == undefined) {
         try {
           console.log('my profile!')
           AsyncStorage.getItem('userInfo')
@@ -44,7 +44,7 @@ export default function UserProfileView(props) {
               }
             }
             )
-  
+
         }
         catch (e) {
           // console.log(e);
@@ -86,17 +86,35 @@ export default function UserProfileView(props) {
           <Text style={styles.name}>{user_Id}</Text>
           <HStack alignItems="center" my="1">
             <View style={styles.buttonStyle}>
-              <TouchableOpacity onPress={() => props.navigation.navigate('FollowList', {
-                user_id: user_Id
-              })} >
+              <TouchableOpacity
+                onPress={
+                  () => props.navigation.navigate('Home', {
+                    screen: 'Sns',
+                    params: {
+                        screen: 'FollowList',
+                        params: {
+                          user_id: user_Id,
+                        },
+                    }})
+                }
+              >
                 <Text style={styles.followText}>팔로워</Text>
                 <Text style={styles.followText}>{userFollowerNum}</Text>
               </TouchableOpacity>
             </View>
             <View style={styles.buttonStyle}>
-              <TouchableOpacity onPress={() => props.navigation.navigate('FollowList', {
-                user_id: user_Id
-              })} >
+              <TouchableOpacity
+                onPress={
+                  () => props.navigation.navigate('Home', {
+                    screen: 'Sns',
+                    params: {
+                        screen: 'FollowList',
+                        params: {
+                          user_id: user_Id,
+                        },
+                    }})
+                }
+              >
                 <Text style={styles.followText}>팔로잉</Text>
                 <Text style={styles.followText}>{userFollowingNum}</Text>
               </TouchableOpacity>
@@ -110,7 +128,7 @@ export default function UserProfileView(props) {
   return (
     <>
       <ProfileHeader />
-      <DiaryList selectedDate={date} navigation={props.navigation} user_Id={props.user_id} />
+      <DiaryList selectedDate={date} navigation={props.navigation} user_Id={user_Id} />
     </>
   )
 }

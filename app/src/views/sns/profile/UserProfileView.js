@@ -88,13 +88,10 @@ export default function UserProfileView(props) {
             <View style={styles.buttonStyle}>
               <TouchableOpacity
                 onPress={
-                  () => props.navigation.navigate('Home', {
-                    screen: 'Sns',
+                  () => props.navigation.navigate('Profile', {
+                    screen: 'FollowList',
                     params: {
-                        screen: 'FollowList',
-                        params: {
                           user_id: user_Id,
-                        },
                     }})
                 }
               >
@@ -105,13 +102,10 @@ export default function UserProfileView(props) {
             <View style={styles.buttonStyle}>
               <TouchableOpacity
                 onPress={
-                  () => props.navigation.navigate('Home', {
-                    screen: 'Sns',
+                  () => props.navigation.navigate('Profile', {
+                    screen: 'FollowList',
                     params: {
-                        screen: 'FollowList',
-                        params: {
                           user_id: user_Id,
-                        },
                     }})
                 }
               >

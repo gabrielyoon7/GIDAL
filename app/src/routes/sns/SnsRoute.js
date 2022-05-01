@@ -3,13 +3,13 @@ import { View, Text, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import FeedView from '../../views/sns/feed/FeedView';
-import FeedSearchView from '../../views/sns/feed/FeedSearchView';
-import FeedDiaryListView from '../../views/sns/feed/FeedDiaryListView';
-import ProfileView from '../../views/sns/profile/ProfileView';
-import FollowListView from '../../views/sns/profile/FollowListView';
-import DmListView from '../../views/sns/dm/DmListView';
-import DmWriteView from '../../views/sns/dm/DmWriteView';
-import OtherUsersProfileView from '../../views/sns/profile/OtherUsersProfileView';
+// import FeedSearchView from '../../views/sns/feed/FeedSearchView';
+// import FeedDiaryListView from '../../views/sns/feed/FeedDiaryListView';
+// import ProfileView from '../../views/sns/profile/ProfileView';
+// import FollowListView from '../../views/sns/profile/FollowListView';
+// import DmListView from '../../views/sns/dm/DmListView';
+// import DmWriteView from '../../views/sns/dm/DmWriteView';
+// import OtherUsersProfileView from '../../views/sns/profile/OtherUsersProfileView';
 
 const FeedScreen = ({ navigation }) => {
     return (

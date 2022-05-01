@@ -36,32 +36,32 @@ const FeedScreen = ({ navigation }) => {
 //   )
 // }
 
-const DmReadScreen = ({ route, navigation }) => {
-  const { userName } = route.params;
-  return (
-    <DmListView navigation={navigation} userName = {userName}/>
-  )
-}
+// const DmReadScreen = ({ route, navigation }) => {
+//   const { userName } = route.params;
+//   return (
+//     <DmListView navigation={navigation} userName = {userName}/>
+//   )
+// }
 
-const DmWriteScreen = ({ navigation, route }) => {
-  const { userName } = route.params;
-  return (
-    <DmWriteView navigation={navigation} userName = {userName}/>
-  )
-}
+// const DmWriteScreen = ({ navigation, route }) => {
+//   const { userName } = route.params;
+//   return (
+//     <DmWriteView navigation={navigation} userName = {userName}/>
+//   )
+// }
 
-const FollowListScreen = ({ navigation, route }) => {
-  const { user_id } = route.params;
-  return (
-    <FollowListView navigation={navigation} user_id={user_id}/>
-  )
-}
+// const FollowListScreen = ({ navigation, route }) => {
+//   const { user_id } = route.params;
+//   return (
+//     <FollowListView navigation={navigation} user_id={user_id}/>
+//   )
+// }
 
-const FeedDiaryListScreen = ({ route, navigation }) => {
-  return (
-    <FeedDiaryListView navigation={navigation}/>
-  )
-}
+// const FeedDiaryListScreen = ({ route, navigation }) => {
+//   return (
+//     <FeedDiaryListView navigation={navigation}/>
+//   )
+// }
 
 const RootStack = createNativeStackNavigator();
 
@@ -75,10 +75,10 @@ const SnsRoute = () => {
           {/* <RootStack.Screen name="FeedSearch" component={FeedSearchScreen} /> */}
           {/* <RootStack.Screen name="Profile" component={ProfileScreen} /> */}
           {/* <RootStack.Screen name="OtherUsersProfile" component={OtherUsersProfileScreen} /> */}
-          <RootStack.Screen name="DmRead" component={DmReadScreen} />
+          {/* <RootStack.Screen name="DmRead" component={DmReadScreen} />
           <RootStack.Screen name="DmWrite" component={DmWriteScreen} />         
           <RootStack.Screen name="FollowList" component={FollowListScreen} />   
-          <RootStack.Screen name="FeedDiaryList" component={FeedDiaryListScreen} />  
+          <RootStack.Screen name="FeedDiaryList" component={FeedDiaryListScreen} />   */}
         </RootStack.Group>
     </RootStack.Navigator>
   );

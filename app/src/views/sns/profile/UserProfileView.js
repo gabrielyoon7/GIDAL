@@ -51,7 +51,7 @@ export default function UserProfileView(props) {
         }
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
     getUserData(user_Id);
   })

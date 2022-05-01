@@ -7,8 +7,9 @@ const todoSchema = mongoose.Schema({
         unique: 1,
         required: true
     },
-    date: [{
-        selected_date: [{
+    to_do_list: [{
+        date: Date,
+        contents: [{
             name: String
         }]
     }]

@@ -12,7 +12,8 @@ const AgendaView = () => {
         {date: "2022-04-16", contents: [{ name: "item 1 - any js object"}]},
         {date: "2022-04-23", contents: [{ name: "item 2 - any js object"}]},
         {date: "2022-04-25", contents: [{ name: "item 3 - any js object" }, { name: "any js object"}]},
-        {date: "2022-04-30", contents: [{ name: "item 3 - any js object",}, { name: "any js object"}]}
+        {date: "2022-04-30", contents: [{ name: "item 3 - any js object",}, { name: "any js object"}]},
+        {date: "2022-05-01", contents: [{ name: "item 3 - any js object",}, { name: "any js object"}]}
     ]);
     const [selectedDate, setSelectedDate] = useState(todayDate);
 
@@ -36,7 +37,7 @@ const AgendaView = () => {
         >
             <Text>{item.name}</Text>
           
-            <AntDesign name="delete" size={24} color="red" onPress={() => handleDelete(item.id)} />
+            <AntDesign name="delete" size={24} onPress={() => handleDelete(item.id)} />
         </TouchableOpacity>
     );
 
@@ -110,8 +111,6 @@ const styles = StyleSheet.create({
       flex: 1,
       paddingTop: 30
     },
-    
-
   });
 
 export default AgendaView;

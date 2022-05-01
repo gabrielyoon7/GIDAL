@@ -8,6 +8,7 @@ import TestMainView from '../../views/test/TestMainView';
 import CarouselTestView from '../../views/test/CarouselTestView';
 import SliderTestView from '../../views/test/SliderTestView';
 import RichTextTestView from '../../views/test/RichTextTestView';
+import DiaryWriteTestVeiw from '../../views/test/DiaryWriteTestVeiw';
 
   
 const TestMainScreen = (props) => {
@@ -35,6 +36,12 @@ function RichTextTestScreen() {
   );
 }
 
+function DiaryWriteTestScreen(){
+  return (
+    <DiaryWriteTestVeiw/>
+  );
+}
+
 
 const Drawer = createDrawerNavigator();
 
@@ -45,6 +52,7 @@ const MyDrawer = (props) => {
       <Drawer.Screen name="CarouselTest" component={CarouselTestScreen} />
       <Drawer.Screen name="SliderTest" component={SliderTestScreen} />
       <Drawer.Screen name="RichTextTest" component={RichTextTestScreen} />
+      <Drawer.Screen name="DiartWriteTest" component={DiaryWriteTestScreen} />
     </Drawer.Navigator>
   );
 }

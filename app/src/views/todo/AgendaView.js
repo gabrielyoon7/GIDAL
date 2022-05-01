@@ -1,21 +1,73 @@
 import { Agenda } from 'react-native-calendars';
 import { View, NativeBaseProvider, Divider } from "native-base";
-import { StyleSheet, TouchableOpacity, Text, Alert, TextInput } from 'react-native';
+import { StyleSheet, TouchableOpacity, Text, Alert } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { AntDesign  } from "@expo/vector-icons";
 import AddTodo from '../todo/AddTodo';
+import { useIsFocused } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios'
+import { config } from '../../../config'
 
 const AgendaView = () => {
     const [items, setItems] = useState({});
     const todayDate = new Date().toJSON().split('T')[0];
+    const isFocused = useIsFocused();
+    const [user_Id, setUserId] = useState('');
     const [todo, setTodo] = useState([
-        {date: "2022-04-16", contents: [{ name: "item 1 - any js object"}]},
-        {date: "2022-04-23", contents: [{ name: "item 2 - any js object"}]},
-        {date: "2022-04-25", contents: [{ name: "item 3 - any js object" }, { name: "any js object"}]},
-        {date: "2022-04-30", contents: [{ name: "item 3 - any js object",}, { name: "any js object"}]},
-        {date: "2022-05-01", contents: [{ name: "item 3 - any js object",}, { name: "any js object"}]}
+        // {date: "2022-04-16", contents: [{ name: "item 1 - any js object"}]},
+        // {date: "2022-04-23", contents: [{ name: "item 2 - any js object"}]},
+        // {date: "2022-04-25", contents: [{ name: "item 3 - any js object" }, { name: "any js object"}]},
+        // {date: "2022-04-30", contents: [{ name: "item 3 - any js object",}, { name: "any js object"}]},
+        // {date: "2022-05-01", contents: [{ name: "item 3 - any js object",}, { name: "any js object"}]}
     ]);
     const [selectedDate, setSelectedDate] = useState(todayDate);
+
+    React.useEffect(() => {
+        // getData();
+        try {
+          AsyncStorage.getItem('userInfo')
+            .then(value => {
+              if (value != null) {
+                const UserInfo = JSON.parse(value);
+                // console.log(UserInfo[0].user_id);
+                setUserId(UserInfo[0].user_id);
+              }
+            }
+            )
+        } catch (error) {
+          console.log(error);
+        }
+      }, [])
+
+    //   console.log(user_Id);
+    const getItems = () => {
+        let result = []
+        axios.post(config.ip + ':5000/todoRouter/findOwn', {
+          data: {
+              user_id: user_Id
+          }
+      }).then((response) => {
+          console.log(response.data[0]);
+        //   let data = JSON.stringify(response.data[0])
+        //   data = JSON.parse(data);
+          if (response.data.length > 0) {
+            response.data.forEach((item) => {
+                item.to_do_list.forEach((data) => {
+                    result.push(data);
+                });
+              });
+          }
+          setTodo(result);
+      }).catch(function (error) {
+          console.log(error);
+      })
+      }
+  
+      useEffect(() => {
+        getItems();
+    }, [isFocused, user_Id]);
+  
 
     useEffect (() => {
         let val = {};

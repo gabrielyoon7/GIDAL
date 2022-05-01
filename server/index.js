@@ -25,11 +25,25 @@ mongoose.connect(`mongodb+srv://soyoung:qnstksalcqudfufcjfl@cluster0.c7eeq.mongo
 // var newDiary = new Diary({user_id:'202212069', date:'2022-04-05', title:'다이어리1', content:'내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용', disclosure:'private'});
 
 // var newTodo = new UserTodo({
-//   user_id : "202212069",
+//   user_id : "201912067",
 // 	to_do_list: [{
 //     date: "2022-05-01",
 //     contents: [{
 //       name: "tototottotododododod"
+//     },{
+//       name: "tototottotododododo123d"
+//     },{
+//       name: "tototottotodododo12312334234dod"
+//     }]
+//   },
+//   {
+//     date: "2022-04-30",
+//     contents: [{
+//       name: "tototottotododododod"
+//     },{
+//       name: "tototottotododododo123d"
+//     },{
+//       name: "tototottotodododo12312334234dod"
 //     }]
 //   }]
 // });

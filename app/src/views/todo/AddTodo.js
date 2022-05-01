@@ -28,8 +28,9 @@ const AddTodo = ({date}) => {
    
     console.log("selected Date : "+date);
 
+   
     const addTodoData = () => {
-        axios.post(config.ip + ':5000/todoRouter/todoSave', {
+        axios.post(config.ip + ':5000/todoRouter/save', {
             data: {
               user_id: user_Id,
               date: date,
@@ -51,7 +52,7 @@ const AddTodo = ({date}) => {
             <Input flex={1} onChangeText={v => setTodo(v)} value={todo} placeholder="Add Task" />
             <IconButton 
                 borderRadius="sm" variant="solid" 
-                icon={<AntDesign name="plus" size={24} color="white" />} 
+                icon={<AntDesign name="plus" size={24}/>} 
                 onPress={() => addTodoData()}/>
           </HStack>
     )

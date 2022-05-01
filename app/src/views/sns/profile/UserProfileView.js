@@ -92,6 +92,7 @@ export default function UserProfileView(props) {
                     screen: 'FollowList',
                     params: {
                           user_id: user_Id,
+                          init:'follower',
                     }})
                 }
               >
@@ -106,6 +107,7 @@ export default function UserProfileView(props) {
                     screen: 'FollowList',
                     params: {
                           user_id: user_Id,
+                          init:'following',
                     }})
                 }
               >

@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, useDisclose, IconButton, Stagger, HStack, Icon, Center, NativeBaseProvider } from "native-base";
-import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons, MaterialIcons, FontAwesome5  } from "@expo/vector-icons";
 
 const Example = () => {
     const {
@@ -9,7 +9,7 @@ const Example = () => {
     } = useDisclose();
     return (
         <Center>
-            <Box alignItems="center" minH="220">
+            <Box alignItems="center" minH="100">
                 <Stagger visible={isOpen} initial={{
                     opacity: 0,
                     scale: 0,
@@ -38,10 +38,13 @@ const Example = () => {
                         }
                     }
                 }}>
-                    <IconButton mb="4" variant="solid" bg="indigo.500" colorScheme="indigo" borderRadius="full" icon={<Icon as={MaterialIcons} size="6" name="location-pin" _dark={{
+                    <IconButton mb="4" variant="solid" bg="indigo.500" colorScheme="indigo" borderRadius="full" icon={<Icon as={FontAwesome5} size="6" name="pencil-alt" _dark={{
                         color: "warmGray.50"
                     }} color="warmGray.50" />} />
-                    <IconButton mb="4" variant="solid" bg="yellow.400" colorScheme="yellow" borderRadius="full" icon={<Icon as={MaterialCommunityIcons} _dark={{
+                          <IconButton mb="4" variant="solid" bg="yellow.500" colorScheme="yellow" borderRadius="full" icon={<Icon as={MaterialIcons} size="6" name="delete" _dark={{
+                        color: "warmGray.50"
+                    }} color="warmGray.50" />} />
+                    {/* <IconButton mb="4" variant="solid" bg="yellow.400" colorScheme="yellow" borderRadius="full" icon={<Icon as={MaterialIcons} size="6" name="delete"_dark={{
                         color: "warmGray.50"
                     }} size="6" name="microphone" color="warmGray.50" />} />
                     <IconButton mb="4" variant="solid" bg="teal.400" colorScheme="teal" borderRadius="full" icon={<Icon as={MaterialCommunityIcons} _dark={{
@@ -49,7 +52,7 @@ const Example = () => {
                     }} size="6" name="video" color="warmGray.50" />} />
                     <IconButton mb="4" variant="solid" bg="red.500" colorScheme="red" borderRadius="full" icon={<Icon as={MaterialIcons} size="6" name="photo-library" _dark={{
                         color: "warmGray.50"
-                    }} color="warmGray.50" />} />
+                    }} color="warmGray.50" />} /> */}
                 </Stagger>
             </Box>
             <HStack alignItems="center">

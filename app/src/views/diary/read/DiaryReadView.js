@@ -80,6 +80,7 @@ const DiaryReadView = (props) => {
                     <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ flex: 1, flexDirection: 'row' }} >
                         <AntDesign style={styles.allowIcon} name="left" size={24} color="black" />
                     </TouchableOpacity>
+                    <DiaryReadStaggerButton/>
                 </Box>
                     <HStack alignItems="center">
                     <Badge
@@ -171,7 +172,7 @@ const DiaryReadView = (props) => {
                 </HStack>
             </View>
         </ScrollView>
-        {/* <DiaryReadStaggerButton/> */}
+      
         </>
     )
 }

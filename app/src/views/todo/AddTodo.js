@@ -16,7 +16,7 @@ const AddTodo = ({date}) => {
             .then(value => {
               if (value != null) {
                 const UserInfo = JSON.parse(value);
-                setUserId(UserInfo.user_id);
+                setUserId(UserInfo[0].user_id);
               }
             }
             )
@@ -28,9 +28,9 @@ const AddTodo = ({date}) => {
    
     console.log("selected Date : "+date);
 
-   
+   console.log(user_Id);
     const addTodoData = () => {
-        axios.post(config.ip + ':5000/todoRouter/save', {
+        axios.post(config.ip + ':5000/todoRouter/todoSave', {
             data: {
               user_id: user_Id,
               date: date,

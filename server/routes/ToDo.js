@@ -6,8 +6,8 @@ const { UserTodo } = require("../models/UserTodo");
 router.post('/save', function(req, res) {
     console.log(req.body);
     // 데이터 저장
-    var newUser = new User(req.body.data.user_id);
-    newUser.save(function(error, data){
+    var newTodo = new UserTodo(req.body.data.user_id);
+    newTodo.save(function(error, data){
         if(error){
             console.log(error);
             return res.json({status: 'fail', error})

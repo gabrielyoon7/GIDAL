@@ -107,6 +107,7 @@ const DiaryReadView = (props) => {
                             () => props.navigation.navigate('UserProfile', {
                                 user_id: diary.user_id
                             })
+                            // ()=>console.log(diary.user_id)
                         }>
                             <HStack alignItems="center" my="1">
                                 <Avatar bg="green.500" alignSelf="center" size="sm" source={{

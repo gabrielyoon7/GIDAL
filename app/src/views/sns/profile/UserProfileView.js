@@ -6,6 +6,7 @@ import { config } from '../../../../config'
 import DiaryList from '../../diary/list/DiaryList';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigationState } from '@react-navigation/native';
+import BackButton from '../../../components/common/BackButton';
 
 // 이걸로 통합 예정
 
@@ -16,8 +17,11 @@ export default function UserProfileView(props) {
   const [date, setSelectedDate] = React.useState(props.selectedDate);
   const [profileImg, setProfileImg] = useState();
   const [user_Id, setUserId] = useState('loading');
+  const [currentId, setCurrentId] = useState('헤헤');
   const [userFollowerNum, setuserFollowerNum] = useState(0);
   const [userFollowingNum, setuserFollowingNum] = useState(0);
+  const [followText, setFollowText] = useState('팔로우');
+
 
   const new_routes = useNavigationState(state => state.routes);
 
@@ -70,20 +74,73 @@ export default function UserProfileView(props) {
         // console.log(following);
         // console.log('****follower****')
         // console.log(follower);
-        setuserFollowerNum(following.length)
-        setuserFollowingNum(follower.length)
+        setuserFollowingNum(following.length)
+        setuserFollowerNum(follower.length)
       }).catch(function (error) {
         // console.log(error);
       });
+  }
+
+  const follow = () =>{
+    Alert.alert('팔로우 기능은 아직 구현되지 않았습니다.')
+  }
+
+  const ProfileActionView = () => {
+    //접속자가 나인지만 검사
+    try {
+      AsyncStorage.getItem('userInfo')
+        .then(value => {
+          if (value != null) {
+            const UserInfo = JSON.parse(value);
+            setCurrentId(UserInfo[0].user_id);
+          }
+        }
+        )
+
+    }
+    catch (e) {
+      console.log(e);
+    }
+
+    return (
+      <View>{
+        (currentId == user_Id)
+          ?
+          (<MyPageActionView/>)
+          :
+          (<OtherPageActionView/>)
+      }
+      </View>
+    )
+  }
+
+  const MyPageActionView = () => {
+    return (
+      <Text>정보 수정</Text>
+    )
+  }
+
+  
+
+  const OtherPageActionView = () => {
+    //만약에 팔로우가 되어있다면 팔로우 해제 버튼과 디엠 보내기만 보여주고,
+    //팔로우가 되어있지 않다면 팔로우만 보여준다.
+    return (
+      <Button mt="3" mr="3" onPress={() => follow()} colorScheme="yellow">
+        <Text>{followText}</Text>
+      </Button>
+    )
   }
 
 
   const ProfileHeader = () => {
     return (
       <View style={styles.header}>
+        <BackButton navigation={props.navigation} />
         <View style={styles.headerContent}>
           <Image style={styles.avatar} source={{ uri: profileImg }} />
           <Text style={styles.name}>{user_Id}</Text>
+          <ProfileActionView />
           <HStack alignItems="center" my="1">
             <View style={styles.buttonStyle}>
               <TouchableOpacity
@@ -91,9 +148,11 @@ export default function UserProfileView(props) {
                   () => props.navigation.navigate('Profile', {
                     screen: 'FollowList',
                     params: {
-                          user_id: user_Id,
-                          init:'follower',
-                    }})
+                      screen: 'Follower',
+                      user_id: user_Id,
+                      // init_page: 'Follower',
+                    }
+                  })
                 }
               >
                 <Text style={styles.followText}>팔로워</Text>
@@ -106,9 +165,11 @@ export default function UserProfileView(props) {
                   () => props.navigation.navigate('Profile', {
                     screen: 'FollowList',
                     params: {
-                          user_id: user_Id,
-                          init:'following',
-                    }})
+                      screen: 'Following',
+                      user_id: user_Id,
+                      // init_page: 'Following',
+                    }
+                  })
                 }
               >
                 <Text style={styles.followText}>팔로잉</Text>

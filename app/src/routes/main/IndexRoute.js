@@ -84,7 +84,7 @@ const IndexRoute = () => {
         name="Profile"
         component={ProfileScreen}
         options={{
-          cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
+          cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
         }}
       />
       <Stack.Screen

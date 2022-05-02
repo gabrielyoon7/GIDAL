@@ -20,19 +20,16 @@ router.post('/save', function(req, res) {
 
 router.post('/todoSave', function(req, res) {
     UserTodo.updateOne(
-        { user_id: req.body.data.user_id}, 
-        {
-            $set: {
-                to_do_list : {
-                    "date": req.body.data.date,
-                    "contents": {
-                        $push:{
-                            name: req.body.data.todo,
-                        }
-                    }
-                },  
-            },
-        }).exec((error, user)=>{
+        { user_id: req.body.data.user_id,
+        to_do_list: {
+            $elemMatch: {
+                "date": req.body.data.date,
+            } 
+        }}, 
+        {$push: { 
+                    "to_do_list.$.contents" : {
+                            "name": req.body.data.todo,
+            }}}).exec((error, user)=>{
             if(error){
                 console.log(error);
                 return res.json({status: 'error', error})
@@ -42,6 +39,27 @@ router.post('/todoSave', function(req, res) {
             }
         });
 });
+
+router.post('/newDateTodoSave', function(req, res) {
+    UserTodo.updateOne(
+        { user_id: req.body.data.user_id}, 
+        {$push: { 
+                    to_do_list : {
+                        date: req.body.data.date,
+                        contents: {
+                            "name": req.body.data.todo,
+                        }
+            }}}).exec((error, user)=>{
+            if(error){
+                console.log(error);
+                return res.json({status: 'error', error})
+            }else{
+                console.log('Saved!')
+                return res.json({status: 'success'})
+            }
+        });
+});
+
 
 router.post('/findOwn', function(req, res, next) {
     // console.log(req.body.data.user_id);
@@ -55,5 +73,25 @@ router.post('/findOwn', function(req, res, next) {
         res.json({status: 'error', error})
     });
 });
+
+router.post('/userTodoDelete', (req,res) => {
+    UserTodo.updateOne(
+        { user_id: req.body.data.user_id,
+        }, 
+        {$pull: { 
+                    to_do_list :{
+                        contents : {
+                            "_id": req.body.data._id,
+                        }
+            }}}).exec((error, todo)=>{
+            if(error){
+                console.log(error);
+                return res.json({status: 'error', error})
+            }else{
+                console.log('Saved!')
+                return res.json({status: 'success'})
+            }
+        });
+  })
 
 module.exports = router;

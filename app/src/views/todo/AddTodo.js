@@ -1,7 +1,8 @@
-import { Input, HStack, IconButton,  Feather } from "native-base";
+import { Input, HStack, IconButton, Icon } from "native-base";
 import React, { useState, useEffect } from 'react';
 import { AntDesign } from "@expo/vector-icons";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Feather } from '@expo/vector-icons';
 import axios from 'axios'
 import { config } from '../../../config'
 import { useIsFocused } from '@react-navigation/native';
@@ -11,6 +12,8 @@ const AddTodo = ({date}) => {
     const [todo, setTodo] = useState("");
     const [firstRecord, setFirstRecord] = useState(true); // 처음 todolist 사용하는 유저 구분
     const isFocused = useIsFocused();
+    const [dateRecord, setDateRecord] = useState([]);
+    const [newDateBool, setNewDateBool] = useState(true);
 
     React.useEffect(() => {
         // getData();
@@ -29,28 +32,38 @@ const AddTodo = ({date}) => {
       }, [])
     
    
-    console.log("selected Date : "+date);
+    // console.log("selected Date : "+date);
     // console.log(user_Id);
-
+  const getDateRecord = (data) => {
+    console.log('---------------------------------');
+    // console.log(data[0][0].to_do_list);
+      
+  }
 
   const getItems = () => {
+    let result = []
         axios.post(config.ip + ':5000/todoRouter/findOwn', {
           data: {
               user_id: user_Id
           }
       }).then((response) => {
-        if(response.data[0]==null){
-          setFirstRecord(true)
-        } else{
-          setFirstRecord(false);
-        }
+        // console.log(response.data[0].to_do_list[0].date);
+        setDateRecord(result)
+          if(response.data[0]==null){
+            setFirstRecord(true)
+          } else{
+            result.push(response.data)
+            setFirstRecord(false);
+            setDateRecord(result)
+            setDateRecord(result[0][0].to_do_list);
+          }
           // console.log(response.data[0]==null);
       }).catch(function (error) {
           console.log(error);
           setFirstRecord(true)
       })
       }
-
+      // console.log(dateRecord);
       // console.log(firstRecord);
   
       useEffect(() => {
@@ -74,10 +87,42 @@ const AddTodo = ({date}) => {
       })
     }
 
+    const addNewDateTodo = () => {
+      axios.post(config.ip + ':5000/todoRouter/newDateTodoSave', {
+        data: {
+          user_id: user_Id,
+          date: date,
+          todo: todo,
+        }
+      }).then((response) => {
+        if (response.data.status === 'success') {
+          console.log('to do save');
+          getItems();
+        }
+      }).catch(function (error) {
+        console.log(error);
+      })
+    }
+
     const addTodoData = () => {
       if(firstRecord == false){
         console.log("기록 있는 유저");
-        addUserTodo()
+        dateRecord.forEach((item) => {
+          console.log(item.date);
+          if(item.date == date){
+            setNewDateBool(true)
+            console.log(newDateBool);
+          } else{
+            setNewDateBool(false);
+            console.log(newDateBool);
+          }
+        })
+        console.log(newDateBool);
+        if(!newDateBool){
+          addUserTodo()
+        } else{
+          addNewDateTodo()
+        }
       } else {
         axios.post(config.ip + ':5000/todoRouter/save', {
           data: {
@@ -107,7 +152,7 @@ const AddTodo = ({date}) => {
             <Input flex={1} onChangeText={v => setTodo(v)} value={todo} placeholder="Add Task" />
             <IconButton 
                 borderRadius="sm" variant="solid" 
-                icon={<AntDesign name="plus" size={24}/>} 
+                icon={<Icon as={AntDesign} name="plus" size="md" />}
                 onPress={() => addTodoData()}/>
           </HStack>
     )

@@ -54,8 +54,10 @@ export default function FollowListView(props) {
         // console.log(response.data[0].following);
         setFollowings(response.data[0].following);
         setFollowers(response.data[0].follower);
-        // setFilteredDataSource(init_page);
-        // setMasterDataSource(init_page);
+        // console.log("*****following******");
+        // console.log(followings);
+        // console.log("*****follower******");
+        // console.log(followers);
       }).catch(function (error) {
         console.log(error);
       });

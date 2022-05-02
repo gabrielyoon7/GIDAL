@@ -74,8 +74,8 @@ export default function UserProfileView(props) {
         // console.log(following);
         // console.log('****follower****')
         // console.log(follower);
-        setuserFollowerNum(following.length)
-        setuserFollowingNum(follower.length)
+        setuserFollowingNum(following.length)
+        setuserFollowerNum(follower.length)
       }).catch(function (error) {
         // console.log(error);
       });

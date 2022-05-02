@@ -4,6 +4,7 @@ import { useState } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { config } from '../../../../config'
 import { AntDesign, MaterialIcons, Ionicons } from "@expo/vector-icons";
+import BackButton from "../../../components/common/BackButton";
 
 const SignUpView = (props) => {
     const [userId, setUserId] = useState('');
@@ -72,9 +73,7 @@ const SignUpView = (props) => {
 
     return (
         <ScrollView bg="white">
-            <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ paddingLeft:30, paddingTop:20 }} >
-                <AntDesign name="left" size={24} color="black" />
-            </TouchableOpacity>
+            <BackButton navigation={props.navigation} />
             <Center w="100%" h="100%">
                 <Box safeArea p="2" w="90%" maxW="290" py="8">
                     <Heading size="lg" color="coolGray.800" _dark={{
@@ -122,7 +121,3 @@ const SignUpView = (props) => {
 }
 
 export default SignUpView;
-
-const styles = StyleSheet.create({
-
-})

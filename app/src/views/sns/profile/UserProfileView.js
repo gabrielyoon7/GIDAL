@@ -6,6 +6,7 @@ import { config } from '../../../../config'
 import DiaryList from '../../diary/list/DiaryList';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigationState } from '@react-navigation/native';
+import BackButton from '../../../components/common/BackButton';
 
 // 이걸로 통합 예정
 
@@ -81,6 +82,7 @@ export default function UserProfileView(props) {
   const ProfileHeader = () => {
     return (
       <View style={styles.header}>
+        <BackButton navigation={props.navigation}/>
         <View style={styles.headerContent}>
           <Image style={styles.avatar} source={{ uri: profileImg }} />
           <Text style={styles.name}>{user_Id}</Text>

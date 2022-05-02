@@ -5,6 +5,7 @@ import axios from 'axios'
 import { config } from '../../../../config'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Button, Center } from 'native-base';
+import BackButton from '../../../components/common/BackButton';
 
 export default function FollowListView(props) {
   const [search, setSearch] = useState('');
@@ -72,14 +73,14 @@ export default function FollowListView(props) {
   };
 
   const selectOther = (item) => {
-    if (props.user_id === user_Id){
+    if (props.user_id === user_Id) {
       props.navigation.navigate('DmRead', {
         userName: item.name
       })
     } else {
       props.navigation.navigate('UserProfile', {
         user_id: item.name
-    })
+      })
     }
   }
 
@@ -139,8 +140,9 @@ export default function FollowListView(props) {
   //   },[])
   return (
     <View style={styles.container} >
-      <Button onPress={() => {setFilteredDataSource(followings); setMasterDataSource(followings);}}>following</Button>
-      <Button onPress={() => {setFilteredDataSource(followers); setMasterDataSource(followers);}}>follower</Button>
+      <BackButton navigation={props.navigation} />
+      <Button onPress={() => { setFilteredDataSource(followings); setMasterDataSource(followings); }}>following</Button>
+      <Button onPress={() => { setFilteredDataSource(followers); setMasterDataSource(followers); }}>follower</Button>
       <Followings navigation={props.navigation} />
     </View>
   )

@@ -6,6 +6,9 @@ import { config } from '../../../../config'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Button, Center } from 'native-base';
 import BackButton from '../../../components/common/BackButton';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+const Tab = createBottomTabNavigator();
 
 export default function FollowListView(props) {
   const [search, setSearch] = useState('');
@@ -85,36 +88,50 @@ export default function FollowListView(props) {
   }
 
   const Followings = (props) => {
-    return <View style={styles.container} >
-      {/* <FeedSearchView/> */}
-      <SearchBar
-        round
-        searchIcon={{ size: 24 }}
-        onChangeText={(text) => searchFilter(text)}
-        onClear={(text) => searchFilter('')}
-        placeholder="search Here..."
-        value={search}
-      />
-      <View style={styles.body} >
-        <FlatList
-          style={styles.container}
-          enableEmptySections={true}
-          data={filteredDataSource}
-          keyExtractor={(item) => {
-            return item.user_id;
-          }}
-          renderItem={({ item }) => {
-            return (
-              <TouchableOpacity onPress={() => selectOther(item)} >
-                <View style={styles.box} >
-                  <Image style={styles.image} source={{ uri: followings[0].image }} />
-                  <Text style={styles.username}>{item.name}</Text>
-                </View>
-              </TouchableOpacity>
-            )
-          }} />
+    return (
+      <View style={styles.container} >
+        {/* <FeedSearchView/> */}
+        <SearchBar
+          round
+          searchIcon={{ size: 24 }}
+          onChangeText={(text) => searchFilter(text)}
+          onClear={(text) => searchFilter('')}
+          placeholder="search Here..."
+          value={search}
+        />
+        <View style={styles.body} >
+          <FlatList
+            style={styles.container}
+            enableEmptySections={true}
+            data={filteredDataSource}
+            keyExtractor={(item) => {
+              return item.user_id;
+            }}
+            renderItem={({ item }) => {
+              return (
+                <TouchableOpacity onPress={() => selectOther(item)} >
+                  <View style={styles.box} >
+                    <Image style={styles.image} source={{ uri: followings[0].image }} />
+                    <Text style={styles.username}>{item.name}</Text>
+                  </View>
+                </TouchableOpacity>
+              )
+            }} />
+        </View>
       </View>
-    </View>
+    )
+  }
+
+  const FollowingScreen = () => {
+    return (
+      <Followings navigation={props.navigation} />
+    )
+  }
+
+  const FollowerScreen = () => {
+    return (
+      <Followings navigation={props.navigation} />
+    )
   }
 
   //     const [following, setFollowing] = useState();
@@ -139,12 +156,22 @@ export default function FollowListView(props) {
   //     });
   //   },[])
   return (
-    <View style={styles.container} >
+    <>
       <BackButton navigation={props.navigation} />
-      <Button onPress={() => { setFilteredDataSource(followings); setMasterDataSource(followings); }}>following</Button>
-      <Button onPress={() => { setFilteredDataSource(followers); setMasterDataSource(followers); }}>follower</Button>
-      <Followings navigation={props.navigation} />
-    </View>
+      <Tab.Navigator
+        screenOptions={{ headerShown: false }}
+      >
+        <Tab.Screen name="Following" component={FollowingScreen} />
+        <Tab.Screen name="Follower" component={FollowerScreen} />
+      </Tab.Navigator>
+
+    </>
+    // <View style={styles.container} >
+    //   <BackButton navigation={props.navigation} />
+    //   <Button onPress={() => { setFilteredDataSource(followings); setMasterDataSource(followings); }}>following</Button>
+    //   <Button onPress={() => { setFilteredDataSource(followers); setMasterDataSource(followers); }}>follower</Button>
+    //   <Followings navigation={props.navigation} />
+    // </View>
   )
 }
 

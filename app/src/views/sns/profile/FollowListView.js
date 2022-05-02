@@ -7,6 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Button, Center } from 'native-base';
 import BackButton from '../../../components/common/BackButton';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useIsFocused, useNavigationState } from "@react-navigation/native";
 
 const Tab = createBottomTabNavigator();
 
@@ -17,9 +18,15 @@ export default function FollowListView(props) {
   const [user_Id, setUserId] = React.useState('');
   const [followings, setFollowings] = useState([]);
   const [followers, setFollowers] = useState([]);
+
+  const new_routes = useNavigationState(state => state.routes);
+  let init_page = new_routes[0].params.screen;
+  // const [init, setInit] = useState('Following');
   // const [data, setData] = useState(followings)
 
-  console.log(props.user_id);
+  // console.log(props.navigation.state);
+
+  // console.log(props.user_id);
 
   React.useEffect(() => {
     // getData();
@@ -44,9 +51,11 @@ export default function FollowListView(props) {
       }
     })
       .then((response) => {
-        console.log(response.data[0].following);
+        // console.log(response.data[0].following);
         setFollowings(response.data[0].following);
         setFollowers(response.data[0].follower);
+        // setFilteredDataSource(init_page);
+        // setMasterDataSource(init_page);
       }).catch(function (error) {
         console.log(error);
       });
@@ -54,8 +63,9 @@ export default function FollowListView(props) {
 
 
   useEffect(() => {
-    setFilteredDataSource(followings);
-    setMasterDataSource(followings);
+    init_page=='Following'?init_page=followings:init_page=followers;
+    setFilteredDataSource(init_page);
+    setMasterDataSource(init_page);
   }, [followings, followers]);
 
   const searchFilter = (text) => {
@@ -123,12 +133,24 @@ export default function FollowListView(props) {
   }
 
   const FollowingScreen = () => {
+    const isFocused = useIsFocused();
+    if (isFocused) {
+      // the screen is currently focused
+      // your code here
+      console.log('Following is focused');
+    }
     return (
       <Followings navigation={props.navigation} />
     )
   }
 
   const FollowerScreen = () => {
+    const isFocused = useIsFocused();
+    if (isFocused) {
+      // the screen is currently focused
+      // your code here
+      console.log('Follower is focused');
+    }
     return (
       <Followings navigation={props.navigation} />
     )
@@ -162,6 +184,18 @@ export default function FollowListView(props) {
         screenOptions={{ headerShown: false }}
       >
         <Tab.Screen
+          name="Follower"
+          component={FollowerScreen}
+          listeners={{
+            tabPress: () => {
+              //버튼 눌렀을 때 메인으로 가게 해주는 기능.
+              //참고로 이 listner 기능은 navigation v6부터 가능함
+              setFilteredDataSource(followers);
+              setMasterDataSource(followers);
+            },
+          }}
+        />
+        <Tab.Screen
           name="Following"
           component={FollowingScreen}
           listeners={{
@@ -170,18 +204,6 @@ export default function FollowListView(props) {
               //참고로 이 listner 기능은 navigation v6부터 가능함
               setFilteredDataSource(followings);
               setMasterDataSource(followings);
-            },
-          }}
-        />
-        <Tab.Screen
-          name="Follower"
-          component={FollowerScreen}
-          listeners={{
-            tabPress: () => {
-              //버튼 눌렀을 때 메인으로 가게 해주는 기능.
-              //참고로 이 listner 기능은 navigation v6부터 가능함
-              setFilteredDataSource(followers); 
-              setMasterDataSource(followers);
             },
           }}
         />

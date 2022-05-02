@@ -82,7 +82,7 @@ export default function UserProfileView(props) {
   const ProfileHeader = () => {
     return (
       <View style={styles.header}>
-        <BackButton navigation={props.navigation}/>
+        <BackButton navigation={props.navigation} />
         <View style={styles.headerContent}>
           <Image style={styles.avatar} source={{ uri: profileImg }} />
           <Text style={styles.name}>{user_Id}</Text>
@@ -93,9 +93,11 @@ export default function UserProfileView(props) {
                   () => props.navigation.navigate('Profile', {
                     screen: 'FollowList',
                     params: {
-                          user_id: user_Id,
-                          init:'follower',
-                    }})
+                      screen: 'Follower',
+                      user_id: user_Id,
+                      // init_page: 'Follower',
+                    }
+                  })
                 }
               >
                 <Text style={styles.followText}>팔로워</Text>
@@ -108,9 +110,11 @@ export default function UserProfileView(props) {
                   () => props.navigation.navigate('Profile', {
                     screen: 'FollowList',
                     params: {
-                          user_id: user_Id,
-                          init:'following',
-                    }})
+                      screen: 'Following',
+                      user_id: user_Id,
+                      // init_page: 'Following',
+                    }
+                  })
                 }
               >
                 <Text style={styles.followText}>팔로잉</Text>

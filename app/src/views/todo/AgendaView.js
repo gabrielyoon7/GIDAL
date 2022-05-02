@@ -16,10 +16,6 @@ const AgendaView = () => {
     const [user_Id, setUserId] = useState('');
     const [todo, setTodo] = useState([
         // {date: "2022-04-16", contents: [{ name: "item 1 - any js object"}]},
-        // {date: "2022-04-23", contents: [{ name: "item 2 - any js object"}]},
-        // {date: "2022-04-25", contents: [{ name: "item 3 - any js object" }, { name: "any js object"}]},
-        // {date: "2022-04-30", contents: [{ name: "item 3 - any js object",}, { name: "any js object"}]},
-        // {date: "2022-05-01", contents: [{ name: "item 3 - any js object",}, { name: "any js object"}]}
     ]);
     const [selectedDate, setSelectedDate] = useState(todayDate);
 
@@ -48,9 +44,6 @@ const AgendaView = () => {
               user_id: user_Id
           }
       }).then((response) => {
-          console.log(response.data[0]);
-        //   let data = JSON.stringify(response.data[0])
-        //   data = JSON.parse(data);
           if (response.data.length > 0) {
             response.data.forEach((item) => {
                 item.to_do_list.forEach((data) => {
@@ -66,7 +59,7 @@ const AgendaView = () => {
   
       useEffect(() => {
         getItems();
-    }, [isFocused, user_Id]);
+    }, [isFocused, todo]);
   
 
     useEffect (() => {
@@ -75,12 +68,8 @@ const AgendaView = () => {
             val[item.date] = item.contents
         })
         setItems(val)
-        console.log(items);
+        // console.log(items);
     },[todo])
-
-    // useEffect (() => {
-    //     console.log(JSON.parse(val));
-    // },[itemStr])
 
     const renderItem = (item) => (
         <TouchableOpacity

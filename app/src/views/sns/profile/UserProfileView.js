@@ -123,6 +123,8 @@ export default function UserProfileView(props) {
   
 
   const OtherPageActionView = () => {
+    //만약에 팔로우가 되어있다면 팔로우 해제 버튼과 디엠 보내기만 보여주고,
+    //팔로우가 되어있지 않다면 팔로우만 보여준다.
     return (
       <Button mt="3" mr="3" onPress={() => follow()} colorScheme="yellow">
         <Text>{followText}</Text>

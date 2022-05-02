@@ -17,8 +17,11 @@ export default function UserProfileView(props) {
   const [date, setSelectedDate] = React.useState(props.selectedDate);
   const [profileImg, setProfileImg] = useState();
   const [user_Id, setUserId] = useState('loading');
+  const [currentId, setCurrentId] = useState('헤헤');
   const [userFollowerNum, setuserFollowerNum] = useState(0);
   const [userFollowingNum, setuserFollowingNum] = useState(0);
+  const [followText, setFollowText] = useState('팔로우');
+
 
   const new_routes = useNavigationState(state => state.routes);
 
@@ -78,6 +81,55 @@ export default function UserProfileView(props) {
       });
   }
 
+  const follow = () =>{
+    Alert.alert('팔로우 기능은 아직 구현되지 않았습니다.')
+  }
+
+  const ProfileActionView = () => {
+    //접속자가 나인지만 검사
+    try {
+      AsyncStorage.getItem('userInfo')
+        .then(value => {
+          if (value != null) {
+            const UserInfo = JSON.parse(value);
+            setCurrentId(UserInfo[0].user_id);
+          }
+        }
+        )
+
+    }
+    catch (e) {
+      console.log(e);
+    }
+
+    return (
+      <View>{
+        (currentId == user_Id)
+          ?
+          (<MyPageActionView/>)
+          :
+          (<OtherPageActionView/>)
+      }
+      </View>
+    )
+  }
+
+  const MyPageActionView = () => {
+    return (
+      <Text>정보 수정</Text>
+    )
+  }
+
+  
+
+  const OtherPageActionView = () => {
+    return (
+      <Button mt="3" mr="3" onPress={() => follow()} colorScheme="yellow">
+        <Text>{followText}</Text>
+      </Button>
+    )
+  }
+
 
   const ProfileHeader = () => {
     return (
@@ -86,6 +138,7 @@ export default function UserProfileView(props) {
         <View style={styles.headerContent}>
           <Image style={styles.avatar} source={{ uri: profileImg }} />
           <Text style={styles.name}>{user_Id}</Text>
+          <ProfileActionView />
           <HStack alignItems="center" my="1">
             <View style={styles.buttonStyle}>
               <TouchableOpacity

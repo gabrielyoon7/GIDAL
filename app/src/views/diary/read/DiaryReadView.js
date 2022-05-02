@@ -202,7 +202,11 @@ const DiaryReadView = (props) => {
         <ParallaxScrollView
         parallaxHeaderHeight={windowHeight * 0.3}
         renderForeground={() => (
-            <Image style={styles.header} source={{uri:'https://t1.daumcdn.net/cfile/blog/99EC04465C9B308326'}}/>
+            <Image
+             style={styles.header} 
+             source={{uri:'https://t1.daumcdn.net/cfile/blog/99EC04465C9B308326'}}
+             alt="Alternate Text"
+            />
            )}
         >
             <ReadView/>

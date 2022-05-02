@@ -1,4 +1,4 @@
-import { Box, Input, Text, TextArea, Stack, Button, HStack, Badge, Spacer, Avatar, Divider, ScrollView, useDisclose, Actionsheet, Icon } from 'native-base';
+import { Box, Input, Text, TextArea, Stack, Button, HStack, Badge, Spacer, Avatar, Divider, ScrollView, useDisclose, Actionsheet, Icon, Image } from 'native-base';
 import * as React from 'react';
 import { Dimensions, StyleSheet, View, TouchableOpacity } from 'react-native';
 import axios from 'axios';
@@ -10,6 +10,8 @@ import moment from 'moment';
 import { Path } from "react-native-svg";
 import { AntDesign, MaterialIcons, Ionicons } from "@expo/vector-icons";
 import DiaryReadStaggerButton from './DiaryReadStaggerButton';
+import ParallaxScrollView from 'react-native-parallax-scroll-view';
+
 const DiaryReadView = (props) => {
     // const [date, setSelectedDate] = React.useState(props.selectedDate);
     const { width } = useWindowDimensions();
@@ -70,11 +72,9 @@ const DiaryReadView = (props) => {
         })
     }, [liked]);
 
-    return (
-        <>
-        <ScrollView style={styles.scroll}>
-            <LinearGradient style={styles.header} colors={['#A6A6A6', 'black']} />
-            <View style={styles.background}>
+    const ReadView = () => {
+        return (
+        <View style={styles.background}>
                 <View style={styles.container}>
                 <Box  style={styles.row} justifyContent="center" display="flex">
                     <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ flex: 1, flexDirection: 'row' }} >
@@ -172,8 +172,41 @@ const DiaryReadView = (props) => {
 
                 </HStack>
             </View>
-        </ScrollView>
-      
+        );
+    }
+
+    {/*<ParallaxScrollView
+      backgroundColor="blue"
+      contentBackgroundColor="pink"
+      parallaxHeaderHeight={300}
+      // renderScrollComponent={() => <Animated.View />}
+      renderScrollComponent={() => <AnimatedCustomScrollView />}
+      renderForeground={() => (
+       <View style={{ height: 300, flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+          <Text>Hello World!</Text>
+        </View>
+      )}>
+      <View style={{ height: 500 }}>
+        <Text>Scroll me</Text>
+      </View>
+      </ParallaxScrollView>*/}
+
+    return (
+        <>
+        {/*<ScrollView style={styles.scroll}>
+            <LinearGradient style={styles.header} colors={['#A6A6A6', 'black']} />
+            <Image style={styles.header} source={{uri:'https://t1.daumcdn.net/cfile/blog/99EC04465C9B308326'}}/>
+            <ReadView/>
+        </ScrollView> */}
+
+        <ParallaxScrollView
+        parallaxHeaderHeight={windowHeight * 0.3}
+        renderForeground={() => (
+            <Image style={styles.header} source={{uri:'https://t1.daumcdn.net/cfile/blog/99EC04465C9B308326'}}/>
+           )}
+        >
+            <ReadView/>
+        </ParallaxScrollView>
         </>
     )
 }

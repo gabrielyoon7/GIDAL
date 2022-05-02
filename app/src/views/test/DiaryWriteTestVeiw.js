@@ -12,6 +12,8 @@ import InputContent from "../../components/diary/InputContent";
 import PressableTag from '../../components/tag/interaction/PressableTag';
 import ParallaxScroll from '@monterosa/react-native-parallax-scroll';
 import { useWindowDimensions } from 'react-native';
+import ParallaxScrollView from 'react-native-parallax-scroll-view';
+
 
 const ReadProfile = () => {
   return (
@@ -40,6 +42,9 @@ const ReadProfile = () => {
                       
           </TouchableOpacity>
       </Box>
+      <Box height={1000} background={"coolGray.500"}>
+        
+      </Box>
     </Box>
   )
 }
@@ -64,21 +69,41 @@ const FidexForeground = () => {
   )
 }
 
+// const DiaryWriteView = (props) => {
+//   return (
+//      <ParallaxScroll
+//       renderHeader={() => <FixedHeader/>} 
+//       parallaxHeaderHeight={300}
+//       isHeaderFixed={false}
+//       parallaxHeight={250}
+//       renderParallaxBackground={() => <FidexBackground />}
+//       renderParallaxForeground={() => <ReadProfile />}
+//       parallaxBackgroundScrollSpeed={5}
+//       parallaxForegroundScrollSpeed={2.5}
+//     >
+//     </ParallaxScroll>
+//   );
+// };
+
 const DiaryWriteView = (props) => {
   return (
-     <ParallaxScroll
-      renderHeader={() => <ReadProfile/>} 
+    <ParallaxScrollView
+      backgroundColor="blue"
+      contentBackgroundColor="pink"
       parallaxHeaderHeight={300}
-      isHeaderFixed={false}
-      parallaxHeight={250}
-      renderParallaxBackground={() => <FidexBackground />}
-      renderParallaxForeground={() => <FidexForeground />}
-      parallaxBackgroundScrollSpeed={5}
-      parallaxForegroundScrollSpeed={2.5}
-    >
-    </ParallaxScroll>
+      // renderScrollComponent={() => <Animated.View />}
+      //renderScrollComponent={() => <AnimatedCustomScrollView />}
+      renderForeground={() => (
+       <View style={{ height: 300, flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+          <Text>Hello World!</Text>
+        </View>
+      )}>
+      <View style={{ height: 500 }}>
+        <Text>Scroll me</Text>
+      </View>
+    </ParallaxScrollView>
   );
-};
+}
 
 export default DiaryWriteView;
 

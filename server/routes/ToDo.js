@@ -77,15 +77,13 @@ router.post('/findOwn', function(req, res, next) {
 router.post('/userTodoDelete', (req,res) => {
     UserTodo.updateOne(
         { user_id: req.body.data.user_id,
-        to_do_list: {
-            $elemMatch: {
-                "date": req.body.data.date,
-            } 
-        }}, 
+        }, 
         {$pull: { 
-                    "to_do_list.$.contents" : {
-                            "name": req.body.data.todo,
-            }}}).exec((error, user)=>{
+                    to_do_list :{
+                        contents : {
+                            "_id": req.body.data._id,
+                        }
+            }}}).exec((error, todo)=>{
             if(error){
                 console.log(error);
                 return res.json({status: 'error', error})

@@ -1,7 +1,8 @@
-import { Input, HStack, IconButton,  Feather } from "native-base";
+import { Input, HStack, IconButton, Icon } from "native-base";
 import React, { useState, useEffect } from 'react';
 import { AntDesign } from "@expo/vector-icons";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Feather } from '@expo/vector-icons';
 import axios from 'axios'
 import { config } from '../../../config'
 import { useIsFocused } from '@react-navigation/native';
@@ -107,15 +108,16 @@ const AddTodo = ({date}) => {
       if(firstRecord == false){
         console.log("기록 있는 유저");
         dateRecord.forEach((item) => {
-          if(item == date){
+          console.log(item.date);
+          if(item.date == date){
             setNewDateBool(true)
-            // console.log(newDateBool);
+            console.log(newDateBool);
           } else{
             setNewDateBool(false);
-            // console.log(newDateBool);
+            console.log(newDateBool);
           }
         })
-        // console.log(newDateBool);
+        console.log(newDateBool);
         if(!newDateBool){
           addUserTodo()
         } else{
@@ -150,7 +152,7 @@ const AddTodo = ({date}) => {
             <Input flex={1} onChangeText={v => setTodo(v)} value={todo} placeholder="Add Task" />
             <IconButton 
                 borderRadius="sm" variant="solid" 
-                icon={<AntDesign name="plus" size={24}/>} 
+                icon={<Icon as={AntDesign} name="plus" size="md" />}
                 onPress={() => addTodoData()}/>
           </HStack>
     )

@@ -59,7 +59,7 @@ const AgendaView = () => {
   
       useEffect(() => {
         getItems();
-    }, [isFocused, todo]);
+    }, [isFocused, user_Id]);
   
 
     useEffect (() => {
@@ -71,14 +71,37 @@ const AgendaView = () => {
         // console.log(items);
     },[todo])
 
+    const handleDelete = (item) => {
+        console.log(item._id);
+        console.log(item.todo);
+        axios.post(config.ip + ':5000/todoRouter/userTodoDelete', {
+            data: {
+                user_id: user_Id,
+                _id: item._id
+            }
+          })
+            .then((response) => {
+                if (response.data.status === 'success') {
+                    console.log('to do save');
+                    getItems();
+            }}).catch(function (error) {
+              console.log(error);
+            });
+    }
+
     const renderItem = (item) => (
         <TouchableOpacity
             style={[styles.item]}
             onPress={() => Alert.alert(item.name)}
         >
             <Text>{item.name}</Text>
-          
-            <AntDesign name="delete" size={24} onPress={() => handleDelete(item.id)} />
+
+            <TouchableOpacity onPress={() => handleDelete({
+                _id: item._id,
+                todo: item.name
+                })} >
+            <AntDesign name="delete" size={24} />
+            </TouchableOpacity>
         </TouchableOpacity>
     );
 

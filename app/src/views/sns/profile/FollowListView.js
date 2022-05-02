@@ -161,10 +161,31 @@ export default function FollowListView(props) {
       <Tab.Navigator
         screenOptions={{ headerShown: false }}
       >
-        <Tab.Screen name="Following" component={FollowingScreen} />
-        <Tab.Screen name="Follower" component={FollowerScreen} />
+        <Tab.Screen
+          name="Following"
+          component={FollowingScreen}
+          listeners={{
+            tabPress: () => {
+              //버튼 눌렀을 때 메인으로 가게 해주는 기능.
+              //참고로 이 listner 기능은 navigation v6부터 가능함
+              setFilteredDataSource(followings);
+              setMasterDataSource(followings);
+            },
+          }}
+        />
+        <Tab.Screen
+          name="Follower"
+          component={FollowerScreen}
+          listeners={{
+            tabPress: () => {
+              //버튼 눌렀을 때 메인으로 가게 해주는 기능.
+              //참고로 이 listner 기능은 navigation v6부터 가능함
+              setFilteredDataSource(followers); 
+              setMasterDataSource(followers);
+            },
+          }}
+        />
       </Tab.Navigator>
-
     </>
     // <View style={styles.container} >
     //   <BackButton navigation={props.navigation} />

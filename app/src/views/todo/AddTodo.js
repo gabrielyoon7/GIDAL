@@ -1,7 +1,8 @@
-import { Input, HStack, IconButton,  Feather } from "native-base";
+import { Input, HStack, IconButton, Icon } from "native-base";
 import React, { useState, useEffect } from 'react';
 import { AntDesign } from "@expo/vector-icons";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Feather } from '@expo/vector-icons';
 import axios from 'axios'
 import { config } from '../../../config'
 import { useIsFocused } from '@react-navigation/native';
@@ -150,7 +151,7 @@ const AddTodo = ({date}) => {
             <Input flex={1} onChangeText={v => setTodo(v)} value={todo} placeholder="Add Task" />
             <IconButton 
                 borderRadius="sm" variant="solid" 
-                icon={<AntDesign name="plus" size={24}/>} 
+                icon={<Icon as={AntDesign} name="plus" size="md" />}
                 onPress={() => addTodoData()}/>
           </HStack>
     )

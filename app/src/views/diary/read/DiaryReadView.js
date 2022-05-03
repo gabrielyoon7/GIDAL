@@ -185,8 +185,9 @@ const DiaryReadView = (props) => {
 
 
                     <Button style={styles.button} colorScheme="green" size="md" onPress={
-                        () => props.navigation.replace('DiaryModify', {
-                            diary: diary,
+                        () => props.navigation.navigate('DiaryModify', {
+                            // () => props.navigation.replace('DiaryModify', {
+                                diary: diary,
                         })
                     }>
                         수정

@@ -8,20 +8,49 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import RadioDisclosure from "../../../components/diary/RadioDisclosure";
 import InputTitle from "../../../components/diary/InputTitle";
 import InputContent from "../../../components/diary/InputContent";
-
-// import Carousel from 'react-native-snap-carousel';
-// import TagCard from '../../../components/tag/TagCard';
 import axios from 'axios';
 import { config } from '../../../../config'
+import { useNavigationState } from "@react-navigation/native";
 
 const DiaryModifyView = (props) => {
-  const diary = props.navigation.getState().routes[1].params.diary;
-
-  const [Date, setDate] = useState(diary.date);
-  const [Title, setTitle] = useState(diary.title);
-  const [Content, setContent] = useState(diary.content);
+  // const diary = props.navigation.getState().routes[1].params.diary;
+  const defaultData = {
+    "__v": 0,
+    "_id": "626f78c19ee18cdc829a10de",
+    "accessible_user": [],
+    "comments": [],
+    "content": "dafault_content",
+    "date": "2022-05-02T00:00:00.000Z",
+    "disclosure": "private",
+    "likes": 0,
+    "stickers": [],
+    "tags": [],
+    "title": "default_title",
+    "user_id": "error",
+  };
+  const [Date, setDate] = useState(defaultData.date);
+  const [Title, setTitle] = useState(defaultData.title);
+  const [Content, setContent] = useState(defaultData.content);
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-  const [disclosure, setDisclosure] = React.useState(diary.disclosure);
+  const [disclosure, setDisclosure] = useState(defaultData.disclosure);
+
+  const new_routes = useNavigationState(state => state.routes);
+  const [diary, setDiary] = React.useState(defaultData);
+  React.useEffect(() => {
+    //초기 일기 수신부
+    try {
+        const idx = new_routes.findIndex(r => r.name === "DiaryModify")
+        const new_diary = new_routes[idx].params.diary;
+        setDiary(new_diary);
+        console.log(new_diary);
+        setDate(new_diary.date);
+        setTitle(new_diary.title);
+        setContent(new_diary.content);
+        setDisclosure(new_diary.disclosure);
+    } catch (error) {
+        // console.log(error);
+    }
+},[Date]);
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -50,8 +79,8 @@ const DiaryModifyView = (props) => {
       }
     }).then((response) => {
       props.navigation.replace('DiaryRead', {
-        diary : response.data,
-    });
+        diary: response.data,
+      });
       // if (response.data.status !== 'fail') {
       //   props.navigation.replace('DiaryRead', {
       //     diary : diary,
@@ -87,25 +116,21 @@ const DiaryModifyView = (props) => {
 
   return (
     <>
-      <ModifyDiaryHeader/>
+      <ModifyDiaryHeader />
       <ScrollView backgroundColor="white">
-      <InputTitle setTitle={setTitle} Title={Title} />
-      <Divider />
-      <InputContent setContent={setContent} content={Content} />
-      <DateTimePickerModal
-        isVisible={isDatePickerVisible}
-        mode="date"
-        onConfirm={handleConfirm}
-        onCancel={hideDatePicker}
-      />
-      {/* <TagSelector /> */}
-      {/* <View style={styles.buttonContainer}>
-        <WriteDiaryButton />
-      </View> */}
-      <RadioDisclosure disclosure={disclosure} setDisclosure={setDisclosure} />
-    </ScrollView>
-  </>
-    
+        <InputTitle setTitle={setTitle} Title={Title} />
+        <Divider />
+        <InputContent setContent={setContent} content={Content} />
+        <DateTimePickerModal
+          isVisible={isDatePickerVisible}
+          mode="date"
+          onConfirm={handleConfirm}
+          onCancel={hideDatePicker}
+        />
+        <RadioDisclosure disclosure={disclosure} setDisclosure={setDisclosure} />
+      </ScrollView>
+    </>
+
 
   )
 }
@@ -176,14 +201,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
   },
   allowIcon: {
-     width: 'auto',
-   },
-   row: {
-     flexDirection: "row",
-     flexWrap: "wrap",
-     justifyContent: "space-between",
-     marginVertical: 10,
-     paddingHorizontal: 15,
-     // borderWidth:1
-   },
+    width: 'auto',
+  },
+  row: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    marginVertical: 10,
+    paddingHorizontal: 15,
+    // borderWidth:1
+  },
 });

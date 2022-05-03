@@ -20,19 +20,19 @@ const FancyDiaryCard = ({ item: diary, onPress, backgroundColor, textColor }) =>
                 }) => {
                     return (
                         <Box
-                         maxW="96%"
-                         minW="96%"
-                         borderWidth="1" 
-                         borderColor="coolGray.300" 
-                         shadow="3" 
-                         bg={isPressed ? "coolGray.200" : isHovered ? "coolGray.200" : "coolGray.100"} 
-                         p="5"
-                         rounded="8" 
-                         style={{
-                            transform: [{
-                                scale: isPressed ? 0.96 : 1
-                            }]
-                         }, styles.diary}
+                            maxW="96%"
+                            minW="96%"
+                            borderWidth="1"
+                            borderColor="coolGray.300"
+                            shadow="3"
+                            bg={isPressed ? "coolGray.200" : isHovered ? "coolGray.200" : "coolGray.100"}
+                            p="5"
+                            rounded="8"
+                            style={{
+                                transform: [{
+                                    scale: isPressed ? 0.96 : 1
+                                }]
+                            }, styles.diary}
                         >
                             <HStack alignItems="center">
                                 <Badge colorScheme="green" _text={{
@@ -41,26 +41,34 @@ const FancyDiaryCard = ({ item: diary, onPress, backgroundColor, textColor }) =>
                                     {diary.disclosure}
                                 </Badge>
                                 <Spacer />
-                                <Text fontSize={10} color="coolGray.800">
-                                    {diary.user_id} | {diary.date.substr(0, 10)}
-                                </Text>
+                                {/* <TouchableOpacity style={styles.heart}> */}
+                                <TouchableOpacity>
+                                    <Ionicons name="md-heart-outline" size={24} color="grey" />
+                                </TouchableOpacity>
                             </HStack>
                             <Text color="coolGray.800" mt="3" fontWeight="medium" fontSize="xl">
                                 {diary.title}
                             </Text>
                             <Text
-                             mt="2" 
-                             fontSize="sm" 
-                             color="coolGray.700" 
-                             numberOfLines={1} 
-                             ellipsizeMode='tail' 
+                                mt="2"
+                                fontSize="sm"
+                                color="coolGray.700"
+                                numberOfLines={2}
+                                ellipsizeMode='tail'
                             //  width={'90%'}
                             >
                                 {content}
                             </Text>
-                            <TouchableOpacity style={styles.heart}>
-                                <Ionicons name="md-heart-outline" size={24} color="grey" />
-                            </TouchableOpacity>
+                            <HStack alignItems="center" mt="3" >
+                                <Text fontSize={10} color="coolGray.800">
+                                    {diary.user_id}
+                                </Text>
+                                <Spacer />
+                                <Text fontSize={10} color="coolGray.800">
+                                    {diary.date.substr(0, 10)}
+                                </Text>
+                            </HStack>
+
                         </Box>
                     )
                 }}

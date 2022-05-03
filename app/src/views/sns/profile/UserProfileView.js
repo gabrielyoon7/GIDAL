@@ -61,7 +61,6 @@ export default function UserProfileView(props) {
     }
   },[]);
 
-  
   React.useEffect(() => {
     getUserData(user_Id);
   },[user_Id]);
@@ -89,25 +88,60 @@ export default function UserProfileView(props) {
   };
 
   React.useEffect(() => {
-    let objectFollowing = Object.values(userFollowing).map(item => item.user_id)
+    let objectFollowing = Object.values(userFollower).map(item => item.user_id)
     console.log("objectFollowing : "+objectFollowing);
     // console.log(currentId);
     if (objectFollowing.includes(currentId)) {
-      console.log("서로 팔로우 되어있음")
+      console.log("이미 팔로우 되어있음")
       setFollowText('Already Followed.')
       
     } else {
-      console.log("서로 팔로우 안되어있음")
+      console.log("아직 팔로우 안되어있음")
       setFollowText('Follow')
     }
-  },[userFollowing])
+  },[userFollower])
+
+
+  React.useEffect(() => {
+    console.log('123');
+  }, [userFollowerNum, userFollowingNum])
 
   const follow = () =>{
-    let objectFollowing = Object.values(userFollowing).map(item => item.user_id)
+    const data = {
+      user_id: currentId,
+      following_user_id: user_Id,
+      img: ""
+    }
+    let objectFollowing = Object.values(userFollower).map(item => item.user_id)
+    console.log("follow : "+objectFollowing);
     if (objectFollowing.includes(currentId)) {
-      Alert.alert('팔로우 끊기 axios가 나와야 함')      
+      // Alert.alert('팔로우 끊기 axios가 나와야 함')      
+      axios.post(config.ip + ':5000/usersRouter/userFollowingDelete', {
+        data: data
+      })
+      axios.post(config.ip + ':5000/usersRouter/userFollowerDelete', {
+        data: data
+      })
+        .then((response) => {
+          setFollowText("Follow")
+          getUserData(user_Id);
+        }).catch(function (error) {
+          console.log(error);
+        });
     } else {
-      Alert.alert('팔로우 걸기 axios가 나와야 함')
+      // Alert.alert('팔로우 걸기 axios가 나와야 함')
+      axios.post(config.ip + ':5000/usersRouter/userFollowing', {
+        data: data
+      })
+      axios.post(config.ip + ':5000/usersRouter/userFollower', {
+        data: data
+      })
+        .then((response) => {
+          setFollowText("Already Followed.")
+          getUserData(user_Id);
+        }).catch(function (error) {
+          console.log(error);
+        });
     }
   }
 

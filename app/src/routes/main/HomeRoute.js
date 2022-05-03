@@ -5,8 +5,7 @@ import DiaryRoute from '../diary/DiaryRoute';
 import SnsRoute from '../sns/SnsRoute';
 import SettingRoute from '../setting/SettingRoute';
 import TodoRoute from '../todo/TodoRoute';
-
-
+import { Ionicons, FontAwesome,Foundation,FontAwesome5 } from '@expo/vector-icons';
 const DiaryScreen = (props) => {
     return (
         <DiaryRoute navigation={props.navigation}/>
@@ -44,11 +43,53 @@ const HomeRoute = () =>{
         <Tab.Navigator
             screenOptions={{ headerShown: false }} 
         >
-            <Tab.Screen name="Diary" component={DiaryScreen} />
-            <Tab.Screen name="Sns" component={SnsScreen} />
-            <Tab.Screen name="Todo" component={TodoScreen} />
-            <Tab.Screen name="Statistics" component={StatisticsScreen} />
-            <Tab.Screen name="Settings" component={SettingsScreen} />
+            <Tab.Screen options={{
+                    tabBarIcon: () => (
+                        <FontAwesome
+                            name="book"
+                            size={30}
+                            color='#5F5F5F'
+                        />
+                    ),
+                }} name="Diary" component={DiaryScreen} />
+                
+            <Tab.Screen  options={{
+                    tabBarIcon: () => (
+                        <Foundation
+                            name="torsos-all"
+                            size={30}
+                            color='#5F5F5F'
+                        />
+                    ),
+                }}name="Sns" component={SnsScreen} />
+
+            <Tab.Screen  options={{
+                    tabBarIcon: () => (
+                        <FontAwesome5
+                            name="list-alt"
+                            size={30}
+                            color='#5F5F5F'
+                        />
+                    ),
+                }}name="Todo" component={TodoScreen} />
+            <Tab.Screen options={{
+                    tabBarIcon: () => (
+                        <FontAwesome
+                            name="area-chart"
+                            size={30}
+                            color='#5F5F5F'
+                        />
+                    ),
+                }} name="Statistics" component={StatisticsScreen} />
+            <Tab.Screen options={{
+                    tabBarIcon: () => (
+                        <Ionicons
+                            name="settings-outline"
+                            size={30}
+                            color='#5F5F5F'
+                        />
+                    ),
+                }} name="Settings" component={SettingsScreen} />
         </Tab.Navigator>
     )
 }

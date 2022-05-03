@@ -6,12 +6,12 @@ import axios from 'axios'
 import { config } from '../../../config'
 import { useIsFocused } from '@react-navigation/native';
 
-const AddTodo = ({date}) => {
+const AddTodo = (props) => {
     const [user_Id, setUserId] = useState('');
     const [todo, setTodo] = useState("");
     const [firstRecord, setFirstRecord] = useState(true); // 처음 todolist 사용하는 유저 구분
     const isFocused = useIsFocused();
-    const [dateRecord, setDateRecord] = useState([]);
+    // const [dateRecord, setDateRecord] = useState([]);
     const [newDateBool, setNewDateBool] = useState(true);
 
     React.useEffect(() => {
@@ -47,14 +47,14 @@ const AddTodo = ({date}) => {
           }
       }).then((response) => {
         // console.log(response.data[0].to_do_list[0].date);
-        setDateRecord(result)
+        props.setDateRecord(result)
           if(response.data[0]==null){
             setFirstRecord(true)
           } else{
             result.push(response.data)
             setFirstRecord(false);
-            setDateRecord(result)
-            setDateRecord(result[0][0].to_do_list);
+            props.setDateRecord(result)
+            props.setDateRecord(result[0][0].to_do_list);
           }
           // console.log(response.data[0]==null);
       }).catch(function (error) {
@@ -67,13 +67,13 @@ const AddTodo = ({date}) => {
   
       useEffect(() => {
         getItems();
-    }, [isFocused, todo]);
+    }, [isFocused]);
 
     const addUserTodo = () => {
       axios.post(config.ip + ':5000/todoRouter/todoSave', {
         data: {
           user_id: user_Id,
-          date: date,
+          date: props.date,
           todo: todo,
         }
       }).then((response) => {
@@ -91,7 +91,7 @@ const AddTodo = ({date}) => {
       axios.post(config.ip + ':5000/todoRouter/newDateTodoSave', {
         data: {
           user_id: user_Id,
-          date: date,
+          date: props.date,
           todo: todo,
         }
       }).then((response) => {
@@ -109,11 +109,11 @@ const AddTodo = ({date}) => {
         if(firstRecord == false){
           console.log("기록 있는 유저");
           // console.log(dateRecord);
-          for(let i=0; i<dateRecord.length; i++){
+          for(let i=0; i<props.dateRecord.length; i++){
             // console.log(dateRecord[i].date == date);
-            let bool = dateRecord[i].date == date;
+            let bool = props.dateRecord[i].date == props.date;
             console.log(bool);
-            if(dateRecord[i].date == date){
+            if(props.dateRecord[i].date == props.date){
              
               setNewDateBool(false)
               console.log('있는 날짜');
@@ -152,7 +152,7 @@ const AddTodo = ({date}) => {
             data: {
               user_id: user_Id,
               to_do_list: {
-                date: date,
+                date: props.date,
                 contents: {
                   name: todo,
                 }

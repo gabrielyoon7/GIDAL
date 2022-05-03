@@ -14,10 +14,11 @@ const AgendaView = () => {
     const todayDate = new Date().toJSON().split('T')[0];
     const isFocused = useIsFocused();
     const [user_Id, setUserId] = useState('');
+    const [dateRecord, setDateRecord] = useState([]);
     const [todo, setTodo] = useState([
         // {date: "2022-04-16", contents: [{ name: "item 1 - any js object"}]},
     ]);
-    const [selectedDate, setSelectedDate] = useState(todayDate);
+    const [selectedDate, setSelectedDate] = useState('');
 
     React.useEffect(() => {
         // getData();
@@ -52,6 +53,7 @@ const AgendaView = () => {
               });
           }
           setTodo(result);
+        //   console.log(result);
       }).catch(function (error) {
           console.log(error);
       })
@@ -59,8 +61,16 @@ const AgendaView = () => {
   
       useEffect(() => {
         getItems();
-    }, [isFocused, user_Id]);
+    }, [isFocused, user_Id, dateRecord]);
   
+    // useEffect(() => {
+        // console.log("items:", items);
+        // if(!selectedDate){
+        //     setSelectedDate(todayDate);
+        // }
+        // console.log(new Date(selectedDate).getTime())
+        // loadItems(new Date(selectedDate).getTime())
+    // },[items])
 
     useEffect (() => {
         let val = {};
@@ -123,19 +133,24 @@ const AgendaView = () => {
     }
 
     const loadItems = (day) => {
-        // console.log(items);
+        // console.log(day);
         setTimeout(() => {
-            for (let i = -15; i < 85; i++) {
-                const time = day.timestamp + i  * 24 * 60 * 60 * 1000;
+            let val = {};
+            todo.forEach((item) => {
+                val[item.date] = item.contents
+            })
+            for (let i = -15; i < 55; i++) {
+                const time = day + i  * 24 * 60 * 60 * 1000;
                 const strTime = timeToString(time);
-                if(!items[strTime]) {
-                    items[strTime] = [];
+                if(!val[strTime]) {
+                    val[strTime] = [];
                 }
             }
             const newItems = {};
-            Object.keys(items).forEach((key) => {
-                newItems[key] = items[key];
+            Object.keys(val).forEach((key) => {
+                newItems[key] = val[key];
             });
+            // console.log(newItems);
             setItems(newItems);
         }, 1000);
     }
@@ -143,10 +158,10 @@ const AgendaView = () => {
     return (
         <NativeBaseProvider>
         <View style={{height: "100%"}}>
-            <AddTodo date={selectedDate}/>
+            <AddTodo date={selectedDate} dateRecord={dateRecord} setDateRecord={setDateRecord} />
             <Agenda
                 items={items}
-                loadItemsForMonth={loadItems}
+                loadItemsForMonth={(day) => loadItems(day.timestamp)}
                 selected={selectedDate}
                 renderItem={renderItem}
                 renderEmptyDate={renderEmptyDate}

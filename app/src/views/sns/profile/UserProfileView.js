@@ -18,6 +18,8 @@ export default function UserProfileView(props) {
   const [profileImg, setProfileImg] = useState();
   const [user_Id, setUserId] = useState('loading');
   const [currentId, setCurrentId] = useState('헤헤');
+  const [userFollower, setUserFollower] = useState([]);
+  const [userFollowing, setUserFollowing] = useState([]);
   const [userFollowerNum, setuserFollowerNum] = useState(0);
   const [userFollowingNum, setuserFollowingNum] = useState(0);
   const [followText, setFollowText] = useState('팔로우');
@@ -57,8 +59,12 @@ export default function UserProfileView(props) {
     } catch (error) {
       // console.log(error);
     }
+  },[]);
+
+  
+  React.useEffect(() => {
     getUserData(user_Id);
-  })
+  },[user_Id]);
 
 
   const getUserData = (user_Id) => {
@@ -74,6 +80,8 @@ export default function UserProfileView(props) {
         // console.log(following);
         // console.log('****follower****')
         // console.log(follower);
+        setUserFollowing(following);
+        setUserFollower(follower);
         setuserFollowingNum(following.length)
         setuserFollowerNum(follower.length)
       }).catch(function (error) {

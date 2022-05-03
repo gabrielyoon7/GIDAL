@@ -7,7 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Button, Center } from 'native-base';
 import BackButton from '../../../components/common/BackButton';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { useIsFocused, useNavigationState } from "@react-navigation/native";
+import { CommonActions, useIsFocused, useNavigationState } from "@react-navigation/native";
 
 const Tab = createBottomTabNavigator();
 
@@ -65,7 +65,7 @@ export default function FollowListView(props) {
 
 
   useEffect(() => {
-    init_page=='Following'?init_page=followings:init_page=followers;
+    init_page == 'Following' ? init_page = followings : init_page = followers;
     setFilteredDataSource(init_page);
     setMasterDataSource(init_page);
   }, [followings, followers]);
@@ -88,15 +88,21 @@ export default function FollowListView(props) {
   };
 
   const selectOther = (item) => {
-    if (props.user_id === user_Id) {
-      props.navigation.navigate('DmRead', {
-        userName: item.name
-      })
-    } else {
-      props.navigation.navigate('UserProfile', {
-        user_id: item.name
-      })
-    }
+    // console.log(item);
+    // props.navigation.navigate('UserProfile', {
+    //   user_id: item.user_id
+    // })
+    props.navigation.dispatch( CommonActions.navigate({ name: 'UserProfile', params: { user_id: item.user_id, }, }) )
+
+    // if (props.user_id === user_Id) {
+    //   props.navigation.navigate('DmRead', {
+    //     userName: item.name
+    //   })
+    // } else {
+    //   props.navigation.navigate('UserProfile', {
+    //     user_id: item.name
+    //   })
+    // }
   }
 
   const Followings = (props) => {

@@ -5,12 +5,16 @@ import axios from 'axios'
 import { config } from '../../../../config'
 import DiaryList from '../../diary/list/DiaryList';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigationState } from '@react-navigation/native';
+import { useIsFocused, useNavigationState } from '@react-navigation/native';
 import BackButton from '../../../components/common/BackButton';
 
 // 이걸로 통합 예정
 
+
 export default function UserProfileView(props) {
+
+
+  const isFocused = useIsFocused();
 
   // console.log('UserProfileView');
 
@@ -29,41 +33,44 @@ export default function UserProfileView(props) {
 
   React.useEffect(() => {
     //초기 프로필 아이디 수신부
-    try {
+    if (isFocused) {
+      try {
 
-      console.log('other profile!');
-      const idx = new_routes.findIndex(r => r.name === "UserProfile")
-      // console.log(new_routes[idx].params);
-      // console.log(idx);
-      if (idx != -1 && new_routes[idx].params != undefined) {
-        // setUserId(props.navigation.getState().routes[2].params.user_id);
-        setUserId(new_routes[idx].params.user_id);
-      }
-      if (new_routes[idx].params == undefined) {
-        try {
-          console.log('my profile!')
-          AsyncStorage.getItem('userInfo')
-            .then(value => {
-              if (value != null) {
-                const UserInfo = JSON.parse(value);
-                setUserId(UserInfo[0].user_id);
+        console.log('other profile!');
+        const idx = new_routes.findIndex(r => r.name === "UserProfile")
+        // console.log(new_routes[idx].params);
+        // console.log(idx);
+        if (idx != -1 && new_routes[idx].params != undefined) {
+          // setUserId(props.navigation.getState().routes[2].params.user_id);
+          setUserId(new_routes[idx].params.user_id);
+        }
+        if (new_routes[idx].params == undefined) {
+          try {
+            console.log('my profile!')
+            AsyncStorage.getItem('userInfo')
+              .then(value => {
+                if (value != null) {
+                  const UserInfo = JSON.parse(value);
+                  setUserId(UserInfo[0].user_id);
+                }
               }
-            }
-            )
+              )
 
+          }
+          catch (e) {
+            // console.log(e);
+          }
         }
-        catch (e) {
-          // console.log(e);
-        }
+        console.log('this is ' + user_Id + 's page');
+      } catch (error) {
+        // console.log(error);
       }
-    } catch (error) {
-      // console.log(error);
     }
-  },[]);
+  }, [isFocused]);
 
   React.useEffect(() => {
     getUserData(user_Id);
-  },[user_Id]);
+  }, [user_Id]);
 
   const getUserData = (user_Id) => {
     axios.post(config.ip + ':5000/usersRouter/findOne', {
@@ -89,31 +96,31 @@ export default function UserProfileView(props) {
 
   React.useEffect(() => {
     let objectFollowing = Object.values(userFollower).map(item => item.user_id)
-    console.log("objectFollowing : "+objectFollowing);
+    console.log("objectFollowing : " + objectFollowing);
     // console.log(currentId);
     if (objectFollowing.includes(currentId)) {
       console.log("이미 팔로우 되어있음")
       setFollowText('Already Followed.')
-      
+
     } else {
       console.log("아직 팔로우 안되어있음")
       setFollowText('Follow')
     }
-  },[userFollower])
+  }, [userFollower])
 
 
   React.useEffect(() => {
     console.log('123');
   }, [userFollowerNum, userFollowingNum])
 
-  const follow = () =>{
+  const follow = () => {
     const data = {
       user_id: currentId,
       following_user_id: user_Id,
       img: ""
     }
     let objectFollowing = Object.values(userFollower).map(item => item.user_id)
-    console.log("follow : "+objectFollowing);
+    console.log("follow : " + objectFollowing);
     if (objectFollowing.includes(currentId)) {
       // Alert.alert('팔로우 끊기 axios가 나와야 함')      
       axios.post(config.ip + ':5000/usersRouter/userFollowingDelete', {
@@ -166,9 +173,9 @@ export default function UserProfileView(props) {
       <View>{
         (currentId == user_Id)
           ?
-          (<MyPageActionView/>)
+          (<MyPageActionView />)
           :
-          (<OtherPageActionView/>)
+          (<OtherPageActionView />)
       }
       </View>
     )
@@ -180,7 +187,7 @@ export default function UserProfileView(props) {
     )
   }
 
-  
+
 
   const OtherPageActionView = () => {
     //만약에 팔로우가 되어있다면 팔로우 해제 버튼과 디엠 보내기만 보여주고,

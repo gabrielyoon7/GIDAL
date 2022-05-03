@@ -103,7 +103,12 @@ export default function UserProfileView(props) {
   },[userFollowing])
 
   const follow = () =>{
-    Alert.alert('팔로우 기능은 아직 구현되지 않았습니다.')
+    let objectFollowing = Object.values(userFollowing).map(item => item.user_id)
+    if (objectFollowing.includes(currentId)) {
+      Alert.alert('팔로우 끊기 axios가 나와야 함')      
+    } else {
+      Alert.alert('팔로우 걸기 axios가 나와야 함')
+    }
   }
 
   const ProfileActionView = () => {

@@ -1,4 +1,4 @@
-import { Box, Input, Text, TextArea, Stack, Button, HStack, Badge, Spacer, Avatar, Divider, ScrollView, useDisclose, Actionsheet, Icon, Image } from 'native-base';
+import { Box, Input, Text, TextArea, Stack, Button, HStack, Badge, Spacer, Avatar, Divider, ScrollView, useDisclose, Actionsheet, Icon, Image, Center, Stagger, IconButton } from 'native-base';
 import * as React from 'react';
 import { Dimensions, StyleSheet, View, TouchableOpacity } from 'react-native';
 import axios from 'axios';
@@ -8,8 +8,8 @@ import RenderHtml from 'react-native-render-html';
 import { LinearGradient } from 'expo-linear-gradient'
 import moment from 'moment';
 import { Path } from "react-native-svg";
-import { AntDesign, MaterialIcons, Ionicons } from "@expo/vector-icons";
-import DiaryReadStaggerButton from './DiaryReadStaggerButton';
+import { AntDesign, MaterialCommunityIcons, MaterialIcons, FontAwesome5, Ionicons } from "@expo/vector-icons";
+// import DiaryReadStaggerButton from './DiaryReadStaggerButton';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 import { useNavigationState } from '@react-navigation/native';
 
@@ -182,8 +182,8 @@ const DiaryReadView = (props) => {
                     <Spacer />
                     <Spacer /> */}
 
-                   
-                    {/* <Button style={styles.button} colorScheme="green" size="md" onPress={
+
+                {/* <Button style={styles.button} colorScheme="green" size="md" onPress={
                         () => props.navigation.navigate('DiaryModify', {
                             // () => props.navigation.replace('DiaryModify', {
                                 diary: diary,
@@ -204,7 +204,7 @@ const DiaryReadView = (props) => {
     return (
         <>
             <ParallaxScrollView
-                style={{flex:1}}
+                style={{ flex: 1 }}
                 parallaxHeaderHeight={windowHeight * 0.3}
                 renderForeground={() => (
                     <Image
@@ -216,7 +216,92 @@ const DiaryReadView = (props) => {
             >
                 <ReadView />
             </ParallaxScrollView>
-            <DiaryReadStaggerButton  />
+            {/* <DiaryReadStaggerButton diary={diary}/> */}
+            <Center style={{ position: 'absolute', right: 30, bottom: 100, height: 30 }} >
+                <Box maxW="100">
+                    <Stagger visible={isOpen} initial={{
+                        opacity: 0,
+                        scale: 0,
+                        translateY: 34
+                    }} animate={{
+                        translateY: 0,
+                        scale: 1,
+                        opacity: 1,
+                        transition: {
+                            type: "spring",
+                            mass: 0.8,
+                            stagger: {
+                                offset: 30,
+                                reverse: true
+                            }
+                        }
+                    }} exit={{
+                        translateY: 34,
+                        scale: 0.5,
+                        opacity: 0,
+                        transition: {
+                            duration: 100,
+                            stagger: {
+                                offset: 30,
+                                reverse: true
+                            }
+                        }
+                    }}>
+
+                        <IconButton
+                            mb="3"
+                            margin={1}
+                            variant="solid"
+                            bg="indigo.500"
+                            colorScheme="indigo"
+                            borderRadius="full"
+                            icon={
+                                <Icon
+                                    as={FontAwesome5}
+                                    size="6"
+                                    name="pencil-alt"
+                                    _dark={{
+                                        color: "warmGray.50"
+                                    }}
+                                    color="warmGray.50"
+                                />
+                            }
+                            onPress={
+                                () => props.navigation.navigate('DiaryModify', {
+                                    diary: diary,
+                                })
+                            }
+                        />
+                        <IconButton
+                            mb="3"
+                            margin={1}
+                            variant="solid"
+                            bg="yellow.500"
+                            colorScheme="yellow"
+                            borderRadius="full"
+                            icon={
+                                <Icon
+                                    as={MaterialIcons}
+                                    size="6"
+                                    name="delete"
+                                    _dark={{
+                                        color: "warmGray.50"
+                                    }}
+                                    color="warmGray.50"
+                                />
+                            }
+                            onPress={
+                                () => deleteDiary()
+                            }
+                        />
+                    </Stagger>
+                </Box>
+                <HStack alignItems="center">
+                    <IconButton variant="solid" borderRadius="full" size="lg" onPress={onToggle} bg="cyan.400" icon={<Icon as={MaterialCommunityIcons} size="6" name="dots-horizontal" color="warmGray.50" _dark={{
+                        color: "warmGray.50"
+                    }} />} />
+                </HStack>
+            </Center>
         </>
     )
 }

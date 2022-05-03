@@ -106,7 +106,6 @@ const DiaryReadView = (props) => {
                         <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ flex: 1, flexDirection: 'row' }} >
                             <AntDesign style={styles.allowIcon} name="left" size={24} color="black" />
                         </TouchableOpacity>
-                        <DiaryReadStaggerButton />
                     </Box>
                     <HStack alignItems="center">
                         <Badge
@@ -179,12 +178,12 @@ const DiaryReadView = (props) => {
                         }
                     </HStack>
                 </View>
-                <HStack margin='5' >
+                {/* <HStack margin='5' >
                     <Spacer />
-                    <Spacer />
+                    <Spacer /> */}
 
-
-                    <Button style={styles.button} colorScheme="green" size="md" onPress={
+                   
+                    {/* <Button style={styles.button} colorScheme="green" size="md" onPress={
                         () => props.navigation.navigate('DiaryModify', {
                             // () => props.navigation.replace('DiaryModify', {
                                 diary: diary,
@@ -195,9 +194,9 @@ const DiaryReadView = (props) => {
 
                     <Button style={styles.button} colorScheme="green" size="md" onPress={() => deleteDiary()} >
                         삭제
-                    </Button>
+                    </Button> */}
 
-                </HStack>
+                {/* </HStack> */}
             </View>
         );
     }
@@ -205,6 +204,7 @@ const DiaryReadView = (props) => {
     return (
         <>
             <ParallaxScrollView
+                style={{flex:1}}
                 parallaxHeaderHeight={windowHeight * 0.3}
                 renderForeground={() => (
                     <Image
@@ -216,6 +216,7 @@ const DiaryReadView = (props) => {
             >
                 <ReadView />
             </ParallaxScrollView>
+            <DiaryReadStaggerButton  />
         </>
     )
 }

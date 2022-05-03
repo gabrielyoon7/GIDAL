@@ -8,9 +8,8 @@ const Example = () => {
         onToggle
     } = useDisclose();
     return (
-        <Center style={{flex: 0.7, flexDirection:"row" }}>
-            
-            <Box  style={{flex: 3, flexDirection:"row" }} maxW="150">
+        <Center style={{position: 'absolute', right: 30, bottom: 100, height: 30}} >
+            <Box  maxW="100">
                 <Stagger visible={isOpen} initial={{
                     opacity: 0,
                     scale: 0,

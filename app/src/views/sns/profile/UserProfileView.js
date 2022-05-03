@@ -66,7 +66,6 @@ export default function UserProfileView(props) {
     getUserData(user_Id);
   },[user_Id]);
 
-
   const getUserData = (user_Id) => {
     axios.post(config.ip + ':5000/usersRouter/findOne', {
       data: {
@@ -87,7 +86,21 @@ export default function UserProfileView(props) {
       }).catch(function (error) {
         // console.log(error);
       });
-  }
+  };
+
+  React.useEffect(() => {
+    let objectFollowing = Object.values(userFollowing).map(item => item.user_id)
+    console.log("objectFollowing : "+objectFollowing);
+    // console.log(currentId);
+    if (objectFollowing.includes(currentId)) {
+      console.log("서로 팔로우 되어있음")
+      setFollowText('Already Followed.')
+      
+    } else {
+      console.log("서로 팔로우 안되어있음")
+      setFollowText('Follow')
+    }
+  },[userFollowing])
 
   const follow = () =>{
     Alert.alert('팔로우 기능은 아직 구현되지 않았습니다.')

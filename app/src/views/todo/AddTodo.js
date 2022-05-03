@@ -2,7 +2,6 @@ import { Input, HStack, IconButton, Icon } from "native-base";
 import React, { useState, useEffect } from 'react';
 import { AntDesign } from "@expo/vector-icons";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Feather } from '@expo/vector-icons';
 import axios from 'axios'
 import { config } from '../../../config'
 import { useIsFocused } from '@react-navigation/native';
@@ -81,6 +80,7 @@ const AddTodo = ({date}) => {
         if (response.data.status === 'success') {
           console.log('to do save');
           getItems();
+          setNewDateBool(true)
         }
       }).catch(function (error) {
         console.log(error);
@@ -98,6 +98,7 @@ const AddTodo = ({date}) => {
         if (response.data.status === 'success') {
           console.log('to do save');
           getItems();
+          setNewDateBool(false)
         }
       }).catch(function (error) {
         console.log(error);
@@ -105,43 +106,67 @@ const AddTodo = ({date}) => {
     }
 
     const addTodoData = () => {
-      if(firstRecord == false){
-        console.log("기록 있는 유저");
-        dateRecord.forEach((item) => {
-          console.log(item.date);
-          if(item.date == date){
-            setNewDateBool(true)
-            console.log(newDateBool);
-          } else{
-            setNewDateBool(false);
-            console.log(newDateBool);
-          }
-        })
-        console.log(newDateBool);
-        if(!newDateBool){
-          addUserTodo()
-        } else{
-          addNewDateTodo()
-        }
-      } else {
-        axios.post(config.ip + ':5000/todoRouter/save', {
-          data: {
-            user_id: user_Id,
-            to_do_list: {
-              date: date,
-              contents: {
-                name: todo,
-              }
+        if(firstRecord == false){
+          console.log("기록 있는 유저");
+          // console.log(dateRecord);
+          for(let i=0; i<dateRecord.length; i++){
+            // console.log(dateRecord[i].date == date);
+            let bool = dateRecord[i].date == date;
+            console.log(bool);
+            if(dateRecord[i].date == date){
+             
+              setNewDateBool(false)
+              console.log('있는 날짜');
+              console.log(newDateBool);
+              break;
+            } else {
+              setNewDateBool(true)
+              console.log('없는 날짜');
+              console.log(newDateBool);
             }
           }
-        }).then((response) => {
-          if (response.data.status === 'success') {
-            console.log('to do save');
+          // dateRecord.forEach((item) => {
+          //   // console.log('---------------');
+          //   // console.log(item.date);
+          //   // console.log(date);
+          //   // let bool = item.date == date
+          //   // setNewDateBool(bool)
+          //   // console.log('let' ,bool);
+
+          //   if(bool){
+          //     setNewDateBool(false)
+          //     return false;
+          //   } else{
+          //     setNewDateBool(true);
+          //     console.log(newDateBool);
+          //   }
+          // })
+          console.log(newDateBool);
+          if(newDateBool){
+            addNewDateTodo()
+          } else{
+            addUserTodo()
           }
-        }).catch(function (error) {
-          console.log(error);
-        })
-      }
+        } else {
+          axios.post(config.ip + ':5000/todoRouter/save', {
+            data: {
+              user_id: user_Id,
+              to_do_list: {
+                date: date,
+                contents: {
+                  name: todo,
+                }
+              }
+            }
+          }).then((response) => {
+            if (response.data.status === 'success') {
+              console.log('to do save');
+            }
+          }).catch(function (error) {
+            console.log(error);
+          })
+        }
+      
         // console.log(todo);
         setTodo('')
         getItems()

@@ -16,20 +16,20 @@ const onPressFunction = (tag) => {
 const TagCard = (props) => {
     const type = {
         button: {
-          interaction:<ButtonTags tags={props.item.tags} selectTags={props.selectTags}/>,
+          interaction:<ButtonTags item={props.item} tags={props.item.tags} selectTags={props.selectTags}/>,
         },
         search: {
-            interaction:<SearchTags tags={props.item.tags} selectTags={props.selectTags} />,
+            interaction:<SearchTags item={props.item} tags={props.item.tags} selectTags={props.selectTags} />,
         },
-        time: {
-            interaction:<TimePicker tags={props.item.tags} selectTags={props.selectTags} />,
-        },
-        slider1: {
-            interaction:<Slider1 tags={props.item.tags} selectTags={props.selectTags} />,
-        },
-        slider2: {
-            interaction:<Slider2 tags={props.item.tags} selectTags={props.selectTags} />,
-        },
+        // time: {
+        //     interaction:<TimePicker tags={props.item.tags} selectTags={props.selectTags} />,
+        // },
+        // slider1: {
+        //     interaction:<Slider1 tags={props.item.tags} selectTags={props.selectTags} />,
+        // },
+        // slider2: {
+        //     interaction:<Slider2 tags={props.item.tags} selectTags={props.selectTags} />,
+        // },
     };
     const card_type = type[props.item.type];
     return (

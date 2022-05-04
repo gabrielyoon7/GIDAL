@@ -29,6 +29,7 @@ app.get('/', (req, res) => {
 
 app.listen(port, function(){
     console.log('listening on 5000');
+    console.log('http://localhost:5000');
 });
 
 app.use('/diariesRouter', diariesRouter);

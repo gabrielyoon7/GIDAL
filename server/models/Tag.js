@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const tagSchema = mongoose.Schema({
+    // _id: {
+    //     type : String,
+    //     required: true
+    // },
     type: {
         type: String,
         maxlength: 30,

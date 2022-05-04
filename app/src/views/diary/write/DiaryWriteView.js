@@ -1,5 +1,5 @@
 
-import { Alert, FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, FlatList, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Box, Button, Center, Divider, HStack, Icon } from "native-base"
 import React, { useEffect, useState, } from 'react';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
@@ -42,15 +42,17 @@ const DiaryWriteView = (props) => {
 })
 
   const selectTags = (selectedTag) => {
+    const newTag=selectedTag.question_id+'-/-/-'+selectedTag.tag;
+    console.log(newTag);
     let newSet = tags;
-    if (newSet.includes(selectedTag)) {
-      const idx = newSet.indexOf(selectedTag)
+    if (newSet.includes(newTag)) {
+      const idx = newSet.indexOf(newTag)
       if (idx > -1) {
         newSet.splice(idx, 1)
       }
       setTags([...newSet]); //리렌더링 사용시 매우 중요함
     } else {
-      newSet.push(selectedTag);
+      newSet.push(newTag);
       setTags([...newSet]); //리렌더링 사용시 매우 중요함
     }
     console.log(tags);
@@ -71,8 +73,14 @@ const DiaryWriteView = (props) => {
   };
 
   const saveDiary = () => {
-    // const user_Id = props.navigation.getState().routes[1].params.user_Id
-    console.log('selected tags : ' + tags);
+    // console.log('selected tags : ' + tags);
+    let tagTextOnlySet = new Set();
+    tags.forEach(element => {
+      tagTextOnlySet.add(element.split('-/-/-')[1]);
+    });
+    const tagTextOnlyArray = Array.from(tagTextOnlySet);
+    console.log('tagTextOnlyArray : '+tagTextOnlyArray);
+
     axios.post(config.ip + ':5000/diariesRouter/save', {
       data: {
         user_id: userId,
@@ -80,7 +88,7 @@ const DiaryWriteView = (props) => {
         title: Title,
         content: Content,
         disclosure: disclosure,
-        tags: tags,
+        tags: tagTextOnlyArray,
       }
     }).then((response) => {
       if (response.data.status === 'success') {
@@ -107,8 +115,20 @@ const DiaryWriteView = (props) => {
   }
   
   const renderItem = ({ item }) => {
+    const elements = item.split('-/-/-');
+    const question_id = elements[0];
+    const tag = elements[1];
+    const temp_item = {
+      _id : question_id,
+      tag : tag,
+    }
     return (
-      <PressableTag key={item} tag={item} selectTags={selectTags} styles={buttonStyles} />
+      // <PressableTag key={item} item={temp_item} tag={tag} selectTags={selectTags} styles={buttonStyles} />
+      <View style={buttonStyles.btnView}>
+      <Pressable style={buttonStyles.button} >
+        <Text>{tag}</Text>
+      </Pressable>
+    </View>
     );
   };
 

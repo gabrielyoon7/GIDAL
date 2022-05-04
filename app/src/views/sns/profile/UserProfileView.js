@@ -38,10 +38,7 @@ export default function UserProfileView(props) {
 
         console.log('other profile!');
         const idx = new_routes.findIndex(r => r.name === "UserProfile")
-        // console.log(new_routes[idx].params);
-        // console.log(idx);
         if (idx != -1 && new_routes[idx].params != undefined) {
-          // setUserId(props.navigation.getState().routes[2].params.user_id);
           setUserId(new_routes[idx].params.user_id);
         }
         if (new_routes[idx].params == undefined) {

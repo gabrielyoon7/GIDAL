@@ -11,6 +11,7 @@ import RadioDisclosure from "../../../components/diary/RadioDisclosure";
 import TagSelector from "../../../components/diary/TagSelector";
 import InputContent from "../../../components/diary/InputContent";
 import PressableTag from '../../../components/tag/interaction/PressableTag';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const DiaryWriteView = (props) => {
@@ -22,6 +23,23 @@ const DiaryWriteView = (props) => {
   const [disclosure, setDisclosure] = React.useState('public');
   const [tags, setTags] = useState([]);
   const [ref, setRef] = useState(null);
+  const [tagLog, setTagLog] = useState([]);
+  const [userId, setUserId] = useState('unknown');
+
+  React.useEffect(() => {
+    try {
+        AsyncStorage.getItem('userInfo')
+            .then(value => {
+                if (value != null) {
+                    const UserInfo = JSON.parse(value);
+                    setUserId(UserInfo[0].user_id);
+                }
+            }
+            )
+    } catch (error) {
+        console.log(error);
+    }
+})
 
   const selectTags = (selectedTag) => {
     let newSet = tags;
@@ -35,7 +53,7 @@ const DiaryWriteView = (props) => {
       newSet.push(selectedTag);
       setTags([...newSet]); //리렌더링 사용시 매우 중요함
     }
-    console.log(tags)
+    console.log(tags);
   }
 
   const showDatePicker = () => {
@@ -53,11 +71,11 @@ const DiaryWriteView = (props) => {
   };
 
   const saveDiary = () => {
-    const user_Id = props.navigation.getState().routes[1].params.user_Id
+    // const user_Id = props.navigation.getState().routes[1].params.user_Id
     console.log('selected tags : ' + tags);
     axios.post(config.ip + ':5000/diariesRouter/save', {
       data: {
-        user_id: user_Id,
+        user_id: userId,
         date: Date,
         title: Title,
         content: Content,
@@ -87,16 +105,6 @@ const DiaryWriteView = (props) => {
       </Box>
     )
   }
-
-  // useEffect(() => { console.log("component did mount with useEffect!"); }, [tags]);
-
-  // const SelectedTagsView = () => {
-  //   return (
-  //     tags.map((tag) => (
-  //       <PressableTag key={tag} tag={tag} selectTags={selectTags} styles={buttonStyles} />
-  //     ))
-  //   )
-  // }
   
   const renderItem = ({ item }) => {
     return (
@@ -106,15 +114,10 @@ const DiaryWriteView = (props) => {
 
   return (
     <>
-      <View style={{ backgroundColor: 'white' }}>
+      <View style={{ backgroundColor: 'white', flex:1 }}>
         <WriteDiaryHeader />
         <Divider />
         <ScrollView style={{ backgroundColor: 'white' }}>
-          {/* <ScrollView
-            horizontal={true}
-          >
-            <SelectedTagsView />
-          </ScrollView> */}
           <FlatList
             horizontal={true}
             data={tags}

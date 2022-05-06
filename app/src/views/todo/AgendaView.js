@@ -61,7 +61,7 @@ const AgendaView = () => {
   
       useEffect(() => {
         getItems();
-    }, [isFocused, user_Id, dateRecord]);
+    }, [user_Id, dateRecord]);
   
     // useEffect(() => {
         // console.log("items:", items);
@@ -139,7 +139,7 @@ const AgendaView = () => {
             todo.forEach((item) => {
                 val[item.date] = item.contents
             })
-            for (let i = -15; i < 55; i++) {
+            for (let i = -45; i < 55; i++) {
                 const time = day + i  * 24 * 60 * 60 * 1000;
                 const strTime = timeToString(time);
                 if(!val[strTime]) {
@@ -157,7 +157,7 @@ const AgendaView = () => {
 
     return (
         <NativeBaseProvider>
-        <View style={{height: "100%"}}>
+        <View style={{flex: 1}}>
             <AddTodo date={selectedDate} dateRecord={dateRecord} setDateRecord={setDateRecord} />
             <Agenda
                 items={items}

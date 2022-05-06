@@ -18,7 +18,7 @@ const AgendaView = () => {
     const [todo, setTodo] = useState([
         // {date: "2022-04-16", contents: [{ name: "item 1 - any js object"}]},
     ]);
-    const [selectedDate, setSelectedDate] = useState('');
+    const [selectedDate, setSelectedDate] = useState(todayDate);
 
     React.useEffect(() => {
         // getData();
@@ -139,7 +139,7 @@ const AgendaView = () => {
             todo.forEach((item) => {
                 val[item.date] = item.contents
             })
-            for (let i = -45; i < 55; i++) {
+            for (let i = -15; i < 55; i++) {
                 const time = day + i  * 24 * 60 * 60 * 1000;
                 const strTime = timeToString(time);
                 if(!val[strTime]) {

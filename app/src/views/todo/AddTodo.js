@@ -46,7 +46,7 @@ const AddTodo = (props) => {
         user_id: user_Id
       }
     }).then((response) => {
-      // console.log(response.data[0].to_do_list[0].date);
+      // console.log(response.data[0]);
       props.setDateRecord(result)
       if (response.data[0] == null) {
         setFirstRecord(true)
@@ -67,7 +67,7 @@ const AddTodo = (props) => {
 
   useEffect(() => {
     getItems();
-  }, [isFocused]);
+  }, [user_Id]);
 
   const addUserTodo = () => {
     axios.post(config.ip + ':5000/todoRouter/todoSave', {

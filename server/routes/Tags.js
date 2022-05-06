@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router();
 const bodyParser = require('body-parser');
 const { Tag } = require("../models/Tag");
+const { TagLog } = require('../models/TagLog');
 
 
 const TagDataExample = [
@@ -86,6 +87,23 @@ router.get('/find', function (req, res, next) {
         next(err)
     });
 });
+
+/* POST*/
+router.post('/save', function(req, res) {
+    // console.log(req.body.data);
+    // 태그 로그 데이터 저장
+    const tagLogArr = req.body.data;
+    TagLog.insertMany(tagLogArr, function(error, docs) {
+        if(error){
+            console.log(error);
+            return res.json({status: 'fail', error})
+        }else{
+            console.log('Tag Log Saved!')
+            return res.json({status: 'success'})
+        }
+    })
+});
+
 
 
 

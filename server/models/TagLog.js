@@ -13,7 +13,7 @@ const tagSchema = mongoose.Schema({
     diary_id:{
         type : String,
         required: true
-    }
+    },
     date: {
         type : Date,
         required: true

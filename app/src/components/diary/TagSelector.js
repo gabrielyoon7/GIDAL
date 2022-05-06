@@ -18,7 +18,7 @@ const TagSelector = (props) => {
   }, []);
 
   useEffect(() => {
-    console.log('123')
+    // console.log('123')
   }, [carouselItems]);
 
   const getTags = () => {

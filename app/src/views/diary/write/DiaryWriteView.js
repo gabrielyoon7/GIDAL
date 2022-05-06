@@ -23,7 +23,6 @@ const DiaryWriteView = (props) => {
   const [disclosure, setDisclosure] = React.useState('public');
   const [tags, setTags] = useState([]);
   const [ref, setRef] = useState(null);
-  const [tagLog, setTagLog] = useState([]);
   const [userId, setUserId] = useState('unknown');
 
   React.useEffect(() => {
@@ -43,7 +42,7 @@ const DiaryWriteView = (props) => {
 
   const selectTags = (selectedTag) => {
     const newTag=selectedTag.question_id+'-/-/-'+selectedTag.tag;
-    console.log(newTag);
+    // console.log(newTag);
     let newSet = tags;
     if (newSet.includes(newTag)) {
       const idx = newSet.indexOf(newTag)
@@ -55,7 +54,7 @@ const DiaryWriteView = (props) => {
       newSet.push(newTag);
       setTags([...newSet]); //리렌더링 사용시 매우 중요함
     }
-    console.log(tags);
+    // console.log(tags);
   }
 
   const showDatePicker = () => {
@@ -79,8 +78,7 @@ const DiaryWriteView = (props) => {
       tagTextOnlySet.add(element.split('-/-/-')[1]);
     });
     const tagTextOnlyArray = Array.from(tagTextOnlySet);
-    console.log('tagTextOnlyArray : '+tagTextOnlyArray);
-
+    // console.log('tagTextOnlyArray : '+tagTextOnlyArray);
     axios.post(config.ip + ':5000/diariesRouter/save', {
       data: {
         user_id: userId,
@@ -92,12 +90,33 @@ const DiaryWriteView = (props) => {
       }
     }).then((response) => {
       if (response.data.status === 'success') {
-        props.navigation.pop();
-        // 스택 쌓지 않고 화면 이동 => 읽기 페이지에서 뒤로가기하면 리스트 페이지 뜸
+        axios.post(config.ip+':5000/tagsRouter/save',{
+          data:makeTagLog(response.data.id)
+        }).then((response) => {
+          if (response.data.status === 'success') {
+            props.navigation.pop();
+            // 스택 쌓지 않고 화면 이동 => 읽기 페이지에서 뒤로가기하면 리스트 페이지 뜸
+          }
+        }).catch(function (error) {
+          console.log(error);
+        })
       }
     }).catch(function (error) {
       console.log(error);
     })
+  }
+
+  const makeTagLog = (id) =>{
+    let tagLogData = [];
+    tags.forEach(element => {
+      const question_id = element.split('-/-/-')[0];
+      const user_id = userId;
+      const diary_id = id;
+      const date = Date;
+      const tag = element.split('-/-/-')[1];
+      tagLogData.push({question_id:question_id,user_id:user_id,diary_id:diary_id,date:date,tag:tag});
+    });
+    return tagLogData;
   }
 
   const WriteDiaryHeader = () => {

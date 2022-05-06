@@ -36,7 +36,7 @@ router.post('/save', function(req, res) {
             return res.json({status: 'fail', error})
         }else{
             console.log('Saved!')
-            return res.json({status: 'success'})
+            return res.json({status: 'success', id:data._id})
         }
     });
 });

@@ -28,7 +28,7 @@ export default function UserProfileView(props) {
   const [userFollowingNum, setuserFollowingNum] = useState(0);
   const [followText, setFollowText] = useState('팔로우');
 
-
+  const [isLoaded, setIsLoaded] = React.useState(false);
   const new_routes = useNavigationState(state => state.routes);
 
   React.useEffect(() => {
@@ -36,7 +36,7 @@ export default function UserProfileView(props) {
     if (isFocused) {
       try {
 
-        console.log('other profile!');
+        // console.log('other profile!');
         const idx = new_routes.findIndex(r => r.name === "UserProfile")
         if (idx != -1 && new_routes[idx].params != undefined) {
           setUserId(new_routes[idx].params.user_id);
@@ -58,7 +58,7 @@ export default function UserProfileView(props) {
             // console.log(e);
           }
         }
-        console.log('this is ' + user_Id + 's page');
+        // console.log('this is ' + user_Id + 's page');
       } catch (error) {
         // console.log(error);
       }
@@ -93,21 +93,21 @@ export default function UserProfileView(props) {
 
   React.useEffect(() => {
     let objectFollowing = Object.values(userFollower).map(item => item.user_id)
-    console.log("objectFollowing : " + objectFollowing);
+    // console.log("objectFollowing : " + objectFollowing);
     // console.log(currentId);
     if (objectFollowing.includes(currentId)) {
-      console.log("이미 팔로우 되어있음")
-      setFollowText('Already Followed.')
+      // console.log("이미 팔로우 되어있음")
+      setFollowText('Unfollow')
 
     } else {
-      console.log("아직 팔로우 안되어있음")
+      // console.log("아직 팔로우 안되어있음")
       setFollowText('Follow')
     }
   }, [userFollower])
 
 
   React.useEffect(() => {
-    console.log('123');
+    // console.log('123');
   }, [userFollowerNum, userFollowingNum])
 
   const follow = () => {
@@ -141,7 +141,7 @@ export default function UserProfileView(props) {
         data: data
       })
         .then((response) => {
-          setFollowText("Already Followed.")
+          setFollowText("Unfollow")
           getUserData(user_Id);
         }).catch(function (error) {
           console.log(error);

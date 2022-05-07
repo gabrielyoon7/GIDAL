@@ -4,13 +4,14 @@ import { useIsFocused } from '@react-navigation/native';
 import axios from 'axios';
 import { config } from '../../../../config'
 import FancyDiaryCard from '../../../components/diary/FancyDiaryCard';
+import LoadingSpinner from '../../../components/common/LoadingSpinner';
 
 
 const DiaryList = (props, navigation) => {
     const [items, setItems] = useState([]);
     const user_id = props.user_Id;
     const isFocused = useIsFocused(); // isFoucesd Define
-
+    const [isLoaded, setIsLoaded] = useState(false);
     const getitems = () => {
         let result = []
         axios.post(config.ip + ':5000/diariesRouter/findOwn', {
@@ -36,6 +37,7 @@ const DiaryList = (props, navigation) => {
     //첫 렌더링에만 호출됨
     useEffect(() => {
         getitems();
+        setIsLoaded(true);
     }, [isFocused, user_id]);
 
     useEffect(() => {
@@ -52,7 +54,7 @@ const DiaryList = (props, navigation) => {
         } else {
             ref.scrollToIndex({ animated: true, index: index, viewPosition: 0 });
         }
-    })
+    }, []);
 
     const renderItem = ({ item }) => {
         return (
@@ -61,7 +63,7 @@ const DiaryList = (props, navigation) => {
                 onPress={
                     () => {
                         props.navigation.navigate('DiaryRead', {
-                            diary : item,
+                            diary: item,
                         })
                     }
                 }
@@ -73,21 +75,26 @@ const DiaryList = (props, navigation) => {
 
     return (
         <View style={styles.container}>
-            <FlatList
-              onScrollToIndexFailed={info => {
-                const wait = new Promise(resolve => setTimeout(resolve, 700));
-                wait.then(() => {
-                  fListRef.current?.scrollToIndex({ index: info.index, animated: true/false });
-                });
-              }}
-                data={items}
-                ref={(ref) => {
-                    setRef(ref);
-                }}
-                renderItem={renderItem}
-                keyExtractor={(item) => item._id}
+            {isLoaded
+                ?
+                <FlatList
+                    onScrollToIndexFailed={info => {
+                        const wait = new Promise(resolve => setTimeout(resolve, 700));
+                        wait.then(() => {
+                            fListRef.current?.scrollToIndex({ index: info.index, animated: true / false });
+                        });
+                    }}
+                    data={items}
+                    ref={(ref) => {
+                        setRef(ref);
+                    }}
+                    renderItem={renderItem}
+                    keyExtractor={(item) => item._id}
                 // extraData={selectedId}
-            />
+                />
+                :
+                <LoadingSpinner />
+            }
         </View>
     )
 }

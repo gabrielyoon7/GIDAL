@@ -1,5 +1,5 @@
 import { StyleSheet, TouchableOpacity, } from 'react-native';
-import { Badge, Box, Flex, HStack, Pressable, Spacer, Text, } from 'native-base';
+import { Badge, Box, Divider, Flex, HStack, Pressable, Spacer, Text, } from 'native-base';
 import { Ionicons } from "@expo/vector-icons";
 
 const FancyDiaryCard = ({ item: diary, onPress, backgroundColor, textColor }) => {
@@ -59,6 +59,7 @@ const FancyDiaryCard = ({ item: diary, onPress, backgroundColor, textColor }) =>
                             >
                                 {content}
                             </Text>
+                            <Divider />
                             <HStack alignItems="center" mt="3" >
                                 <Text fontSize={10} color="coolGray.800">
                                     {diary.user_id}
@@ -106,8 +107,7 @@ export default FancyDiaryCard;
 
 const styles = StyleSheet.create({
     diary: {
-        // marginVertical: 8,
-        // marginHorizontal: 16,
+        backgroundColor:"white",
     },
     heart: {
         flex: 1,

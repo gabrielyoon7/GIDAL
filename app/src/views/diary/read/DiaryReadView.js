@@ -12,6 +12,7 @@ import { AntDesign, MaterialCommunityIcons, MaterialIcons, FontAwesome5, Ionicon
 // import DiaryReadStaggerButton from './DiaryReadStaggerButton';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 import { useNavigationState } from '@react-navigation/native';
+import LoadingSpinner from '../../../components/common/LoadingSpinner';
 
 const DiaryReadView = (props) => {
     // const [date, setSelectedDate] = React.useState(props.selectedDate);
@@ -22,21 +23,23 @@ const DiaryReadView = (props) => {
         "_id": "626f78c19ee18cdc829a10de",
         "accessible_user": [],
         "comments": [],
-        "content": "dafault_content",
+        "content": "loading...",
         "date": "2022-05-02T00:00:00.000Z",
         "disclosure": "private",
         "likes": 0,
         "stickers": [],
         "tags": [],
-        "title": "default_title",
-        "user_id": "error",
+        "title": "loading...",
+        "user_id": "loading...",
     };
     const [diary, setDiary] = React.useState(defaultData);
+    const [isLoaded, setIsLoaded] = React.useState(false);
     React.useEffect(() => {
         //초기 일기 수신부
         try {
             const idx = new_routes.findIndex(r => r.name === "DiaryRead")
             setDiary(new_routes[idx].params.diary);
+            setIsLoaded(true);
         } catch (error) {
             // console.log(error);
         }
@@ -178,31 +181,14 @@ const DiaryReadView = (props) => {
                         }
                     </HStack>
                 </View>
-                {/* <HStack margin='5' >
-                    <Spacer />
-                    <Spacer /> */}
-
-
-                {/* <Button style={styles.button} colorScheme="green" size="md" onPress={
-                        () => props.navigation.navigate('DiaryModify', {
-                            // () => props.navigation.replace('DiaryModify', {
-                                diary: diary,
-                        })
-                    }>
-                        수정
-                    </Button>
-
-                    <Button style={styles.button} colorScheme="green" size="md" onPress={() => deleteDiary()} >
-                        삭제
-                    </Button> */}
-
-                {/* </HStack> */}
             </View>
         );
     }
 
     return (
         <>
+            {isLoaded
+            ?
             <ParallaxScrollView
                 style={{ flex: 1 }}
                 parallaxHeaderHeight={windowHeight * 0.3}
@@ -214,9 +200,11 @@ const DiaryReadView = (props) => {
                     />
                 )}
             >
-                <ReadView />
+                <ReadView/>
             </ParallaxScrollView>
-            {/* <DiaryReadStaggerButton diary={diary}/> */}
+            :
+            <LoadingSpinner />
+            }
             <Center style={{ position: 'absolute', right: 30, bottom: 100, height: 30 }} >
                 <Box maxW="100">
                     <Stagger visible={isOpen} initial={{

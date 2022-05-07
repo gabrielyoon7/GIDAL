@@ -61,7 +61,7 @@ const AgendaView = () => {
   
       useEffect(() => {
         getItems();
-    }, [user_Id, dateRecord]);
+    }, [user_Id]);
   
     // useEffect(() => {
         // console.log("items:", items);
@@ -158,7 +158,7 @@ const AgendaView = () => {
     return (
         <NativeBaseProvider>
         <View style={{flex: 1}}>
-            <AddTodo date={selectedDate} dateRecord={dateRecord} setDateRecord={setDateRecord} />
+            <AddTodo date={selectedDate} />
             <Agenda
                 items={items}
                 loadItemsForMonth={(day) => loadItems(day.timestamp)}

@@ -11,7 +11,7 @@ const AddTodo = (props) => {
   const [todo, setTodo] = useState("");
   const [firstRecord, setFirstRecord] = useState(true); // 처음 todolist 사용하는 유저 구분
   const isFocused = useIsFocused();
-  // const [dateRecord, setDateRecord] = useState([]);
+  const [dateRecord, setDateRecord] = useState([]);
   const [newDateBool, setNewDateBool] = useState(true);
 
   React.useEffect(() => {
@@ -47,14 +47,14 @@ const AddTodo = (props) => {
       }
     }).then((response) => {
       // console.log(response.data[0]);
-      props.setDateRecord(result)
       if (response.data[0] == null) {
         setFirstRecord(true)
+        setDateRecord(result)
       } else {
         result.push(response.data)
         setFirstRecord(false);
-        props.setDateRecord(result)
-        props.setDateRecord(result[0][0].to_do_list);
+        // props.setDateRecord(result)
+        setDateRecord(result[0][0].to_do_list);
       }
       // console.log(response.data[0]==null);
     }).catch(function (error) {
@@ -68,6 +68,20 @@ const AddTodo = (props) => {
   useEffect(() => {
     getItems();
   }, [user_Id]);
+
+  useEffect(() => {
+  },[dateRecord])
+
+  useEffect(() => {
+    if(newDateBool)
+    console.log(newDateBool);
+      if (newDateBool) {
+        addNewDateTodo()
+      } else {
+        console.log(newDateBool)
+        addUserTodo()
+      }
+  },[newDateBool])
 
   const addUserTodo = () => {
     axios.post(config.ip + ':5000/todoRouter/todoSave', {
@@ -98,7 +112,7 @@ const AddTodo = (props) => {
       if (response.data.status === 'success') {
         console.log('to do save');
         getItems();
-        setNewDateBool(false)
+        setNewDateBool(true)
       }
     }).catch(function (error) {
       console.log(error);
@@ -113,18 +127,17 @@ const AddTodo = (props) => {
     if (firstRecord == false) {
       console.log("기록 있는 유저");
       // console.log(dateRecord);
-      for (let i = 0; i < props.dateRecord.length; i++) {
+      for (let i = 0; i < dateRecord.length; i++) {
         // console.log(dateRecord[i].date == date);
-        let bool = props.dateRecord[i].date == props.date;
+        let bool = dateRecord[i].date === props.date;
         console.log(bool);
-        if (props.dateRecord[i].date == props.date) {
-
+        console.log(dateRecord[i].date);
+        if (dateRecord[i].date == props.date) {
           setNewDateBool(false)
           console.log('있는 날짜');
           console.log(newDateBool);
           break;
         } else {
-          setNewDateBool(true)
           console.log('없는 날짜');
           console.log(newDateBool);
         }
@@ -149,6 +162,7 @@ const AddTodo = (props) => {
       if (newDateBool) {
         addNewDateTodo()
       } else {
+        console.log(newDateBool)
         addUserTodo()
       }
     } else {

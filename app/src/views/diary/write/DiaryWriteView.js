@@ -12,7 +12,9 @@ import TagSelector from "../../../components/diary/TagSelector";
 import InputContent from "../../../components/diary/InputContent";
 import PressableTag from '../../../components/tag/interaction/PressableTag';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { LogBox } from 'react-native';
+// LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs();//Ignore all log notifications
 
 const DiaryWriteView = (props) => {
 

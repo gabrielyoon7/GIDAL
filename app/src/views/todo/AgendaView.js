@@ -82,7 +82,7 @@ const AgendaView = () => {
     },[todo])
 
     const handleDelete = (item) => {
-        console.log(item._id);
+        console.log(item);
         console.log(item.todo);
         axios.post(config.ip + ':5000/todoRouter/userTodoDelete', {
             data: {

@@ -75,13 +75,15 @@ router.post('/findOwn', function(req, res, next) {
 });
 
 router.post('/userTodoDelete', (req,res) => {
-    UserTodo.updateOne(
+    // console.log();
+    UserTodo.updateMany(
         { user_id: req.body.data.user_id,
         }, 
         {$pull: { 
-                    to_do_list :{
+                    to_do_list :{ 
                         contents : {
-                            "_id": req.body.data._id,
+                                _id: req.body.data._id,
+                            
                         }
             }}}).exec((error, todo)=>{
             if(error){

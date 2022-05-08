@@ -54,7 +54,15 @@ const DiaryReadView = (props) => {
                 id: diary._id,
             }
         }).then((response) => {
-            props.navigation.pop();
+            axios.post(config.ip + ':5000/tagsRouter/deleteMany/', {
+                data: {
+                  id: diary._id,
+                }
+              }).then((response) => {
+                props.navigation.pop();
+              }).catch(function (error) {
+                console.log(error);
+              })
         }).catch(function (error) {
             console.log(error);
         })

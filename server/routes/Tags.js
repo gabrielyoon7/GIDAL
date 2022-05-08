@@ -104,7 +104,17 @@ router.post('/save', function(req, res) {
     })
 });
 
+router.post('/deleteMany/', function(req, res, next) {
+    // console.log(req.body);
+    // 삭제
+    TagLog.deleteMany({ diary_id: { $eq: req.body.data.id } }).then(function(){
+        console.log("게시글 번호 "+req.body.data.id+"의 모든 태그 로그 데이터가 삭제됨."); // Success
+        return res.json({status: 'success'})
+    }).catch(function(error){
+        console.log(error); // Failure
+    });
 
+});
 
 
 module.exports = router;

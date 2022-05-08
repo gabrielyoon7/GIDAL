@@ -6,6 +6,8 @@ import DiaryListView from '../../views/diary/list/DiaryListView';
 import DiaryReadView from '../../views/diary/read/DiaryReadView';
 import DiaryWriteView from '../../views/diary/write/DiaryWriteView';
 import DiaryModifyView from '../../views/diary/modify/DiaryModifyView';
+import { CardStyleInterpolators } from '@react-navigation/stack';
+
 
 Date.prototype.format = function (f) {
   if (!this.valueOf()) return " ";
@@ -70,10 +72,25 @@ const DiaryRoute = () => {
       screenOptions={{ headerShown: false }}     
     >
         {/* <RootStack.Group> */}
-            <RootStack.Screen name="DiaryList" component={DiaryListScreen} initialParams={{ selectedDate: selectedDate }} />
+            <RootStack.Screen
+             name="DiaryList" 
+             component={DiaryListScreen} 
+             initialParams={{ selectedDate: selectedDate }} 
+            />
             {/* <RootStack.Screen name="DiaryRead" component={DiaryReadScreen} initialParams={{ selectedDate: selectedDate }} /> */}
-            <RootStack.Screen name="DiaryWrite" component={DiaryWriteScreen} initialParams={{ selectedDate: selectedDate }} />
-            <RootStack.Screen name="DiaryModify" component={DiaryModifyScreen} initialParams={{ selectedDate: selectedDate }} />
+            <RootStack.Screen
+             name="DiaryWrite" 
+             component={DiaryWriteScreen} 
+             initialParams={{ selectedDate: selectedDate }} 
+            //  options={{
+            //   cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
+            // }}
+            />
+            <RootStack.Screen 
+             name="DiaryModify" 
+             component={DiaryModifyScreen} 
+             initialParams={{ selectedDate: selectedDate }} 
+            />
         {/* </RootStack.Group> */}
     </RootStack.Navigator>
   );

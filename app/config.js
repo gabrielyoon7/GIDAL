@@ -8,7 +8,7 @@
 
 */
 export const config = {
-	ip : "http://192.168.35.37",
+	ip : 'http://192.168.0.3',
 	color : {
 		main : {
 			primary:	"#003399",
@@ -31,20 +31,4 @@ export const config = {
 			light:		"#FFFFFF",
 		}
 	},
-	horizontalAnimation : {
-		cardStyleInterpolator: ({ current, layouts }) => {
-		  return {
-			cardStyle: {
-			  transform: [
-				{
-				  translateX: current.progress.interpolate({
-					inputRange: [0, 1],
-					outputRange: [layouts.screen.width, 0],
-				  }),
-				},
-			  ],
-			},
-		  };
-		},
-	  }
 };

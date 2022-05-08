@@ -40,8 +40,9 @@ console.log();
 
 
 let ip = require("ip");
-console.dir('현재 사용중인 내부 ip');
-console.dir (ip.address() );
+console.dir('현재 사용중인 내부 ip...');
+console.log ('ip : \'http://'+ip.address()+'\',' );
+console.dir('위 한 줄을 복사해서 config.js의 ip 줄에 그대로 덮어쓰기 하세요.');
 console.log();
 
 mongoose.connect(`mongodb+srv://soyoung:qnstksalcqudfufcjfl@cluster0.c7eeq.mongodb.net/gidal?authSource=admin&replicaSet=atlas-rkqtpg-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true`, {})

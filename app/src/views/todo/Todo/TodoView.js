@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, StatusBar, FlatList } from "react-native";
 import { Fab, Icon } from "native-base";
 import styled from "styled-components";
-import AddInput from "./AddInputTest";
+import AddInput from "./AddInput";
 import { AntDesign } from "@expo/vector-icons";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import TodoList from "./TodoList";

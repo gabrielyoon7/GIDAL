@@ -2,11 +2,11 @@ import * as React from 'react';
 import { View, Text, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import TodoListView from '../../views/todo/TodoListView';
+import TodoView from '../../views/todo/Todo/TodoView';
 
 const TodoListScreen = ({ navigation }) => {
   return (
-    <TodoListView navigation={navigation} />
+    <TodoView navigation={navigation} />
   );
 }
 

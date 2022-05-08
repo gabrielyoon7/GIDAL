@@ -116,5 +116,17 @@ router.post('/deleteMany/', function(req, res, next) {
 
 });
 
+/* GET. */
+router.get('/makeStatisticsData', function (req, res, next) {
+    // console.log('find tags');
+    // 전체 데이터 가져오기
+    Tag.find().then((tags) => {
+        res.json(tags)
+    }).catch((err) => {
+        console.log(err);
+        next(err)
+    });
+});
+
 
 module.exports = router;

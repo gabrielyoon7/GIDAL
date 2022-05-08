@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { FlatList, Text, View } from "react-native";
 import { config } from "../../../config";
 import StatisticsCard from "../../components/statistics/StatisticsCard";
-const StatisticsList = () => {
+const StatisticsList = (props) => {
     const [items, setItems] = useState([]);
     const [ref, setRef] = useState(null);
 
@@ -32,7 +32,7 @@ const StatisticsList = () => {
 
     const renderItem = ({ item }) => {
         return (
-            <StatisticsCard question = {item.question} />
+            <StatisticsCard question = {item.question} id={item._id}  navigation={props.navigation}/>
         );
     };
 

@@ -4,14 +4,17 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 const StatisticsCard = (props) => {
     return (
-        <TouchableOpacity>
-        <View style={styles.card}>
-            <HStack>
-            <Text fontSize="xl">{props.question}</Text>
-            <Spacer/>
-            <Text>에 대한 응답 보러가기</Text>
-            </HStack>
-        </View>
+        <TouchableOpacity
+        onPress={() => props.navigation.navigate('UserStatistics')} 
+        // onPress={() => console.log(props)} 
+        >
+            <View style={styles.card}>
+                <HStack>
+                    <Text fontSize="xl">{props.question}</Text>
+                    <Spacer />
+                    <Text>에 대한 통계 보러가기</Text>
+                </HStack>
+            </View>
         </TouchableOpacity>
     );
 }

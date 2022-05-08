@@ -2,6 +2,7 @@ import { useNavigationState } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { Text, View } from "react-native"
 import BackButton from "../../components/common/BackButton";
+import PersonalStatisticsView from "./PersonalStatisticsView";
 
 const UserStatisticsView = (props) => {
     const new_routes = useNavigationState(state => state.routes);
@@ -24,6 +25,7 @@ const UserStatisticsView = (props) => {
             <BackButton navigation={props.navigation} />
             <Text>{id}</Text>
             {/* 개인통계 */}
+            <PersonalStatisticsView/>
             {/* 친구통계 */}
             {/* 익명통계 */}
         </View>

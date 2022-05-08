@@ -6,6 +6,7 @@ import SnsRoute from '../sns/SnsRoute';
 import SettingRoute from '../setting/SettingRoute';
 import TodoRoute from '../todo/TodoRoute';
 import { Ionicons, FontAwesome,Foundation,FontAwesome5 } from '@expo/vector-icons';
+import StatisticsRoute from '../statistics/StatisticsRoute';
 const DiaryScreen = (props) => {
     return (
         <DiaryRoute navigation={props.navigation}/>
@@ -32,7 +33,7 @@ const TodoScreen = (props) => {
 
 const StatisticsScreen = (props) => {
     return (
-        <SettingRoute navigation={props.navigation}/>
+        <StatisticsRoute navigation={props.navigation}/>
     );
 }
 

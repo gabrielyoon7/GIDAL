@@ -3,6 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { FlatList, Text, View } from "react-native";
 import { config } from "../../../config";
+import StatisticsCard from "../../components/statistics/StatisticsCard";
 const StatisticsList = () => {
     const [items, setItems] = useState([]);
     const [ref, setRef] = useState(null);
@@ -31,7 +32,7 @@ const StatisticsList = () => {
 
     const renderItem = ({ item }) => {
         return (
-            <Text>{item.question}</Text>
+            <StatisticsCard question = {item.question} />
         );
     };
 

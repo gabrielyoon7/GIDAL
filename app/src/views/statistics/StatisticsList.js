@@ -20,11 +20,11 @@ const StatisticsList = () => {
         let result = []
         axios.get(config.ip + ':5000/tagsRouter/find')
             .then((response) => {
-                console.log('hi');
-                console.log(response.data);
+                // console.log('hi');
+                // console.log(response.data);
                 setItems(response.data);
             }).catch(function (error) {
-                console.log('hi');
+                // console.log('hi');
                 console.log(error);
             })
     }

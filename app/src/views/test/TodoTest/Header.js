@@ -1,13 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-let today = new Date().toISOString().slice(0, 10);
-
-export default function Header() {
+export default function Header({date}) {
   return (
     <ComponentContainer>
       <HeaderText>To-Do</HeaderText>
-      <HeaderList>{today}</HeaderList>
+      <HeaderList>{date}</HeaderList>
     </ComponentContainer>
   );
 }

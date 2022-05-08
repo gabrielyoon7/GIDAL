@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { View, StatusBar, FlatList } from "react-native";
+import { Fab, Icon } from "native-base";
 import styled from "styled-components";
 import AddInput from "./AddInputTest";
+import { AntDesign } from "@expo/vector-icons";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 import TodoList from "./TodoList";
 import Header from './Header';
 import Empty from "./Empty";
@@ -9,12 +12,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios'
 import { config } from '../../../../config'
 
+let today = new Date().toISOString().slice(0, 10);
+
 const Todo = () => {
   const [user_Id, setUserId] = useState('');
   const [data, setData] = useState([]);
   const [firstRecord, setFirstRecord] = useState(true); // 처음 todolist 사용하는 유저 구분
-
-  let today = new Date().toISOString().slice(0, 10);
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [pickedDate, setPickedDate] = useState(today)
 
   React.useEffect(() => {
     // getData();
@@ -34,7 +39,7 @@ const Todo = () => {
 
   useEffect(() => {
     getItems();
-  }, [user_Id]);
+  }, [user_Id, pickedDate]);
 
   const getItems = () => {
     let result = []
@@ -49,8 +54,8 @@ const Todo = () => {
         result.push(response.data[0].to_do_list)
         setFirstRecord(false);
         console.log('---------------------------');
-        console.log(result[0]);
-        setData(result[0])
+        // console.log(result[0]);
+        setData(result[0].filter((todo) => todo.date == pickedDate))
       }
     }).catch(function (error) {
       console.log(error);
@@ -103,7 +108,7 @@ const Todo = () => {
         data: {
           user_id: user_Id,
           to_do_list: {
-            date: today,
+            date: pickedDate,
             key: random_key,
             value: value
           }
@@ -121,7 +126,7 @@ const Todo = () => {
         data: {
           user_id: user_Id,
           to_do_list: {
-            date: today,
+            date: pickedDate,
             key: random_key,
             value: value
           }
@@ -138,7 +143,19 @@ const Todo = () => {
     }
   }
 
-console.log(data);
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirm = (date) => {
+    setPickedDate(date.toJSON().split('T')[0])
+    hideDatePicker();
+  };
+
  return (
   <ComponentContainer>
   <View>
@@ -149,7 +166,11 @@ console.log(data);
   <View>
   <FlatList
             data={data}
-            ListHeaderComponent={() => <Header />}
+            ListHeaderComponent={() => 
+            <>
+              <Header date={pickedDate}/>
+              <AddInput submitHandler={submitHandler} />
+            </> }
             ListEmptyComponent={() => <Empty />}
             keyExtractor={(item) => item.key}
             renderItem={({ item }) => (
@@ -157,9 +178,21 @@ console.log(data);
             )}
           />
     <View>
-      <AddInput submitHandler={submitHandler} />
     </View>
   </View>
+  <DateTimePickerModal
+        isVisible={isDatePickerVisible}
+        mode="date"
+        onConfirm={handleConfirm}
+        onCancel={hideDatePicker}
+      />
+  <Fab
+                renderInPortal={false}
+                shadow={2}
+                size="md"
+                icon={<Icon color="white" as={AntDesign} name="calendar" size="md" />}
+                onPress={() => showDatePicker()}
+            />
 </ComponentContainer>
     );
 };
@@ -174,7 +207,7 @@ const ComponentContainer = styled.View`
 
 const TodoTest = () => {
   return (
-        <Todo />
+    <Todo />
   )
 }
 

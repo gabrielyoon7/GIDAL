@@ -9,10 +9,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios'
 import { config } from '../../../../config'
 
-const Example = () => {
+const Todo = () => {
   const [user_Id, setUserId] = useState('');
   const [data, setData] = useState([]);
-   const [firstRecord, setFirstRecord] = useState(true); // 처음 todolist 사용하는 유저 구분
+  const [firstRecord, setFirstRecord] = useState(true); // 처음 todolist 사용하는 유저 구분
 
   let today = new Date().toISOString().slice(0, 10);
 
@@ -46,8 +46,11 @@ const Example = () => {
       if (response.data[0] == null) {
         setFirstRecord(true)
       } else {
-        result.push(response.data)
+        result.push(response.data[0].to_do_list)
         setFirstRecord(false);
+        console.log('---------------------------');
+        console.log(result[0]);
+        setData(result[0])
       }
     }).catch(function (error) {
       console.log(error);
@@ -75,8 +78,24 @@ const Example = () => {
     setData((prevTodo) => {
       return prevTodo.filter((todo) => todo.key != key);
     });
+    deleteData({key})
   };
 
+  const deleteData = ({key}) => {
+    axios.post(config.ip + ':5000/testTodoRouter/todoDelete', {
+      data: {
+          user_id: user_Id,
+          key: key
+      }
+    })
+      .then((response) => {
+          if (response.data.status === 'success') {
+              console.log('to do save');
+              getItems();
+      }}).catch(function (error) {
+        console.log(error);
+      });
+  }
 
   const addData = ({value, random_key}) => {
     if(firstRecord){ // todo 기록 없는 유저
@@ -110,6 +129,7 @@ const Example = () => {
       }).then((response) => {
         if (response.data.status === 'success') {
           console.log('to do save');
+          setFirstRecord(false)
           getItems();
         }
       }).catch(function (error) {
@@ -154,7 +174,7 @@ const ComponentContainer = styled.View`
 
 const TodoTest = () => {
   return (
-        <Example />
+        <Todo />
   )
 }
 

@@ -5,7 +5,9 @@ export default function Empty() {
   return (
     <ComponentContainer>
       {/* <EmptyImage
-        source={require(img_url)}
+        source={{
+          uri: 'https://cdn-icons-png.flaticon.com/512/42/42767.png',
+        }}
       /> */}
       <EmptyText>Add To-Do.</EmptyText>
     </ComponentContainer>
@@ -18,13 +20,12 @@ const ComponentContainer = styled.View`
   height: 650px;
 `;
 
-// const EmptyImage = styled.Image`
-//   width: 350px;
-//   height: 200px;
-// `;
+const EmptyImage = styled.Image`
+  width: 350px;
+  height: 400px;
+`;
 
 const EmptyText = styled.Text`
   color: white;
-  margin-top: 30px;
   font-size: 30px;
 `;

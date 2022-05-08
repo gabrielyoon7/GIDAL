@@ -17,11 +17,9 @@ export default function AddInput({ submitHandler }) {
   return (
     <ComponentContainer>
     <InputContainer>
-      <Input placeholder="Add Task..." onChangeText={onChangeText} />
+      <Input placeholder="Add Task..." value={value} onChangeText={onChangeText} />
     </InputContainer>
-    <SubmitButton
-        onPress={() => addData()}
-      >
+    <SubmitButton onPress={() => addData()}>
       <Text>Submit</Text>
     </SubmitButton>
   </ComponentContainer>

@@ -49,4 +49,23 @@ router.post('/findOwn', function(req, res, next) {
     });
 });
 
+router.post('/todoDelete', (req,res) => {
+    TestTodo.updateMany(
+        { user_id: req.body.data.user_id }, 
+        {$pull : {
+            to_do_list : {
+                "key": req.body.data.key,
+            }
+        }})
+        .exec((error, user)=>{
+            if(error){
+                console.log(error);
+                res.json({status: 'error', error})
+            }else{
+                console.log('Saved!')
+                res.json({status: 'success'})
+            }
+        });
+  })
+
 module.exports = router;

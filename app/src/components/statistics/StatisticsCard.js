@@ -5,8 +5,13 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 const StatisticsCard = (props) => {
     return (
         <TouchableOpacity
-        onPress={() => props.navigation.navigate('UserStatistics')} 
-        // onPress={() => console.log(props)} 
+            onPress={
+                () => {
+                    props.navigation.navigate('UserStatistics', {
+                        id: props.id,
+                    })
+                }
+            }
         >
             <View style={styles.card}>
                 <HStack>

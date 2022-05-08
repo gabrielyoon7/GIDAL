@@ -107,7 +107,7 @@ export default FancyDiaryCard;
 
 const styles = StyleSheet.create({
     diary: {
-        backgroundColor:"white",
+        // backgroundColor:"white",
     },
     heart: {
         flex: 1,

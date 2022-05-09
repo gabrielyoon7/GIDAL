@@ -24,6 +24,7 @@ router.post('/todoSave', function(req, res) {
         {$push: {to_do_list: {
             "date": req.body.data.to_do_list.date,
             "key": req.body.data.to_do_list.key,
+            isDone: false,
             "value": req.body.data.to_do_list.value,
         }}}).exec((error, todo)=>{
             if(error){

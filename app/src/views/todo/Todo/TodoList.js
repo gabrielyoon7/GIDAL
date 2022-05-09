@@ -3,6 +3,7 @@ import { View } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import styled from "styled-components";
+import { Checkbox } from "native-base";
 
 export default function TodoList({ item, deleteItem }) {
   return (
@@ -10,7 +11,8 @@ export default function TodoList({ item, deleteItem }) {
     {item != null && 
       <ListContainer>
         <CirlceContainer>
-          <Entypo name="circle" size={20} color="midnightblue" />
+          {/* <Entypo name="circle" size={20} color="midnightblue" /> */}
+          <Checkbox value={item.isDone}> </Checkbox>
         </CirlceContainer>
         <View>
           <TextItem>{item.value}</TextItem>

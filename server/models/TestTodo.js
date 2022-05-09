@@ -10,6 +10,7 @@ const testTodoSchema = mongoose.Schema({
     to_do_list: [{
         date: String,
         value: String,
+        isDone: Boolean,
         key: String
     }]
 })

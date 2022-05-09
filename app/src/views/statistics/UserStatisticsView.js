@@ -2,17 +2,20 @@ import { useNavigationState } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { Text, View } from "react-native"
 import BackButton from "../../components/common/BackButton";
+import WelcomeCard from "../../components/statistics/WelcomeCard";
 import PersonalStatisticsView from "./PersonalStatisticsView";
 
 const UserStatisticsView = (props) => {
     const new_routes = useNavigationState(state => state.routes);
     const [id, setId] = useState('hihi');
+    const [question, setQuestion] = useState('hihi2');
     const [isLoaded, setIsLoaded] = useState(false);
     useEffect(() => {
         //초기 질문 id 수신부
         try {
             const idx = new_routes.findIndex(r => r.name === "UserStatistics")
             setId(new_routes[idx].params.id);
+            setQuestion(new_routes[idx].params.question)
             // 여기에서 백엔드로 통계 자료 요청해야함
             // 수신 직후에 loaded를 true로 전환해줄 것
             setIsLoaded(true);
@@ -23,9 +26,9 @@ const UserStatisticsView = (props) => {
     return (
         <View style={{ flex: 1 }}>
             <BackButton navigation={props.navigation} />
-            <Text>{id}</Text>
+            <WelcomeCard title={question} content={id+'에서 데이터를 가져올 것임'}/>
             {/* 개인통계 */}
-            <PersonalStatisticsView/>
+            <PersonalStatisticsView id={id}/>
             {/* 친구통계 */}
             {/* 익명통계 */}
         </View>

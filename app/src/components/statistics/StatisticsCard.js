@@ -9,6 +9,7 @@ const StatisticsCard = (props) => {
                 () => {
                     props.navigation.navigate('UserStatistics', {
                         id: props.id,
+                        question : props.question,
                     })
                 }
             }

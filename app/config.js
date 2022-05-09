@@ -8,7 +8,7 @@
 
 */
 export const config = {
-	ip : 'http://192.168.0.3',
+	ip : 'http://192.168.171.48',
 	color : {
 		main : {
 			primary:	"#003399",

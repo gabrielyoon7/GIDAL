@@ -107,19 +107,19 @@ export default function FollowListView(props) {
 
   const Followings = (props) => {
     return (
-      <View style={styles.container} >
+      <View>
         {/* <FeedSearchView/> */}
         <SearchBar
+         style={styles.container} 
           round
           searchIcon={{ size: 24 }}
           onChangeText={(text) => searchFilter(text)}
           onClear={(text) => searchFilter('')}
-          placeholder="search Here..."
+          placeholder="검색어를 입력해주세요"
           value={search}
         />
         <View style={styles.body} >
           <FlatList
-            style={styles.container}
             enableEmptySections={true}
             data={filteredDataSource}
             keyExtractor={(item) => {
@@ -286,5 +286,8 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     margin: 5,
     backgroundColor: 'white'
+  },
+  container:{
+    margin :10
   }
 });

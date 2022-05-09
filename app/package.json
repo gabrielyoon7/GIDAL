@@ -61,7 +61,8 @@
     "react-native-webview": "11.18.1",
     "styled-components": "^5.3.5",
     "styled-components-native": "^1.0.2",
-    "yarn": "^1.22.18"
+    "yarn": "^1.22.18",
+    "react-native-pager-view": "5.4.15"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

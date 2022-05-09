@@ -5,14 +5,14 @@ import { MaterialIcons } from "@expo/vector-icons";
 import styled from "styled-components";
 import { Checkbox } from "native-base";
 
-export default function TodoList({ item, deleteItem }) {
+export default function TodoList({ item, deleteItem, changeIsDone }) {
   return (
     <ComponentContainer>
     {item != null && 
       <ListContainer>
         <CirlceContainer>
           {/* <Entypo name="circle" size={20} color="midnightblue" /> */}
-          <Checkbox value={item.isDone}> </Checkbox>
+          <Checkbox value={item.isDone} onChange={(val) => changeIsDone(item, val)}> </Checkbox>
         </CirlceContainer>
         <View>
           <TextItem>{item.value}</TextItem>

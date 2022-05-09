@@ -7,7 +7,7 @@ const TagRankCard = (props) => {
             <Box pb="3">
                 <HStack>
                     <Heading size="md" isTruncated>
-                        개인 통계
+                        {props.data.title}
                     </Heading>
                     <Spacer />
                     <TouchableOpacity onPress={() => console.log('hey hey')}>

@@ -7,7 +7,7 @@ const WelcomeCard = (props) => {
             <Heading>
                 <Heading>{props.title}</Heading>
             </Heading>
-            <Text pt="3" fontWeight="md">
+            <Text pt="3">
                 {props.content}
             </Text>
         </View>
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FAECC5',
         marginVertical: 10,
         borderRadius: 10,
-        height: 200,
+        height: 150,
         padding: 20,
         marginHorizontal: 10,
     },

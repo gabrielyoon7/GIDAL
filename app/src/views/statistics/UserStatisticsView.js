@@ -24,7 +24,7 @@ const UserStatisticsView = (props) => {
         } catch (error) {
             // console.log(error);
         }
-    })
+    }, []);
     return (
         <View style={{ flex: 1 }}>
             <BackButton navigation={props.navigation} />

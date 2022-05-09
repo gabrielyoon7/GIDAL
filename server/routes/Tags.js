@@ -117,10 +117,13 @@ router.post('/deleteMany/', function(req, res, next) {
 });
 
 /* GET. */
-router.get('/makeStatisticsData', function (req, res, next) {
-    // console.log('find tags');
+router.post('/makeStatisticsPreview', function (req, res, next) {
+    let receivedData = req.body.data;
+    console.log(receivedData);
     // 전체 데이터 가져오기
-    Tag.find().then((tags) => {
+    TagLog.find( 
+        { $and : [ { question_id : receivedData.question_id }, { user_id : receivedData.user_id } ] }
+    ).then((tags) => {
         res.json(tags)
     }).catch((err) => {
         console.log(err);

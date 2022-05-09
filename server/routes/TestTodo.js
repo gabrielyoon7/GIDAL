@@ -42,12 +42,12 @@ router.post('/todoSave', function (req, res) {
 });
 
 router.post('/findOwn', function (req, res, next) {
-    // console.log(req.body.data.user_id);
+    console.log(req.body.data.user_id);
     // 전체 데이터 가져오기
     TestTodo.find().where('user_id').equals(req.body.data.user_id)
         .then((todos) => {
-            console.log(todos);
-            // res.json(todos)
+            // console.log(todos);
+            res.json(todos)
         }).catch((err) => {
             console.log(err);
             res.json({ status: 'error', error })

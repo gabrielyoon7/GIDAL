@@ -48,6 +48,7 @@ const Todo = () => {
         user_id: user_Id
       }
     }).then((response) => {
+      console.log(response.data);
       if (response.data[0] == null) {
         setFirstRecord(true)
       } else {
@@ -114,6 +115,7 @@ const Todo = () => {
   }
 
   const addData = ({value, random_key}) => {
+    console.log(firstRecord);
     if(firstRecord){ // todo 기록 없는 유저
       axios.post(config.ip + ':5000/testTodoRouter/save', {
         data: {

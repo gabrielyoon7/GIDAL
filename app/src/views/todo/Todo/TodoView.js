@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StatusBar, FlatList } from "react-native";
+import { View, StatusBar, FlatList, Alert } from "react-native";
 import { Fab, Icon } from "native-base";
 import styled from "styled-components";
 import AddInput from "./AddInput";
@@ -143,6 +143,36 @@ const Todo = () => {
     }
   }
 
+  const changeIsDone = (item, val) => {
+    // Alert.alert(
+    //   "일정을 완료하셨나요?",
+    //   `${item.value}`,
+    //   [
+    //     {
+    //       text: "아니요",
+    //       onPress: () => console.log(key),
+    //       style: "cancel"
+    //     },
+    //     { text: "네", onPress: () => console.log(key) },
+    //   ],
+    //   { cancelable: false });
+    console.log(val);
+    axios.post(config.ip + ':5000/testTodoRouter/modifyIsDone', {
+      data: {
+        user_id: user_Id,
+        key: item.key,
+        isDone: val
+      }
+    }).then((response) => {
+      if (response.data.status === 'success') {
+        console.log('to do modify');
+        // getItems();
+      }
+    }).catch(function (error) {
+      console.log(error);
+    })
+  };
+
   const showDatePicker = () => {
     setDatePickerVisibility(true);
   };
@@ -175,7 +205,7 @@ const Todo = () => {
             ListEmptyComponent={() => <Empty />}
             keyExtractor={(item) => item.key}
             renderItem={({ item }) => (
-              <TodoList item={item} deleteItem={deleteItem} />
+              <TodoList item={item} deleteItem={deleteItem} changeIsDone={changeIsDone} />
             )}
           />
     <View>

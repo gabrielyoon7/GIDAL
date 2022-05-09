@@ -9,9 +9,9 @@ const todoSchema = mongoose.Schema({
     },
     to_do_list: [{
         date: String,
-        contents: [{
-            name: String
-        }]
+        value: String,
+        isDone: Boolean,
+        key: String
     }]
 })
 

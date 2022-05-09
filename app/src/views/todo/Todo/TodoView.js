@@ -43,7 +43,7 @@ const Todo = () => {
 
   const getItems = () => {
     let result = []
-    axios.post(config.ip + ':5000/testTodoRouter/findOwn', {
+    axios.post(config.ip + ':5000/todoRouter/findOwn', {
       data: {
         user_id: user_Id
       }
@@ -93,20 +93,22 @@ const Todo = () => {
         {setData((prevTodo) => {
           return prevTodo.filter((todo) => todo.key != item.key);
         });
+        console.log(item.key);
         deleteData(item.key)}},
       ],
       { cancelable: false });
   };
 
   const deleteData = ({key}) => {
-    axios.post(config.ip + ':5000/testTodoRouter/todoDelete', {
+    console.log(key);
+    axios.post(config.ip + ':5000/todoRouter/todoDelete', {
       data: {
           user_id: user_Id,
           key: key
       }
     })
       .then((response) => {
-          if (response.data.status === 'success') {
+          if (response.data.status == 'success') {
               console.log('to do save');
               getItems();
       }}).catch(function (error) {
@@ -117,7 +119,7 @@ const Todo = () => {
   const addData = ({value, random_key}) => {
     console.log(firstRecord);
     if(firstRecord){ // todo 기록 없는 유저
-      axios.post(config.ip + ':5000/testTodoRouter/save', {
+      axios.post(config.ip + ':5000/todoRouter/save', {
         data: {
           user_id: user_Id,
           to_do_list: {
@@ -135,7 +137,7 @@ const Todo = () => {
         console.log(error);
       })
     } else { // todo 기록 있는 유저
-      axios.post(config.ip + ':5000/testTodoRouter/todoSave', {
+      axios.post(config.ip + ':5000/todoRouter/todoSave', {
         data: {
           user_id: user_Id,
           to_do_list: {
@@ -158,7 +160,7 @@ const Todo = () => {
 
   const changeIsDone = (item, val) => {
     console.log(val);
-    axios.post(config.ip + ':5000/testTodoRouter/modifyIsDone', {
+    axios.post(config.ip + ':5000/todoRouter/modifyIsDone', {
       data: {
         user_id: user_Id,
         key: item.key,

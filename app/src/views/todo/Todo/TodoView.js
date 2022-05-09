@@ -93,13 +93,12 @@ const Todo = () => {
         {setData((prevTodo) => {
           return prevTodo.filter((todo) => todo.key != item.key);
         });
-        console.log(item.key);
         deleteData(item.key)}},
       ],
       { cancelable: false });
   };
 
-  const deleteData = ({key}) => {
+  const deleteData = (key) => {
     console.log(key);
     axios.post(config.ip + ':5000/todoRouter/todoDelete', {
       data: {

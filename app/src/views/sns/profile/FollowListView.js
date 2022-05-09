@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, TextInput, View, TouchableOpacity, SafeAreaView, ScrollView, Image, Alert, Modal, Pressable, ImageBackground, FlatList } from 'react-native';
+import { Dimensions,StyleSheet, StatusBar,Text, TextInput, View, TouchableOpacity, SafeAreaView, ScrollView, Image, Alert, Modal, Pressable, ImageBackground, FlatList } from 'react-native';
 import SearchBar from "react-native-dynamic-search-bar";
 import axios from 'axios'
 import { config } from '../../../../config'
@@ -8,9 +8,22 @@ import { Button, Center } from 'native-base';
 import BackButton from '../../../components/common/BackButton';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { CommonActions, useIsFocused, useNavigationState } from "@react-navigation/native";
-
+import { TabView, SceneMap } from 'react-native-tab-view';
 const Tab = createBottomTabNavigator();
+const FirstRoute = () => (
+  <View style={[styles.scene, { backgroundColor: '#ff4081' }]} />
+);
 
+const SecondRoute = () => (
+  <View style={[styles.scene, { backgroundColor: '#673ab7' }]} />
+);
+
+const initialLayout = { width: Dimensions.get('window').width };
+
+const renderScene = SceneMap({
+  first: FirstRoute,
+  second: SecondRoute,
+});
 export default function FollowListView(props) {
   const [search, setSearch] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState([]);
@@ -21,6 +34,14 @@ export default function FollowListView(props) {
 
   const new_routes = useNavigationState(state => state.routes);
   let init_page = new_routes[0].params.screen;
+
+  //시작
+  const [index, setIndex] = React.useState(0);
+  const [routes] = React.useState([
+    { key: 'first', title: 'First' },
+    { key: 'second', title: 'Second' },
+  ]);
+
   // const [init, setInit] = useState('Following');
   // const [data, setData] = useState(followings)
 
@@ -110,7 +131,7 @@ export default function FollowListView(props) {
       <View>
         {/* <FeedSearchView/> */}
         <SearchBar
-         style={styles.container} 
+         style={styles.searchbar} 
           round
           searchIcon={{ size: 24 }}
           onChangeText={(text) => searchFilter(text)}
@@ -187,7 +208,15 @@ export default function FollowListView(props) {
   //   },[])
   return (
     <>
+    
       <BackButton navigation={props.navigation} />
+      <TabView
+      navigationState={{ index, routes }}
+      renderScene={renderScene}
+      onIndexChange={setIndex}
+      initialLayout={initialLayout}
+      style={styles.container}
+    />
       <Tab.Navigator
         screenOptions={{ headerShown: false }}
       >
@@ -287,7 +316,13 @@ const styles = StyleSheet.create({
     margin: 5,
     backgroundColor: 'white'
   },
-  container:{
+  searchbar:{
     margin :10
-  }
+  },
+  container: {
+    marginTop: StatusBar.currentHeight,
+  },
+  scene: {
+    flex: 1,
+  },
 });

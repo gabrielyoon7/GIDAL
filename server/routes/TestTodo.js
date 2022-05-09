@@ -46,8 +46,8 @@ router.post('/findOwn', function (req, res, next) {
     // 전체 데이터 가져오기
     TestTodo.find().where('user_id').equals(req.body.data.user_id)
         .then((todos) => {
-            // console.log(todos);
-            res.json(todos)
+            console.log(todos);
+            // res.json(todos)
         }).catch((err) => {
             console.log(err);
             res.json({ status: 'error', error })
@@ -69,7 +69,7 @@ router.post('/todoDelete', (req, res) => {
                 console.log(error);
                 res.json({ status: 'error', error })
             } else {
-                console.log('Saved!')
+                console.log('deleted!')
                 res.json({ status: 'success' })
             }
         });

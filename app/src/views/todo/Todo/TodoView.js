@@ -54,7 +54,7 @@ const Todo = () => {
         result.push(response.data[0].to_do_list)
         setFirstRecord(false);
         console.log('---------------------------');
-        // console.log(result[0]);
+        console.log(result[0]);
         setData(result[0].filter((todo) => todo.date == pickedDate))
       }
     }).catch(function (error) {
@@ -78,12 +78,23 @@ const Todo = () => {
     });
   };
 
-  const deleteItem = (key) => {
-
-    setData((prevTodo) => {
-      return prevTodo.filter((todo) => todo.key != key);
-    });
-    deleteData({key})
+  const deleteItem = (item) => {
+    Alert.alert(
+      "일정을 삭제하시겠어요?",
+      `${item.value}`,
+      [
+        {
+          text: "아니요",
+          onPress: () => console.log(item.key),
+          style: "cancel"
+        },
+        { text: "네", onPress: () => 
+        {setData((prevTodo) => {
+          return prevTodo.filter((todo) => todo.key != item.key);
+        });
+        deleteData(item.key)}},
+      ],
+      { cancelable: false });
   };
 
   const deleteData = ({key}) => {
@@ -144,18 +155,6 @@ const Todo = () => {
   }
 
   const changeIsDone = (item, val) => {
-    // Alert.alert(
-    //   "일정을 완료하셨나요?",
-    //   `${item.value}`,
-    //   [
-    //     {
-    //       text: "아니요",
-    //       onPress: () => console.log(key),
-    //       style: "cancel"
-    //     },
-    //     { text: "네", onPress: () => console.log(key) },
-    //   ],
-    //   { cancelable: false });
     console.log(val);
     axios.post(config.ip + ':5000/testTodoRouter/modifyIsDone', {
       data: {

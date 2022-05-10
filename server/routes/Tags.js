@@ -57,7 +57,7 @@ const TagDataExample = [
 
 /* GET. */
 router.get('/init', function (req, res, next) {
-    console.log('하이')    
+    console.log('하이')
     // 태그데이터 전체삭제 후 새로 추가하기
     Tag.deleteMany({}).then(function () {
         console.log('기존 태그가 전부 삭제됨');
@@ -89,41 +89,50 @@ router.get('/find', function (req, res, next) {
 });
 
 /* POST*/
-router.post('/save', function(req, res) {
+router.post('/save', function (req, res) {
     // console.log(req.body.data);
     // 태그 로그 데이터 저장
     const tagLogArr = req.body.data;
-    TagLog.insertMany(tagLogArr, function(error, docs) {
-        if(error){
+    TagLog.insertMany(tagLogArr, function (error, docs) {
+        if (error) {
             console.log(error);
-            return res.json({status: 'fail', error})
-        }else{
+            return res.json({ status: 'fail', error })
+        } else {
             console.log('Tag Log Saved!')
-            return res.json({status: 'success'})
+            return res.json({ status: 'success' })
         }
     })
 });
 
-router.post('/deleteMany/', function(req, res, next) {
+router.post('/deleteMany/', function (req, res, next) {
     // console.log(req.body);
     // 삭제
-    TagLog.deleteMany({ diary_id: { $eq: req.body.data.id } }).then(function(){
-        console.log("게시글 번호 "+req.body.data.id+"의 모든 태그 로그 데이터가 삭제됨."); // Success
-        return res.json({status: 'success'})
-    }).catch(function(error){
+    TagLog.deleteMany({ diary_id: { $eq: req.body.data.id } }).then(function () {
+        console.log("게시글 번호 " + req.body.data.id + "의 모든 태그 로그 데이터가 삭제됨."); // Success
+        return res.json({ status: 'success' })
+    }).catch(function (error) {
         console.log(error); // Failure
     });
 
 });
 
 /* GET. */
-router.post('/makeStatisticsPreview', function (req, res, next) {
+router.post('/makePersonalStatistics', function (req, res, next) {
     let receivedData = req.body.data;
     console.log(receivedData);
     // 전체 데이터 가져오기
-    TagLog.find( 
-        { $and : [ { question_id : receivedData.question_id }, { user_id : receivedData.user_id } ] }
-    ).then((tags) => {
+    // TagLog.find( 
+    //     { $and : [ { question_id : receivedData.question_id }, { user_id : receivedData.user_id } ] }
+    // ).then((tags) => {
+    //     res.json(tags)
+    // }).catch((err) => {
+    //     console.log(err);
+    //     next(err)
+    // });
+    TagLog.aggregate([
+        { $match: {$and : [ { question_id : receivedData.question_id }, { user_id : receivedData.user_id } ]} },
+        { $sortByCount: "$tag" }
+    ]).then((tags) => {
         res.json(tags)
     }).catch((err) => {
         console.log(err);

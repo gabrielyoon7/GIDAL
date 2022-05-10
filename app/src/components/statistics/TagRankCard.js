@@ -1,6 +1,8 @@
 import { Box, Heading, HStack, Spacer, View } from "native-base";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
+
+
 const TagRankCard = (props) => {
     return (
         <View style={styles.card}>
@@ -15,6 +17,9 @@ const TagRankCard = (props) => {
                             <Text>자세히 보기</Text>
                         </HStack>
                     </TouchableOpacity>
+                </HStack>
+                <HStack>
+                    <Text>dd</Text>
                 </HStack>
             </Box>
         </View>

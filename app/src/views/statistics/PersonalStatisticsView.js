@@ -37,7 +37,7 @@ const PersonalStatisticsView = (props) => {
 
     const getStatisticsPreview = (user_id) => {
         if (user_Id != '') {
-            axios.post(config.ip + ':5000/tagsRouter/makeStatisticsPreview', {
+            axios.post(config.ip + ':5000/tagsRouter/makePersonalStatistics', {
                 data: {
                     question_id: props.id,
                     user_id: user_id,

@@ -213,9 +213,10 @@ const DiaryReadView = (props) => {
             :
             <LoadingSpinner />
             }
-            <Center style={{ position: 'absolute', right: 30, bottom: 100, height: 30 }} >
+            <Center style={{ position: 'absolute', right: 20, bottom: 130, height: 30,}} >
                 <Box maxW="100">
-                    <Stagger visible={isOpen} initial={{
+                    <Stagger    visible={isOpen} 
+                        initial={{
                         opacity: 0,
                         scale: 0,
                         translateY: 34
@@ -251,6 +252,7 @@ const DiaryReadView = (props) => {
                             bg="indigo.500"
                             colorScheme="indigo"
                             borderRadius="full"
+                           
                             icon={
                                 <Icon
                                     as={FontAwesome5}
@@ -293,7 +295,7 @@ const DiaryReadView = (props) => {
                     </Stagger>
                 </Box>
                 <HStack alignItems="center">
-                    <IconButton variant="solid" borderRadius="full" size="lg" onPress={onToggle} bg="cyan.400" icon={<Icon as={MaterialCommunityIcons} size="6" name="dots-horizontal" color="warmGray.50" _dark={{
+                    <IconButton style={{backgroundColor :"#27ae60"}} variant="solid" borderRadius="full" shadow={2} size="lg" onPress={onToggle} bg="cyan.400" icon={<Icon as={MaterialCommunityIcons} size="7" name="dots-horizontal"  color="warmGray.50" _dark={{
                         color: "warmGray.50"
                     }} />} />
                 </HStack>

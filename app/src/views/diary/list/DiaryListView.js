@@ -34,6 +34,7 @@ const DiaryListView = (props) => {
                 renderInPortal={false}
                 shadow={2}
                 size="md"
+                style={{backgroundColor:"#27ae60", }}
                 icon={<Icon color="white" as={AntDesign} name="plus" size="md" />}
                 onPress={() => props.navigation.navigate('DiaryWrite', { selectedDate: date, user_Id: user_Id })}
             />

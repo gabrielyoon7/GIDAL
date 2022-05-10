@@ -1,11 +1,20 @@
 import { Box, Heading, HStack, Spacer, View } from "native-base";
 import { useEffect } from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import PrivateRankCard from "./interaction/PrivateRankCard";
 
 
 
 const TagRankCard = (props) => {
-
+    const type = {
+        private: {
+            interaction: <PrivateRankCard tagLogArr={props.tagLogArr} />,
+        },
+        friends: {
+            interaction: <PrivateRankCard tagLogArr={props.tagLogArr} />,
+        },
+    };
+    const card_type = type[props.data.type];
     return (
         <View style={styles.card}>
             <Box pb="3">
@@ -20,9 +29,10 @@ const TagRankCard = (props) => {
                         </HStack>
                     </TouchableOpacity>
                 </HStack>
-                {props.tagLogArr && props.tagLogArr.map((tag) => (
+                {/* {props.tagLogArr && props.tagLogArr.slice(0, 5).map((tag) => (
                     <Text key={tag._id}>{tag._id}{tag.count}</Text>
-                ))}
+                ))} */}
+                {card_type ? (<View style={styles.interaction}>{card_type.interaction}</View>) : (<View><Text>Wrong type</Text></View>)}
             </Box>
         </View>
     )

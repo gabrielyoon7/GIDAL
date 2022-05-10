@@ -120,15 +120,6 @@ router.post('/deleteMany/', function (req, res, next) {
 router.post('/makePersonalStatistics', function (req, res, next) {
     let receivedData = req.body.data;
     console.log(receivedData);
-    // 전체 데이터 가져오기
-    // TagLog.find( 
-    //     { $and : [ { question_id : receivedData.question_id }, { user_id : receivedData.user_id } ] }
-    // ).then((tags) => {
-    //     res.json(tags)
-    // }).catch((err) => {
-    //     console.log(err);
-    //     next(err)
-    // });
     TagLog.aggregate([
         { $match: {$and : [ { question_id : receivedData.question_id }, { user_id : receivedData.user_id } ]} },
         { $sortByCount: "$tag" }
@@ -138,6 +129,20 @@ router.post('/makePersonalStatistics', function (req, res, next) {
         console.log(err);
         next(err)
     });
+});
+
+router.post('/makeFriendsStatistics', function (req, res, next) {
+    let receivedData = req.body.data;
+    console.log(receivedData);
+    // TagLog.aggregate([
+    //     { $match: {$and : [ { question_id : receivedData.question_id }, { user_id : receivedData.user_id } ]} },
+    //     { $sortByCount: "$tag" }
+    // ]).then((tags) => {
+    //     res.json(tags)
+    // }).catch((err) => {
+    //     console.log(err);
+    //     next(err)
+    // });
 });
 
 

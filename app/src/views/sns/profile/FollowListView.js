@@ -10,20 +10,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { CommonActions, useIsFocused, useNavigationState } from "@react-navigation/native";
 import { TabView, SceneMap } from 'react-native-tab-view';
 const Tab = createBottomTabNavigator();
-const FirstRoute = () => (
-  <View style={[styles.scene, { backgroundColor: '#ff4081' }]} />
-);
 
-const SecondRoute = () => (
-  <View style={[styles.scene, { backgroundColor: '#673ab7' }]} />
-);
 
-const initialLayout = { width: Dimensions.get('window').width };
 
-const renderScene = SceneMap({
-  first: FirstRoute,
-  second: SecondRoute,
-});
 export default function FollowListView(props) {
   const [search, setSearch] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState([]);
@@ -38,8 +27,8 @@ export default function FollowListView(props) {
   //시작
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: 'first', title: 'First' },
-    { key: 'second', title: 'Second' },
+    { key: 'first', title: 'Follower' },
+    { key: 'second', title: 'Following' },
   ]);
 
   // const [init, setInit] = useState('Following');
@@ -173,6 +162,7 @@ export default function FollowListView(props) {
     )
   }
 
+
   const FollowerScreen = () => {
     const isFocused = useIsFocused();
     if (isFocused) {
@@ -184,7 +174,27 @@ export default function FollowListView(props) {
       <Followings navigation={props.navigation} />
     )
   }
+  const FirstRoute = () => (
+    <>
+    <View/>
+    <FollowerScreen/>
+    
+    </>
+  );
+  
+  const SecondRoute = () => (
+    <>
+    <View/>
+    <FollowingScreen />
+    </>
+    
+  );
+  const initialLayout = { width: Dimensions.get('window').width };
 
+const renderScene = SceneMap({
+  first: FirstRoute,
+  second: SecondRoute,
+});
   //     const [following, setFollowing] = useState();
   //     const [profileImg, setProfileImg] = useState();
   //     const [date, setSelectedDate] = React.useState(props.selectedDate);    
@@ -211,13 +221,16 @@ export default function FollowListView(props) {
     
       <BackButton navigation={props.navigation} />
       <TabView
+      tabBarPosition='bottom'
       navigationState={{ index, routes }}
       renderScene={renderScene}
       onIndexChange={setIndex}
       initialLayout={initialLayout}
       style={styles.container}
+      
     />
-      <Tab.Navigator
+    
+      {/* <Tab.Navigator
         screenOptions={{ headerShown: false }}
       >
         <Tab.Screen
@@ -244,7 +257,7 @@ export default function FollowListView(props) {
             },
           }}
         />
-      </Tab.Navigator>
+      </Tab.Navigator> */}
     </>
     // <View style={styles.container} >
     //   <BackButton navigation={props.navigation} />
@@ -252,6 +265,7 @@ export default function FollowListView(props) {
     //   <Button onPress={() => { setFilteredDataSource(followers); setMasterDataSource(followers); }}>follower</Button>
     //   <Followings navigation={props.navigation} />
     // </View>
+   
   )
 }
 
@@ -322,7 +336,5 @@ const styles = StyleSheet.create({
   container: {
     marginTop: StatusBar.currentHeight,
   },
-  scene: {
-    flex: 1,
-  },
+ 
 });

@@ -14,6 +14,7 @@ const PersonalStatisticsView = (props) => {
     }
     const [user_Id, setUserId] = useState('');
     const [questionId, setQuestionId] = useState(props.id);
+    const [tagLogArr, setTagLogArr] = useState([]);
 
     useEffect(() => {
         try {
@@ -44,6 +45,7 @@ const PersonalStatisticsView = (props) => {
                 }
             }).then((response) => {
                 console.log(response.data);
+                setTagLogArr(response.data);
             }).catch(function (error) {
                 console.log(error);
             })
@@ -53,7 +55,7 @@ const PersonalStatisticsView = (props) => {
 
     return (
         <View>
-            <TagRankCard data={data} />
+            <TagRankCard data={data} tagLogArr={tagLogArr} />
         </View>
     )
 }

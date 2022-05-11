@@ -180,19 +180,19 @@ const Todo = () => {
     })
   };
 
-  // const showDatePicker = () => {
-  //   setDatePickerVisibility(true);
-  // };
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
 
-  // const hideDatePicker = () => {
-  //   setDatePickerVisibility(false);
-  // };
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
 
-  // const handleConfirm = (date) => {
-  //   console.log(date);
-  //   setPickedDate(date.toJSON().split('T')[0])
-  //   hideDatePicker();
-  // };
+  const handleConfirm = (date) => {
+    console.log(date);
+    setPickedDate(date.toJSON().split('T')[0])
+    hideDatePicker();
+  };
 
   return (
     <ComponentContainer>
@@ -218,20 +218,20 @@ const Todo = () => {
         <View>
         </View>
       </View>
-      {/* <DateTimePickerModal
+      <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode="date"
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
       />
-  <Fab
-                renderInPortal={false}
-                shadow={2}
-                size="md"
-                icon={<Icon color="white" as={AntDesign} name="calendar" size="md" />}
-                onPress={() => showDatePicker()}
-            /> */}
-      <TodoStatistics />
+      <Fab
+        renderInPortal={false}
+        shadow={2}
+        size="md"
+        icon={<Icon color="white" as={AntDesign} name="calendar" size="md" />}
+        onPress={() => showDatePicker()}
+      />
+      {/* <TodoStatistics /> */}
     </ComponentContainer>
   );
 };

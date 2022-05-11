@@ -11,6 +11,7 @@ import Empty from "./Empty";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios'
 import { config } from '../../../../config'
+import TodoStatistics from './TodoStatistics';
 
 let today = new Date().toJSON().split('T')[0];
 
@@ -67,7 +68,7 @@ const Todo = () => {
   const submitHandler = (value) => {
     let random_key = Math.random().toString();
 
-    addData({value, random_key})
+    addData({ value, random_key })
     setData((prevTodo) => {
       return [
         {
@@ -89,11 +90,14 @@ const Todo = () => {
           onPress: () => console.log(item.key),
           style: "cancel"
         },
-        { text: "네", onPress: () => 
-        {setData((prevTodo) => {
-          return prevTodo.filter((todo) => todo.key != item.key);
-        });
-        deleteData(item.key)}},
+        {
+          text: "네", onPress: () => {
+            setData((prevTodo) => {
+              return prevTodo.filter((todo) => todo.key != item.key);
+            });
+            deleteData(item.key)
+          }
+        },
       ],
       { cancelable: false });
   };
@@ -102,22 +106,23 @@ const Todo = () => {
     console.log(key);
     axios.post(config.ip + ':5000/todoRouter/todoDelete', {
       data: {
-          user_id: user_Id,
-          key: key
+        user_id: user_Id,
+        key: key
       }
     })
       .then((response) => {
-          if (response.data.status == 'success') {
-              console.log('to do save');
-              getItems();
-      }}).catch(function (error) {
+        if (response.data.status == 'success') {
+          console.log('to do save');
+          getItems();
+        }
+      }).catch(function (error) {
         console.log(error);
       });
   }
 
-  const addData = ({value, random_key}) => {
+  const addData = ({ value, random_key }) => {
     console.log(firstRecord);
-    if(firstRecord){ // todo 기록 없는 유저
+    if (firstRecord) { // todo 기록 없는 유저
       axios.post(config.ip + ':5000/todoRouter/save', {
         data: {
           user_id: user_Id,
@@ -175,45 +180,45 @@ const Todo = () => {
     })
   };
 
-  const showDatePicker = () => {
-    setDatePickerVisibility(true);
-  };
+  // const showDatePicker = () => {
+  //   setDatePickerVisibility(true);
+  // };
 
-  const hideDatePicker = () => {
-    setDatePickerVisibility(false);
-  };
+  // const hideDatePicker = () => {
+  //   setDatePickerVisibility(false);
+  // };
 
-  const handleConfirm = (date) => {
-    console.log(date);
-    setPickedDate(date.toJSON().split('T')[0])
-    hideDatePicker();
-  };
+  // const handleConfirm = (date) => {
+  //   console.log(date);
+  //   setPickedDate(date.toJSON().split('T')[0])
+  //   hideDatePicker();
+  // };
 
- return (
-  <ComponentContainer>
-  <View>
-    <StatusBar barStyle="light-content" 
-      backgroundColor="midnightblue" />
-  </View>
+  return (
+    <ComponentContainer>
+      <View>
+        <StatusBar barStyle="light-content"
+          backgroundColor="midnightblue" />
+      </View>
 
-  <View>
-  <FlatList
-            data={data}
-            ListHeaderComponent={() => 
+      <View>
+        <FlatList
+          data={data}
+          ListHeaderComponent={() =>
             <>
-              <Header date={pickedDate}/>
+              <Header date={pickedDate} />
               <AddInput submitHandler={submitHandler} />
-            </> }
-            ListEmptyComponent={() => <Empty />}
-            keyExtractor={(item) => item.key}
-            renderItem={({ item }) => (
-              <TodoList item={item} deleteItem={deleteItem} changeIsDone={changeIsDone} />
-            )}
-          />
-    <View>
-    </View>
-  </View>
-  <DateTimePickerModal
+            </>}
+          ListEmptyComponent={() => <Empty />}
+          keyExtractor={(item) => item.key}
+          renderItem={({ item }) => (
+            <TodoList item={item} deleteItem={deleteItem} changeIsDone={changeIsDone} />
+          )}
+        />
+        <View>
+        </View>
+      </View>
+      {/* <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode="date"
         onConfirm={handleConfirm}
@@ -225,9 +230,10 @@ const Todo = () => {
                 size="md"
                 icon={<Icon color="white" as={AntDesign} name="calendar" size="md" />}
                 onPress={() => showDatePicker()}
-            />
-</ComponentContainer>
-    );
+            /> */}
+      <TodoStatistics />
+    </ComponentContainer>
+  );
 };
 
 const ComponentContainer = styled.View`

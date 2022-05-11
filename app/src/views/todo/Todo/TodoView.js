@@ -129,6 +129,7 @@ const Todo = () => {
           to_do_list: {
             date: pickedDate,
             key: random_key,
+            isDone: false,
             value: value
           }
         }

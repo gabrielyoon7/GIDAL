@@ -8,7 +8,7 @@ import { Button, Center } from 'native-base';
 import BackButton from '../../../components/common/BackButton';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { CommonActions, useIsFocused, useNavigationState } from "@react-navigation/native";
-import { TabView, SceneMap } from 'react-native-tab-view';
+import { TabView, SceneMap,TabBar  } from 'react-native-tab-view';
 const Tab = createBottomTabNavigator();
 
 
@@ -119,6 +119,7 @@ export default function FollowListView(props) {
     return (
       <View>
         {/* <FeedSearchView/> */}
+        <BackButton navigation={props.navigation} />
         <SearchBar
          style={styles.searchbar} 
           round
@@ -127,6 +128,7 @@ export default function FollowListView(props) {
           onClear={(text) => searchFilter('')}
           placeholder="검색어를 입력해주세요"
           value={search}
+        
         />
         <View style={styles.body} >
           <FlatList
@@ -176,7 +178,7 @@ export default function FollowListView(props) {
   }
   const FirstRoute = () => (
     <>
-    <View/>
+ 
     <FollowerScreen/>
     
     </>
@@ -184,7 +186,7 @@ export default function FollowListView(props) {
   
   const SecondRoute = () => (
     <>
-    <View/>
+    
     <FollowingScreen />
     </>
     
@@ -195,6 +197,14 @@ const renderScene = SceneMap({
   first: FirstRoute,
   second: SecondRoute,
 });
+
+const renderTabBar = props => (
+  <TabBar
+    {...props}
+    indicatorStyle={{ backgroundColor: 'white' }}
+    style={{ backgroundColor: '#27ae60' }}
+  />
+);
   //     const [following, setFollowing] = useState();
   //     const [profileImg, setProfileImg] = useState();
   //     const [date, setSelectedDate] = React.useState(props.selectedDate);    
@@ -218,18 +228,17 @@ const renderScene = SceneMap({
   //   },[])
   return (
     <>
-    
-      <BackButton navigation={props.navigation} />
       <TabView
       tabBarPosition='bottom'
       navigationState={{ index, routes }}
       renderScene={renderScene}
       onIndexChange={setIndex}
       initialLayout={initialLayout}
+      renderTabBar={renderTabBar}
       style={styles.container}
       
     />
-    
+
       {/* <Tab.Navigator
         screenOptions={{ headerShown: false }}
       >
@@ -295,22 +304,22 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   body: {
-    padding: 30,
-    backgroundColor: "#E6E6FA",
-    marginBottom: 20
+    padding: 15,
+    
   },
   flatListStyle: {
     // backgroundColor: '#fff',
     margin: 20,
   },
   box: {
-    padding: 5,
+    padding: 3,
     marginTop: 5,
     marginBottom: 5,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#f1f3f5', //리스트 카드 색
     flexDirection: 'row',
     shadowColor: 'black',
     shadowOpacity: .2,
+    borderRadius: 30,
     shadowOffset: {
       height: 1,
       width: -2
@@ -318,7 +327,7 @@ const styles = StyleSheet.create({
     elevation: 2
   },
   username: {
-    color: "#20B2AA",
+    color: "black",
     fontSize: 22,
     alignSelf: 'center',
     marginLeft: 10
@@ -331,10 +340,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   searchbar:{
-    margin :10
+    margin :11,
+    borderWidth:1,
+    borderColor:'gray'
+  
   },
   container: {
-    marginTop: StatusBar.currentHeight,
+    marginTop: 5,
+    backgroundColor:"white"
   },
  
 });

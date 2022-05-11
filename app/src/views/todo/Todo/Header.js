@@ -22,12 +22,12 @@ const ComponentContainer = styled.View`
 `;
 
 const HeaderText = styled.Text`
-  color: white;
+  ${'' /* color: white; */}
   font-size: 30px;
 `;
 
 const HeaderList = styled.Text`
-  color: white;
+  ${'' /* color: white; */}
   font-size: 20px;
   margin-right: 20px;
 `;

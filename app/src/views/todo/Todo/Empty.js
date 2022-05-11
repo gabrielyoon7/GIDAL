@@ -26,6 +26,6 @@ const EmptyImage = styled.Image`
 `;
 
 const EmptyText = styled.Text`
-  color: white;
+  ${'' /* color: white; */}
   font-size: 30px;
 `;

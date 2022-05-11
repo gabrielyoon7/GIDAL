@@ -237,7 +237,7 @@ const Todo = () => {
 };
 
 const ComponentContainer = styled.View`
-  background-color: midnightblue;
+  background-color: white;
   height: 100%;
   flex-direction: column;
   align-items: center;

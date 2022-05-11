@@ -17,7 +17,7 @@ const InputContent = (props) => {
                     initialHeight={200}
                     enterKeyHint={'done'}
                     // containerStyle={{borderRadius: 24}}
-                    placeholder={'오늘의 하루는 어떘나요?'}
+                    placeholder={'오늘의 하루는 어땠나요?'}
                     initialContentHTML={props.content}
                     // editorInitializedCallback={editorInitializedCallback}
                     // onChange={handleChange}

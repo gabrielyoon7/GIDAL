@@ -2,6 +2,7 @@ import { Fab, Icon } from "native-base";
 import { useState } from "react";
 import { Modal, Pressable, StyleSheet, Text, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+import TodoChart from "./TodoChart";
 
 export default function TodoStatistics() {
     const [modalVisible, setModalVisible] = useState(false);
@@ -19,7 +20,8 @@ export default function TodoStatistics() {
             >
                 <View style={styles.centeredView}>
                     <View style={styles.modalView}>
-                        <Text style={styles.modalText}>Hello World!</Text>
+                        {/* <Text style={styles.modalText}>Hello World!</Text> */}
+                        <TodoChart />
                         <Pressable
                             style={[styles.button, styles.buttonClose]}
                             onPress={() => setModalVisible(!modalVisible)}

@@ -9,6 +9,7 @@ import UserProfileView from '../../views/sns/profile/UserProfileView';
 import ProfileRoute from '../sns/ProfileRoute';
 import StoreRoute from '../store/StoreRoute';
 import UserStatisticsView from '../../views/statistics/UserStatisticsView';
+import TodoStatisticsView from '../../views/statistics/TodoStatisticsView';
 
 const UserScreen = ({ navigation }) => {
   return (
@@ -58,6 +59,12 @@ const StoreScreen = ({ navigation }) => {
   )
 }
 
+const TodoStatisticsScreen = ({ navigation }) => {
+  return (
+    <TodoStatisticsView navigation={navigation} />
+  )
+}
+
 const Stack = createStackNavigator();
 
 const IndexRoute = () => {
@@ -104,6 +111,13 @@ const IndexRoute = () => {
       <Stack.Screen
         name="UserStatistics"
         component={UserStatisticsScreen}
+        options={{
+          cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
+        }}
+      />
+      <Stack.Screen
+        name="TodoStatistics"
+        component={TodoStatisticsScreen}
         options={{
           cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
         }}

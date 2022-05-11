@@ -7,6 +7,7 @@ import DiaryReadView from '../../views/diary/read/DiaryReadView';
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 import UserProfileView from '../../views/sns/profile/UserProfileView';
 import ProfileRoute from '../sns/ProfileRoute';
+import StoreRoute from '../store/StoreRoute';
 import UserStatisticsView from '../../views/statistics/UserStatisticsView';
 import TodoStatisticsView from '../../views/statistics/TodoStatisticsView';
 
@@ -49,6 +50,12 @@ const ProfileScreen = ({ navigation }) => {
 const UserStatisticsScreen = ({ navigation }) => {
   return (
     <UserStatisticsView navigation={navigation} />
+  )
+}
+
+const StoreScreen = ({ navigation }) => {
+  return (
+    <StoreRoute navigation={navigation} />
   )
 }
 
@@ -111,6 +118,13 @@ const IndexRoute = () => {
       <Stack.Screen
         name="TodoStatistics"
         component={TodoStatisticsScreen}
+        options={{
+          cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
+        }}
+      />
+      <Stack.Screen
+        name="Store"
+        component={StoreScreen}
         options={{
           cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
         }}

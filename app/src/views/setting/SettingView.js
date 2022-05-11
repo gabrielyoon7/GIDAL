@@ -10,6 +10,7 @@ const menu = [
     { key: 1, type: 'nav_index', menu: '마이페이지', argument: 'UserProfile', extra: null },
     { key: 2, type: 'logout', menu: '로그아웃', argument: 'User', extra: null },
     { key: 3, type: 'link', menu: '앱 소개 : Github', argument: 'https://github.com/gabrielyoon7/GIDAL', extra: null },
+    { key: 4, type: 'store', menu: '스토어', argument: 'Store', extra: null },
 ]
 
 const SettingHeader = () => {
@@ -76,6 +77,16 @@ const SettingMenu = ({ item, props }) => {
                 <Link href={item.argument} isExternal >
                     <Text style={styles.item}>{item.menu}</Text>
                 </Link>
+            )
+        case "store":
+            return (
+                <TouchableOpacity
+                    onPress={
+                        () => props.navigation.navigate(item.argument)
+                    }
+                >
+                    <Text style={styles.item}>{item.menu}</Text>
+                </TouchableOpacity>
             )
         default:
             return (

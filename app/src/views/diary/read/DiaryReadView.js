@@ -109,15 +109,21 @@ const DiaryReadView = (props) => {
         })
     }, [liked]);
 
+    const ReadHeader = () => {
+        return (
+            <Box style={styles.row} justifyContent="center" display="flex">
+                <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ flex: 1, flexDirection: 'row' }} >
+                    <AntDesign style={styles.allowIcon} name="left" size={24} color="black" />
+                </TouchableOpacity>
+            </Box>
+        );
+    }
+
     const ReadView = () => {
         return (
             <View style={styles.background}>
                 <View style={styles.container}>
-                    <Box style={styles.row} justifyContent="center" display="flex">
-                        <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ flex: 1, flexDirection: 'row' }} >
-                            <AntDesign style={styles.allowIcon} name="left" size={24} color="black" />
-                        </TouchableOpacity>
-                    </Box>
+                    <ReadHeader/>
                     <HStack alignItems="center">
                         <Badge
                             backgroundColor="emerald.400"
@@ -199,7 +205,10 @@ const DiaryReadView = (props) => {
             ?
             <ParallaxScrollView
                 style={{ flex: 1 }}
+                backgroundColor="white"
                 parallaxHeaderHeight={windowHeight * 0.3}
+                renderStickyHeader={() => <ReadHeader/>}
+                stickyHeaderHeight={40}
                 renderForeground={() => (
                     <Image
                         style={styles.header}
@@ -317,7 +326,7 @@ const styles = StyleSheet.create({
         // justifyContent: 'center',
     },
     header: {
-        height: windowHeight * 0.3,
+        height: windowHeight * 0.4,
         // backgroundColor: "black",
         // textAlign: "center",
         // justifyContent: 'center',

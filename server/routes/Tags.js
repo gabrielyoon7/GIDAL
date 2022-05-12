@@ -135,21 +135,30 @@ router.post('/makeFriendsStatistics', function (req, res, next) {
     let receivedData = req.body.data;
     console.log(receivedData);
     let friendsStatisticsList = [];
-    receivedData.userFollowing.map(friend=>
-        TagLog.aggregate([
-            { $match: {$and : [ { question_id : receivedData.question_id }, { user_id : friend } ]} },
-            { $sortByCount: "$tag" }
-        ]).then((tags) => {
-            friendsStatisticsList.push({id:friend,statistics:tags});
-            console.log(friendsStatisticsList);
-            // res.json(tags)
-        }).catch((err) => {
-            console.log(err);
-            next(err)
-        })
+
+    async function mfs(){
+        await receivedData.userFollowing.map(friend=>
+            TagLog.aggregate([
+                { $match: {$and : [ { question_id : receivedData.question_id }, { user_id : friend } ]} },
+                { $sortByCount: "$tag" }
+            ]).then((tags) => {
+                friendsStatisticsList.push({id:friend,statistics:tags});
+                console.log(friend+'의 데이터 추가');
+                // res.json(tags)
+            }).catch((err) => {
+                console.log(err);
+                next(err)
+            })
+        );
+    }
+
+    mfs().then(
+        ()=>{
+            console.log(friendsStatisticsList)
+            res.json(friendsStatisticsList)
+        }
     );
     
-    res.json(friendsStatisticsList);
 });
 
 

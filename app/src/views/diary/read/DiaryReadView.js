@@ -111,8 +111,8 @@ const DiaryReadView = (props) => {
 
     const ReadHeader = () => {
         return (
-            <Box style={styles.row} justifyContent="center" display="flex">
-                <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ flex: 1, flexDirection: 'row' }} >
+            <Box style={styles.headerBar} justifyContent="center" display="flex">
+                <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ flex: 1, flexDirection: 'row', paddingLeft: 10 }} >
                     <AntDesign style={styles.allowIcon} name="left" size={24} color="black" />
                 </TouchableOpacity>
             </Box>
@@ -123,7 +123,7 @@ const DiaryReadView = (props) => {
         return (
             <View style={styles.background}>
                 <View style={styles.container}>
-                    <ReadHeader/>
+                    {/* <ReadHeader/> */}
                     <HStack alignItems="center">
                         <Badge
                             backgroundColor="emerald.400"
@@ -207,8 +207,8 @@ const DiaryReadView = (props) => {
                 style={{ flex: 1 }}
                 backgroundColor="white"
                 parallaxHeaderHeight={windowHeight * 0.3}
-                renderStickyHeader={() => <ReadHeader/>}
-                stickyHeaderHeight={40}
+                renderFixedHeader={() => <ReadHeader/>}
+               // stickyHeaderHeight={40}
                 renderForeground={() => (
                     <Image
                         style={styles.header}
@@ -349,6 +349,14 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         marginBottom: 16,
         // backgroundColor: 'black'
+    },
+    headerBar: {
+        flexDirection: "row",
+        flexWrap: "wrap",
+        justifyContent: "center",
+        marginBottom: 16,
+        backgroundColor: 'white',
+        paddingVertical: 10,
     },
 })
 

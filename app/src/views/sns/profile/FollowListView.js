@@ -119,6 +119,7 @@ export default function FollowListView(props) {
     return (
       <View>
         {/* <FeedSearchView/> */}
+        <BackButton navigation={props.navigation} />
         <SearchBar
          style={styles.searchbar} 
           round
@@ -227,8 +228,6 @@ const renderTabBar = props => (
   //   },[])
   return (
     <>
-    
-      <BackButton navigation={props.navigation} />
       <TabView
       tabBarPosition='bottom'
       navigationState={{ index, routes }}
@@ -305,9 +304,8 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   body: {
-    padding: 25,
-    // backgroundColor: "#E6E6FA",
-    marginBottom: 20
+    padding: 15,
+    
   },
   flatListStyle: {
     // backgroundColor: '#fff',
@@ -342,7 +340,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   searchbar:{
-    margin :5,
+    margin :11,
     borderWidth:1,
     borderColor:'gray'
   

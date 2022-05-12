@@ -134,15 +134,22 @@ router.post('/makePersonalStatistics', function (req, res, next) {
 router.post('/makeFriendsStatistics', function (req, res, next) {
     let receivedData = req.body.data;
     console.log(receivedData);
-    // TagLog.aggregate([
-    //     { $match: {$and : [ { question_id : receivedData.question_id }, { user_id : receivedData.user_id } ]} },
-    //     { $sortByCount: "$tag" }
-    // ]).then((tags) => {
-    //     res.json(tags)
-    // }).catch((err) => {
-    //     console.log(err);
-    //     next(err)
-    // });
+    let friendsStatisticsList = [];
+    receivedData.userFollowing.map(friend=>
+        TagLog.aggregate([
+            { $match: {$and : [ { question_id : receivedData.question_id }, { user_id : friend } ]} },
+            { $sortByCount: "$tag" }
+        ]).then((tags) => {
+            friendsStatisticsList.push({id:friend,statistics:tags});
+            console.log(friendsStatisticsList);
+            // res.json(tags)
+        }).catch((err) => {
+            console.log(err);
+            next(err)
+        })
+    );
+    
+    res.json(friendsStatisticsList);
 });
 
 

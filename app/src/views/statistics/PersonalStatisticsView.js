@@ -44,7 +44,7 @@ const PersonalStatisticsView = (props) => {
                     user_id: user_id,
                 }
             }).then((response) => {
-                console.log(response.data);
+                // console.log(response.data);
                 setTagLogArr(response.data);
             }).catch(function (error) {
                 console.log(error);

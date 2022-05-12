@@ -5,11 +5,14 @@ import { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import BackButton from "../../components/common/BackButton";
 import WelcomeCard from "../../components/statistics/WelcomeCard";
+import TodoChart from "../../views/todo/Todo/TodoChart"
 import { config } from "../../../config";
 
 const TodoStatisticsView = (props) => {    
     const [user_Id, setUserId] = useState('');
-    const [TodoStatistics, setTodoStatistics] = useState({})
+    const [todoStatistics, setTodoStatistics] = useState([{type: "할 일", count: 0, color: 'rgb(84,219,234)'},
+                                                                    {type: "완료", count: 0, color: 'lightgreen'},
+                                                                    {type: "미완료", count: 0, color: 'lightgray'}])
 
     const PersonalTodoStatistics = () => {
         return (
@@ -30,9 +33,10 @@ const TodoStatisticsView = (props) => {
                     <Text key={tag._id}>{tag._id}{tag.count}</Text>
                 ))} */}
                     <View style={styles.interaction}>
-                        <Text>incomplete: {TodoStatistics.incomplete}</Text>
-                        <Text>complete: {TodoStatistics.complete}</Text>
-                        <Text>todo: {TodoStatistics.todo}</Text>
+                        {/* <Text>incomplete: {todoStatistics[0]}</Text>
+                        <Text>complete: {todoStatistics.complete}</Text>
+                        <Text>todo: {todoStatistics.todo}</Text> */}
+                        <TodoChart todoStatistics={todoStatistics} />
                     </View>
                 </Box>
             </View>
@@ -58,6 +62,10 @@ const TodoStatisticsView = (props) => {
         getTodoStatistics()
     },[user_Id])
 
+    useEffect(() => {
+        // console.log(todoStatistics)
+    },[todoStatistics])
+
     const getTodoStatistics = () =>{
         if (user_Id != '') {
             const today = new Date();
@@ -75,10 +83,6 @@ const TodoStatisticsView = (props) => {
             }).then((response) => {
                 const todoList = response.data[0].to_do_list
                 todoList.forEach(todo => {
-                    console.log(todo.date)
-                    console.log(day)
-                    // console.log(new Date(todo.date) < new Date(day))
-                    console.log(todo.isDone)
                     if(todo.isDone){
                         completeCnt++;
                     } else if(todo.date < day){
@@ -87,7 +91,9 @@ const TodoStatisticsView = (props) => {
                         todoCnt++;
                     }
                 });
-                setTodoStatistics({incomplete: incompleteCnt, complete: completeCnt, todo: todoCnt});
+                setTodoStatistics([{type: "할 일", count: todoCnt, color: 'rgb(84,219,234)'},
+                {type: "완료", count: completeCnt, color: 'lightgreen'},
+                {type: "미완료", count: incompleteCnt, color: 'lightgray'}]);
             }).catch(function (error) {
                 console.log(error);
             })
@@ -114,7 +120,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#E8D9FF',
         marginVertical: 10,
         borderRadius: 10,
-        height: 200,
+        // height: 200,
         padding: 20,
         marginHorizontal: 10,
     },

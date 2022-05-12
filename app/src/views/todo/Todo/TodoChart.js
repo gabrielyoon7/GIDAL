@@ -1,32 +1,48 @@
+import { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import { PieChart } from "react-native-gifted-charts";
 
-export default function TodoChart() {
-    const renderLegend = (text, color) => {
+export default function TodoChart(props) {
+    const statistics = props.todoStatistics;
+    const [data, setData] = useState([]);
+    const [legends, setLegends] = useState([]);
+
+    const renderLegend = (legend) => {
         return (
-            <View style={{ flexDirection: 'row', marginBottom: 12 }}>
+            <View style={{ flexDirection: 'row', marginBottom: 12 }} key={legend.key}>
                 <View
                     style={{
                         height: 18,
                         width: 18,
                         marginRight: 10,
                         borderRadius: 4,
-                        backgroundColor: color || 'white',
+                        backgroundColor: legend.color || 'white',
                     }}
                 />
-                <Text style={{ color: 'white', fontSize: 16 }}>{text || ''}</Text>
+                <Text style={{ color: 'white', fontSize: 16 }}>{legend.type || ''}</Text>
             </View>
         );
     };
+
+    useEffect(() => {
+        let dataArr = [];
+        let legendArr = [];
+        statistics.forEach(function(element, idx) {
+            dataArr.push({value: element.count, color: element.color})
+            legendArr.push({type: element.type, color: element.color, key: idx})
+        });
+        setData(dataArr);
+        setLegends(legendArr);
+    },[statistics])
 
     return (
         <View>
             <View
                 style={{
-                    marginVertical: 100,
-                    marginHorizontal: 30,
+                    marginVertical: 10,
+                    // marginHorizontal: 30,
                     borderRadius: 10,
-                    paddingVertical: 50,
+                    paddingVertical: 30,
                     backgroundColor: '#414141',
                     justifyContent: 'center',
                     alignItems: 'center',
@@ -34,7 +50,7 @@ export default function TodoChart() {
 
 
                 {/*********************    Custom Header component      ********************/}
-                <Text
+                {/* <Text
                     style={{
                         color: 'white',
                         fontSize: 32,
@@ -42,7 +58,7 @@ export default function TodoChart() {
                         marginBottom: 12,
                     }}>
                     Quarterly Sales
-                </Text>
+                </Text> */}
                 {/****************************************************************************/}
 
 
@@ -50,11 +66,7 @@ export default function TodoChart() {
                     strokeColor="white"
                     strokeWidth={4}
                     donut
-                    data={[
-                        { value: 30, color: 'rgb(84,219,234)' },
-                        { value: 40, color: 'lightgreen' },
-                        { value: 20, color: 'orange' },
-                    ]}
+                    data={data}
                     innerCircleColor="#414141"
                     innerCircleBorderWidth={4}
                     innerCircleBorderColor={'white'}
@@ -62,14 +74,14 @@ export default function TodoChart() {
                     showText
                     textSize={18}
                     showTextBackground={true}
-                    centerLabelComponent={() => {
-                        return (
-                            <View>
-                                <Text style={{ color: 'white', fontSize: 36 }}>90</Text>
-                                <Text style={{ color: 'white', fontSize: 18 }}>Total</Text>
-                            </View>
-                        );
-                    }}
+                    // centerLabelComponent={() => {
+                    //     return (
+                    //         <View>
+                    //             <Text style={{ color: 'white', fontSize: 36 }}>90</Text>
+                    //             <Text style={{ color: 'white', fontSize: 18 }}>Total</Text>
+                    //         </View>
+                    //     );
+                    // }}
                 />
 
 
@@ -81,9 +93,12 @@ export default function TodoChart() {
                         justifyContent: 'space-evenly',
                         marginTop: 20,
                     }}>
-                    {renderLegend('Jan', 'rgb(84,219,234)')}
+                    {/* {renderLegend('Jan', 'rgb(84,219,234)')}
                     {renderLegend('Feb', 'lightgreen')}
-                    {renderLegend('Mar', 'orange')}
+                    {renderLegend('Mar', 'lightgray')} */}
+                    {legends.map((legend) => (
+                        renderLegend(legend)
+                    ))}
                 </View>
                 {/****************************************************************************/}
 

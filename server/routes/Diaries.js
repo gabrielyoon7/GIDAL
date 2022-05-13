@@ -25,6 +25,21 @@ router.post('/findOwn', function(req, res, next) {
     });
 });
 
+router.post('/findOwnPerMonth', function(req, res, next) {
+    // console.log(req.body.data.month);
+    const min = req.body.data.year + '-' + req.body.data.month + '-01';
+    const max = req.body.data.year + '-' + req.body.data.month + '-31';
+    console.log(min)
+    console.log(max)
+    // 전체 데이터 가져오기
+    Diary.find().where('user_id').equals(req.body.data.user_id).sort({date: -1}).then( (diaries) => {
+        res.json(diaries)
+    }).catch( (err) => {
+        console.log(err);
+        next(err)
+    });
+});
+
 /* POST*/
 router.post('/save', function(req, res) {
     console.log(req.body);

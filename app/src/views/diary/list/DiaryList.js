@@ -13,9 +13,13 @@ const DiaryList = (props, navigation) => {
     const [isLoaded, setIsLoaded] = useState(false);
     const getitems = () => {
         let result = []
-        axios.post(config.ip + ':5000/diariesRouter/findOwn', {
+        const year = props.selectedDate.split('-')[0]
+        const month = props.selectedDate.split('-')[1]
+        axios.post(config.ip + ':5000/diariesRouter/findOwnPerMonth', {
             data: {
-                user_id: user_id
+                user_id: user_id,
+                year: year,
+                month: month
             }
         }).then((response) => {
             if (response.data.length > 0) {

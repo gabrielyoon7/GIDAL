@@ -10,7 +10,7 @@ const PersonalStatisticsView = (props) => {
     // 여기에서 조회 데이터를 받은 다음, 아래 TagRankCard에 값을 줘서 렌더링 할 것임
     const data = {
         type: "private",
-        title: "개별 통계",
+        title: "개인 통계",
     }
     const [user_Id, setUserId] = useState('');
     const [questionId, setQuestionId] = useState(props.id);

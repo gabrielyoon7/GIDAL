@@ -151,22 +151,32 @@ router.post('/makeFriendsStatistics', function (req, res, next) {
             })
         );
 
-        // 3초 대기
+        // 1초 대기
         await new Promise((resolve, reject) => setTimeout(resolve, 1000));
         // await console.log(friendsStatisticsList)
         // await res.json(friendsStatisticsList)
-            console.log(friendsStatisticsList)
-            res.json(friendsStatisticsList)
+        console.log(friendsStatisticsList)
+        res.json(friendsStatisticsList)
 
     }
 
-    mfs().then(
-        () => {
-            // console.log(friendsStatisticsList)
-            // res.json(friendsStatisticsList)
-        }
-    );
+    mfs();
 
+});
+
+/* GET. */
+router.post('/makeAnonymousStatistics', function (req, res, next) {
+    let receivedData = req.body.data;
+    console.log(receivedData);
+    TagLog.aggregate([
+        { $match: {question_id: receivedData.question_id } },
+        { $sortByCount: "$tag" }
+    ]).then((tags) => {
+        res.json(tags)
+    }).catch((err) => {
+        console.log(err);
+        next(err)
+    });
 });
 
 

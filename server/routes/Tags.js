@@ -119,7 +119,7 @@ router.post('/deleteMany/', function (req, res, next) {
 /* GET. */
 router.post('/makePersonalStatistics', function (req, res, next) {
     let receivedData = req.body.data;
-    console.log(receivedData);
+    // console.log(receivedData);
     TagLog.aggregate([
         { $match: { $and: [{ question_id: receivedData.question_id }, { user_id: receivedData.user_id }] } },
         { $sortByCount: "$tag" }
@@ -133,7 +133,7 @@ router.post('/makePersonalStatistics', function (req, res, next) {
 
 router.post('/makeFriendsStatistics', function (req, res, next) {
     let receivedData = req.body.data;
-    console.log(receivedData);
+    // console.log(receivedData);
     let friendsStatisticsList = [];
 
     async function mfs() {
@@ -143,7 +143,7 @@ router.post('/makeFriendsStatistics', function (req, res, next) {
                 { $sortByCount: "$tag" }
             ]).then((tags) => {
                 friendsStatisticsList.push({ id: friend, statistics: tags });
-                console.log(friend + '의 데이터 추가');
+                // console.log(friend + '의 데이터 추가');
                 // res.json(tags)
             }).catch((err) => {
                 console.log(err);
@@ -153,11 +153,8 @@ router.post('/makeFriendsStatistics', function (req, res, next) {
 
         // 1초 대기
         await new Promise((resolve, reject) => setTimeout(resolve, 1000));
-        // await console.log(friendsStatisticsList)
-        // await res.json(friendsStatisticsList)
-        console.log(friendsStatisticsList)
+        // console.log(friendsStatisticsList)
         res.json(friendsStatisticsList)
-
     }
 
     mfs();

@@ -17,7 +17,7 @@ const AnonymousStatisticsView = (props) => {
 
     useEffect(() => {
         getStatisticsPreview();
-    }, []);
+    }, [questionId]);
 
     const getStatisticsPreview = () => {
         axios.post(config.ip + ':5000/tagsRouter/makeAnonymousStatistics', {
@@ -37,7 +37,7 @@ const AnonymousStatisticsView = (props) => {
 
     return(
         <View>
-            <TagRankCard data={data}/>
+            <TagRankCard data={data} tagLogArr={tagLogArr} />
         </View>
     )
 }

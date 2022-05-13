@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Text, View } from "react-native"
 import { config } from "../../../config";
+import LoadingSpinner from "../../components/common/LoadingSpinner";
 import TagRankCard from "../../components/statistics/TagRankCard";
 
 
@@ -12,6 +13,7 @@ const AnonymousStatisticsView = (props) => {
         title:"익명 통계",
     }
 
+    const [isLoaded, setIsLoaded] = useState(false);
     const [questionId, setQuestionId] = useState(props.id);
     const [tagLogArr, setTagLogArr] = useState([]);
 
@@ -33,11 +35,18 @@ const AnonymousStatisticsView = (props) => {
         })
     }
 
-
+    useEffect(() => {
+        setIsLoaded(true);
+    }, [tagLogArr]);
 
     return(
         <View>
+            {isLoaded
+            ?
             <TagRankCard data={data} tagLogArr={tagLogArr} />
+            :
+            <LoadingSpinner />
+            }
         </View>
     )
 }

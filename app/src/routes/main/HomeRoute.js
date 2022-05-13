@@ -72,7 +72,7 @@ const HomeRoute = () =>{
                             color='#5F5F5F'
                         />
                     ),
-                }}name="Todo" component={TodoScreen} />
+                }} name="Todo" component={TodoScreen} />
             <Tab.Screen options={{
                     tabBarIcon: () => (
                         <FontAwesome

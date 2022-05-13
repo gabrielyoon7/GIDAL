@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { View, StatusBar, FlatList, Alert } from "react-native";
-import { Fab, Icon } from "native-base";
+import { View, StatusBar, FlatList, Alert, Text } from "react-native";
+import { Fab } from "native-base";
 import styled from "styled-components";
 import AddInput from "./AddInput";
 import { AntDesign } from "@expo/vector-icons";
+import Icon from 'react-native-vector-icons/Entypo';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import TodoList from "./TodoList";
-import Header from './Header';
+// import Header from './Header';
 import Empty from "./Empty";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios'
 import { config } from '../../../../config'
-import TodoStatistics from './TodoStatistics';
 
 let today = new Date().toJSON().split('T')[0];
 
-const Todo = () => {
+const Todo = ({props}) => {
   const [user_Id, setUserId] = useState('');
   const [data, setData] = useState([]);
   const [firstRecord, setFirstRecord] = useState(true); // 처음 todolist 사용하는 유저 구분
@@ -195,6 +195,19 @@ const Todo = () => {
     hideDatePicker();
   };
 
+  function Header({date}) {
+    // const [isDatePickerVisible, setDatePickerVisibility] = React.useState(false);
+  
+    return (
+      <HeaderComponentContainer>
+        <HeaderText>To-Do</HeaderText>
+        <Text></Text>
+        <HeaderList onPress={() => showDatePicker()}>
+        {date} <Icon name="list" size={30} color="#900" onPress={() => props.navigation.navigate('TodoCalendar')} /></HeaderList>
+      </HeaderComponentContainer>
+    );
+  }
+
   return (
     <ComponentContainer>
       <View>
@@ -225,13 +238,13 @@ const Todo = () => {
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
       />
-      <Fab
+      {/* <Fab
         renderInPortal={false}
         shadow={2}
         size="md"
         icon={<Icon color="white" as={AntDesign} name="calendar" size="md" />}
-        onPress={() => showDatePicker()}
-      />
+        onPress={() => props.navigation.navigate('TodoCalendar')} 
+      /> */}
       {/* <TodoStatistics /> */}
     </ComponentContainer>
   );
@@ -245,9 +258,27 @@ const ComponentContainer = styled.View`
   justify-content: center;
 `;
 
-const TodoTest = () => {
+const HeaderComponentContainer = styled.View`
+  height: 100px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const HeaderText = styled.Text`
+  ${'' /* color: white; */}
+  font-size: 30px;
+`;
+
+const HeaderList = styled.Text`
+  ${'' /* color: white; */}
+  font-size: 20px;
+  margin-right: 20px;
+`;
+
+const TodoTest = (props) => {
   return (
-    <Todo />
+    <Todo props={props}/>
   )
 }
 

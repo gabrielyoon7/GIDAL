@@ -50,9 +50,9 @@ function TodoTestScreen(){
   );
 }
 
-function TodoTest2Screen(){
+function TodoTest2Screen({navigation}){
   return (
-    <TodoTest2View/>
+    <TodoTest2View navigation={navigation} />
   );
 }
 

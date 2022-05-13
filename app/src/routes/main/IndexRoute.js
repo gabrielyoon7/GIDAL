@@ -10,6 +10,7 @@ import ProfileRoute from '../sns/ProfileRoute';
 import StoreRoute from '../store/StoreRoute';
 import UserStatisticsView from '../../views/statistics/UserStatisticsView';
 import TodoStatisticsView from '../../views/statistics/TodoStatisticsView';
+import TodoTest2View from '../../views/test/TodoTest2View';
 
 const UserScreen = ({ navigation }) => {
   return (
@@ -62,6 +63,12 @@ const StoreScreen = ({ navigation }) => {
 const TodoStatisticsScreen = ({ navigation }) => {
   return (
     <TodoStatisticsView navigation={navigation} />
+  )
+}
+
+const TodoCalendarScreen = ({ navigation }) => {
+  return (
+    <TodoTest2View navigation={navigation} />
   )
 }
 
@@ -132,6 +139,13 @@ const IndexRoute = () => {
       <Stack.Screen
         name="Test"
         component={TestScreen}
+        options={{
+          cardStyleInterpolator: CardStyleInterpolators.forRevealFromBottomAndroid,
+        }}
+      />
+      <Stack.Screen
+        name="TodoCalendar"
+        component={TodoCalendarScreen}
         options={{
           cardStyleInterpolator: CardStyleInterpolators.forRevealFromBottomAndroid,
         }}

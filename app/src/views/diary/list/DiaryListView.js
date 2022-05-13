@@ -8,8 +8,17 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const DiaryListView = (props) => {
     const [date, setSelectedDate] = React.useState(props.selectedDate);
+    const [markedDates, setMarkedDates] = React.useState({
+        [props.selectedDate]: {
+            selected: true,
+            disableTouchEvent: true,
+            selectedColor: 'yellowgreen',
+            // selectedTextColor: '#7954FA',
+        },
+    })
+    const [items, setItems] = React.useState([]);
     const [user_Id, setUserId] = React.useState('');
-    console.log(user_Id);
+    // console.log(user_Id);
 
     React.useEffect(() => {
         try {
@@ -26,10 +35,30 @@ const DiaryListView = (props) => {
         }
     })
 
+    React.useEffect(() => {
+        let val = {};
+        let isSelected = false;
+        items.forEach(item => {
+            const itemDate = item.date.split('T')[0]
+            if(itemDate === date){
+                val[itemDate] = {marked: true, selected: true,disableTouchEvent: true,selectedColor: 'yellowgreen',}
+                isSelected = true
+            }
+            else {
+                val[itemDate] = {marked: true}
+            }
+        });
+        if(!isSelected){
+            val[date] = ({selected: true, disableTouchEvent: true, selectedColor: 'yellowgreen'})
+ 
+        }
+        setMarkedDates(val)
+    },[items, date])
+
     return (
         <>
-            <CalendarView selectedDate={date} setSelectedDate={setSelectedDate} />
-            <DiaryList selectedDate={date} navigation={props.navigation} user_Id={user_Id} />
+            <CalendarView selectedDate={date} setSelectedDate={setSelectedDate} markedDates={markedDates} />
+            <DiaryList selectedDate={date} navigation={props.navigation} user_Id={user_Id} items={items} setItems={setItems} />
             <Fab
                 renderInPortal={false}
                 shadow={2}

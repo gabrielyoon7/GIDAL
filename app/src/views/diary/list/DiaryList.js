@@ -8,7 +8,6 @@ import LoadingSpinner from '../../../components/common/LoadingSpinner';
 
 
 const DiaryList = (props, navigation) => {
-    const [items, setItems] = useState([]);
     const user_id = props.user_Id;
     const isFocused = useIsFocused(); // isFoucesd Define
     const [isLoaded, setIsLoaded] = useState(false);
@@ -24,7 +23,7 @@ const DiaryList = (props, navigation) => {
                     result.push(item);
                 });
             }
-            setItems(result);
+            props.setItems(result);
         }).catch(function (error) {
             console.log(error);
         })
@@ -41,12 +40,12 @@ const DiaryList = (props, navigation) => {
     }, [isFocused, user_id]);
 
     useEffect(() => {
-        let index = items.findIndex((item, idx) => {
+        let index = props.items.findIndex((item, idx) => {
             return item.date.substr(0, 10) === props.selectedDate
         })
 
         setData(index);
-        if (ref === null || items.length < 1) {
+        if (ref === null || props.items.length < 1) {
             return;
         }
         if (index <= 0) {
@@ -84,7 +83,7 @@ const DiaryList = (props, navigation) => {
                             fListRef.current?.scrollToIndex({ index: info.index, animated: true / false });
                         });
                     }}
-                    data={items}
+                    data={props.items}
                     ref={(ref) => {
                         setRef(ref);
                     }}

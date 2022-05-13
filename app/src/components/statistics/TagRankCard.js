@@ -1,6 +1,7 @@
 import { Box, Heading, HStack, Spacer, View } from "native-base";
 import { useEffect } from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import FriendsRankCard from "./interaction/FriendsRankCard";
 import PrivateRankCard from "./interaction/PrivateRankCard";
 
 
@@ -11,7 +12,7 @@ const TagRankCard = (props) => {
             interaction: <PrivateRankCard tagLogArr={props.tagLogArr} />,
         },
         friends: {
-            interaction: <PrivateRankCard tagLogArr={props.tagLogArr} />,
+            interaction: <FriendsRankCard tagLogArr={props.tagLogArr} />,
         },
     };
     const card_type = type[props.data.type];

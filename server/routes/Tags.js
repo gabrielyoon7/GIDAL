@@ -121,7 +121,7 @@ router.post('/makePersonalStatistics', function (req, res, next) {
     let receivedData = req.body.data;
     console.log(receivedData);
     TagLog.aggregate([
-        { $match: {$and : [ { question_id : receivedData.question_id }, { user_id : receivedData.user_id } ]} },
+        { $match: { $and: [{ question_id: receivedData.question_id }, { user_id: receivedData.user_id }] } },
         { $sortByCount: "$tag" }
     ]).then((tags) => {
         res.json(tags)
@@ -136,29 +136,37 @@ router.post('/makeFriendsStatistics', function (req, res, next) {
     console.log(receivedData);
     let friendsStatisticsList = [];
 
-    async function mfs(){
-        await receivedData.userFollowing.map(friend=>
+    async function mfs() {
+        await receivedData.userFollowing.map(friend =>
             TagLog.aggregate([
-                { $match: {$and : [ { question_id : receivedData.question_id }, { user_id : friend } ]} },
+                { $match: { $and: [{ question_id: receivedData.question_id }, { user_id: friend }] } },
                 { $sortByCount: "$tag" }
             ]).then((tags) => {
-                friendsStatisticsList.push({id:friend,statistics:tags});
-                console.log(friend+'의 데이터 추가');
+                friendsStatisticsList.push({ id: friend, statistics: tags });
+                console.log(friend + '의 데이터 추가');
                 // res.json(tags)
             }).catch((err) => {
                 console.log(err);
                 next(err)
             })
         );
+
+        // 3초 대기
+        await new Promise((resolve, reject) => setTimeout(resolve, 1000));
+        // await console.log(friendsStatisticsList)
+        // await res.json(friendsStatisticsList)
+            console.log(friendsStatisticsList)
+            res.json(friendsStatisticsList)
+
     }
 
     mfs().then(
-        ()=>{
-            console.log(friendsStatisticsList)
-            res.json(friendsStatisticsList)
+        () => {
+            // console.log(friendsStatisticsList)
+            // res.json(friendsStatisticsList)
         }
     );
-    
+
 });
 
 

@@ -35,6 +35,7 @@ const CalendarView = ( props ) => {
                 markedDates={props.markedDates}
                 monthFormat={'yyyy년 MM월'}
                 onMonthChange={(month) => monthChanged(month)}
+                enableSwipeMonths={true}
             />
             {/* <Agenda /> */}
         </View>

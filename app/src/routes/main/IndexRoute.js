@@ -8,9 +8,9 @@ import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/
 import UserProfileView from '../../views/sns/profile/UserProfileView';
 import ProfileRoute from '../sns/ProfileRoute';
 import StoreRoute from '../store/StoreRoute';
-import UserStatisticsView from '../../views/statistics/UserStatisticsView';
-import TodoStatisticsView from '../../views/statistics/TodoStatisticsView';
+import TodoStatisticsView from '../../views/statistics/todo/TodoStatisticsView';
 import TodoTest2View from '../../views/test/TodoTest2View';
+import UserStatisticsView from '../../views/statistics/tag/UserStatisticsView';
 
 const UserScreen = ({ navigation }) => {
   return (

@@ -1,8 +1,8 @@
 import { Heading } from "native-base"
 import { StyleSheet, View } from "react-native";
 import WelcomeCard from "../../components/statistics/WelcomeCard";
-import StatisticsList from "./StatisticsList";
 import TodoStatisticsCard from "../../components/statistics/TodoStatisticsCard"
+import StatisticsList from "./tag/StatisticsList";
 
 const StatisticsMainView = (props) => {
     return(

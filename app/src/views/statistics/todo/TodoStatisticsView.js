@@ -3,10 +3,10 @@ import axios from "axios";
 import { Box, Heading, HStack, Spacer } from "native-base";
 import { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native"
-import BackButton from "../../components/common/BackButton";
-import WelcomeCard from "../../components/statistics/WelcomeCard";
-import TodoChart from "../../views/todo/Todo/TodoChart"
-import { config } from "../../../config";
+import BackButton from "../../../components/common/BackButton";
+import WelcomeCard from "../../../components/statistics/WelcomeCard";
+import TodoChart from "../../todo/Todo/TodoChart"
+import { config } from "../../../../config";
 
 const TodoStatisticsView = (props) => {    
     const [user_Id, setUserId] = useState('');

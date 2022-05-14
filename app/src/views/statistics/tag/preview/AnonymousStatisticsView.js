@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Text, View } from "react-native"
-import { config } from "../../../config";
-import LoadingSpinner from "../../components/common/LoadingSpinner";
-import TagRankCard from "../../components/statistics/TagRankCard";
+import { config } from "../../../../../config";
+import LoadingSpinner from "../../../../components/common/LoadingSpinner";
+import TagRankCard from "../../../../components/statistics/TagRankCard";
 
 
 const AnonymousStatisticsView = (props) => {

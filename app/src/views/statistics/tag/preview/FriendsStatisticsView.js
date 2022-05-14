@@ -2,8 +2,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Text, View } from "react-native"
-import { config } from "../../../config";
-import TagRankCard from "../../components/statistics/TagRankCard";
+import { config } from "../../../../../config";
+import TagRankCard from "../../../../components/statistics/TagRankCard";
 
 
 const FriendsStatisticsView = (props) => {

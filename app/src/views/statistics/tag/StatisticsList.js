@@ -2,8 +2,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { FlatList, Text, View } from "react-native";
-import { config } from "../../../config";
-import StatisticsCard from "../../components/statistics/StatisticsCard";
+import { config } from "../../../../config";
+import StatisticsCard from "../../../components/statistics/StatisticsCard";
 const StatisticsList = (props) => {
     const [items, setItems] = useState([]);
     const [ref, setRef] = useState(null);

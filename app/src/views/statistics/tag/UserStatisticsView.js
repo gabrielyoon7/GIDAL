@@ -1,11 +1,11 @@
 import { useNavigationState } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { ScrollView, Text, View } from "react-native"
-import BackButton from "../../components/common/BackButton";
-import WelcomeCard from "../../components/statistics/WelcomeCard";
-import AnonymousStatisticsView from "./AnonymousStatisticsView";
-import FriendsStatisticsView from "./FriendsStatisticsView";
-import PersonalStatisticsView from "./PersonalStatisticsView";
+import BackButton from "../../../components/common/BackButton";
+import WelcomeCard from "../../../components/statistics/WelcomeCard";
+import AnonymousStatisticsView from "./preview/AnonymousStatisticsView";
+import FriendsStatisticsView from "./preview/FriendsStatisticsView";
+import PersonalStatisticsView from "./preview/PersonalStatisticsView";
 
 const UserStatisticsView = (props) => {
     const new_routes = useNavigationState(state => state.routes);

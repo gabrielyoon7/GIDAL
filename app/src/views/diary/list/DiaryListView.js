@@ -26,7 +26,6 @@ const DiaryListView = (props) => {
         let result = []
         const year = date.split('-')[0]
         const month = date.split('-')[1]
-        console.log(year,'-',month)
         axios.post(config.ip + ':5000/diariesRouter/findOwnPerMonth', {
             data: {
                 user_id: user_Id,
@@ -40,7 +39,7 @@ const DiaryListView = (props) => {
                 });
             }
             setItems(result);
-            console.log(result);
+            // console.log(result);
         }).catch(function (error) {
             console.log(error);
         })

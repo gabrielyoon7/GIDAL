@@ -4,36 +4,77 @@ import { PieChart } from "react-native-gifted-charts";
 
 export default function TodoChart(props) {
     const statistics = props.todoStatistics;
+    // const data = props.data;
     const [data, setData] = useState([]);
     const [legends, setLegends] = useState([]);
+    const [showChart, setShowChart] = useState(false);
 
-    const renderLegend = (legend) => {
+    const RenderLegend = (props) => {
         return (
-            <View style={{ flexDirection: 'row', marginBottom: 12 }} key={legend.key}>
+            <View style={{ flexDirection: 'row', marginBottom: 12 }}>
                 <View
                     style={{
                         height: 18,
                         width: 18,
                         marginRight: 10,
                         borderRadius: 4,
-                        backgroundColor: legend.color || 'white',
+                        backgroundColor: props.legend.color || 'white',
                     }}
                 />
-                <Text style={{ color: 'white', fontSize: 16 }}>{legend.type || ''}</Text>
+                <Text style={{ color: 'white', fontSize: 16 }}>{props.legend.type || ''}</Text>
             </View>
         );
     };
 
     useEffect(() => {
-        let dataArr = [];
-        let legendArr = [];
-        statistics.forEach(function(element, idx) {
-            dataArr.push({value: element.count, color: element.color})
-            legendArr.push({type: element.type, color: element.color, key: idx})
-        });
-        setData(dataArr);
-        setLegends(legendArr);
+        if (statistics.length !== 0) {
+            console.log(statistics)
+            let dataArr = [];
+            let legendArr = [];
+            statistics.forEach(function (element, idx) {
+                dataArr.push({ value: element.count, color: element.color })
+                legendArr.push({ type: element.type, color: element.color, key: idx })
+            });
+            setData(dataArr);
+            setLegends(legendArr);
+        }
     },[statistics])
+
+    useEffect(() => {
+        if(data.length !== 0) {
+            console.log("data",data)
+            setShowChart(true);
+        }
+    },[data])
+
+    const ShowChart = () => {
+        return(
+            <PieChart
+                    strokeColor="white"
+                    strokeWidth={4}
+                    donut={true}
+                    data={data}
+                    innerCircleColor="#414141"
+                    innerCircleBorderWidth={4}
+                    innerCircleBorderColor={'white'}
+                    showValuesAsLabels={true}
+                    showText
+                    textSize={18}
+                    showTextBackground={true}
+                    shiftX={0}
+                    shiftY={0}
+
+                    // centerLabelComponent={() => {
+                    //     return (
+                    //         <View>
+                    //             <Text style={{ color: 'white', fontSize: 36 }}>90</Text>
+                    //             <Text style={{ color: 'white', fontSize: 18 }}>Total</Text>
+                    //         </View>
+                    //     );
+                    // }}
+                />
+        )
+    }
 
     return (
         <View>
@@ -61,29 +102,7 @@ export default function TodoChart(props) {
                 </Text> */}
                 {/****************************************************************************/}
 
-
-                <PieChart
-                    strokeColor="white"
-                    strokeWidth={4}
-                    donut
-                    data={data}
-                    innerCircleColor="#414141"
-                    innerCircleBorderWidth={4}
-                    innerCircleBorderColor={'white'}
-                    showValuesAsLabels={true}
-                    showText
-                    textSize={18}
-                    showTextBackground={true}
-                    // centerLabelComponent={() => {
-                    //     return (
-                    //         <View>
-                    //             <Text style={{ color: 'white', fontSize: 36 }}>90</Text>
-                    //             <Text style={{ color: 'white', fontSize: 18 }}>Total</Text>
-                    //         </View>
-                    //     );
-                    // }}
-                />
-
+                {showChart ? <ShowChart /> : null}
 
                 {/*********************    Custom Legend component      ********************/}
                 <View
@@ -93,11 +112,8 @@ export default function TodoChart(props) {
                         justifyContent: 'space-evenly',
                         marginTop: 20,
                     }}>
-                    {/* {renderLegend('Jan', 'rgb(84,219,234)')}
-                    {renderLegend('Feb', 'lightgreen')}
-                    {renderLegend('Mar', 'lightgray')} */}
                     {legends.map((legend) => (
-                        renderLegend(legend)
+                        <RenderLegend key={legend.key} legend={legend} />
                     ))}
                 </View>
                 {/****************************************************************************/}

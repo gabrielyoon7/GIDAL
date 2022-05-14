@@ -10,9 +10,7 @@ import { config } from "../../../../config";
 
 const TodoStatisticsView = (props) => {    
     const [user_Id, setUserId] = useState('');
-    const [todoStatistics, setTodoStatistics] = useState([{type: "할 일", count: 0, color: 'rgb(84,219,234)'},
-                                                                    {type: "완료", count: 0, color: 'lightgreen'},
-                                                                    {type: "미완료", count: 0, color: 'lightgray'}])
+    const [todoStatistics, setTodoStatistics] = useState([]);
 
     const PersonalTodoStatistics = () => {
         return (
@@ -29,13 +27,7 @@ const TodoStatisticsView = (props) => {
                             </HStack>
                         </TouchableOpacity>
                     </HStack>
-                    {/* {props.tagLogArr && props.tagLogArr.slice(0, 5).map((tag) => (
-                    <Text key={tag._id}>{tag._id}{tag.count}</Text>
-                ))} */}
                     <View style={styles.interaction}>
-                        {/* <Text>incomplete: {todoStatistics[0]}</Text>
-                        <Text>complete: {todoStatistics.complete}</Text>
-                        <Text>todo: {todoStatistics.todo}</Text> */}
                         <TodoChart todoStatistics={todoStatistics} />
                     </View>
                 </Box>
@@ -59,11 +51,12 @@ const TodoStatisticsView = (props) => {
     },[])
 
     useEffect(() => {
-        getTodoStatistics()
+        if(!(user_Id === '')){
+            getTodoStatistics()
+        }
     },[user_Id])
 
     useEffect(() => {
-        // console.log(todoStatistics)
     },[todoStatistics])
 
     const getTodoStatistics = () =>{

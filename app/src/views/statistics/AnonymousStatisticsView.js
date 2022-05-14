@@ -16,6 +16,7 @@ const AnonymousStatisticsView = (props) => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [questionId, setQuestionId] = useState(props.id);
     const [tagLogArr, setTagLogArr] = useState([]);
+    const [reRequestCount, setReRequestCount] = useState(0);
 
     useEffect(() => {
         getStatisticsPreview();
@@ -29,7 +30,8 @@ const AnonymousStatisticsView = (props) => {
             }
         }).then((response) => {
             console.log(response.data);
-            setTagLogArr(response.data);
+            let temp = response.data;
+            setTagLogArr([...temp]); //re-rendering 시 매우 중요함
         }).catch(function (error) {
             console.log(error);
         })
@@ -37,6 +39,11 @@ const AnonymousStatisticsView = (props) => {
 
     useEffect(() => {
         setIsLoaded(true);
+        if(tagLogArr.length==0){
+            // console.log('re-request count : '+reRequestCount);
+            getStatisticsPreview();
+            setReRequestCount(reRequestCount+1);
+        }
     }, [tagLogArr]);
 
     return(

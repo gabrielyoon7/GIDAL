@@ -6,17 +6,16 @@ import { config } from "../../../../../config";
 import TagRankCard from "../../../../components/statistics/TagRankCard";
 
 
-const FriendsStatisticsView = (props) => {
+const PersonalStatPreView = (props) => {
     // 여기에서 조회 데이터를 받은 다음, 아래 TagRankCard에 값을 줘서 렌더링 할 것임
     const data = {
-        type:"friends",
-        title:"친구 통계",
+        type: "private",
+        title: "개인 통계",
     }
     const [user_Id, setUserId] = useState('');
-    const [userFollowing, setUserFollowing] = useState([]);
     const [questionId, setQuestionId] = useState(props.id);
     const [tagLogArr, setTagLogArr] = useState([]);
-    
+
     useEffect(() => {
         try {
             AsyncStorage.getItem('userInfo')
@@ -34,38 +33,15 @@ const FriendsStatisticsView = (props) => {
     }, []);
 
     useEffect(() => {
-        getUserData(user_Id);
-      }, [user_Id]);
-    
-      const getUserData = (user_Id) => {
-        axios.post(config.ip + ':5000/usersRouter/findOne', {
-          data: {
-            user_id: user_Id,
-          }
-        })
-          .then((response) => {
-            const following = response.data[0].following;
-            // console.log('****following****')
-            // console.log(following);
-            let followingArr = [];
-            following.map(user=>followingArr.push(user.user_id));
-            // console.log(followingArr);
-            setUserFollowing(followingArr);
-          }).catch(function (error) {
-            // console.log(error);
-          });
-      };
-          
-      useEffect(() => {
-        getStatisticsPreview(userFollowing);
-      }, [userFollowing]);
+        getStatisticsPreview(user_Id);
+    }, [user_Id]);
 
-      const getStatisticsPreview = (userFollowing) => {
+    const getStatisticsPreview = (user_id) => {
         if (user_Id != '') {
-            axios.post(config.ip + ':5000/tagsRouter/makeFriendsStatistics', {
+            axios.post(config.ip + ':5000/tagsRouter/makePersonalStatistics', {
                 data: {
                     question_id: props.id,
-                    userFollowing:userFollowing,
+                    user_id: user_id,
                 }
             }).then((response) => {
                 // console.log(response.data);
@@ -77,11 +53,11 @@ const FriendsStatisticsView = (props) => {
         }
     }
 
-    return(
+    return (
         <View>
             <TagRankCard data={data} tagLogArr={tagLogArr} />
         </View>
     )
 }
 
-export default FriendsStatisticsView;
+export default PersonalStatPreView;

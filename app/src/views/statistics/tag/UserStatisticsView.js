@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { ScrollView, Text, View } from "react-native"
 import BackButton from "../../../components/common/BackButton";
 import WelcomeCard from "../../../components/statistics/WelcomeCard";
-import AnonymousStatisticsView from "./preview/AnonymousStatisticsView";
-import FriendsStatisticsView from "./preview/FriendsStatisticsView";
-import PersonalStatisticsView from "./preview/PersonalStatisticsView";
+import AnonymousStatPreView from "./preview/AnonymousStatPreView";
+import FriendsStatPreView from "./preview/FriendsStatPreView";
+import PersonalStatPreView from "./preview/PersonalStatPreView";
 
 const UserStatisticsView = (props) => {
     const new_routes = useNavigationState(state => state.routes);
@@ -31,11 +31,11 @@ const UserStatisticsView = (props) => {
             <ScrollView>
             <WelcomeCard title={question} content={id+'에서 데이터를 가져올 것임'}/>
             {/* 개인통계 */}
-            <PersonalStatisticsView id={id}/>
+            <PersonalStatPreView id={id}/>
             {/* 친구통계 */}
-            <FriendsStatisticsView id={id}/>
+            <FriendsStatPreView id={id}/>
             {/* 익명통계 */}
-            <AnonymousStatisticsView id={id}/>
+            <AnonymousStatPreView id={id}/>
             </ScrollView>
         </View>
     )

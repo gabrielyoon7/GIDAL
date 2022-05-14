@@ -6,7 +6,7 @@ import LoadingSpinner from "../../../../components/common/LoadingSpinner";
 import TagRankCard from "../../../../components/statistics/TagRankCard";
 
 
-const AnonymousStatisticsView = (props) => {
+const AnonymousStatPreView = (props) => {
     // 여기에서 조회 데이터를 받은 다음, 아래 TagRankCard에 값을 줘서 렌더링 할 것임
     const data = {
         type:"anonymous",
@@ -58,4 +58,4 @@ const AnonymousStatisticsView = (props) => {
     )
 }
 
-export default AnonymousStatisticsView;
+export default AnonymousStatPreView;

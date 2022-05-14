@@ -4,6 +4,8 @@ import DiaryList from './DiaryList';
 import { Fab, Icon } from "native-base";
 import { AntDesign } from "@expo/vector-icons";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+import { config } from '../../../../config'
 
 
 const DiaryListView = (props) => {
@@ -19,6 +21,30 @@ const DiaryListView = (props) => {
     const [items, setItems] = React.useState([]);
     const [user_Id, setUserId] = React.useState('');
     // console.log(user_Id);
+
+    const getitems = () => {
+        let result = []
+        const year = date.split('-')[0]
+        const month = date.split('-')[1]
+        console.log(year,'-',month)
+        axios.post(config.ip + ':5000/diariesRouter/findOwnPerMonth', {
+            data: {
+                user_id: user_Id,
+                year: year,
+                month: month
+            }
+        }).then((response) => {
+            if (response.data.length > 0) {
+                response.data.forEach((item) => {
+                    result.push(item);
+                });
+            }
+            setItems(result);
+            console.log(result);
+        }).catch(function (error) {
+            console.log(error);
+        })
+    }
 
     React.useEffect(() => {
         try {
@@ -57,8 +83,8 @@ const DiaryListView = (props) => {
 
     return (
         <>
-            <CalendarView selectedDate={date} setSelectedDate={setSelectedDate} markedDates={markedDates} />
-            <DiaryList selectedDate={date} navigation={props.navigation} user_Id={user_Id} items={items} setItems={setItems} />
+            <CalendarView selectedDate={date} setSelectedDate={setSelectedDate} markedDates={markedDates} getitems={getitems} />
+            <DiaryList selectedDate={date} navigation={props.navigation} user_Id={user_Id} items={items} getitems={getitems} />
             <Fab
                 renderInPortal={false}
                 shadow={2}

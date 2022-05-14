@@ -31,10 +31,16 @@ router.post('/findOwnPerMonth', function(req, res, next) {
     const max = req.body.data.year + '-' + req.body.data.month + '-31';
     console.log(min)
     console.log(max)
+    const startDate = new Date(min);
+    const endDate = new Date(max)
     // 전체 데이터 가져오기
-    Diary.find().where('user_id').equals(req.body.data.user_id).sort({date: -1}).then( (diaries) => {
+    Diary.aggregate([
+        { $match: { $and: [{ user_id: req.body.data.user_id }, { date: { $gte: startDate } }, { date: { $lte: endDate }}] } },
+        { $sort: { date: -1 } }
+    ]).then((diaries) => {
+        console.log(diaries)
         res.json(diaries)
-    }).catch( (err) => {
+    }).catch((err) => {
         console.log(err);
         next(err)
     });

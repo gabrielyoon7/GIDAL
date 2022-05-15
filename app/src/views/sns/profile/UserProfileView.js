@@ -31,6 +31,8 @@ export default function UserProfileView(props) {
   const [isLoaded, setIsLoaded] = React.useState(false);
   const new_routes = useNavigationState(state => state.routes);
 
+  const [items, setItems] = React.useState([]);
+
   React.useEffect(() => {
     //초기 프로필 아이디 수신부
     if (isFocused) {
@@ -249,7 +251,7 @@ export default function UserProfileView(props) {
   return (
     <>
       <ProfileHeader />
-      <DiaryList selectedDate={date} navigation={props.navigation} user_Id={user_Id} />
+      <DiaryList selectedDate={date} navigation={props.navigation} user_Id={user_Id} type={'profile'} items={items} setItems={setItems} />
     </>
   )
 }

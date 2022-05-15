@@ -13,6 +13,7 @@ import InputContent from "../../../components/diary/InputContent";
 import PressableTag from '../../../components/tag/interaction/PressableTag';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LogBox } from 'react-native';
+import { useNavigationState } from '@react-navigation/native';
 // LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs();//Ignore all log notifications
 
@@ -26,24 +27,29 @@ const DiaryWriteView = (props) => {
   const [tags, setTags] = useState([]);
   const [ref, setRef] = useState(null);
   const [userId, setUserId] = useState('unknown');
+  
+  const new_routes = useNavigationState(state => state.routes);
 
   React.useEffect(() => {
     try {
-        AsyncStorage.getItem('userInfo')
-            .then(value => {
-                if (value != null) {
-                    const UserInfo = JSON.parse(value);
-                    setUserId(UserInfo[0].user_id);
-                }
-            }
-            )
+      const idx = new_routes.findIndex(r => r.name === "DiaryWrite")
+      const selectedDate = new_routes[idx].params.selectedDate;
+      setDate(selectedDate);
+      AsyncStorage.getItem('userInfo')
+        .then(value => {
+          if (value != null) {
+            const UserInfo = JSON.parse(value);
+            setUserId(UserInfo[0].user_id);
+          }
+        }
+        )
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-})
+  },[]);
 
   const selectTags = (selectedTag) => {
-    const newTag=selectedTag.question_id+'-/-/-'+selectedTag.tag;
+    const newTag = selectedTag.question_id + '-/-/-' + selectedTag.tag;
     // console.log(newTag);
     let newSet = tags;
     if (newSet.includes(newTag)) {
@@ -92,8 +98,8 @@ const DiaryWriteView = (props) => {
       }
     }).then((response) => {
       if (response.data.status === 'success') {
-        axios.post(config.ip+':5000/tagsRouter/save',{
-          data:makeTagLog(response.data.id)
+        axios.post(config.ip + ':5000/tagsRouter/save', {
+          data: makeTagLog(response.data.id)
         }).then((response) => {
           if (response.data.status === 'success') {
             props.navigation.pop();
@@ -108,7 +114,7 @@ const DiaryWriteView = (props) => {
     })
   }
 
-  const makeTagLog = (id) =>{
+  const makeTagLog = (id) => {
     let tagLogData = [];
     tags.forEach(element => {
       const question_id = element.split('-/-/-')[0];
@@ -116,7 +122,7 @@ const DiaryWriteView = (props) => {
       const diary_id = id;
       const date = Date;
       const tag = element.split('-/-/-')[1];
-      tagLogData.push({question_id:question_id,user_id:user_id,diary_id:diary_id,date:date,tag:tag});
+      tagLogData.push({ question_id: question_id, user_id: user_id, diary_id: diary_id, date: date, tag: tag });
     });
     return tagLogData;
   }
@@ -134,28 +140,28 @@ const DiaryWriteView = (props) => {
       </Box>
     )
   }
-  
+
   const renderItem = ({ item }) => {
     const elements = item.split('-/-/-');
     const question_id = elements[0];
     const tag = elements[1];
     const temp_item = {
-      _id : question_id,
-      tag : tag,
+      _id: question_id,
+      tag: tag,
     }
     return (
       // <PressableTag key={item} item={temp_item} tag={tag} selectTags={selectTags} styles={buttonStyles} />
       <View style={buttonStyles.btnView}>
-      <Pressable style={buttonStyles.button} >
-        <Text>{tag}</Text>
-      </Pressable>
-    </View>
+        <Pressable style={buttonStyles.button} >
+          <Text>{tag}</Text>
+        </Pressable>
+      </View>
     );
   };
 
   return (
     <>
-      <View style={{ backgroundColor: 'white', flex:1 }}>
+      <View style={{ backgroundColor: 'white', flex: 1 }}>
         <WriteDiaryHeader />
         <Divider />
         <ScrollView style={{ backgroundColor: 'white' }}>
@@ -175,7 +181,6 @@ const DiaryWriteView = (props) => {
           </Box>
           <Divider />
           <InputTitle setTitle={setTitle} Title={Title} />
-          {/* <Divider /> */}
           <InputContent setContent={setContent} content={Content} />
           <DateTimePickerModal
             isVisible={isDatePickerVisible}

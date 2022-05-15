@@ -12,6 +12,7 @@ import TodoStatisticsView from '../../views/statistics/todo/TodoStatisticsView';
 import TodoTest2View from '../../views/test/TodoTest2View';
 import UserStatPreView from '../../views/statistics/tag/UserStatPreView';
 import UserStatDetailView from '../../views/statistics/tag/detail/UserStatDetailView';
+import DiaryWriteView from '../../views/diary/write/DiaryWriteView';
 
 const UserScreen = ({ navigation }) => {
   return (
@@ -34,6 +35,12 @@ const TestScreen = ({ navigation }) => {
 const DiaryReadScreen = ({ navigation }) => {
   return (
     <DiaryReadView navigation={navigation} />
+  );
+}
+
+const DiaryWriteScreen = ({ navigation }) => {
+  return (
+    <DiaryWriteView navigation={navigation} />
   );
 }
 
@@ -104,6 +111,13 @@ const IndexRoute = () => {
       <Stack.Screen
         name="DiaryRead"
         component={DiaryReadScreen}
+        options={{
+          cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
+        }}
+      />
+      <Stack.Screen
+        name="DiaryWrite"
+        component={DiaryWriteScreen}
         options={{
           cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
         }}

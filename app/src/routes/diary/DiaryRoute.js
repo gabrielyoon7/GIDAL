@@ -44,12 +44,12 @@ const DiaryListScreen = ({ route, navigation }) => {
   );
 }
 
-const DiaryWriteScreen = ({ route, navigation }) => {
-  const { selectedDate } = route.params;
-  return (
-    <DiaryWriteView navigation={navigation} selectedDate={selectedDate} />
-  );
-}
+// const DiaryWriteScreen = ({ route, navigation }) => {
+//   const { selectedDate } = route.params;
+//   return (
+//     <DiaryWriteView navigation={navigation} selectedDate={selectedDate} />
+//   );
+// }
 
 // const DiaryReadScreen = ({ navigation }) => {
 //     return (
@@ -78,14 +78,14 @@ const DiaryRoute = () => {
              initialParams={{ selectedDate: selectedDate }} 
             />
             {/* <RootStack.Screen name="DiaryRead" component={DiaryReadScreen} initialParams={{ selectedDate: selectedDate }} /> */}
-            <RootStack.Screen
+            {/* <RootStack.Screen
              name="DiaryWrite" 
              component={DiaryWriteScreen} 
              initialParams={{ selectedDate: selectedDate }} 
-            //  options={{
-            //   cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
-            // }}
-            />
+             options={{
+              cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
+            }}
+            /> */}
             <RootStack.Screen 
              name="DiaryModify" 
              component={DiaryModifyScreen} 

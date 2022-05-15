@@ -3,9 +3,9 @@ import { View, Text, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import DiaryListView from '../../views/diary/list/DiaryListView';
-import DiaryReadView from '../../views/diary/read/DiaryReadView';
-import DiaryWriteView from '../../views/diary/write/DiaryWriteView';
-import DiaryModifyView from '../../views/diary/modify/DiaryModifyView';
+// import DiaryReadView from '../../views/diary/read/DiaryReadView';
+// import DiaryWriteView from '../../views/diary/write/DiaryWriteView';
+// import DiaryModifyView from '../../views/diary/modify/DiaryModifyView';
 import { CardStyleInterpolators } from '@react-navigation/stack';
 
 
@@ -57,11 +57,11 @@ const DiaryListScreen = ({ route, navigation }) => {
 //     );
 //   }
   
-  const DiaryModifyScreen = ({ navigation }) => {
-    return (
-      <DiaryModifyView navigation={navigation} />
-    );
-  }
+  // const DiaryModifyScreen = ({ navigation }) => {
+  //   return (
+  //     <DiaryModifyView navigation={navigation} />
+  //   );
+  // }
 
 const RootStack = createNativeStackNavigator();
 
@@ -86,11 +86,11 @@ const DiaryRoute = () => {
               cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
             }}
             /> */}
-            <RootStack.Screen 
+            {/* <RootStack.Screen 
              name="DiaryModify" 
              component={DiaryModifyScreen} 
              initialParams={{ selectedDate: selectedDate }} 
-            />
+            /> */}
         {/* </RootStack.Group> */}
     </RootStack.Navigator>
   );

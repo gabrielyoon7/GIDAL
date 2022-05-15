@@ -50,7 +50,7 @@ const AnonymousStatPreView = (props) => {
         <View>
             {isLoaded
             ?
-            <TagRankCard data={data} tagLogArr={tagLogArr} />
+            <TagRankCard data={data} tagLogArr={tagLogArr} navigation={props.navigation}/>
             :
             <LoadingSpinner />
             }

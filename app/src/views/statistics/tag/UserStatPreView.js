@@ -7,7 +7,7 @@ import AnonymousStatPreView from "./preview/AnonymousStatPreView";
 import FriendsStatPreView from "./preview/FriendsStatPreView";
 import PersonalStatPreView from "./preview/PersonalStatPreView";
 
-const UserStatisticsView = (props) => {
+const UserStatPreView = (props) => {
     const new_routes = useNavigationState(state => state.routes);
     const [id, setId] = useState('hihi');
     const [question, setQuestion] = useState('hihi2');
@@ -15,7 +15,7 @@ const UserStatisticsView = (props) => {
     useEffect(() => {
         //초기 질문 id 수신부
         try {
-            const idx = new_routes.findIndex(r => r.name === "UserStatistics")
+            const idx = new_routes.findIndex(r => r.name === "UserStatisticsPreview")
             setId(new_routes[idx].params.id);
             setQuestion(new_routes[idx].params.question)
             // 여기에서 백엔드로 통계 자료 요청해야함
@@ -29,16 +29,16 @@ const UserStatisticsView = (props) => {
         <View style={{ flex: 1 }}>
             <BackButton navigation={props.navigation} />
             <ScrollView>
-            <WelcomeCard title={question} content={id+'에서 데이터를 가져올 것임'}/>
-            {/* 개인통계 */}
-            <PersonalStatPreView id={id}/>
-            {/* 친구통계 */}
-            <FriendsStatPreView id={id}/>
-            {/* 익명통계 */}
-            <AnonymousStatPreView id={id}/>
+                <WelcomeCard title={question} content={id + '에서 데이터를 가져올 것임'} />
+                {/* 개인통계 */}
+                <PersonalStatPreView id={id} navigation={props.navigation} />
+                {/* 친구통계 */}
+                <FriendsStatPreView id={id} navigation={props.navigation} />
+                {/* 익명통계 */}
+                <AnonymousStatPreView id={id} navigation={props.navigation} />
             </ScrollView>
         </View>
     )
 }
 
-export default UserStatisticsView;
+export default UserStatPreView;

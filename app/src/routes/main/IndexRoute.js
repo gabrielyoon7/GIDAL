@@ -10,7 +10,8 @@ import ProfileRoute from '../sns/ProfileRoute';
 import StoreRoute from '../store/StoreRoute';
 import TodoStatisticsView from '../../views/statistics/todo/TodoStatisticsView';
 import TodoTest2View from '../../views/test/TodoTest2View';
-import UserStatisticsView from '../../views/statistics/tag/UserStatisticsView';
+import UserStatPreView from '../../views/statistics/tag/UserStatPreView';
+import UserStatDetailView from '../../views/statistics/tag/detail/UserStatDetailView';
 
 const UserScreen = ({ navigation }) => {
   return (
@@ -48,9 +49,15 @@ const ProfileScreen = ({ navigation }) => {
   )
 }
 
-const UserStatisticsScreen = ({ navigation }) => {
+const UserStatisticsPreviewScreen = ({ navigation }) => {
   return (
-    <UserStatisticsView navigation={navigation} />
+    <UserStatPreView navigation={navigation} />
+  )
+}
+
+const UserStatisticsDetailScreen = ({ navigation }) => {
+  return (
+    <UserStatDetailView navigation={navigation} />
   )
 }
 
@@ -116,10 +123,17 @@ const IndexRoute = () => {
         }}
       />
       <Stack.Screen
-        name="UserStatistics"
-        component={UserStatisticsScreen}
+        name="UserStatisticsPreview"
+        component={UserStatisticsPreviewScreen}
         options={{
           cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
+        }}
+      />
+      <Stack.Screen
+        name="UserStatisticsDetail"
+        component={UserStatisticsDetailScreen}
+        options={{
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
         }}
       />
       <Stack.Screen

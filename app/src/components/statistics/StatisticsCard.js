@@ -7,7 +7,7 @@ const StatisticsCard = (props) => {
         <TouchableOpacity
             onPress={
                 () => {
-                    props.navigation.navigate('UserStatistics', {
+                    props.navigation.navigate('UserStatisticsPreview', {
                         id: props.id,
                         question : props.question,
                     })

@@ -55,7 +55,7 @@ const PersonalStatPreView = (props) => {
 
     return (
         <View>
-            <TagRankCard data={data} tagLogArr={tagLogArr} />
+            <TagRankCard data={data} tagLogArr={tagLogArr} navigation={props.navigation}/>
         </View>
     )
 }

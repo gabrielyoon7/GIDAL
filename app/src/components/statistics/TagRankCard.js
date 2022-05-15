@@ -28,7 +28,14 @@ const TagRankCard = (props) => {
                         {props.data.title}
                     </Heading>
                     <Spacer />
-                    <TouchableOpacity onPress={() => console.log(props.tagLogArr)}>
+                    <TouchableOpacity
+                     onPress={
+                        () => {
+                            // console.log(props);
+                            props.navigation.navigate('UserStatisticsDetail')
+                        }
+                     }
+                    >
                         <HStack>
                             <Text>자세히 보기</Text>
                         </HStack>

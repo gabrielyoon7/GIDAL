@@ -11,27 +11,24 @@ const DiaryList = (props, navigation) => {
     const user_id = props.user_Id;
     const isFocused = useIsFocused(); // isFoucesd Define
     const [isLoaded, setIsLoaded] = useState(false);
-    // const getitems = () => {
-    //     let result = []
-    //     const year = props.selectedDate.split('-')[0]
-    //     const month = props.selectedDate.split('-')[1]
-    //     axios.post(config.ip + ':5000/diariesRouter/findOwnPerMonth', {
-    //         data: {
-    //             user_id: user_id,
-    //             year: year,
-    //             month: month
-    //         }
-    //     }).then((response) => {
-    //         if (response.data.length > 0) {
-    //             response.data.forEach((item) => {
-    //                 result.push(item);
-    //             });
-    //         }
-    //         props.setItems(result);
-    //     }).catch(function (error) {
-    //         console.log(error);
-    //     })
-    // }
+
+    const getItems = () => {
+        let result = []
+        axios.post(config.ip + ':5000/diariesRouter/findOwn', {
+            data: {
+                user_id: user_id
+            }
+        }).then((response) => {
+            if (response.data.length > 0) {
+                response.data.forEach((item) => {
+                    result.push(item);
+                });
+            }
+            props.setItems(result);
+        }).catch(function (error) {
+            console.log(error);
+        })
+    }
 
     const [data, setData] = useState(0);
     const [selectedId, setSelectedId] = useState(null);
@@ -39,7 +36,11 @@ const DiaryList = (props, navigation) => {
 
     //첫 렌더링에만 호출됨
     useEffect(() => {
-        props.getitems();
+        if(props.type === 'calendar'){
+            props.getitems();
+        } else {
+            getItems();
+        }
         setIsLoaded(true);
     }, [isFocused, user_id]);
 

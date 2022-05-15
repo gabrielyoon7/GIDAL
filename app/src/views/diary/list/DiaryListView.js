@@ -83,7 +83,7 @@ const DiaryListView = (props) => {
     return (
         <>
             <CalendarView selectedDate={date} setSelectedDate={setSelectedDate} markedDates={markedDates} getitems={getitems} />
-            <DiaryList selectedDate={date} navigation={props.navigation} user_Id={user_Id} items={items} getitems={getitems} />
+            <DiaryList selectedDate={date} navigation={props.navigation} user_Id={user_Id} items={items} getitems={getitems} type={'calendar'} />
             <Fab
                 renderInPortal={false}
                 shadow={2}

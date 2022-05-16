@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Dimensions,StyleSheet, StatusBar,Text, TextInput, View, TouchableOpacity, SafeAreaView, ScrollView, Image, Alert, Modal, Pressable, ImageBackground, FlatList } from 'react-native';
+import { Dimensions, StyleSheet, StatusBar, Text, TextInput, View, TouchableOpacity, SafeAreaView, ScrollView, Image, Alert, Modal, Pressable, ImageBackground, FlatList } from 'react-native';
 import SearchBar from "react-native-dynamic-search-bar";
 import axios from 'axios'
 import { config } from '../../../../config'
@@ -8,7 +8,7 @@ import { Button, Center } from 'native-base';
 import BackButton from '../../../components/common/BackButton';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { CommonActions, useIsFocused, useNavigationState } from "@react-navigation/native";
-import { TabView, SceneMap,TabBar  } from 'react-native-tab-view';
+import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 const Tab = createBottomTabNavigator();
 
 
@@ -55,6 +55,9 @@ export default function FollowListView(props) {
   }, [])
 
   useEffect(() => {
+    if(user_Id === ''){
+      return;
+    }
     axios.post(config.ip + ':5000/usersRouter/findOne/', {
       data: {
         user_id: props.user_id,
@@ -71,13 +74,18 @@ export default function FollowListView(props) {
       }).catch(function (error) {
         console.log(error);
       });
-  }, []);
+  }, [user_Id]);
 
 
   useEffect(() => {
-    init_page == 'Following' ? init_page = followings : init_page = followers;
-    setFilteredDataSource(init_page);
-    setMasterDataSource(init_page);
+    let data = followers;
+    // init_page == 'Following' ? data = followings : data = followers;
+    if(init_page === 'Following'){
+      data = followings;
+      setIndex(1);
+    }
+    setFilteredDataSource(data);
+    setMasterDataSource(data);
   }, [followings, followers]);
 
   const searchFilter = (text) => {
@@ -102,7 +110,7 @@ export default function FollowListView(props) {
     // props.navigation.navigate('UserProfile', {
     //   user_id: item.user_id
     // })
-    props.navigation.dispatch( CommonActions.navigate({ name: 'UserProfile', params: { user_id: item.user_id, }, }) )
+    props.navigation.dispatch(CommonActions.navigate({ name: 'UserProfile', params: { user_id: item.user_id, }, }))
 
     // if (props.user_id === user_Id) {
     //   props.navigation.navigate('DmRead', {
@@ -121,14 +129,14 @@ export default function FollowListView(props) {
         {/* <FeedSearchView/> */}
         <BackButton navigation={props.navigation} />
         <SearchBar
-         style={styles.searchbar} 
+          style={styles.searchbar}
           round
           searchIcon={{ size: 24 }}
           onChangeText={(text) => searchFilter(text)}
           onClear={(text) => searchFilter('')}
           placeholder="검색어를 입력해주세요"
           value={search}
-        
+
         />
         <View style={styles.body} >
           <FlatList
@@ -157,7 +165,7 @@ export default function FollowListView(props) {
     if (isFocused) {
       // the screen is currently focused
       // your code here
-      console.log('Following is focused');
+      // console.log('Following is focused');
     }
     return (
       <Followings navigation={props.navigation} />
@@ -170,7 +178,7 @@ export default function FollowListView(props) {
     if (isFocused) {
       // the screen is currently focused
       // your code here
-      console.log('Follower is focused');
+      // console.log('Follower is focused');
     }
     return (
       <Followings navigation={props.navigation} />
@@ -178,33 +186,33 @@ export default function FollowListView(props) {
   }
   const FirstRoute = () => (
     <>
- 
-    <FollowerScreen/>
-    
+
+      <FollowerScreen />
+
     </>
   );
-  
+
   const SecondRoute = () => (
     <>
-    
-    <FollowingScreen />
+
+      <FollowingScreen />
     </>
-    
+
   );
   const initialLayout = { width: Dimensions.get('window').width };
 
-const renderScene = SceneMap({
-  first: FirstRoute,
-  second: SecondRoute,
-});
+  const renderScene = SceneMap({
+    first: FirstRoute,
+    second: SecondRoute,
+  });
 
-const renderTabBar = props => (
-  <TabBar
-    {...props}
-    indicatorStyle={{ backgroundColor: 'white' }}
-    style={{ backgroundColor: '#27ae60' }}
-  />
-);
+  const renderTabBar = props => (
+    <TabBar
+      {...props}
+      indicatorStyle={{ backgroundColor: 'white' }}
+      style={{ backgroundColor: '#27ae60' }}
+    />
+  );
   //     const [following, setFollowing] = useState();
   //     const [profileImg, setProfileImg] = useState();
   //     const [date, setSelectedDate] = React.useState(props.selectedDate);    
@@ -226,18 +234,30 @@ const renderTabBar = props => (
   //       console.log(error);
   //     });
   //   },[])
+
+  const setPage = (id) => {
+    // if(init_page === 'Followeing'){
+    //   setIndex(1)
+    // }
+    if(id === 1){
+      setFilteredDataSource(followings);
+    }else{
+      setFilteredDataSource(followers);
+    }
+    setIndex(id);
+  }
   return (
     <>
       <TabView
-      tabBarPosition='bottom'
-      navigationState={{ index, routes }}
-      renderScene={renderScene}
-      onIndexChange={setIndex}
-      initialLayout={initialLayout}
-      renderTabBar={renderTabBar}
-      style={styles.container}
-      
-    />
+        tabBarPosition='bottom'
+        navigationState={{ index, routes }}
+        renderScene={renderScene}
+        onIndexChange={(id) => {setPage(id)}}
+        initialLayout={initialLayout}
+        renderTabBar={renderTabBar}
+        style={styles.container}
+
+      />
 
       {/* <Tab.Navigator
         screenOptions={{ headerShown: false }}
@@ -274,7 +294,7 @@ const renderTabBar = props => (
     //   <Button onPress={() => { setFilteredDataSource(followers); setMasterDataSource(followers); }}>follower</Button>
     //   <Followings navigation={props.navigation} />
     // </View>
-   
+
   )
 }
 
@@ -305,7 +325,7 @@ const styles = StyleSheet.create({
   },
   body: {
     padding: 15,
-    
+
   },
   flatListStyle: {
     // backgroundColor: '#fff',
@@ -339,15 +359,15 @@ const styles = StyleSheet.create({
     margin: 5,
     backgroundColor: 'white'
   },
-  searchbar:{
-    margin :11,
-    borderWidth:1,
-    borderColor:'gray'
-  
+  searchbar: {
+    margin: 11,
+    borderWidth: 1,
+    borderColor: 'gray'
+
   },
   container: {
     marginTop: 5,
-    backgroundColor:"white"
+    backgroundColor: "white"
   },
- 
+
 });

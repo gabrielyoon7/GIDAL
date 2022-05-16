@@ -32,7 +32,10 @@ const TagRankCard = (props) => {
                      onPress={
                         () => {
                             // console.log(props);
-                            props.navigation.navigate('UserStatisticsDetail')
+                            props.navigation.navigate('UserStatisticsDetail',{
+                                data:props.data,
+                                tagLogArr:props.tagLogArr,
+                            })
                         }
                      }
                     >

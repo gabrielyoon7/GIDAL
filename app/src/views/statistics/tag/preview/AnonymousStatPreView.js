@@ -29,7 +29,7 @@ const AnonymousStatPreView = (props) => {
                 // user_id: user_id,
             }
         }).then((response) => {
-            console.log(response.data);
+            // console.log(response.data);
             let temp = response.data;
             setTagLogArr([...temp]); //re-rendering 시 매우 중요함
         }).catch(function (error) {

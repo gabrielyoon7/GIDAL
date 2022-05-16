@@ -11,7 +11,7 @@ import StoreRoute from '../store/StoreRoute';
 import TodoStatisticsView from '../../views/statistics/todo/TodoStatisticsView';
 import TodoTest2View from '../../views/test/TodoTest2View';
 import UserStatPreView from '../../views/statistics/tag/UserStatPreView';
-import UserStatDetailView from '../../views/statistics/tag/detail/UserStatDetailView';
+import UserStatDetailView from '../../views/statistics/tag/UserStatDetailView';
 import DiaryWriteView from '../../views/diary/write/DiaryWriteView';
 import DiaryModifyView from '../../views/diary/modify/DiaryModifyView';
 

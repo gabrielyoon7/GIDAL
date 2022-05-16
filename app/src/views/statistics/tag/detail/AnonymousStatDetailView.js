@@ -8,7 +8,10 @@ const AnonymousStatDetailView = (props) => {
 
     return(
         <View>
-            <Text>잉명</Text>
+            <Text>{props.data.title}</Text>
+            {props.tagLogArr.map((tag)=>(
+                <Text>{tag._id}{tag.count}</Text>
+            ))}
         </View>
     )
 }

@@ -32,7 +32,7 @@ const FancyDiaryCard = ({ item: diary, onPress, backgroundColor, textColor }) =>
                                 transform: [{
                                     scale: isPressed ? 0.96 : 1
                                 }]
-                            }, styles.diary}
+                            }}
                         >
                             <HStack alignItems="center">
                                 <Badge colorScheme="green" _text={{

@@ -22,6 +22,7 @@ const TodoTest2View = (props) => {
     const [backupData, setBackupData] = useState([]);
     const [sortedDate, setSortedDate] = useState([]);
     const [dateResult, setDateResult] = useState([]);
+    const [month, setMonth] = useState(new Date().getMonth()+1)
 
     useEffect(() => {
         getItems();
@@ -84,6 +85,8 @@ const TodoTest2View = (props) => {
 
     const renderItem = ({ item }) => {
         return (
+            <>
+            {item.date.split('-')[1] == month &&
             <Box alignItems="center" py="1" px="1">
             <Pressable>
                 {({
@@ -127,11 +130,19 @@ const TodoTest2View = (props) => {
                             <LoadingSpinner />
                             }
                                 </Box>
+                        
                             )
                 }}
             </Pressable>
         </Box>
+            }
+            </>
+            
         );
+    };
+
+      const submitHandler = (value) => {
+        setMonth(value)
     };
 
         return (
@@ -150,7 +161,7 @@ const TodoTest2View = (props) => {
                     }}
                     style ={{margin:12, borderWidth:1,borderColor:'gray'}}
                 />
-                <MonthSelector/>
+                <MonthSelector submitHandler={submitHandler} />
                     <FlatList
                     data={dateResult}
                     renderItem={renderItem}

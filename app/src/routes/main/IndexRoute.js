@@ -9,7 +9,7 @@ import UserProfileView from '../../views/sns/profile/UserProfileView';
 import ProfileRoute from '../sns/ProfileRoute';
 import StoreRoute from '../store/StoreRoute';
 import TodoStatisticsView from '../../views/statistics/todo/TodoStatisticsView';
-import TodoTest2View from '../../views/test/TodoTest2View';
+import TodoDetailView from '../../views/todo/Todo/TodoDetailView';
 import UserStatPreView from '../../views/statistics/tag/UserStatPreView';
 import UserStatDetailView from '../../views/statistics/tag/UserStatDetailView';
 import DiaryWriteView from '../../views/diary/write/DiaryWriteView';
@@ -91,7 +91,7 @@ const TodoCalendarScreen = ({ navigation, route }) => {
   const { user_id } = route.params;
   const { pickedDate } = route.params;
   return (
-    <TodoTest2View navigation={navigation} user_id={user_id} pickedDate = {pickedDate}/>
+    <TodoDetailView navigation={navigation} user_id={user_id} pickedDate = {pickedDate}/>
   )
 }
 

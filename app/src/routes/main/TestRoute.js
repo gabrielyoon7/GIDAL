@@ -10,7 +10,7 @@ import SliderTestView from '../../views/test/SliderTestView';
 import RichTextTestView from '../../views/test/RichTextTestView';
 import DiaryWriteTestVeiw from '../../views/test/DiaryWriteTestVeiw';
 import TodoTestView from '../../views/test/TodoTest/TodoTestView'
-import TodoTest2View from '../../views/test/TodoTest2View';
+import TodoTest2View from '../../views/test/TodoDetailView';
 
   
 const TestMainScreen = (props) => {

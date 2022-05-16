@@ -1,34 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Calendar } from 'react-native-calendars';
-import { Button, View, Text, SafeAreaView, FlatList, StyleSheet, Pressable, Alert } from 'react-native';
-import { Spacer } from 'native-base';
+import { Button, View, SafeAreaView, FlatList, StyleSheet, Alert } from 'react-native';
+import { Badge, Box, Divider, Flex, HStack, Pressable, Spacer, Text, } from 'native-base';
 import axios from 'axios';
 import { config } from '../../../config'
 import BackButton from '../../components/common/BackButton';
 import { useIsFocused } from '@react-navigation/native';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import FancyTodoCard from '../../components/todo/FancyTodoCard';
-
-// const DATA = [
-//     {
-//       id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-//       title: 'First Item',
-//     },
-//     {
-//       id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-//       title: 'Second Item',
-//     },
-//     {
-//       id: '58694a0f-3da1-471f-bd96-145571e29d72',
-//       title: 'Third Item',
-//     },
-//   ];
-  
-//   const Item = ({ title }) => (
-//     <View style={styles.item}>
-//       <Text style={styles.title}>{title}</Text>
-//     </View>
-//   );
+import SearchBar from "react-native-dynamic-search-bar";
+import TodoCard from '../../components/todo/TodoCard';
 
 const TodoTest2View = (props) => {
     // console.log(props.pickedDate);
@@ -37,85 +18,143 @@ const TodoTest2View = (props) => {
     const isFocused = useIsFocused();
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState([]);
+    const [backupData, setBackupData] = useState([]);
+    const [sortedDate, setSortedDate] = useState([]);
+    const [dateResult, setDateResult] = useState([]);
 
     useEffect(() => {
         getItems();
       }, [user_id, isFocused]);
 
     const getItems = () => {
-        let result = []
+        let dateList = []
+        let dateResult = []
         axios.post(config.ip + ':5000/todoRouter/findOwn', {
             data: {
                 user_id: user_id
             }
         }).then((response) => {
-            // if (response.data.length > 0) {
-            //     response.data.forEach((item) => {
-            //         result.push(item);
-            //     });
-            // }
-            setItems(response.data[0].to_do_list);
+            let result = response.data[0].to_do_list
+            .sort((a,b) => new Date(a.date) - new Date(b.date));
+            response.data[0].to_do_list.forEach((item) => {
+                dateList.push(item.date)
+            });
+            setItems(result);
+            setBackupData(result);
+            let sortDate = dateList.sort().filter(function(item, idx, array){
+                return !idx || item != array[idx-1];
+            })
+            for (let i=0; i<sortDate.length; i++){
+                dateResult.push({
+                    key: i,
+                    date: sortDate[i]
+                })
+            }
+            console.log(dateResult);
+            setDateResult(dateResult)
+            // const obj = Object.assign({}, sortDate);
+            // console.log(obj);
+            setSortedDate(dateList)
             setIsLoaded(true)
         }).catch(function (error) {
             console.log(error);
         })
     }
-// console.log(items);
-    const [data, setData] = useState(0);
-    const [ref, setRef] = useState(null);
 
-    useEffect(() => {
-        let index = items.findIndex((item, idx) => {
-            return item.date.substr(0, 10) === pickedDate
+    const filterList = (text) => {
+        let newData = backupData;
+        newData = backupData.filter((item) => {
+            //통합 검색을 위한 처리 시작
+            let intergratedData = item.date+item.value
+            //통합 검색을 위한 처리 끝
+            const itemData = intergratedData.toLowerCase();
+            const textData = text.toLowerCase();
+            return itemData.indexOf(textData) > -1;
         })
-
-        setData(index);
-        if (ref === null || items.length < 1) {
-            return;
-        }
-        if (index <= 0) {
-            ref.scrollToIndex({ animated: true, index: 0, viewPosition: 0 });
-        } else {
-            ref.scrollToIndex({ animated: true, index: index, viewPosition: 0 });
-        }
-    }, []);
+        setItems(newData);
+    }
     
-    const renderItem = ({ item }) => (
+    const insideRenderItem = ({ item }) => (
         <FancyTodoCard
                 item={item}
-                // 해당 일기로 넘어가기 구현
                 textColor="black"
             />
       );
 
+    const renderItem = ({ item }) => {
+        return (
+            <Box alignItems="center" py="1" px="1">
+            <Pressable>
+                {({
+                    isHovered,
+                    isFocused,
+                    isPressed
+                }) => {
+                    return (
+                        <Box
+                            maxW="96%"
+                            minW="96%"
+                            borderWidth="1"
+                            borderColor="coolGray.300"
+                            shadow="3"
+                            bg={isPressed ? "coolGray.200" : isHovered ? "coolGray.200" : "coolGray.100"}
+                            p="5"
+                            rounded="8"
+                            style={{
+                                transform: [{
+                                    scale: isPressed ? 0.96 : 1
+                                }]
+                            }}
+                        >
+                                <Text fontSize={10} color="coolGray.800">
+                                    {item.date}
+                                </Text>
+                            <Divider />
+                            {isLoaded ? 
+                            <FlatList
+                                onScrollToIndexFailed={info => {
+                                const wait = new Promise(resolve => setTimeout(resolve, 700));
+                                wait.then(() => {
+                                    fListRef.current?.scrollToIndex({ index: info.index, animated: true / false });
+                                });
+                            }}
+                            data={items.filter(data=> data.date==item.date)}
+                            renderItem={insideRenderItem}
+                            keyExtractor={(item) => item._id}
+                            />
+                            :
+                            <LoadingSpinner />
+                            }
+                                </Box>
+                            )
+                }}
+            </Pressable>
+        </Box>
+        );
+    };
+
         return (
             <>
-                    {/* <Calendar
-                        markedDates={markedDates}
-                    /> */}
-                    <View style={styles.container}>
+                <View style={styles.container}>
                     <BackButton navigation={props.navigation} />
-                    <Spacer />
-                    {isLoaded
-                    ?
+                    <SearchBar
+                    placeholder="검색어를 입력하세요."
+                    // onPress={() => alert("onPress")}
+                    onChangeText={(text) => {
+                        console.log(text)
+                        filterList(text);
+                    }}
+                    onClearPress={() => {
+                        filterList("");
+                    }}
+                    style ={{margin:12, borderWidth:1,borderColor:'gray'}}
+                />
                     <FlatList
-                        onScrollToIndexFailed={info => {
-                        const wait = new Promise(resolve => setTimeout(resolve, 700));
-                        wait.then(() => {
-                            fListRef.current?.scrollToIndex({ index: info.index, animated: true / false });
-                        });
-                    }}
-                    data={items}
-                    ref={(ref) => {
-                        setRef(ref);
-                    }}
+                    data={dateResult}
                     renderItem={renderItem}
-                    keyExtractor={(item) => item._id}
-                    />
-                    :
-                    <LoadingSpinner />
-                    }
-        </View>
+                    keyExtractor={item => item.key}
+                />
+                </View>
             </>
          )
 }

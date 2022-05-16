@@ -50,6 +50,10 @@ const diarySchema = mongoose.Schema({
     time_sleep: {
         type : String,
         // required: true
+    },
+    likers: {
+        type: Array,
+        likers: [{user_id: String}]
     }
 })
 

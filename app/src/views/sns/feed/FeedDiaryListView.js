@@ -5,11 +5,23 @@ import axios from 'axios';
 import { config } from '../../../../config'
 import FancyDiaryCard from '../../../components/diary/FancyDiaryCard';
 import SearchBar from "react-native-dynamic-search-bar";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const FeedDiaryList = (props, navigation) => {
     const [items, setItems] = useState([]);
     const [backupData, setBackupData] = useState([]);
+    const [userId, setUserId] = useState('');
     const isFocused = useIsFocused(); // isFoucesd Define
+
+    useEffect(() => {
+        AsyncStorage.getItem('userInfo')
+            .then(value => {
+                if (value != null) {
+                    const UserInfo = JSON.parse(value);
+                    setUserId(UserInfo[0].user_id);
+                }
+            })
+    },[])
 
     const getitems = () => {
         let result = []
@@ -81,6 +93,7 @@ const FeedDiaryList = (props, navigation) => {
                     () => {
                         props.navigation.navigate('DiaryRead', {
                             diary: item,
+                            user_id: userId,
                         })
                     }
                 }

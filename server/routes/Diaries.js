@@ -128,7 +128,7 @@ router.post('/modify', function(req, res, next) {
 
 router.post('/modifyLikeCount', function(req, res, next) {
     const diaryInfo = req.body.data;
-    console.log(diaryInfo);
+    console.log(diaryInfo.likes);
     // 데이터 수정
     Diary.findOneAndUpdate({_id: diaryInfo._id}, {$set:{likes:diaryInfo.likes}}, function(error, data){
         console.log('--- UPDATE ---');

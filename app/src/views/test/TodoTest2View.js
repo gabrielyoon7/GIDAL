@@ -10,6 +10,7 @@ import LoadingSpinner from '../../components/common/LoadingSpinner';
 import FancyTodoCard from '../../components/todo/FancyTodoCard';
 import SearchBar from "react-native-dynamic-search-bar";
 import TodoCard from '../../components/todo/TodoCard';
+import MonthSelector from '../../components/todo/MonthSelector';
 
 const TodoTest2View = (props) => {
     // console.log(props.pickedDate);
@@ -149,6 +150,7 @@ const TodoTest2View = (props) => {
                     }}
                     style ={{margin:12, borderWidth:1,borderColor:'gray'}}
                 />
+                <MonthSelector/>
                     <FlatList
                     data={dateResult}
                     renderItem={renderItem}

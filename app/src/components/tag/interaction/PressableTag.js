@@ -37,10 +37,10 @@ const buttonStyles = StyleSheet.create({
     width: 80
   },
   buttonColorNormal:{
-    backgroundColor: '#78e08f', //태그버튼색 변경
+    backgroundColor: '#aed685', //태그버튼색 변경
   },
   buttonColorPressed:{
-    backgroundColor: 'yellow', //태그버튼색 변경
+    backgroundColor: '#27ae60', //태그버튼색 변경
   },
   btnView: {
     borderWidth: StyleSheet.hairlineWidth,

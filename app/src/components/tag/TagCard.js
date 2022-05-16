@@ -33,7 +33,7 @@ const TagCard = (props) => {
     };
     const card_type = type[props.item.type];
     return (
-        <View style={{ backgroundColor: '#b8e994', marginVertical: 10, borderRadius: 10 }}>
+        <View style={{ marginVertical: 10, borderRadius: 10, borderColor: '#cacbcf', borderWidth:1 }}>
             <Text style={{ fontSize: 20, fontWeight: 'bold', margin: 10, textAlign: 'center', }} onPress={() => onPressFunction(props.item.type)}>{props.item.question}</Text>
             <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                 <View style={styles.lineView} />
@@ -48,7 +48,7 @@ export default TagCard;
 const styles = StyleSheet.create({
 
     lineView: {
-      borderBottomColor: 'black',
+      borderBottomColor: '#a9a9a9',
       borderBottomWidth: 2,
       width: '90%',
     },

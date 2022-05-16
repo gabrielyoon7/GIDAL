@@ -87,9 +87,11 @@ const TodoStatisticsScreen = ({ navigation }) => {
   )
 }
 
-const TodoCalendarScreen = ({ navigation }) => {
+const TodoCalendarScreen = ({ navigation, route }) => {
+  const { user_id } = route.params;
+  const { pickedDate } = route.params;
   return (
-    <TodoTest2View navigation={navigation} />
+    <TodoTest2View navigation={navigation} user_id={user_id} pickedDate = {pickedDate}/>
   )
 }
 

@@ -203,7 +203,10 @@ const Todo = ({props}) => {
         <HeaderText>To-Do</HeaderText>
         <Text></Text>
         <HeaderList onPress={() => showDatePicker()}>
-        {date} <Icon name="list" size={30} color="#900" onPress={() => props.navigation.navigate('TodoCalendar')} /></HeaderList>
+        {date} <Icon name="list" size={30} color="#900" onPress={() => props.navigation.navigate('TodoCalendar', {
+          user_id: user_Id,
+          pickedDate: pickedDate
+        })} /></HeaderList>
       </HeaderComponentContainer>
     );
   }

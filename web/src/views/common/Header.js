@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Login from "./Login";
 
 const Header = () => {
     return (
@@ -9,10 +10,17 @@ const Header = () => {
                         <a className="link-secondary" href="https://github.com/gabrielyoon7/GIDAL">고객센터</a>
                     </div>
                     <div className="col-4 text-center">
-                    <Link to="/"><div className="blog-header-logo text-dark" href="/">기록의 달인</div></Link>
+                        <Link to="/"><div className="blog-header-logo text-dark" href="/">기록의 달인</div></Link>
                     </div>
-                    <div className="col-4 d-flex justify-content-end align-items-center">
+                    {/* <div className="col-4 d-flex justify-content-end align-items-center">
                         <a className="btn btn-sm btn-outline-secondary" href="#">로그인</a>
+                    </div> */}
+                    {/* <!-- Button trigger modal --> */}
+                    <div className="col-4 d-flex justify-content-end align-items-center">
+                        <button type="button" className="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            로그인
+                        </button>
+
                     </div>
                 </div>
             </header>
@@ -25,6 +33,18 @@ const Header = () => {
                     <a className="p-2 link-secondary" href="#">할일</a>
                     <a className="p-2 link-secondary" href="#">설정</a>
                 </nav>
+            </div>
+            {/* <!-- Modal --> */}
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">로그인</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <Login/>
+                    </div>
+                </div>
             </div>
         </div>
 

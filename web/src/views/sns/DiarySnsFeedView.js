@@ -32,7 +32,7 @@ const DiarySnsFeedView = () => {
             <div className="row g-5">
                 <div className="col-md-8">
                     <h3 className="pb-4 mb-4 fst-italic border-bottom">
-                        From the Firehose
+                        모두의 일기
                     </h3>
                     {items.map((diary) => (
                         <DiaryPostCard diary={diary} />

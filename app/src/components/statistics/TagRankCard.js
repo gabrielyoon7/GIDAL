@@ -1,13 +1,16 @@
 import { Box, Heading, HStack, Spacer, View } from "native-base";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import AnonymousRankCard from "./interaction/AnonymousRankCard";
 import FriendsRankCard from "./interaction/FriendsRankCard";
 import PrivateRankCard from "./interaction/PrivateRankCard";
+import { BarChart, PieChart } from "react-native-gifted-charts";
 
 
 
 const TagRankCard = (props) => {
+    const data=[ {value:3, label:'여행'}, {value:2, label:'일상'}, {value:1, label:'운동'} ]
+
     const type = {
         private: {
             interaction: <PrivateRankCard tagLogArr={props.tagLogArr} />,
@@ -47,7 +50,14 @@ const TagRankCard = (props) => {
                 {/* {props.tagLogArr && props.tagLogArr.slice(0, 5).map((tag) => (
                     <Text key={tag._id}>{tag._id}{tag.count}</Text>
                 ))} */}
-                {card_type ? (<View style={styles.interaction}>{card_type.interaction}</View>) : (<View><Text>Wrong type</Text></View>)}
+                <Box>
+                    <BarChart 
+                        data={data}
+                        height={120}
+                        width={280}
+                    />
+                    {card_type ? (<View style={styles.interaction}>{card_type.interaction}</View>) : (<View><Text>Wrong type</Text></View>)}
+                </Box>
             </Box>
         </View>
     )
@@ -67,4 +77,8 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
     },
 
+    graph: {
+        height: 150,
+        backgroundColor: 'green',
+    }
 });

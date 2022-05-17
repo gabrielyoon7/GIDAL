@@ -3,14 +3,14 @@
 import { Link } from "react-router-dom";
 import Footer from "../../views/common/Footer";
 import Header from "../../views/common/Header";
-import MainView from "../../views/main/MainView";
+import DiarySnsFeedView from "../../views/sns/DiarySnsFeedView";
 
 const IndexPage = (props) => {
   return (
     <div>
       <Header/>
       <main className="container">
-        <MainView/>
+        <DiarySnsFeedView/>
       </main>
       <Footer/>
     </div>

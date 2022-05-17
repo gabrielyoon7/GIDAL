@@ -10,6 +10,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<IndexPage/>} />
+      <Route path="/sns" element={<IndexPage/>} />
       {/* <Route path="main" element={<MainPage />} /> */}
       {/* <Route path="data/:menu" element={<DataPage/>} /> */}
     </Routes>

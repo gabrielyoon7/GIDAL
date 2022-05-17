@@ -55,6 +55,8 @@ const TagRankCard = (props) => {
                         data={data}
                         height={120}
                         width={280}
+                        maxValue={3} //MaxValue = noOfSections여야함
+                        noOfSections={3}
                     />
                     {card_type ? (<View style={styles.interaction}>{card_type.interaction}</View>) : (<View><Text>Wrong type</Text></View>)}
                 </Box>

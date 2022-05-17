@@ -15,7 +15,7 @@ const StatisticsCard = (props) => {
                 <HStack>
                     <Text fontSize="xl">Todo</Text>
                     <Spacer />
-                    <Text>에 대한 통계 보러가기</Text>
+                    <Text alignSelf={'center'}>에 대한 통계 보러가기</Text>
                 </HStack>
             </View>
         </TouchableOpacity>
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#E8D9FF',
         marginVertical: 10,
         borderRadius: 10,
-        height: 100,
+        height: 70,
         padding: 20,
         marginHorizontal: 10,
     },

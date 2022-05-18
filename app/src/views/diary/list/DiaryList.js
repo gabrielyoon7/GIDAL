@@ -58,7 +58,7 @@ const DiaryList = (props, navigation) => {
         } else {
             ref.scrollToIndex({ animated: true, index: index, viewPosition: 0 });
         }
-    });
+    },[props.selectedDate]);
 
     const renderItem = ({ item }) => {
         return (

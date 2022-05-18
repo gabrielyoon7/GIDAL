@@ -36,13 +36,20 @@ const DiaryReadView = (props) => {
     };
     const [diary, setDiary] = React.useState(defaultData);
     const [isLoaded, setIsLoaded] = React.useState(false);
+    const [liked, setLiked] = React.useState(false);
+
     React.useEffect(() => {
         //초기 일기 수신부
         try {
             const idx = new_routes.findIndex(r => r.name === "DiaryRead")
-            setDiary(new_routes[idx].params.diary);
-            setUserId(new_routes[idx].params.user_id)
+            const diary = new_routes[idx].params.diary;
+            const user_id = new_routes[idx].params.user_id;
+            setDiary(diary);
+            setUserId(user_id)
             setIsLoaded(true);
+            if(diary.likers.includes(user_id)){
+                setLiked(true)
+            }
         } catch (error) {
             // console.log(error);
         }
@@ -50,7 +57,7 @@ const DiaryReadView = (props) => {
 
     const [likeCount, setLikeCount] = React.useState(diary.likes);
     const [likers, setLikers] = React.useState(diary.likers);
-    const [liked, setLiked] = React.useState(false);
+
     const deleteDiary = () => {
         console.log("l", diary._id);
         axios.post(config.ip + ':5000/diariesRouter/delete/', {
@@ -91,50 +98,34 @@ const DiaryReadView = (props) => {
     } = useDisclose();
 
     const pressHeart = () => {
+        let likersCount = 0
+        let likersArr = []
         if (liked) {
-            setLikeCount(likeCount - 1)
-            setLikers(likers.filter(user => user !== userId))
+            likersCount = likeCount - 1;
+            setLikeCount(likersCount)
+            likersArr = likers.filter(user => user !== userId)
+            setLikers(likersArr)
         } else {
-            setLikeCount(likeCount + 1)
-            setLikers(likers.concat(userId))
+            likersCount = likeCount + 1;
+            setLikeCount(likersCount)
+            likersArr = likers.concat(userId)
+            setLikers(likersArr)
         }
-        
+
         setLiked(!liked);
-    }
 
-    // React.useEffect(() => {
-    //     if (liked) {
-    //         setLikeCount(likeCount + 1)
-    //     } else {
-    //         setLikeCount(likeCount - 1)
-    //     }
-
-    //     axios.post(config.ip + ':5000/diariesRouter/modifyLikeCount/', {
-    //         data: {
-    //             id: diary._id,
-    //             likes: likeCount,
-    //         }
-    //     }).then((response) => {
-    //         console.log(likeCount);
-    //     }).catch(function (error) {
-    //         console.log(error);
-    //     })
-    // }, [liked]);
-
-    React.useEffect(() => {
-        console.log(likers);
         axios.post(config.ip + ':5000/diariesRouter/modifyLikeCount', {
             data: {
                 id: diary._id,
-                likes: likeCount,
-                likers: likers
+                likes: likersCount,
+                likers: likersArr
             }
         }).then((response) => {
             console.log(likeCount);
         }).catch(function (error) {
             console.log(error);
         })
-    },[likers])
+    }
 
     const ReadHeader = () => {
         return (

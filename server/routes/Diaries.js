@@ -128,15 +128,18 @@ router.post('/modify', function(req, res, next) {
 
 router.post('/modifyLikeCount', function(req, res, next) {
     const diaryInfo = req.body.data;
-    console.log(diaryInfo.likers);
-    // 데이터 수정
-    // Diary.findOneAndUpdate({_id: diaryInfo._id}, {$set:{likes:diaryInfo.likes}}, function(error, data){
-    //     console.log('--- UPDATE ---');
-    //     if(error){
-    //         console.log(error);
-    //     }
-    //     console.log('--- updated ---');
-    // });
+    console.log(diaryInfo.id);
+    Diary.updateOne(
+        { '_id': diaryInfo.id },
+        { $set: {'likes': diaryInfo.likes, 'likers': diaryInfo.likers} }).exec((error, todo) => {
+            if (error) {
+                console.log(error);
+                return res.json({ status: 'error', error })
+            } else {
+                console.log('modified!')
+                return res.json({ status: 'success' })
+            }
+        });
 });
 
 //작동하는지 확인 안해봄

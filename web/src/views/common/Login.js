@@ -14,19 +14,20 @@ const Login = () => {
 
     const onClickLogin = () => {
         console.log('click login')
-        console.log(inputId)
-        console.log(inputPw)
+        // console.log(inputId)
+        // console.log(inputPw)
 
-        axios.post('/usersRouter/findOne', {
+        axios.post('/usersRouter/loginCheck', {
             data: {
                 user_id: inputId
             }
         }).then((response) => {
             // console.log(response.data);
             // alert(123)
-            if (!response.data) {
+            if (response===undefined) {
                 alert('존재하지 않는 아이디입니다.');
             } else {
+                console.log(123)
                 console.log(response.data[0]);
                 if (response.data[0].password === inputPw) {
                     alert('비밀번호가 일치함');
@@ -41,30 +42,30 @@ const Login = () => {
 
     return (
         <div>
-            <div class="modal-body">
+            <div className="modal-body">
                 <div>
-                    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+                    <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
 
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput"value={inputId} onChange={handleInputId} placeholder="ID" />
-                        <label for="floatingInput">ID</label>
+                    <div className="form-floating">
+                        <input type="text" className="form-control" id="floatingInput"value={inputId} onChange={handleInputId} placeholder="ID" />
+                        <label htmlFor="floatingInput">ID</label>
                     </div>
-                    <div class="form-floating">
-                        <input type="password" class="form-control" id="floatingPassword" value={inputPw} onChange={handleInputPw} placeholder="Password" />
-                        <label for="floatingPassword">Password</label>
+                    <div className="form-floating">
+                        <input type="password" className="form-control" id="floatingPassword" value={inputPw} onChange={handleInputPw} placeholder="Password" />
+                        <label htmlFor="floatingPassword">Password</label>
                     </div>
 
-                    <div class="checkbox mb-3">
+                    <div className="checkbox mb-3">
                         {/* <label>
                             <input type="checkbox" value="remember-me" /> Remember me
                         </label> */}
                     </div>
-                    <button class="w-100 btn btn-lg btn-primary" onClick={onClickLogin} >Sign in</button>
+                    <button className="w-100 btn btn-lg btn-primary" onClick={onClickLogin} >Sign in</button>
                 </div>
             </div>
-            <div class="modal-footer">
-                {/* <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Understood</button> */}
+            <div className="modal-footer">
+                {/* <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" className="btn btn-primary">Understood</button> */}
             </div>
         </div>
     )

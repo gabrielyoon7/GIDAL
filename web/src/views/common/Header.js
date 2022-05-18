@@ -28,19 +28,19 @@ const Header = () => {
                 {/* 이 부분은 로그인 한 사람에게만 뜨면 좋겠음 */}
                 <nav className="nav d-flex justify-content-between">
                     <a className="p-2 link-secondary" href="#">마이다이어리</a>
-                    <a className="p-2 link-secondary" href="#">피드</a>
+                    <a className="p-2 link-secondary" href="sns">피드</a>
                     <a className="p-2 link-secondary" href="#">통계</a>
                     <a className="p-2 link-secondary" href="#">할일</a>
                     <a className="p-2 link-secondary" href="#">설정</a>
                 </nav>
             </div>
             {/* <!-- Modal --> */}
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">로그인</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="staticBackdropLabel">로그인</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <Login/>
                     </div>

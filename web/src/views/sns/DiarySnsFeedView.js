@@ -35,7 +35,7 @@ const DiarySnsFeedView = () => {
                         모두의 일기
                     </h3>
                     {items.map((diary) => (
-                        <DiaryPostCard diary={diary} />
+                        <DiaryPostCard diary={diary} key ={diary._id} />
                     ))}
 
 

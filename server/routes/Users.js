@@ -120,6 +120,29 @@ router.post('/findOne/', function(req, res, next) {
     // });
 });
 
+router.post('/loginCheck/', function(req, res, next) {
+    // 특정 아이디값 가져오기
+    const user_id = req.body.data.user_id
+    console.log('[로그인 요청] '+user_id);
+    User.find().where('user_id').equals(user_id)
+    .then( (users) => {
+        console.log(users);
+        res.json(users);
+    }).catch( (err) => {
+        console.log(err);
+        next(err)
+    });
+    // User.findOne({"user_id": bmName}, function(error,news){
+    //     console.log('--- Read one ---');
+    //     if(error){
+    //         console.log(error);
+    //     }else{
+    //         res.json(news)
+            
+    //     }
+    // });
+});
+
 router.post('/userFollowingDelete', (req,res) => {
     console.log( req.body.data.following_user_id);
     User.updateMany(

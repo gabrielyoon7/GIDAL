@@ -1,14 +1,27 @@
 import { StyleSheet, TouchableOpacity, } from 'react-native';
 import { Badge, Box, Divider, Flex, HStack, Pressable, Spacer, Text, } from 'native-base';
 import { Ionicons } from "@expo/vector-icons";
+import { useEffect, useState } from 'react';
 
-const FancyDiaryCard = ({ item: diary, onPress, backgroundColor, textColor }) => {
+const FancyDiaryCard = ({ item: diary, user_id, onPress, backgroundColor, textColor }) => {
+    const [liked, setLiked] = useState(false);
+
     // 정규식을 이용한 HTML 태그 제거 시작
     let content = diary.content.replace(/<(\/)?([a-zA-Z]*)(\s[a-zA-Z]*=[^>]*)?(\s)*(\/)?>/ig, "");
     content = content.replace(/<br\/>/ig, "\n");
     content = content.replace(/<(\/)?([a-zA-Z]*)(\s[a-zA-Z]*=[^>]*)?(\s)*(\/)?>/ig, "");
     content = content.replace(/(<([^>]+)>)/gi, "");
     content = content.replace(/&nbsp;/gi, "");
+
+    useEffect(() => {
+        if(diary.user_id === 'La'){ // 추후 해당 조건문 삭제 예정
+            if(diary.likers.includes(user_id)){
+                console.log(diary.likers);
+                setLiked(true)
+            }
+        }
+    }, [])
+
     // 정규식을 이용한 HTML 태그 제거 끝
     return (
         <Box alignItems="center" py="1" px="1">
@@ -43,7 +56,7 @@ const FancyDiaryCard = ({ item: diary, onPress, backgroundColor, textColor }) =>
                                 <Spacer />
                                 {/* <TouchableOpacity style={styles.heart}> */}
                                 <TouchableOpacity>
-                                    <Ionicons name="md-heart-outline" size={24} color="grey" />
+                                    {liked ? <Ionicons name="heart" size={24} color="red" /> : <Ionicons name="md-heart-outline" size={24} color="grey" />}
                                 </TouchableOpacity>
                             </HStack>
                             <Text color="coolGray.800" mt="3" fontWeight="medium" fontSize="xl">

@@ -50,21 +50,22 @@ const FeedDiaryList = (props, navigation) => {
         getitems();
     }, [isFocused]);
 
-    useEffect(() => {
-        let index = items.findIndex((item, idx) => {
-            return item.date.substr(0, 10) === props.selectedDate
-        })
+    //메인화면에서 선택한 날짜에 맞는 리스트를 보여주기 위한 코드였음. 이곳에서는 안쓰일 것 같아 주석처리함
+    // useEffect(() => {
+    //     let index = items.findIndex((item, idx) => {
+    //         return item.date.substr(0, 10) === props.selectedDate
+    //     })
 
-        setData(index);
-        if (ref === null || items.length < 1) {
-            return;
-        }
-        if (index <= 0) {
-            ref.scrollToIndex({ animated: true, index: 0, viewPosition: 0 });
-        } else {
-            ref.scrollToIndex({ animated: true, index: index, viewPosition: 0 });
-        }
-    })
+    //     setData(index);
+    //     if (ref === null || items.length < 1) {
+    //         return;
+    //     }
+    //     if (index <= 0) {
+    //         ref.scrollToIndex({ animated: true, index: 0, viewPosition: 0 });
+    //     } else {
+    //         ref.scrollToIndex({ animated: true, index: index, viewPosition: 0 });
+    //     }
+    // })
 
 
     const filterList = (text) => {
@@ -89,6 +90,7 @@ const FeedDiaryList = (props, navigation) => {
         return (
             <FancyDiaryCard
                 item={item}
+                user_id={userId}
                 onPress={
                     () => {
                         props.navigation.navigate('DiaryRead', {

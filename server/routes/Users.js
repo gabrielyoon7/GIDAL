@@ -103,7 +103,8 @@ router.post('/findOne/', function(req, res, next) {
     console.log('[로그인 요청] '+user_id);
     User.find().where('user_id').equals(user_id)
     .then( (users) => {
-        res.json(users)
+        console.log(users);
+        res.json(users);
     }).catch( (err) => {
         console.log(err);
         next(err)

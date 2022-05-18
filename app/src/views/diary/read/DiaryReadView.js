@@ -93,10 +93,10 @@ const DiaryReadView = (props) => {
     const pressHeart = () => {
         if (liked) {
             setLikeCount(likeCount - 1)
-            setLikers(likers.concat(userId))
+            setLikers(likers.filter(user => user !== userId))
         } else {
             setLikeCount(likeCount + 1)
-            setLikers(likers.filter(user => user !== userId))
+            setLikers(likers.concat(userId))
         }
         
         setLiked(!liked);
@@ -122,11 +122,12 @@ const DiaryReadView = (props) => {
     // }, [liked]);
 
     React.useEffect(() => {
-        axios.post(config.ip + ':5000/diariesRouter/modifyLikeCount/', {
+        console.log(likers);
+        axios.post(config.ip + ':5000/diariesRouter/modifyLikeCount', {
             data: {
                 id: diary._id,
                 likes: likeCount,
-                // likers: likers
+                likers: likers
             }
         }).then((response) => {
             console.log(likeCount);

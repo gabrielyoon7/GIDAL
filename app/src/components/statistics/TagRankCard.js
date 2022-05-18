@@ -24,7 +24,7 @@ const TagRankCard = (props) => {
     };
     const card_type = type[props.data.type];
     return (
-        <View style={styles.card}>
+        <View style={styles.card} >
             <Box pb="3">
                 <HStack>
                     <Heading size="md" isTruncated>
@@ -70,13 +70,21 @@ export default TagRankCard;
 
 const styles = StyleSheet.create({
 
-    card: {
-        backgroundColor: '#E8D9FF',
+    card: { //통계리스트 카드 색
         marginVertical: 10,
-        borderRadius: 10,
-        height: 200,
-        padding: 20,
         marginHorizontal: 10,
+        padding: 3,
+        marginTop: 5,
+        marginBottom: 5,
+        backgroundColor: '#e6e6e6', 
+        flexDirection: 'row',
+        shadow:3,
+        borderRadius: 8,
+        elevation: 3,
+        borderWidth:1,
+        borderColor:"#d1d2d1",
+      
+       
     },
 
     graph: {

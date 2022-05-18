@@ -64,6 +64,7 @@ const DiaryList = (props, navigation) => {
         return (
             <FancyDiaryCard
                 item={item}
+                user_id={user_id}
                 onPress={
                     () => {
                         props.navigation.navigate('DiaryRead', {

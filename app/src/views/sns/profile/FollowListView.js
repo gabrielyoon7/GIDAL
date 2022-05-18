@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Dimensions, StyleSheet, StatusBar, Text, TextInput, View, TouchableOpacity, SafeAreaView, ScrollView, Image, Alert, Modal, Pressable, ImageBackground, FlatList } from 'react-native';
+import { Dimensions, StyleSheet, StatusBar, Text, TextInput, View, TouchableOpacity, SafeAreaView, ScrollView, Image, Alert, Modal, Pressable, ImageBackground, FlatList, } from 'react-native';
 import SearchBar from "react-native-dynamic-search-bar";
 import axios from 'axios'
 import { config } from '../../../../config'
@@ -127,18 +127,7 @@ export default function FollowListView(props) {
   const Followings = (props) => {
     return (
       <View>
-        {/* <FeedSearchView/> */}
-        <BackButton navigation={props.navigation} />
-        <SearchBar
-          style={styles.searchbar}
-          round
-          searchIcon={{ size: 24 }}
-          onChangeText={(text) => searchFilter(text)}
-          onClear={(text) => searchFilter('')}
-          placeholder="검색어를 입력해주세요"
-          value={search}
 
-        />
         <View style={styles.body} >
           <FlatList
             enableEmptySections={true}
@@ -247,9 +236,26 @@ export default function FollowListView(props) {
     }
     setIndex(id);
   }
+ 
   return (
     <>
+    <View style={{backgroundColor:'white'}}>
+
+      <BackButton navigation={props.navigation}  style={{backgroundColor:'FFFFFF' }}/>
+        <SearchBar
+          style={styles.searchbar}
+          round
+          searchIcon={{ size: 24 }}
+          onChangeText={(text) => searchFilter(text)}
+          onClear={(text) => searchFilter('')}
+          placeholder="검색어를 입력해주세요"
+          value={search}
+
+        />
+</View>
+
       <TabView
+       backgroundColor= "white"
         tabBarPosition='bottom'
         navigationState={{ index, routes }}
         renderScene={renderScene}
@@ -288,6 +294,7 @@ export default function FollowListView(props) {
           }}
         />
       </Tab.Navigator> */}
+     
     </>
     // <View style={styles.container} >
     //   <BackButton navigation={props.navigation} />
@@ -300,13 +307,6 @@ export default function FollowListView(props) {
 }
 
 const styles = StyleSheet.create({
-  header: {
-    backgroundColor: "#0abde3",
-  },
-  headerContent: {
-    padding: 30,
-    alignItems: 'center',
-  },
   avatar: {
     width: 130,
     height: 130,
@@ -326,6 +326,7 @@ const styles = StyleSheet.create({
   },
   body: {
     padding: 15,
+    
 
   },
   flatListStyle: {

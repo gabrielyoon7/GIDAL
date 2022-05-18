@@ -9,6 +9,7 @@ import BackButton from '../../../components/common/BackButton';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { CommonActions, useIsFocused, useNavigationState } from "@react-navigation/native";
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
+
 const Tab = createBottomTabNavigator();
 
 
@@ -337,14 +338,11 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     backgroundColor: '#f1f3f5', //리스트 카드 색
     flexDirection: 'row',
-    shadowColor: 'black',
-    shadowOpacity: .2,
-    borderRadius: 30,
-    shadowOffset: {
-      height: 1,
-      width: -2
-    },
-    elevation: 2
+    shadow:3,
+    borderRadius: 8,
+    elevation: 3,
+    borderWidth:1,
+    borderColor:"#d1d2d1",
   },
   username: {
     color: "black",

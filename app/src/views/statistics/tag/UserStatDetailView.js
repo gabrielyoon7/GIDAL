@@ -55,7 +55,7 @@ const UserStatDetailView = (props) => {
         <View style={{ flex: 1 }}>
             <BackButton navigation={props.navigation} />
             <ScrollView>
-                <Text>상세 통계 표시</Text>
+                {/* <Text>상세 통계 표시</Text> */}
                 <StatDeatilView/>
                 {/* {type[statType]?(<View>{type[statType].interaction}</View>):(<View><Text>Wrong type</Text></View>)} */}
             </ScrollView>

@@ -15,7 +15,7 @@ import { config } from '../../../../config'
 
 let today = new Date().toJSON().split('T')[0];
 
-const Todo = ({props}) => {
+const Todo = ({ props }) => {
   const [user_Id, setUserId] = useState('');
   const [data, setData] = useState([]);
   const [firstRecord, setFirstRecord] = useState(true); // 처음 todolist 사용하는 유저 구분
@@ -195,45 +195,47 @@ const Todo = ({props}) => {
     hideDatePicker();
   };
 
-  function Header({date}) {
+  function Header({ date }) {
     // const [isDatePickerVisible, setDatePickerVisibility] = React.useState(false);
-  
+
     return (
       <HeaderComponentContainer>
         <HeaderText>To-Do</HeaderText>
         <Text></Text>
         <HeaderList onPress={() => showDatePicker()}>
-        {date} <Icon name="list" size={30} color="#900" onPress={() => props.navigation.navigate('TodoCalendar', {
-          user_id: user_Id,
-          pickedDate: pickedDate
-        })} /></HeaderList>
+          {date} <Icon name="list" size={30} color="#900" onPress={() => props.navigation.navigate('TodoCalendar', {
+            user_id: user_Id,
+            pickedDate: pickedDate
+          })} /></HeaderList>
       </HeaderComponentContainer>
     );
   }
 
   return (
     <ComponentContainer>
-      <View>
+      {/* <View>
         <StatusBar barStyle="light-content"
           backgroundColor="midnightblue" />
-      </View>
+      </View> */}
 
       <View>
         <FlatList
           data={data}
-          ListHeaderComponent={() =>
-            <>
-              <Header date={pickedDate} />
-              <AddInput submitHandler={submitHandler} />
-            </>}
+          ListHeaderComponent={
+            () =>
+              <>
+                <Header date={pickedDate} />
+                <AddInput submitHandler={submitHandler} />
+              </>
+          }
           ListEmptyComponent={() => <Empty />}
           keyExtractor={(item) => item.key}
           renderItem={({ item }) => (
             <TodoList item={item} deleteItem={deleteItem} changeIsDone={changeIsDone} />
           )}
         />
-        <View>
-        </View>
+        {/* <View>
+        </View> */}
       </View>
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
@@ -281,7 +283,7 @@ const HeaderList = styled.Text`
 
 const TodoTest = (props) => {
   return (
-    <Todo props={props}/>
+    <Todo props={props} />
   )
 }
 

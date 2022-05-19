@@ -31,7 +31,7 @@ const PersonalStatDetailView = (props) => {
                     showFractionalValue
                     showYAxisIndices
                     noOfSections={4}
-                    maxValue={5}
+                    maxValue={4}
                     data={items}
                     isAnimated
                 />

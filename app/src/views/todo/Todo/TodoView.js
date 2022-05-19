@@ -225,6 +225,12 @@ const Todo = ({ props }) => {
             () =>
               <>
                 <Header date={pickedDate} />
+                {/* <AddInput submitHandler={submitHandler} /> */}
+              </>
+          }
+          ListFooterComponent={
+            () =>
+              <>
                 <AddInput submitHandler={submitHandler} />
               </>
           }

@@ -70,7 +70,9 @@ const Header = () => {
                             <h5 className="modal-title" id="staticBackdropLabel">로그인</h5>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                            <Login/>
+                        {!isLogin &&
+                            <Login/>}
+                            
                     </div>
                 </div>
             </div>

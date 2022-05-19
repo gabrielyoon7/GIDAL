@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import Login from "./Login";
+import SignUp from "./SignUp";
 
 const Header = () => {
     const [isLogin, setIsLogin] = useState(false)
@@ -37,13 +38,20 @@ const Header = () => {
                     {/* <!-- Button trigger modal --> */}
                     <div className="col-4 d-flex justify-content-end align-items-center">
                     {!isLogin &&
-                        <button type="button" className="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <div>
+                    <button type="button" className="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#loginModal">
                             로그인
-                        </button> }
+                        </button>
+                        <button type="button" className="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#signupModal">
+                            회원가입
+                        </button>
+                    </div>
+                        
+                         }
                     {isLogin &&
                     <div>
                     <a className="p-2 link-secondary" href="#">{userId}</a>님 안녕하세요
-                    <button type="button" className="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={() => logout()}>
+                    <button type="button" className="btn btn-sm btn-outline-secondary" onClick={() => logout()}>
                             로그아웃
                         </button>
                     </div>
@@ -62,17 +70,31 @@ const Header = () => {
                     <a className="p-2 link-secondary" href="#">설정</a>
                 </nav>
             </div>
-            {/* <!-- Modal --> */}
-            <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            {/* <!-- Login Modal --> */}
+            <div className="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title" id="staticBackdropLabel">로그인</h5>
+                            <h5 className="modal-title" id="loginModalLabel">로그인</h5>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         {!isLogin &&
                             <Login/>}
                             
+                    </div>
+                </div>
+            </div>
+
+            {/* <!-- Sign up Modal --> */}
+            <div className="modal fade" id="signupModal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="signupModalLabel">회원가입</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        {!isLogin &&
+                            <SignUp/>}
                     </div>
                 </div>
             </div>

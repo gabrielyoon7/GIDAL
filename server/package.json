@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "express": "^4.17.3",
     "index.js": "^0.0.3",
     "ip": "^1.1.5",

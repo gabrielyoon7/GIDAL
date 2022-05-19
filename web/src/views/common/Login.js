@@ -79,7 +79,6 @@ const Login = () => {
                         </label> */}
                     </div>
                     <button className="w-100 btn btn-lg btn-primary" onClick={onClickLogin} >로그인</button>
-                    <button className="w-100 btn btn-lg btn-primary" onClick={onClickSignUp} >회원가입</button>
                 </div>
             </div>
             <div className="modal-footer">

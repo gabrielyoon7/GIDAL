@@ -38,7 +38,7 @@ const Login = () => {
                 console.log(123)
                 console.log(response.data[0]);
                 if (response.data[0].password === inputPw) {
-                    alert('비밀번호가 일치함');
+                    // alert('비밀번호가 일치함');
                     sessionStorage.setItem("Id", inputId);
                     sessionStorage.setItem("Pw", inputPw);
 

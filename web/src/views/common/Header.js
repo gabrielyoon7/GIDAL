@@ -1,7 +1,26 @@
+import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import Login from "./Login";
 
 const Header = () => {
+    const [isLogin, setIsLogin] = useState(false)
+    const userId = sessionStorage.getItem("Id");
+
+    // console.log(sessionStorage.getItem("Id"));
+
+    useEffect(() => {
+        if(sessionStorage.getItem("Id") == null){
+          setIsLogin(false)
+        } else {
+          setIsLogin(true)
+        }
+      })
+
+    const logout = () => {
+        sessionStorage.clear('Id')
+        window.location.reload();
+    }
+
     return (
         <div className="container">
             <header className="blog-header py-3">
@@ -17,10 +36,19 @@ const Header = () => {
                     </div> */}
                     {/* <!-- Button trigger modal --> */}
                     <div className="col-4 d-flex justify-content-end align-items-center">
+                    {!isLogin &&
                         <button type="button" className="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                             로그인
+                        </button> }
+                    {isLogin &&
+                    <div>
+                    <a className="p-2 link-secondary" href="#">{userId}</a>님 안녕하세요
+                    <button type="button" className="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={() => logout()}>
+                            로그아웃
                         </button>
-
+                    </div>
+                        
+                         }
                     </div>
                 </div>
             </header>
@@ -42,7 +70,7 @@ const Header = () => {
                             <h5 className="modal-title" id="staticBackdropLabel">로그인</h5>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <Login/>
+                            <Login/>
                     </div>
                 </div>
             </div>

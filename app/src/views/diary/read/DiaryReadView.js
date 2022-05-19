@@ -13,6 +13,7 @@ import { AntDesign, MaterialCommunityIcons, MaterialIcons, FontAwesome5, Ionicon
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 import { useNavigationState } from '@react-navigation/native';
 import LoadingSpinner from '../../../components/common/LoadingSpinner';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const DiaryReadView = (props) => {
     // const [date, setSelectedDate] = React.useState(props.selectedDate);
@@ -37,6 +38,7 @@ const DiaryReadView = (props) => {
     const [diary, setDiary] = React.useState(defaultData);
     const [isLoaded, setIsLoaded] = React.useState(false);
     const [liked, setLiked] = React.useState(false);
+    const [isMyDiary, setMyDiary] = React.useState(false);
 
     React.useEffect(() => {
         //초기 일기 수신부
@@ -46,8 +48,13 @@ const DiaryReadView = (props) => {
             const user_id = new_routes[idx].params.user_id;
             setDiary(diary);
             setUserId(user_id)
+            // console.log(user_id, currentUser);
+            // if(user_id==currentUser){
+            //     // console.log(userId, currentUser);
+            //     setMyDiary(true);
+            // }
             setIsLoaded(true);
-            if(diary.likers.includes(user_id)){
+            if (diary.likers.includes(user_id)) {
                 setLiked(true)
             }
         } catch (error) {
@@ -67,13 +74,13 @@ const DiaryReadView = (props) => {
         }).then((response) => {
             axios.post(config.ip + ':5000/tagsRouter/deleteMany/', {
                 data: {
-                  id: diary._id,
+                    id: diary._id,
                 }
-              }).then((response) => {
+            }).then((response) => {
                 props.navigation.pop();
-              }).catch(function (error) {
+            }).catch(function (error) {
                 console.log(error);
-              })
+            })
         }).catch(function (error) {
             console.log(error);
         })
@@ -125,6 +132,26 @@ const DiaryReadView = (props) => {
         }).catch(function (error) {
             console.log(error);
         })
+    }
+
+    const [currentUser, setCurrentUser] = React.useState('currentUser');
+
+    React.useEffect(() => {
+        getData();
+    }, [])
+
+    const getData = () => {
+        try {
+            AsyncStorage.getItem('userInfo')
+                .then(value => {
+                    if (value != null) {
+                        const UserInfo = JSON.parse(value);
+                        setCurrentUser(UserInfo[0].user_id);
+                    }
+                })
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     const ReadHeader = () => {
@@ -220,113 +247,121 @@ const DiaryReadView = (props) => {
     return (
         <>
             {isLoaded
-            ?
-            <ParallaxScrollView
-                style={{ flex: 1 }}
-                backgroundColor="white"
-                parallaxHeaderHeight={windowHeight * 0.3}
-                renderFixedHeader={() => <ReadHeader/>}
-               // stickyHeaderHeight={40}
-                renderForeground={() => (
-                    <Image
-                        style={styles.header}
-                        source={{ uri: 'https://t1.daumcdn.net/cfile/blog/99EC04465C9B308326' }}
-                        alt="Alternate Text"
-                    />
-                )}
-            >
-                <ReadView/>
-            </ParallaxScrollView>
-            :
-            <LoadingSpinner />
+                ?
+                <ParallaxScrollView
+                    style={{ flex: 1 }}
+                    backgroundColor="white"
+                    parallaxHeaderHeight={windowHeight * 0.3}
+                    renderFixedHeader={() => <ReadHeader />}
+                    // stickyHeaderHeight={40}
+                    renderForeground={() => (
+                        <Image
+                            style={styles.header}
+                            source={{ uri: 'https://t1.daumcdn.net/cfile/blog/99EC04465C9B308326' }}
+                            alt="Alternate Text"
+                        />
+                    )}
+                >
+                    <ReadView />
+                </ParallaxScrollView>
+                :
+                <LoadingSpinner />
             }
-            <Center style={{ position: 'absolute', right: 20, bottom: 130, height: 30,}} >
-                <Box maxW="100">
-                    <Stagger    visible={isOpen} 
-                        initial={{
-                        opacity: 0,
-                        scale: 0,
-                        translateY: 34
-                    }} animate={{
-                        translateY: 0,
-                        scale: 1,
-                        opacity: 1,
-                        transition: {
-                            type: "spring",
-                            mass: 0.8,
-                            stagger: {
-                                offset: 30,
-                                reverse: true
-                            }
-                        }
-                    }} exit={{
-                        translateY: 34,
-                        scale: 0.5,
-                        opacity: 0,
-                        transition: {
-                            duration: 100,
-                            stagger: {
-                                offset: 30,
-                                reverse: true
-                            }
-                        }
-                    }}>
+            {
+                diary.user_id == currentUser
+                    ?
+                    <Center style={{ position: 'absolute', right: 20, bottom: 130, height: 30, }} >
+                        <Box maxW="100">
+                            <Stagger
+                                visible={isOpen}
+                                initial={{
+                                    opacity: 0,
+                                    scale: 0,
+                                    translateY: 34
+                                }} animate={{
+                                    translateY: 0,
+                                    scale: 1,
+                                    opacity: 1,
+                                    transition: {
+                                        type: "spring",
+                                        mass: 0.8,
+                                        stagger: {
+                                            offset: 30,
+                                            reverse: true
+                                        }
+                                    }
+                                }} exit={{
+                                    translateY: 34,
+                                    scale: 0.5,
+                                    opacity: 0,
+                                    transition: {
+                                        duration: 100,
+                                        stagger: {
+                                            offset: 30,
+                                            reverse: true
+                                        }
+                                    }
+                                }}>
 
-                        <IconButton
-                            mb="3"
-                            margin={1}
-                            variant="solid"
-                            bg="indigo.500"
-                            colorScheme="indigo"
-                            borderRadius="full"
-                           
-                            icon={
-                                <Icon
-                                    as={FontAwesome5}
-                                    size="6"
-                                    name="pencil-alt"
-                                    _dark={{
-                                        color: "warmGray.50"
-                                    }}
-                                    color="warmGray.50"
+                                <IconButton
+                                    mb="3"
+                                    margin={1}
+                                    variant="solid"
+                                    bg="indigo.500"
+                                    colorScheme="indigo"
+                                    borderRadius="full"
+
+                                    icon={
+                                        <Icon
+                                            as={FontAwesome5}
+                                            size="6"
+                                            name="pencil-alt"
+                                            _dark={{
+                                                color: "warmGray.50"
+                                            }}
+                                            color="warmGray.50"
+                                        />
+                                    }
+                                    onPress={
+                                        () => props.navigation.navigate('DiaryModify', {
+                                            diary: diary,
+                                        })
+                                    }
                                 />
-                            }
-                            onPress={
-                                () => props.navigation.navigate('DiaryModify', {
-                                    diary: diary,
-                                })
-                            }
-                        />
-                        <IconButton
-                            mb="3"
-                            margin={1}
-                            variant="solid"
-                            bg="yellow.500"
-                            colorScheme="yellow"
-                            borderRadius="full"
-                            icon={
-                                <Icon
-                                    as={MaterialIcons}
-                                    size="6"
-                                    name="delete"
-                                    _dark={{
-                                        color: "warmGray.50"
-                                    }}
-                                    color="warmGray.50"
+                                <IconButton
+                                    mb="3"
+                                    margin={1}
+                                    variant="solid"
+                                    bg="yellow.500"
+                                    colorScheme="yellow"
+                                    borderRadius="full"
+                                    icon={
+                                        <Icon
+                                            as={MaterialIcons}
+                                            size="6"
+                                            name="delete"
+                                            _dark={{
+                                                color: "warmGray.50"
+                                            }}
+                                            color="warmGray.50"
+                                        />
+                                    }
+                                    onPress={
+                                        () => deleteDiary()
+                                    }
                                 />
-                            }
-                            onPress={
-                                () => deleteDiary()
-                            }
-                        />
-                    </Stagger>
-                </Box>
-                <HStack alignItems="center">
-                    <IconButton style={{backgroundColor :"#27ae60"}} variant="solid" borderRadius="full" shadow={2} size="lg" onPress={onToggle} bg="cyan.400" icon={<Icon as={MaterialCommunityIcons} size="7" name="dots-horizontal"  color="warmGray.50" _dark={{
-                        color: "warmGray.50"
-                    }} />} />
-                </HStack>
-            </Center>
+                            </Stagger>
+                        </Box>
+                        <HStack alignItems="center">
+                            <IconButton style={{ backgroundColor: "#27ae60" }} variant="solid" borderRadius="full" shadow={2} size="lg" onPress={onToggle} bg="cyan.400" icon={<Icon as={MaterialCommunityIcons} size="7" name="dots-horizontal" color="warmGray.50" _dark={{
+                                color: "warmGray.50"
+                            }} />} />
+                        </HStack>
+                    </Center>
+                    :
+                    null
+            }
+
         </>
     )
 }

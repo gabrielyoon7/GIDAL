@@ -1,7 +1,7 @@
 import * as React from 'react';
 import CalendarView from './CalendarView';
 import DiaryList from './DiaryList';
-import { Fab, Icon } from "native-base";
+import { Fab, Icon, useToast } from "native-base";
 import { AntDesign } from "@expo/vector-icons";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
@@ -80,6 +80,19 @@ const DiaryListView = (props) => {
         setMarkedDates(val)
     },[items, date])
 
+    const toast = useToast();
+    const id = "diary-write-toast";
+
+    const handleWriteButton = () => {
+        props.navigation.navigate('DiaryWrite', { selectedDate: date, user_Id: user_Id })
+        if (!toast.isActive(id)) {
+            toast.show({
+              id,
+              title: "작성하시는 일기는 선택 일자인 "+date+"에 저장됩니다."
+            });
+        }
+    }
+
     return (
         <>
             <CalendarView selectedDate={date} setSelectedDate={setSelectedDate} markedDates={markedDates} getitems={getitems} />
@@ -90,7 +103,7 @@ const DiaryListView = (props) => {
                 size="md"
                 style={{backgroundColor:"#27ae60", }}
                 icon={<Icon color="white" as={AntDesign} name="plus" size="md" />}
-                onPress={() => props.navigation.navigate('DiaryWrite', { selectedDate: date, user_Id: user_Id })}
+                onPress={handleWriteButton}
             />
         </>
     )

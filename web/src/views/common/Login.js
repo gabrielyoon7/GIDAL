@@ -3,6 +3,10 @@ import axios from "axios";
 const Login = () => {
     const [inputId, setInputId] = useState('');
     const [inputPw, setInputPw] = useState('');
+    const [savedId, setSavedId] = useState("");
+    const [savedPw, setSavedPw] = useState("");
+
+    const sessionStorage = window.sessionStorage;
 
     const handleInputId = (e) => {
         setInputId(e.target.value);
@@ -12,11 +16,15 @@ const Login = () => {
         setInputPw(e.target.value);
     }
 
+    const refreshPage = ()=>{
+        window.location.reload();
+     }
+
     const onClickLogin = () => {
         console.log('click login')
         // console.log(inputId)
         // console.log(inputPw)
-
+        
         axios.post('/usersRouter/loginCheck', {
             data: {
                 user_id: inputId
@@ -31,6 +39,12 @@ const Login = () => {
                 console.log(response.data[0]);
                 if (response.data[0].password === inputPw) {
                     alert('비밀번호가 일치함');
+                    sessionStorage.setItem("Id", inputId);
+                    sessionStorage.setItem("Pw", inputPw);
+
+                    setSavedId(sessionStorage.getItem("Id"));
+                    setSavedPw(sessionStorage.getItem("Pw"));
+                    refreshPage();
                 } else {
                     alert('비밀번호가 일치하지 않습니다.');
                 }
@@ -38,6 +52,10 @@ const Login = () => {
         }).catch(function (error) {
             console.log(error);
         })
+    }
+
+    const onClickSignUp = () => {
+        alert("회원가입")
     }
 
     return (
@@ -60,7 +78,8 @@ const Login = () => {
                             <input type="checkbox" value="remember-me" /> Remember me
                         </label> */}
                     </div>
-                    <button className="w-100 btn btn-lg btn-primary" onClick={onClickLogin} >Sign in</button>
+                    <button className="w-100 btn btn-lg btn-primary" onClick={onClickLogin} >로그인</button>
+                    <button className="w-100 btn btn-lg btn-primary" onClick={onClickSignUp} >회원가입</button>
                 </div>
             </div>
             <div className="modal-footer">

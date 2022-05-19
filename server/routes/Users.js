@@ -2,21 +2,47 @@ const express = require('express')
 const router = express.Router();
 const bodyParser = require('body-parser');
 const { User } = require("../models/User");
+const bcrypt = require('bcrypt')
 
 /* POST*/
+// router.post('/save', function(req, res) {
+//     console.log(req.body);
+//     // 데이터 저장
+//     var newUser = new User(req.body.data);
+    // newUser.save(function(error, data){
+    //     if(error){
+    //         console.log(error);
+    //         return res.json({status: 'fail', error})
+    //     }else{
+    //         console.log('Saved!')
+    //         return res.json({status: 'success'})
+    //     }
+    // });
+// });
+
 router.post('/save', function(req, res) {
-    console.log(req.body);
-    // 데이터 저장
-    var newUser = new User(req.body.data);
-    newUser.save(function(error, data){
-        if(error){
-            console.log(error);
-            return res.json({status: 'fail', error})
-        }else{
-            console.log('Saved!')
-            return res.json({status: 'success'})
-        }
-    });
+    console.log(req.body.data.user_id);
+    bcrypt.hash(req.body.data.password, 10, (err, encryptedPassowrd) => {
+		// async callback
+		const one = {
+			user_id: req.body.data.user_id,
+			name: req.body.data.name,
+            bday: req.body.data.bday,
+			gender: req.body.data.gender,
+            location: req.body.data.location,
+			password: encryptedPassowrd,
+		};
+		const newUser = new User(one);
+		newUser.save(function(error, data){
+                if(error){
+                    console.log(error);
+                    return res.json({status: 'fail', error})
+                }else{
+                    console.log('Saved!')
+                    return res.json({status: 'success'})
+                }
+            })
+	});
 });
 
 /*유저 업데이트 */
@@ -120,27 +146,61 @@ router.post('/findOne/', function(req, res, next) {
     // });
 });
 
-router.post('/loginCheck/', function(req, res, next) {
-    // 특정 아이디값 가져오기
-    const user_id = req.body.data.user_id
-    console.log('[로그인 요청] '+user_id);
-    User.find().where('user_id').equals(user_id)
-    .then( (users) => {
-        console.log(users);
-        res.json(users);
-    }).catch( (err) => {
-        console.log(err);
-        next(err)
-    });
-    // User.findOne({"user_id": bmName}, function(error,news){
-    //     console.log('--- Read one ---');
-    //     if(error){
-    //         console.log(error);
-    //     }else{
-    //         res.json(news)
+// router.post('/loginCheck/', function(req, res, next) {
+//     // 특정 아이디값 가져오기
+//     const user_id = req.body.data.user_id
+//     console.log('[로그인 요청] '+user_id);
+//     User.find().where('user_id').equals(user_id)
+//     .then( (users) => {
+//         console.log(users);
+//         res.json(users);
+//     }).catch( (err) => {
+//         console.log(err);
+//         next(err)
+//     });
+//     // User.findOne({"user_id": bmName}, function(error,news){
+//     //     console.log('--- Read one ---');
+//     //     if(error){
+//     //         console.log(error);
+//     //     }else{
+//     //         res.json(news)
             
-    //     }
-    // });
+//     //     }
+//     // });
+// });
+
+router.post('/loginCheck/', function(req, res, next) {
+    User.findOne({ user_id: req.body.data.user_id }, (err, user) => {
+		if (!user) {
+			return res.json({
+				loginToken: false,
+				message: "아이디가 일치하지 않습니다.",
+			});
+		} else {
+			bcrypt.compare(req.body.data.password, user.password, (err, same) => {
+				// async callback
+                if(!same){
+                    console.log(error);
+                    return res.json({status: 'fail', error})
+                }else{
+                    console.log('Saved!')
+                    return res.json({status: 'success'})
+                }
+
+				// if (same) {
+				// 	return res.json({
+				// 		loginToken: true,
+				// 		message: "로그인되었습니다!",
+				// 	});
+				// } else {
+				// 	return res.json({
+				// 		loginToken: false,
+				// 		message: "비밀번호가 일치하지 않습니다.",
+				// 	});
+				// }
+			});
+		}
+	});
 });
 
 router.post('/userFollowingDelete', (req,res) => {

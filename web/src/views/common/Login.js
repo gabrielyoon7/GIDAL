@@ -27,7 +27,8 @@ const Login = () => {
         
         axios.post('/usersRouter/loginCheck', {
             data: {
-                user_id: inputId
+                user_id: inputId,
+                password: inputPw
             }
         }).then((response) => {
             // console.log(response.data);
@@ -37,15 +38,24 @@ const Login = () => {
             } else {
                 console.log(123)
                 console.log(response.data[0]);
-                if (response.data[0].password === inputPw) {
-                    // alert('비밀번호가 일치함');
+                if (response.data.status === 'success') {
                     sessionStorage.setItem("Id", inputId);
                     sessionStorage.setItem("Pw", inputPw);
 
                     setSavedId(sessionStorage.getItem("Id"));
                     setSavedPw(sessionStorage.getItem("Pw"));
                     refreshPage();
-                } else {
+                } 
+                // if (response.data[0].password === inputPw) {
+                //     // alert('비밀번호가 일치함');
+                //     sessionStorage.setItem("Id", inputId);
+                //     sessionStorage.setItem("Pw", inputPw);
+
+                //     setSavedId(sessionStorage.getItem("Id"));
+                //     setSavedPw(sessionStorage.getItem("Pw"));
+                //     refreshPage();
+                // }
+                 else {
                     alert('비밀번호가 일치하지 않습니다.');
                 }
             }

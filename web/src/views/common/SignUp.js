@@ -33,43 +33,6 @@ const SignUp = () => {
         setBirthDay(e.target.value);
     }
 
-    const refreshPage = ()=>{
-        window.location.reload();
-     }
-
-    const onClickLogin = () => {
-        console.log('click login')
-        // console.log(inputId)
-        // console.log(inputPw)
-        
-        axios.post('/usersRouter/loginCheck', {
-            data: {
-                user_id: inputId
-            }
-        }).then((response) => {
-            // console.log(response.data);
-            // alert(123)
-            if (response===undefined) {
-                alert('존재하지 않는 아이디입니다.');
-            } else {
-                console.log(123)
-                console.log(response.data[0]);
-                if (response.data[0].password === inputPw) {
-                    // alert('비밀번호가 일치함');
-                    sessionStorage.setItem("Id", inputId);
-                    sessionStorage.setItem("Pw", inputPw);
-
-                    setSavedId(sessionStorage.getItem("Id"));
-                    setSavedPw(sessionStorage.getItem("Pw"));
-                    refreshPage();
-                } else {
-                    alert('비밀번호가 일치하지 않습니다.');
-                }
-            }
-        }).catch(function (error) {
-            console.log(error);
-        })
-    }
 
     const onClickSignUp = () => {
         if (!inputId) {
@@ -80,16 +43,6 @@ const SignUp = () => {
             alert('비밀번호를 입력해주세요');
             return;
         }
-        // if (!checkPassword) {
-        //     alert('비밀번호 확인을 입력해주세요');
-        //     return;
-        // }
-        // if (password !== checkPassword) {
-        //     alert('비밀번호가 일치하지 않습니다.');
-        //     console.log(password);
-        //     console.log(checkPassword);
-        //     return;
-        // }
         if (!inputName) {
             alert('이름을 입력해주세요');
             return;
@@ -155,7 +108,7 @@ const SignUp = () => {
                         <label htmlFor="floatingPassword">성별</label>
                     </div>
                     <div className="form-floating">
-                        <input type="text" className="form-control" id="floatingBirth" value={birthDay} onChange={handleBirth} placeholder="생년월일" />
+                        <input type="date" className="form-control" id="floatingBirth" value={birthDay} onChange={handleBirth} placeholder="생년월일" />
                         <label htmlFor="floatingPassword">생년월일</label>
                     </div>
                     <div className="form-floating">

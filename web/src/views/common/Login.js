@@ -24,44 +24,78 @@ const Login = () => {
         console.log('click login')
         // console.log(inputId)
         // console.log(inputPw)
-        
-        axios.post('/usersRouter/loginCheck', {
-            data: {
-                user_id: inputId,
-                password: inputPw
-            }
-        }).then((response) => {
-            // console.log(response.data);
-            // alert(123)
-            if (response===undefined) {
-                alert('존재하지 않는 아이디입니다.');
-            } else {
-                console.log(123)
-                console.log(response.data[0]);
-                if (response.data.status === 'success') {
-                    sessionStorage.setItem("Id", inputId);
-                    sessionStorage.setItem("Pw", inputPw);
-
-                    setSavedId(sessionStorage.getItem("Id"));
-                    setSavedPw(sessionStorage.getItem("Pw"));
-                    refreshPage();
-                } 
-                // if (response.data[0].password === inputPw) {
-                //     // alert('비밀번호가 일치함');
-                //     sessionStorage.setItem("Id", inputId);
-                //     sessionStorage.setItem("Pw", inputPw);
-
-                //     setSavedId(sessionStorage.getItem("Id"));
-                //     setSavedPw(sessionStorage.getItem("Pw"));
-                //     refreshPage();
-                // }
-                 else {
-                    alert('비밀번호가 일치하지 않습니다.');
+        if(inputPw.length < 10){ // 복호화 전 회원가입 했던 유저 로그인
+            axios.post('/usersRouter/loginCheck', {
+                data: {
+                    user_id: inputId,
+                    // password: inputPw
                 }
-            }
-        }).catch(function (error) {
-            console.log(error);
-        })
+            })
+            .then((response) => {
+                // console.log(response.data);
+                // alert(123)
+                if (response===undefined) {
+                    alert('존재하지 않는 아이디입니다.');
+                } else {
+                    console.log(123)
+                    console.log(response.data[0]);
+                    if (response.data[0].password === inputPw) {
+                        alert('비밀번호가 일치함');
+                        sessionStorage.setItem("Id", inputId);
+                        sessionStorage.setItem("Pw", inputPw);
+    
+                        setSavedId(sessionStorage.getItem("Id"));
+                        setSavedPw(sessionStorage.getItem("Pw"));
+                        refreshPage();
+                    }
+                     else {
+                        alert('비밀번호가 일치하지 않습니다.');
+                    }
+                }
+            }).catch(function (error) {
+                console.log(error);
+            })
+        } else { // 복호화 후 회원가입한 유저 로그인
+            axios.post('/usersRouter/loginBcrypt', {
+                data: {
+                    user_id: inputId,
+                    password: inputPw
+                }
+            })
+            .then((response) => {
+                // console.log(response.data);
+                // alert(123)
+                if (response===undefined) {
+                    alert('존재하지 않는 아이디입니다.');
+                } else {
+                    console.log(123)
+                    console.log(response.data[0]);
+                    if (response.data.status === 'success') {
+                        sessionStorage.setItem("Id", inputId);
+                        sessionStorage.setItem("Pw", inputPw);
+    
+                        setSavedId(sessionStorage.getItem("Id"));
+                        setSavedPw(sessionStorage.getItem("Pw"));
+                        refreshPage();
+                    } 
+                    // if (response.data[0].password === inputPw) {
+                    //     // alert('비밀번호가 일치함');
+                    // }
+                     else {
+                        alert('비밀번호가 일치하지 않습니다.');
+                    }
+                }
+            }).catch(function (error) {
+                console.log(error);
+            })
+        }
+        // axios.post('/usersRouter/loginBcrypt', {
+        //     data: {
+        //         user_id: inputId,
+        //         password: inputPw
+        //     }
+        // })
+        
     }
 
     const onClickSignUp = () => {

@@ -146,30 +146,30 @@ router.post('/findOne/', function(req, res, next) {
     // });
 });
 
-// router.post('/loginCheck/', function(req, res, next) {
-//     // 특정 아이디값 가져오기
-//     const user_id = req.body.data.user_id
-//     console.log('[로그인 요청] '+user_id);
-//     User.find().where('user_id').equals(user_id)
-//     .then( (users) => {
-//         console.log(users);
-//         res.json(users);
-//     }).catch( (err) => {
-//         console.log(err);
-//         next(err)
-//     });
-//     // User.findOne({"user_id": bmName}, function(error,news){
-//     //     console.log('--- Read one ---');
-//     //     if(error){
-//     //         console.log(error);
-//     //     }else{
-//     //         res.json(news)
-            
-//     //     }
-//     // });
-// });
-
 router.post('/loginCheck/', function(req, res, next) {
+    // 특정 아이디값 가져오기
+    const user_id = req.body.data.user_id
+    console.log('[로그인 요청] '+user_id);
+    User.find().where('user_id').equals(user_id)
+    .then( (users) => {
+        console.log(users);
+        res.json(users);
+    }).catch( (err) => {
+        console.log(err);
+        next(err)
+    });
+    // User.findOne({"user_id": bmName}, function(error,news){
+    //     console.log('--- Read one ---');
+    //     if(error){
+    //         console.log(error);
+    //     }else{
+    //         res.json(news)
+            
+    //     }
+    // });
+});
+
+router.post('/loginBcrypt/', function(req, res, next) {
     User.findOne({ user_id: req.body.data.user_id }, (err, user) => {
 		if (!user) {
 			return res.json({
@@ -177,7 +177,7 @@ router.post('/loginCheck/', function(req, res, next) {
 				message: "아이디가 일치하지 않습니다.",
 			});
 		} else {
-			bcrypt.compare(req.body.data.password, user.password, (err, same) => {
+			bcrypt.compare(req.body.data.password, user.password, (error, same) => {
 				// async callback
                 if(!same){
                     console.log(error);

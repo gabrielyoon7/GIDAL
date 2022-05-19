@@ -3,10 +3,12 @@ import axios from "axios";
 import { Box, Text, Heading, VStack, FormControl, Input, Link, Button, HStack, Center, NativeBaseProvider } from "native-base";
 import { useEffect, useState } from "react";
 import { config } from '../../../../config'
+import LoadingSpinner from "../../../components/common/LoadingSpinner";
 
 const SignInView = (props) => {
     const [userId, setUserId] = useState('');
     const [password, setPassword] = useState('');
+    const [isLoaded, setLoaded] = useState(false);
 
     const SignIn = () => {
         if (!userId) {
@@ -60,6 +62,9 @@ const SignInView = (props) => {
                     if (value != null) {
                         props.navigation.replace('Home');
                     }
+                    else{
+                        setLoaded(true);
+                    }
                 })
         } catch (error) {
             console.log(error);
@@ -67,6 +72,8 @@ const SignInView = (props) => {
     }
 
     return (
+        isLoaded
+        ?
         <Center w="100%" h="100%" bg="white">
             <Box safeArea p="2" py="8" w="90%" maxW="290">
                 <Heading
@@ -126,6 +133,8 @@ const SignInView = (props) => {
                 </VStack>
             </Box>
         </Center>
+        :
+        <LoadingSpinner/>
     );
 }
 

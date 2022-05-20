@@ -49,10 +49,10 @@ const DiarySnsFeedView = () => {
                 <div className="col-md-4">
                     <div className="position-sticky">
                         {/* <div> */}
-                        <div className="p-4 mb-3 bg-light rounded">
+                        {/* <div className="p-4 mb-3 bg-light rounded">
                             <h4 className="fst-italic">About</h4>
                             <p className="mb-0">Customize this section to tell your visitors a little bit about your publication, writers, content, or something else entirely. Totally up to you.</p>
-                        </div>
+                        </div> */}
 
                         <div className="p-4">
                             <h4 className="fst-italic">Archives</h4>

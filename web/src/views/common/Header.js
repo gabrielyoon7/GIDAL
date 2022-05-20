@@ -85,8 +85,8 @@ const Header = () => {
                     <div className="nav-scroller py-1 mb-2">
                         {/* 이 부분은 로그인 한 사람에게만 뜨면 좋겠음 */}
                         <nav className="nav d-flex justify-content-between">
-                            <a className="p-2 link-secondary" href="user/gabrielyoon7">마이다이어리</a>
-                            <a className="p-2 link-secondary" href="sns">피드</a>
+                            <a className="p-2 link-secondary" href="/user/gabrielyoon7">마이다이어리</a>
+                            <a className="p-2 link-secondary" href="/sns">피드</a>
                             <a className="p-2 link-secondary" href="#">통계</a>
                             <a className="p-2 link-secondary" href="#">할일</a>
                             <a className="p-2 link-secondary" href="#">설정</a>

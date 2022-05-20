@@ -11,7 +11,7 @@ const DiaryPostCard = (props) => {
     return (
         <article className="blog-post">
             <h2 className="blog-post-title">{props.diary.title}</h2>
-            <p className="blog-post-meta">{props.diary.date} by <a href="#">{props.diary.user_id}</a></p>
+            <p className="blog-post-meta">{props.diary.date} by <a href={"user/"+props.diary.user_id}>{props.diary.user_id}</a></p>
             <p>{content}</p>
             <hr></hr>
         </article>

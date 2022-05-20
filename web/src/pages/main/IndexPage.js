@@ -1,18 +1,47 @@
 // import logo from '../../logo.svg';
 // import '../../App.css';
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Footer from "../../views/common/Footer";
 import Header from "../../views/common/Header";
+import MyDiaryView from "../../views/diary/MyDiaryView";
 import MainView from "../../views/main/MainView";
+import DiarySnsFeedView from "../../views/sns/DiarySnsFeedView";
+
+
+const data = {
+  undefined: {
+    html: <MainView />,
+  },
+  home: {
+    html: <MainView />,
+  },
+  diary:{
+    html:<MyDiaryView/>,
+  },
+  sns: {
+    html: <DiarySnsFeedView />,
+  },
+};
+
 
 const IndexPage = (props) => {
+  const params = useParams();
+  const menu = data[params.menu];
+
   return (
     <div>
-      <Header/>
+      <Header />
       <main className="container">
-        <MainView/>
+        {/* <MainView/> */}
+        {menu ? (
+          <>
+            {menu.html}
+          </>
+        ) : (
+          <p>존재하지 않는 메뉴입니다.</p>
+        )}
       </main>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

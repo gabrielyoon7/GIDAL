@@ -54,7 +54,7 @@ const Header = () => {
                                 <div>
                                     <div className="dropdown">
                                         <button className="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <i class="bi bi-person-circle"></i>
+                                            <i className="bi bi-person-circle"></i>
                                         </button>
                                         <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
                                             <li><a className="dropdown-item" href="#">{userId}</a></li>
@@ -69,19 +69,13 @@ const Header = () => {
                                 <div>
                                     <div className="dropdown">
                                         <button className="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <i class="bi bi-box-arrow-in-right"></i>
+                                            <i className="bi bi-box-arrow-in-right"></i>
                                         </button>
                                         <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
                                             <li><a className="dropdown-item active" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">로그인</a></li>
                                             <li><a className="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#signupModal">회원가입</a></li>
                                         </ul>
                                     </div>
-                                    {/* <button type="button" className="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#loginModal">
-                                        로그인
-                                    </button>
-                                    <button type="button" className="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#signupModal">
-                                        회원가입
-                                    </button> */}
                                 </div>
                         }
                     </div>
@@ -93,7 +87,7 @@ const Header = () => {
                     <div className="nav-scroller py-1 mb-2">
                         {/* 이 부분은 로그인 한 사람에게만 뜨면 좋겠음 */}
                         <nav className="nav d-flex justify-content-between">
-                            <a className="p-2 link-secondary" href="#">마이다이어리</a>
+                            <a className="p-2 link-secondary" href="diary">마이다이어리</a>
                             <a className="p-2 link-secondary" href="sns">피드</a>
                             <a className="p-2 link-secondary" href="#">통계</a>
                             <a className="p-2 link-secondary" href="#">할일</a>

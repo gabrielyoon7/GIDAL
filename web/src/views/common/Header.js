@@ -58,7 +58,7 @@ const Header = () => {
                                         </button>
                                         <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
                                             <li><a className="dropdown-item" href={"/user/"+userId}>{userId}</a></li>
-                                            <li><a className="dropdown-item" href="#">일기 작성하기</a></li>
+                                            <li><a className="dropdown-item" href="/wirte">일기 작성하기</a></li>
                                             <li><a className="dropdown-item" onClick={() => logout()}>로그아웃</a></li>
                                         </ul>
                                     </div>

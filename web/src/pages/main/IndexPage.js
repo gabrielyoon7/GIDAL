@@ -3,6 +3,7 @@
 import { Link, useParams } from "react-router-dom";
 import Footer from "../../views/common/Footer";
 import Header from "../../views/common/Header";
+import DirayWriteView from "../../views/diary/DirayWriteView";
 import MainView from "../../views/main/MainView";
 import DiarySnsFeedView from "../../views/sns/DiarySnsFeedView";
 
@@ -13,6 +14,9 @@ const data = {
   },
   home: {
     html: <MainView />,
+  },
+  wirte:{
+    html: <DirayWriteView/>,
   },
   sns: {
     html: <DiarySnsFeedView />,

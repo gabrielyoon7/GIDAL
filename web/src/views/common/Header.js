@@ -31,6 +31,17 @@ const Header = () => {
                     </div>
                     <div className="col-4 text-center h1">
                         <Link to="/" className='text-decoration-none'><div className="blog-header-logo text-dark" href="/">기록의 달인</div></Link>
+                        {/* <div className="dropdown">
+                            <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                Dropdown button
+                            </button>
+                            <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                                <li><a className="dropdown-item active" href="#">Action</a></li>
+                                <li><a className="dropdown-item" href="#">Another action</a></li>
+                                <li><a className="dropdown-item" href="#">Something else here</a></li>
+                                <li><a className="dropdown-item" href="#">Separated link</a></li>
+                            </ul>
+                        </div> */}
                     </div>
                     {/* <div className="col-4 d-flex justify-content-end align-items-center">
                         <a className="btn btn-sm btn-outline-secondary" href="#">로그인</a>
@@ -42,18 +53,27 @@ const Header = () => {
                                 ?
                                 <div>
                                     <a className="p-2 link-secondary" href="#">{userId}</a>님 안녕하세요
-                                    <button type="button" className="btn btn-sm btn-outline-secondary" onClick={() => logout()}>
+                                    {/* <button type="button" className="btn btn-sm btn-outline-secondary" onClick={() => logout()}>
                                         로그아웃
-                                    </button>
+                                    </button> */}
                                 </div>
                                 :
                                 <div>
-                                    <button type="button" className="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#loginModal">
+                                    <div className="dropdown">
+                                        <button className="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="bi bi-box-arrow-in-right"></i>
+                                        </button>
+                                        <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                                            <li><a className="dropdown-item active" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">로그인</a></li>
+                                            <li><a className="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#signupModal">회원가입</a></li>
+                                        </ul>
+                                    </div>
+                                    {/* <button type="button" className="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#loginModal">
                                         로그인
                                     </button>
                                     <button type="button" className="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#signupModal">
                                         회원가입
-                                    </button>
+                                    </button> */}
                                 </div>
                         }
                     </div>
@@ -74,7 +94,7 @@ const Header = () => {
                     </div>
                     :
                     <div></div>
-             }
+            }
             {/* <!-- Login Modal --> */}
             <div className="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
                 <div className="modal-dialog">

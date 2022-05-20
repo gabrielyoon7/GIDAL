@@ -10,12 +10,12 @@ const Header = () => {
     // console.log(sessionStorage.getItem("Id"));
 
     useEffect(() => {
-        if(sessionStorage.getItem("Id") == null){
-          setIsLogin(false)
+        if (sessionStorage.getItem("Id") == null) {
+            setIsLogin(false)
         } else {
-          setIsLogin(true)
+            setIsLogin(true)
         }
-      })
+    })
 
     const logout = () => {
         sessionStorage.clear('Id')
@@ -37,26 +37,25 @@ const Header = () => {
                     </div> */}
                     {/* <!-- Button trigger modal --> */}
                     <div className="col-4 d-flex justify-content-end align-items-center">
-                    {!isLogin &&
-                    <div>
-                    <button type="button" className="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#loginModal">
-                            로그인
-                        </button>
-                        <button type="button" className="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#signupModal">
-                            회원가입
-                        </button>
-                    </div>
-                        
-                         }
-                    {isLogin &&
-                    <div>
-                    <a className="p-2 link-secondary" href="#">{userId}</a>님 안녕하세요
-                    <button type="button" className="btn btn-sm btn-outline-secondary" onClick={() => logout()}>
-                            로그아웃
-                        </button>
-                    </div>
-                        
-                         }
+                        {
+                            isLogin
+                                ?
+                                <div>
+                                    <a className="p-2 link-secondary" href="#">{userId}</a>님 안녕하세요
+                                    <button type="button" className="btn btn-sm btn-outline-secondary" onClick={() => logout()}>
+                                        로그아웃
+                                    </button>
+                                </div>
+                                :
+                                <div>
+                                    <button type="button" className="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#loginModal">
+                                        로그인
+                                    </button>
+                                    <button type="button" className="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#signupModal">
+                                        회원가입
+                                    </button>
+                                </div>
+                        }
                     </div>
                 </div>
             </header>
@@ -79,8 +78,8 @@ const Header = () => {
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         {!isLogin &&
-                            <Login/>}
-                            
+                            <Login />}
+
                     </div>
                 </div>
             </div>
@@ -94,7 +93,7 @@ const Header = () => {
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         {!isLogin &&
-                            <SignUp/>}
+                            <SignUp />}
                     </div>
                 </div>
             </div>

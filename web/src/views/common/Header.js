@@ -57,13 +57,11 @@ const Header = () => {
                                             <i className="bi bi-person-circle"></i>
                                         </button>
                                         <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                                            <li><a className="dropdown-item" href="#">{userId}</a></li>
+                                            <li><a className="dropdown-item" href="user/">{userId}</a></li>
+                                            <li><a className="dropdown-item" href="#">일기 작성하기</a></li>
                                             <li><a className="dropdown-item" onClick={() => logout()}>로그아웃</a></li>
                                         </ul>
                                     </div>
-                                    {/* <button type="button" className="btn btn-sm btn-outline-secondary" onClick={() => logout()}>
-                                        로그아웃
-                                    </button> */}
                                 </div>
                                 :
                                 <div>
@@ -87,7 +85,7 @@ const Header = () => {
                     <div className="nav-scroller py-1 mb-2">
                         {/* 이 부분은 로그인 한 사람에게만 뜨면 좋겠음 */}
                         <nav className="nav d-flex justify-content-between">
-                            <a className="p-2 link-secondary" href="diary">마이다이어리</a>
+                            <a className="p-2 link-secondary" href="user/gabrielyoon7">마이다이어리</a>
                             <a className="p-2 link-secondary" href="sns">피드</a>
                             <a className="p-2 link-secondary" href="#">통계</a>
                             <a className="p-2 link-secondary" href="#">할일</a>

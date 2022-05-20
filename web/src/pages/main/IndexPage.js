@@ -3,7 +3,6 @@
 import { Link, useParams } from "react-router-dom";
 import Footer from "../../views/common/Footer";
 import Header from "../../views/common/Header";
-import MyDiaryView from "../../views/diary/MyDiaryView";
 import MainView from "../../views/main/MainView";
 import DiarySnsFeedView from "../../views/sns/DiarySnsFeedView";
 
@@ -14,9 +13,6 @@ const data = {
   },
   home: {
     html: <MainView />,
-  },
-  diary:{
-    html:<MyDiaryView/>,
   },
   sns: {
     html: <DiarySnsFeedView />,

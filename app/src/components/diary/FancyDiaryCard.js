@@ -14,13 +14,12 @@ const FancyDiaryCard = ({ item: diary, user_id, onPress, backgroundColor, textCo
     content = content.replace(/&nbsp;/gi, "");
 
     useEffect(() => {
-        if(diary.user_id === 'La'){ // 추후 해당 조건문 삭제 예정
-            if(diary.likers.includes(user_id)){
-                console.log(diary.likers);
-                setLiked(true)
-            }
+        if (diary.likers.includes(user_id)) {
+            setLiked(true)
+        } else {
+            setLiked(false);
         }
-    }, [])
+    }, [diary])
 
     // 정규식을 이용한 HTML 태그 제거 끝
     return (

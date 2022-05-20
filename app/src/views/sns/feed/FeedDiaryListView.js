@@ -47,6 +47,7 @@ const FeedDiaryList = (props, navigation) => {
 
     //泥� �젋�뜑留곸뿉留� �샇異쒕맖
     useEffect(() => {
+        console.log(1);
         getitems();
     }, [isFocused]);
 

@@ -60,7 +60,7 @@ const DiaryReadView = (props) => {
         } catch (error) {
             // console.log(error);
         }
-    })
+    }, [])
 
     const [likeCount, setLikeCount] = React.useState(diary.likes);
     const [likers, setLikers] = React.useState(diary.likers);

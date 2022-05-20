@@ -35,10 +35,10 @@ const diarySchema = mongoose.Schema({
         type: Array,
         stickers : [{sticker : String}]
     },
-    comments: {
-        type: Array,
-        comments : [{comment : String}]
-    },
+    comments: [{
+        user_id: String,
+        comment: String
+    }],
     likes: {
         type: Number,
         default: 0

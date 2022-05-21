@@ -192,7 +192,7 @@ export default function UserProfileView(props) {
     //만약에 팔로우가 되어있다면 팔로우 해제 버튼과 디엠 보내기만 보여주고,
     //팔로우가 되어있지 않다면 팔로우만 보여준다.
     return (
-      <Button mt="3" mr="3" onPress={() => follow()} colorScheme="yellow">
+      <Button mt="3" mr="3" onPress={() => follow()} colorScheme="yellow" style={styles.followButton}>
         <Text>{followText}</Text>
       </Button>
     )
@@ -259,24 +259,27 @@ export default function UserProfileView(props) {
 const styles = StyleSheet.create({
   buttonStyle: {
     alignItems: 'center',
-    width: 80,
-    marginRight: 20,
+    width: 50,
+    marginRight: 10,
+    marginTop: 10,
     padding: 5,
+    //backgroundColor: 'blue'
   },
   header: {
     backgroundColor: "#2ecc71",
   },
   headerContent: {
-    padding: 30,
+    padding: 20,
     alignItems: 'center',
   },
   avatar: {
-    width: 130,
-    height: 130,
+    width: 90,
+    height: 90,
     borderRadius: 63,
     borderWidth: 4,
     borderColor: "#FFFFFF",
-    marginBottom: 10,
+    position: 'absolute',
+    top: 10, left: 20
   },
   image: {
     width: 60,
@@ -316,5 +319,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: 'white',
     textAlign: 'center',
+  },
+  followButton: {
+    position: 'absolute',
+    left: "25%"
   }
 });

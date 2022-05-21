@@ -188,8 +188,6 @@ const DiaryWriteView = (props) => {
             onConfirm={handleConfirm}
             onCancel={hideDatePicker}
           />
-
-
         </ScrollView>
         <RadioDisclosure disclosure={disclosure} setDisclosure={setDisclosure} />
       </View>

@@ -6,7 +6,34 @@ const InputContent = (props) => {
     const richText = React.useRef();
     return (
         <>
-            <ScrollView style={{height:310}}>
+                    <RichToolbar
+                editor={richText}
+                actions={[
+                  actions.undo,
+                  actions.redo,
+                  actions.insertVideo,
+                  actions.insertImage,
+                  actions.setStrikethrough,
+                  // actions.checkboxList,
+                  actions.insertOrderedList,
+                  actions.blockquote,
+                  actions.alignLeft,
+                  actions.alignCenter,
+                  actions.alignRight,
+                  actions.code,
+                  actions.line,
+      
+                  actions.foreColor,
+                  actions.hiliteColor,
+                  actions.heading1,
+                  actions.heading4,
+                  'insertEmoji',
+                  'insertHTML',
+                  'fontSize',
+                ]} // default defaultActions
+                iconMap={{ [actions.heading1]: ({ tintColor }) => (<Text style={[{ color: tintColor }]}>H1</Text>), }}
+            />
+            <ScrollView style={{height:500}}>
                 <RichEditor
                     // initialFocus={true}
                     // disabled={disabled}
@@ -92,7 +119,7 @@ const InputContent = (props) => {
         // foreColor={handleForeColor}
         // hiliteColor={handleHiliteColor}
         /> */}
-            <RichToolbar
+            {/* <RichToolbar
                 editor={richText}
                 actions={[
                   actions.undo,
@@ -118,7 +145,7 @@ const InputContent = (props) => {
                   'fontSize',
                 ]} // default defaultActions
                 iconMap={{ [actions.heading1]: ({ tintColor }) => (<Text style={[{ color: tintColor }]}>H1</Text>), }}
-            />
+            /> */}
         </>
     )
 }

@@ -1,6 +1,6 @@
 import { Box, Input, Text, TextArea, Stack, Button, HStack, Badge, Spacer, Avatar, Divider, ScrollView, useDisclose, Actionsheet, Icon, Image, Center, Stagger, IconButton } from 'native-base';
 import * as React from 'react';
-import { Dimensions, StyleSheet, View, TouchableOpacity } from 'react-native';
+import { Dimensions, StyleSheet, View, TouchableOpacity, FlatList } from 'react-native';
 import axios from 'axios';
 import { config } from '../../../../config'
 import { useWindowDimensions } from 'react-native';
@@ -17,6 +17,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const DiaryReadView = (props) => {
     // const [date, setSelectedDate] = React.useState(props.selectedDate);
+    const [ref, setRef] = React.useState(null);
+
     const [userId, setUserId] = React.useState('');
     const { width } = useWindowDimensions();
     const new_routes = useNavigationState(state => state.routes);
@@ -164,6 +166,22 @@ const DiaryReadView = (props) => {
         );
     }
 
+    const renderItem = ({ item }) => {
+        return (
+            <Badge
+                backgroundColor={generateColor()}
+                _text={{
+                    color: "white"
+                }}
+                variant="solid"
+                rounded="4"
+                key={item}
+            >
+                {item}
+            </Badge>
+        );
+    };
+
     const ReadView = () => {
         return (
             <View style={styles.background}>
@@ -224,6 +242,17 @@ const DiaryReadView = (props) => {
                     <Divider my="5" />
 
                     <HStack alignItems="center">
+                        {/* <FlatList
+                            horizontal={true}
+                            data={diary.tags}
+                            ref={(ref) => {
+                                setRef(ref);
+                            }}
+                            renderItem={renderItem}
+                            keyExtractor={(item) => item}
+                            extraData={diary.tags}
+                        /> */}
+
                         {diary.tags.map((tag) => (
                             <Badge
                                 backgroundColor={generateColor()}

@@ -1,10 +1,10 @@
 import { View } from "native-base";
 import { useCallback, useEffect, useRef, useState } from "react";
-import Carousel, { ParallaxImage } from 'react-native-snap-carousel';import { config } from "../../../config";
+import Carousel, { ParallaxImage } from 'react-native-snap-carousel'; import { config } from "../../../config";
 import TagCard from "../tag/TagCard";
 // import { TagDataExample } from "./TagDataExample";
 import axios from 'axios';
-import { Dimensions,Text, TouchableOpacity, StyleSheet  } from "react-native";
+import { Dimensions, Text, TouchableOpacity, StyleSheet } from "react-native";
 
 const { width: screenWidth } = Dimensions.get('window')
 const TagSelector = (props) => {
@@ -12,7 +12,7 @@ const TagSelector = (props) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [carouselItems, setCarouselItems] = useState([]);
   const ref = useRef(null);
-  
+
   useEffect(() => {
     getTags();
   }, []);
@@ -32,19 +32,19 @@ const TagSelector = (props) => {
       })
   }
 
-  const renderItem = useCallback(({ item, index },parallaxProps) => (
+  const renderItem = useCallback(({ item, index }, parallaxProps) => (
     <View>
-       <ParallaxImage
-                    source={{ uri: item.thumbnail }}
-                    containerStyle={styles.imageContainer}
-                    style={styles.image}
-                    parallaxFactor={0.4}
-                    {...parallaxProps}
-                />
-    <TagCard item={item} selectTags={props.selectTags} />
+      <ParallaxImage
+        source={{ uri: item.thumbnail }}
+        containerStyle={styles.imageContainer}
+        style={styles.image}
+        parallaxFactor={0.4}
+        {...parallaxProps}
+      />
+      <TagCard item={item} selectTags={props.selectTags} />
 
     </View>
-       
+
 
   ), []);
 
@@ -52,10 +52,10 @@ const TagSelector = (props) => {
   return (
     <View>
       <Carousel
-       layout={'default'}
+        layout={'stack'}
         ref={ref}
         data={carouselItems}
-        sliderWidth={350}
+        sliderWidth={450}
         itemWidth={350}
         renderItem={renderItem}
         onSnapToItem={(index) => setActiveIndex(index)}

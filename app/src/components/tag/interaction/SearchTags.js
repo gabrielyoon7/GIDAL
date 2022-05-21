@@ -56,6 +56,7 @@ const SearchTags = (props) => {
                     initialNumToRender={3}
                     maxToRenderPerBatch={1}
                     windowSize={1}
+                    numColumns={3}
                 />
             </View>
 

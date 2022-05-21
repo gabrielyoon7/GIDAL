@@ -52,7 +52,7 @@ const TagSelector = (props) => {
   return (
     <View>
       <Carousel
-        layout={'stack'}
+        layout={'default'}
         ref={ref}
         data={carouselItems}
         sliderWidth={450}

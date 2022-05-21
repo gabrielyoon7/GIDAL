@@ -7,6 +7,7 @@ import DiaryList from '../../diary/list/DiaryList';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused, useNavigationState } from '@react-navigation/native';
 import BackButton from '../../../components/common/BackButton';
+import { Ionicons } from "@expo/vector-icons";
 
 // 이걸로 통합 예정
 
@@ -26,7 +27,7 @@ export default function UserProfileView(props) {
   const [userFollowing, setUserFollowing] = useState([]);
   const [userFollowerNum, setuserFollowerNum] = useState(0);
   const [userFollowingNum, setuserFollowingNum] = useState(0);
-  const [followText, setFollowText] = useState('팔로우');
+  const [followText, setFollowText] = useState('loading');
 
   const [isLoaded, setIsLoaded] = React.useState(false);
   const new_routes = useNavigationState(state => state.routes);
@@ -99,11 +100,11 @@ export default function UserProfileView(props) {
     // console.log(currentId);
     if (objectFollowing.includes(currentId)) {
       // console.log("이미 팔로우 되어있음")
-      setFollowText('Unfollow')
+      setFollowText(<Ionicons name="person-remove" size={15} color="red" />)
 
     } else {
       // console.log("아직 팔로우 안되어있음")
-      setFollowText('Follow')
+      setFollowText(<Ionicons name="person-add" size={15} color="green" />)
     }
   }, [userFollower])
 
@@ -129,7 +130,7 @@ export default function UserProfileView(props) {
         data: data
       })
         .then((response) => {
-          setFollowText("Follow")
+          setFollowText(<Ionicons name="person-add" size={15} color="green" />)
           getUserData(user_Id);
         }).catch(function (error) {
           console.log(error);
@@ -143,7 +144,7 @@ export default function UserProfileView(props) {
         data: data
       })
         .then((response) => {
-          setFollowText("Unfollow")
+          setFollowText(<Ionicons name="person-remove" size={15} color="red" />)
           getUserData(user_Id);
         }).catch(function (error) {
           console.log(error);
@@ -182,7 +183,8 @@ export default function UserProfileView(props) {
 
   const MyPageActionView = () => {
     return (
-      <Text>정보 수정</Text>
+      // <Text>정보 수정</Text>
+      <Box></Box>
     )
   }
 
@@ -266,7 +268,8 @@ const styles = StyleSheet.create({
     //backgroundColor: 'blue'
   },
   header: {
-    backgroundColor: "#2ecc71",
+    // 헤더  색상
+    backgroundColor: "#336600",
   },
   headerContent: {
     padding: 20,

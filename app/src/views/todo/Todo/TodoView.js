@@ -229,20 +229,21 @@ const Todo = ({ props }) => { // 진짜
                 {/* <AddInput submitHandler={submitHandler} /> */}
               </>
           }
-          ListFooterComponent={
-            () =>
-              <>
-                <AddInput submitHandler={submitHandler} />
-              </>
-          }
+          // ListFooterComponent={
+          //   () =>
+          //     <>
+          //       <AddInput submitHandler={submitHandler} />
+          //     </>
+          // }
           ListEmptyComponent={() => <Empty />}
           keyExtractor={(item) => item.key}
           renderItem={({ item }) => (
             <TodoList item={item} deleteItem={deleteItem} changeIsDone={changeIsDone} />
           )}
         />
-        {/* <View>
-        </View> */}
+        <View>
+        <AddInput submitHandler={submitHandler} />
+        </View>
       </View>
       <DateTimePickerModal
         isVisible={isDatePickerVisible}

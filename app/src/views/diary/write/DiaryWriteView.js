@@ -227,14 +227,14 @@ const buttonStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 8,
-    borderRadius: 100,
+    borderRadius: 8,
     backgroundColor: 'yellow', //태그버튼색 변경
     width: 80
   },
   btnView: {
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: 'black',
-    borderRadius: 100,
+    borderRadius: 8,
     borderWidth: 1.5,
     margin: 3,
   },

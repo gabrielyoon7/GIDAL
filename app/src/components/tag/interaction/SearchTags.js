@@ -31,6 +31,7 @@ const SearchTags = (props) => {
         <View style={{ justifyContent: 'center', flexDirection: "column", padding: 23 }} >
             <View>
                 <SearchBar
+                    style={{borderWidth: 1, width: 300, shadowOpacity: 0, borderColor: '#808080'}}
                     placeholder="검색어를 입력하세요"
                     // onPress={() => alert("onPress")}
                     onChangeText={(text) => {

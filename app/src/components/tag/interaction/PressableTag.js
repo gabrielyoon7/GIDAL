@@ -20,7 +20,7 @@ const PressableTag = (props) => {
         onPress={() => (
           onPressTag()
         )}>
-        <Text>{props.tag}</Text>
+        <Text style={{ fontWeight: 'bold'}}>{props.tag}</Text>
       </Pressable>
     </View>
   )
@@ -46,7 +46,7 @@ const buttonStyles = StyleSheet.create({
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: 'black',
     borderRadius: 10,
-    borderWidth: 1.5,
+    borderWidth: 1.4,
     margin: 3,
     // marginTop: 15
   },

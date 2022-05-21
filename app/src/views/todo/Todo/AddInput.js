@@ -17,7 +17,7 @@ export default function AddInput({ submitHandler }) {
   return (
     <ComponentContainer>
     <InputContainer>
-      <Input placeholder="Add Task..." value={value} onChangeText={onChangeText} />
+      <Input placeholder="할 일을 입력하세요" value={value} onChangeText={onChangeText} />
     </InputContainer>
     <SubmitButton onPress={() => addData()}>
       <Text>+</Text>
@@ -32,17 +32,22 @@ const ComponentContainer = styled.View`
 
 const InputContainer = styled.View`
   flex-direction: row;
-  border-radius: 10px;
-  border: 2px solid black;
+  border-radius: 8px;
+  border: 1px;
+  width: 320px;
+  height: 50px;
+  margin-bottom: 5px;
+  border-color:gray;
+
 `;
 
 const Input = styled.TextInput`
-  font-size: 20px;
+  font-size: 15px;
   background-color: white;
   width: 300px;
   margin-right: 20px;
   padding: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   border-radius: 10px;
 `;
 
@@ -51,6 +56,9 @@ const SubmitButton = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   background-color: whitesmoke;
-  margin-bottom: 20px;
-  border-radius: 10px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  border-radius: 8px;
+  background-color:#27ae60;
+
 `;

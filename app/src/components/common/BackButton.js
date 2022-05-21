@@ -3,8 +3,8 @@ import { AntDesign } from "@expo/vector-icons";
 
 const BackButton = (props) => {
     return (
-        <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ paddingLeft: 30, paddingTop: 20 }} >
-            <AntDesign name="left" size={24} color="black" />
+        <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ paddingLeft: 10, paddingTop: 15 }} >
+            <AntDesign name="left" size={24} color="white" />
         </TouchableOpacity>
     )
 }

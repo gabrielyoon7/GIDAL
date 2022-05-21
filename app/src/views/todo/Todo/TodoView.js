@@ -12,10 +12,11 @@ import Empty from "./Empty";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios'
 import { config } from '../../../../config'
+import { Feather } from '@expo/vector-icons'; 
 
 let today = new Date().toJSON().split('T')[0];
 
-const Todo = ({ props }) => {
+const Todo = ({ props }) => { // 진짜
   const [user_Id, setUserId] = useState('');
   const [data, setData] = useState([]);
   const [firstRecord, setFirstRecord] = useState(true); // 처음 todolist 사용하는 유저 구분
@@ -203,10 +204,10 @@ const Todo = ({ props }) => {
         <HeaderText>To-Do</HeaderText>
         <Text></Text>
         <HeaderList onPress={() => showDatePicker()}>
-          {date} <Icon name="list" size={30} color="#900" onPress={() => props.navigation.navigate('TodoCalendar', {
+          {date} <Feather name="menu" size={30} color="black" onPress={() => props.navigation.navigate('TodoCalendar', {
             user_id: user_Id,
             pickedDate: pickedDate
-          })} /></HeaderList>
+          })}/></HeaderList>
       </HeaderComponentContainer>
     );
   }
@@ -270,21 +271,22 @@ const ComponentContainer = styled.View`
 `;
 
 const HeaderComponentContainer = styled.View`
-  height: 100px;
+  height: 50px;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  font-weight: bold;
 `;
 
 const HeaderText = styled.Text`
   ${'' /* color: white; */}
-  font-size: 30px;
+  font-size: 25px;
 `;
 
 const HeaderList = styled.Text`
   ${'' /* color: white; */}
   font-size: 20px;
-  margin-right: 20px;
+  margin-right: 5px;
 `;
 
 const TodoTest = (props) => {

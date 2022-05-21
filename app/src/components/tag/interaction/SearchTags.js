@@ -28,10 +28,10 @@ const SearchTags = (props) => {
         setDataSource(newData);
     }
     return (
-        <View style={{ justifyContent: 'center', flexDirection: "column", padding: 23 }} >
+        <View style={{ justifyContent: 'center', flexDirection: "column", padding: 23, marginTop: -10 }} >
             <View>
                 <SearchBar
-                    style={{borderWidth: 1, width: 300, shadowOpacity: 0, borderColor: '#808080', marginBottom: 4}}
+                    style={{borderWidth: 1, width: 300, shadowOpacity: 0, borderColor: '#808080' }}
                     placeholder="검색어를 입력하세요"
                     // onPress={() => alert("onPress")}
                     onChangeText={(text) => {
@@ -71,6 +71,8 @@ const styles = StyleSheet.create({
         // flexDirection: 'column',
         flexWrap: 'wrap',
         width: '27%',
+        maxHeight: '88%',
+        marginTop: 4
     },
 });
 

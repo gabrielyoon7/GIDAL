@@ -16,10 +16,9 @@ export default function TodoList({ item, deleteItem, changeIsDone }) {
         </CirlceContainer>
         <View>
           <TextItem>{item.value}</TextItem>
-          <TextDate> Task</TextDate>
         </View>
         <IconContainer onPress={() => deleteItem(item)}>
-          <MaterialIcons name="delete" size={24} color="midnightblue" />
+          <MaterialIcons name="delete" size={24} color="black" />
         </IconContainer>
       </ListContainer>
     }
@@ -28,11 +27,12 @@ export default function TodoList({ item, deleteItem, changeIsDone }) {
 }
 
 const ListContainer = styled.TouchableOpacity`
-  background-color: whitesmoke;
+  background-color: #b8e994;
   height: auto;
   width: 350px;
-  margin-bottom: 30px;
-  border-radius: 10px;
+  margin-top:20px
+  margin-bottom: 0.1px;
+  border-radius: 8px;
   flex-direction: row;
   justify-content: space-between;
 `;
@@ -46,11 +46,11 @@ const ComponentContainer = styled.View`
 
 const TextItem = styled.Text`
   color: black;
-  width: 260px;
+  width: 240px;
   height: auto;
   font-size: 20px;
   margin-top: 10px;
-  margin-right: 20px;
+  margin-right:1px;
 `;
 
 const TextDate = styled.Text`
@@ -64,16 +64,14 @@ const TextDate = styled.Text`
 const IconContainer = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
-  margin-right: 10px;
-  margin-top: 15px;
-
-  height: 40px;
-
-  border-radius: 10px;
+  height: 60px;
+  padding-right: 10px;
+  padding-top: 1px;
 `;
 
 const CirlceContainer = styled.View`
   align-items: center;
   justify-content: center;
-  padding-left: 5px;
+  padding-left: 15px;
+
 `;

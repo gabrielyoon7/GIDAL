@@ -1,10 +1,12 @@
+import React, { useState } from 'react';
 import axios from "axios";
-import { Box, Heading, VStack, FormControl, Input, Button, Center, NativeBaseProvider, ScrollView } from "native-base";
-import { useState } from "react";
+import { Box, Heading, VStack, FormControl, Input, Button, Center, HStack, ScrollView, Radio } from "native-base";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { config } from '../../../../config'
 import { AntDesign, MaterialIcons, Ionicons } from "@expo/vector-icons";
 import BackButton from "../../../components/common/BackButton";
+import BirthDayPicker from './BirthDatePicker';
+
 
 const SignUpView = (props) => {
     const [userId, setUserId] = useState('');
@@ -14,6 +16,7 @@ const SignUpView = (props) => {
     const [gender, setGender] = useState('');
     const [birthDay, setBirthDay] = useState('');
     const [residence, setResidence] = useState('');
+    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
     const signUp = () => {
         if (!userId) {
@@ -71,6 +74,26 @@ const SignUpView = (props) => {
         })
     }
 
+    const setBirth = (birthDay) => {
+        setBirthDay(birthDay)
+    }
+
+    const SexRadio = () => {
+        return <Radio.Group name="myRadioGroup" accessibilityLabel="favorite number" value={gender} onChange={nextValue => {
+          setGender(nextValue);
+        }}>
+        <HStack>
+        <Radio value="남" my={1}>
+              남
+            </Radio>
+            <Box mr={4}/>
+            <Radio value="여" my={1}>
+              여
+            </Radio>
+        </HStack>
+          </Radio.Group>;
+      };
+
     return (
         <ScrollView bg="white">
             <BackButton navigation={props.navigation} />
@@ -99,12 +122,14 @@ const SignUpView = (props) => {
                             <Input onChangeText={(value) => setName(value)} />
                         </FormControl>
                         <FormControl>
-                            <FormControl.Label>생년월일(추후 모달 구현 예정)</FormControl.Label>
-                            <Input onChangeText={(value) => setBirthDay(value)} />
+                            <FormControl.Label>생년월일</FormControl.Label>
+                            <BirthDayPicker setBirth={setBirth}/>
+                            {/* <Input onPressIn={() => showDatePicker()}/> */}
                         </FormControl>
                         <FormControl>
-                            <FormControl.Label>성별(추후 라디오 버튼 추가할 예정)</FormControl.Label>
-                            <Input onChangeText={(value) => setGender(value)} />
+                            <FormControl.Label>성별</FormControl.Label>
+                            {/* <Input onChangeText={(value) => setGender(value)} /> */}
+                            <SexRadio/>
                         </FormControl>
                         <FormControl>
                             <FormControl.Label>거주지</FormControl.Label>

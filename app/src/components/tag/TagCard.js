@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useRef } from 'react';
 import Carousel from 'react-native-snap-carousel';
-import { Button, View, Text, SafeAreaView, ScrollView, StyleSheet, Pressable, Alert } from 'react-native';
+import { Button, Divider, View, Text, SafeAreaView, ScrollView, StyleSheet, Pressable, Alert } from 'react-native';
 import { Center } from 'native-base';
 import ButtonTags from './interaction/ButtonTags';
 import SearchTags from './interaction/SearchTags';
@@ -49,8 +49,9 @@ const styles = StyleSheet.create({
 
     lineView: {
       borderBottomColor: '#a9a9a9',
-      borderBottomWidth: 2,
+      borderBottomWidth: 1,
       width: '90%',
+      marginTop: -10
     },
 
     interaction:{

@@ -1,5 +1,5 @@
 import { StyleSheet, TouchableOpacity, } from 'react-native';
-import { Badge, Box, Divider, Flex, HStack, Pressable, Spacer, Text, } from 'native-base';
+import { Avatar, Badge, Box, Divider, Flex, HStack, Pressable, Spacer, Text, } from 'native-base';
 import { Ionicons } from "@expo/vector-icons";
 import { useEffect, useState } from 'react';
 
@@ -47,16 +47,29 @@ const FancyDiaryCard = ({ item: diary, user_id, onPress, backgroundColor, textCo
                             }}
                         >
                             <HStack alignItems="center">
-                                <Badge colorScheme="green" _text={{
+                                {/* <Badge colorScheme="green" _text={{
                                     color: "white"
                                 }} variant="solid" rounded="4">
                                     {diary.disclosure}
-                                </Badge>
+                                </Badge> */}
+                                <Avatar bg="green.500" alignSelf="center" size="xs" source={{
+                                    uri: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+                                }}>
+                                    AJ
+                                </Avatar>
+                                <Text fontSize={15} color="coolGray.800" alignSelf="center" mx={2}>
+                                    {diary.user_id}
+                                </Text>
+                                {/* 친구가 아닌 경우에만 이걸 표시해 줘야 할듯 */}
+                                <Ionicons name="person-add-outline" size={15} color="grey" />
                                 <Spacer />
+                                <Text fontSize={11} color="coolGray.800">
+                                    {diary.date.substr(0, 10)}
+                                </Text>
                                 {/* <TouchableOpacity style={styles.heart}> */}
-                                <TouchableOpacity>
+                                {/* <TouchableOpacity>
                                     {liked ? <Ionicons name="heart" size={24} color="red" /> : <Ionicons name="md-heart-outline" size={24} color="grey" />}
-                                </TouchableOpacity>
+                                </TouchableOpacity> */}
                             </HStack>
                             <Text color="coolGray.800" mt="3" fontWeight="medium" fontSize="xl">
                                 {diary.title}
@@ -71,8 +84,8 @@ const FancyDiaryCard = ({ item: diary, user_id, onPress, backgroundColor, textCo
                             >
                                 {content}
                             </Text>
-                            <Divider />
-                            <HStack alignItems="center" mt="3" >
+                            <Divider my={2} />
+                            {/* <HStack alignItems="center" mt="3" >
                                 <Text fontSize={10} color="coolGray.800">
                                     {diary.user_id}
                                 </Text>
@@ -80,8 +93,31 @@ const FancyDiaryCard = ({ item: diary, user_id, onPress, backgroundColor, textCo
                                 <Text fontSize={10} color="coolGray.800">
                                     {diary.date.substr(0, 10)}
                                 </Text>
-                            </HStack>
+                            </HStack> */}
+                            <HStack>
+                                {diary.tags&&diary.tags.slice(0, 3).map((tag) => (
+                                    <Badge colorScheme="green" _text={{
+                                        color: "white"
+                                    }} variant="solid" rounded="4">
+                                        {tag}
+                                    </Badge>
+                                ))}
+                                <Spacer />
+                                
+                                <TouchableOpacity>
+                                    <Ionicons name="chatbubble-outline" size={22} color="grey" />
+                                </TouchableOpacity>
 
+                                <Box mx={1} />
+
+                                <TouchableOpacity>
+                                    {liked ? <Ionicons name="heart" size={24} color="red" /> : <Ionicons name="md-heart-outline" size={24} color="grey" />}
+                                </TouchableOpacity>
+                                {/* <Spacer />
+                                <TouchableOpacity>
+                                    <Ionicons name="paper-plane-outline" size={22} color="grey" />
+                                </TouchableOpacity> */}
+                            </HStack>
                         </Box>
                     )
                 }}

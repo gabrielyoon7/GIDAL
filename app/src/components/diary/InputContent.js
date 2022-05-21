@@ -6,7 +6,7 @@ const InputContent = (props) => {
     const richText = React.useRef();
     return (
         <>
-            <ScrollView style={{height:270}}>
+            <ScrollView style={{height:310}}>
                 <RichEditor
                     // initialFocus={true}
                     // disabled={disabled}

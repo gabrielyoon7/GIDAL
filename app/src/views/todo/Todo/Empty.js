@@ -9,7 +9,7 @@ export default function Empty() {
           uri: 'https://cdn-icons-png.flaticon.com/512/42/42767.png',
         }}
       /> */}
-      <EmptyText>Add To-Do.</EmptyText>
+      <EmptyText>할 일이 없습니다.</EmptyText>
     </ComponentContainer>
   );
 }
@@ -18,14 +18,14 @@ const ComponentContainer = styled.View`
   align-items: center;
   justify-content: center;
   height: 650px;
+  font-color:red;
 `;
 
-const EmptyImage = styled.Image`
-  width: 350px;
-  height: 400px;
-`;
+// const EmptyText = styled.Image`
+
+// `;
 
 const EmptyText = styled.Text`
   ${'' /* color: white; */}
-  font-size: 30px;
+  font-size: 20px;
 `;

@@ -173,4 +173,23 @@ router.post('/deleteMany/', function(req, res, next) {
 
 });
 
+router.post('/modifyComment', function(req, res, next) {
+    const commentInfo = req.body.data;
+    console.log(commentInfo.id);
+    Diary.updateOne(
+        { _id: commentInfo.id }, 
+        {$push: {comments: {
+            "user_id": commentInfo.user_id, 
+            "comment": commentInfo.comment,
+        }}}).exec((error, family)=>{
+            if(error){
+                console.log(error);
+                return res.json({status: 'error', error})
+            }else{
+                console.log('Saved!')
+                return res.json({status: 'Success'})
+            }
+        });
+});
+
 module.exports = router;

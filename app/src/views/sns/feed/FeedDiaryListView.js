@@ -68,12 +68,12 @@ const FeedDiaryList = (props, navigation) => {
     //     }
     // })
 
-    const pressCommentIcon = () => {
+    const pressCommentIcon = (item) => {
         props.navigation.navigate('DiaryComment'
-        // , {
-        //     diary: item,
-        //     user_id: userId,
-        // }
+        , {
+            diary: item,
+            user_id: userId,
+        }
         )
     }
 
@@ -101,7 +101,7 @@ const FeedDiaryList = (props, navigation) => {
             <FancyDiaryCard
                 item={item}
                 user_id={userId}
-                pressCommentIcon={pressCommentIcon}
+                pressCommentIcon={() => pressCommentIcon(item)}
                 onPress={
                     () => {
                         props.navigation.navigate('DiaryRead', {

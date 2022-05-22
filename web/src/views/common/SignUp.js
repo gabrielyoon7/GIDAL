@@ -9,9 +9,6 @@ const SignUp = () => {
     const [birthDay, setBirthDay] = useState('');
     const [residence, setResidence] = useState('');
 
-    const [savedId, setSavedId] = useState("");
-    const [savedPw, setSavedPw] = useState("");
-
     const sessionStorage = window.sessionStorage;
 
     const handleInputId = (e) => {
@@ -24,6 +21,7 @@ const SignUp = () => {
         setInputName(e.target.value);
     }
     const handleGender = (e) => {
+        console.log(e.target.value);
         setGender(e.target.value);
     }
     const handleResidence = (e) => {
@@ -73,9 +71,6 @@ const SignUp = () => {
                 alert('회원가입이 되었습니다!');
                 sessionStorage.setItem("Id", inputId);
                 sessionStorage.setItem("Pw", inputPw);
-
-                setSavedId(sessionStorage.getItem("Id"));
-                setSavedPw(sessionStorage.getItem("Pw"));
                 window.location.reload();
             } else {
                 alert('이미 존재하는 아이디입니다.');
@@ -101,12 +96,21 @@ const SignUp = () => {
                     </div>
                     <div className="form-floating">
                         <input type="text" className="form-control" id="floatingName" value={inputName} onChange={handleName} placeholder="이름" />
-                        <label htmlFor="floatingPassword">이름</label>
+                        <label>이름</label>
                     </div>
-                    <div className="form-floating">
-                        <input type="text" className="form-control" id="floatingGender" value={gender} onChange={handleGender} placeholder="성별" />
-                        <label htmlFor="floatingPassword">성별</label>
-                    </div>
+                    <label>성별</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="남" onChange={handleGender}/>
+                        <label class="form-check-label" for="flexRadioDefault1" >
+                            남
+                        </label>
+                        </div>
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="여" onChange={handleGender}/>
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            여
+                        </label>
+                        </div>
                     <div className="form-floating">
                         <input type="date" className="form-control" id="floatingBirth" value={birthDay} onChange={handleBirth} placeholder="생년월일" />
                         <label htmlFor="floatingPassword">생년월일</label>

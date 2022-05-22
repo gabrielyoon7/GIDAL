@@ -261,7 +261,7 @@ export default function UserProfileView(props) {
 const styles = StyleSheet.create({
   buttonStyle: {
     alignItems: 'center',
-    width: 50,
+    width: 60,
     marginRight: 10,
     marginTop: 10,
     padding: 5,

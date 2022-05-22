@@ -337,7 +337,7 @@ const styles = StyleSheet.create({
     padding: 3,
     marginTop: 5,
     marginBottom: 5,
-    backgroundColor: '#f1f3f5', //리스트 카드 색
+    backgroundColor: '#ffffff', //리스트 카드 색
     flexDirection: 'row',
     shadow:3,
     borderRadius: 8,

@@ -48,7 +48,7 @@ const StatisticsCard = (props) => {
                             borderWidth="1"
                             borderColor="coolGray.300"
                             shadow="3"
-                            bg={isPressed ? "coolGray.200" : isHovered ? "coolGray.200" : "coolGray.100"}
+                            bg={isPressed ? "#E2E2E2" : isHovered ? "#FFFFFF" : "#FFFFFF"}
                             p="5"
                             rounded="8"
                             style={{

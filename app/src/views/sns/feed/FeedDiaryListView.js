@@ -69,7 +69,6 @@ const FeedDiaryList = (props, navigation) => {
     // })
 
     const pressCommentIcon = () => {
-        console.log(1);
         props.navigation.navigate('DiaryComment'
         // , {
         //     diary: item,

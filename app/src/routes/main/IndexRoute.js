@@ -14,6 +14,7 @@ import UserStatPreView from '../../views/statistics/tag/UserStatPreView';
 import UserStatDetailView from '../../views/statistics/tag/UserStatDetailView';
 import DiaryWriteView from '../../views/diary/write/DiaryWriteView';
 import DiaryModifyView from '../../views/diary/modify/DiaryModifyView';
+import DiaryCommentView from '../../views/diary/read/DiaryCommentView';
 
 const UserScreen = ({ navigation }) => {
   return (
@@ -36,6 +37,12 @@ const TestScreen = ({ navigation }) => {
 const DiaryReadScreen = ({ navigation }) => {
   return (
     <DiaryReadView navigation={navigation} />
+  );
+}
+
+const DiaryCommentScreen = ({ navigation }) => {
+  return (
+    <DiaryCommentView navigation={navigation} />
   );
 }
 
@@ -120,6 +127,13 @@ const IndexRoute = () => {
       <Stack.Screen
         name="DiaryRead"
         component={DiaryReadScreen}
+        options={{
+          cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
+        }}
+      />
+      <Stack.Screen
+        name="DiaryComment"
+        component={DiaryCommentScreen}
         options={{
           cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
         }}

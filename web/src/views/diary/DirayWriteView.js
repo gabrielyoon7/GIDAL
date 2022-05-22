@@ -1,30 +1,42 @@
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import React, { useState } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor } from 'react-draft-wysiwyg';
+import { convertToHTML } from 'draft-convert';
+import DOMPurify from 'dompurify';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import './App.css';
 const DirayWriteView = () => {
-    return (
-        <div>
-            <div>ㅇㅇㅇㅇ</div>
-            <CKEditor
-                editor={ClassicEditor}
-                data="<p>Hello from CKEditor 5!</p>"
-                onReady={editor => {
-                    // You can store the "editor" and use when it is needed.
-                    console.log('Editor is ready to use!', editor);
-                }}
-                onChange={(event, editor) => {
-                    const data = editor.getData();
-                    console.log({ event, editor, data });
-                }}
-                onBlur={(event, editor) => {
-                    console.log('Blur.', editor);
-                }}
-                onFocus={(event, editor) => {
-                    console.log('Focus.', editor);
-                }}
-            />
-
-        </div>
-    )
+  const [editorState, setEditorState] = useState(
+    () => EditorState.createEmpty(),
+  );
+  const  [convertedContent, setConvertedContent] = useState(null);
+  const handleEditorChange = (state) => {
+    setEditorState(state);
+    convertContentToHTML();
+  }
+  const convertContentToHTML = () => {
+    let currentContentAsHTML = convertToHTML(editorState.getCurrentContent());
+    setConvertedContent(currentContentAsHTML);
+  }
+  const createMarkup = (html) => {
+    return  {
+      __html: DOMPurify.sanitize(html)
+    }
+  }
+  return (
+    <div className="App">
+      <header className="App-header">
+        일기 작성하기
+      </header>
+      <Editor
+        editorState={editorState}
+        onEditorStateChange={handleEditorChange}
+        wrapperClassName="wrapper-class"
+        editorClassName="editor-class"
+        toolbarClassName="toolbar-class"
+      />
+      <div className="preview" dangerouslySetInnerHTML={createMarkup(convertedContent)}></div>
+    </div>
+  )
 }
-
 export default DirayWriteView;

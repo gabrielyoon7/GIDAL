@@ -186,7 +186,7 @@ router.post('/modifyComment', function(req, res, next) {
                 console.log(error);
                 return res.json({status: 'error', error})
             }else{
-                console.log('Saved!')
+                console.log(family)
                 return res.json({status: 'Success'})
             }
         });

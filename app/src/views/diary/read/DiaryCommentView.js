@@ -30,6 +30,7 @@ const DiaryCommentView = (props) => {
         "user_id": "loading...",
     };
     const [diary, setDiary] = useState(defaultData);
+    const [comments, setComments] = useState(defaultData.comments);
 
     useEffect(() => {
         //초기 일기 수신부
@@ -41,6 +42,7 @@ const DiaryCommentView = (props) => {
             console.log(user_id)
             setDiary(diary);
             setUserId(user_id)
+            setComments(diary.comments)
         } catch (error) {
             console.log(error);
         }
@@ -55,6 +57,7 @@ const DiaryCommentView = (props) => {
             }
         }).then((response) => {
             console.log(2);
+            
         }).catch(function (error) {
             console.log(error);
         })
@@ -78,35 +81,31 @@ const DiaryCommentView = (props) => {
 
     const renderItem = ({ item }) => (
         <FancyCommentCard item={item} />
-      );
+    );
+
+    const onChangeText = (text) => {
+        setInputComment(text);
+    }
 
     const CommentView = () => {
         return (
             <>
+            <View>
+                    <FlatList
+                        data={comments}
+                        renderItem={renderItem}
+                        keyExtractor={item => item._id} >
+                    </FlatList>
+            </View>
                 <KeyboardAvoidingView
                     style={{ backgroundColor: '#FFFFFF' }}
                     behavior={Platform.OS === "ios" ? "padding" : "height"}
                 >
                     <View>
-                        <FlatList
-                            data={diary.comments}
-                            renderItem={renderItem}
-                            keyExtractor={item => item._id} > 
-                        </FlatList>
-                        <Input
-                            // style={styles.input}
-                            // style={{ margin: 12, borderWidth: 1, borderColor: 'gray' }}
-                            // onChangeText={(value) => setInputComment(value)}
-                            onChangeText={(text) => {
-                                console.log(text)
-                                setInputComment(text);
-                            }}
-                            value={inputComment}
-                            InputRightElement={<Button size="xs" rounded="none" w="1/6" h="full" onPress={handleClick} >
-                                {/* {show ? "Hide" : "Show"} */}
-                                {"show"}
-                            </Button>}
-                        />
+                        <TextInput style ={{margin:12, borderWidth:1,borderColor:'gray'}}></TextInput>
+                        <Button size="xs" rounded="none" onPress={handleClick} >
+                                저장
+                        </Button>
                     </View>
                 </KeyboardAvoidingView>
             </>
@@ -114,14 +113,18 @@ const DiaryCommentView = (props) => {
     }
 
     return (
-        <ParallaxScrollView
-            style={{ flex: 1 }}
-            backgroundColor="white"
-            parallaxHeaderHeight={windowHeight * 0.3}
-            renderFixedHeader={() => <CommentHeader />}
-        >
+        // <ParallaxScrollView
+        //     style={{ flex: 1 }}
+        //     backgroundColor="white"
+        //     parallaxHeaderHeight={windowHeight * 0.3}
+        //     renderFixedHeader={() => <CommentHeader />}
+        // >
+        //     <CommentView />
+        // </ParallaxScrollView>
+        <>
+            <CommentHeader />
             <CommentView />
-        </ParallaxScrollView>
+        </>
     )
 }
 export default DiaryCommentView;

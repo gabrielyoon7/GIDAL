@@ -79,7 +79,7 @@ router.post('/saveTemp', function(req, res) {
 });
 
 //작동하는지 확인 안해봄
-router.post('/findOne/', function(req, res, next) {
+router.post('/findOne', function(req, res, next) {
     console.log(req.body);
     // 특정 아이디값 가져오기
     Diary.findOne({_id:req.body.id}, function(error,diary){
@@ -87,7 +87,8 @@ router.post('/findOne/', function(req, res, next) {
         if(error){
             console.log(error);
         }else{
-            console.log(diary);
+            console.log(diary.comments);
+            res.json(diary.comments);
         }
     });
 });

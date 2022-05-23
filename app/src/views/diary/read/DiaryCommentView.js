@@ -38,8 +38,7 @@ const DiaryCommentView = (props) => {
             const idx = new_routes.findIndex(r => r.name === "DiaryComment")
             const diary = new_routes[idx].params.diary;
             const user_id = new_routes[idx].params.user_id;
-            console.log(diary)
-            console.log(user_id)
+
             setDiary(diary);
             setUserId(user_id)
             setComments(diary.comments)
@@ -56,8 +55,19 @@ const DiaryCommentView = (props) => {
                 comment: inputComment
             }
         }).then((response) => {
-            console.log(2);
-            
+            setInputComment('');
+            getItem();
+        }).catch(function (error) {
+            console.log(error);
+        })
+    }
+
+    const getItem = () => {
+        axios.post(config.ip + ':5000/diariesRouter/findOne', {
+            id: diary._id,
+        }).then((response) => {
+            console.log(response.data)
+            setComments(response.data);
         }).catch(function (error) {
             console.log(error);
         })
@@ -102,9 +112,9 @@ const DiaryCommentView = (props) => {
                     behavior={Platform.OS === "ios" ? "padding" : "height"}
                 >
                     <View>
-                        <TextInput style ={{margin:12, borderWidth:1,borderColor:'gray'}}></TextInput>
+                        <TextInput style={{ margin: 12, borderWidth: 1, borderColor: 'gray' }} onChangeText={onChangeText} value={inputComment}></TextInput>
                         <Button size="xs" rounded="none" onPress={handleClick} >
-                                저장
+                            저장
                         </Button>
                     </View>
                 </KeyboardAvoidingView>
@@ -121,10 +131,10 @@ const DiaryCommentView = (props) => {
         // >
         //     <CommentView />
         // </ParallaxScrollView>
-        <>
+        <View>
             <CommentHeader />
             <CommentView />
-        </>
+        </View>
     )
 }
 export default DiaryCommentView;

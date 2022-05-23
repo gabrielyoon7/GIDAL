@@ -135,7 +135,7 @@ const IndexRoute = () => {
         name="DiaryComment"
         component={DiaryCommentScreen}
         options={{
-          cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
         }}
       />
       <Stack.Screen

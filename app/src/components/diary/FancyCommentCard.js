@@ -14,8 +14,7 @@ const FancyCommentCard = ({item: comment}) => {
                         >
                             <HStack alignItems="center" mt="3" >
                             <Text color="coolGray.800" mt="3" fontWeight="medium" fontSize="xl">
-                                {/* {todo.value} */}
-                                123
+                                {comment.comment}
                             </Text>
                                 <Spacer />
                                 {/* {todo.isDone == true && 
@@ -24,8 +23,8 @@ const FancyCommentCard = ({item: comment}) => {
                                     </Text>
                                 } */}
                                 <Text fontSize={10} color="coolGray.800">
-                                        완료
-                                    </Text>
+                                        삭제
+                                </Text>
                             </HStack>
                         </Box>
                     )

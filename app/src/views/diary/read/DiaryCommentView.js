@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import { config } from '../../../../config'
 import { useNavigationState } from '@react-navigation/native';
+import FancyCommentCard from "../../../components/diary/FancyCommentCard";
 
 const windowHeight = Dimensions.get('window').height;
 
@@ -69,34 +70,37 @@ const DiaryCommentView = (props) => {
         );
     }
 
-    const Item = ({ title }) => (
-        <View style={styles.item}>
-          <Text style={styles.title}>{title}</Text>
-        </View>
-      );
+    // const Item = ({ title }) => (
+    //     <View style={styles.item}>
+    //       <Text style={styles.title}>{title}</Text>
+    //     </View>
+    //   );
 
     const renderItem = ({ item }) => (
-        <Item user_id={item.title} />
+        <FancyCommentCard item={item} />
       );
 
     const CommentView = () => {
         return (
             <>
-                {/* <KeyboardAvoidingView
+                <KeyboardAvoidingView
                     style={{ backgroundColor: '#FFFFFF' }}
                     behavior={Platform.OS === "ios" ? "padding" : "height"}
-                > */}
+                >
                     <View>
-                        {/* <FlatList
+                        <FlatList
                             data={diary.comments}
                             renderItem={renderItem}
-                            keyExtractor={item => item._id} >
-                            
-                        </FlatList> */}
+                            keyExtractor={item => item._id} > 
+                        </FlatList>
                         <Input
                             // style={styles.input}
                             // style={{ margin: 12, borderWidth: 1, borderColor: 'gray' }}
-                            onChangeText={(value) => setInputComment(value)}
+                            // onChangeText={(value) => setInputComment(value)}
+                            onChangeText={(text) => {
+                                console.log(text)
+                                setInputComment(text);
+                            }}
                             value={inputComment}
                             InputRightElement={<Button size="xs" rounded="none" w="1/6" h="full" onPress={handleClick} >
                                 {/* {show ? "Hide" : "Show"} */}
@@ -104,7 +108,7 @@ const DiaryCommentView = (props) => {
                             </Button>}
                         />
                     </View>
-                {/* </KeyboardAvoidingView> */}
+                </KeyboardAvoidingView>
             </>
         )
     }

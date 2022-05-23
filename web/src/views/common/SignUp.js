@@ -99,15 +99,15 @@ const SignUp = () => {
                         <label>이름</label>
                     </div>
                     <label>성별</label>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="남" onChange={handleGender}/>
-                        <label class="form-check-label" for="flexRadioDefault1" >
+                    <div className="form-check">
+                        <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="남" onChange={handleGender}/>
+                        <label className="form-check-label" htmlFor="flexRadioDefault1" >
                             남
                         </label>
                         </div>
-                        <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="여" onChange={handleGender}/>
-                        <label class="form-check-label" for="flexRadioDefault2">
+                        <div className="form-check">
+                        <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="여" onChange={handleGender}/>
+                        <label className="form-check-label" htmlFor="flexRadioDefault2">
                             여
                         </label>
                         </div>

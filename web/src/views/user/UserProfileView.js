@@ -39,7 +39,7 @@ const UserProfileView = () => {
             <main className="container">
                 <div className="row g-5">
                     <div className="col-md-8">
-                        <h3 className="pb-4 mb-4 fst-italic border-bottom">
+                        <h3 className="pb-4 mb-4 fw-bold border-bottom">
                         {user_id}의 일기
                         </h3>
                         {items.map((diary) => (
@@ -58,12 +58,12 @@ const UserProfileView = () => {
                         <div className="position-sticky">
                             {/* <div> */}
                             <div className="p-4 mb-3 bg-light rounded">
-                                <h4 className="fst-italic">{user_id}</h4>
+                                <h4 className="fw-bold">{user_id}</h4>
                                 <p className="mb-0">개인 정보가 나와야 할 자리</p>
                             </div>
 
                             <div className="p-4">
-                                <h4 className="fst-italic">Archives</h4>
+                                <h4 className="fw-bold">Archives</h4>
                                 <ol className="list-unstyled mb-0">
                                     <li><a href="#">March 2021</a></li>
                                     <li><a href="#">February 2021</a></li>
@@ -81,7 +81,7 @@ const UserProfileView = () => {
                             </div>
 
                             <div className="p-4">
-                                <h4 className="fst-italic">Elsewhere</h4>
+                                <h4 className="fw-bold">Elsewhere</h4>
                                 <ol className="list-unstyled">
                                     <li><a href="#">GitHub</a></li>
                                     <li><a href="#">Twitter</a></li>

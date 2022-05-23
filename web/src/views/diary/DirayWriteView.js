@@ -9,7 +9,7 @@ const DirayWriteView = () => {
   const [editorState, setEditorState] = useState(
     () => EditorState.createEmpty(),
   );
-  const  [convertedContent, setConvertedContent] = useState(null);
+  const [convertedContent, setConvertedContent] = useState(null);
   const handleEditorChange = (state) => {
     setEditorState(state);
     convertContentToHTML();
@@ -19,23 +19,36 @@ const DirayWriteView = () => {
     setConvertedContent(currentContentAsHTML);
   }
   const createMarkup = (html) => {
-    return  {
+    return {
       __html: DOMPurify.sanitize(html)
     }
   }
+
+  const onClickEvent = () => {
+    alert(editorState.getCurrentContent())
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        일기 작성하기
-      </header>
-      <Editor
-        editorState={editorState}
-        onEditorStateChange={handleEditorChange}
-        wrapperClassName="wrapper-class"
-        editorClassName="editor-class"
-        toolbarClassName="toolbar-class"
-      />
-      <div className="preview" dangerouslySetInnerHTML={createMarkup(convertedContent)}></div>
+    <div className="mt-3">
+      <div className='diaryEditor my-3'>
+        <div className="fw-bold h3">
+          일기 작성하기
+        </div>
+        <Editor
+          editorState={editorState}
+          onEditorStateChange={handleEditorChange}
+          wrapperClassName="wrapper-class"
+          editorClassName="editor-class"
+          toolbarClassName="toolbar-class"
+        />
+        <button onClick={onClickEvent}>작성하기</button>
+      </div>
+      <div className='diaryPreview my-3'>
+        <div className="fw-bold h3">
+          일기 미리보기
+        </div>
+        <div className="preview" dangerouslySetInnerHTML={createMarkup(convertedContent)}></div>
+      </div>
     </div>
   )
 }

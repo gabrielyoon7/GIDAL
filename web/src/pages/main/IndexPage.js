@@ -11,11 +11,11 @@ import DiarySnsFeedView from "../../views/sns/DiarySnsFeedView";
 const data = {
   undefined: {
     html: <MainView />,
-  },
+  },  
   home: {
     html: <MainView />,
   },
-  wirte:{
+  write:{
     html: <DirayWriteView/>,
   },
   sns: {

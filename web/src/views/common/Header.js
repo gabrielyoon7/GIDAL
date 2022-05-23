@@ -30,7 +30,7 @@ const Header = () => {
                         <a className="link-secondary" href="https://github.com/gabrielyoon7/GIDAL">고객센터</a>
                     </div>
                     <div className="col-4 text-center h1">
-                        <Link to="/" className='text-decoration-none'><div className="blog-header-logo text-dark" href="/">기록의 달인</div></Link>
+                        <Link to="/" className='text-decoration-none'><div className="blog-header-logo text-dark fw-bold" href="/">기록의 달인</div></Link>
                         {/* <div className="dropdown">
                             <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
                                 Dropdown button
@@ -58,7 +58,7 @@ const Header = () => {
                                         </button>
                                         <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
                                             <li><a className="dropdown-item" href={"/user/"+userId}>{userId}</a></li>
-                                            <li><a className="dropdown-item" href="/wirte">일기 작성하기</a></li>
+                                            <li><a className="dropdown-item" href="/write">일기 작성하기</a></li>
                                             <li><a className="dropdown-item" onClick={() => logout()}>로그아웃</a></li>
                                         </ul>
                                     </div>
@@ -85,11 +85,9 @@ const Header = () => {
                     <div className="nav-scroller py-1 mb-2">
                         {/* 이 부분은 로그인 한 사람에게만 뜨면 좋겠음 */}
                         <nav className="nav d-flex justify-content-between">
-                            <a className="p-2 link-secondary" href="/user/gabrielyoon7">마이다이어리</a>
-                            <a className="p-2 link-secondary" href="/sns">피드</a>
-                            <a className="p-2 link-secondary" href="#">통계</a>
-                            <a className="p-2 link-secondary" href="#">할일</a>
-                            <a className="p-2 link-secondary" href="#">설정</a>
+                            <a className="p-2 link-secondary" href={"/user/"+userId}>마이 다이어리</a>
+                            <a className="p-2 link-secondary" href="/sns">모두의 일기</a>
+                            <a className="p-2 link-secondary" href="/write">일기 작성하기</a>
                         </nav>
                     </div>
                     :

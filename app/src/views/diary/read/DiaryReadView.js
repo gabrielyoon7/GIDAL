@@ -91,9 +91,8 @@ const DiaryReadView = (props) => {
     const source = {
         html: diary.content,
     };
-    const sdate = diary.date;
-    const showDate = sdate.substring(0, 10);
-    const showTime = sdate.substring(11, 19);
+    
+    const showDate = diary.date.substring(0, 10);
 
     const generateColor = () => { //컬러 랜덤 지정
         const randomColor = Math.floor(Math.random() * 16777215)
@@ -205,7 +204,7 @@ const DiaryReadView = (props) => {
                         {diary.title}
                     </Text>
                     <Text fontSize="sm" color="coolGray.700" my="1">
-                        <Text>{showDate}</Text> <Text>{showTime}</Text>
+                        <Text>{showDate}</Text> <Text>{diary.time}</Text>
                     </Text>
                     <Box style={styles.row} justifyContent="center" display="flex">
                         <TouchableOpacity onPress={

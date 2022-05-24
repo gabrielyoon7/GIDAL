@@ -9,18 +9,28 @@ import { Badge, Box, Heading, HStack, Spacer } from "native-base";
 const AnonymousStatDetailView = (props) => {
 
     const [items, setItems] = useState([]);
+    const [maxValue, setMaxValue] = useState(0);
 
     useEffect(() => {
         getData();
     }, [props.tagLogArr]);
 
     const getData = () => {
-        let temp = []
+        let itemTemp = [];
         props.tagLogArr.map((tag) => (
-            temp.push({ value: tag.count, label: tag._id, frontColor: '#4ABFF4' })
+            itemTemp.push({ value: tag.count, label: tag._id, frontColor: '#4ABFF4' })
         ))
-        console.log(temp);
-        setItems(temp);
+        console.log(itemTemp);
+
+        let countTemp = [];
+        props.tagLogArr.map((tag) => (
+            countTemp.push(tag.count)
+        ))
+        countTemp = Math.max.apply(null, countTemp);
+        console.log(countTemp);
+
+        setItems(itemTemp);
+        setMaxValue(countTemp);
     }
 
     const TagChart = (props) => {
@@ -30,8 +40,8 @@ const AnonymousStatDetailView = (props) => {
                 <BarChart
                     showFractionalValue
                     showYAxisIndices
-                    noOfSections={4}
-                    maxValue={20}
+                    noOfSections={5}
+                    maxValue={maxValue}
                     data={items}
                     isAnimated
                 />

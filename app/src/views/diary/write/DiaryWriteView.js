@@ -79,6 +79,7 @@ const DiaryWriteView = (props) => {
     setDate(date.format("yyyy-MM-dd"))
   };
 
+
   const saveDiary = () => {
     // console.log('selected tags : ' + tags);
     let tagTextOnlySet = new Set();
@@ -87,6 +88,7 @@ const DiaryWriteView = (props) => {
     });
     const tagTextOnlyArray = Array.from(tagTextOnlySet);
     // console.log('tagTextOnlyArray : '+tagTextOnlyArray);
+   
     axios.post(config.ip + ':5000/diariesRouter/save', {
       data: {
         user_id: userId,

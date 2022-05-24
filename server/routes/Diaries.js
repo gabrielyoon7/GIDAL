@@ -49,8 +49,14 @@ router.post('/findOwnPerMonth', function(req, res, next) {
 /* POST*/
 router.post('/save', function(req, res) {
     console.log(req.body);
+    // console.log(new Date().toLocaleTimeString());
+    let time = new Date().toLocaleTimeString();
+    let data = req.body.data
+    data.time = time;
+    // console.log(data);
     // 데이터 저장
-    var newDiary = new Diary(req.body.data);
+    // var newDiary = new Diary(req.body.data);
+    var newDiary = new Diary(data);
     newDiary.save(function(error, data){
         if(error){
             console.log(error);

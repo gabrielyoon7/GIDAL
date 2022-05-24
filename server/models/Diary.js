@@ -54,7 +54,11 @@ const diarySchema = mongoose.Schema({
     likers: {
         type: Array,
         likers: [{user_id: String}]
-    }
+    },
+    time: {
+        type : String,
+        // required: true
+    },
 })
 
 const Diary = mongoose.model('Diary', diarySchema)

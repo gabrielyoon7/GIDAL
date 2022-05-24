@@ -65,7 +65,7 @@ const FancyDiaryCard = ({ item: diary, user_id, pressCommentIcon, onPress, backg
                                 <Ionicons name="person-add-outline" size={15} color="grey" />
                                 <Spacer />
                                 <Text fontSize={11} color="coolGray.800">
-                                    {diary.date.substr(0, 10)}
+                                    {diary.date.substr(0, 10) + diary.time}
                                 </Text>
                                 {/* <TouchableOpacity style={styles.heart}> */}
                                 {/* <TouchableOpacity>

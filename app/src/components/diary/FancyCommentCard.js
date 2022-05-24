@@ -2,7 +2,7 @@ import { StyleSheet, TouchableOpacity, } from 'react-native';
 import { Badge, Box, Button, Divider, Flex, HStack, Pressable, Spacer, Text, } from 'native-base';
 import { Ionicons } from "@expo/vector-icons";
 
-const FancyCommentCard = ({ item: comment, deleteComment }) => {
+const FancyCommentCard = ({ item: comment, user_id, deleteComment }) => {
 
     const pressDelete = () => {
         console.log(122);
@@ -26,11 +26,12 @@ const FancyCommentCard = ({ item: comment, deleteComment }) => {
                     {comment.user_id}
                 </Text>
                 <Spacer />
-                <TouchableOpacity
-                    onPress={deleteComment}
-                >
-                    <Ionicons name="trash" size={22} color="grey" />
-                </TouchableOpacity>
+                { user_id === comment.user_id ? 
+                    <TouchableOpacity
+                        onPress={deleteComment}
+                    >
+                        <Ionicons name="trash" size={22} color="grey" />
+                    </TouchableOpacity> : null }
             </HStack>
         </Box>
     )

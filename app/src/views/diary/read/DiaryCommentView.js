@@ -100,7 +100,7 @@ const DiaryCommentView = (props) => {
     }
 
     const renderItem = ({ item }) => (
-        <FancyCommentCard item={item} deleteComment={() => deleteComment(item._id)} />
+        <FancyCommentCard item={item} user_id={userId} deleteComment={() => deleteComment(item._id)} />
     );
 
     const onChangeText = (text) => {

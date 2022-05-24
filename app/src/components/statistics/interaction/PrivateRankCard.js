@@ -48,7 +48,8 @@ const PrivateRankCard = (props) => {
                     height={120}
                     width={280}
                     maxValue={maxValue} //MaxValue = noOfSections여야함
-                    noOfSections={5}
+                    noOfSections={maxValue}
+                    hideRules
                 />
             }
 

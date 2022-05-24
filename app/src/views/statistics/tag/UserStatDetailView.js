@@ -37,7 +37,7 @@ const UserStatDetailView = (props) => {
         }
         if(statType=='friends'){
             return(
-                <FriendsStatDetailView data={data} tagLogArr={tagLogArr} />
+                <FriendsStatDetailView data={data} tagLogArr={tagLogArr} navigation={props.navigation}/>
             )
         }
         if(statType=='anonymous'){

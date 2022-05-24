@@ -6,19 +6,30 @@ import { BarChart } from "react-native-gifted-charts";
 const PrivateRankCard = (props) => {
 
     const [items, setItems] = useState([]);
+    const [maxValue, setMaxValue] = useState(0);
 
     useEffect(() => {
         getData();
     }, [props.tagLogArr]);
 
     const getData = () => {
-        let temp = []
+        let itemTemp = [];
         props.tagLogArr.map((tag) => (
-            temp.push({ value: tag.count, label: tag._id })
+            itemTemp.push({ value: tag.count, label: tag._id })
         ))
-        console.log(temp);
-        setItems(temp);
+        console.log(itemTemp);
+
+        let countTemp = [];
+        props.tagLogArr.map((tag) => (
+            countTemp.push(tag.count)
+        ))
+        countTemp = Math.max.apply(null, countTemp);
+        console.log(countTemp);
+
+        setItems(itemTemp);
+        setMaxValue(countTemp);
     }
+
 
 
     return (
@@ -34,8 +45,8 @@ const PrivateRankCard = (props) => {
                     data={items}
                     height={120}
                     width={280}
-                    maxValue={3} //MaxValue = noOfSections여야함
-                    noOfSections={3}
+                    maxValue={maxValue} //MaxValue = noOfSections여야함
+                    noOfSections={5}
                 />
             }
 

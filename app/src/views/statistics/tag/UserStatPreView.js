@@ -29,7 +29,8 @@ const UserStatPreView = (props) => {
         <View style={{ flex: 1 }}>
             <BackButton navigation={props.navigation} />
             <ScrollView>
-                <WelcomeCard title={question} content={id + '에서 데이터를 가져올 것임'} />
+                {/* <WelcomeCard title={question} content={id + '에서 데이터를 가져올 것임'} /> */}
+                <WelcomeCard title={question} content={'당신의 일기를 분석했어요!'} />
                 {/* 개인통계 */}
                 <PersonalStatPreView id={id} navigation={props.navigation} />
                 {/* 친구통계 */}

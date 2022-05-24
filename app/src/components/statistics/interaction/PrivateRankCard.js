@@ -42,6 +42,8 @@ const PrivateRankCard = (props) => {
                 </View>
                 :
                 <BarChart
+                    frontColor={'#91d653'}
+                    barBorderRadius={4}
                     data={items}
                     height={120}
                     width={280}

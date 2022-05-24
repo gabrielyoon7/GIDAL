@@ -80,7 +80,7 @@ const TagRankCard = (props) => {
                                         {/* </HStack>
                                     </TouchableOpacity> */}
                                 </HStack>
-                                <Box>
+                                <Box mt={3}>
                                     {card_type ? (<View style={styles.interaction}>{card_type.interaction}</View>) : (<View><Text>Wrong type</Text></View>)}
                                 </Box>
                             </Box>

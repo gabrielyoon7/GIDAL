@@ -193,4 +193,20 @@ router.post('/modifyComment', function(req, res, next) {
         });
 });
 
+router.post('/deleteComment', function(req, res, next) {
+    Diary.updateOne(
+        { _id: req.body.data.id },
+        {
+          $pull: { comments: { "_id": req.body.data.comment_id } },
+        }).exec((error, user) => {
+            if (error) {
+                console.log(error);
+                res.json({ status: 'error', error })
+            } else {
+                console.log('deleted!')
+                res.json({ status: 'success' })
+            }
+        });
+})
+
 module.exports = router;

@@ -7,6 +7,7 @@ import axios from 'axios';
 import { config } from '../../../../config'
 import { useNavigationState } from '@react-navigation/native';
 import FancyCommentCard from "../../../components/diary/FancyCommentCard";
+import SearchBar from "react-native-dynamic-search-bar";
 
 const windowHeight = Dimensions.get('window').height;
 
@@ -73,6 +74,21 @@ const DiaryCommentView = (props) => {
         })
     }
 
+    const deleteComment = (id) => {
+        axios.post(config.ip + ':5000/diariesRouter/deleteComment', {
+            data: {
+                id: diary._id,
+                comment_id: id
+            }
+        }).then((response) => {
+            console.log(id)
+            // setComments(response.data);
+            getItem();
+        }).catch(function (error) {
+            console.log(error);
+        })
+    }
+
     const CommentHeader = () => {
         return (
             <Box style={styles.headerBar} justifyContent="center" display="flex">
@@ -83,14 +99,8 @@ const DiaryCommentView = (props) => {
         );
     }
 
-    // const Item = ({ title }) => (
-    //     <View style={styles.item}>
-    //       <Text style={styles.title}>{title}</Text>
-    //     </View>
-    //   );
-
     const renderItem = ({ item }) => (
-        <FancyCommentCard item={item} />
+        <FancyCommentCard item={item} deleteComment={() => deleteComment(item._id)} />
     );
 
     const onChangeText = (text) => {
@@ -116,6 +126,16 @@ const DiaryCommentView = (props) => {
                         <Button size="xs" rounded="none" onPress={handleClick} >
                             저장
                         </Button>
+                        {/* <SearchBar
+                            placeholder="검색어를 입력하세요."
+                            // onPress={() => alert("onPress")}
+                            onChangeText={onChangeText}
+                            value={inputComment}
+                            // onClearPress={() => {
+                            //     filterList("");
+                            // }}
+                            style={{ margin: 12, borderWidth: 1, borderColor: 'gray' }}
+                        /> */}
                     </View>
                 </KeyboardAvoidingView>
             </>

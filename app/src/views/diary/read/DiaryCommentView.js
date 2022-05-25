@@ -68,7 +68,7 @@ const DiaryCommentView = (props) => {
             id: diary._id,
         }).then((response) => {
             console.log(response.data)
-            setComments(response.data);
+            setComments(response.data.comments);
         }).catch(function (error) {
             console.log(error);
         })

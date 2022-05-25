@@ -93,8 +93,8 @@ router.post('/findOne', function(req, res, next) {
         if(error){
             console.log(error);
         }else{
-            console.log(diary.comments);
-            res.json(diary.comments);
+            // console.log(diary.comments);
+            res.json(diary);
         }
     });
 });

@@ -20,9 +20,9 @@ const data = {
   write:{
     html: <DirayWriteView/>,
   },
-  read:{
-    html: <DiaryReadView/>,
-  },
+  // read:{
+  //   html: <DiaryReadView/>,
+  // },
   sns: {
     html: <DiarySnsFeedView />,
   },

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { FlatList, View, StatusBar, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { FlatList, View, StatusBar, StyleSheet, Text, TouchableOpacity, Dimensions } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import axios from 'axios';
 import { config } from '../../../../config'
@@ -77,6 +77,11 @@ const DiaryList = (props, navigation) => {
             />
         );
     };
+    
+    // const windowHeight = Dimensions.get('window').height;
+    // const windowWidth = Dimensions.get('window').width;
+    // console.log(windowHeight);
+    // console.log(windowWidth);
 
     return (
         <View style={styles.container}>
@@ -95,6 +100,7 @@ const DiaryList = (props, navigation) => {
                     }}
                     renderItem={renderItem}
                     keyExtractor={(item) => item._id}
+                    // numColumns={2}
                 // extraData={selectedId}
                 />
                 :
@@ -104,6 +110,7 @@ const DiaryList = (props, navigation) => {
     )
 }
 export default DiaryList;
+
 
 const styles = StyleSheet.create({
     container: {

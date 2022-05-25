@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, StatusBar, FlatList, Alert, Text } from "react-native";
-import { Fab } from "native-base";
+import { View, StatusBar, FlatList, Alert, Text, TouchableOpacity, StyleSheet, ScrollView, KeyboardAvoidingView } from "react-native";
+import { Box, Fab, Heading, HStack, Spacer } from "native-base";
 import styled from "styled-components";
 import AddInput from "./AddInput";
 import { AntDesign } from "@expo/vector-icons";
@@ -12,7 +12,7 @@ import Empty from "./Empty";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios'
 import { config } from '../../../../config'
-import { Feather } from '@expo/vector-icons'; 
+import { Feather } from '@expo/vector-icons';
 
 let today = new Date().toJSON().split('T')[0];
 
@@ -200,50 +200,38 @@ const Todo = ({ props }) => { // 진짜
     // const [isDatePickerVisible, setDatePickerVisibility] = React.useState(false);
 
     return (
-      <HeaderComponentContainer>
-        <HeaderText>To-Do</HeaderText>
-        <Text></Text>
-        <HeaderList onPress={() => showDatePicker()}>
-          {date} <Feather name="menu" size={30} color="black" onPress={() => props.navigation.navigate('TodoCalendar', {
+      <HStack style={{ backgroundColor: "white" }}>
+        <TouchableOpacity onPress={() => showDatePicker()}>
+          <Heading style={styles.heading}>{date}의 할 일</Heading>
+        </TouchableOpacity>
+        <Spacer />
+        <Box style={styles.heading}>
+
+          <Feather name="menu" size={30} color="black" onPress={() => props.navigation.navigate('TodoCalendar', {
             user_id: user_Id,
             pickedDate: pickedDate
-          })}/></HeaderList>
-      </HeaderComponentContainer>
+          })} />
+
+        </Box>
+      </HStack>
     );
   }
 
   return (
-    <ComponentContainer>
-      {/* <View>
-        <StatusBar barStyle="light-content"
-          backgroundColor="midnightblue" />
-      </View> */}
-
-      <View>
+    <KeyboardAvoidingView       behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ flex: 1 }}>
+      <Header date={pickedDate} />
+      <ScrollView>
         <FlatList
           data={data}
-          ListHeaderComponent={
-            () =>
-              <>
-                <Header date={pickedDate} />
-                {/* <AddInput submitHandler={submitHandler} /> */}
-              </>
-          }
-          // ListFooterComponent={
-          //   () =>
-          //     <>
-          //       <AddInput submitHandler={submitHandler} />
-          //     </>
-          // }
           ListEmptyComponent={() => <Empty />}
           keyExtractor={(item) => item.key}
           renderItem={({ item }) => (
             <TodoList item={item} deleteItem={deleteItem} changeIsDone={changeIsDone} />
           )}
         />
-        <View>
+      </ScrollView>
+      <View>
         <AddInput submitHandler={submitHandler} />
-        </View>
       </View>
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
@@ -251,50 +239,22 @@ const Todo = ({ props }) => { // 진짜
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
       />
-      {/* <Fab
-        renderInPortal={false}
-        shadow={2}
-        size="md"
-        icon={<Icon color="white" as={AntDesign} name="calendar" size="md" />}
-        onPress={() => props.navigation.navigate('TodoCalendar')} 
-      /> */}
-      {/* <TodoStatistics /> */}
-    </ComponentContainer>
+    </KeyboardAvoidingView>
   );
 };
 
-const ComponentContainer = styled.View`
-  background-color: white;
-  height: 100%;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
-
-const HeaderComponentContainer = styled.View`
-  height: 50px;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: bold;
-`;
-
-const HeaderText = styled.Text`
-  ${'' /* color: white; */}
-  font-size: 25px;
-`;
-
-const HeaderList = styled.Text`
-  ${'' /* color: white; */}
-  font-size: 20px;
-  margin-right: 5px;
-`;
-
-const TodoTest = (props) => {
+const TodoView = (props) => {
   return (
     <Todo props={props} />
   )
 }
 
-export default TodoTest;
+export default TodoView;
 
+const styles = StyleSheet.create({
+  heading: {
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    backgroundColor: '#fff',
+  },
+});

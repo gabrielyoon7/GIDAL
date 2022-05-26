@@ -22,6 +22,7 @@ const bcrypt = require('bcrypt')
 
 router.post('/save', function(req, res) {
     console.log(req.body.data.user_id);
+    const profileImg = "https://cdn-icons-png.flaticon.com/512/1/1247.png"
     bcrypt.hash(req.body.data.password, 10, (err, encryptedPassowrd) => {
 		// async callback
 		const one = {
@@ -31,6 +32,7 @@ router.post('/save', function(req, res) {
 			gender: req.body.data.gender,
             location: req.body.data.location,
 			password: encryptedPassowrd,
+            profile_image: profileImg
 		};
 		const newUser = new User(one);
 		newUser.save(function(error, data){

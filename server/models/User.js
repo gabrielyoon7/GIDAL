@@ -69,7 +69,7 @@ const userSchema = mongoose.Schema({
         title: String,
         content: String,
         date: Date
-    }]
+    }],
 })
 
 const User = mongoose.model('User', userSchema)

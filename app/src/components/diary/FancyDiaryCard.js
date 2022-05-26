@@ -3,7 +3,7 @@ import { Avatar, Badge, Box, Divider, Flex, HStack, Pressable, Spacer, Text, } f
 import { Ionicons } from "@expo/vector-icons";
 import { useEffect, useState } from 'react';
 
-const FancyDiaryCard = ({ item: diary, user_id, pressCommentIcon, onPress, backgroundColor, textColor }) => {
+const FancyDiaryCard = ({ item: diary, user_id, pressCommentIcon, profileImg, onPress, backgroundColor, textColor }) => {
     const [liked, setLiked] = useState(false);
 
     // 정규식을 이용한 HTML 태그 제거 시작
@@ -54,7 +54,7 @@ const FancyDiaryCard = ({ item: diary, user_id, pressCommentIcon, onPress, backg
                                     {diary.disclosure}
                                 </Badge> */}
                                 <Avatar bg="green.500" alignSelf="center" size="xs" source={{
-                                    uri: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+                                    uri: profileImg
                                 }}>
                                     AJ
                                 </Avatar>

@@ -170,21 +170,14 @@ const DiaryReadView = (props) => {
         );
     }
 
-    const renderItem = ({ item }) => {
-        return (
-            <Badge
-                backgroundColor={generateColor()}
-                _text={{
-                    color: "white"
-                }}
-                variant="solid"
-                rounded="4"
-                key={item}
-            >
-                {item}
-            </Badge>
-        );
-    };
+    const pressCommentIcon = (item) => {
+        props.navigation.navigate('DiaryComment'
+        , {
+            diary: item,
+            user_id: userId,
+        }
+        )
+    }
 
     const ReadView = () => {
         return (
@@ -211,7 +204,9 @@ const DiaryReadView = (props) => {
                     <Text fontSize="sm" color="coolGray.700" my="1">
                         <Text>{showDate}</Text> <Text>{diary.time}</Text>
                     </Text>
-                    <Box style={styles.row} justifyContent="center" display="flex">
+                    {/* <Box style={styles.row} justifyContent="center" display="flex"> */}
+                    {/* <Box> */}
+                    <HStack>
                         <TouchableOpacity onPress={
                             () => props.navigation.navigate('UserProfile', {
                                 user_id: diary.user_id
@@ -230,10 +225,24 @@ const DiaryReadView = (props) => {
                                 <Spacer />
                             </HStack>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => pressHeart()} style={{ flex: 1, flexDirection: 'row-reverse', alignSelf: 'center', marginLeft: 10 }}>
-                            {liked ? <Ionicons name="heart" size={24} color="red" /> : <Ionicons name="md-heart-outline" size={24} color="gray" />}
+                        <Spacer />
+                        <TouchableOpacity
+                            onPress={() => pressCommentIcon(diary)}
+                        >
+                            <HStack>
+                                <Ionicons name="chatbubble-outline" size={22} color="grey" />
+                                <Text>댓글 {diary.comments.length}개</Text>
+                            </HStack>
                         </TouchableOpacity>
-                    </Box>
+                        <Box mx={1} />
+                        <TouchableOpacity onPress={() => pressHeart()}>
+                            <HStack>
+                                {liked ? <Ionicons name="heart" size={24} color="red" /> : <Ionicons name="md-heart-outline" size={24} color="gray" />}
+                                <Text>좋아요 {diary.likers.length}개</Text>
+                            </HStack>
+                        </TouchableOpacity>
+                    </HStack>
+                    {/* </Box> */}
 
 
                     <Divider my="2" />

@@ -4315,6 +4315,20 @@
   dependencies:
     "fontfaceobserver" "^2.1.0"
 
+"expo-image-loader@~3.2.0":
+  "integrity" "sha512-LU3Q2prn64/HxdToDmxgMIRXS1ZvD9Q3iCxRVTZn1fPQNNDciIQFE5okaa74Ogx20DFHs90r6WoUd7w9Af1OGQ=="
+  "resolved" "https://registry.npmjs.org/expo-image-loader/-/expo-image-loader-3.2.0.tgz"
+  "version" "3.2.0"
+
+"expo-image-picker@^13.1.1":
+  "integrity" "sha512-fU8oONRkKg5DvuU+7KvnuOtf1ubzXNU/OsE/T6yB149LbXb+ZN5A49NicvJ+cOG4Oa5NAnILt0aAAkchIr3iRQ=="
+  "resolved" "https://registry.npmjs.org/expo-image-picker/-/expo-image-picker-13.1.1.tgz"
+  "version" "13.1.1"
+  dependencies:
+    "@expo/config-plugins" "^4.0.14"
+    "expo-image-loader" "~3.2.0"
+    "uuid" "7.0.2"
+
 "expo-keep-awake@~10.1.1":
   "integrity" "sha512-9zC0sdhQljUeMr2yQ7o4kzEZXVAy82fFOAZE1+TwPL7qR0b0sphe7OJ5T1GX1qLcwuVaJ8YewaPoLSHRk79+Rg=="
   "resolved" "https://registry.npmjs.org/expo-keep-awake/-/expo-keep-awake-10.1.1.tgz"
@@ -7021,12 +7035,10 @@
     "nullthrows" "^1.1.1"
 
 "react-native-dynamic-search-bar@github:WrathChaos/react-native-dynamic-search-bar#expo":
-  "integrity" "sha512-ExxvCfFXC2RuGDDdGVjBChgnheTB7UR3wsJjv0cDjHfJBcm1ZAHi8ce7GIGWGMntOH2TJGVq58A0NQhqYjX5fQ=="
   "resolved" "git+ssh://git@github.com/WrathChaos/react-native-dynamic-search-bar.git#91f5aeeec42fb4f9cf0a41d5e1dcd17dd0f1968d"
   "version" "2.0.2"
 
 "react-native-dynamic-vector-icons@>= 1.1.4", "react-native-dynamic-vector-icons@github:WrathChaos/react-native-dynamic-vector-icons#expo":
-  "integrity" "sha512-nu0Es+f7id+Phm0uqOFNREUqWIkX0ckvYNSuE5GIn48qpzVIjQwPBCmM3EgP+gw0s9RMrSjvyX4CwgiCS3qokA=="
   "resolved" "git+ssh://git@github.com/WrathChaos/react-native-dynamic-vector-icons.git#5335e80080125505044e6d60bb7c79cb8afe5971"
   "version" "0.1.1"
 
@@ -7067,6 +7079,11 @@
   dependencies:
     "entities" "^1.1.1"
     "htmlparser2-without-node-native" "^3.9.2"
+
+"react-native-image-picker@^4.8.3":
+  "integrity" "sha512-mA3xKN8TtXpLl3Aoo65ArZvusv3gCsbe3/hsOLKI1DcC+QcYPcDnsYK/ft05rWBj4BdiJ9E2JoveiHNtU8W9GA=="
+  "resolved" "https://registry.npmjs.org/react-native-image-picker/-/react-native-image-picker-4.8.3.tgz"
+  "version" "4.8.3"
 
 "react-native-iphone-x-helper@^1.0.3", "react-native-iphone-x-helper@^1.3.1":
   "integrity" "sha512-HOf0jzRnq2/aFUcdCJ9w9JGzN3gdEg0zFE4FyYlp4jtidqU03D5X7ZegGKfT1EWteR0gPBGp9ye5T5FvSWi9Yg=="
@@ -8495,6 +8512,11 @@
   "integrity" "sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg=="
   "resolved" "https://registry.npmjs.org/uuid/-/uuid-8.3.2.tgz"
   "version" "8.3.2"
+
+"uuid@7.0.2":
+  "integrity" "sha512-vy9V/+pKG+5ZTYKf+VcphF5Oc6EFiu3W8Nv3P3zIh0EqVI80ZxOzuPfe9EHjkFNvf8+xuTHVeei4Drydlx4zjw=="
+  "resolved" "https://registry.npmjs.org/uuid/-/uuid-7.0.2.tgz"
+  "version" "7.0.2"
 
 "valid-url@~1.0.9":
   "integrity" "sha1-HBRHm0DxOXp1eC8RXkCGRHQzogA="

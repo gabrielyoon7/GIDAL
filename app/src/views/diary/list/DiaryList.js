@@ -61,12 +61,22 @@ const DiaryList = (props, navigation) => {
         }
     },[props.selectedDate]);
 
+    const pressCommentIcon = (item) => {
+        props.navigation.navigate('DiaryComment'
+        , {
+            diary: item,
+            user_id: user_id,
+        }
+        )
+    }
+
     const renderItem = ({ item }) => {
         return (
             <FancyDiaryCard
                 item={item}
                 user_id={user_id}
                 profileImg={profileImg}
+                pressCommentIcon={() => pressCommentIcon(item)}
                 onPress={
                     () => {
                         props.navigation.navigate('DiaryRead', {

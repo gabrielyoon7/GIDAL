@@ -11,6 +11,7 @@ import RichTextTestView from '../../views/test/RichTextTestView';
 import DiaryWriteTestVeiw from '../../views/test/DiaryWriteTestVeiw';
 import TodoTestView from '../../views/test/TodoTest/TodoTestView'
 import TodoTest2View from '../../views/test/TodoDetailView';
+import ImagePickerExample from '../../views/test/ImagePickerTest';
 
   
 const TestMainScreen = (props) => {
@@ -56,6 +57,13 @@ function TodoTest2Screen({navigation}){
   );
 }
 
+function ImagePickerScreen({navigation}){
+  return (
+    <ImagePickerExample navigation={navigation} />
+  );
+}
+
+
 const Drawer = createDrawerNavigator();
 
 const MyDrawer = (props) => {
@@ -68,6 +76,7 @@ const MyDrawer = (props) => {
       <Drawer.Screen name="DiartWriteTest" component={DiaryWriteTestScreen} />
       <Drawer.Screen name="TodoTest" component={TodoTestScreen} />
       <Drawer.Screen name="TodoTest2" component={TodoTest2Screen} />
+      <Drawer.Screen name="ImagePicker" component={ImagePickerScreen} />
     </Drawer.Navigator>
   );
 }

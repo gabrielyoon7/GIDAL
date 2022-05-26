@@ -108,13 +108,19 @@ const FancyDiaryCard = ({ item: diary, user_id, pressCommentIcon, onPress, backg
                                 <TouchableOpacity
                                     onPress={pressCommentIcon}
                                 >
-                                    <Ionicons name="chatbubble-outline" size={22} color="grey" />
+                                    <HStack>
+                                        <Ionicons name="chatbubble-outline" size={22} color="grey" />
+                                        <Text>댓글 {diary.comments.length}개</Text>
+                                    </HStack>
                                 </TouchableOpacity>
 
                                 <Box mx={1} />
 
                                 <TouchableOpacity>
-                                    {liked ? <Ionicons name="heart" size={24} color="red" /> : <Ionicons name="md-heart-outline" size={24} color="grey" />}
+                                    <HStack>
+                                        {liked ? <Ionicons name="heart" size={24} color="red" /> : <Ionicons name="md-heart-outline" size={24} color="grey" />}
+                                        <Text>좋아요 {diary.likers.length}개</Text>
+                                    </HStack>
                                 </TouchableOpacity>
                                 {/* <Spacer />
                                 <TouchableOpacity>

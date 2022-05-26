@@ -81,6 +81,7 @@ const DiaryList = (props, navigation) => {
                     () => {
                         props.navigation.navigate('DiaryRead', {
                             diary: item,
+                            user_id: user_id,
                             profileImg: profileImg
                         })
                     }

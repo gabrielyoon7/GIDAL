@@ -53,8 +53,9 @@ const DiaryReadView = (props) => {
             const user_id = new_routes[idx].params.user_id;
             const profile = new_routes[idx].params.profileImg;
             setDiary(diary);
-            setUserId(user_id)
-            setProfile(profile)
+            setUserId(user_id);
+            setProfile(profile);
+            setLikeCount(diary.likes);
             // console.log(user_id, currentUser);
             // if(user_id==currentUser){
             //     // console.log(userId, currentUser);
@@ -68,6 +69,10 @@ const DiaryReadView = (props) => {
             // console.log(error);
         }
     }, [])
+
+    // React.useEffect(() => {
+    //     // console.log(userId)
+    // },[userId])
 
     const [likeCount, setLikeCount] = React.useState(diary.likes);
     const [likers, setLikers] = React.useState(diary.likers);
@@ -140,25 +145,25 @@ const DiaryReadView = (props) => {
         })
     }
 
-    const [currentUser, setCurrentUser] = React.useState('currentUser');
+    // const [currentUser, setCurrentUser] = React.useState('currentUser');
 
-    React.useEffect(() => {
-        getData();
-    }, [])
+    // React.useEffect(() => {
+    //     getData();
+    // }, [])
 
-    const getData = () => {
-        try {
-            AsyncStorage.getItem('userInfo')
-                .then(value => {
-                    if (value != null) {
-                        const UserInfo = JSON.parse(value);
-                        setCurrentUser(UserInfo[0].user_id);
-                    }
-                })
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    // const getData = () => {
+    //     try {
+    //         AsyncStorage.getItem('userInfo')
+    //             .then(value => {
+    //                 if (value != null) {
+    //                     const UserInfo = JSON.parse(value);
+    //                     setCurrentUser(UserInfo[0].user_id);
+    //                 }
+    //             })
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
 
     const ReadHeader = () => {
         return (
@@ -238,7 +243,7 @@ const DiaryReadView = (props) => {
                         <TouchableOpacity onPress={() => pressHeart()}>
                             <HStack>
                                 {liked ? <Ionicons name="heart" size={24} color="red" /> : <Ionicons name="md-heart-outline" size={24} color="gray" />}
-                                <Text>좋아요 {diary.likers.length}개</Text>
+                                <Text>좋아요 {likeCount}개</Text>
                             </HStack>
                         </TouchableOpacity>
                     </HStack>
@@ -310,7 +315,7 @@ const DiaryReadView = (props) => {
                 <LoadingSpinner />
             }
             {
-                diary.user_id == currentUser
+                diary.user_id == userId
                     ?
                     <Center style={{ position: 'absolute', right: 20, bottom: 130, height: 30, }} >
                         <Box maxW="100">

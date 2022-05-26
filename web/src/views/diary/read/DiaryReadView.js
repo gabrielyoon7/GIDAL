@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from 'axios';
 import Footer from "../../../views/common/Footer";
 import Header from "../../../views/common/Header";
+import DOMPurify from 'dompurify';
 
 const DiaryReadView = () => {
     const params = useParams();
@@ -25,7 +26,7 @@ const DiaryReadView = () => {
     const [diary, setDiary] = useState(defaultData);
 
     useEffect(() => {
-        console.log(diary_id)
+        // console.log(diary_id)
         getItem();
     }, [])
 
@@ -40,10 +41,11 @@ const DiaryReadView = () => {
         })
     }
 
-    const RenderContent = () => {
-        // 여긴 수정이 필요할 듯
-        return diary.content;
-    }
+    const createMarkup = (html) => {
+        return {
+            __html: DOMPurify.sanitize(html)
+        }
+    };
 
     return (
         <div>
@@ -57,13 +59,18 @@ const DiaryReadView = () => {
                 </div>
                 <hr />
                 <div>
-                    <p><RenderContent /></p>
+                    <div dangerouslySetInnerHTML={createMarkup(diary.content)}></div>
                 </div>
                 <hr />
                 {diary.tags.map((tag) => (
-                    <span key={tag} >{tag}  </span>
+                    <button type="button" class="btn btn-success disabled me-1">{tag}</button>
+                    // <span key={tag} className="badge"  >{tag}  </span>
+                    // badge 디자인이 적용 안됨
                 ))
                 }
+                {/* <button type="button" class="btn btn-success disabled">Success</button>
+                <button class="badge text-bg-success">Success</button> */} 
+                
             </main>
             <Footer />
         </div>

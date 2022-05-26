@@ -11,6 +11,7 @@ const DiaryList = (props, navigation) => {
     const user_id = props.user_Id;
     const isFocused = useIsFocused(); // isFoucesd Define
     const [isLoaded, setIsLoaded] = useState(false);
+    const profileImg = props.profileImg
 
     const getItems = () => {
         let result = []
@@ -65,10 +66,12 @@ const DiaryList = (props, navigation) => {
             <FancyDiaryCard
                 item={item}
                 user_id={user_id}
+                profileImg={profileImg}
                 onPress={
                     () => {
                         props.navigation.navigate('DiaryRead', {
                             diary: item,
+                            profileImg: profileImg
                         })
                     }
                 }

@@ -17,11 +17,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const DiaryReadView = (props) => {
     // const [date, setSelectedDate] = React.useState(props.selectedDate);
-    const [ref, setRef] = React.useState(null);
 
+    const [ref, setRef] = React.useState(null);
     const [userId, setUserId] = React.useState('');
     const { width } = useWindowDimensions();
     const new_routes = useNavigationState(state => state.routes);
+    console.log(new_routes);
     const defaultData = {
         "__v": 0,
         "_id": "626f78c19ee18cdc829a10de",
@@ -37,10 +38,12 @@ const DiaryReadView = (props) => {
         "title": "loading...",
         "user_id": "loading...",
     };
+    const defaultImg = "https://cdn-icons-png.flaticon.com/512/1/1247.png"
     const [diary, setDiary] = React.useState(defaultData);
     const [isLoaded, setIsLoaded] = React.useState(false);
     const [liked, setLiked] = React.useState(false);
     const [isMyDiary, setMyDiary] = React.useState(false);
+    const [profile, setProfile] = React.useState(defaultImg);
 
     React.useEffect(() => {
         //초기 일기 수신부
@@ -48,8 +51,10 @@ const DiaryReadView = (props) => {
             const idx = new_routes.findIndex(r => r.name === "DiaryRead")
             const diary = new_routes[idx].params.diary;
             const user_id = new_routes[idx].params.user_id;
+            const profile = new_routes[idx].params.profileImg;
             setDiary(diary);
             setUserId(user_id)
+            setProfile(profile)
             // console.log(user_id, currentUser);
             // if(user_id==currentUser){
             //     // console.log(userId, currentUser);
@@ -215,7 +220,7 @@ const DiaryReadView = (props) => {
                         }>
                             <HStack alignItems="center" my="1">
                                 <Avatar bg="green.500" alignSelf="center" size="sm" source={{
-                                    uri: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+                                    uri: profile
                                 }}>
                                     AJ
                                 </Avatar>

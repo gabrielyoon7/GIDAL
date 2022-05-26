@@ -8,6 +8,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused, useNavigationState } from '@react-navigation/native';
 import BackButton from '../../../components/common/BackButton';
 import { Ionicons } from "@expo/vector-icons";
+import ImagePickerExample from '../../test/ImagePickerTest';
 
 // 이걸로 통합 예정
 
@@ -20,7 +21,7 @@ export default function UserProfileView(props) {
   // console.log('UserProfileView');
 
   const [date, setSelectedDate] = React.useState(props.selectedDate);
-  const [profileImg, setProfileImg] = useState();
+  const [profileImg, setProfileImg] = useState('');
   const [user_Id, setUserId] = useState('loading');
   const [currentId, setCurrentId] = useState('헤헤');
   const [userFollower, setUserFollower] = useState([]);
@@ -31,7 +32,6 @@ export default function UserProfileView(props) {
 
   const [isLoaded, setIsLoaded] = React.useState(false);
   const new_routes = useNavigationState(state => state.routes);
-
   const [items, setItems] = React.useState([]);
 
   React.useEffect(() => {
@@ -52,6 +52,7 @@ export default function UserProfileView(props) {
                 if (value != null) {
                   const UserInfo = JSON.parse(value);
                   setUserId(UserInfo[0].user_id);
+                  setProfileImg(UserInfo[0].profile_image);
                 }
               }
               )
@@ -201,12 +202,16 @@ export default function UserProfileView(props) {
   }
 
 
+
   const ProfileHeader = () => {
     return (
       <View style={styles.header}>
         <BackButton navigation={props.navigation} />
         <View style={styles.headerContent}>
-          <Image style={styles.avatar} source={{ uri: profileImg }} />
+        {/* <Image style={styles.avatar} source={{ uri: profileImg }} /> */}
+        <ImagePickerExample/>
+      
+          
           <Text style={styles.name}>{user_Id}</Text>
           <ProfileActionView />
           <HStack alignItems="center" my="1">
@@ -253,7 +258,7 @@ export default function UserProfileView(props) {
   return (
     <>
       <ProfileHeader />
-      <DiaryList selectedDate={date} navigation={props.navigation} user_Id={user_Id} type={'profile'} items={items} setItems={setItems} />
+      <DiaryList selectedDate={date} navigation={props.navigation} user_Id={user_Id} type={'profile'} items={items} setItems={setItems} profileImg={profileImg}/>
     </>
   )
 }

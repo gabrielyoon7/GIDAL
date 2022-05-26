@@ -57,7 +57,7 @@ const SignUp = () => {
             alert('거주지를 입력해주세요');
             return;
         }
-        axios.post('/usersRouter/save', {
+        axios.post('/usersRouter/webSave', {
             data: {
                 user_id: inputId,
                 password: inputPw,

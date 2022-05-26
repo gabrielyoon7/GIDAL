@@ -5,22 +5,25 @@ const { User } = require("../models/User");
 const bcrypt = require('bcrypt')
 
 /* POST*/
-// router.post('/save', function(req, res) {
-//     console.log(req.body);
-//     // 데이터 저장
-//     var newUser = new User(req.body.data);
-    // newUser.save(function(error, data){
-    //     if(error){
-    //         console.log(error);
-    //         return res.json({status: 'fail', error})
-    //     }else{
-    //         console.log('Saved!')
-    //         return res.json({status: 'success'})
-    //     }
-    // });
-// });
-
 router.post('/save', function(req, res) {
+    console.log(req.body);
+    const profileImg = "https://cdn-icons-png.flaticon.com/512/1/1247.png"
+    // 데이터 저장
+    let data = req.body.data
+    data.profile_image = profileImg
+    var newUser = new User(data);
+    newUser.save(function(error, data){
+        if(error){
+            console.log(error);
+            return res.json({status: 'fail', error})
+        }else{
+            console.log('Saved!')
+            return res.json({status: 'success'})
+        }
+    });
+});
+
+router.post('/webSave', function(req, res) {
     console.log(req.body.data.user_id);
     const profileImg = "https://cdn-icons-png.flaticon.com/512/1/1247.png"
     bcrypt.hash(req.body.data.password, 10, (err, encryptedPassowrd) => {
@@ -186,20 +189,8 @@ router.post('/loginBcrypt/', function(req, res, next) {
                     return res.json({status: 'fail', error})
                 }else{
                     console.log('Saved!')
-                    return res.json({status: 'success'})
+                    return res.json({status: 'success', user})
                 }
-
-				// if (same) {
-				// 	return res.json({
-				// 		loginToken: true,
-				// 		message: "로그인되었습니다!",
-				// 	});
-				// } else {
-				// 	return res.json({
-				// 		loginToken: false,
-				// 		message: "비밀번호가 일치하지 않습니다.",
-				// 	});
-				// }
 			});
 		}
 	});

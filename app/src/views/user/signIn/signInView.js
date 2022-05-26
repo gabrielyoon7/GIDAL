@@ -1,8 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { Box, Text, Heading, VStack, FormControl, Input, Link, Button, HStack, Center, NativeBaseProvider } from "native-base";
-import { Alert } from 'react-native';
-
 import { useEffect, useState } from "react";
 import { config } from '../../../../config'
 import LoadingSpinner from "../../../components/common/LoadingSpinner";
@@ -21,53 +19,25 @@ const SignInView = (props) => {
             alert('비밀번호를 입력해주세요.');
             return;
         }
-        if(password.length < 5){
-            axios.post(config.ip + ':5000/usersRouter/findOne', {
-                data: {
-                    user_id: userId
-                }
-            }).then((response) => {
-                if (!response.data) {
-                    alert('존재하지 않는 아이디입니다.');
+
+        axios.post(config.ip + ':5000/usersRouter/findOne', {
+            data: {
+                user_id: userId
+            }
+        }).then((response) => {
+            if (!response.data) {
+                alert('존재하지 않는 아이디입니다.');
+            } else {
+                console.log(response.data[0]);
+                if (response.data[0].password === password) {
+                    setDate(response.data);
                 } else {
-                    console.log(response.data[0]);
-                    if (response.data[0].password === password) {
-                        setDate(response.data);
-                    } else {
-                        alert('비밀번호가 일치하지 않습니다.');
-                    }
+                    alert('비밀번호가 일치하지 않습니다.');
                 }
-            }).catch(function (error) {
-                console.log(error);
-            })
-        } else {
-            axios.post(config.ip + ':5000/usersRouter/loginBcrypt', {
-                data: {
-                    user_id: userId,
-                    password: password
-                }
-            })
-            .then((response) => {
-                // console.log(response.data);
-                // alert(123)
-                if (response===undefined) {
-                    Alert.alert('존재하지 않는 아이디입니다.');
-                } else {
-                    if (response.data.status === 'success') {
-                        setDate(response.data);
-                    } 
-                    // if (response.data[0].password === inputPw) {
-                    //     // alert('비밀번호가 일치함');
-                    // }
-                     else {
-                        alert('비밀번호가 일치하지 않습니다.');
-                    }
-                }
-            }).catch(function (error) {
-                console.log(error);
-            })
-        }
-        
+            }
+        }).catch(function (error) {
+            console.log(error);
+        })
     }
 
     const setDate = async (user) => {

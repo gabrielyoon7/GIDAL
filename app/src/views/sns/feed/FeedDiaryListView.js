@@ -12,6 +12,7 @@ const FeedDiaryList = (props, navigation) => {
     const [backupData, setBackupData] = useState([]);
     const [userId, setUserId] = useState('');
     const isFocused = useIsFocused(); // isFoucesd Define
+    const [profileImg, setProfileImg] = useState('');
 
     useEffect(() => {
         AsyncStorage.getItem('userInfo')
@@ -19,6 +20,7 @@ const FeedDiaryList = (props, navigation) => {
                 if (value != null) {
                     const UserInfo = JSON.parse(value);
                     setUserId(UserInfo[0].user_id);
+                    setProfileImg(UserInfo[0].profile_image);
                 }
             })
     },[])
@@ -101,6 +103,7 @@ const FeedDiaryList = (props, navigation) => {
             <FancyDiaryCard
                 item={item}
                 user_id={userId}
+                profileImg={profileImg}
                 pressCommentIcon={() => pressCommentIcon(item)}
                 onPress={
                     () => {

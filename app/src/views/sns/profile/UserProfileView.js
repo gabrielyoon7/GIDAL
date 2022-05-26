@@ -21,7 +21,7 @@ export default function UserProfileView(props) {
   // console.log('UserProfileView');
 
   const [date, setSelectedDate] = React.useState(props.selectedDate);
-  const [profileImg, setProfileImg] = useState();
+  const [profileImg, setProfileImg] = useState('');
   const [user_Id, setUserId] = useState('loading');
   const [currentId, setCurrentId] = useState('헤헤');
   const [userFollower, setUserFollower] = useState([]);
@@ -32,7 +32,6 @@ export default function UserProfileView(props) {
 
   const [isLoaded, setIsLoaded] = React.useState(false);
   const new_routes = useNavigationState(state => state.routes);
-
   const [items, setItems] = React.useState([]);
 
   React.useEffect(() => {
@@ -53,6 +52,7 @@ export default function UserProfileView(props) {
                 if (value != null) {
                   const UserInfo = JSON.parse(value);
                   setUserId(UserInfo[0].user_id);
+                  setProfileImg(UserInfo[0].profile_image);
                 }
               }
               )
@@ -258,7 +258,7 @@ export default function UserProfileView(props) {
   return (
     <>
       <ProfileHeader />
-      <DiaryList selectedDate={date} navigation={props.navigation} user_Id={user_Id} type={'profile'} items={items} setItems={setItems} />
+      <DiaryList selectedDate={date} navigation={props.navigation} user_Id={user_Id} type={'profile'} items={items} setItems={setItems} profileImg={profileImg}/>
     </>
   )
 }

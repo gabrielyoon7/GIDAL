@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from 'axios';
+import Footer from "../../../views/common/Footer";
+import Header from "../../../views/common/Header";
 
 const DiaryReadView = () => {
     const params = useParams();
@@ -43,34 +45,27 @@ const DiaryReadView = () => {
         return diary.content;
     }
 
-    return(
+    return (
         <div>
-            <h1>{diary.title}</h1>
-            <p>{diary.date}</p>
-            <div className="row">
-                <p className="col-6">{diary.user_id}</p>
-                <p className="col-6">heart</p>
-            </div>
-            <hr />
-            <div>
-                <p><RenderContent /></p>
-            </div>
-            <hr />
-            {diary.tags.map((tag) => (
-                // <Badge
-                //     backgroundColor={generateColor()}
-                //     _text={{
-                //         color: "white"
-                //     }}
-                //     variant="solid"
-                //     rounded="4"
-                //     key={tag}
-                // >
-                //     {tag}
-                // </Badge>
-                <span key={tag} >{tag}  </span>
-            ))
-            }
+            <Header />
+            <main className="container">
+                <h1>{diary.title}</h1>
+                <p>{diary.date}</p>
+                <div className="row">
+                    <p className="col-6">{diary.user_id}</p>
+                    <p className="col-6">heart</p>
+                </div>
+                <hr />
+                <div>
+                    <p><RenderContent /></p>
+                </div>
+                <hr />
+                {diary.tags.map((tag) => (
+                    <span key={tag} >{tag}  </span>
+                ))
+                }
+            </main>
+            <Footer />
         </div>
     )
 }

@@ -110,6 +110,7 @@ const FeedDiaryList = (props, navigation) => {
                         props.navigation.navigate('DiaryRead', {
                             diary: item,
                             user_id: userId,
+                            profileImg: profileImg
                         })
                     }
                 }

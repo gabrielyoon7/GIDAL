@@ -3,6 +3,8 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const { User } = require("../models/User");
 const bcrypt = require('bcrypt')
+// const multer = require('multer')
+// const sharp = require("sharp");
 
 /* POST*/
 router.post('/save', function(req, res) {
@@ -235,5 +237,9 @@ router.post('/userFollowingDelete', (req,res) => {
             }
         });
   })
+
+// const formData = new FormData();
+// formData.append("selectImg", image);
+
 
 module.exports = router;

@@ -8,6 +8,8 @@ const usersRouter = require('./routes/users');
 const todoRouter = require('./routes/todo');
 const tagsRouter = require('./routes/tags');
 const testTodoRouter = require('./routes/TestTodo')
+const exampleRouter = require('./routes/Examples')
+
 const { Diary } = require("./models/Diary");
 const { User } = require("./models/User");
 const { UserTodo } = require("./models/UserTodo");
@@ -67,3 +69,4 @@ app.use('/usersRouter', usersRouter);
 app.use('/todoRouter', todoRouter);
 app.use('/tagsRouter', tagsRouter);
 app.use('/testTodoRouter', testTodoRouter);
+app.use('/exampleRouter', exampleRouter);

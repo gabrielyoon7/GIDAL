@@ -5,10 +5,9 @@ import Footer from "../../views/common/Footer";
 import Header from "../../views/common/Header";
 import DiaryReadView from "../../views/diary/read/DiaryReadView";
 import DirayWriteView from "../../views/diary/write/DirayWriteView";
-
+import ExampleView from "../../views/main/ExampleView";
 import MainView from "../../views/main/MainView";
 import DiarySnsFeedView from "../../views/sns/DiarySnsFeedView";
-
 
 const data = {
   undefined: {
@@ -20,12 +19,12 @@ const data = {
   write:{
     html: <DirayWriteView/>,
   },
-  // read:{
-  //   html: <DiaryReadView/>,
-  // },
   sns: {
     html: <DiarySnsFeedView />,
   },
+  example:{
+    html: <ExampleView/>,
+  }
 };
 
 

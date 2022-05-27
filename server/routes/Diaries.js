@@ -101,10 +101,11 @@ router.post('/findOne', function(req, res, next) {
 
 router.post('/findMostLikersDiary', function(req, res, next) {
     // 전체 데이터 가져오기
-    const query = new RegExp(req.body.date)
-    console.log(query)
-    Diary.find({'disclosure': 'public', 'date': { $regex: query }}).sort({likes: -1}).then( (diaries) => {
-        console.log(diaries);
+    // const date = req.body.date.split('-')
+    const date = new Date(req.body.date);
+    const tomorrow = new Date(req.body.date);
+    tomorrow.setDate(date.getDate() + 1)
+    Diary.find({'disclosure': 'public', date: {"$gte": date, "$lt": tomorrow} }).sort({likes: -1}).then( (diaries) => {
         res.json(diaries)
     }).catch( (err) => {
         console.log(err);

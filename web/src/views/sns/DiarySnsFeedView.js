@@ -15,9 +15,10 @@ const DiarySnsFeedView = () => {
         // getMostLikersItems();
     }, []);
 
-    // useEffect(() => {
-    //     getMostLikersItems();
-    // },[value])
+    useEffect(() => {
+        console.log(moment(value).format("YYYY-MM-DD"))
+        getMostLikersItems();
+    },[value])
 
     const getitems = () => {
         let result = []

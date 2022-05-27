@@ -24,7 +24,7 @@ const DiaryPostCard = ({ diary }) => {
                         {/* <strong className="d-inline-block mb-2 text-primary">태그 태그</strong> */}
                         <div className="row d-inline-block ms-1">
                             {diary.tags.map((tag) => (
-                                <button key={tag} type="button" class="btn btn-outline-success btn-sm disabled me-1 col-auto">{tag}</button>
+                                <button key={tag} type="button" class="btn btn-outline-success btn-sm disabled me-1 mt-1 col-auto">{tag}</button>
                             ))}
                         </div>
                         <div className="text-muted row">

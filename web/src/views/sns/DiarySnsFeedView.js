@@ -84,12 +84,12 @@ const DiarySnsFeedView = () => {
                         </div> */}
 
                         <div className="p-4">
-                            <h4 className="fw-bold">Calendar</h4>
+                            <h4 className="fw-bold">인기 일기</h4>
                             <Calendar onChange={onChange} value={value}
                                 formatDay={(locale, date) => moment(date).format("DD")}
                                 className="mx-auto w-full text-sm border-b"
                             />
-                            <ol className="list-unstyled">
+                            <ol className="list-unstyled mt-4">
                                 {mostLikersItems.map((diary) => (
                                     <DiaryPostCard diary={diary} key={diary._id} />                                ))}
                             </ol>

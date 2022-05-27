@@ -9,9 +9,6 @@ const DiarySnsFeedView = () => {
         getitems();
     }, []);
 
-    const readDiary = (id) => {
-        window.location.href = "/read/"+id;
-    }
 
     const getitems = () => {
         let result = []
@@ -39,7 +36,7 @@ const DiarySnsFeedView = () => {
                         모두의 일기
                     </h3>
                     {items.map((diary) => (
-                        <DiaryPostCard diary={diary} readDiary={() => readDiary(diary._id)} key ={diary._id} />
+                        <DiaryPostCard diary={diary} key ={diary._id} />
                     ))}
 
 

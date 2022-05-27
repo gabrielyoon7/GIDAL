@@ -26,7 +26,7 @@ const DiaryPostCard = ({ diary }) => {
                     <div className="d-flex justify-content-between">
                         {/* <strong className="d-inline-block mb-2 text-primary">태그 태그</strong> */}
                         <div className="row d-inline-block ms-1">
-                            {diary.tags.map((tag) => (
+                            {diary.tags.slice(0,3).map((tag) => (
                                 <button key={tag} type="button" className="btn btn-outline-success btn-sm disabled me-1 mt-1 col-auto">{tag}</button>
                             ))}
                         </div>

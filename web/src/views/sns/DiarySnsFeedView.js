@@ -18,7 +18,7 @@ const DiarySnsFeedView = () => {
     useEffect(() => {
         console.log(moment(value).format("YYYY-MM-DD"))
         getMostLikersItems();
-    },[value])
+    }, [value])
 
     const getitems = () => {
         let result = []
@@ -63,10 +63,13 @@ const DiarySnsFeedView = () => {
                     <h3 className="pb-4 mb-4 fw-bold border-bottom">
                         모두의 일기
                     </h3>
-                    {items.map((diary) => (
-                        <DiaryPostCard diary={diary} key ={diary._id} />
-                    ))}
-
+                    <div className="row">
+                        {items.map((diary) => (
+                            <div className="col-xl-6">
+                                <DiaryPostCard diary={diary} key={diary._id} />
+                            </div>
+                        ))}
+                    </div>
 
                     <nav className="blog-pagination" aria-label="Pagination">
                         <a className="btn btn-outline-primary" href="#">Older</a>
@@ -91,7 +94,7 @@ const DiarySnsFeedView = () => {
                             />
                             <ol className="list-unstyled mt-4">
                                 {mostLikersItems.map((diary) => (
-                                    <DiaryPostCard diary={diary} key={diary._id} />                                ))}
+                                    <DiaryPostCard diary={diary} key={diary._id} />))}
                             </ol>
                         </div>
 

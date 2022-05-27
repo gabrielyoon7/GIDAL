@@ -109,14 +109,14 @@ const DiaryCommentView = (props) => {
 
     const CommentView = () => {
         return (
-            <>
             <View>
+                <View>
                     <FlatList
                         data={comments}
                         renderItem={renderItem}
                         keyExtractor={item => item._id} >
                     </FlatList>
-            </View>
+                </View>
                 <KeyboardAvoidingView
                     style={{ backgroundColor: '#FFFFFF' }}
                     behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -138,7 +138,7 @@ const DiaryCommentView = (props) => {
                         /> */}
                     </View>
                 </KeyboardAvoidingView>
-            </>
+            </View>
         )
     }
 
@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         flexWrap: "wrap",
         justifyContent: "center",
-        marginBottom: 16,
+        // marginBottom: 16,
         backgroundColor: 'white',
         paddingVertical: 10,
     },

@@ -6,13 +6,13 @@ const DiaryPreview = (props) => {
             </div>
             <div className='card rounded-3' style={style} >
                 {/* <!-- 상태바 시작--> */}
-                <div class="d-flex justify-content-between pt-2 px-4" id="status-bar">
+                <div className="d-flex justify-content-between pt-2 px-4" id="status-bar">
                     <div><b>12:00</b></div>
                     <div>
-                        <i class="bi bi-bluetooth"></i>
-                        <i class="bi bi-bar-chart-fill"></i>
-                        <i class="bi bi-wifi"></i>
-                        <i class="bi bi-battery-full"></i>
+                        <i className="bi bi-bluetooth"></i>
+                        <i className="bi bi-bar-chart-fill"></i>
+                        <i className="bi bi-wifi"></i>
+                        <i className="bi bi-battery-full"></i>
                     </div>
                 </div>
                 {/* <!-- 상태바 끝--> */}
@@ -28,5 +28,6 @@ const DiaryPreview = (props) => {
 export default DiaryPreview;
 
 const style = { 
-    maxWidth:"400px"
+    maxWidth:"400px",
+    minHeight:"300px"
 }

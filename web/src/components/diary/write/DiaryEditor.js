@@ -1,5 +1,6 @@
 import { Editor } from 'react-draft-wysiwyg';
 import './App.css';
+import '/node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 const DiaryEditor = (props) => {
     return (
         <div className='diaryEditor my-3'>

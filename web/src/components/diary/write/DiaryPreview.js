@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 const DiaryPreview = (props) => {
 
     const [time, setTime] = useState(new Date());
-    const userId = sessionStorage.getItem("Id");
+
 
     return (
         <div className='diaryPreview my-3 '>
@@ -38,7 +38,7 @@ const DiaryPreview = (props) => {
                 </div>
                 <div className="p-3">
                     <button className="btn btn-success btn-sm">public</button>
-                    <div className="fs-1 fw-bold">
+                    <div className="fs-2 fw-bold">
                         {props.title ? props.title : '제목을 입력하세요'}
                     </div>
                     <div className="my-1">
@@ -46,9 +46,14 @@ const DiaryPreview = (props) => {
                     </div>
                     <div className="my-1">
                         <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" className="me-2 rounded-circle" alt="Avatar" style={{ height: '30px' }} />
-                        <strong className="d-inline-block mb-2 text-primary">{userId    }</strong>
+                        <strong className="d-inline-block mb-2 text-primary">{props.userId}</strong>
+                        <hr></hr>
                     </div>
-                    <div className="preview" dangerouslySetInnerHTML={props.createMarkup(props.convertedContent)}></div>
+                    <div className="preview" dangerouslySetInnerHTML={props.createMarkup(props.convertedContent)} style={{ minHeight: '300px' }}></div>
+                    <div className="d-flex justify-content-end">
+                        댓글 99개 좋아요 99개
+                    </div>
+                    <hr></hr>
                 </div>
             </div>
         </div>

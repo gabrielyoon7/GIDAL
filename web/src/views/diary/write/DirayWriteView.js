@@ -10,6 +10,7 @@ const DirayWriteView = () => {
   const [editorState, setEditorState] = useState(
     () => EditorState.createEmpty(),
   );
+  const userId = sessionStorage.getItem("Id");
   const [convertedContent, setConvertedContent] = useState(null);
   const [title, setTitle] = useState('');
   const handleTitleChange = (state) => {
@@ -66,7 +67,7 @@ const DirayWriteView = () => {
           <DiaryEditor handleTitleChange={handleTitleChange} editorState={editorState} handleEditorChange={handleEditorChange} />
         </div>
         <div className='col-lg-6'>
-          <DiaryPreview title={title} createMarkup={createMarkup} convertedContent={convertedContent} />
+          <DiaryPreview userId={userId} title={title} createMarkup={createMarkup} convertedContent={convertedContent} />
         </div>
         <button onClick={saveDiary}>작성하기</button>
       </div>

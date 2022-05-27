@@ -44,7 +44,7 @@
 
 ## Project Structure
 
-이 프로젝트에서 사용하는 구조는 다음과 같습니다.
+앱  사용하는 구조는 다음과 같습니다.
 
     src
      |-components

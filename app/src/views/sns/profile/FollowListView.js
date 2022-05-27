@@ -28,8 +28,8 @@ export default function FollowListView(props) {
   //시작
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: 'first', title: 'Follower' },
-    { key: 'second', title: 'Following' },
+    { key: 'first', title: '팔로워' },
+    { key: 'second', title: '팔로잉' },
   ]);
 
   // const [init, setInit] = useState('Following');
@@ -335,9 +335,8 @@ const styles = StyleSheet.create({
   },
   box: {
     padding: 3,
-    marginTop: 5,
     marginBottom: 5,
-    backgroundColor: '#ffffff', //리스트 카드 색
+    backgroundColor: 'white', //리스트 카드 색
     flexDirection: 'row',
     shadow:3,
     borderRadius: 8,
@@ -359,13 +358,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   searchbar: {
-    margin: 11,
+    margin: 7,
     borderWidth: 1,
     borderColor: 'gray'
 
   },
   container: {
-    marginTop: 5,
     backgroundColor: "white"
   },
 

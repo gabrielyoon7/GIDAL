@@ -66,6 +66,6 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     borderColor: "#FFFFFF",
     position: 'absolute',
-    top: 10, left: 20
+    top: 20, right :80
   }
 });

@@ -207,9 +207,10 @@ export default function UserProfileView(props) {
     return (
       <View style={styles.header}>
         <BackButton navigation={props.navigation} />
+        <ImagePicker/>
         <View style={styles.headerContent}>
         {/* <Image style={styles.avatar} source={{ uri: profileImg }} /> */}
-        <ImagePicker/>
+     
       
           
           <Text style={styles.name}>{user_Id}</Text>
@@ -274,11 +275,12 @@ const styles = StyleSheet.create({
   },
   header: {
     // 헤더  색상
-    backgroundColor: "#336600",
+    backgroundColor: "#27ae60",
   },
   headerContent: {
     padding: 20,
     alignItems: 'center',
+    paddingLeft:60
   },
   avatar: {
     width: 90,

@@ -54,8 +54,9 @@ const DiaryReadView = () => {
                 <h1>{diary.title}</h1>
                 <p>{diary.date}</p>
                 <div className="row">
-                    <p className="col-6">{diary.user_id}</p>
-                    <p className="col-6">heart</p>
+                    <p className="col-auto me-auto">{diary.user_id}</p>
+                    <p className="col-auto"><i class="bi bi-chat-right-text me-2"></i>{diary.comments.length}</p>
+                    <p className="col-auto"><i class="bi bi-heart me-2"></i>{diary.likers.length}</p>
                 </div>
                 <hr />
                 <div>
@@ -64,13 +65,7 @@ const DiaryReadView = () => {
                 <hr />
                 {diary.tags.map((tag) => (
                     <button type="button" class="btn btn-success disabled me-1">{tag}</button>
-                    // <span key={tag} className="badge"  >{tag}  </span>
-                    // badge 디자인이 적용 안됨
-                ))
-                }
-                {/* <button type="button" class="btn btn-success disabled">Success</button>
-                <button class="badge text-bg-success">Success</button> */} 
-                
+                ))}                
             </main>
             <Footer />
         </div>

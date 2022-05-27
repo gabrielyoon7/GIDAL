@@ -1,4 +1,4 @@
-import { Box, Button, Image, Input } from "native-base";
+import { Box, Button, Image, Input, ScrollView } from "native-base";
 import { Dimensions, FlatList, KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 import { AntDesign } from "@expo/vector-icons";
@@ -110,38 +110,30 @@ const DiaryCommentView = (props) => {
         setInputComment(text);
     }
 
-    const CommentView = () => {
+    const CommentListView = () => {
         return (
-            <View>
-                <View>
-                    <FlatList
-                        data={comments}
-                        renderItem={renderItem}
-                        keyExtractor={item => item._id} >
-                    </FlatList>
-                </View>
-                <KeyboardAvoidingView
-                    style={{ backgroundColor: '#FFFFFF' }}
-                    behavior={Platform.OS === "ios" ? "padding" : "height"}
-                >
-                    <View>
-                        <TextInput style={{ margin: 12, borderWidth: 1, borderColor: 'gray' }} onChangeText={onChangeText} value={inputComment}></TextInput>
-                        <Button size="xs" rounded="none" onPress={handleClick} >
-                            저장
-                        </Button>
-                        {/* <SearchBar
-                            placeholder="검색어를 입력하세요."
-                            // onPress={() => alert("onPress")}
-                            onChangeText={onChangeText}
-                            value={inputComment}
-                            // onClearPress={() => {
-                            //     filterList("");
-                            // }}
-                            style={{ margin: 12, borderWidth: 1, borderColor: 'gray' }}
-                        /> */}
-                    </View>
-                </KeyboardAvoidingView>
+            <View style={styles.container}>
+                <FlatList
+                    data={comments}
+                    renderItem={renderItem}
+                    keyExtractor={item => item._id} >
+                </FlatList>
             </View>
+        )
+    }
+
+    const CommentInputView = () => {
+        return (
+            <KeyboardAvoidingView>
+                <View style={styles.ComponentContainer}>
+                    <View style={styles.inputContainer}>
+                        <TextInput style={styles.input} placeholder="댓글을 입력하세요" value={inputComment} onChangeText={onChangeText} />
+                    </View>
+                    <TouchableOpacity style={styles.SubmitButton} onPress={handleClick}>
+                        <Text>저장</Text>
+                    </TouchableOpacity>
+                </View>
+            </KeyboardAvoidingView>
         )
     }
 
@@ -154,49 +146,21 @@ const DiaryCommentView = (props) => {
         // >
         //     <CommentView />
         // </ParallaxScrollView>
-        <View>
+        <>
             <CommentHeader />
-            <CommentView />
-        </View>
+            <CommentListView />
+            <CommentInputView />
+        </>
     )
 }
 export default DiaryCommentView;
 
 const styles = StyleSheet.create({
     container: {
-        margin: 20,
-    },
-    background: {
-        backgroundColor: "white",
-        // flex:1,
-        minHeight: windowHeight - 49,
-        // flex:1,
-        // justifyContent: 'center',
-    },
-    header: {
-        height: windowHeight * 0.4,
-        // backgroundColor: "black",
-        // textAlign: "center",
-        // justifyContent: 'center',
-        // color: "white",
-    },
-    scroll: {
-        flex: 1.0,
-    },
-    button: {
-        flex: 0.5,
-        marginLeft: 20,
-
-    },
-    source: {
-        minHeight: windowHeight * 0.4,
-    },
-    row: {
-        flexDirection: "row",
-        flexWrap: "wrap",
-        justifyContent: "center",
-        marginBottom: 16,
-        // backgroundColor: 'black'
+        flex: 1,
+        backgroundColor: '#fff',
+        // alignItems: 'center',
+        justifyContent: 'center',
     },
     headerBar: {
         flexDirection: "row",
@@ -206,4 +170,38 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         paddingVertical: 10,
     },
+    ComponentContainer: {
+        flexDirection: "row",
+        backgroundColor: "#ffffff",
+        padding: 10,
+        justifyContent: "center",
+    },
+    inputContainer: {
+        // flexDirection: "row",
+        borderRadius: 8,
+        borderWidth: 1,
+        width: 320,
+        height: 50,
+        marginBottom: 5,
+        borderColor: "gray",
+    },
+    input: {
+        fontSize: 15,
+        backgroundColor: "white",
+        width: 300,
+        marginRight: 20,
+        padding: 10,
+        marginBottom: 5,
+        borderRadius: 10,
+    },
+    SubmitButton: {
+        width: 50,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "whitesmoke",
+        marginBottom: 5,
+        marginLeft: 5,
+        borderRadius: 8,
+        backgroundColor: "#27ae60",
+    }
 })

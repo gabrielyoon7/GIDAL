@@ -105,7 +105,7 @@ router.post('/findMostLikersDiary', function(req, res, next) {
     const date = new Date(req.body.date);
     const tomorrow = new Date(req.body.date);
     tomorrow.setDate(date.getDate() + 1)
-    Diary.find({'disclosure': 'public', date: {"$gte": date, "$lt": tomorrow} }).sort({likes: -1}).then( (diaries) => {
+    Diary.find({'disclosure': 'public', date: {"$gte": date, "$lt": tomorrow} }).sort({likes: -1}).limit(3).then( (diaries) => {
         res.json(diaries)
     }).catch( (err) => {
         console.log(err);

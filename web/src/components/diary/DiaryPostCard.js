@@ -21,8 +21,17 @@ const DiaryPostCard = ({ diary }) => {
                     <h3 className="mb-0">{diary.title}</h3>
                     <p className="card-text mb-auto">{content}</p>
                     <div className="d-flex justify-content-between">
-                        <strong className="d-inline-block mb-2 text-primary">태그 태그</strong>
-                        <div className="mb-1 text-muted">댓글 좋아요</div>
+                        {/* <strong className="d-inline-block mb-2 text-primary">태그 태그</strong> */}
+                        <div className="row d-inline-block ms-1">
+                            {diary.tags.map((tag) => (
+                                <button key={tag} type="button" class="btn btn-outline-success btn-sm disabled me-1 col-auto">{tag}</button>
+                            ))}
+                        </div>
+                        <div className="text-muted row">
+                                <p className="col-auto"><i class="bi bi-chat-right-text me-2"></i>{diary.comments.length}</p>
+                                <p className="col-auto"><i class="bi bi-heart me-2"></i>{diary.likers.length}</p>
+                                {/* 좋아요 댓글 */}
+                        </div>
                     </div>
                 </div>
             </div>

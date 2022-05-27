@@ -221,7 +221,7 @@ const Todo = ({ props }) => { // 진짜
     <>
       <Header date={pickedDate} />
       
-      <ScrollView style={{backgroundColor:'white'}}>
+      <View style={styles.container}>
         
         <FlatList
           data={data}
@@ -230,7 +230,7 @@ const Todo = ({ props }) => { // 진짜
           renderItem={({ item }) => (
             <TodoList item={item} deleteItem={deleteItem} changeIsDone={changeIsDone} />
           )} />
-      </ScrollView>
+      </View>
       <KeyboardAvoidingView>
       
         <AddInput submitHandler={submitHandler} />
@@ -259,4 +259,10 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     backgroundColor: '#fff',
   },
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    // alignItems: 'center',
+    justifyContent: 'center',
+},
 });

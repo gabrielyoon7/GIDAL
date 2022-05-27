@@ -8,7 +8,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused, useNavigationState } from '@react-navigation/native';
 import BackButton from '../../../components/common/BackButton';
 import { Ionicons } from "@expo/vector-icons";
-import ImagePickerExample from '../../test/ImagePickerTest';
+import ImagePicker from "./ImagePicker"
 
 // 이걸로 통합 예정
 
@@ -209,7 +209,7 @@ export default function UserProfileView(props) {
         <BackButton navigation={props.navigation} />
         <View style={styles.headerContent}>
         {/* <Image style={styles.avatar} source={{ uri: profileImg }} /> */}
-        <ImagePickerExample/>
+        <ImagePicker/>
       
           
           <Text style={styles.name}>{user_Id}</Text>

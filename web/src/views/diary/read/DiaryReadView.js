@@ -64,7 +64,7 @@ const DiaryReadView = () => {
                 </div>
                 <hr />
                 {diary.tags.map((tag) => (
-                    <button type="button" class="btn btn-success disabled me-1">{tag}</button>
+                    <button key={tag} type="button" class="btn btn-success disabled me-1">{tag}</button>
                 ))}                
             </main>
             <Footer />

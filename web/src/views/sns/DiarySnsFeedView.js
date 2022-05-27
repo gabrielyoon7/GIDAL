@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import DiaryPostCard from "../../components/diary/DiaryPostCard";
-const DiarySnsFeedView = () => {
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css'; // css import
+import moment from 'moment';
 
+const DiarySnsFeedView = () => {
+    const [value, onChange] = useState(new Date());
     const [items, setItems] = useState([]);
 
     useEffect(() => {
@@ -56,21 +60,11 @@ const DiarySnsFeedView = () => {
                         </div> */}
 
                         <div className="p-4">
-                            <h4 className="fw-bold">Archives</h4>
-                            <ol className="list-unstyled mb-0">
-                                <li><a href="#">March 2021</a></li>
-                                <li><a href="#">February 2021</a></li>
-                                <li><a href="#">January 2021</a></li>
-                                <li><a href="#">December 2020</a></li>
-                                <li><a href="#">November 2020</a></li>
-                                <li><a href="#">October 2020</a></li>
-                                <li><a href="#">September 2020</a></li>
-                                <li><a href="#">August 2020</a></li>
-                                <li><a href="#">July 2020</a></li>
-                                <li><a href="#">June 2020</a></li>
-                                <li><a href="#">May 2020</a></li>
-                                <li><a href="#">April 2020</a></li>
-                            </ol>
+                            <h4 className="fw-bold">Calendar</h4>
+                            <Calendar onChange={onChange} value={value}
+                                formatDay={(locale, date) => moment(date).format("DD")}
+                                className="mx-auto w-full text-sm border-b"
+                             />
                         </div>
 
                         <div className="p-4">

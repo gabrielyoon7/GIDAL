@@ -3,7 +3,7 @@ import { Avatar, Badge, Box, Divider, Flex, HStack, Pressable, Spacer, Text, } f
 import { Ionicons } from "@expo/vector-icons";
 import { useEffect, useState } from 'react';
 
-const FancyDiaryCard = ({ item: diary, user_id, pressCommentIcon, profileImg, onPress, backgroundColor, textColor }) => {
+const FancyDiaryCard = ({ item: diary, user_id, pressCommentIcon, profileImg, onPress, followers, backgroundColor, textColor }) => {
     const [liked, setLiked] = useState(false);
 
     // 정규식을 이용한 HTML 태그 제거 시작
@@ -35,8 +35,8 @@ const FancyDiaryCard = ({ item: diary, user_id, pressCommentIcon, profileImg, on
                 <Text fontSize={15} color="coolGray.800" alignSelf="center" mx={2}>
                     {diary.user_id}
                 </Text>
-                {/* 친구가 아닌 경우에만 이걸 표시해 줘야 할듯 */}
-                <Ionicons size={15} color="grey" name="star-outline" />
+                {/* 친구가 아닌 경우에만 표시함 */}
+                {!followers.find(v => v.user_id === diary.user_id) && !(user_id === diary.user_id) ? <Ionicons size={15} color="grey" name="star-outline" /> : null}
                 <Spacer />
                 <Text fontSize={11} color="coolGray.800">
                     {diary.date.substr(0, 10)}

@@ -11,7 +11,7 @@ const MonthSelector = ({ submitHandler}) => {
         const result = [];
         for(let i=1; i<=12; i++){
             let month = i+"월"
-            result.push(<Button key={i} h="10" mr="1" rounded="md" shadow={3} onPress={()=>selectMonth(i)}>{month}</Button>)
+        result.push(<Button key={i} h="10" mr="1" rounded="md" backgroundColor={'#27ae60'} shadow={3} onPress={()=>selectMonth(i)}>{month}</Button>)
         }
         return result;
     }

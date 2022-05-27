@@ -218,28 +218,30 @@ const Todo = ({ props }) => { // 진짜
   }
 
   return (
-    <KeyboardAvoidingView       behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ flex: 1 }}>
+    <>
       <Header date={pickedDate} />
-      <ScrollView>
+      
+      <View style={styles.container}>
+        
         <FlatList
           data={data}
           ListEmptyComponent={() => <Empty />}
           keyExtractor={(item) => item.key}
           renderItem={({ item }) => (
             <TodoList item={item} deleteItem={deleteItem} changeIsDone={changeIsDone} />
-          )}
-        />
-      </ScrollView>
-      <View>
-        <AddInput submitHandler={submitHandler} />
+          )} />
       </View>
-      <DateTimePickerModal
+      <KeyboardAvoidingView>
+      
+        <AddInput submitHandler={submitHandler} />
+     
+    </KeyboardAvoidingView>
+    <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode="date"
         onConfirm={handleConfirm}
-        onCancel={hideDatePicker}
-      />
-    </KeyboardAvoidingView>
+        onCancel={hideDatePicker} /></>
+    
   );
 };
 
@@ -257,4 +259,10 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     backgroundColor: '#fff',
   },
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    // alignItems: 'center',
+    justifyContent: 'center',
+},
 });

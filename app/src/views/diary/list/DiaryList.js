@@ -66,6 +66,7 @@ const DiaryList = (props, navigation) => {
         , {
             diary: item,
             user_id: user_id,
+            profileImg: profileImg,
         }
         )
     }
@@ -76,6 +77,7 @@ const DiaryList = (props, navigation) => {
                 item={item}
                 user_id={user_id}
                 profileImg={profileImg}
+                followers={[]}
                 pressCommentIcon={() => pressCommentIcon(item)}
                 onPress={
                     () => {

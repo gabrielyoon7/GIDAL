@@ -18,16 +18,11 @@ const TodoStatisticsView = (props) => {
                 <Box pb="3">
                     <HStack>
                         <Heading size="md" isTruncated>
-                            Todo 통계
+                            할 일 통계
                         </Heading>
                         <Spacer />
-                        <TouchableOpacity onPress={() => console.log("detail")}>
-                            <HStack>
-                                <Text>자세히 보기</Text>
-                            </HStack>
-                        </TouchableOpacity>
                     </HStack>
-                    <View style={styles.interaction}>
+                    <View>
                         <TodoChart todoStatistics={todoStatistics} />
                     </View>
                 </Box>
@@ -98,7 +93,7 @@ const TodoStatisticsView = (props) => {
         <View style={{ flex: 1 }}>
             <BackButton navigation={props.navigation} />
             <ScrollView>
-            <WelcomeCard title={"Todo"} content={0+'에서 데이터를 가져올 것임'}/>
+            <WelcomeCard title={"할 일"} content={0+'에서 데이터를 가져올 것임'}/>
             <PersonalTodoStatistics />
             </ScrollView>
         </View>

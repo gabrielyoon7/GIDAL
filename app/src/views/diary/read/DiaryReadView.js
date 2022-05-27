@@ -180,6 +180,7 @@ const DiaryReadView = (props) => {
         , {
             diary: item,
             user_id: userId,
+            profileImg: profile,
         }
         )
     }

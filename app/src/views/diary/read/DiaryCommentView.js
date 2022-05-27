@@ -1,4 +1,4 @@
-import { Box, Button, Image, Input } from "native-base";
+import { Box, Button, Image, Input, ScrollView } from "native-base";
 import { Dimensions, FlatList, KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 import { AntDesign } from "@expo/vector-icons";
@@ -8,11 +8,13 @@ import { config } from '../../../../config'
 import { useNavigationState } from '@react-navigation/native';
 import FancyCommentCard from "../../../components/diary/FancyCommentCard";
 import SearchBar from "react-native-dynamic-search-bar";
+import InputComment from "./InputComment";
 
 const windowHeight = Dimensions.get('window').height;
 
 const DiaryCommentView = (props) => {
     const [userId, setUserId] = useState('');
+    const [profileImg, setProfileImg] = useState('');
     const [inputComment, setInputComment] = useState('');
     const new_routes = useNavigationState(state => state.routes);
     const defaultData = {
@@ -39,21 +41,23 @@ const DiaryCommentView = (props) => {
             const idx = new_routes.findIndex(r => r.name === "DiaryComment")
             const diary = new_routes[idx].params.diary;
             const user_id = new_routes[idx].params.user_id;
+            const profile_image = new_routes[idx].params.profileImg;
 
             setDiary(diary);
-            setUserId(user_id)
+            setUserId(user_id);
+            setProfileImg(profile_image);
             setComments(diary.comments)
         } catch (error) {
             console.log(error);
         }
     }, [])
 
-    const handleClick = () => {
+    const handleClick = (value) => {
         axios.post(config.ip + ':5000/diariesRouter/modifyComment', {
             data: {
                 id: diary._id,
                 user_id: userId,
-                comment: inputComment
+                comment: value
             }
         }).then((response) => {
             setInputComment('');
@@ -99,108 +103,118 @@ const DiaryCommentView = (props) => {
         );
     }
 
+    const Empty = () => {
+        return (
+            <View style={styles.emptyContainer}>
+                <Text style={styles.EmptyText}>댓글이 없습니다.</Text>
+            </View>
+        )
+    }
+
     const renderItem = ({ item }) => (
-        <FancyCommentCard item={item} user_id={userId} deleteComment={() => deleteComment(item._id)} />
+        <FancyCommentCard item={item} user_id={userId} profileImg={profileImg} deleteComment={() => deleteComment(item._id)} />
     );
 
     const onChangeText = (text) => {
         setInputComment(text);
     }
 
-    const CommentView = () => {
+    const CommentListView = () => {
         return (
-            <>
-            <View>
-                    <FlatList
-                        data={comments}
-                        renderItem={renderItem}
-                        keyExtractor={item => item._id} >
-                    </FlatList>
+            <View style={styles.container}>
+                <FlatList
+                    data={comments}
+                    ListEmptyComponent={() => <Empty />}
+                    renderItem={renderItem}
+                    keyExtractor={item => item._id} >
+                </FlatList>
             </View>
-                <KeyboardAvoidingView
-                    style={{ backgroundColor: '#FFFFFF' }}
-                    behavior={Platform.OS === "ios" ? "padding" : "height"}
-                >
-                    <View>
-                        <TextInput style={{ margin: 12, borderWidth: 1, borderColor: 'gray' }} onChangeText={onChangeText} value={inputComment}></TextInput>
-                        <Button size="xs" rounded="none" onPress={handleClick} >
-                            저장
-                        </Button>
-                        {/* <SearchBar
-                            placeholder="검색어를 입력하세요."
-                            // onPress={() => alert("onPress")}
-                            onChangeText={onChangeText}
-                            value={inputComment}
-                            // onClearPress={() => {
-                            //     filterList("");
-                            // }}
-                            style={{ margin: 12, borderWidth: 1, borderColor: 'gray' }}
-                        /> */}
+        )
+    }
+
+    const CommentInputView = () => {
+        return (
+            <KeyboardAvoidingView>
+                <View style={styles.ComponentContainer}>
+                    <View style={styles.inputContainer}>
+                        <TextInput style={styles.input} placeholder="댓글을 입력하세요" value={inputComment} onChangeText={onChangeText} />
                     </View>
-                </KeyboardAvoidingView>
-            </>
+                    <TouchableOpacity style={styles.SubmitButton} onPress={handleClick}>
+                        <Text>저장</Text>
+                    </TouchableOpacity>
+                </View>
+            </KeyboardAvoidingView>
         )
     }
 
     return (
-        // <ParallaxScrollView
-        //     style={{ flex: 1 }}
-        //     backgroundColor="white"
-        //     parallaxHeaderHeight={windowHeight * 0.3}
-        //     renderFixedHeader={() => <CommentHeader />}
-        // >
-        //     <CommentView />
-        // </ParallaxScrollView>
-        <View>
+        <>
             <CommentHeader />
-            <CommentView />
-        </View>
+            <CommentListView />
+            {/* <CommentInputView /> */}
+            <InputComment saveHandler={handleClick} />
+        </>
     )
 }
 export default DiaryCommentView;
 
 const styles = StyleSheet.create({
     container: {
-        margin: 20,
-    },
-    background: {
-        backgroundColor: "white",
-        // flex:1,
-        minHeight: windowHeight - 49,
-        // flex:1,
-        // justifyContent: 'center',
-    },
-    header: {
-        height: windowHeight * 0.4,
-        // backgroundColor: "black",
-        // textAlign: "center",
-        // justifyContent: 'center',
-        // color: "white",
-    },
-    scroll: {
-        flex: 1.0,
-    },
-    button: {
-        flex: 0.5,
-        marginLeft: 20,
-
-    },
-    source: {
-        minHeight: windowHeight * 0.4,
-    },
-    row: {
-        flexDirection: "row",
-        flexWrap: "wrap",
-        justifyContent: "center",
-        marginBottom: 16,
-        // backgroundColor: 'black'
+        flex: 1,
+        backgroundColor: '#fff',
+        // alignItems: 'center',
+        justifyContent: 'center',
     },
     headerBar: {
         flexDirection: "row",
         flexWrap: "wrap",
         justifyContent: "center",
-        marginBottom: 16,
+        // marginBottom: 16,
         backgroundColor: 'white',
         paddingVertical: 10,
     },
+    ComponentContainer: {
+        flexDirection: "row",
+        backgroundColor: "#ffffff",
+        padding: 10,
+        justifyContent: "center",
+    },
+    inputContainer: {
+        // flexDirection: "row",
+        borderRadius: 8,
+        borderWidth: 1,
+        width: 320,
+        height: 50,
+        marginBottom: 5,
+        borderColor: "gray",
+    },
+    input: {
+        fontSize: 15,
+        backgroundColor: "white",
+        width: 300,
+        marginRight: 20,
+        padding: 10,
+        marginBottom: 5,
+        borderRadius: 10,
+    },
+    SubmitButton: {
+        width: 50,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "whitesmoke",
+        marginBottom: 5,
+        marginLeft: 5,
+        borderRadius: 8,
+        backgroundColor: "#27ae60",
+    },
+    emptyContainer: {
+        alignItems: "center",
+        justifyContent: "center",
+        height: 630,
+        fontColor: "red",
+        backgroundColor: "#ffffff",
+    },
+    EmptyText: {
+        fontSize: 20
+    }
 })

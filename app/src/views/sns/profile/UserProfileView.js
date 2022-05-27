@@ -7,8 +7,8 @@ import DiaryList from '../../diary/list/DiaryList';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused, useNavigationState } from '@react-navigation/native';
 import BackButton from '../../../components/common/BackButton';
-import { Ionicons } from "@expo/vector-icons";
-import ImagePickerExample from '../../test/ImagePickerTest';
+import { Ionicons, Feather  } from "@expo/vector-icons";
+import ImagePicker from "./ImagePicker"
 
 // 이걸로 통합 예정
 
@@ -101,11 +101,11 @@ export default function UserProfileView(props) {
     // console.log(currentId);
     if (objectFollowing.includes(currentId)) {
       // console.log("이미 팔로우 되어있음")
-      setFollowText(<Ionicons name="person-remove" size={15} color="red" />)
+      setFollowText(<Feather name="check" size={20} color="green" />)
 
     } else {
       // console.log("아직 팔로우 안되어있음")
-      setFollowText(<Ionicons name="person-add" size={15} color="green" />)
+      setFollowText(<Ionicons name="person-add" size={19} color="green" />)
     }
   }, [userFollower])
 
@@ -131,7 +131,7 @@ export default function UserProfileView(props) {
         data: data
       })
         .then((response) => {
-          setFollowText(<Ionicons name="person-add" size={15} color="green" />)
+          setFollowText(<Ionicons name="person-add" size={19} color="green" />)
           getUserData(user_Id);
         }).catch(function (error) {
           console.log(error);
@@ -145,7 +145,7 @@ export default function UserProfileView(props) {
         data: data
       })
         .then((response) => {
-          setFollowText(<Ionicons name="person-remove" size={15} color="red" />)
+          setFollowText(<Feather name="check" size={20} color="green" />)
           getUserData(user_Id);
         }).catch(function (error) {
           console.log(error);
@@ -207,9 +207,10 @@ export default function UserProfileView(props) {
     return (
       <View style={styles.header}>
         <BackButton navigation={props.navigation} />
+        <ImagePicker/>
         <View style={styles.headerContent}>
         {/* <Image style={styles.avatar} source={{ uri: profileImg }} /> */}
-        <ImagePickerExample/>
+     
       
           
           <Text style={styles.name}>{user_Id}</Text>
@@ -274,11 +275,12 @@ const styles = StyleSheet.create({
   },
   header: {
     // 헤더  색상
-    backgroundColor: "#336600",
+    backgroundColor: "#27ae60",
   },
   headerContent: {
     padding: 20,
     alignItems: 'center',
+    paddingLeft:60
   },
   avatar: {
     width: 90,
@@ -330,6 +332,7 @@ const styles = StyleSheet.create({
   },
   followButton: {
     position: 'absolute',
-    left: "25%"
+    left: "25%",
+    backgroundColor: "#E6E6FA",
   }
 });

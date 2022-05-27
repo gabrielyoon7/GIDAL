@@ -30,7 +30,7 @@ const Header = () => {
                         <a className="link-secondary" href="https://github.com/gabrielyoon7/GIDAL">고객센터</a>
                     </div>
                     <div className="col-4 text-center h1">
-                        <Link to="/" className='text-decoration-none'><div className="blog-header-logo text-dark fw-bold" href="/">기록의 달인</div></Link>
+                        <Link to="/" className='text-decoration-none'><div className="blog-header-logo text-dark fw-bold" href="/">기달</div></Link>
                         {/* <div className="dropdown">
                             <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
                                 Dropdown button

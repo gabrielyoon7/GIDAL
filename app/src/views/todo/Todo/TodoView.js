@@ -230,7 +230,7 @@ const Todo = ({ props }) => { // 진짜
           )}
         />
       </ScrollView>
-      <View>
+      <View style={{backgroundColor:'white'}}>
         <AddInput submitHandler={submitHandler} />
       </View>
       <DateTimePickerModal

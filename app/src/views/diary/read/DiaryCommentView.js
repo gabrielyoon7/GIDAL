@@ -8,6 +8,7 @@ import { config } from '../../../../config'
 import { useNavigationState } from '@react-navigation/native';
 import FancyCommentCard from "../../../components/diary/FancyCommentCard";
 import SearchBar from "react-native-dynamic-search-bar";
+import InputComment from "./InputComment";
 
 const windowHeight = Dimensions.get('window').height;
 
@@ -51,12 +52,12 @@ const DiaryCommentView = (props) => {
         }
     }, [])
 
-    const handleClick = () => {
+    const handleClick = (value) => {
         axios.post(config.ip + ':5000/diariesRouter/modifyComment', {
             data: {
                 id: diary._id,
                 user_id: userId,
-                comment: inputComment
+                comment: value
             }
         }).then((response) => {
             setInputComment('');
@@ -102,6 +103,14 @@ const DiaryCommentView = (props) => {
         );
     }
 
+    const Empty = () => {
+        return (
+            <View style={styles.emptyContainer}>
+                <Text style={styles.EmptyText}>댓글이 없습니다.</Text>
+            </View>
+        )
+    }
+
     const renderItem = ({ item }) => (
         <FancyCommentCard item={item} user_id={userId} profileImg={profileImg} deleteComment={() => deleteComment(item._id)} />
     );
@@ -115,6 +124,7 @@ const DiaryCommentView = (props) => {
             <View style={styles.container}>
                 <FlatList
                     data={comments}
+                    ListEmptyComponent={() => <Empty />}
                     renderItem={renderItem}
                     keyExtractor={item => item._id} >
                 </FlatList>
@@ -138,18 +148,11 @@ const DiaryCommentView = (props) => {
     }
 
     return (
-        // <ParallaxScrollView
-        //     style={{ flex: 1 }}
-        //     backgroundColor="white"
-        //     parallaxHeaderHeight={windowHeight * 0.3}
-        //     renderFixedHeader={() => <CommentHeader />}
-        // >
-        //     <CommentView />
-        // </ParallaxScrollView>
         <>
             <CommentHeader />
             <CommentListView />
-            <CommentInputView />
+            {/* <CommentInputView /> */}
+            <InputComment saveHandler={handleClick} />
         </>
     )
 }
@@ -203,5 +206,15 @@ const styles = StyleSheet.create({
         marginLeft: 5,
         borderRadius: 8,
         backgroundColor: "#27ae60",
+    },
+    emptyContainer: {
+        alignItems: "center",
+        justifyContent: "center",
+        height: 630,
+        fontColor: "red",
+        backgroundColor: "#ffffff",
+    },
+    EmptyText: {
+        fontSize: 20
     }
 })

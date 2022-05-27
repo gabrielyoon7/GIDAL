@@ -98,8 +98,8 @@ const TodoDetailView = (props) => {
                             minW="96%"
                             borderWidth="1"
                             borderColor="coolGray.300"
-                            shadow="3"
-                            bg={isPressed ? "coolGray.200" : isHovered ? "coolGray.200" : "coolGray.100"}
+                            shadow="1"
+                            bg={ isHovered ? "coolGray.200" : "coolGray.100"}
                             p="5"
                             rounded="8"
                             style={{
@@ -108,7 +108,7 @@ const TodoDetailView = (props) => {
                                 }]
                             }}
                         >
-                                <Text fontSize={10} color="coolGray.800">
+                                <Text fontSize={15} color="coolGray.800" padding={1}>
                                     {item.date}
                                 </Text>
                             <Divider />

@@ -221,7 +221,7 @@ const Todo = ({ props }) => { // 진짜
     <>
       <Header date={pickedDate} />
       
-      <ScrollView>
+      <ScrollView style={{backgroundColor:'white'}}>
         
         <FlatList
           data={data}

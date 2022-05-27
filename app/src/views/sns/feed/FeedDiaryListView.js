@@ -13,6 +13,7 @@ const FeedDiaryList = (props, navigation) => {
     const [userId, setUserId] = useState('');
     const isFocused = useIsFocused(); // isFoucesd Define
     const [profileImg, setProfileImg] = useState('');
+    const [followers, setFollowers] = useState([]);
 
     useEffect(() => {
         AsyncStorage.getItem('userInfo')
@@ -21,6 +22,7 @@ const FeedDiaryList = (props, navigation) => {
                     const UserInfo = JSON.parse(value);
                     setUserId(UserInfo[0].user_id);
                     setProfileImg(UserInfo[0].profile_image);
+                    setFollowers(UserInfo[0].follower);
                 }
             })
     },[])
@@ -104,6 +106,7 @@ const FeedDiaryList = (props, navigation) => {
                 item={item}
                 user_id={userId}
                 profileImg={profileImg}
+                followers={followers}
                 pressCommentIcon={() => pressCommentIcon(item)}
                 onPress={
                     () => {

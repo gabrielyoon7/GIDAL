@@ -13,7 +13,8 @@ const DirayWriteView = () => {
   const [convertedContent, setConvertedContent] = useState(null);
   const [title, setTitle] = useState('');
   const handleTitleChange = (state) => {
-    console.log(state.target.value);
+    // console.log(state.target.value);
+    setTitle(state.target.value);
   };
   const handleEditorChange = (state) => {
     setEditorState(state);

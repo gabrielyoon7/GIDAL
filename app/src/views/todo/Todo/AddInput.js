@@ -28,9 +28,9 @@ export default function AddInput({ submitHandler }) {
 
 const ComponentContainer = styled.View`
   flex-direction: row;
-  margin-top: 10px;
-  margin-left: 20px;
   background-color: #ffffff;
+  padding:10px;
+  justify-content: center;
 `;
 
 const InputContainer = styled.View`

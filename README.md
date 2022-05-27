@@ -25,11 +25,14 @@
 
 
 **Client(Web)**
+
 [![ㅇㅇ](https://img.shields.io/badge/Web-React-blue)](https://reactjs.org/)
 [![ㅇㅇ](https://img.shields.io/badge/Web-React%20Router%20DOM-red)](https://v5.reactrouter.com/web/guides/quick-start)
 [![ㅇㅇ](https://img.shields.io/badge/Web-Bootstrap-blueviolet)](https://getbootstrap.com/)
 
+
 **Server**
+
 [![ㅇㅇ](https://img.shields.io/badge/Backend-MongoDB-success)](https://www.mongodb.com/ko-kr)
 [![ㅇㅇ](https://img.shields.io/badge/Backend-mongoose-red)](https://mongoosejs.com/)
 [![ㅇㅇ](https://img.shields.io/badge/Backend-NodeJS-green)](https://nodejs.org/ko/)

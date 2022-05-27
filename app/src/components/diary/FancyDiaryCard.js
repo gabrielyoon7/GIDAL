@@ -96,21 +96,27 @@ const FancyDiaryCard = ({ item: diary, user_id, pressCommentIcon, profileImg, on
                                 </Text>
                             </HStack> */}
                             <HStack>
-                                {diary.tags&&diary.tags.slice(0, 3).map((tag) => (
-                                    <Badge colorScheme="green" _text={{
-                                        color: "white"
-                                    }} variant="solid" rounded="4">
+                                {diary.tags && diary.tags.slice(0, 3).map((tag) => (
+                                    <Badge
+                                        colorScheme="green"
+                                        _text={{
+                                            color: "white"
+                                        }}
+                                        variant="solid"
+                                        rounded="4"
+                                        mr="1"
+                                    >
                                         {tag}
                                     </Badge>
                                 ))}
                                 <Spacer />
-                                
+
                                 <TouchableOpacity
                                     onPress={pressCommentIcon}
                                 >
                                     <HStack>
                                         <Ionicons name="chatbubble-outline" size={22} color="grey" />
-                                        <Text>댓글 {diary.comments.length}개</Text>
+                                        <Text>댓글 {diary.comments.length}</Text>
                                     </HStack>
                                 </TouchableOpacity>
 
@@ -119,7 +125,7 @@ const FancyDiaryCard = ({ item: diary, user_id, pressCommentIcon, profileImg, on
                                 <TouchableOpacity>
                                     <HStack>
                                         {liked ? <Ionicons name="heart" size={24} color="red" /> : <Ionicons name="md-heart-outline" size={24} color="grey" />}
-                                        <Text>좋아요 {diary.likers.length}개</Text>
+                                        <Text>좋아요 {diary.likers.length}</Text>
                                     </HStack>
                                 </TouchableOpacity>
                                 {/* <Spacer />

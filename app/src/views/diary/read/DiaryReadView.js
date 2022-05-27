@@ -101,7 +101,7 @@ const DiaryReadView = (props) => {
     const source = {
         html: diary.content,
     };
-    
+
     const showDate = diary.date.substring(0, 10);
 
     const generateColor = () => { //컬러 랜덤 지정
@@ -177,11 +177,11 @@ const DiaryReadView = (props) => {
 
     const pressCommentIcon = (item) => {
         props.navigation.navigate('DiaryComment'
-        , {
-            diary: item,
-            user_id: userId,
-            profileImg: profile,
-        }
+            , {
+                diary: item,
+                user_id: userId,
+                profileImg: profile,
+            }
         )
     }
 
@@ -232,6 +232,20 @@ const DiaryReadView = (props) => {
                             </HStack>
                         </TouchableOpacity>
                         <Spacer />
+
+                    </HStack>
+                    {/* </Box> */}
+
+
+                    <Divider my="2" />
+                    <View style={styles.source}>
+                        <RenderHtml
+                            contentWidth={width}
+                            source={source}
+                        />
+                    </View>
+                    <HStack>
+                        <Spacer />
                         <TouchableOpacity
                             onPress={() => pressCommentIcon(diary)}
                         >
@@ -248,16 +262,6 @@ const DiaryReadView = (props) => {
                             </HStack>
                         </TouchableOpacity>
                     </HStack>
-                    {/* </Box> */}
-
-
-                    <Divider my="2" />
-                    <View style={styles.source}>
-                        <RenderHtml
-                            contentWidth={width}
-                            source={source}
-                        />
-                    </View>
                     <Divider my="5" />
 
                     <HStack alignItems="center">

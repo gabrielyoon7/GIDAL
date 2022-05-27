@@ -13,7 +13,7 @@ const StatisticsCard = (props) => {
         >
             <View style={styles.card}>
                 <HStack>
-                    <Text fontSize="xl">Todo</Text>
+                    <Text fontSize="xl">할 일</Text>
                     <Spacer />
                     <Text alignSelf={'center'}>에 대한 통계 보러가기</Text>
                 </HStack>

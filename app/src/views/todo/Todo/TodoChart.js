@@ -4,7 +4,6 @@ import { PieChart } from "react-native-gifted-charts";
 
 export default function TodoChart(props) {
     const statistics = props.todoStatistics;
-    // const data = props.data;
     const [data, setData] = useState([]);
     const [legends, setLegends] = useState([]);
     const [showChart, setShowChart] = useState(false);
@@ -21,7 +20,7 @@ export default function TodoChart(props) {
                         backgroundColor: props.legend.color || 'white',
                     }}
                 />
-                <Text style={{ color: 'white', fontSize: 16 }}>{props.legend.type || ''}</Text>
+                <Text style={{ color: '#414141', fontSize: 16 }}>{props.legend.type || ''}</Text>
             </View>
         );
     };
@@ -54,7 +53,7 @@ export default function TodoChart(props) {
                     strokeWidth={4}
                     donut={true}
                     data={data}
-                    innerCircleColor="#414141"
+                    innerCircleColor="#E8D9FF"
                     innerCircleBorderWidth={4}
                     innerCircleBorderColor={'white'}
                     showValuesAsLabels={true}
@@ -63,15 +62,6 @@ export default function TodoChart(props) {
                     showTextBackground={true}
                     shiftX={0}
                     shiftY={0}
-
-                    // centerLabelComponent={() => {
-                    //     return (
-                    //         <View>
-                    //             <Text style={{ color: 'white', fontSize: 36 }}>90</Text>
-                    //             <Text style={{ color: 'white', fontSize: 18 }}>Total</Text>
-                    //         </View>
-                    //     );
-                    // }}
                 />
         )
     }
@@ -81,30 +71,15 @@ export default function TodoChart(props) {
             <View
                 style={{
                     marginVertical: 10,
-                    // marginHorizontal: 30,
                     borderRadius: 10,
-                    paddingVertical: 30,
-                    backgroundColor: '#414141',
+                    // paddingVertical: 30,
+                    backgroundColor: '#E8D9FF',
                     justifyContent: 'center',
                     alignItems: 'center',
                 }}>
 
-
-                {/*********************    Custom Header component      ********************/}
-                {/* <Text
-                    style={{
-                        color: 'white',
-                        fontSize: 32,
-                        fontWeight: 'bold',
-                        marginBottom: 12,
-                    }}>
-                    Quarterly Sales
-                </Text> */}
-                {/****************************************************************************/}
-
                 {showChart ? <ShowChart /> : null}
 
-                {/*********************    Custom Legend component      ********************/}
                 <View
                     style={{
                         width: '100%',
@@ -116,9 +91,6 @@ export default function TodoChart(props) {
                         <RenderLegend key={legend.key} legend={legend} />
                     ))}
                 </View>
-                {/****************************************************************************/}
-
-
             </View>
         </View>
     );

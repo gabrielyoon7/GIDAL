@@ -99,6 +99,19 @@ router.post('/findOne', function(req, res, next) {
     });
 });
 
+router.post('/findMostLikersDiary', function(req, res, next) {
+    // 전체 데이터 가져오기
+    const query = new RegExp(req.body.date)
+    console.log(query)
+    Diary.find({'disclosure': 'public', 'date': { $regex: query }}).sort({likes: -1}).then( (diaries) => {
+        console.log(diaries);
+        res.json(diaries)
+    }).catch( (err) => {
+        console.log(err);
+        next(err)
+    });
+});
+
 router.post('/findPublic', function(req, res, next) {
     // 전체 데이터 가져오기
     Diary.find().where('disclosure').equals('public').sort({date: -1}).then( (diaries) => {

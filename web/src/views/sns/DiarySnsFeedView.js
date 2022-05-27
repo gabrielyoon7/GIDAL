@@ -8,11 +8,16 @@ import moment from 'moment';
 const DiarySnsFeedView = () => {
     const [value, onChange] = useState(new Date());
     const [items, setItems] = useState([]);
+    const [mostLikersItems, setMostLikersItems] = useState([]);
 
     useEffect(() => {
         getitems();
+        // getMostLikersItems();
     }, []);
 
+    // useEffect(() => {
+    //     getMostLikersItems();
+    // },[value])
 
     const getitems = () => {
         let result = []
@@ -24,6 +29,24 @@ const DiarySnsFeedView = () => {
                     });
                 }
                 setItems(result);
+            }).catch(function (error) {
+                console.log(error);
+            })
+        console.log(result);
+    }
+
+    const getMostLikersItems = () => {
+        let result = []
+        axios.post('/diariesRouter/findMostLikersDiary', {
+            date: moment(value).format("YYYY-MM-DD")
+        })
+            .then((response) => {
+                if (response.data.length > 0) {
+                    response.data.forEach((item) => {
+                        result.push(item);
+                    });
+                }
+                setMostLikersItems(result);
             }).catch(function (error) {
                 console.log(error);
             })
@@ -64,7 +87,11 @@ const DiarySnsFeedView = () => {
                             <Calendar onChange={onChange} value={value}
                                 formatDay={(locale, date) => moment(date).format("DD")}
                                 className="mx-auto w-full text-sm border-b"
-                             />
+                            />
+                            <ol className="list-unstyled">
+                                {mostLikersItems.map((diary) => (
+                                    <DiaryPostCard diary={diary} key={diary._id} />                                ))}
+                            </ol>
                         </div>
 
                         <div className="p-4">

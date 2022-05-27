@@ -66,6 +66,7 @@ const DiaryList = (props, navigation) => {
         , {
             diary: item,
             user_id: user_id,
+            profileImg: profileImg,
         }
         )
     }

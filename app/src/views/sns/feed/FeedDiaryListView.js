@@ -77,6 +77,7 @@ const FeedDiaryList = (props, navigation) => {
         , {
             diary: item,
             user_id: userId,
+            profileImg: profileImg,
         }
         )
     }

@@ -13,6 +13,7 @@ const windowHeight = Dimensions.get('window').height;
 
 const DiaryCommentView = (props) => {
     const [userId, setUserId] = useState('');
+    const [profileImg, setProfileImg] = useState('');
     const [inputComment, setInputComment] = useState('');
     const new_routes = useNavigationState(state => state.routes);
     const defaultData = {
@@ -39,9 +40,11 @@ const DiaryCommentView = (props) => {
             const idx = new_routes.findIndex(r => r.name === "DiaryComment")
             const diary = new_routes[idx].params.diary;
             const user_id = new_routes[idx].params.user_id;
+            const profile_image = new_routes[idx].params.profileImg;
 
             setDiary(diary);
-            setUserId(user_id)
+            setUserId(user_id);
+            setProfileImg(profile_image);
             setComments(diary.comments)
         } catch (error) {
             console.log(error);
@@ -100,7 +103,7 @@ const DiaryCommentView = (props) => {
     }
 
     const renderItem = ({ item }) => (
-        <FancyCommentCard item={item} user_id={userId} deleteComment={() => deleteComment(item._id)} />
+        <FancyCommentCard item={item} user_id={userId} profileImg={profileImg} deleteComment={() => deleteComment(item._id)} />
     );
 
     const onChangeText = (text) => {

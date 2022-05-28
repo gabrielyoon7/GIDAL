@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from 'axios';
 import Footer from "../../../views/common/Footer";
@@ -24,21 +24,37 @@ const DiaryReadView = () => {
         "user_id": "loading...",
     };
     const [diary, setDiary] = useState(defaultData);
-
+// useLayoutEffect
     useEffect(() => {
+        (async function (){
+            // await getItem();
+            // const {data} = await axios.post('/diariesRouter/findOne', {
+            //     id: diary_id,
+            // })
+            // setDiary(data);
+
+            const data = await getItem(diary_id);
+            setDiary(data);
+        })()
         // console.log(diary_id)
-        getItem();
+        // getItem();
+        return ()=>{
+            
+        }
     }, [])
 
-    const getItem = () => {
-        axios.post('/diariesRouter/findOne', {
+    const getItem = async (diary_id) => {
+        const {data} = await axios.post('/diariesRouter/findOne', {
             id: diary_id,
-        }).then((response) => {
-            console.log(response.data)
-            setDiary(response.data);
-        }).catch(function (error) {
-            console.log(error);
         })
+        return data;
+        // setDiary(data);
+        // .then((response) => {
+        //     console.log(response.data)
+        //     setDiary(response.data);
+        // }).catch(function (error) {
+        //     console.log(error);
+        // })
     }
 
     const createMarkup = (html) => {

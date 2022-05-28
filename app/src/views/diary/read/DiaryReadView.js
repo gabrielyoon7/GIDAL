@@ -465,4 +465,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default DiaryReadView;
+export default React.memo(DiaryReadView);

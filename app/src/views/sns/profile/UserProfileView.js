@@ -21,7 +21,7 @@ export default function UserProfileView(props) {
   // console.log('UserProfileView');
 
   const [date, setSelectedDate] = React.useState(props.selectedDate);
-  const [profileImg, setProfileImg] = useState('');
+  const [profileImg, setProfileImg] = useState('https://cdn-icons-png.flaticon.com/512/1/1247.png');
   const [user_Id, setUserId] = useState('loading');
   const [currentId, setCurrentId] = useState('헤헤');
   const [userFollower, setUserFollower] = useState([]);
@@ -29,7 +29,7 @@ export default function UserProfileView(props) {
   const [userFollowerNum, setuserFollowerNum] = useState(0);
   const [userFollowingNum, setuserFollowingNum] = useState(0);
   const [followText, setFollowText] = useState('loading');
-
+  const [imgChange, setImgChange] = useState("");
   const [isLoaded, setIsLoaded] = React.useState(false);
   const new_routes = useNavigationState(state => state.routes);
   const [items, setItems] = React.useState([]);
@@ -52,7 +52,6 @@ export default function UserProfileView(props) {
                 if (value != null) {
                   const UserInfo = JSON.parse(value);
                   setUserId(UserInfo[0].user_id);
-                  setProfileImg(UserInfo[0].profile_image);
                 }
               }
               )
@@ -71,7 +70,7 @@ export default function UserProfileView(props) {
 
   React.useEffect(() => {
     getUserData(user_Id);
-  }, [user_Id]);
+  }, [user_Id, imgChange]);
 
   const getUserData = (user_Id) => {
     axios.post(config.ip + ':5000/usersRouter/findOne', {
@@ -82,6 +81,7 @@ export default function UserProfileView(props) {
       .then((response) => {
         const following = response.data[0].following;
         const follower = response.data[0].follower;
+        const profileImg = response.data[0].profile_image;
         // console.log('****following****')
         // console.log(following);
         // console.log('****follower****')
@@ -90,6 +90,7 @@ export default function UserProfileView(props) {
         setUserFollower(follower);
         setuserFollowingNum(following.length)
         setuserFollowerNum(follower.length)
+        setProfileImg(profileImg)
       }).catch(function (error) {
         // console.log(error);
       });
@@ -185,10 +186,15 @@ export default function UserProfileView(props) {
   const MyPageActionView = () => {
     return (
       // <Text>정보 수정</Text>
-      <Box></Box>
+      <Box>
+        
+      </Box>
     )
   }
 
+  const changeProfile = (uri) => {
+    setImgChange(uri)
+  }
 
 
   const OtherPageActionView = () => {
@@ -207,15 +213,16 @@ export default function UserProfileView(props) {
     return (
       <View style={styles.header}>
         <BackButton navigation={props.navigation} />
-        <ImagePicker/>
+        
         <View style={styles.headerContent}>
-        {/* <Image style={styles.avatar} source={{ uri: profileImg }} /> */}
-     
-      
-          
+        <Image style={styles.avatar} source={{ uri: profileImg }} />
+        
+        
           <Text style={styles.name}>{user_Id}</Text>
           <ProfileActionView />
+          
           <HStack alignItems="center" my="1">
+          
             <View style={styles.buttonStyle}>
               <TouchableOpacity
                 onPress={
@@ -251,7 +258,11 @@ export default function UserProfileView(props) {
               </TouchableOpacity>
             </View>
           </HStack>
-        </View>
+          {currentId == user_Id ? 
+            <ImagePicker style={styles.picker} user_Id={user_Id} changeProfile={changeProfile}/>
+            : null
+          }
+          </View>
       </View>
     )
   }
@@ -280,7 +291,7 @@ const styles = StyleSheet.create({
   headerContent: {
     padding: 20,
     alignItems: 'center',
-    paddingLeft:60
+    paddingLeft: 150
   },
   avatar: {
     width: 90,
@@ -289,7 +300,7 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     borderColor: "#FFFFFF",
     position: 'absolute',
-    top: 10, left: 20
+    top: 10, left: 60
   },
   image: {
     width: 60,
@@ -334,5 +345,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: "25%",
     backgroundColor: "#E6E6FA",
+  },
+  iconContainer: {
+    justifyContent: "right",
+    alignItems: "right",
+
   }
 });

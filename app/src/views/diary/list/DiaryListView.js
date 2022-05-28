@@ -94,7 +94,7 @@ const DiaryListView = (props) => {
             });
         }
     }
-    
+    console.log(profileImg);
     return (
         <>
             <CalendarView selectedDate={date} setSelectedDate={setSelectedDate} markedDates={markedDates} getitems={getitems} />

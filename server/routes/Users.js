@@ -238,6 +238,23 @@ router.post('/userFollowingDelete', (req,res) => {
         });
   })
 
+  router.post('/updateProfile', (req,res) => {
+    console.log( req.body.data.user_id);
+    User.updateMany(
+        { user_id: req.body.data.user_id }, 
+        {profile_image: req.body.data.uri}
+        )
+        .exec((error, user)=>{
+            if(error){
+                console.log(error);
+                res.json({status: 'error', error})
+            }else{
+                console.log('Saved!')
+                res.json({status: 'success'})
+            }
+        });
+  })
+
 // const formData = new FormData();
 // formData.append("selectImg", image);
 

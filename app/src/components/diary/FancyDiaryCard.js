@@ -78,6 +78,7 @@ const FancyDiaryCard = ({ item: diary, user_id, pressCommentIcon, profileImg, on
                                 _text={{
                                     color: "white"
                                 }}
+                                key={tag}
                                 variant="solid"
                                 rounded="4"
                                 mr="1"

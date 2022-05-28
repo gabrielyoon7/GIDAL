@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import DiaryMobileReadView from "../../views/diary/read/DiaryMobileReadView";
 
 const DiaryPostCard = ({ diary }) => {
 
@@ -11,7 +12,9 @@ const DiaryPostCard = ({ diary }) => {
     // 정규식을 이용한 HTML 태그 제거 끝
 
     return (
-        <Link to={"/read/" + diary._id} className="text-decoration-none text-dark">
+        <>
+            {/* <Link to={"/read/" + diary._id} className="text-decoration-none text-dark"> */}
+            {/* <a href="#" className="text-decoration-none text-dark" data-bs-toggle="modal" data-bs-target="#exampleModal"> */}
             <div className="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                 <div className="col p-4 d-flex flex-column position-static">
                     <div className="d-flex justify-content-between">
@@ -26,25 +29,20 @@ const DiaryPostCard = ({ diary }) => {
                     <div className="d-flex justify-content-between">
                         {/* <strong className="d-inline-block mb-2 text-primary">태그 태그</strong> */}
                         <div className="row d-inline-block ms-1">
-                            {diary.tags.slice(0,3).map((tag) => (
+                            {diary.tags.slice(0, 3).map((tag) => (
                                 <button key={tag} type="button" className="btn btn-outline-success btn-sm disabled me-1 mt-1 col-auto">{tag}</button>
                             ))}
                         </div>
                         <div className="text-muted row">
-                            <p className="col-auto"><i class="bi bi-chat-right-text me-2"></i>{diary.comments.length}</p>
-                            <p className="col-auto"><i class="bi bi-heart me-2"></i>{diary.likers.length}</p>
+                            <p className="col-auto"><i className="bi bi-chat-right-text me-2"></i>{diary.comments.length}</p>
+                            <p className="col-auto"><i className="bi bi-heart me-2"></i>{diary.likers.length}</p>
                             {/* 좋아요 댓글 */}
                         </div>
                     </div>
                 </div>
             </div>
-        </Link>
-        // <div className="blog-post" onClick={readDiary} >
-        //     <h2 className="blog-post-title">{diary.title}</h2>
-        //     <p className="blog-post-meta">{diary.date} by <a href={"user/"+diary.user_id}>{diary.user_id}</a></p>
-        //     <p>{content}</p>
-        //     <hr></hr>
-        // </div>
+            {/* </a> */}
+        </>
     )
 }
 export default DiaryPostCard;

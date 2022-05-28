@@ -4,11 +4,28 @@ import DiaryPostCard from "../../components/diary/DiaryPostCard";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; // css import
 import moment from 'moment';
+import DiaryMobileReadView from "../diary/read/DiaryMobileReadView";
 
 const DiarySnsFeedView = () => {
     const [value, onChange] = useState(new Date());
     const [items, setItems] = useState([]);
     const [mostLikersItems, setMostLikersItems] = useState([]);
+    const defaultData = {
+        "__v": 0,
+        "_id": "626f78c19ee18cdc829a10de",
+        "accessible_user": [],
+        "comments": [],
+        "content": "loading...",
+        "date": "2022-05-02T00:00:00.000Z",
+        "disclosure": "private",
+        "likes": 0,
+        "stickers": [],
+        "tags": [],
+        "likers": [],
+        "title": "loading...",
+        "user_id": "loading...",
+    };
+    const [diary, setDiary] = useState(defaultData);
 
     useEffect(() => {
         getitems();
@@ -65,8 +82,10 @@ const DiarySnsFeedView = () => {
                     </h3>
                     <div className="row">
                         {items.map((diary) => (
-                            <div className="col-xl-6">
-                                <DiaryPostCard diary={diary} key={diary._id} />
+                            <div className="col-xl-6" key={diary._id}>
+                                <a href="#" className="text-decoration-none text-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => setDiary(diary)}>
+                                    <DiaryPostCard diary={diary} />
+                                </a>
                             </div>
                         ))}
                     </div>
@@ -94,7 +113,11 @@ const DiarySnsFeedView = () => {
                             />
                             <ol className="list-unstyled mt-4">
                                 {mostLikersItems.map((diary) => (
-                                    <DiaryPostCard diary={diary} key={diary._id} />))}
+                                    <a href="#" className="text-decoration-none text-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => setDiary(diary)} key={diary._id} >
+                                        <DiaryPostCard diary={diary}/>
+                                    </a>
+                                )
+                                )}
                             </ol>
                         </div>
 
@@ -105,6 +128,24 @@ const DiarySnsFeedView = () => {
                                 <li><a href="#">App Download</a></li>
                             </ol>
                         </div>
+                    </div>
+                </div>
+            </div>
+            {/* <!-- Modal --> */}
+            <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                    <div className="modal-content" style={{width:'430px'}}>
+                        {/* <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div> */}
+                        <div className="modal-body bg-dark rounded-3">
+                            <DiaryMobileReadView diary={diary} />
+                        </div>
+                        {/* <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" className="btn btn-primary">Save changes</button>
+                        </div> */}
                     </div>
                 </div>
             </div>

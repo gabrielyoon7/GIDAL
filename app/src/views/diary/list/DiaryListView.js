@@ -94,6 +94,7 @@ const DiaryListView = (props) => {
             });
         }
     }
+    console.log('profileImg');
     console.log(profileImg);
     return (
         <>

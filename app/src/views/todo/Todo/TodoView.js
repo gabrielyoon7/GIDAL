@@ -220,9 +220,7 @@ const Todo = ({ props }) => { // 진짜
   return (
     <>
       <Header date={pickedDate} />
-      
       <View style={styles.container}>
-        
         <FlatList
           data={data}
           ListEmptyComponent={() => <Empty />}
@@ -231,17 +229,16 @@ const Todo = ({ props }) => { // 진짜
             <TodoList item={item} deleteItem={deleteItem} changeIsDone={changeIsDone} />
           )} />
       </View>
-      <KeyboardAvoidingView>
-      
+      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} >
         <AddInput submitHandler={submitHandler} />
-     
-    </KeyboardAvoidingView>
-    <DateTimePickerModal
+      </KeyboardAvoidingView>
+      <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode="date"
         onConfirm={handleConfirm}
-        onCancel={hideDatePicker} /></>
-    
+        onCancel={hideDatePicker} />
+    </>
+
   );
 };
 
@@ -264,5 +261,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     // alignItems: 'center',
     justifyContent: 'center',
-},
+  },
 });

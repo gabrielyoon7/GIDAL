@@ -34,7 +34,7 @@ const FriendsStatDetailView = (props) => {
             <Heading mb={5} >{props.data.title}</Heading>
 
             {props.tagLogArr && props.tagLogArr.map((friend) => (
-                <Box my={3}>
+                <Box my={3} key={friend.id}>
                     <TouchableOpacity onPress={
                             () => props.navigation.navigate('UserProfile', {
                                 user_id: friend.id

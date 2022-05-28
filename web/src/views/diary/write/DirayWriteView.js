@@ -42,31 +42,25 @@ const DirayWriteView = () => {
   const saveDiary = () => {
     let currentContentAsHTML = convertToHTML(editorState.getCurrentContent());
     alert(currentContentAsHTML);
-    // axios.post(config.ip + ':5000/diariesRouter/save', {
-    //   data: {
-    //     user_id: userId,
-    //     date: Date,
-    //     title: Title,
-    //     content: Content,
-    //     disclosure: disclosure,
-    //     tags: tagTextOnlyArray,
-    //   }
-    // }).then((response) => {
-    //   if (response.data.status === 'success') {
-    //     axios.post(config.ip + ':5000/tagsRouter/save', {
-    //       data: makeTagLog(response.data.id)
-    //     }).then((response) => {
-    //       if (response.data.status === 'success') {
-    //         props.navigation.pop();
-    //         // 스택 쌓지 않고 화면 이동 => 읽기 페이지에서 뒤로가기하면 리스트 페이지 뜸
-    //       }
-    //     }).catch(function (error) {
-    //       console.log(error);
-    //     })
-    //   }
-    // }).catch(function (error) {
-    //   console.log(error);
-    // })
+    axios.post('/diariesRouter/save', {
+      data: {
+        user_id: userId,
+        date: new Date(),
+        title: title,
+        content: currentContentAsHTML,
+        disclosure: disclosure,
+        tags: [],
+      }
+    }).then((response) => {
+      if (response.data.status === 'success') {
+        alert('잘 등록 됨')
+      }
+      else(
+        alert('에러 발생')
+      )
+    }).catch(function (error) {
+      console.log(error);
+    })
   };
 
   return (

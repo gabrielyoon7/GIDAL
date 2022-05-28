@@ -37,7 +37,7 @@ const DiaryPreview = (props) => {
                     <img src='https://t1.daumcdn.net/cfile/blog/99EC04465C9B308326' style={{ height: '200px', width: '400px' }} />
                 </div>
                 <div className="p-3">
-                    <button className="btn btn-success btn-sm">public</button>
+                    <button className="btn btn-success btn-sm">{props.disclosure}</button>
                     <div className="fs-2 fw-bold">
                         {props.title ? props.title : '제목을 입력하세요'}
                     </div>

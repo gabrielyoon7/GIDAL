@@ -25,18 +25,29 @@ const FancyDiaryCard = ({ item: diary, user_id, pressCommentIcon, profileImg, on
     }, [diary])
 
     const FancyDiaryHeader = () => {
+        let avatar_text = '';
+        let avatar_color = 'white';
+        user_id === diary.user_id
+        ?
+        (avatar_text='나',avatar_color='green.500')
+        :
+        followers.find(v => v.user_id === diary.user_id) ? (avatar_text='친구',avatar_color='yellow.500') : (avatar_text='?',avatar_color='red.500')
+
+        
         return (
             <HStack alignItems="center">
-                <Avatar bg="green.500" alignSelf="center" size="xs" source={{
+                <Avatar bg={avatar_color} alignSelf="center" size="xs" source={{
                     uri: profileImg
                 }}>
-                    AJ
+                    {
+                        avatar_text
+                    }
                 </Avatar>
                 <Text fontSize={15} color="coolGray.800" alignSelf="center" mx={2}>
                     {diary.user_id}
                 </Text>
                 {/* 친구가 아닌 경우에만 표시함 */}
-                {!followers.find(v => v.user_id === diary.user_id) && !(user_id === diary.user_id) ? <Ionicons size={15} color="grey" name="star-outline" /> : null}
+                {/* {!followers.find(v => v.user_id === diary.user_id) && !(user_id === diary.user_id) ? <Ionicons size={15} color="grey" name="star-outline" /> : null} */}
                 <Spacer />
                 <Text fontSize={11} color="coolGray.800">
                     {diary.date.substr(0, 10)}

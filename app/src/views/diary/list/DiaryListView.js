@@ -20,7 +20,7 @@ const DiaryListView = (props) => {
     })
     const [items, setItems] = React.useState([]);
     const [user_Id, setUserId] = React.useState('');
-    const [profileImg, setProfileImg] = React.useState('');
+    // const [profileImg, setProfileImg] = React.useState('');
     // console.log(user_Id);
 
     const getitems = () => {
@@ -53,7 +53,7 @@ const DiaryListView = (props) => {
                     if (value != null) {
                         const UserInfo = JSON.parse(value);
                         setUserId(UserInfo[0].user_id);
-                        setProfileImg(UserInfo[0].profile_image);
+                        // setProfileImg(UserInfo[0].profile_image);
                     }
                 }
                 )
@@ -94,12 +94,13 @@ const DiaryListView = (props) => {
             });
         }
     }
-    console.log('profileImg');
-    console.log(profileImg);
+    // console.log('profileImg');
+    // console.log(profileImg);
     return (
         <>
             <CalendarView selectedDate={date} setSelectedDate={setSelectedDate} markedDates={markedDates} getitems={getitems} />
-            <DiaryList selectedDate={date} navigation={props.navigation} user_Id={user_Id} items={items} getitems={getitems} type={'calendar'} profileImg={profileImg}/>
+            {/* <DiaryList selectedDate={date} navigation={props.navigation} user_Id={user_Id} items={items} getitems={getitems} type={'calendar'} profileImg={profileImg}/> */}
+            <DiaryList selectedDate={date} navigation={props.navigation} user_Id={user_Id} items={items} getitems={getitems} type={'calendar'} />
             <Fab
                 renderInPortal={false}
                 shadow={2}

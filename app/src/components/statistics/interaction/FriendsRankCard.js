@@ -41,13 +41,13 @@ const FriendsRankCard = (props) => {
       let color = '';
 
       friend.statics.map((tag) => {
-        color = tags.find(item => item.tagName === tag.id);
-        console.log(color);
+        color = tags.find(item => item.tagName === tag._id).color;
+
         if(tagCount == 0 && tag.count > 0){
-          stacks.push({ value: tag.count, color: "orange"});
+          stacks.push({ value: tag.count, color: color});
         }
         else if(tag.count > 0){
-          stacks.push({ value: tag.count, color: "orange", marginBottom: 2 });
+          stacks.push({ value: tag.count, color: color, marginBottom: 2 });
         }
         tagCount += tag.count;
       })

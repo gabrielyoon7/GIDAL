@@ -15,7 +15,7 @@ const TagRankCard = (props) => {
             interaction: <PrivateRankCard tagLogArr={props.tagLogArr} />,
         },
         friends: {
-            interaction: <FriendsRankCard tagLogArr={props.tagLogArr} />,
+            interaction: <FriendsRankCard tagLogArr={props.tagLogArr} tags={props.tags} />,
         },
         anonymous: {
             interaction: <AnonymousRankCard tagLogArr={props.tagLogArr} />,

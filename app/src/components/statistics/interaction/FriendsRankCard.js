@@ -4,52 +4,31 @@ import { Text, View } from "react-native";
 import { BarChart } from "react-native-gifted-charts";
 
 const FriendsRankCard = (props) => {
-  //더미 데이터
-  const stackSampleData = [
-    {
-      stacks: [
-        { value: 10, color: 'orange' },
-        { value: 20, color: '#4ABFF4', marginBottom: 2 },
-      ],
-      label: '201912067',
-    },
-    {
-      stacks: [
-        { value: 10, color: '#4ABFF4' },
-        { value: 11, color: 'orange', marginBottom: 2 },
-        { value: 15, color: '#28B2B3', marginBottom: 2 },
-      ],
-      label: 'Gabriel',
-    },
-    {
-      stacks: [
-        { value: 14, color: 'orange' },
-        { value: 18, color: '#4ABFF4', marginBottom: 2 },
-      ],
-      label: 'ChaeYoung',
-    },
-    {
-      stacks: [
-        { value: 7, color: '#4ABFF4' },
-        { value: 11, color: 'orange', marginBottom: 2 },
-        { value: 10, color: '#28B2B3', marginBottom: 2 },
-      ],
-      label: 'Test2',
-    },
-  ];
-
-  const [stackData, setStackData] = useState(stackSampleData);
+  const [stackData, setStackData] = useState([]);
   const [maxValue, setMaxValue] = useState(0);
-
-  // useEffect(() => {
-  //   console.log('1', stackData[0].stacks);
-  // }, [stackData]);
+  const [tags, setTags] = useState([]);
 
   useEffect(() => {
-    if (props.tagLogArr.length !== 0){
+    let result = [];
+    props.tags.map((tag) => {
+      const color = generateColor();
+      result.push({tagName: tag, color: color});
+    })
+    setTags(result);
+  },[props.tags])
+
+  useEffect(() => {
+    if (props.tagLogArr.length !== 0 && tags.length !==0){
       getData();
     }
-  }, [props.tagLogArr]);
+  }, [props.tagLogArr, tags]);
+
+  const generateColor = () => { //컬러 랜덤 지정
+    const randomColor = Math.floor(Math.random() * 16777215)
+        .toString(16)
+        .padStart(6, '0');
+    return `#${randomColor}`;
+};
 
   const getData = () => {
     let itemTemp = [];
@@ -59,16 +38,20 @@ const FriendsRankCard = (props) => {
     props.tagLogArr.map((friend) => {
       let stacks = [];
       let tagCount = 0;
-      
+      let color = '';
+
       friend.statics.map((tag) => {
+        color = tags.find(item => item.tagName === tag._id).color;
+
         if(tagCount == 0 && tag.count > 0){
-          stacks.push({ value: tag.count, color: 'orange'});
+          stacks.push({ value: tag.count, color: color});
         }
         else if(tag.count > 0){
-          stacks.push({ value: tag.count, color: 'orange', marginBottom: 2 });
+          stacks.push({ value: tag.count, color: color, marginBottom: 2 });
         }
         tagCount += tag.count;
       })
+
       if (tagCount !== 0) {
         itemTemp.push({ 'stacks': stacks, 'label': friend.id });
         countTemp.push(tagCount);

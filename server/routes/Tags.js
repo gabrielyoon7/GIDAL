@@ -88,6 +88,16 @@ router.get('/find', function (req, res, next) {
     });
 });
 
+router.post('/findTagsPerQuestion', function (req, res, next) {
+    // 전체 데이터 가져오기
+    Tag.find({_id: req.body.data.question_id}).then((tags) => {
+        res.json(tags)
+    }).catch((err) => {
+        console.log(err);
+        next(err)
+    });
+});
+
 /* POST*/
 router.post('/save', function (req, res) {
     // console.log(req.body.data);

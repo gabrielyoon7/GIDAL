@@ -14,6 +14,7 @@ const DirayWriteView = () => {
   const [convertedContent, setConvertedContent] = useState(null);
   const [title, setTitle] = useState('');
   const [disclosure, setDisclosure] = React.useState('public');
+  const [time, setTime] = useState(new Date());
   useEffect(()=>{
     console.log(disclosure)
   }, [disclosure])
@@ -70,7 +71,7 @@ const DirayWriteView = () => {
           <DiaryEditor handleTitleChange={handleTitleChange} handleDisclosureChange={handleDisclosureChange} disclosure={disclosure} editorState={editorState} handleEditorChange={handleEditorChange} />
         </div>
         <div className='col-lg-6'>
-          <DiaryPreview userId={userId} title={title} disclosure={disclosure} createMarkup={createMarkup} convertedContent={convertedContent} />
+          <DiaryPreview userId={userId} title={title} disclosure={disclosure} time={time} createMarkup={createMarkup} convertedContent={convertedContent} />
         </div>
         <button onClick={saveDiary}>작성하기</button>
       </div>

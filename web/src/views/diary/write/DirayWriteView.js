@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { EditorState } from 'draft-js';
 import { convertToHTML } from 'draft-convert';
 import DOMPurify from 'dompurify';
@@ -13,9 +13,18 @@ const DirayWriteView = () => {
   const userId = sessionStorage.getItem("Id");
   const [convertedContent, setConvertedContent] = useState(null);
   const [title, setTitle] = useState('');
+  const [disclosure, setDisclosure] = React.useState('public');
+  useEffect(()=>{
+    console.log(disclosure)
+  }, [disclosure])
+
   const handleTitleChange = (state) => {
     // console.log(state.target.value);
     setTitle(state.target.value);
+  };
+  const handleDisclosureChange = (state) => {
+    console.log(state.target.value);
+    setDisclosure(state.target.value);
   };
   const handleEditorChange = (state) => {
     setEditorState(state);
@@ -64,10 +73,10 @@ const DirayWriteView = () => {
     <div className="mt-3">
       <div className='row'>
         <div className='col-lg-6'>
-          <DiaryEditor handleTitleChange={handleTitleChange} editorState={editorState} handleEditorChange={handleEditorChange} />
+          <DiaryEditor handleTitleChange={handleTitleChange} handleDisclosureChange={handleDisclosureChange} disclosure={disclosure} editorState={editorState} handleEditorChange={handleEditorChange} />
         </div>
         <div className='col-lg-6'>
-          <DiaryPreview userId={userId} title={title} createMarkup={createMarkup} convertedContent={convertedContent} />
+          <DiaryPreview userId={userId} title={title} disclosure={disclosure} createMarkup={createMarkup} convertedContent={convertedContent} />
         </div>
         <button onClick={saveDiary}>작성하기</button>
       </div>

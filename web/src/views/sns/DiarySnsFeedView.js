@@ -99,11 +99,10 @@ const DiarySnsFeedView = () => {
                         </div>
 
                         <div className="p-4">
-                            <h4 className="fw-bold">Elsewhere</h4>
+                            <h4 className="fw-bold">Link</h4>
                             <ol className="list-unstyled">
-                                <li><a href="#">GitHub</a></li>
-                                <li><a href="#">Twitter</a></li>
-                                <li><a href="#">Facebook</a></li>
+                                <li><a href="#">고객센터</a></li>
+                                <li><a href="#">App Download</a></li>
                             </ol>
                         </div>
                     </div>

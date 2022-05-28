@@ -4,17 +4,17 @@ import '/node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 const DiaryEditor = (props) => {
     const DiaryDisclosure = () => {
         return (
-            <div className='d-flex justify-content-around'>
+            <div className='d-flex justify-content-around my-2'>
                 <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
+                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="public" onChange={props.handleDisclosureChange} checked={props.disclosure==='public'} />
                     <label className="form-check-label" htmlFor="inlineRadio1">전체공개</label>
                 </div>
                 <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
+                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="private" onChange={props.handleDisclosureChange} checked={props.disclosure==='private'} />
                     <label className="form-check-label" htmlFor="inlineRadio2">나만보기</label>
                 </div>
                 <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" />
+                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="friends" onChange={props.handleDisclosureChange} checked={props.disclosure==='friends'} />
                     <label className="form-check-label" htmlFor="inlineRadio3">친구공개</label>
                 </div>
             </div>

@@ -13,9 +13,9 @@ const StatisticsCard = (props) => {
         >
             <View style={styles.card}>
                 <HStack>
-                    <Text fontSize="xl">할 일</Text>
+                    <Text fontSize="xl">할 일 통계</Text>
                     <Spacer />
-                    <Text alignSelf={'center'}>에 대한 통계 보러가기</Text>
+                    {/* <Text alignSelf={'center'}>에 대한 통계 보러가기</Text> */}
                 </HStack>
             </View>
         </TouchableOpacity>

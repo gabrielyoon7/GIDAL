@@ -8,9 +8,11 @@ import WelcomeCard from "../../../components/statistics/WelcomeCard";
 import TodoChart from "../../todo/Todo/TodoChart"
 import { config } from "../../../../config";
 
-const TodoStatisticsView = (props) => {    
+const TodoStatisticsView = (props) => {
     const [user_Id, setUserId] = useState('');
     const [todoStatistics, setTodoStatistics] = useState([]);
+    const [todoRaw, setTodoRaw] = useState([]);
+    // console.log(1, todoStatistics);
 
     const PersonalTodoStatistics = () => {
         return (
@@ -25,6 +27,13 @@ const TodoStatisticsView = (props) => {
                     <View>
                         <TodoChart todoStatistics={todoStatistics} />
                     </View>
+                    {/* <View>
+                        {
+                            todoRaw.map((todo)=>{
+                                <Text>todo.value</Text>
+                            })
+                        }
+                    </View> */}
                 </Box>
             </View>
         )
@@ -43,23 +52,23 @@ const TodoStatisticsView = (props) => {
         } catch (error) {
             console.log(error);
         }
-    },[])
+    }, [])
 
     useEffect(() => {
-        if(!(user_Id === '')){
+        if (!(user_Id === '')) {
             getTodoStatistics()
         }
-    },[user_Id])
+    }, [user_Id])
 
     useEffect(() => {
-    },[todoStatistics])
+    }, [todoStatistics])
 
-    const getTodoStatistics = () =>{
+    const getTodoStatistics = () => {
         if (user_Id != '') {
             const today = new Date();
             const month = today.getMonth() + 1
-            const monthStr =  month < 10 ? "0"+ month :  month
-            const date =  today.getDate() < 10 ? "0"+ today.getDate() :  today.getDate()
+            const monthStr = month < 10 ? "0" + month : month
+            const date = today.getDate() < 10 ? "0" + today.getDate() : today.getDate()
             const day = today.getFullYear() + "-" + monthStr + "-" + date;
             let incompleteCnt = 0
             let completeCnt = 0
@@ -69,32 +78,37 @@ const TodoStatisticsView = (props) => {
                     user_id: user_Id,
                 }
             }).then((response) => {
-                const todoList = response.data[0].to_do_list
+                const todoList = response.data[0].to_do_list;
+                setTodoRaw(todoList);
                 todoList.forEach(todo => {
-                    if(todo.isDone){
+                    if (todo.isDone) {
                         completeCnt++;
-                    } else if(todo.date < day){
+                    } else if (todo.date < day) {
                         incompleteCnt++;
                     } else {
                         todoCnt++;
                     }
                 });
-                setTodoStatistics([{type: "할 일", count: todoCnt, color: 'rgb(84,219,234)'},
-                {type: "완료", count: completeCnt, color: 'lightgreen'},
-                {type: "미완료", count: incompleteCnt, color: 'lightgray'}]);
+                setTodoStatistics(
+                    [
+                        { type: "할 일", count: todoCnt, color: 'rgb(84,219,234)' },
+                        { type: "완료", count: completeCnt, color: 'lightgreen' },
+                        { type: "미완료", count: incompleteCnt, color: 'lightgray' }
+                    ]
+                );
             }).catch(function (error) {
                 console.log(error);
             })
 
         }
     }
-    
+
     return (
         <View style={{ flex: 1 }}>
             <BackButton navigation={props.navigation} />
             <ScrollView>
-            <WelcomeCard title={"할 일"} content={0+'에서 데이터를 가져올 것임'}/>
-            <PersonalTodoStatistics />
+                <WelcomeCard title={"할 일"} content={'계획한 목표를 많이 달성하셨나요?'} />
+                <PersonalTodoStatistics />
             </ScrollView>
         </View>
     )

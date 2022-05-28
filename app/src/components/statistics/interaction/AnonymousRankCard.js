@@ -45,7 +45,7 @@ const AnonymousRankCard = (props) => {
                     height={120}
                     width={280}
                     maxValue={maxValue} //MaxValue = noOfSections여야함
-                    noOfSections={maxValue}
+                    noOfSections={5}
                 />
             }
 

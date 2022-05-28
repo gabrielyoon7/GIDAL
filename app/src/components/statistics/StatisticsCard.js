@@ -59,9 +59,9 @@ const StatisticsCard = (props) => {
                         >
                             <View style={{ paddingHorizontal: 10 }}>
                                 <HStack>
-                                    <Text fontSize="xl" style={styles.cardTitleText}>Q : {props.question}</Text>
+                                    <Text fontSize="xl" style={styles.cardTitleText}>{props.question}</Text>
                                     <Spacer />
-                                    <Text style={styles.goDetailText}>에 대한 통계 보러가기</Text>
+                                    {/* <Text style={styles.goDetailText}>에 대한 통계 보러가기</Text> */}
                                 </HStack>
                             </View>
 

@@ -27,7 +27,7 @@ export default function TodoChart(props) {
 
     useEffect(() => {
         if (statistics.length !== 0) {
-            console.log(statistics)
+            // console.log(statistics)
             let dataArr = [];
             let legendArr = [];
             statistics.forEach(function (element, idx) {
@@ -41,7 +41,7 @@ export default function TodoChart(props) {
 
     useEffect(() => {
         if(data.length !== 0) {
-            console.log("data",data)
+            // console.log("data",data)
             setShowChart(true);
         }
     },[data])

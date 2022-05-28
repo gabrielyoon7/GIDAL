@@ -44,7 +44,7 @@ const FriendsStatDetailView = (props) => {
                     </TouchableOpacity>
                     
                     {/* <Text></Text> */}
-                    {friend.statistics.map((tag) => (
+                    {friend?.statics?.map((tag) => (
                         <Text style={styles.item} key={tag._id}>{tag._id} {tag.count}</Text>
                     ))}
                 </Box>

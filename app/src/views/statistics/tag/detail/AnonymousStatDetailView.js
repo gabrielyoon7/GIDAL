@@ -20,14 +20,14 @@ const AnonymousStatDetailView = (props) => {
         props.tagLogArr.map((tag) => (
             itemTemp.push({ value: tag.count, label: tag._id, frontColor: '#4ABFF4' })
         ))
-        console.log(itemTemp);
+        // console.log(itemTemp);
 
         let countTemp = [];
         props.tagLogArr.map((tag) => (
             countTemp.push(tag.count)
         ))
         countTemp = Math.max.apply(null, countTemp);
-        console.log(countTemp);
+        // console.log(countTemp);
 
         setItems(itemTemp);
         setMaxValue(countTemp);

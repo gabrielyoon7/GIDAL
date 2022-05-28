@@ -68,7 +68,8 @@ const FriendsStatPreView = (props) => {
                     userFollowing:userFollowing,
                 }
             }).then((response) => {
-                // console.log(response.data);
+                // console.log('dddddd');
+                // console.log(response.data[0].statics);
                 setTagLogArr(response.data);
             }).catch(function (error) {
                 console.log(error);

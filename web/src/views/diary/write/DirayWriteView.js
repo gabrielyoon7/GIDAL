@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { EditorState } from 'draft-js';
 import { convertToHTML } from 'draft-convert';
 import DOMPurify from 'dompurify';
@@ -10,10 +10,21 @@ const DirayWriteView = () => {
   const [editorState, setEditorState] = useState(
     () => EditorState.createEmpty(),
   );
+  const userId = sessionStorage.getItem("Id");
   const [convertedContent, setConvertedContent] = useState(null);
   const [title, setTitle] = useState('');
+  const [disclosure, setDisclosure] = React.useState('public');
+  useEffect(()=>{
+    console.log(disclosure)
+  }, [disclosure])
+
   const handleTitleChange = (state) => {
+    // console.log(state.target.value);
+    setTitle(state.target.value);
+  };
+  const handleDisclosureChange = (state) => {
     console.log(state.target.value);
+    setDisclosure(state.target.value);
   };
   const handleEditorChange = (state) => {
     setEditorState(state);
@@ -31,41 +42,35 @@ const DirayWriteView = () => {
   const saveDiary = () => {
     let currentContentAsHTML = convertToHTML(editorState.getCurrentContent());
     alert(currentContentAsHTML);
-    // axios.post(config.ip + ':5000/diariesRouter/save', {
-    //   data: {
-    //     user_id: userId,
-    //     date: Date,
-    //     title: Title,
-    //     content: Content,
-    //     disclosure: disclosure,
-    //     tags: tagTextOnlyArray,
-    //   }
-    // }).then((response) => {
-    //   if (response.data.status === 'success') {
-    //     axios.post(config.ip + ':5000/tagsRouter/save', {
-    //       data: makeTagLog(response.data.id)
-    //     }).then((response) => {
-    //       if (response.data.status === 'success') {
-    //         props.navigation.pop();
-    //         // 스택 쌓지 않고 화면 이동 => 읽기 페이지에서 뒤로가기하면 리스트 페이지 뜸
-    //       }
-    //     }).catch(function (error) {
-    //       console.log(error);
-    //     })
-    //   }
-    // }).catch(function (error) {
-    //   console.log(error);
-    // })
+    axios.post('/diariesRouter/save', {
+      data: {
+        user_id: userId,
+        date: new Date(),
+        title: title,
+        content: currentContentAsHTML,
+        disclosure: disclosure,
+        tags: [],
+      }
+    }).then((response) => {
+      if (response.data.status === 'success') {
+        alert('잘 등록 됨')
+      }
+      else(
+        alert('에러 발생')
+      )
+    }).catch(function (error) {
+      console.log(error);
+    })
   };
 
   return (
     <div className="mt-3">
       <div className='row'>
         <div className='col-lg-6'>
-          <DiaryEditor handleTitleChange={handleTitleChange} editorState={editorState} handleEditorChange={handleEditorChange} />
+          <DiaryEditor handleTitleChange={handleTitleChange} handleDisclosureChange={handleDisclosureChange} disclosure={disclosure} editorState={editorState} handleEditorChange={handleEditorChange} />
         </div>
         <div className='col-lg-6'>
-          <DiaryPreview title={title} createMarkup={createMarkup} convertedContent={convertedContent} />
+          <DiaryPreview userId={userId} title={title} disclosure={disclosure} createMarkup={createMarkup} convertedContent={convertedContent} />
         </div>
         <button onClick={saveDiary}>작성하기</button>
       </div>

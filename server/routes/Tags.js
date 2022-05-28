@@ -131,33 +131,24 @@ router.post('/makePersonalStatistics', function (req, res, next) {
     });
 });
 
-router.post('/makeFriendsStatistics', function (req, res, next) {
+router.post('/makeFriendsStatistics', async function (req, res, next) {
     let receivedData = req.body.data;
-    // console.log(receivedData);
-    let friendsStatisticsList = [];
-
-    async function mfs() {
-        await receivedData.userFollowing.map(friend =>
-            TagLog.aggregate([
-                { $match: { $and: [{ question_id: receivedData.question_id }, { user_id: friend }] } },
-                { $sortByCount: "$tag" }
-            ]).then((tags) => {
-                friendsStatisticsList.push({ id: friend, statistics: tags });
-                // console.log(friend + '의 데이터 추가');
-                // res.json(tags)
-            }).catch((err) => {
-                console.log(err);
-                next(err)
-            })
-        );
-
-        // 1초 대기
-        await new Promise((resolve, reject) => setTimeout(resolve, 1000));
-        // console.log(friendsStatisticsList)
-        res.json(friendsStatisticsList)
-    }
-
-    mfs();
+    // console.log('1',receivedData);
+    const friendsStatisticsList = receivedData.userFollowing.map( async (friend) => {
+        const statics = await TagLog.aggregate([
+            { $match: { $and: [{ question_id: receivedData.question_id }, { user_id: friend }] } },
+            { $sortByCount: "$tag" }
+        ]).exec();
+        // console.log(statics);
+        return {
+            id : friend,
+            statics
+        } ;
+    });
+    const result = await Promise.all(friendsStatisticsList)
+    // console.log('3');
+    // console.dir(result);
+    res.json(result);
 
 });
 
@@ -166,7 +157,7 @@ router.post('/makeAnonymousStatistics', function (req, res, next) {
     let receivedData = req.body.data;
     console.log(receivedData);
     TagLog.aggregate([
-        { $match: {question_id: receivedData.question_id } },
+        { $match: { question_id: receivedData.question_id } },
         { $sortByCount: "$tag" }
     ]).then((tags) => {
         res.json(tags)

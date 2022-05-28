@@ -55,11 +55,11 @@ const FriendsRankCard = (props) => {
     let itemTemp = [];
     let countTemp = [];
 
-    // console.log(props.tagLogArr)
 
     props.tagLogArr.map((friend) => {
       let stacks = [];
       let tagCount = 0;
+      
       friend.statics.map((tag) => {
         if(tagCount == 0 && tag.count > 0){
           stacks.push({ value: tag.count, color: 'orange'});
@@ -74,16 +74,12 @@ const FriendsRankCard = (props) => {
         countTemp.push(tagCount);
       }
     })
-    // console.log(itemTemp[0].stacks);
-
-    // props.tagLogArr.map((tag) => (
-    //     countTemp.push(tag.count)
-    // ))
+    
     countTemp = Math.max.apply(null, countTemp);
-    // console.log(countTemp);
+    countTemp = Math.ceil(countTemp / 5);
 
     setStackData(itemTemp);
-    setMaxValue(countTemp);
+    setMaxValue(countTemp * 5);
 }
 
   return (
@@ -92,11 +88,11 @@ const FriendsRankCard = (props) => {
       <BarChart
         width={340}
         rotateLabel
-        noOfSections={4}
+        noOfSections={5}
         spacing={30}
         stackData={stackData}
         barBorderRadius={4}
-        // maxValue={maxValue}
+        maxValue={maxValue}
       />
       {/* {props.tagLogArr && props.tagLogArr.slice(0, 3).map((friend) => (
                 <Box my={1}>

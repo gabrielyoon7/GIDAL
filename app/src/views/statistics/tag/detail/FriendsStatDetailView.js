@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Box, Heading } from "native-base";
+import { Badge, Box, Heading, HStack, Spacer } from "native-base";
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native"
 import { BarChart } from "react-native-gifted-charts";
@@ -16,7 +16,7 @@ const TagChart = (props) => {
     const getData = () => {
         let itemTemp = [];
         props.statics.map((tag) => (
-            itemTemp.push({ value: tag.count, label: tag._id, frontColor: '#4ABFF4' })
+            itemTemp.push({ value: tag.count, label: tag._id, frontColor: '#91d653' })
         ))
         // console.log(itemTemp);
 
@@ -32,8 +32,9 @@ const TagChart = (props) => {
     }
 
     return (
-        <View>
+        <View style={{marginVertical: 15}}>
             <BarChart
+                barBorderRadius={4}
                 showFractionalValue
                 showYAxisIndices
                 noOfSections={5}
@@ -65,7 +66,19 @@ const FriendsStatDetailView = (props) => {
                     
                     {/* <Text></Text> */}
                     {friend?.statics?.map((tag) => (
-                        <Text style={styles.item} key={tag._id}>{tag._id} {tag.count}</Text>
+                        // <Text style={styles.item} key={tag._id}>{tag._id} {tag.count}</Text>
+                        <Box mx={5}>
+                            <HStack>
+                                <Badge colorScheme="green" _text={{
+                                color: "white"
+                                }} variant="solid" rounded="4"
+                                style={{marginVertical: 3}}>
+                                    {tag._id}
+                                </Badge>
+                                <Spacer />
+                                <Text>{tag.count}</Text>
+                            </HStack>
+                        </Box>
                     ))}
                 </Box>
             ))}

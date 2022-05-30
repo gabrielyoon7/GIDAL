@@ -7,7 +7,7 @@ import FeedView from '../../views/sns/feed/FeedView';
 // import FeedDiaryListView from '../../views/sns/feed/FeedDiaryListView';
 // import ProfileView from '../../views/sns/profile/ProfileView';
 // import FollowListView from '../../views/sns/profile/FollowListView';
-// import DmListView from '../../views/sns/dm/DmListView';
+import DmListView from '../../views/sns/dm/DmListView';
 // import DmWriteView from '../../views/sns/dm/DmWriteView';
 // import OtherUsersProfileView from '../../views/sns/profile/OtherUsersProfileView';
 
@@ -72,6 +72,7 @@ const SnsRoute = () => {
     >
         <RootStack.Group>
           <RootStack.Screen name="FeedList" component={FeedScreen} />
+          {/* <RootStack.Screen name="DmRead" component={DmReadScreen} /> */}
           {/* <RootStack.Screen name="FeedSearch" component={FeedSearchScreen} /> */}
           {/* <RootStack.Screen name="Profile" component={ProfileScreen} /> */}
           {/* <RootStack.Screen name="OtherUsersProfile" component={OtherUsersProfileScreen} /> */}

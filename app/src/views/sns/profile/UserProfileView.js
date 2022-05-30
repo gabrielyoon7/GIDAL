@@ -7,7 +7,7 @@ import DiaryList from '../../diary/list/DiaryList';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused, useNavigationState } from '@react-navigation/native';
 import BackButton from '../../../components/common/BackButton';
-import { Ionicons, Feather  } from "@expo/vector-icons";
+import { Ionicons, Feather, AntDesign  } from "@expo/vector-icons";
 import ImagePicker from "./ImagePicker"
 
 // 이걸로 통합 예정
@@ -30,7 +30,6 @@ export default function UserProfileView(props) {
   const [userFollowingNum, setuserFollowingNum] = useState(0);
   const [followText, setFollowText] = useState('loading');
   const [imgChange, setImgChange] = useState("");
-  const [isLoaded, setIsLoaded] = React.useState(false);
   const new_routes = useNavigationState(state => state.routes);
   const [items, setItems] = React.useState([]);
 
@@ -106,7 +105,6 @@ export default function UserProfileView(props) {
     if (objectFollowing.includes(currentId)) {
       // console.log("이미 팔로우 되어있음")
       setFollowText(<Feather name="check" size={20} color="green" />)
-
     } else {
       // console.log("아직 팔로우 안되어있음")
       setFollowText(<Ionicons name="person-add" size={19} color="green" />)
@@ -199,14 +197,28 @@ export default function UserProfileView(props) {
     setImgChange(uri)
   }
 
-
   const OtherPageActionView = () => {
     //만약에 팔로우가 되어있다면 팔로우 해제 버튼과 디엠 보내기만 보여주고,
     //팔로우가 되어있지 않다면 팔로우만 보여준다.
     return (
-      <Button mt="3" mr="3" onPress={() => follow()} colorScheme="yellow" style={styles.followButton}>
+      <View style={styles.followBtn}>
+        <Button mt="1" mr="3" onPress={() => follow()} colorScheme="yellow" style={styles.followButton}>
         <Text>{followText}</Text>
-      </Button>
+        </Button>
+         <Button mt="10" mr="3" style={styles.followButton}   onPress={
+    () => props.navigation.navigate('Profile', {
+      screen: 'DmRead',
+      params: {
+        userName: user_Id
+        // init_page: 'Follower',
+      }
+    })
+  }>
+        <Text><AntDesign name="message1" size={20} color="green" /></Text>
+        </Button>
+      </View>
+       
+      
     )
   }
 
@@ -353,5 +365,8 @@ const styles = StyleSheet.create({
     justifyContent: "right",
     alignItems: "right",
 
+  }, 
+  followBtn: {
+    left: 50
   }
 });

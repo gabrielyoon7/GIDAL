@@ -8,9 +8,12 @@ import { config } from '../../../../config'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import InputTitle from "../../../components/diary/InputTitle";
 import InputContent from "../../../components/diary/InputContent";
+import { AntDesign } from '@expo/vector-icons';
+import BackButton from '../../../components/common/BackButton'
 
 const DmWriteView = (props) => {
   var todayDate = new Date();
+  console.log(todayDate);
 
   const [Title, setTitle] = useState('');
   const [Content, setContent] = useState('');
@@ -54,41 +57,71 @@ const DmWriteView = (props) => {
     
   }
 
-  const WriteDiaryButton = () => {
+  // const WriteDiaryButton = () => {
+  //   return (
+  //     <Box alignItems="center">
+  //       <Button onPress={() => saveDiary()} >작성하기</Button>
+  //     </Box>
+  //   );
+  // };
+
+    const WriteDiaryHeader = () => {
     return (
-      <Box alignItems="center">
-        <Button onPress={() => saveDiary()} >작성하기</Button>
+      <Box style={styles.row} justifyContent="center" display="flex" >
+        <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ flex: 1, flexDirection: 'row', alignSelf: 'center' }} >
+          <AntDesign style={styles.allowIcon} name="left" size={24} color="black" />
+        </TouchableOpacity>
+        <Box alignItems="center">
+          <Button onPress={() => { saveDiary(); }} colorScheme="green">작성하기</Button>
+        </Box>
       </Box>
-    );
-  };
+    )
+  }
+
   return (
-    <View>
-      <Text style={styles.textStyle} >받는사람</Text>
-      <Text style={styles.recipientStyle}>{props.userName}</Text>
-      <InputTitle setTitle={setTitle} Title={Title} />
-      <Divider />
-        <InputContent setContent={setContent} content={Content} />
-      <View style={styles.buttonContainer}>
-        <WriteDiaryButton />
+    <View style={{ backgroundColor: 'white', flex: 1 }}>
+        <WriteDiaryHeader />
+        <Divider />
+         <Text style={styles.textStyle} >받는사람</Text>
+         <Text style={styles.recipientStyle}>{props.userName}</Text>
+        <ScrollView style={{ backgroundColor: 'white' }}>
+          <Divider />
+          <InputTitle setTitle={setTitle} Title={Title} />
+          <InputContent setContent={setContent} content={Content} />
+        </ScrollView>
       </View>
-    </View>
+    // <View>
+    // <BackButton navigation={props.navigation} />
+    //   <Text style={styles.textStyle} >받는사람</Text>
+    //   <Text style={styles.recipientStyle}>{props.userName}</Text>
+    //   <InputTitle setTitle={setTitle} Title={Title} />
+    //   <Divider />
+    //     <InputContent setContent={setContent} content={Content} />
+    //   <View style={styles.buttonContainer}>
+    //     <WriteDiaryButton />
+    //   </View>
+    // </View>
   )
 }
 const styles = StyleSheet.create({
-  dateText: {
-
-    fontWeight: "bold",
-    textAlign: "center",
-    fontSize: 30,
+  allowIcon: {
+    width: 'auto',
   },
-  textStyle: {
+  dateText: {
+    fontSize: 20,
+    flex: 5,
+    flexDirection: 'row',
+    fontWeight: 'bold',
+    width: 'auto',
+    alignSelf: 'center',
 
-    fontWeight: "bold",
-    textAlign: "left",
-    fontSize: 17,
-    marginLeft: 50,
-    margin: 10,
-
+  },
+  row: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    marginVertical: 10,
+    paddingHorizontal: 15,
   },
   recipientStyle:{
     fontWeight: "bold",
@@ -96,9 +129,12 @@ const styles = StyleSheet.create({
     marginLeft: 50,
     margin: 10,
   },
-  buttonContainer: {
-    // margin: 20,
-
+  textStyle: {
+    fontWeight: "bold",
+    textAlign: "left",
+    fontSize: 17,
+    marginLeft: 50,
+    margin: 10,
   },
-})
+});
 export default DmWriteView;

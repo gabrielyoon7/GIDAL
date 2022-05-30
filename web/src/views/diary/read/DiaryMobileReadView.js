@@ -21,7 +21,7 @@ const DiaryMobileReadView = (props) => {
                     }}
                     disclosure={props.diary.disclosure}
                     title={props.diary.title}
-                    time={props.diary.date}
+                    time={props.diary.date.slice(0,10)}
                     userId={props.diary.user_id}
                     convertedContent={props.diary.content}
                     createMarkup={createMarkup}

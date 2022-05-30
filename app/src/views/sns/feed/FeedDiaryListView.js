@@ -111,7 +111,7 @@ const FeedDiaryList = (props, navigation) => {
                 pressCommentIcon={() => pressCommentIcon(item)}
                 onPress={
                     () => {
-                        props.navigation.navigate('DiaryRead', {
+                        props.navigation.push('DiaryRead', {
                             diary: item,
                             user_id: userId,
                             profileImg: profileImg

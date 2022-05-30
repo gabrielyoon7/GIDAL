@@ -73,7 +73,7 @@ const DirayWriteView = () => {
         <div className='col-lg-6'>
           <DiaryPreview userId={userId} title={title} disclosure={disclosure} time={time} createMarkup={createMarkup} convertedContent={convertedContent} />
         </div>
-        <button onClick={saveDiary}>작성하기</button>
+        <button className='btn btn-success' onClick={saveDiary}>작성하기</button>
       </div>
     </div>
   )

@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom";
+import Ad from "../../components/common/Ad";
+
 const WelcomeView = () => {
     return (
         <div>
@@ -20,31 +23,30 @@ const WelcomeView = () => {
                             </div>
                             <h3 className="mb-0">모두의 일기</h3>
                             <p className="card-text mb-auto">다른 사람들의 일기를 훔쳐보아요</p>
-                            <a href="#" className="stretched-link">바로 가기</a>
+                            <Link to="sns" className="stretched-link">바로 가기</Link>
                         </div>
-                        {/* <div className="col-auto d-none d-lg-block">
-                            <svg className="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-                        </div> */}
                     </div>
                 </div>
                 <div className="col-md-6">
                     <div className="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                         <div className="col p-4 d-flex flex-column position-static">
-                        <div className="d-flex justify-content-between">
-                        <strong className="d-inline-block mb-2 text-success">통계</strong>
+                            <div className="d-flex justify-content-between">
+                                <strong className="d-inline-block mb-2 text-success">통계</strong>
                                 <div className="mb-1 text-muted">App Only</div>
                             </div>
                             <h3 className="mb-0">태그 통계</h3>
                             <p className="mb-auto">내 일기를 통계로 확인해보아요.</p>
-                            <a href="#" className="stretched-link">앱 다운로드 받기</a>
+                            {/* <a href="#" className="stretched-link">앱 다운로드 받기</a> */}
+                            <a href="#" className="stretched-link" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                앱 다운로드 받기
+                            </a>
                         </div>
-                        {/* <div className="col-auto d-none d-lg-block">
-                            <svg className="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-                        </div> */}
                     </div>
                 </div>
+            </div>
+            {/* <!-- Modal --> */}
+            <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <Ad/>
             </div>
         </div>
     )

@@ -58,7 +58,8 @@ const AnonymousStatDetailView = (props) => {
                     <HStack>
                         <Badge colorScheme="green" _text={{
                             color: "white"
-                        }} variant="solid" rounded="4">
+                        }} variant="solid" rounded="4"
+                        style={{marginVertical: 3}}>
                             {tag._id}
                         </Badge>
                         <Spacer />

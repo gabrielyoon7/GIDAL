@@ -114,6 +114,28 @@ router.post('/save', function (req, res) {
     })
 });
 
+router.post('/modify', async function (req, res) {
+    // console.log(req.body.data);
+    // 태그 로그 데이터 저장
+    const result = await TagLog.deleteMany({ diary_id: { $eq: req.body.data.diary_id } }).exec().then(function () {
+        console.log("게시글 번호 " + req.body.data.diary_id + "의 모든 태그 로그 데이터가 삭제됨."); // Success
+        return "success"
+    });
+
+    if(result === "success"){
+        const tagLogArr = req.body.data.tagLog;
+        TagLog.insertMany(tagLogArr, function (error, docs) {
+            if (error) {
+                console.log(error);
+                return res.json({ status: 'fail', error })
+            } else {
+                console.log('Tag Log Saved!')
+                return res.json({ status: 'success' })
+            }
+        })
+    } else {return res.json({ status: 'fail', error })}
+});
+
 router.post('/deleteMany/', function (req, res, next) {
     // console.log(req.body);
     // 삭제

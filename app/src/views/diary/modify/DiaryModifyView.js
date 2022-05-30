@@ -103,7 +103,24 @@ const DiaryModifyView = (props) => {
     // console.log(tags);
   }
 
+  const makeTagLog = (diary) => {
+    let tagLogData = [];
+    tags.forEach(element => {
+      const question_id = element.split('-/-/-')[0];
+      const user_id = diary.user_id;
+      const diary_id = diary._id;
+      const date = Date;
+      const tag = element.split('-/-/-')[1];
+      tagLogData.push({ question_id: question_id, user_id: user_id, diary_id: diary_id, date: date, tag: tag });
+    });
+    return tagLogData;
+  }
+
   const modifyDiary = () => {
+    let tagTextOnlyArray = [];
+    tags.forEach(element => {
+      tagTextOnlyArray.push(element.split('-/-/-')[1]);
+    });
 
     axios.post(config.ip + ':5000/diariesRouter/modify', {
       data: {
@@ -112,18 +129,28 @@ const DiaryModifyView = (props) => {
         date: Date,
         title: Title,
         content: Content,
-        disclosure: disclosure
+        disclosure: disclosure,
+        tags: tagTextOnlyArray,
       }
     }).then((response) => {
-      props.navigation.replace('DiaryRead', {
-        diary: response.data,
-      });
-      // if (response.data.status !== 'fail') {
-      //   props.navigation.replace('DiaryRead', {
-      //     diary : diary,
-      // });
-      //   // 스택 쌓지 않고 화면 이동 => 읽기 페이지에서 뒤로가기하면 리스트 페이지 뜸
-      // }
+      if (response.data.status === 'success') {
+        console.log(response.data)
+        const modifieddiary = response.data.diary;
+        axios.post(config.ip + ':5000/tagsRouter/modify', {
+          data: {
+            diary_id: diary._id,
+            tagLog: makeTagLog(modifieddiary)
+          }
+        }).then((response) => {
+          if (response.data.status === 'success') {
+            props.navigation.replace('DiaryRead', {
+              diary: modifieddiary,
+            });
+          }
+        }).catch(function (error) {
+          console.log(error);
+        })
+      }
     }).catch(function (error) {
       console.log(error);
     })

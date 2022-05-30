@@ -127,7 +127,7 @@ router.post('/modify', function(req, res, next) {
     const diary = req.body.data;
     console.log(diary);
     // 데이터 수정
-    Diary.findOneAndUpdate({_id: diary._id}, {$set:{user_id:diary.user_id, date:diary.date, title:diary.title, content:diary.content, disclosure:diary.disclosure}}, function(error, data){
+    Diary.findOneAndUpdate({_id: diary._id}, {$set:{user_id:diary.user_id, date:diary.date, title:diary.title, content:diary.content, disclosure:diary.disclosure, tags:diary.tags}}, function(error, data){
         console.log('--- UPDATE ---');
         if(error){
             console.log(error);
@@ -139,7 +139,7 @@ router.post('/modify', function(req, res, next) {
                 console.log(error);
             }else{
                 console.log(diary);
-                return res.json(diary)
+                return res.json({status: 'success', diary: diary})
             }
         });
         // return res.json({status: 'fail'})

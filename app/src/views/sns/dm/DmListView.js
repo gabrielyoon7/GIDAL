@@ -7,6 +7,7 @@ import axios from 'axios'
 import { config } from '../../../../config'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused } from '@react-navigation/native';
+import BackButton from '../../../components/common/BackButton'
 
 const DmListView = (props) => {
     const partner = props.userName;
@@ -25,7 +26,7 @@ const DmListView = (props) => {
                   if (value != null) {
                       const UserInfo = JSON.parse(value);
                       setUserId(UserInfo[0].user_id);
-                      getUserDmData()
+                      getUserDmData();
                   }
               }
         )
@@ -34,9 +35,9 @@ const DmListView = (props) => {
       }
   },[isFocused]) 
 
-  useEffect(()=>{
-   getUserDmData()
-},[isFocused])
+//   useEffect(()=>{
+//    getUserDmData()
+// },[isFocused])
 
 const getUserDmData = () => {
   let result = []
@@ -75,6 +76,9 @@ const filteredPersonsId = dmData.filter( item => (item.opponent_id == props.user
 
   const DmListReadView = () => {
     
+    console.log('=================================');
+console.log(props);
+
     return (
       <FlatList 
                 enableEmptySections={true}
@@ -93,7 +97,7 @@ const filteredPersonsId = dmData.filter( item => (item.opponent_id == props.user
                         title={item.opponent_id}
                         />
                     </CardAction>
-                    <CardTitle title={item.title} subtitle={(item.date).split('T')}/>
+                    {/* <CardTitle title={item.title} subtitle={(item.date).split('T')}/> */}
                     <CardContent text={item.content}/>
                     <CardAction seperator={true} inColumn={false} >
                         <CardButton
@@ -170,6 +174,7 @@ const CustomCarousel = () => {
     return(
         
      <View>
+      <BackButton navigation={props.navigation} />
         <Button
                 title="새로운 교환일기 작성"
                 onPress={() => props.navigation.navigate('DmWrite',{

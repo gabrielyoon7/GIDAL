@@ -14,7 +14,7 @@ export default function TodoList({ item, deleteItem, changeIsDone }) {
           {/* <Entypo name="circle" size={20} color="midnightblue" /> */}
           <Checkbox value={item.isDone} onChange={(val) => changeIsDone(item, val)}> </Checkbox>
         </CirlceContainer>
-        <View>
+        <View style={{marginTop: 8}}>
           <TextItem>{item.value}</TextItem>
         </View>
         <IconContainer onPress={() => deleteItem(item)}>

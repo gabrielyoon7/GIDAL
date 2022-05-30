@@ -22,7 +22,7 @@ const DiaryMobileReadView = (props) => {
                     disclosure={props.diary.disclosure}
                     title={props.diary.title}
                     time={props.diary.date}
-                    userId={props.diary.userId}
+                    userId={props.diary.user_id}
                     convertedContent={props.diary.content}
                     createMarkup={createMarkup}
                     likes={99}

@@ -18,7 +18,7 @@ const AnonymousStatDetailView = (props) => {
     const getData = () => {
         let itemTemp = [];
         props.tagLogArr.map((tag) => (
-            itemTemp.push({ value: tag.count, label: tag._id, frontColor: '#4ABFF4' })
+            itemTemp.push({ value: tag.count, label: tag._id, frontColor: '#91d653' }) //#4ABFF4
         ))
         // console.log(itemTemp);
 
@@ -38,6 +38,7 @@ const AnonymousStatDetailView = (props) => {
         return (
             <View>
                 <BarChart
+                    barBorderRadius={4}
                     showFractionalValue
                     showYAxisIndices
                     noOfSections={5}

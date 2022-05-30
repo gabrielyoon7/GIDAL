@@ -16,7 +16,7 @@ const TagChart = (props) => {
     const getData = () => {
         let itemTemp = [];
         props.statics.map((tag) => (
-            itemTemp.push({ value: tag.count, label: tag._id, frontColor: '#4ABFF4' })
+            itemTemp.push({ value: tag.count, label: tag._id, frontColor: '#91d653' })
         ))
         // console.log(itemTemp);
 
@@ -34,6 +34,7 @@ const TagChart = (props) => {
     return (
         <View style={{marginVertical: 15}}>
             <BarChart
+                barBorderRadius={4}
                 showFractionalValue
                 showYAxisIndices
                 noOfSections={5}

@@ -137,7 +137,7 @@ router.post('/getTagLog', async function (req, res, next) {
     console.dir(tagLogs);
     const result = []
     tagLogs.map((tag) => {
-        result.push(tag.diary_id + '-/-/-' + tag.tag);
+        result.push(tag.question_id + '-/-/-' + tag.tag);
     })
     // console.dir(re);
     res.json(result);

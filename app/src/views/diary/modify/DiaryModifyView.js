@@ -55,10 +55,6 @@ const DiaryModifyView = (props) => {
     }
   }, [Date]);
 
-  React.useEffect(() => {
-    console.log(tags);
-  },[tags])
-
   const getTags = (user_id, diary_id) => {
     axios.post(config.ip + ':5000/tagsRouter/getTagLog', {
       data: {
@@ -91,9 +87,7 @@ const DiaryModifyView = (props) => {
     //   return;
     // }
     const newTag = selectedTag.question_id + '-/-/-' + selectedTag.tag;
-    console.log("1", tags);
     let newSet = {tags}.tags;
-    console.log('2', newSet);
     if (newSet.includes(newTag)) {
       const idx = newSet.indexOf(newTag)
       if (idx > -1) {
@@ -182,7 +176,7 @@ const DiaryModifyView = (props) => {
           extraData={tags}
         />
         <Box style={styles.row} justifyContent="center" display="flex">
-          <TagSelector selectTags={selectTags} />
+          <TagSelector selectTags={selectTags} tags={tags} />
         </Box>
         <InputTitle setTitle={setTitle} Title={Title} />
         <Divider />

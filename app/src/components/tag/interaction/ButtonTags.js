@@ -19,7 +19,7 @@ const ButtonTags = (props) => {
         // </TouchableOpacity>
       ))} */}
       {props.tags.map((tag) => (
-        <PressableTag key={tag} item={props.item} tag={tag} selectTags={props.selectTags} />
+        <PressableTag key={tag} item={props.item} tag={tag} selectTags={props.selectTags} selectedtags={props.selectedtags} />
         // <TouchableOpacity key={tag} onPress={() => console.log(tag)}>
         //   <Text>{tag}</Text>
         // </TouchableOpacity>

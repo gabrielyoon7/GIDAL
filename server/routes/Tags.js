@@ -126,7 +126,23 @@ router.post('/deleteMany/', function (req, res, next) {
 
 });
 
-/* GET. */
+router.post('/getTagLog', async function (req, res, next) {
+    let receivedData = req.body.data;
+    console.log(receivedData);
+    const tagLogs = await TagLog.aggregate([
+        { $match: { $and: [{ diary_id: receivedData.diary_id }, { user_id: receivedData.user_id }] } }
+    ]).exec();
+
+    // console.log('3');
+    console.dir(tagLogs);
+    const result = []
+    tagLogs.map((tag) => {
+        result.push(tag.diary_id + '-/-/-' + tag.tag);
+    })
+    // console.dir(re);
+    res.json(result);
+});
+
 router.post('/makePersonalStatistics', function (req, res, next) {
     let receivedData = req.body.data;
     // console.log(receivedData);

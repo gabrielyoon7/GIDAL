@@ -45,7 +45,7 @@ const MobileUI = (props) => {
                     {props.title ? props.title : '제목을 입력하세요'}
                 </div>
                 <div className="my-1">
-                    {/* {props.time.toTimeString()} */}
+                    {props.time}
                 </div>
                 <div className="my-1">
                     <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" className="me-2 rounded-circle" alt="Avatar" style={{ height: '30px' }} />

@@ -82,7 +82,7 @@ const DiarySnsFeedView = () => {
                     </h3>
                     <div className="row">
                         {items.map((diary) => (
-                            <div className="col-xl-6" key={diary._id}>
+                            <div className="col-xl-6 text-truncate" key={diary._id}>
                                 <a href="#" className="text-decoration-none text-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => setDiary(diary)}>
                                     <DiaryPostCard diary={diary} />
                                 </a>
@@ -135,17 +135,9 @@ const DiarySnsFeedView = () => {
             <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content" style={{width:'430px'}}>
-                        {/* <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div> */}
                         <div className="modal-body bg-dark rounded-3">
                             <DiaryMobileReadView diary={diary} />
                         </div>
-                        {/* <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary">Save changes</button>
-                        </div> */}
                     </div>
                 </div>
             </div>

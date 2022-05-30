@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
 const PressableTag = (props) => {
@@ -6,6 +6,14 @@ const PressableTag = (props) => {
 
   const [isPressed, setIsPressed] = useState(false);
   const [buttonColor, setButtonColor] = useState(buttonStyles.buttonColorNormal);
+
+  useEffect(() => {
+    const tag = props.selectedtags
+    if (tag.includes(props.item._id + "-/-/-" + props.tag)) {
+      setIsPressed(!isPressed);
+      isPressed?setButtonColor(buttonStyles.buttonColorNormal):setButtonColor(buttonStyles.buttonColorPressed)
+    }
+  },[])
 
   const onPressTag = () => {
     props.selectTags({ question_id: props.item._id, tag: props.tag })

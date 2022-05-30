@@ -71,7 +71,10 @@ export default function UserProfileView(props) {
   }, [isFocused]);
 
   React.useEffect(() => {
-    getUserData(user_Id);
+    console.log(user_Id, ' ',  imgChange)
+    if(user_Id !== 'loading'){
+      getUserData(user_Id);
+    }
   }, [user_Id, imgChange]);
 
   const getUserData = (user_Id) => {
@@ -112,9 +115,9 @@ export default function UserProfileView(props) {
   }, [userFollower])
 
 
-  React.useEffect(() => {
-    // console.log('123');
-  }, [userFollowerNum, userFollowingNum])
+  // React.useEffect(() => {
+  //   // console.log('123');
+  // }, [userFollowerNum, userFollowingNum])
 
   const follow = () => {
     const data = {

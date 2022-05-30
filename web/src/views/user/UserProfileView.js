@@ -4,11 +4,30 @@ import { useParams } from "react-router-dom";
 import DiaryPostCard from "../../components/diary/DiaryPostCard";
 import Footer from "../common/Footer";
 import Header from "../common/Header";
+import DiaryMobileReadView from "../diary/read/DiaryMobileReadView";
 
 const UserProfileView = () => {
     const params = useParams();
     const user_id = params.id;
     const [items, setItems] = useState([]);
+
+
+    const defaultData = {
+        "__v": 0,
+        "_id": "626f78c19ee18cdc829a10de",
+        "accessible_user": [],
+        "comments": [],
+        "content": "loading...",
+        "date": "2022-05-02T00:00:00.000Z",
+        "disclosure": "private",
+        "likes": 0,
+        "stickers": [],
+        "tags": [],
+        "likers": [],
+        "title": "loading...",
+        "user_id": "loading...",
+    };
+    const [diary, setDiary] = useState(defaultData);
 
     useEffect(() => {
         getitems();
@@ -40,11 +59,18 @@ const UserProfileView = () => {
                 <div className="row g-5">
                     <div className="col-md-8">
                         <h3 className="pb-4 mb-4 fw-bold border-bottom">
-                        {user_id}의 일기
+                            {user_id}의 일기
                         </h3>
-                        {items.map((diary) => (
-                            <DiaryPostCard diary={diary} key={diary._id} />
-                        ))}
+
+                        <div className="row">
+                            {items.map((diary) => (
+                                <div className="col-xl-6 text-truncate" key={diary._id}>
+                                    <a href="#" className="text-decoration-none text-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => setDiary(diary)}>
+                                        <DiaryPostCard diary={diary} />
+                                    </a>
+                                </div>
+                            ))}
+                        </div>
 
 
                         <nav className="blog-pagination" aria-label="Pagination">
@@ -58,8 +84,12 @@ const UserProfileView = () => {
                         <div className="position-sticky">
                             {/* <div> */}
                             <div className="p-4 mb-3 bg-light rounded">
-                                <h4 className="fw-bold">{user_id}</h4>
-                                <p className="mb-0">개인 정보가 나와야 할 자리</p>
+                                <div className="col text-center">
+                                    <svg className="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+                                    <h2>{user_id}</h2>
+                                    <p>팔로우 00명 팔로워 00명</p>
+                                    <p><a className="btn btn-secondary" href="#">View details &raquo;</a></p>
+                                </div>
                             </div>
 
                             <div className="p-4">
@@ -92,6 +122,16 @@ const UserProfileView = () => {
                     </div>
                 </div>
             </main>
+            {/* <!-- Modal --> */}
+            <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                    <div className="modal-content" style={{ width: '430px' }}>
+                        <div className="modal-body bg-dark rounded-3">
+                            <DiaryMobileReadView diary={diary} />
+                        </div>
+                    </div>
+                </div>
+            </div>
             <Footer />
         </div>
     )

@@ -18,7 +18,7 @@ const DiaryPreview = (props) => {
                 }}
                 disclosure={props.disclosure}
                 title={props.title}
-                time={props.time}
+                time={props.time.toDateString()}
                 userId={props.userId}
                 convertedContent={props.convertedContent}
                 createMarkup={props.createMarkup}

@@ -16,10 +16,10 @@ const onPressFunction = (tag) => {
 const TagCard = (props) => {
     const type = {
         button: {
-          interaction:<ButtonTags item={props.item} tags={props.item.tags} selectTags={props.selectTags}/>,
+          interaction:<ButtonTags item={props.item} tags={props.item.tags} selectTags={props.selectTags} selectedtags={props.tags} />,
         },
         search: {
-            interaction:<SearchTags item={props.item} tags={props.item.tags} selectTags={props.selectTags} />,
+            interaction:<SearchTags item={props.item} tags={props.item.tags} selectTags={props.selectTags} selectedtags={props.tags} />,
         },
         // time: {
         //     interaction:<TimePicker tags={props.item.tags} selectTags={props.selectTags} />,

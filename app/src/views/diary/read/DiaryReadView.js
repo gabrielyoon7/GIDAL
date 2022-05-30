@@ -375,7 +375,7 @@ const DiaryReadView = (props) => {
                                         />
                                     }
                                     onPress={
-                                        () => props.navigation.navigate('DiaryModify', {
+                                        () => props.navigation.replace('DiaryModify', {
                                             diary: diary,
                                         })
                                     }

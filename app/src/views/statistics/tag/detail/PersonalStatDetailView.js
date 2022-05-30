@@ -18,7 +18,7 @@ const PersonalStatDetailView = (props) => {
     const getData = () => {
         let itemTemp = [];
         props.tagLogArr.map((tag) => (
-            itemTemp.push({ value: tag.count, label: tag._id, frontColor: '#4ABFF4' })
+            itemTemp.push({ value: tag.count, label: tag._id, frontColor: '#91d653' })
         ))
         // console.log(itemTemp);
 
@@ -38,6 +38,7 @@ const PersonalStatDetailView = (props) => {
         return (
             <View>
                 <BarChart
+                    barBorderRadius={4}
                     showFractionalValue
                     showYAxisIndices
                     noOfSections={5}
@@ -60,7 +61,8 @@ const PersonalStatDetailView = (props) => {
                     <HStack>
                         <Badge colorScheme="green" _text={{
                             color: "white"
-                        }} variant="solid" rounded="4">
+                        }} variant="solid" rounded="4"
+                        style={{marginVertical: 3}}>
                             {tag._id}
                         </Badge>
                         <Spacer />

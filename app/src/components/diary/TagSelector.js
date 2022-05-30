@@ -41,12 +41,11 @@ const TagSelector = (props) => {
         parallaxFactor={0.4}
         {...parallaxProps}
       />
-      <TagCard item={item} selectTags={props.selectTags} />
-
+      <TagCard item={item} selectTags={props.selectTags} tags={props.tags} />
     </View>
 
 
-  ), []);
+  ), [props.tags]);
 
 
   return (

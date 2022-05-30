@@ -76,6 +76,7 @@ const FriendsRankCard = (props) => {
         stackData={stackData}
         barBorderRadius={4}
         maxValue={maxValue}
+        hideRules
       />
       {/* {props.tagLogArr && props.tagLogArr.slice(0, 3).map((friend) => (
                 <Box my={1}>

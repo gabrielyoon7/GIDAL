@@ -28,7 +28,6 @@ const TagRankCard = (props) => {
             <Pressable
                 onPress={
                     () => {
-                        // console.log(props);
                         props.navigation.navigate('UserStatisticsDetail', {
                             data: props.data,
                             tagLogArr: props.tagLogArr,
@@ -57,81 +56,24 @@ const TagRankCard = (props) => {
                                 }],
                             }}
                         >
-                            {/* <View style={styles.card} > */}
                             <Box pb="3">
                                 <HStack>
                                     <Heading size="md" isTruncated>
                                         {props.data.title}
                                     </Heading>
                                     <Spacer />
-                                    {/* <TouchableOpacity
-                                        onPress={
-                                            () => {
-                                                // console.log(props);
-                                                props.navigation.navigate('UserStatisticsDetail', {
-                                                    data: props.data,
-                                                    tagLogArr: props.tagLogArr,
-                                                })
-                                            }
-                                        }
-                                    >
-                                        <HStack> */}
-                                            <Text>자세히 보기</Text>
-                                        {/* </HStack>
-                                    </TouchableOpacity> */}
+                                    <Text>자세히 보기</Text>
                                 </HStack>
                                 <Box mt={3}>
                                     {card_type ? (<View style={styles.interaction}>{card_type.interaction}</View>) : (<View><Text>Wrong type</Text></View>)}
                                 </Box>
                             </Box>
-                            {/* </View> */}
 
                         </Box>
                     )
                 }}
             </Pressable>
         </Box>
-
-
-
-        // <View style={styles.card} >
-        //     <Box pb="3">
-        //         <HStack>
-        //             <Heading size="md" isTruncated>
-        //                 {props.data.title}
-        //             </Heading>
-        //             <Spacer />
-        //             <TouchableOpacity
-        //              onPress={
-        //                 () => {
-        //                     // console.log(props);
-        //                     props.navigation.navigate('UserStatisticsDetail',{
-        //                         data:props.data,
-        //                         tagLogArr:props.tagLogArr,
-        //                     })
-        //                 }
-        //              }
-        //             >
-        //                 <HStack>
-        //                     <Text>자세히 보기</Text>
-        //                 </HStack>
-        //             </TouchableOpacity>
-        //         </HStack>
-        //         {/* {props.tagLogArr && props.tagLogArr.slice(0, 5).map((tag) => (
-        //             <Text key={tag._id}>{tag._id}{tag.count}</Text>
-        //         ))} */}
-        //         <Box>
-        //             {/* <BarChart 
-        //                 data={data}
-        //                 height={120}
-        //                 width={280}
-        //                 maxValue={3} //MaxValue = noOfSections여야함
-        //                 noOfSections={3}
-        //             /> */}
-        //             {card_type ? (<View style={styles.interaction}>{card_type.interaction}</View>) : (<View><Text>Wrong type</Text></View>)}
-        //         </Box>
-        //     </Box>
-        // </View>
     )
 }
 

@@ -27,7 +27,6 @@ const CalendarView = (props) => {
     }
 
     const monthChanged = (date) => {
-        // console.log('month changed', date);
         props.setSelectedDate(date.dateString);
         setMonth(date.month);
     }

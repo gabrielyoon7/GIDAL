@@ -18,14 +18,12 @@ const TagSelector = (props) => {
   }, []);
 
   useEffect(() => {
-    // console.log('123')
   }, [carouselItems]);
 
   const getTags = () => {
     let result = []
     axios.get(config.ip + ':5000/tagsRouter/find')
       .then((response) => {
-        // console.log(response.data);
         setCarouselItems(response.data);
       }).catch(function (error) {
         console.log(error);

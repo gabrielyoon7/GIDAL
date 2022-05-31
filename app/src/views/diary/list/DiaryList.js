@@ -94,10 +94,10 @@ const DiaryList = (props, navigation) => {
         );
     };
     
-    // const windowHeight = Dimensions.get('window').height;
-    // const windowWidth = Dimensions.get('window').width;
-    // console.log(windowHeight);
-    // console.log(windowWidth);
+    const windowHeight = Dimensions.get('window').height;
+    const windowWidth = Dimensions.get('window').width;
+    console.log(windowHeight);
+    console.log(windowWidth);
 
     return (
         <View style={styles.container}>

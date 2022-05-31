@@ -7,9 +7,6 @@ import PressableTag from './PressableTag';
 
 const SearchTags = (props) => {
 
-
-    // console.log(props.item);
-
     const [ref, setRef] = useState(null);
     const renderItem = ({ item }) => {
         return (

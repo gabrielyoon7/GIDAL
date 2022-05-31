@@ -190,9 +190,7 @@ export default function UserProfileView(props) {
   const MyPageActionView = () => {
     return (
       // <Text>정보 수정</Text>
-      <Box>
-        
-      </Box>
+      <ImagePicker style={styles.picker} user_Id={user_Id} changeProfile={changeProfile}/>
     )
   }
 
@@ -204,24 +202,24 @@ export default function UserProfileView(props) {
     //만약에 팔로우가 되어있다면 팔로우 해제 버튼과 디엠 보내기만 보여주고,
     //팔로우가 되어있지 않다면 팔로우만 보여준다.
     return (
-      <View style={styles.followBtn}>
-        <Button mt="1" mr="3" onPress={() => follow()} colorScheme="yellow" style={styles.followButton}>
-        <Text>{followText}</Text>
-        </Button>
-         <Button mt="10" mr="3" style={styles.followButton}   onPress={
-    () => props.navigation.navigate('Profile', {
-      screen: 'DmRead',
-      params: {
-        userName: user_Id
-        // init_page: 'Follower',
-      }
-    })
-  }>
-        <Text><AntDesign name="message1" size={20} color="green" /></Text>
-        </Button>
+      <HStack justifyContent={'center'} >
+        <View style={styles.followBtn}>
+          <Button mt="1" mr="3" onPress={() => follow()} colorScheme="yellow" style={styles.followButton}>
+            <Text>{followText}</Text>
+          </Button>
+          <Button mt="10" mr="3" style={styles.followButton}   onPress={
+              () => props.navigation.navigate('Profile', {
+                screen: 'DmRead',
+                params: {
+                  userName: user_Id
+                  // init_page: 'Follower',
+                }
+              })
+            }>
+            <Text><AntDesign name="message1" size={20} color="green" /></Text>
+          </Button>
       </View>
-       
-      
+      </HStack>
     )
   }
 
@@ -232,55 +230,63 @@ export default function UserProfileView(props) {
       <View style={styles.header}>
         <BackButton navigation={props.navigation} />
         
-        <View style={styles.headerContent}>
-        <Image style={styles.avatar} source={{ uri: profileImg }} />
-        
-        
-          <Text style={styles.name}>{user_Id}</Text>
-          <ProfileActionView />
+        <HStack alignItems='center' justifyContent='center'>
+          <Box style={styles.avatarBox}>
+            <Image style={styles.avatar} source={{ uri: profileImg }} />
+          </Box>
           
-          <HStack alignItems="center" my="1">
-          
-            <View style={styles.buttonStyle}>
-              <TouchableOpacity
-                onPress={
-                  () => props.navigation.navigate('Profile', {
-                    screen: 'FollowList',
-                    params: {
-                      screen: 'Follower',
-                      user_id: user_Id,
-                      // init_page: 'Follower',
-                    }
-                  })
-                }
-              >
-                <Text style={styles.followText}>팔로워</Text>
-                <Text style={styles.followText}>{userFollowerNum}</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.buttonStyle}>
-              <TouchableOpacity
-                onPress={
-                  () => props.navigation.navigate('Profile', {
-                    screen: 'FollowList',
-                    params: {
-                      screen: 'Following',
-                      user_id: user_Id,
-                      // init_page: 'Following',
-                    }
-                  })
-                }
-              >
-                <Text style={styles.followText}>팔로잉</Text>
-                <Text style={styles.followText}>{userFollowingNum}</Text>
-              </TouchableOpacity>
-            </View>
+          <Box style={styles.textBox}>
+            <Text style={styles.name}>{user_Id}</Text>
+            
+            
+            <HStack alignItems="center" my="1">
+            
+              <View style={styles.buttonStyle}>
+                <TouchableOpacity
+                  onPress={
+                    () => props.navigation.navigate('Profile', {
+                      screen: 'FollowList',
+                      params: {
+                        screen: 'Follower',
+                        user_id: user_Id,
+                        // init_page: 'Follower',
+                      }
+                    })
+                  }
+                >
+                  <Text style={styles.followText}>팔로워</Text>
+                  <Text style={styles.followText}>{userFollowerNum}</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.buttonStyle}>
+                <TouchableOpacity
+                  onPress={
+                    () => props.navigation.navigate('Profile', {
+                      screen: 'FollowList',
+                      params: {
+                        screen: 'Following',
+                        user_id: user_Id,
+                        // init_page: 'Following',
+                      }
+                    })
+                  }
+                >
+                  <Text style={styles.followText}>팔로잉</Text>
+                  <Text style={styles.followText}>{userFollowingNum}</Text>
+                </TouchableOpacity>
+              </View>
+            </HStack>
+          </Box>
           </HStack>
-          {currentId == user_Id ? 
-            <ImagePicker style={styles.picker} user_Id={user_Id} changeProfile={changeProfile}/>
-            : null
-          }
-          </View>
+          <View style={{marginVertical: 10}}>
+          {/* {currentId == user_Id ? 
+            // <ImagePicker style={styles.picker} user_Id={user_Id} changeProfile={changeProfile}/>
+            <MyPageActionView />
+            // : null
+            : <ProfileActionView />
+          } */}
+          <ProfileActionView />
+          </View>   
       </View>
     )
   }
@@ -297,7 +303,7 @@ const styles = StyleSheet.create({
   buttonStyle: {
     alignItems: 'center',
     width: 60,
-    marginRight: 10,
+    // marginRight: 10,
     marginTop: 10,
     padding: 5,
     //backgroundColor: 'blue'
@@ -307,9 +313,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#27ae60",
   },
   headerContent: {
-    padding: 20,
+    padding: 10,
+    display: 'flex',
     alignItems: 'center',
-    paddingLeft: 150
+    justifyContent: 'space-between',
+    // paddingLeft: 150
   },
   avatar: {
     width: 90,
@@ -318,7 +326,14 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     borderColor: "#FFFFFF",
     position: 'absolute',
-    top: 10, left: 60
+  },
+  avatarBox: {
+    width: 90, height: 90,
+  },
+  textBox: {
+    width: 'auto',
+    alignItems: 'center',
+    marginHorizontal: 30
   },
   image: {
     width: 60,
@@ -360,8 +375,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   followButton: {
-    position: 'absolute',
-    left: "25%",
+    // position: 'absolute',
+    // left: "25%",
     backgroundColor: "#E6E6FA",
   },
   iconContainer: {
@@ -370,6 +385,6 @@ const styles = StyleSheet.create({
 
   }, 
   followBtn: {
-    left: 50
+    // left: 50
   }
 });

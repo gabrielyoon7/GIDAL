@@ -35,7 +35,7 @@ const DmListView = (props) => {
                 setFollowers(UserInfo[0].follower);
               }
           })
-  },[])
+  },[isFocused])
 
   useEffect(()=>{
    getUserDmData()
@@ -55,7 +55,7 @@ const getUserDmData = () => {
 
 const filteredPersonsId = dmData.filter( item => (item.opponent_id == props.userName ))
 
-// console.log(filteredPersonsId);
+console.log(filteredPersonsId);
 
      const hideModal = () => {
       setModal(false);
@@ -115,7 +115,7 @@ const filteredPersonsId = dmData.filter( item => (item.opponent_id == props.user
     return (
       <FlatList 
                 enableEmptySections={true}
-                data={dmData}
+                data={filteredPersonsId}
                 keyExtractor= {(item) => {
                   return item._id;
                 }}
@@ -190,7 +190,7 @@ const CustomCarousel = () => {
         <Button
                 title="새로운 교환일기 작성"
                 onPress={() => props.navigation.navigate('DmWrite',{
-                    userName: writer
+                    userName: partner
                 })}
             />
             

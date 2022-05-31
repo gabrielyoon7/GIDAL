@@ -11,9 +11,7 @@ router.post('/save', function(req, res) {
     console.log(req.body);
     const profileImg = "https://cdn-icons-png.flaticon.com/512/1/1247.png"
     // 데이터 저장
-    let time = new Date().toLocaleTimeString();
     let data = req.body.data
-    data.time = time;
     data.profile_image = profileImg
     var newUser = new User(data);
     newUser.save(function(error, data){
@@ -57,6 +55,7 @@ router.post('/webSave', function(req, res) {
 /*유저 업데이트 */
 router.post('/userSentDm', function(req, res) {
     console.log(req.body.data.user_id);
+    let time = new Date().toLocaleTimeString();
     User.updateOne(
         { user_id: req.body.data.user_id }, 
         {$push: {sentDm: {
@@ -64,6 +63,7 @@ router.post('/userSentDm', function(req, res) {
             "title": req.body.data.title,
             "content": req.body.data.content,
             "date": req.body.data.date,
+            "time": time
         }}}).exec((error, user)=>{
             if(error){
                 console.log(error);

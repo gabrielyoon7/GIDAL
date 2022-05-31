@@ -12,7 +12,7 @@ const FeedDiaryList = (props, navigation) => {
     const [backupData, setBackupData] = useState([]);
     const [userId, setUserId] = useState('');
     const isFocused = useIsFocused(); // isFoucesd Define
-    const [profileImg, setProfileImg] = useState('');
+    const [profileImg, setProfileImg] = useState('https://cdn-icons-png.flaticon.com/512/1/1247.png');
     const [followers, setFollowers] = useState([]);
 
     useEffect(() => {
@@ -21,7 +21,7 @@ const FeedDiaryList = (props, navigation) => {
                 if (value != null) {
                     const UserInfo = JSON.parse(value);
                     setUserId(UserInfo[0].user_id);
-                    setProfileImg(UserInfo[0].profile_image);
+                    // setProfileImg(UserInfo[0].profile_image);
                     setFollowers(UserInfo[0].follower);
                 }
             })

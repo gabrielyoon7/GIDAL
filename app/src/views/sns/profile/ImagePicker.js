@@ -34,13 +34,13 @@ const PickModal = ({user_Id, changeProfile}) => {
 
   }
 
-  return <Center>
+  return <Center style={styles.picker}>
   {/* <TouchableOpacity onPress={() => setShowModal(true)}> */}
   {/* <Image style={styles.avatar} source={{ uri: image }} /> */}
   {/* <Button title="프로필 수정"  onPress={() => setShowModal(true)}>프로필 수정</Button> */}
   <TouchableOpacity onPress={() => setShowModal(true)}>
     <Text>
-        <Icon name="edit" size={20} color="black" />
+        <Icon name="edit" size={20} color="green" />
     </Text>
       </TouchableOpacity>
   {/* </TouchableOpacity> */}
@@ -121,5 +121,14 @@ const styles = StyleSheet.create({
   selected: {
     fontSize: 16,
     fontWeight: '600',
+  },
+  picker: {
+    backgroundColor: 'white',
+    width: '40%',
+    alignSelf: 'center',
+    paddingVertical: 10,
+    borderRadius: 4,
+    marginHorizontal: 15,
+    top: 2,
   },
 });

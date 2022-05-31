@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList, Alert } from 'react-native';
-import { Box, Button, HStack } from "native-base"
+import { Box, Button, HStack, Icon } from "native-base"
 import axios from 'axios'
 import { config } from '../../../../config'
 import DiaryList from '../../diary/list/DiaryList';
@@ -190,7 +190,13 @@ export default function UserProfileView(props) {
   const MyPageActionView = () => {
     return (
       // <Text>정보 수정</Text>
-      <ImagePicker style={styles.picker} user_Id={user_Id} changeProfile={changeProfile}/>
+      <HStack justifyContent={'center'}>
+        <ImagePicker user_Id={user_Id} changeProfile={changeProfile}/>
+        <Button mt="1" mr="3" style={styles.followButton}>
+            <Text><AntDesign name="plus" size={20} color="green" /></Text>
+          </Button>
+      </HStack>
+
     )
   }
 

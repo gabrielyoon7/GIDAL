@@ -20,6 +20,7 @@ const DmListView = (props) => {
     const [profileImg, setProfileImg] = useState('');
     const [followers, setFollowers] = useState([]);
     const isFocused = useIsFocused(); // isFoucesd Define
+    const [writer, setWriter] = useState(props.userName);
 
     useEffect(() => {
       AsyncStorage.getItem('userInfo')
@@ -36,33 +37,21 @@ const DmListView = (props) => {
           })
   },[])
 
-//   useEffect(()=>{
-//    getUserDmData()
-// },[props])
+  useEffect(()=>{
+   getUserDmData()
+},[props])
 
-// const getUserDmData = () => {
-//   let result = []
-//   axios.post(config.ip + ':5000/usersRouter/findOne', {
-//     data: {
-//       user_id: user_Id,
-//     }
-//   }).then((response) => {
-//     // setReceivedDmList(result)
-//     setDmData(result)
-//     // setSentDmList(result)
-//     if (response.data.length > 0) {
-//       response.data.forEach((item) => {
-//         result.push(item);
-//       });
-//       // setReceivedDmList(result[0].receivedDm)
-//       setDmData(result[0].receivedDm)
-//       // setSentDmList(result[0].sentDm)
-//     }
-//     // console.log(result[0].receivedDm);
-// }).catch(function (error) {
-//   console.log(error);
-// });
-// }
+const getUserDmData = () => {
+  axios.post(config.ip + ':5000/usersRouter/findOne', {
+    data: {
+      user_id: partner,
+    }
+  }).then((response) => {
+    setProfileImg(response.data.profile_image)
+}).catch(function (error) {
+  console.log(error);
+});
+}
 
 const filteredPersonsId = dmData.filter( item => (item.opponent_id == props.userName ))
 
@@ -106,13 +95,15 @@ const filteredPersonsId = dmData.filter( item => (item.opponent_id == props.user
               user_id={user_Id}
               profileImg={profileImg}
               followers={followers}
+              writer={writer}
               pressCommentIcon={() => pressCommentIcon(item)}
               onPress={
                   () => {
-                      props.navigation.push('DiaryRead', {
+                      props.navigation.push('DmRead', {
                           diary: item,
-                          user_id: user_Id,
-                          profileImg: profileImg
+                          writer: writer,
+                          profileImg: profileImg,
+                          user_id: user_Id
                       })
                   }
               }
@@ -134,10 +125,12 @@ const filteredPersonsId = dmData.filter( item => (item.opponent_id == props.user
 
   const receivedDm = () => {
     setDmData(receivedDmList)
+    setWriter(partner)
   }
 
   const sentDm = () => {
     setDmData(sentDmList)
+    setWriter(user_Id)
   }
 
 const ModalView = () => {
@@ -197,7 +190,7 @@ const CustomCarousel = () => {
         <Button
                 title="새로운 교환일기 작성"
                 onPress={() => props.navigation.navigate('DmWrite',{
-                    userName: partner
+                    userName: writer
                 })}
             />
             
@@ -213,25 +206,5 @@ const CustomCarousel = () => {
         
     )
 }
-
-const styles = StyleSheet.create({
-    button: {
-      alignItems: 'center',
-      justifyContent: 'center',
-      paddingVertical: 8,
-      borderRadius: 100,
-      backgroundColor: '#dcdde1',
-      width: 80
-    },
-    btnView: {
-      borderWidth: StyleSheet.hairlineWidth,
-      borderColor: 'black',
-      borderRadius: 100,
-      borderWidth: 2,
-      margin: 5,
-      marginTop: 15
-    }
-  });
-
 
 export default DmListView;

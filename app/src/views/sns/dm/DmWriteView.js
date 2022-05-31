@@ -41,7 +41,7 @@ const DmWriteView = (props) => {
       dmRecipient_id: props.userName,
       title: Title,
       content: Content,
-      date: todayDate
+      date: todayDate.toJSON().split('T')[0]
     }
     axios.post(config.ip + ':5000/usersRouter/userSentDm', {
       data: data
@@ -56,14 +56,6 @@ const DmWriteView = (props) => {
   });
     
   }
-
-  // const WriteDiaryButton = () => {
-  //   return (
-  //     <Box alignItems="center">
-  //       <Button onPress={() => saveDiary()} >작성하기</Button>
-  //     </Box>
-  //   );
-  // };
 
     const WriteDiaryHeader = () => {
     return (

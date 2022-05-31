@@ -3,7 +3,7 @@ import { Avatar, Badge, Box, Divider, Flex, HStack, Pressable, Spacer, Text, } f
 import { Ionicons } from "@expo/vector-icons";
 import { useEffect, useState } from 'react';
 
-const FancyDMCard = ({ item: diary, user_id, pressCommentIcon, profileImg, onPress, followers, backgroundColor, textColor }) => {
+const FancyDMCard = ({ item: diary, user_id, profileImg, onPress, followers, writer }) => {
 
     // 정규식을 이용한 HTML 태그 제거 시작
 
@@ -26,11 +26,11 @@ const FancyDMCard = ({ item: diary, user_id, pressCommentIcon, profileImg, onPre
     const FancyDiaryHeader = () => {
         let avatar_text = '';
         let avatar_color = 'white';
-        user_id === diary.user_id
+        user_id === writer
         ?
         (avatar_text='나',avatar_color='green.500')
         :
-        followers.find(v => v.user_id === diary.user_id) ? (avatar_text='친구',avatar_color='yellow.500') : (avatar_text='?',avatar_color='red.500')
+        followers.find(v => v.user_id === writer) ? (avatar_text='친구',avatar_color='yellow.500') : (avatar_text='?',avatar_color='red.500')
 
         
         return (
@@ -43,7 +43,7 @@ const FancyDMCard = ({ item: diary, user_id, pressCommentIcon, profileImg, onPre
                     }
                 </Avatar>
                 <Text fontSize={15} color="coolGray.800" alignSelf="center" mx={2}>
-                    {diary.user_id}
+                    {writer}
                 </Text>
                 {/* 친구가 아닌 경우에만 표시함 */}
                 {/* {!followers.find(v => v.user_id === diary.user_id) && !(user_id === diary.user_id) ? <Ionicons size={15} color="grey" name="star-outline" /> : null} */}

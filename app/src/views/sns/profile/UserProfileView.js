@@ -214,7 +214,7 @@ export default function UserProfileView(props) {
           </Button>
           <Button mt="1" mr="3" style={styles.followButton}   onPress={
               () => props.navigation.navigate('Profile', {
-                screen: 'DmRead',
+                screen: 'DmList',
                 params: {
                   userName: user_Id
                   // init_page: 'Follower',

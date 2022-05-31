@@ -77,6 +77,7 @@ router.post('/userSentDm', function(req, res) {
 
 router.post('/userReceivedDm', function(req, res) {
     console.log(req.body.data.user_id);
+    let time = new Date().toLocaleTimeString();
     User.updateOne(
         { user_id: req.body.data.dmRecipient_id }, 
         {$push: {receivedDm: {
@@ -84,6 +85,7 @@ router.post('/userReceivedDm', function(req, res) {
             "title": req.body.data.title,
             "content": req.body.data.content,
             "date": req.body.data.date,
+            "time": time
         }}}).exec((error, user)=>{
             if(error){
                 console.log(error);

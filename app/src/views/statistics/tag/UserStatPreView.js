@@ -26,7 +26,7 @@ const UserStatPreView = (props) => {
         }
     }, []);
     return (
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, backgroundColor: 'white' }}>
             <BackButton navigation={props.navigation} />
             <ScrollView>
                 {/* <WelcomeCard title={question} content={id + '에서 데이터를 가져올 것임'} /> */}

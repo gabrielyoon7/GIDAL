@@ -52,7 +52,7 @@ const UserStatDetailView = (props) => {
         }
     }
     return (
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, backgroundColor: 'white' }}>
             <BackButton navigation={props.navigation} />
             <ScrollView>
                 {/* <Text>상세 통계 표시</Text> */}

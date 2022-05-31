@@ -1,5 +1,5 @@
 ﻿import React, { useEffect, useState } from 'react';
-import { FlatList, View, StatusBar, StyleSheet, Text, TouchableOpacity, RefreshControl, KeyboardAvoidingView } from 'react-native';
+import { FlatList, View, StatusBar, StyleSheet, Text, TouchableOpacity, RefreshControl, KeyboardAvoidingView, Dimensions } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import axios from 'axios';
 import { config } from '../../../../config'
@@ -138,6 +138,11 @@ const FeedDiaryList = (props, navigation) => {
         //   wait(2000).then(() => setRefreshing(false));
     }, []);
 
+
+    const windowHeight = Dimensions.get('window').height;
+    const windowWidth = Dimensions.get('window').width;
+    const numOfCol=windowWidth>700?2:1;
+
     return (
         <>
             <View style={styles.container}>
@@ -154,6 +159,7 @@ const FeedDiaryList = (props, navigation) => {
                             onRefresh={onRefresh}
                         />
                     }
+                    numColumns={numOfCol}
                 />
             </View>
             <KeyboardAvoidingView

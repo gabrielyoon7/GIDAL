@@ -7,11 +7,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { img } from './profileImg'
 import Icon from 'react-native-vector-icons/AntDesign';
 
-const PickModal = ({user_Id, changeProfile}) => {
+const PickModal = ({user_Id, profileImg, changeProfile}) => {
   const [showModal, setShowModal] = useState(false);
-  const [image, setImage] = useState("https://cdn-icons-png.flaticon.com/512/1/1247.png");
+  const [image, setImage] = useState(profileImg);
 
-  console.log(user_Id);
+  // useEffect(() => {
+  //   console.log(profileImg);
+  // },[profileImg])
+
   const pressImg = (uri) => {
     setImage(uri)
   }
@@ -97,9 +100,9 @@ const PickModal = ({user_Id, changeProfile}) => {
     </Center>
 };
 
-export default function ImagePicker({user_Id, changeProfile}) {
+export default function ImagePicker({user_Id, profileImg, changeProfile}) {
   return (
-    <PickModal user_Id={user_Id} changeProfile={changeProfile}/>
+    <PickModal user_Id={user_Id} profileImg={profileImg} changeProfile={changeProfile}/>
   );
 }
 

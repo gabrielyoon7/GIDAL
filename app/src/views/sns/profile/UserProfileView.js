@@ -90,7 +90,7 @@ export default function UserProfileView(props) {
         // console.log('****following****')
         // console.log(following);
         // console.log('****follower****')
-        // console.log(follower);
+        // console.log(profileImg);
         setUserFollowing(following);
         setUserFollower(follower);
         setuserFollowingNum(following.length)
@@ -191,7 +191,7 @@ export default function UserProfileView(props) {
     return (
       // <Text>정보 수정</Text>
       <HStack justifyContent={'center'}>
-        <ImagePicker user_Id={user_Id} changeProfile={changeProfile}/>
+        <ImagePicker user_Id={user_Id} profileImg={profileImg} changeProfile={changeProfile}/>
         <Button mt="1" mr="3" style={styles.followButton}>
             <Text><AntDesign name="plus" size={20} color="green" /></Text>
           </Button>

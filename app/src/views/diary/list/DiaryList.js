@@ -96,8 +96,7 @@ const DiaryList = (props, navigation) => {
     
     const windowHeight = Dimensions.get('window').height;
     const windowWidth = Dimensions.get('window').width;
-    console.log(windowHeight);
-    console.log(windowWidth);
+    const numOfCol=windowWidth>700?2:1;
 
     return (
         <View style={styles.container}>
@@ -116,7 +115,7 @@ const DiaryList = (props, navigation) => {
                     }}
                     renderItem={renderItem}
                     keyExtractor={(item) => item._id}
-                    // numColumns={2}
+                    numColumns={numOfCol}
                 // extraData={selectedId}
                 />
                 :

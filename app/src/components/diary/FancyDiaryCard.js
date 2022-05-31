@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity, } from 'react-native';
+import { Dimensions, StyleSheet, TouchableOpacity, } from 'react-native';
 import { Avatar, Badge, Box, Divider, Flex, HStack, Pressable, Spacer, Text, } from 'native-base';
 import { Ionicons } from "@expo/vector-icons";
 import { useEffect, useState } from 'react';
@@ -133,6 +133,10 @@ const FancyDiaryCard = ({ item: diary, user_id, pressCommentIcon, profileImg, on
         )
     }
 
+    const windowHeight = Dimensions.get('window').height;
+    const windowWidth = Dimensions.get('window').width;
+    const numOfCol=windowWidth>700?2:1;
+    const diaryWidth= numOfCol>1? windowWidth*0.5*0.96 : windowWidth*0.96;
 
     return (
         <Box alignItems="center" py="1" px="1">
@@ -144,8 +148,8 @@ const FancyDiaryCard = ({ item: diary, user_id, pressCommentIcon, profileImg, on
                 }) => {
                     return (
                         <Box
-                            maxW="96%"
-                            minW="96%"
+                            maxW={diaryWidth}
+                            minW={diaryWidth}
                             borderWidth="1"
                             borderColor="coolGray.300"
                             shadow="3"

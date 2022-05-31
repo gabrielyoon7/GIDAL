@@ -25,6 +25,8 @@ const PickModal = ({user_Id, changeProfile}) => {
     }).then((response) => {
       if (response.data.status === 'success') {
         console.log('save profile');
+        AsyncStorage.clear();
+        setData(response.data.user)
       }
     }).catch(function (error) {
       console.log(error);
@@ -33,6 +35,16 @@ const PickModal = ({user_Id, changeProfile}) => {
     setShowModal(false);
 
   }
+
+  const setData = async (user) => {
+    try {
+        await AsyncStorage.setItem('userInfo', JSON.stringify(user), () => {
+            console.log('유저정보 저장 완료')
+        });
+    } catch (error) {
+        console.log(error);
+    }
+}
 
   return <Center style={styles.picker}>
   {/* <TouchableOpacity onPress={() => setShowModal(true)}> */}

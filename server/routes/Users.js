@@ -252,9 +252,17 @@ router.post('/userFollowingDelete', (req,res) => {
             if(error){
                 console.log(error);
                 res.json({status: 'error', error})
-            }else{
+            } else {
                 console.log('Saved!')
-                res.json({status: 'success'})
+                // res.json({status: 'success', user:user})
+                User.find().where('user_id').equals( req.body.data.user_id )
+                    .then((users) => {
+                        console.log(users);
+                        res.json({status: 'success', user: users})
+                    }).catch((err) => {
+                        console.log(err);
+                        res.json({status: 'error', error})
+                    });
             }
         });
   })

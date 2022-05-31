@@ -4,7 +4,7 @@ import SearchBar from "react-native-dynamic-search-bar";
 import axios from 'axios'
 import { config } from '../../../../config'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Button, Center } from 'native-base';
+import { Button, Center, Avatar } from 'native-base';
 import BackButton from '../../../components/common/BackButton';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { CommonActions, useIsFocused, useNavigationState } from "@react-navigation/native";
@@ -123,11 +123,9 @@ export default function FollowListView(props) {
     //   })
     // }
   }
-
-  const Followings = (props) => {
+  console.log(filteredDataSource);
+  const Followings = () => {
     return (
-      <View>
-
         <View style={styles.body} >
           <FlatList
             enableEmptySections={true}
@@ -138,15 +136,14 @@ export default function FollowListView(props) {
             renderItem={({ item }) => {
               return (
                 <TouchableOpacity onPress={() => selectOther(item)} >
-                  <View style={styles.box} >
-                    <Image style={styles.image} source={{ uri: followings[0].image }} />
+                  <View style={styles.box} > 
+                    <Image style={styles.image} source={{ uri: item.img }} />
                     <Text style={styles.username}>{item.name}</Text>
                   </View>
                 </TouchableOpacity>
               )
             }} />
         </View>
-      </View>
     )
   }
 

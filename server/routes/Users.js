@@ -11,7 +11,9 @@ router.post('/save', function(req, res) {
     console.log(req.body);
     const profileImg = "https://cdn-icons-png.flaticon.com/512/1/1247.png"
     // 데이터 저장
+    let time = new Date().toLocaleTimeString();
     let data = req.body.data
+    data.time = time;
     data.profile_image = profileImg
     var newUser = new User(data);
     newUser.save(function(error, data){

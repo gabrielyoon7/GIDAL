@@ -85,9 +85,9 @@ const DmReadView = (props) => {
                     <Text color="coolGray.800" mt="3" fontWeight="bold" fontSize="4xl">
                         {diary.title}
                     </Text>
-                    {/* <Text fontSize="sm" color="coolGray.700" my="1">
+                    <Text fontSize="sm" color="coolGray.700" my="1">
                         <Text>{showDate}</Text> <Text>{diary.time}</Text>
-                    </Text> */}
+                    </Text>
                     <HStack>
                         <TouchableOpacity onPress={
                             () => props.navigation.navigate('UserProfile', {

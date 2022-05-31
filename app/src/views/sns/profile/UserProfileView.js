@@ -123,7 +123,7 @@ export default function UserProfileView(props) {
     const data = {
       user_id: currentId,
       following_user_id: user_Id,
-      img: ""
+      img: profileImg
     }
     let objectFollowing = Object.values(userFollower).map(item => item.user_id)
     console.log("follow : " + objectFollowing);

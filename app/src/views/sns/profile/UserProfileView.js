@@ -203,11 +203,10 @@ export default function UserProfileView(props) {
     //팔로우가 되어있지 않다면 팔로우만 보여준다.
     return (
       <HStack justifyContent={'center'} >
-        <View style={styles.followBtn}>
           <Button mt="1" mr="3" onPress={() => follow()} colorScheme="yellow" style={styles.followButton}>
             <Text>{followText}</Text>
           </Button>
-          <Button mt="10" mr="3" style={styles.followButton}   onPress={
+          <Button mt="1" mr="3" style={styles.followButton}   onPress={
               () => props.navigation.navigate('Profile', {
                 screen: 'DmRead',
                 params: {
@@ -218,7 +217,6 @@ export default function UserProfileView(props) {
             }>
             <Text><AntDesign name="message1" size={20} color="green" /></Text>
           </Button>
-      </View>
       </HStack>
     )
   }
@@ -377,7 +375,9 @@ const styles = StyleSheet.create({
   followButton: {
     // position: 'absolute',
     // left: "25%",
-    backgroundColor: "#E6E6FA",
+    // backgroundColor: "#E6E6FA",
+    backgroundColor: 'white',
+    width: '40%'
   },
   iconContainer: {
     justifyContent: "right",

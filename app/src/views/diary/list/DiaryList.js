@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { FlatList, View, StatusBar, StyleSheet, Text, TouchableOpacity, Dimensions } from 'react-native';
-import { useIsFocused } from '@react-navigation/native';
 import axios from 'axios';
 import { config } from '../../../../config'
 import FancyDiaryCard from '../../../components/diary/FancyDiaryCard';
@@ -9,7 +8,6 @@ import LoadingSpinner from '../../../components/common/LoadingSpinner';
 
 const DiaryList = (props, navigation) => {
     const user_id = props.user_Id;
-    const isFocused = useIsFocused(); // isFoucesd Define
     const [isLoaded, setIsLoaded] = useState(false);
     const profileImg = props.profileImg
 
@@ -43,7 +41,7 @@ const DiaryList = (props, navigation) => {
             getItems();
         }
         setIsLoaded(true);
-    }, [isFocused, user_id]);
+    }, [user_id]);
 
     useEffect(() => {
         let index = props.items.findIndex((item, idx) => {
@@ -72,7 +70,6 @@ const DiaryList = (props, navigation) => {
     }
 
     const renderItem = ({ item }) => {
-        // console.log(profileImg)
         return (
             <FancyDiaryCard
                 item={item}

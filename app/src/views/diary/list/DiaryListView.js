@@ -6,9 +6,10 @@ import { AntDesign } from "@expo/vector-icons";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { config } from '../../../../config'
-
+import { useIsFocused } from '@react-navigation/native';
 
 const DiaryListView = (props) => {
+    const isFocused = useIsFocused(); // isFoucesd Define
     const [date, setSelectedDate] = React.useState(props.selectedDate);
     const [markedDates, setMarkedDates] = React.useState({
         [props.selectedDate]: {
@@ -22,6 +23,43 @@ const DiaryListView = (props) => {
     const [user_Id, setUserId] = React.useState('');
     const [profileImg, setProfileImg] = React.useState('');
     // console.log(user_Id);
+
+    React.useEffect(() => {
+        try {
+            AsyncStorage.getItem('userInfo')
+                .then(value => {
+                    if (value != null) {
+                        const UserInfo = JSON.parse(value);
+                        setUserId(UserInfo[0].user_id);
+                        setProfileImg(UserInfo[0].profile_image);
+                        // console.log(UserInfo[0].profile_image);
+                    }
+                }
+                )
+        } catch (error) {
+            console.log(error);
+        }
+    },[isFocused])
+
+    React.useEffect(() => {
+        let val = {};
+        let isSelected = false;
+        items.forEach(item => {
+            const itemDate = item.date.split('T')[0]
+            if(itemDate === date){
+                val[itemDate] = {marked: true, selected: true,disableTouchEvent: true,selectedColor: 'yellowgreen',}
+                isSelected = true
+            }
+            else {
+                val[itemDate] = {marked: true}
+            }
+        });
+        if(!isSelected){
+            val[date] = ({selected: true, disableTouchEvent: true, selectedColor: 'yellowgreen'})
+ 
+        }
+        setMarkedDates(val)
+    },[items, date])
 
     const getitems = () => {
         let result = []
@@ -45,43 +83,6 @@ const DiaryListView = (props) => {
             console.log(error);
         })
     }
-
-    React.useEffect(() => {
-        try {
-            AsyncStorage.getItem('userInfo')
-                .then(value => {
-                    if (value != null) {
-                        const UserInfo = JSON.parse(value);
-                        setUserId(UserInfo[0].user_id);
-                        setProfileImg(UserInfo[0].profile_image);
-                        console.log(UserInfo[0].profile_image);
-                    }
-                }
-                )
-        } catch (error) {
-            console.log(error);
-        }
-    },[])
-
-    React.useEffect(() => {
-        let val = {};
-        let isSelected = false;
-        items.forEach(item => {
-            const itemDate = item.date.split('T')[0]
-            if(itemDate === date){
-                val[itemDate] = {marked: true, selected: true,disableTouchEvent: true,selectedColor: 'yellowgreen',}
-                isSelected = true
-            }
-            else {
-                val[itemDate] = {marked: true}
-            }
-        });
-        if(!isSelected){
-            val[date] = ({selected: true, disableTouchEvent: true, selectedColor: 'yellowgreen'})
- 
-        }
-        setMarkedDates(val)
-    },[items, date])
 
     const toast = useToast();
     const id = "diary-write-toast";

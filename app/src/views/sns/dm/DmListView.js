@@ -8,6 +8,7 @@ import { config } from '../../../../config'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused } from '@react-navigation/native';
 import BackButton from '../../../components/common/BackButton'
+import FancyDMCard from '../../../components/dm/FancyDMCard';
 
 const DmListView = (props) => {
     const partner = props.userName;
@@ -16,52 +17,53 @@ const DmListView = (props) => {
     const [sentDmList, setSentDmList] = useState([]);
     const [receivedDmList, setReceivedDmList] = useState([]);
     const [dmData, setDmData] = useState([]);
+    const [profileImg, setProfileImg] = useState('');
+    const [followers, setFollowers] = useState([]);
     const isFocused = useIsFocused(); // isFoucesd Define
 
-    React.useEffect(() => {
-      // getData();
-      try {
-          AsyncStorage.getItem('userInfo')
-              .then(value => {
-                  if (value != null) {
-                      const UserInfo = JSON.parse(value);
-                      setUserId(UserInfo[0].user_id);
-                      getUserDmData();
-                  }
+    useEffect(() => {
+      AsyncStorage.getItem('userInfo')
+          .then(value => {
+              if (value != null) {
+                const UserInfo = JSON.parse(value);
+                setUserId(UserInfo[0].user_id);
+                setReceivedDmList(UserInfo[0].receivedDm)
+                setSentDmList(UserInfo[0].sentDm)
+                setDmData(UserInfo[0].receivedDm)
+                setProfileImg(UserInfo[0].profile_image);
+                setFollowers(UserInfo[0].follower);
               }
-        )
-      } catch (error) {
-          console.log(error);
-      }
-  },[isFocused]) 
+          })
+  },[])
 
 //   useEffect(()=>{
 //    getUserDmData()
-// },[isFocused])
+// },[props])
 
-const getUserDmData = () => {
-  let result = []
-  axios.post(config.ip + ':5000/usersRouter/findOne', {
-    data: {
-      user_id: user_Id,
-    }
-  }).then((response) => {
-    setReceivedDmList(result)
-    setDmData(result)
-    setSentDmList(result)
-    if (response.data.length > 0) {
-      response.data.forEach((item) => {
-        result.push(item);
-      });
-      setReceivedDmList(result[0].receivedDm)
-      setDmData(result[0].receivedDm)
-      setSentDmList(result[0].sentDm)
-    }
-    // console.log(result[0].receivedDm);
-}).catch(function (error) {
-  console.log(error);
-});
-}
+// const getUserDmData = () => {
+//   let result = []
+//   axios.post(config.ip + ':5000/usersRouter/findOne', {
+//     data: {
+//       user_id: user_Id,
+//     }
+//   }).then((response) => {
+//     // setReceivedDmList(result)
+//     setDmData(result)
+//     // setSentDmList(result)
+//     if (response.data.length > 0) {
+//       response.data.forEach((item) => {
+//         result.push(item);
+//       });
+//       // setReceivedDmList(result[0].receivedDm)
+//       setDmData(result[0].receivedDm)
+//       // setSentDmList(result[0].sentDm)
+//     }
+//     // console.log(result[0].receivedDm);
+// }).catch(function (error) {
+//   console.log(error);
+// });
+// }
+
 const filteredPersonsId = dmData.filter( item => (item.opponent_id == props.userName ))
 
 // console.log(filteredPersonsId);
@@ -75,9 +77,49 @@ const filteredPersonsId = dmData.filter( item => (item.opponent_id == props.user
     }
 
   const DmListReadView = () => {
+    // const renderItem = useCallback(({ item, index }) => (
+    //   <TouchableOpacity onPress={() => showDMList()}>
+    //   {item.opponent_id == props.userName &&
+    //   <Card>
     
-    console.log('=================================');
-console.log(props);
+    //   <CardAction seperator={true} inColumn={false} >
+    //       <CardButton
+    //       title={item.opponent_id}
+    //       />
+    //   </CardAction>
+    //   {/* <CardTitle title={item.title} subtitle={(item.date).split('T')}/> */}
+    //   <CardContent text={item.content}/>
+    //   <CardAction seperator={true} inColumn={false} >
+    //       <CardButton
+    //       onPress={() => {}}
+    //       title="♥"
+    //       />
+    //   </CardAction>
+    //   </Card>
+    //   }
+    //   </TouchableOpacity> 
+    // ), []);
+    const renderItem = ({ item }) => {
+      return (
+          <FancyDMCard
+              item={item}
+              user_id={user_Id}
+              profileImg={profileImg}
+              followers={followers}
+              pressCommentIcon={() => pressCommentIcon(item)}
+              onPress={
+                  () => {
+                      props.navigation.push('DiaryRead', {
+                          diary: item,
+                          user_id: user_Id,
+                          profileImg: profileImg
+                      })
+                  }
+              }
+              textColor="black"
+          />
+      );
+  };
 
     return (
       <FlatList 
@@ -86,30 +128,7 @@ console.log(props);
                 keyExtractor= {(item) => {
                   return item._id;
                 }}
-                renderItem={({item}) => {
-                  return (
-                    <TouchableOpacity onPress={() => showDMList()}>
-                    {item.opponent_id == props.userName &&
-                    <Card>
-                   
-                    <CardAction seperator={true} inColumn={false} >
-                        <CardButton
-                        title={item.opponent_id}
-                        />
-                    </CardAction>
-                    {/* <CardTitle title={item.title} subtitle={(item.date).split('T')}/> */}
-                    <CardContent text={item.content}/>
-                    <CardAction seperator={true} inColumn={false} >
-                        <CardButton
-                        onPress={() => {}}
-                        title="♥"
-                        />
-                    </CardAction>
-                    </Card>
-                    }
-                    </TouchableOpacity>
-                  )
-              }}/>
+                renderItem={renderItem}/>
     )
   }
 

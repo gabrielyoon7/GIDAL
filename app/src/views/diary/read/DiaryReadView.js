@@ -1,6 +1,6 @@
 import { Box, Input, Text, TextArea, Stack, Button, HStack, Badge, Spacer, Avatar, Divider, ScrollView, useDisclose, Actionsheet, Icon, Image, Center, Stagger, IconButton } from 'native-base';
 import * as React from 'react';
-import { Dimensions, StyleSheet, View, TouchableOpacity, FlatList } from 'react-native';
+import { Dimensions, StyleSheet, View, TouchableOpacity, FlatList, Alert } from 'react-native';
 import axios from 'axios';
 import { config } from '../../../../config'
 import { useWindowDimensions } from 'react-native';
@@ -78,7 +78,6 @@ const DiaryReadView = (props) => {
     const [likers, setLikers] = React.useState(diary.likers);
 
     const deleteDiary = () => {
-        console.log("l", diary._id);
         axios.post(config.ip + ':5000/diariesRouter/delete/', {
             data: {
                 id: diary._id,
@@ -96,6 +95,21 @@ const DiaryReadView = (props) => {
         }).catch(function (error) {
             console.log(error);
         })
+    }
+
+    const confirmDeleteDiary = () => {
+        Alert.alert(
+            "삭제 확인",
+            "해당 일기를 삭제하시겠습니까?",
+            [
+              {
+                text: "취소",
+                onPress: () => console.log("취소"),
+                style: "cancel"
+              },
+              { text: "확인", onPress: () => deleteDiary() }
+            ]
+          );
     }
 
     const source = {
@@ -399,7 +413,7 @@ const DiaryReadView = (props) => {
                                         />
                                     }
                                     onPress={
-                                        () => deleteDiary()
+                                        () => confirmDeleteDiary()
                                     }
                                 />
                             </Stagger>

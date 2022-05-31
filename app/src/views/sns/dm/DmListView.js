@@ -55,6 +55,7 @@ const getUserDmData = () => {
 
 const filteredPersonsId = dmData.filter( item => (item.opponent_id == props.userName ))
 
+// console.log(dmData);
 console.log(filteredPersonsId);
 
      const hideModal = () => {

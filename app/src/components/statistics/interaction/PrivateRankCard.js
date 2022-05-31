@@ -24,10 +24,11 @@ const PrivateRankCard = (props) => {
             countTemp.push(tag.count)
         ))
         countTemp = Math.max.apply(null, countTemp);
-        console.log(countTemp);
+        countTemp = Math.ceil(countTemp / 5);
+        // console.log(countTemp);
 
         setItems(itemTemp);
-        setMaxValue(countTemp);
+        setMaxValue(countTemp * 5);
     }
 
 

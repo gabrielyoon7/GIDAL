@@ -48,7 +48,7 @@ const TagRankCard = (props) => {
                             borderWidth="1"
                             borderColor="coolGray.300"
                             shadow="3"
-                            bg={isPressed ? "coolGray.200" : isHovered ? "coolGray.200" : "coolGray.100"}
+                            bg={isPressed ? "coolGray.200" : isHovered ? "coolGray.200" : "white"}
                             p="5"
                             rounded="8"
                             style={{

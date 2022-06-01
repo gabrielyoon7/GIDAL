@@ -11,7 +11,7 @@ const StatisticsCard = (props) => {
                 }
             }
         >
-            <View style={styles.card}>
+            <View style={styles.card} >
                 <HStack>
                     <Text fontSize="xl">할 일 통계</Text>
                     <Spacer />
@@ -27,12 +27,22 @@ export default StatisticsCard;
 const styles = StyleSheet.create({
 
     card: {
-        backgroundColor: '#E8D9FF',
         marginVertical: 10,
-        borderRadius: 10,
-        height: 70,
-        padding: 20,
         marginHorizontal: 10,
+        padding: 23,
+        marginLeft:13,
+        margin:30,
+        paddingLeft:30,
+        height: 85,
+        width:385,
+        marginBottom: 5,
+        backgroundColor: '#FFFFFF',
+        flexDirection: 'row',
+        shadow: 2,
+        borderRadius: 8,
+        elevation: 3,
+        borderWidth: 1,
+        borderColor: "#d1d2d1",
     },
 
 });

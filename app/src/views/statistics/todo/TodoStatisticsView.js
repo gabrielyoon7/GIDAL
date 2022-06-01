@@ -119,12 +119,26 @@ export default TodoStatisticsView;
 const styles = StyleSheet.create({
 
     card: {
-        backgroundColor: '#E8D9FF',
+        // backgroundColor: '#FFFFFF',
+        // borderColor:"#E2E2E2",
+        // marginVertical: 10,
+        // borderRadius: 8,
+        // shadow: 1,
+       
+        // padding: 20,
+        // marginHorizontal: 10,
         marginVertical: 10,
-        borderRadius: 10,
-        // height: 200,
-        padding: 20,
         marginHorizontal: 10,
+        padding: 20,
+        marginTop: 5,
+        marginBottom: 5,
+        backgroundColor: '#FFFFFF',
+        flexDirection: 'row',
+        shadow: 2,
+        borderRadius: 8,
+        elevation: 3,
+        borderWidth: 1,
+        borderColor: "#d1d2d1",
     },
 
 });

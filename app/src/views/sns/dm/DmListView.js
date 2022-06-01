@@ -122,6 +122,7 @@ console.log(filteredPersonsId);
                   return item._id;
                 }}
                 renderItem={renderItem}
+                style={{height: '100%'}}
                 />
     )
   }

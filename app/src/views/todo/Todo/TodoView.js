@@ -204,6 +204,7 @@ const Todo = ({ props }) => { // 진짜
         <TouchableOpacity onPress={() => showDatePicker()}>
           <Heading style={styles.heading}>{date}의 할 일</Heading>
         </TouchableOpacity>
+        <AntDesign name="check" size={20} color="black" style={{alignSelf: 'center', left: -10}}/>
         <Spacer />
         <Box style={styles.heading}>
 

@@ -7,7 +7,7 @@ const WelcomeCard = (props) => {
         <View style={styles.card}>
             <Heading>
                 <Heading>{props.title} </Heading>
-                {props.title === '태그 분석 서비스' && ( <Ionicons name="ios-stats-chart" size={24} color="black" />)}
+                {props.icon && ( <Ionicons name={props.icon} size={24} color="black" />)}
             </Heading>
             <Text pt="3">
                 {props.content}

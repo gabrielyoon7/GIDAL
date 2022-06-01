@@ -9,6 +9,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused } from '@react-navigation/native';
 import BackButton from '../../../components/common/BackButton'
 import FancyDMCard from '../../../components/dm/FancyDMCard';
+import { Fab, Icon, useToast } from "native-base";
+import { AntDesign } from "@expo/vector-icons";
 
 const DmListView = (props) => {
     const partner = props.userName;
@@ -21,6 +23,8 @@ const DmListView = (props) => {
     const [followers, setFollowers] = useState([]);
     const isFocused = useIsFocused(); // isFoucesd Define
     const [writer, setWriter] = useState(props.userName);
+    const [button, setbutton] = useState(false);
+
 
     useEffect(() => {
       AsyncStorage.getItem('userInfo')
@@ -65,7 +69,13 @@ console.log(filteredPersonsId);
     const showDMList = () => {
         setModal(true)
     }
+    const untouchedButton = () => {
+      setbuttonl(false);
+    }
 
+    const touchButtont = () => {
+      setbutton(true)
+    }
   const 
   DmListReadView = () => {
     // const renderItem = useCallback(({ item, index }) => (
@@ -189,27 +199,32 @@ const CustomCarousel = () => {
 };
     return(
         
-     <View backgroundColor='white'>
+     <View backgroundColor='white' style={{flex: 1}}>
       <BackButton navigation={props.navigation} />
-            <Button onPress={() => props.navigation.navigate('DmWrite',{
-                    userName: partner
-                })}
-                style={styles.btnNew}>
-              <Text style={styles.btnText}>새로운 교환일기 작성</Text>
-            </Button>
+   
             
-            <View>
+            
+            <View style={{flex: 1}}>
               <HStack style={{justifyContent: 'center'}}>
-                <Button onPress={() => receivedDm()} style={[styles.btnMini, {borderRightColor: 'white', borderRightWidth: 1}]}>
+              <TouchableOpacity onPress={() => receivedDm()} style={[styles.btnMini, {borderRightColor: 'white', borderRightWidth: 1}]}>
                   <Text style={styles.btnText}>받은 DM</Text>
-                </Button>
-                <Button onPress={() => sentDm()} style={styles.btnMini}>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => sentDm()} style={styles.btnMini}>
                   <Text style={styles.btnText}>보낸 DM</Text>
-                </Button>
+                </TouchableOpacity>
               </HStack>
               <DmListReadView/>
+              <TouchableOpacity onPress={() => props.navigation.navigate('DmWrite',{
+                    userName: partner
+                }) 
+              }
+                style={styles.btnNew}>
+              <Text style={styles.btnText}>새로운 교환일기 작성</Text>
+            </TouchableOpacity>
             </View>
             <ModalView/>
+            <View>
+            </View>
         </View>
         
     )
@@ -218,19 +233,28 @@ const CustomCarousel = () => {
 const styles = StyleSheet.create({
   btnNew: {
     backgroundColor: '#27ae60',
-    borderRadius: 0,
+    borderRadius: 8,
     borderBottomColor: 'white',
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
+    marginLeft:20,
+    marginRight:20,
+    margin:10,
+    alignItems: 'center',
+    height:40,
+    padding:1
   },
   btnMini: {
     backgroundColor: '#27ae60',
     borderRadius: 0,
     width: '50%',
-    marginBottom: 10
+    marginBottom: 10,
+    padding:3
   },
   btnText: {
     color: 'white',
-    fontSize: 15
+    fontSize: 15,
+    padding:8,
+    textAlign: 'center',
   },
 })
 

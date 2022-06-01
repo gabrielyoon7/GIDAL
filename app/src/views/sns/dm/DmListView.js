@@ -23,15 +23,16 @@ const DmListView = (props) => {
     const [followers, setFollowers] = useState([]);
     const isFocused = useIsFocused(); // isFoucesd Define
     const [writer, setWriter] = useState(props.userName);
+    const [currentUser, setCurrentUser] = useState(partner);
     const [button, setbutton] = useState(false);
 
-
-    useEffect(() => {
+    React.useEffect(() => {
       AsyncStorage.getItem('userInfo')
           .then(value => {
               if (value != null) {
                 const UserInfo = JSON.parse(value);
                 setUserId(UserInfo[0].user_id);
+                // getUserDmData()
                 setReceivedDmList(UserInfo[0].receivedDm)
                 setSentDmList(UserInfo[0].sentDm)
                 setDmData(UserInfo[0].receivedDm)
@@ -43,24 +44,30 @@ const DmListView = (props) => {
 
   useEffect(()=>{
    getUserDmData()
-},[props])
+},[isFocused])
 
 const getUserDmData = () => {
-  axios.post(config.ip + ':5000/usersRouter/findOne', {
-    data: {
-      user_id: partner,
-    }
-  }).then((response) => {
-    setProfileImg(response.data.profile_image)
-}).catch(function (error) {
-  console.log(error);
-});
+    axios.post(config.ip + ':5000/usersRouter/findOne', {
+      data: {
+        user_id: user_Id,
+      }
+    }).then((response) => {
+      // console.log(response.data[0].receivedDm);
+      setReceivedDmList(response.data[0].receivedDm)
+      setSentDmList(response.data[0].sentDm)
+      setDmData(response.data[0].receivedDm)
+      setProfileImg(response.data[0].profile_image);
+      setFollowers(response.data[0].follower);
+  }).catch(function (error) {
+    console.log(error);
+  });
 }
 
 const filteredPersonsId = dmData.filter( item => (item.opponent_id == props.userName ))
 
 // console.log(dmData);
-console.log(filteredPersonsId);
+// console.log('==============================');
+// console.log(filteredPersonsId);
 
      const hideModal = () => {
       setModal(false);
@@ -76,7 +83,7 @@ console.log(filteredPersonsId);
     const touchButtont = () => {
       setbutton(true)
     }
-  const 
+  const
   DmListReadView = () => {
     // const renderItem = useCallback(({ item, index }) => (
     //   <TouchableOpacity onPress={() => showDMList()}>
@@ -102,6 +109,10 @@ console.log(filteredPersonsId);
     // ), []);
     const renderItem = ({ item }) => {
       return (
+        // <View>
+        //   <Text>{writer}</Text>
+        //   <Text>{item.title}</Text>
+        // </View>
           <FancyDMCard
               item={item}
               user_id={user_Id}
@@ -140,70 +151,78 @@ console.log(filteredPersonsId);
   const receivedDm = () => {
     setDmData(receivedDmList)
     setWriter(partner)
+    // setCurrentUser(partner)
   }
 
   const sentDm = () => {
+    // console.log(dmData);
     setDmData(sentDmList)
     setWriter(user_Id)
+    // setCurrentUser(user_Id)
   }
 
-const ModalView = () => {
-    return (
-        <Modal isOpen={modal} onClose={() => hideModal()}>
-        <Modal.Content maxWidth="400px">
-          <Modal.CloseButton />
-          <Modal.Header>교환일기</Modal.Header>
-          <Modal.Body>
-          <CustomCarousel />
-          </Modal.Body>
-          <Modal.Footer>
-            
-          </Modal.Footer>
-        </Modal.Content>
-      </Modal> 
-    )
-}
+// const ModalView = () => {
+//     return (
+//         <Modal isOpen={modal} onClose={() => hideModal()}>
+//         <Modal.Content maxWidth="400px">
+//           <Modal.CloseButton />
+//           <Modal.Header>교환일기</Modal.Header>
+//           <Modal.Body>
+//           <CustomCarousel />
+//           </Modal.Body>
+//           <Modal.Footer>
 
-const CustomCarousel = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [carouselItems, setCarouselItems] = useState(filteredPersonsId);
-  const ref = useRef(null);
+//           </Modal.Footer>
+//         </Modal.Content>
+//       </Modal>
+//     )
+// }
 
-    const renderItem = useCallback(({ item, index }) => (
-      <View>
-          {item.opponent_id == props.userName &&
-      <View style={{ backgroundColor: 'orange', marginTop: 20, borderRadius: 10, flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text style={{ fontSize: 20, fontWeight: 'bold', margin: 10 }}>{item.title}</Text>
-        <View style={{ justifyContent: 'center', flexDirection : "column" }} >
-        <Text>{item.content}</Text>
-        <Text>{(item.date).split('T')[0]}</Text>
-      </View>
-      </View>
-      }
-    </View>
-    ), []);
-    
-  return (
-      <View>
-        <Carousel
-          layout="default"
-          ref={ref}
-          data={carouselItems}
-          sliderWidth={250}
-          itemWidth={250}
-          renderItem={renderItem}
-          onSnapToItem={(index) => setActiveIndex(index)}
-        />
-      </View>
-  );
-};
+// const CustomCarousel = () => {
+//   const [activeIndex, setActiveIndex] = useState(0);
+//   const [carouselItems, setCarouselItems] = useState(filteredPersonsId);
+//   const ref = useRef(null);
+
+//     const renderItem = useCallback(({ item, index }) => (
+//       <View>
+//           {item.opponent_id == props.userName &&
+//       <View style={{ backgroundColor: 'orange', marginTop: 20, borderRadius: 10, flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+//       <Text style={{ fontSize: 20, fontWeight: 'bold', margin: 10 }}>{item.title}</Text>
+//         <View style={{ justifyContent: 'center', flexDirection : "column" }} >
+//         <Text>{item.content}</Text>
+//         <Text>{(item.date).split('T')[0]}</Text>
+//       </View>
+//       </View>
+//       }
+//     </View>
+//     ), []);
+
+//   return (
+//       <View>
+//         <Carousel
+//           layout="default"
+//           ref={ref}
+//           data={carouselItems}
+//           sliderWidth={250}
+//           itemWidth={250}
+//           renderItem={renderItem}
+//           onSnapToItem={(index) => setActiveIndex(index)}
+//         />
+//       </View>
+//   );
+// };
     return(
         
      <View backgroundColor='white' style={{flex: 1}}>
       <BackButton navigation={props.navigation} />
-   
+        <Button
+                title="새로운 교환일기 작성"
+                onPress={() => props.navigation.navigate('DmWrite',{
+                    userName: partner
+                })}
+            />
             
-            
+
             <View style={{flex: 1}}>
               <HStack style={{justifyContent: 'center'}}>
               <TouchableOpacity onPress={() => receivedDm()} style={[styles.btnMini, {borderRightColor: 'white', borderRightWidth: 1}]}>
@@ -216,15 +235,15 @@ const CustomCarousel = () => {
               <DmListReadView/>
               <TouchableOpacity onPress={() => props.navigation.navigate('DmWrite',{
                     userName: partner
-                }) 
+                })
               }
                 style={styles.btnNew}>
               <Text style={styles.btnText}>새로운 교환일기 작성</Text>
             </TouchableOpacity>
             </View>
-            <ModalView/>
             <View>
             </View>
+            {/* <ModalView/> */}
         </View>
         
     )

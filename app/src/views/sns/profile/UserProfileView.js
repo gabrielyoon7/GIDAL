@@ -107,10 +107,20 @@ export default function UserProfileView(props) {
     // console.log(currentId);
     if (objectFollowing.includes(currentId)) {
       // console.log("이미 팔로우 되어있음")
-      setFollowText(<Feather name="check" size={20} color="green" />)
+      setFollowText(
+        <HStack>
+          <Feather name="check" size={20} color="green" />
+          <Text style={{alignSelf: 'center', marginHorizontal: 9, fontSize: 15, color: 'green'}}>팔로잉</Text>
+        </HStack>
+      )
     } else {
       // console.log("아직 팔로우 안되어있음")
-      setFollowText(<Ionicons name="person-add" size={19} color="green" />)
+      setFollowText(
+        <HStack>
+          <Ionicons name="person-add" size={19} color="green" />
+          <Text style={{alignSelf: 'center', marginHorizontal: 9, fontSize: 15, color: 'green'}}>팔로우</Text>
+        </HStack>
+      )
     }
   }, [userFollower])
 
@@ -212,7 +222,7 @@ export default function UserProfileView(props) {
     return (
       <HStack justifyContent={'center'} >
           <Button mt="1" mr="3" onPress={() => follow()} colorScheme="yellow" style={styles.followButton}>
-            <Text>{followText}</Text>
+            {followText}
           </Button>
           <Button mt="1" mr="3" style={styles.followButton}   onPress={
               () => props.navigation.navigate('Profile', {
@@ -223,7 +233,10 @@ export default function UserProfileView(props) {
                 }
               })
             }>
-            <Text><AntDesign name="message1" size={20} color="green" /></Text>
+            <HStack>
+              <AntDesign name="message1" size={20} color="green" />
+              <Text style={{alignSelf: 'center', marginHorizontal: 9, fontSize: 15, color: 'green'}}>교환일기</Text>
+            </HStack>
           </Button>
       </HStack>
     )

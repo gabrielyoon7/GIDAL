@@ -54,10 +54,13 @@ const PickModal = ({user_Id, profileImg, changeProfile}) => {
   {/* <Image style={styles.avatar} source={{ uri: image }} /> */}
   {/* <Button title="프로필 수정"  onPress={() => setShowModal(true)}>프로필 수정</Button> */}
   <TouchableOpacity onPress={() => setShowModal(true)}>
-    <Text>
-        <Icon name="edit" size={20} color="green" />
-    </Text>
-      </TouchableOpacity>
+    <HStack>
+      <Text>
+          <Icon name="edit" size={20} color="green" />
+      </Text>
+      <Text style={{alignSelf: 'center', marginHorizontal: 9, fontSize: 15, color: 'green'}}>프로필 수정</Text>
+    </HStack>
+  </TouchableOpacity>
   {/* </TouchableOpacity> */}
       <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
         <Modal.Content maxWidth="450px">

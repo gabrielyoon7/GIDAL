@@ -193,10 +193,12 @@ export default function UserProfileView(props) {
       <HStack justifyContent={'center'}>
         <ImagePicker user_Id={user_Id} profileImg={profileImg} changeProfile={changeProfile}/>
         <Button mt="1" mr="3" style={styles.followButton}>
+          <HStack>
             <Text><AntDesign name="plus" size={20} color="green" /></Text>
-          </Button>
+            <Text style={{alignSelf: 'center', marginHorizontal: 5, fontSize: 15, color: 'green'}}>새 일기 작성</Text>
+          </HStack>
+        </Button>
       </HStack>
-
     )
   }
 

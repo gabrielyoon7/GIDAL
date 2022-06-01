@@ -9,8 +9,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused } from '@react-navigation/native';
 import BackButton from '../../../components/common/BackButton'
 import FancyDMCard from '../../../components/dm/FancyDMCard';
-import { Fab, Icon, useToast } from "native-base";
-import { AntDesign } from "@expo/vector-icons";
 
 const DmListView = (props) => {
     const partner = props.userName;
@@ -25,6 +23,10 @@ const DmListView = (props) => {
     const [writer, setWriter] = useState(props.userName);
     const [currentUser, setCurrentUser] = useState(partner);
     const [button, setbutton] = useState(false);
+    const [receivedBtnColor, setReceivedBtnColor] = useState("green")
+    const [sentBtnColor, setSentBtnColor] = useState("white")
+    const [receivedTextColor, setReceivedTextColor] = useState("green")
+    const [sentTextColor, setSentTextColor] = useState("white")
 
     React.useEffect(() => {
       AsyncStorage.getItem('userInfo')
@@ -152,6 +154,10 @@ const filteredPersonsId = dmData.filter( item => (item.opponent_id == props.user
     setDmData(receivedDmList)
     setWriter(partner)
     // setCurrentUser(partner)
+    setReceivedBtnColor('green')
+    setReceivedTextColor('white')
+    setSentBtnColor('white')
+    setSentTextColor('green')
   }
 
   const sentDm = () => {
@@ -159,77 +165,30 @@ const filteredPersonsId = dmData.filter( item => (item.opponent_id == props.user
     setDmData(sentDmList)
     setWriter(user_Id)
     // setCurrentUser(user_Id)
+    setReceivedBtnColor('white')
+    setReceivedTextColor('green')
+    setSentBtnColor('green')
+    setSentTextColor('white')
   }
 
-// const ModalView = () => {
-//     return (
-//         <Modal isOpen={modal} onClose={() => hideModal()}>
-//         <Modal.Content maxWidth="400px">
-//           <Modal.CloseButton />
-//           <Modal.Header>교환일기</Modal.Header>
-//           <Modal.Body>
-//           <CustomCarousel />
-//           </Modal.Body>
-//           <Modal.Footer>
-
-//           </Modal.Footer>
-//         </Modal.Content>
-//       </Modal>
-//     )
-// }
-
-// const CustomCarousel = () => {
-//   const [activeIndex, setActiveIndex] = useState(0);
-//   const [carouselItems, setCarouselItems] = useState(filteredPersonsId);
-//   const ref = useRef(null);
-
-//     const renderItem = useCallback(({ item, index }) => (
-//       <View>
-//           {item.opponent_id == props.userName &&
-//       <View style={{ backgroundColor: 'orange', marginTop: 20, borderRadius: 10, flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-//       <Text style={{ fontSize: 20, fontWeight: 'bold', margin: 10 }}>{item.title}</Text>
-//         <View style={{ justifyContent: 'center', flexDirection : "column" }} >
-//         <Text>{item.content}</Text>
-//         <Text>{(item.date).split('T')[0]}</Text>
-//       </View>
-//       </View>
-//       }
-//     </View>
-//     ), []);
-
-//   return (
-//       <View>
-//         <Carousel
-//           layout="default"
-//           ref={ref}
-//           data={carouselItems}
-//           sliderWidth={250}
-//           itemWidth={250}
-//           renderItem={renderItem}
-//           onSnapToItem={(index) => setActiveIndex(index)}
-//         />
-//       </View>
-//   );
-// };
     return(
-        
      <View backgroundColor='white' style={{flex: 1}}>
       <BackButton navigation={props.navigation} />
-        <Button
+        {/* <Button
                 title="새로운 교환일기 작성"
                 onPress={() => props.navigation.navigate('DmWrite',{
                     userName: partner
                 })}
-            />
+            /> */}
             
 
             <View style={{flex: 1}}>
               <HStack style={{justifyContent: 'center'}}>
-              <TouchableOpacity onPress={() => receivedDm()} style={[styles.btnMini, {borderRightColor: 'white', borderRightWidth: 1}]}>
-                  <Text style={styles.btnText}>받은 DM</Text>
+              <TouchableOpacity onPress={() => receivedDm()} style={[styles.btnMini, {borderRightColor: 'white', borderRightWidth: 1, backgroundColor: receivedBtnColor}]}>
+                  <Text style={[styles.btnText, {color:  receivedTextColor}]}>받은 DM</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => sentDm()} style={styles.btnMini}>
-                  <Text style={styles.btnText}>보낸 DM</Text>
+                <TouchableOpacity onPress={() => sentDm()} style={[styles.btnMini, {borderRightColor: 'white', borderRightWidth: 1, backgroundColor: sentBtnColor}]}>
+                  <Text style={[styles.btnText, {color: sentTextColor}]}>보낸 DM</Text>
                 </TouchableOpacity>
               </HStack>
               <DmListReadView/>
@@ -263,14 +222,14 @@ const styles = StyleSheet.create({
     padding:1
   },
   btnMini: {
-    backgroundColor: '#27ae60',
+    // backgroundColor: '#27ae60',
     borderRadius: 0,
     width: '50%',
     marginBottom: 10,
     padding:3
   },
   btnText: {
-    color: 'white',
+    // color: 'white',
     fontSize: 15,
     padding:8,
     textAlign: 'center',

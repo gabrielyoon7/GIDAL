@@ -172,6 +172,16 @@ const filteredPersonsId = dmData.filter( item => (item.opponent_id == props.user
     setSentTextColor('white')
   }
 
+  const writePage = () => {
+    setReceivedBtnColor('green')
+    setReceivedTextColor('white')
+    setSentBtnColor('white')
+    setSentTextColor('green')
+    props.navigation.navigate('DmWrite',{
+      userName: partner
+  })
+  }
+
     return(
      <View backgroundColor='white' style={{flex: 1}}>
       <BackButton navigation={props.navigation} />
@@ -193,9 +203,14 @@ const filteredPersonsId = dmData.filter( item => (item.opponent_id == props.user
                 </TouchableOpacity>
               </HStack>
               <DmListReadView/>
-              <TouchableOpacity onPress={() => props.navigation.navigate('DmWrite',{
+              {/* <TouchableOpacity onPress={() => props.navigation.navigate('DmWrite',{
                     userName: partner
                 })
+              }
+                style={styles.btnNew}>
+              <Text style={styles.btnText}>새로운 교환일기 작성</Text>
+            </TouchableOpacity> */}
+            <TouchableOpacity onPress={() => writePage()
               }
                 style={styles.btnNew}>
               <Text style={styles.btnText}>새로운 교환일기 작성</Text>

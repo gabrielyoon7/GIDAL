@@ -104,7 +104,7 @@ const TodoStatisticsView = (props) => {
     }
 
     return (
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, backgroundColor: 'white' }}>
             <BackButton navigation={props.navigation} />
             <ScrollView>
                 <WelcomeCard title={"할 일"} content={'계획한 목표를 많이 달성하셨나요?'} />

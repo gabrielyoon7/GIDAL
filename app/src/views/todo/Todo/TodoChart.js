@@ -10,7 +10,7 @@ export default function TodoChart(props) {
 
     const RenderLegend = (props) => {
         return (
-            <View style={{ flexDirection: 'row', marginBottom: 12 }}>
+            <View style={{ flexDirection: 'row', marginBottom: 12,  }}>
                 <View
                     style={{
                         height: 18,
@@ -53,7 +53,7 @@ export default function TodoChart(props) {
                     strokeWidth={4}
                     donut={true}
                     data={data}
-                    innerCircleColor="#E8D9FF"
+                    innerCircleColor="#f7d2fa"
                     innerCircleBorderWidth={4}
                     innerCircleBorderColor={'white'}
                     showValuesAsLabels={true}
@@ -67,13 +67,14 @@ export default function TodoChart(props) {
     }
 
     return (
-        <View>
+        <View >
             <View
                 style={{
                     marginVertical: 10,
                     borderRadius: 10,
+                    padding:10,
                     // paddingVertical: 30,
-                    backgroundColor: '#E8D9FF',
+                    backgroundColor: '#f7d2fa',
                     justifyContent: 'center',
                     alignItems: 'center',
                 }}>

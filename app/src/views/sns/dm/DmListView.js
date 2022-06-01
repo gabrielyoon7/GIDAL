@@ -24,9 +24,10 @@ const DmListView = (props) => {
     const [currentUser, setCurrentUser] = useState(partner);
     const [button, setbutton] = useState(false);
     const [receivedBtnColor, setReceivedBtnColor] = useState("green")
+    const [receivedTextColor, setReceivedTextColor] = useState("white")
     const [sentBtnColor, setSentBtnColor] = useState("white")
-    const [receivedTextColor, setReceivedTextColor] = useState("green")
-    const [sentTextColor, setSentTextColor] = useState("white")
+
+    const [sentTextColor, setSentTextColor] = useState("green")
 
     React.useEffect(() => {
       AsyncStorage.getItem('userInfo')

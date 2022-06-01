@@ -202,9 +202,9 @@ const Todo = ({ props }) => { // 진짜
     return (
       <HStack style={{ backgroundColor: "white" }}>
         <TouchableOpacity onPress={() => showDatePicker()}>
-          <Heading style={styles.heading}>{date}의 할 일</Heading>
+          <Heading style={styles.heading}>{date}의 할 일 <AntDesign name="down" size={20} color="black" style={{alignSelf: 'center', left: -13}}/></Heading>
         </TouchableOpacity>
-        <AntDesign name="check" size={20} color="black" style={{alignSelf: 'center', left: -13}}/>
+        
         <Spacer />
         <Box style={styles.heading}>
 

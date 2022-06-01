@@ -4,6 +4,7 @@ import axios from 'axios';
 import { config } from '../../../../config'
 import FancyDiaryCard from '../../../components/diary/FancyDiaryCard';
 import LoadingSpinner from '../../../components/common/LoadingSpinner';
+import { Center } from 'native-base';
 
 
 const DiaryList = (props, navigation) => {
@@ -35,7 +36,7 @@ const DiaryList = (props, navigation) => {
 
     //첫 렌더링에만 호출됨
     useEffect(() => {
-        if(props.type === 'calendar'){
+        if (props.type === 'calendar') {
             props.getitems();
         } else {
             getItems();
@@ -57,15 +58,15 @@ const DiaryList = (props, navigation) => {
         } else {
             ref.scrollToIndex({ animated: true, index: index, viewPosition: 0 });
         }
-    },[props.selectedDate]);
+    }, [props.selectedDate]);
 
     const pressCommentIcon = (item) => {
         props.navigation.navigate('DiaryComment'
-        , {
-            diary: item,
-            user_id: user_id,
-            // profileImg: profileImg,
-        }
+            , {
+                diary: item,
+                user_id: user_id,
+                // profileImg: profileImg,
+            }
         )
     }
 
@@ -91,31 +92,36 @@ const DiaryList = (props, navigation) => {
             />
         );
     };
-    
+
     const windowHeight = Dimensions.get('window').height;
     const windowWidth = Dimensions.get('window').width;
-    const numOfCol=windowWidth>700?2:1;
+    const numOfCol = windowWidth > 700 ? 2 : 1;
 
     return (
         <View style={styles.container}>
             {isLoaded
                 ?
-                <FlatList
-                    onScrollToIndexFailed={info => {
-                        const wait = new Promise(resolve => setTimeout(resolve, 700));
-                        wait.then(() => {
-                            fListRef.current?.scrollToIndex({ index: info.index, animated: true / false });
-                        });
-                    }}
-                    data={props.items}
-                    ref={(ref) => {
-                        setRef(ref);
-                    }}
-                    renderItem={renderItem}
-                    keyExtractor={(item) => item._id}
-                    numColumns={numOfCol}
-                // extraData={selectedId}
-                />
+                props.items.length > 0
+                    ?
+                    <FlatList
+                        onScrollToIndexFailed={info => {
+                            const wait = new Promise(resolve => setTimeout(resolve, 700));
+                            wait.then(() => {
+                                fListRef.current?.scrollToIndex({ index: info.index, animated: true / false });
+                            });
+                        }}
+                        data={props.items}
+                        ref={(ref) => {
+                            setRef(ref);
+                        }}
+                        renderItem={renderItem}
+                        keyExtractor={(item) => item._id}
+                        numColumns={numOfCol}
+                    />
+                    :
+                    <Center>
+                        <Text>이번 달에 작성된 일기가 없습니다.</Text>
+                    </Center>
                 :
                 <LoadingSpinner />
             }

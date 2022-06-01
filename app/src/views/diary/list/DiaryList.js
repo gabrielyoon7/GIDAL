@@ -5,7 +5,7 @@ import { config } from '../../../../config'
 import FancyDiaryCard from '../../../components/diary/FancyDiaryCard';
 import LoadingSpinner from '../../../components/common/LoadingSpinner';
 import { Center } from 'native-base';
-
+import { useIsFocused } from '@react-navigation/native';
 
 const DiaryList = (props, navigation) => {
     const user_id = props.user_Id;
@@ -33,6 +33,7 @@ const DiaryList = (props, navigation) => {
     const [data, setData] = useState(0);
     const [selectedId, setSelectedId] = useState(null);
     const [ref, setRef] = useState(null);
+    const isFocused = useIsFocused(); // isFoucesd Define
 
     //첫 렌더링에만 호출됨
     useEffect(() => {
@@ -42,7 +43,7 @@ const DiaryList = (props, navigation) => {
             getItems();
         }
         setIsLoaded(true);
-    }, [user_id]);
+    }, [isFocused, user_id]);
 
     useEffect(() => {
         let index = props.items.findIndex((item, idx) => {

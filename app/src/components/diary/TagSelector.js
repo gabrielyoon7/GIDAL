@@ -1,6 +1,8 @@
 import { View } from "native-base";
 import { useCallback, useEffect, useRef, useState } from "react";
-import Carousel, { ParallaxImage } from 'react-native-snap-carousel'; import { config } from "../../../config";
+// import Carousel, { ParallaxImage } from 'react-native-snap-carousel';
+import Carousel from 'react-native-snap-carousel';
+import { config } from "../../../config";
 import TagCard from "../tag/TagCard";
 // import { TagDataExample } from "./TagDataExample";
 import axios from 'axios';
@@ -30,15 +32,16 @@ const TagSelector = (props) => {
       })
   }
 
-  const renderItem = useCallback(({ item, index }, parallaxProps) => (
+  // const renderItem = useCallback(({ item, index }, parallaxProps) => (
+    const renderItem = useCallback(({ item, index }) => (
     <View>
-      <ParallaxImage
+      {/* <ParallaxImage
         source={{ uri: item.thumbnail }}
         containerStyle={styles.imageContainer}
         style={styles.image}
         parallaxFactor={0.4}
         {...parallaxProps}
-      />
+      /> */}
       <TagCard item={item} selectTags={props.selectTags} tags={props.tags} />
     </View>
 
@@ -56,7 +59,7 @@ const TagSelector = (props) => {
         itemWidth={350}
         renderItem={renderItem}
         onSnapToItem={(index) => setActiveIndex(index)}
-        hasParallaxImages={true}
+        // hasParallaxImages={true}
       />
     </View>
   );

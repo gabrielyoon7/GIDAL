@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
-import { Button, FlatList, View, StyleSheet, Text, TouchableOpacity, RefreshControl } from 'react-native';
-import {Modal, HStack} from 'native-base'
+import { FlatList, View, StyleSheet, Text, TouchableOpacity, RefreshControl } from 'react-native';
+import { Button, Modal, HStack } from 'native-base'
 import { Card, CardTitle, CardContent, CardAction, CardButton } from 'react-native-material-cards'
 import Carousel from 'react-native-snap-carousel';
 import axios from 'axios'
@@ -66,7 +66,8 @@ console.log(filteredPersonsId);
         setModal(true)
     }
 
-  const DmListReadView = () => {
+  const 
+  DmListReadView = () => {
     // const renderItem = useCallback(({ item, index }) => (
     //   <TouchableOpacity onPress={() => showDMList()}>
     //   {item.opponent_id == props.userName &&
@@ -120,7 +121,8 @@ console.log(filteredPersonsId);
                 keyExtractor= {(item) => {
                   return item._id;
                 }}
-                renderItem={renderItem}/>
+                renderItem={renderItem}
+                />
     )
   }
 
@@ -186,20 +188,24 @@ const CustomCarousel = () => {
 };
     return(
         
-     <View>
+     <View backgroundColor='white'>
       <BackButton navigation={props.navigation} />
-        <Button
-                title="새로운 교환일기 작성"
-                onPress={() => props.navigation.navigate('DmWrite',{
+            <Button onPress={() => props.navigation.navigate('DmWrite',{
                     userName: partner
                 })}
-            />
+                style={styles.btnNew}>
+              <Text style={styles.btnText}>새로운 교환일기 작성</Text>
+            </Button>
             
             <View>
-            <HStack>
-            <Button title='받은 DM' onPress={() => receivedDm()}/>
-            <Button title='보낸 DM' onPress={() => sentDm()} />
-            </HStack>
+              <HStack style={{justifyContent: 'center'}}>
+                <Button onPress={() => receivedDm()} style={[styles.btnMini, {borderRightColor: 'white', borderRightWidth: 1}]}>
+                  <Text style={styles.btnText}>받은 DM</Text>
+                </Button>
+                <Button onPress={() => sentDm()} style={styles.btnMini}>
+                  <Text style={styles.btnText}>보낸 DM</Text>
+                </Button>
+              </HStack>
               <DmListReadView/>
             </View>
             <ModalView/>
@@ -207,5 +213,24 @@ const CustomCarousel = () => {
         
     )
 }
+
+const styles = StyleSheet.create({
+  btnNew: {
+    backgroundColor: '#27ae60',
+    borderRadius: 0,
+    borderBottomColor: 'white',
+    borderBottomWidth: 1
+  },
+  btnMini: {
+    backgroundColor: '#27ae60',
+    borderRadius: 0,
+    width: '50%',
+    marginBottom: 10
+  },
+  btnText: {
+    color: 'white',
+    fontSize: 15
+  },
+})
 
 export default DmListView;

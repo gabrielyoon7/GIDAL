@@ -78,7 +78,7 @@ const DiaryListView = (props) => {
                 });
             }
             setItems(result);
-            // console.log(result);
+            console.log(result);
         }).catch(function (error) {
             console.log(error);
         })
@@ -98,8 +98,7 @@ const DiaryListView = (props) => {
     }
     return (
         <>
-            <CalendarView selectedDate={date} setSelectedDate={setSelectedDate} markedDates={markedDates} getitems={getitems} />
-            {/* <DiaryList selectedDate={date} navigation={props.navigation} user_Id={user_Id} items={items} getitems={getitems} type={'calendar'} profileImg={profileImg}/> */}
+            <CalendarView selectedDate={date} setSelectedDate={setSelectedDate} markedDates={markedDates} getitems={getitems} items={items}/>
             <DiaryList selectedDate={date} navigation={props.navigation} user_Id={user_Id} items={items} getitems={getitems} type={'calendar'} profileImg={profileImg} />
             <Fab
                 renderInPortal={false}

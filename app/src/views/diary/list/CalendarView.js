@@ -7,14 +7,6 @@ const CalendarView = (props) => {
     const toast = useToast();
     const id = "calender-select-toast";
     const [month, setMonth] = useState(props.date);
-    // const [markedDates, setMarkedDates] = useState({
-    //     [props.selectedDate]: {
-    //         selected: true,
-    //         disableTouchEvent: true,
-    //         selectedColor: 'yellowgreen',
-    //         // selectedTextColor: '#7954FA',
-    //     },
-    // })
 
     const changeDate = (date) => {
         props.setSelectedDate(date.dateString);
@@ -37,7 +29,6 @@ const CalendarView = (props) => {
 
     return (
         <View style={{ height: 310 }}>
-            {/* <View style={{ flex: 0.7 }}> */}
             <Calendar
                 onDayPress={(date) => changeDate(date)}
                 markedDates={props.markedDates}
@@ -45,7 +36,6 @@ const CalendarView = (props) => {
                 onMonthChange={(month) => monthChanged(month)}
                 enableSwipeMonths={true}
             />
-            {/* <Agenda /> */}
         </View>
     );
 }

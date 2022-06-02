@@ -56,7 +56,7 @@ export default function FollowListView(props) {
   }, [])
 
   useEffect(() => {
-    if(user_Id === ''){
+    if (user_Id === '') {
       return;
     }
     axios.post(config.ip + ':5000/usersRouter/findOne/', {
@@ -81,7 +81,7 @@ export default function FollowListView(props) {
   useEffect(() => {
     let data = followers;
     // init_page == 'Following' ? data = followings : data = followers;
-    if(init_page === 'Following'){
+    if (init_page === 'Following') {
       data = followings;
       setIndex(1);
     }
@@ -126,24 +126,24 @@ export default function FollowListView(props) {
   console.log(filteredDataSource);
   const Followings = () => {
     return (
-        <View style={styles.body} >
-          <FlatList
-            enableEmptySections={true}
-            data={filteredDataSource}
-            keyExtractor={(item) => {
-              return item.user_id;
-            }}
-            renderItem={({ item }) => {
-              return (
-                <TouchableOpacity onPress={() => selectOther(item)} >
-                  <View style={styles.box} > 
-                    <Image style={styles.image} source={{ uri: item.img }} />
-                    <Text style={styles.username}>{item.name}</Text>
-                  </View>
-                </TouchableOpacity>
-              )
-            }} />
-        </View>
+      <View style={styles.body} >
+        <FlatList
+          enableEmptySections={true}
+          data={filteredDataSource}
+          keyExtractor={(item) => {
+            return item.user_id;
+          }}
+          renderItem={({ item }) => {
+            return (
+              <TouchableOpacity onPress={() => selectOther(item)} >
+                <View style={styles.box} >
+                  <Image style={styles.image} source={{ uri: item.img }} />
+                  <Text style={styles.username}>{item.name}</Text>
+                </View>
+              </TouchableOpacity>
+            )
+          }} />
+      </View>
     )
   }
 
@@ -152,7 +152,6 @@ export default function FollowListView(props) {
     if (isFocused) {
       // the screen is currently focused
       // your code here
-      // console.log('Following is focused');
     }
     return (
       <Followings navigation={props.navigation} />
@@ -165,7 +164,6 @@ export default function FollowListView(props) {
     if (isFocused) {
       // the screen is currently focused
       // your code here
-      // console.log('Follower is focused');
     }
     return (
       <Followings navigation={props.navigation} />
@@ -226,19 +224,19 @@ export default function FollowListView(props) {
     // if(init_page === 'Followeing'){
     //   setIndex(1)
     // }
-    if(id === 1){
+    if (id === 1) {
       setFilteredDataSource(followings);
-    }else{
+    } else {
       setFilteredDataSource(followers);
     }
     setIndex(id);
   }
- 
+
   return (
     <>
-    <View style={{backgroundColor:'white'}}>
+      <View style={{ backgroundColor: 'white' }}>
 
-      <BackButton navigation={props.navigation}  style={{backgroundColor:'FFFFFF' }}/>
+        <BackButton navigation={props.navigation} style={{ backgroundColor: 'FFFFFF' }} />
         <SearchBar
           style={styles.searchbar}
           round
@@ -249,14 +247,14 @@ export default function FollowListView(props) {
           value={search}
 
         />
-</View>
+      </View>
 
       <TabView
-       backgroundColor= "white"
+        backgroundColor="white"
         tabBarPosition='bottom'
         navigationState={{ index, routes }}
         renderScene={renderScene}
-        onIndexChange={(id) => {setPage(id)}}
+        onIndexChange={(id) => { setPage(id) }}
         initialLayout={initialLayout}
         renderTabBar={renderTabBar}
         style={styles.container}
@@ -291,7 +289,7 @@ export default function FollowListView(props) {
           }}
         />
       </Tab.Navigator> */}
-     
+
     </>
     // <View style={styles.container} >
     //   <BackButton navigation={props.navigation} />
@@ -323,7 +321,7 @@ const styles = StyleSheet.create({
   },
   body: {
     padding: 15,
-    
+
 
   },
   flatListStyle: {
@@ -335,11 +333,11 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     backgroundColor: 'white', //리스트 카드 색
     flexDirection: 'row',
-    shadow:3,
+    shadow: 3,
     borderRadius: 8,
     elevation: 3,
-    borderWidth:1,
-    borderColor:"#d1d2d1",
+    borderWidth: 1,
+    borderColor: "#d1d2d1",
   },
   username: {
     color: "black",

@@ -39,27 +39,27 @@ const DiaryListView = (props) => {
         } catch (error) {
             console.log(error);
         }
-    },[isFocused])
+    }, [isFocused])
 
     React.useEffect(() => {
         let val = {};
         let isSelected = false;
         items.forEach(item => {
             const itemDate = item.date.split('T')[0]
-            if(itemDate === date){
-                val[itemDate] = {marked: true, selected: true,disableTouchEvent: true,selectedColor: 'yellowgreen',}
+            if (itemDate === date) {
+                val[itemDate] = { marked: true, selected: true, disableTouchEvent: true, selectedColor: 'yellowgreen', }
                 isSelected = true
             }
             else {
-                val[itemDate] = {marked: true}
+                val[itemDate] = { marked: true }
             }
         });
-        if(!isSelected){
-            val[date] = ({selected: true, disableTouchEvent: true, selectedColor: 'yellowgreen'})
- 
+        if (!isSelected) {
+            val[date] = ({ selected: true, disableTouchEvent: true, selectedColor: 'yellowgreen' })
+
         }
         setMarkedDates(val)
-    },[items, date])
+    }, [items, date])
 
     const getitems = () => {
         let result = []
@@ -91,13 +91,11 @@ const DiaryListView = (props) => {
         props.navigation.navigate('DiaryWrite', { selectedDate: date, user_Id: user_Id })
         if (!toast.isActive(id)) {
             toast.show({
-              id,
-              title: "작성하시는 일기는 선택 일자인 "+date+"에 저장됩니다."
+                id,
+                title: "작성하시는 일기는 선택 일자인 " + date + "에 저장됩니다."
             });
         }
     }
-    // console.log('profileImg');
-    // console.log(profileImg);
     return (
         <>
             <CalendarView selectedDate={date} setSelectedDate={setSelectedDate} markedDates={markedDates} getitems={getitems} />
@@ -107,7 +105,7 @@ const DiaryListView = (props) => {
                 renderInPortal={false}
                 shadow={2}
                 size="md"
-                style={{backgroundColor:"#27ae60", }}
+                style={{ backgroundColor: "#27ae60", }}
                 icon={<Icon color="white" as={AntDesign} name="plus" size="md" />}
                 onPress={handleWriteButton}
             />

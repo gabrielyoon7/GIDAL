@@ -2,7 +2,7 @@ import { Agenda } from 'react-native-calendars';
 import { View, NativeBaseProvider, Divider } from "native-base";
 import { StyleSheet, TouchableOpacity, Text, Alert } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { AntDesign  } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 import AddTodo from '../todo/AddTodo';
 import { useIsFocused } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -23,63 +23,63 @@ const AgendaView = () => {
     React.useEffect(() => {
         // getData();
         try {
-          AsyncStorage.getItem('userInfo')
-            .then(value => {
-              if (value != null) {
-                const UserInfo = JSON.parse(value);
-                // console.log(UserInfo[0].user_id);
-                setUserId(UserInfo[0].user_id);
-              }
-            }
-            )
+            AsyncStorage.getItem('userInfo')
+                .then(value => {
+                    if (value != null) {
+                        const UserInfo = JSON.parse(value);
+                        // console.log(UserInfo[0].user_id);
+                        setUserId(UserInfo[0].user_id);
+                    }
+                }
+                )
         } catch (error) {
-          console.log(error);
+            console.log(error);
         }
-      }, [])
+    }, [])
 
     //   console.log(user_Id);
     const getItems = () => {
         let result = []
         axios.post(config.ip + ':5000/todoRouter/findOwn', {
-          data: {
-              user_id: user_Id
-          }
-      }).then((response) => {
-          if (response.data.length > 0) {
-            response.data.forEach((item) => {
-                item.to_do_list.forEach((data) => {
-                    result.push(data);
+            data: {
+                user_id: user_Id
+            }
+        }).then((response) => {
+            if (response.data.length > 0) {
+                response.data.forEach((item) => {
+                    item.to_do_list.forEach((data) => {
+                        result.push(data);
+                    });
                 });
-              });
-          }
-          setTodo(result);
-        //   console.log(result);
-      }).catch(function (error) {
-          console.log(error);
-      })
-      }
-  
-      useEffect(() => {
+            }
+            setTodo(result);
+            //   console.log(result);
+        }).catch(function (error) {
+            console.log(error);
+        })
+    }
+
+    useEffect(() => {
         getItems();
     }, [user_Id]);
-  
+
     // useEffect(() => {
-        // console.log("items:", items);
-        // if(!selectedDate){
-        //     setSelectedDate(todayDate);
-        // }
-        // console.log(new Date(selectedDate).getTime())
-        // loadItems(new Date(selectedDate).getTime())
+    // console.log("items:", items);
+    // if(!selectedDate){
+    //     setSelectedDate(todayDate);
+    // }
+    // console.log(new Date(selectedDate).getTime())
+    // loadItems(new Date(selectedDate).getTime())
     // },[items])
 
-    useEffect (() => {
+    useEffect(() => {
         let val = {};
         todo.forEach((item) => {
             val[item.date] = item.contents
         })
         setItems(val)
         // console.log(items);
-    },[todo])
+    }, [todo])
 
     const handleDelete = (item) => {
         console.log(item);
@@ -89,13 +89,13 @@ const AgendaView = () => {
                 user_id: user_Id,
                 _id: item._id
             }
-          })
+        })
             .then((response) => {
                 if (response.data.status === 'success') {
-                    console.log('to do save');
                     getItems();
-            }}).catch(function (error) {
-              console.log(error);
+                }
+            }).catch(function (error) {
+                console.log(error);
             });
     }
 
@@ -109,8 +109,8 @@ const AgendaView = () => {
             <TouchableOpacity onPress={() => handleDelete({
                 _id: item._id,
                 todo: item.name
-                })} >
-            <AntDesign name="delete" size={24} />
+            })} >
+                <AntDesign name="delete" size={24} />
             </TouchableOpacity>
         </TouchableOpacity>
     );
@@ -140,9 +140,9 @@ const AgendaView = () => {
                 val[item.date] = item.contents
             })
             for (let i = -15; i < 55; i++) {
-                const time = day + i  * 24 * 60 * 60 * 1000;
+                const time = day + i * 24 * 60 * 60 * 1000;
                 const strTime = timeToString(time);
-                if(!val[strTime]) {
+                if (!val[strTime]) {
                     val[strTime] = [];
                 }
             }
@@ -157,39 +157,39 @@ const AgendaView = () => {
 
     return (
         <NativeBaseProvider>
-        <View style={{flex: 1}}>
-            <AddTodo date={selectedDate} />
-            <Agenda
-                items={items}
-                loadItemsForMonth={(day) => loadItems(day.timestamp)}
-                selected={selectedDate}
-                renderItem={renderItem}
-                renderEmptyDate={renderEmptyDate}
-                rowHasChanged={rowHasChanged}
-                onDayPress={(day) => {setSelectedDate(day.dateString)}}
-                onDayChange={(day) => {
-                    setSelectedDate(day.dateString)
-                  }}
-            />
-        </View>
+            <View style={{ flex: 1 }}>
+                <AddTodo date={selectedDate} />
+                <Agenda
+                    items={items}
+                    loadItemsForMonth={(day) => loadItems(day.timestamp)}
+                    selected={selectedDate}
+                    renderItem={renderItem}
+                    renderEmptyDate={renderEmptyDate}
+                    rowHasChanged={rowHasChanged}
+                    onDayPress={(day) => { setSelectedDate(day.dateString) }}
+                    onDayChange={(day) => {
+                        setSelectedDate(day.dateString)
+                    }}
+                />
+            </View>
         </NativeBaseProvider>
     );
 }
 
 const styles = StyleSheet.create({
     item: {
-      backgroundColor: 'white',
-      flex: 1,
-      borderRadius: 5,
-      padding: 10,
-      marginRight: 10,
-      marginTop: 17
+        backgroundColor: 'white',
+        flex: 1,
+        borderRadius: 5,
+        padding: 10,
+        marginRight: 10,
+        marginTop: 17
     },
     emptyDate: {
-      height: 15,
-      flex: 1,
-      paddingTop: 30
+        height: 15,
+        flex: 1,
+        paddingTop: 30
     },
-  });
+});
 
 export default AgendaView;

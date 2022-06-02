@@ -53,11 +53,8 @@ const FriendsStatPreView = (props) => {
         })
             .then((response) => {
                 const following = response.data[0].following;
-                // console.log('****following****')
-                // console.log(following);
                 let followingArr = [];
                 following.map(user => followingArr.push(user.user_id));
-                // console.log(followingArr);
                 setUserFollowing(followingArr);
             }).catch(function (error) {
                 // console.log(error);
@@ -71,8 +68,6 @@ const FriendsStatPreView = (props) => {
                     question_id: props.id,
                 }
             }).then((response) => {
-                // console.log('dddddd');
-                // console.log('5', response.data[0].tags);
                 setTags(response.data[0].tags);
             }).catch(function (error) {
                 console.log(error);
@@ -89,8 +84,6 @@ const FriendsStatPreView = (props) => {
                     userFollowing: userFollowing,
                 }
             }).then((response) => {
-                // console.log('dddddd');
-                // console.log(response.data[0].statics);
                 setTagLogArr(response.data);
             }).catch(function (error) {
                 console.log(error);

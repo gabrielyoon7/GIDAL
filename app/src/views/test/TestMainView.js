@@ -7,7 +7,6 @@ import MenuButton from "../../components/test/MenuButton";
 
 
 const makeDiaryData = (mode, disclosure) => {
-  console.log('makeDiaryData')
   let user_id = 'test';
   AsyncStorage.getItem('userInfo').then(value => {
     if (value != null) {
@@ -47,36 +46,35 @@ const makeDiaryData = (mode, disclosure) => {
 
 const deleteManyDiary = (mode) => {
   let user_id = 'test';
-  AsyncStorage.getItem('userInfo').then( value =>
-    {
-      if (value != null) {
-        const UserInfo = JSON.parse(value);
-        if (!mode) {
-          user_id = UserInfo[0].user_id;
-        }
-        axios.post(config.ip + ':5000/diariesRouter/deleteMany/', {
-          data: {
-            id: user_id,
-          }
-        }).then((response) => {
-          Alert.alert(
-            "성공!",
-            user_id+"의 모든 데이터가 삭제되었습니다.",
-            [
-              {
-                text: "Cancel",
-                onPress: () => console.log("Cancel Pressed"),
-                style: "cancel"
-              },
-              { text: "OK", onPress: () => console.log("OK Pressed") }
-            ]
-          );
-          // props.navigation.pop();
-        }).catch(function (error) {
-          console.log(error);
-        })
+  AsyncStorage.getItem('userInfo').then(value => {
+    if (value != null) {
+      const UserInfo = JSON.parse(value);
+      if (!mode) {
+        user_id = UserInfo[0].user_id;
       }
+      axios.post(config.ip + ':5000/diariesRouter/deleteMany/', {
+        data: {
+          id: user_id,
+        }
+      }).then((response) => {
+        Alert.alert(
+          "성공!",
+          user_id + "의 모든 데이터가 삭제되었습니다.",
+          [
+            {
+              text: "Cancel",
+              onPress: () => console.log("Cancel Pressed"),
+              style: "cancel"
+            },
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+          ]
+        );
+        // props.navigation.pop();
+      }).catch(function (error) {
+        console.log(error);
+      })
     }
+  }
   )
 }
 

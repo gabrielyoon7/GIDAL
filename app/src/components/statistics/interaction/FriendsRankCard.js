@@ -12,23 +12,23 @@ const FriendsRankCard = (props) => {
     let result = [];
     props.tags.map((tag) => {
       const color = generateColor();
-      result.push({tagName: tag, color: color});
+      result.push({ tagName: tag, color: color });
     })
     setTags(result);
-  },[props.tags])
+  }, [props.tags])
 
   useEffect(() => {
-    if (props.tagLogArr.length !== 0 && tags.length !==0){
+    if (props.tagLogArr.length !== 0 && tags.length !== 0) {
       getData();
     }
   }, [props.tagLogArr, tags]);
 
   const generateColor = () => { //컬러 랜덤 지정
     const randomColor = Math.floor(Math.random() * 16777215)
-        .toString(16)
-        .padStart(6, '0');
+      .toString(16)
+      .padStart(6, '0');
     return `#${randomColor}`;
-};
+  };
 
   const getData = () => {
     let itemTemp = [];
@@ -43,10 +43,10 @@ const FriendsRankCard = (props) => {
       friend.statics.map((tag) => {
         color = tags.find(item => item.tagName === tag._id).color;
 
-        if(tagCount == 0 && tag.count > 0){
-          stacks.push({ value: tag.count, color: color});
+        if (tagCount == 0 && tag.count > 0) {
+          stacks.push({ value: tag.count, color: color });
         }
-        else if(tag.count > 0){
+        else if (tag.count > 0) {
           stacks.push({ value: tag.count, color: color, marginBottom: 2 });
         }
         tagCount += tag.count;
@@ -57,17 +57,16 @@ const FriendsRankCard = (props) => {
         countTemp.push(tagCount);
       }
     })
-    
+
     countTemp = Math.max.apply(null, countTemp);
     countTemp = Math.ceil(countTemp / 5);
 
     setStackData(itemTemp);
     setMaxValue(countTemp * 5);
-}
+  }
 
   return (
     <>
-      {/* {console.log('2', stackData[0].stacks)} */}
       <BarChart
         width={340}
         rotateLabel
@@ -78,18 +77,6 @@ const FriendsRankCard = (props) => {
         maxValue={maxValue}
         hideRules
       />
-      {/* {props.tagLogArr && props.tagLogArr.slice(0, 3).map((friend) => (
-                <Box my={1}>
-                    <Badge colorScheme="green" _text={{
-                        color: "white"
-                    }} variant="solid" rounded="4">
-                        {friend.id}
-                    </Badge>
-                    {friend.statistics.slice(0, 3).map((tag) => (
-                        <Text key={tag._id}>• {tag._id} {tag.count}</Text>
-                    ))}
-                </Box>
-            ))} */}
     </>
   )
 }

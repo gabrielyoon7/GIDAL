@@ -34,8 +34,6 @@ const AddTodo = (props) => {
   // console.log("selected Date : "+date);
   // console.log(user_Id);
   const getDateRecord = (data) => {
-    console.log('---------------------------------');
-    // console.log(data[0][0].to_do_list);
 
   }
 
@@ -70,18 +68,18 @@ const AddTodo = (props) => {
   }, [user_Id]);
 
   useEffect(() => {
-  },[dateRecord])
+  }, [dateRecord])
 
   useEffect(() => {
-    if(newDateBool)
-    console.log(newDateBool);
-      if (newDateBool) {
-        addNewDateTodo()
-      } else {
-        console.log(newDateBool)
-        addUserTodo()
-      }
-  },[newDateBool])
+    if (newDateBool)
+      console.log(newDateBool);
+    if (newDateBool) {
+      addNewDateTodo()
+    } else {
+      console.log(newDateBool)
+      addUserTodo()
+    }
+  }, [newDateBool])
 
   const addUserTodo = () => {
     axios.post(config.ip + ':5000/todoRouter/todoSave', {
@@ -92,7 +90,6 @@ const AddTodo = (props) => {
       }
     }).then((response) => {
       if (response.data.status === 'success') {
-        console.log('to do save');
         getItems();
         setNewDateBool(true)
       }
@@ -110,7 +107,6 @@ const AddTodo = (props) => {
       }
     }).then((response) => {
       if (response.data.status === 'success') {
-        console.log('to do save');
         getItems();
         setNewDateBool(true)
       }
@@ -134,35 +130,14 @@ const AddTodo = (props) => {
         console.log(dateRecord[i].date);
         if (dateRecord[i].date == props.date) {
           setNewDateBool(false)
-          console.log('있는 날짜');
-          console.log(newDateBool);
           break;
         } else {
-          console.log('없는 날짜');
-          console.log(newDateBool);
+
         }
       }
-      // dateRecord.forEach((item) => {
-      //   // console.log('---------------');
-      //   // console.log(item.date);
-      //   // console.log(date);
-      //   // let bool = item.date == date
-      //   // setNewDateBool(bool)
-      //   // console.log('let' ,bool);
-
-      //   if(bool){
-      //     setNewDateBool(false)
-      //     return false;
-      //   } else{
-      //     setNewDateBool(true);
-      //     console.log(newDateBool);
-      //   }
-      // })
-      console.log(newDateBool);
       if (newDateBool) {
         addNewDateTodo()
       } else {
-        console.log(newDateBool)
         addUserTodo()
       }
     } else {
@@ -178,7 +153,7 @@ const AddTodo = (props) => {
         }
       }).then((response) => {
         if (response.data.status === 'success') {
-          console.log('to do save');
+
         }
       }).catch(function (error) {
         console.log(error);

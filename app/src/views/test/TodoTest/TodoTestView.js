@@ -53,7 +53,6 @@ const Todo = () => {
       } else {
         result.push(response.data[0].to_do_list)
         setFirstRecord(false);
-        console.log('---------------------------');
         // console.log(result[0]);
         setData(result[0].filter((todo) => todo.date == pickedDate))
       }
@@ -66,7 +65,7 @@ const Todo = () => {
   const submitHandler = (value) => {
     let random_key = Math.random().toString();
 
-    addData({value, random_key})
+    addData({ value, random_key })
     setData((prevTodo) => {
       return [
         {
@@ -83,27 +82,27 @@ const Todo = () => {
     setData((prevTodo) => {
       return prevTodo.filter((todo) => todo.key != key);
     });
-    deleteData({key})
+    deleteData({ key })
   };
 
-  const deleteData = ({key}) => {
+  const deleteData = ({ key }) => {
     axios.post(config.ip + ':5000/testTodoRouter/todoDelete', {
       data: {
-          user_id: user_Id,
-          key: key
+        user_id: user_Id,
+        key: key
       }
     })
       .then((response) => {
-          if (response.data.status === 'success') {
-              console.log('to do save');
-              getItems();
-      }}).catch(function (error) {
+        if (response.data.status === 'success') {
+          getItems();
+        }
+      }).catch(function (error) {
         console.log(error);
       });
   }
 
-  const addData = ({value, random_key}) => {
-    if(firstRecord){ // todo 기록 없는 유저
+  const addData = ({ value, random_key }) => {
+    if (firstRecord) { // todo 기록 없는 유저
       axios.post(config.ip + ':5000/testTodoRouter/save', {
         data: {
           user_id: user_Id,
@@ -116,7 +115,6 @@ const Todo = () => {
       }).then((response) => {
         if (response.data.status === 'success') {
           setFirstRecord(false)
-          console.log('to do save');
         }
       }).catch(function (error) {
         console.log(error);
@@ -133,7 +131,6 @@ const Todo = () => {
         }
       }).then((response) => {
         if (response.data.status === 'success') {
-          console.log('to do save');
           setFirstRecord(false)
           getItems();
         }
@@ -157,45 +154,45 @@ const Todo = () => {
     hideDatePicker();
   };
 
- return (
-  <ComponentContainer>
-  <View>
-    <StatusBar barStyle="light-content" 
-      backgroundColor="midnightblue" />
-  </View>
+  return (
+    <ComponentContainer>
+      <View>
+        <StatusBar barStyle="light-content"
+          backgroundColor="midnightblue" />
+      </View>
 
-  <View>
-  <FlatList
-            data={data}
-            ListHeaderComponent={() => 
+      <View>
+        <FlatList
+          data={data}
+          ListHeaderComponent={() =>
             <>
-              <Header date={pickedDate}/>
+              <Header date={pickedDate} />
               <AddInput submitHandler={submitHandler} />
-            </> }
-            ListEmptyComponent={() => <Empty />}
-            keyExtractor={(item) => item.key}
-            renderItem={({ item }) => (
-              <TodoList item={item} deleteItem={deleteItem} />
-            )}
-          />
-    <View>
-    </View>
-  </View>
-  <DateTimePickerModal
+            </>}
+          ListEmptyComponent={() => <Empty />}
+          keyExtractor={(item) => item.key}
+          renderItem={({ item }) => (
+            <TodoList item={item} deleteItem={deleteItem} />
+          )}
+        />
+        <View>
+        </View>
+      </View>
+      <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode="date"
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
       />
-  <Fab
-                renderInPortal={false}
-                shadow={2}
-                size="md"
-                icon={<Icon color="white" as={AntDesign} name="calendar" size="md" />}
-                onPress={() => showDatePicker()}
-            />
-</ComponentContainer>
-    );
+      <Fab
+        renderInPortal={false}
+        shadow={2}
+        size="md"
+        icon={<Icon color="white" as={AntDesign} name="calendar" size="md" />}
+        onPress={() => showDatePicker()}
+      />
+    </ComponentContainer>
+  );
 };
 
 const ComponentContainer = styled.View`

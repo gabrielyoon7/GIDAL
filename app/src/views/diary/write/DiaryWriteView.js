@@ -27,7 +27,7 @@ const DiaryWriteView = (props) => {
   const [tags, setTags] = useState([]);
   const [ref, setRef] = useState(null);
   const [userId, setUserId] = useState('unknown');
-  
+
   const new_routes = useNavigationState(state => state.routes);
 
   React.useEffect(() => {
@@ -46,7 +46,7 @@ const DiaryWriteView = (props) => {
     } catch (error) {
       console.log(error);
     }
-  },[]);
+  }, []);
 
   const selectTags = (selectedTag) => {
     const newTag = selectedTag.question_id + '-/-/-' + selectedTag.tag;
@@ -81,14 +81,12 @@ const DiaryWriteView = (props) => {
 
 
   const saveDiary = () => {
-    // console.log('selected tags : ' + tags);
     let tagTextOnlySet = new Set();
     tags.forEach(element => {
       tagTextOnlySet.add(element.split('-/-/-')[1]);
     });
     const tagTextOnlyArray = Array.from(tagTextOnlySet);
-    // console.log('tagTextOnlyArray : '+tagTextOnlyArray);
-   
+
     axios.post(config.ip + ':5000/diariesRouter/save', {
       data: {
         user_id: userId,

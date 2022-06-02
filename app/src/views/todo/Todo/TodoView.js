@@ -56,8 +56,6 @@ const Todo = ({ props }) => { // 진짜
       } else {
         result.push(response.data[0].to_do_list)
         setFirstRecord(false);
-        console.log('---------------------------');
-        console.log(result[0]);
         setData(result[0].filter((todo) => todo.date == pickedDate))
       }
     }).catch(function (error) {
@@ -113,7 +111,6 @@ const Todo = ({ props }) => { // 진짜
     })
       .then((response) => {
         if (response.data.status == 'success') {
-          console.log('to do save');
           getItems();
         }
       }).catch(function (error) {
@@ -137,7 +134,6 @@ const Todo = ({ props }) => { // 진짜
       }).then((response) => {
         if (response.data.status === 'success') {
           setFirstRecord(false)
-          console.log('to do save');
         }
       }).catch(function (error) {
         console.log(error);
@@ -154,7 +150,6 @@ const Todo = ({ props }) => { // 진짜
         }
       }).then((response) => {
         if (response.data.status === 'success') {
-          console.log('to do save');
           setFirstRecord(false)
           getItems();
         }
@@ -174,8 +169,7 @@ const Todo = ({ props }) => { // 진짜
       }
     }).then((response) => {
       if (response.data.status === 'success') {
-        console.log('to do modify');
-        // getItems();
+
       }
     }).catch(function (error) {
       console.log(error);
@@ -202,9 +196,9 @@ const Todo = ({ props }) => { // 진짜
     return (
       <HStack style={{ backgroundColor: "white" }}>
         <TouchableOpacity onPress={() => showDatePicker()}>
-          <Heading style={styles.heading}>{date}의 할 일 <AntDesign name="down" size={20} color="black" style={{alignSelf: 'center', left: -13}}/></Heading>
+          <Heading style={styles.heading}>{date}의 할 일 <AntDesign name="down" size={20} color="black" style={{ alignSelf: 'center', left: -13 }} /></Heading>
         </TouchableOpacity>
-        
+
         <Spacer />
         <Box style={styles.heading}>
 

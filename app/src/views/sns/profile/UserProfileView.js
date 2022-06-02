@@ -7,7 +7,7 @@ import DiaryList from '../../diary/list/DiaryList';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused, useNavigationState } from '@react-navigation/native';
 import BackButton from '../../../components/common/BackButton';
-import { Ionicons, Feather, AntDesign  } from "@expo/vector-icons";
+import { Ionicons, Feather, AntDesign } from "@expo/vector-icons";
 import ImagePicker from "./ImagePicker"
 
 // 이걸로 통합 예정
@@ -17,8 +17,6 @@ export default function UserProfileView(props) {
 
 
   const isFocused = useIsFocused();
-
-  // console.log('UserProfileView');
 
   const [date, setSelectedDate] = React.useState(props.selectedDate);
   const [profileImg, setProfileImg] = useState('https://cdn-icons-png.flaticon.com/512/1/1247.png');
@@ -38,14 +36,12 @@ export default function UserProfileView(props) {
     if (isFocused) {
       try {
 
-        // console.log('other profile!');
         const idx = new_routes.findIndex(r => r.name === "UserProfile")
         if (idx != -1 && new_routes[idx].params != undefined) {
           setUserId(new_routes[idx].params.user_id);
         }
         if (new_routes[idx].params == undefined) {
           try {
-            console.log('my profile!')
             AsyncStorage.getItem('userInfo')
               .then(value => {
                 if (value != null) {
@@ -57,22 +53,21 @@ export default function UserProfileView(props) {
 
           }
           catch (e) {
-            // console.log(e);
+
           }
         }
-        // console.log('this is ' + user_Id + 's page');
       } catch (error) {
-        // console.log(error);
+
       }
     }
-    return ()=>{
-            
+    return () => {
+
     }
   }, [isFocused]);
 
   React.useEffect(() => {
-    console.log(user_Id, ' ',  imgChange)
-    if(user_Id !== 'loading'){
+    console.log(user_Id, ' ', imgChange)
+    if (user_Id !== 'loading') {
       getUserData(user_Id);
     }
   }, [user_Id, imgChange]);
@@ -87,10 +82,6 @@ export default function UserProfileView(props) {
         const following = response.data[0].following;
         const follower = response.data[0].follower;
         const profileImg = response.data[0].profile_image;
-        // console.log('****following****')
-        // console.log(following);
-        // console.log('****follower****')
-        // console.log(profileImg);
         setUserFollowing(following);
         setUserFollower(follower);
         setuserFollowingNum(following.length)
@@ -110,7 +101,7 @@ export default function UserProfileView(props) {
       setFollowText(
         <HStack>
           <Feather name="check" size={20} color="green" />
-          <Text style={{alignSelf: 'center', marginHorizontal: 9, fontSize: 15, color: 'green'}}>팔로잉</Text>
+          <Text style={{ alignSelf: 'center', marginHorizontal: 9, fontSize: 15, color: 'green' }}>팔로잉</Text>
         </HStack>
       )
     } else {
@@ -118,16 +109,11 @@ export default function UserProfileView(props) {
       setFollowText(
         <HStack>
           <Ionicons name="person-add" size={19} color="green" />
-          <Text style={{alignSelf: 'center', marginHorizontal: 9, fontSize: 15, color: 'green'}}>팔로우</Text>
+          <Text style={{ alignSelf: 'center', marginHorizontal: 9, fontSize: 15, color: 'green' }}>팔로우</Text>
         </HStack>
       )
     }
   }, [userFollower])
-
-
-  // React.useEffect(() => {
-  //   // console.log('123');
-  // }, [userFollowerNum, userFollowingNum])
 
   const follow = () => {
     const data = {
@@ -201,11 +187,11 @@ export default function UserProfileView(props) {
     return (
       // <Text>정보 수정</Text>
       <HStack justifyContent={'center'}>
-        <ImagePicker user_Id={user_Id} profileImg={profileImg} changeProfile={changeProfile}/>
+        <ImagePicker user_Id={user_Id} profileImg={profileImg} changeProfile={changeProfile} />
         <Button mt="1" mr="3" style={styles.followButton}>
           <HStack>
             <Text><AntDesign name="plus" size={20} color="green" /></Text>
-            <Text style={{alignSelf: 'center', marginHorizontal: 5, fontSize: 15, color: 'green'}}>새 일기 작성</Text>
+            <Text style={{ alignSelf: 'center', marginHorizontal: 5, fontSize: 15, color: 'green' }}>새 일기 작성</Text>
           </HStack>
         </Button>
       </HStack>
@@ -221,23 +207,23 @@ export default function UserProfileView(props) {
     //팔로우가 되어있지 않다면 팔로우만 보여준다.
     return (
       <HStack justifyContent={'center'} >
-          <Button mt="1" mr="3" onPress={() => follow()} colorScheme="yellow" style={styles.followButton}>
-            {followText}
-          </Button>
-          <Button mt="1" mr="3" style={styles.followButton}   onPress={
-              () => props.navigation.navigate('Profile', {
-                screen: 'DmList',
-                params: {
-                  userName: user_Id
-                  // init_page: 'Follower',
-                }
-              })
-            }>
-            <HStack>
-              <AntDesign name="message1" size={20} color="green" />
-              <Text style={{alignSelf: 'center', marginHorizontal: 9, fontSize: 15, color: 'green'}}>교환일기</Text>
-            </HStack>
-          </Button>
+        <Button mt="1" mr="3" onPress={() => follow()} colorScheme="yellow" style={styles.followButton}>
+          {followText}
+        </Button>
+        <Button mt="1" mr="3" style={styles.followButton} onPress={
+          () => props.navigation.navigate('Profile', {
+            screen: 'DmList',
+            params: {
+              userName: user_Id
+              // init_page: 'Follower',
+            }
+          })
+        }>
+          <HStack>
+            <AntDesign name="message1" size={20} color="green" />
+            <Text style={{ alignSelf: 'center', marginHorizontal: 9, fontSize: 15, color: 'green' }}>교환일기</Text>
+          </HStack>
+        </Button>
       </HStack>
     )
   }
@@ -248,18 +234,18 @@ export default function UserProfileView(props) {
     return (
       <View style={styles.header}>
         <BackButton navigation={props.navigation} />
-        
+
         <HStack alignItems='center' justifyContent='center'>
           <Box style={styles.avatarBox}>
             <Image style={styles.avatar} source={{ uri: profileImg }} />
           </Box>
-          
+
           <Box style={styles.textBox}>
             <Text style={styles.name}>{user_Id}</Text>
-            
-            
+
+
             <HStack alignItems="center" my="1">
-            
+
               <View style={styles.buttonStyle}>
                 <TouchableOpacity
                   onPress={
@@ -296,8 +282,8 @@ export default function UserProfileView(props) {
               </View>
             </HStack>
           </Box>
-          </HStack>
-          <View style={{marginVertical: 10}}>
+        </HStack>
+        <View style={{ marginVertical: 10 }}>
           {/* {currentId == user_Id ? 
             // <ImagePicker style={styles.picker} user_Id={user_Id} changeProfile={changeProfile}/>
             <MyPageActionView />
@@ -305,7 +291,7 @@ export default function UserProfileView(props) {
             : <ProfileActionView />
           } */}
           <ProfileActionView />
-          </View>   
+        </View>
       </View>
     )
   }
@@ -313,7 +299,7 @@ export default function UserProfileView(props) {
   return (
     <>
       <ProfileHeader />
-      <DiaryList selectedDate={date} navigation={props.navigation} user_Id={user_Id} type={'profile'} items={items} setItems={setItems} profileImg={profileImg}/>
+      <DiaryList selectedDate={date} navigation={props.navigation} user_Id={user_Id} type={'profile'} items={items} setItems={setItems} profileImg={profileImg} />
     </>
   )
 }
@@ -404,7 +390,7 @@ const styles = StyleSheet.create({
     justifyContent: "right",
     alignItems: "right",
 
-  }, 
+  },
   followBtn: {
     // left: 50
   }

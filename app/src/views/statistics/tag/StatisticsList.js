@@ -13,7 +13,7 @@ const StatisticsList = (props) => {
     }, []);
 
     useEffect(() => {
-        // console.log('123')
+
     }, [items]);
 
     const getTags = () => {
@@ -21,18 +21,15 @@ const StatisticsList = (props) => {
         let result = []
         axios.get(config.ip + ':5000/tagsRouter/find')
             .then((response) => {
-                // console.log('hi');
-                // console.log(response.data);
                 setItems(response.data);
             }).catch(function (error) {
-                // console.log('hi');
                 console.log(error);
             })
     }
 
     const renderItem = ({ item }) => {
         return (
-            <StatisticsCard question = {item.question} id={item._id}  navigation={props.navigation}/>
+            <StatisticsCard question={item.question} id={item._id} navigation={props.navigation} />
         );
     };
 

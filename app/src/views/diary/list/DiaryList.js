@@ -37,13 +37,15 @@ const DiaryList = (props, navigation) => {
 
     //첫 렌더링에만 호출됨
     useEffect(() => {
-        console.log(3)
-        if (props.type === 'calendar') {
-            props.getitems();
-        } else {
-            getItems();
+        if(user_id !== ''){
+            console.log(3)
+            if (props.type === 'calendar') {
+                props.getitems();
+            } else {
+                getItems();
+            }
+            setIsLoaded(true);
         }
-        setIsLoaded(true);
     }, [isFocused, user_id]);
 
     useEffect(() => {

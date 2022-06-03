@@ -17,7 +17,6 @@ const FancyDiaryCard = ({ item: diary, user_id, pressCommentIcon, profileImg, on
     // 정규식을 이용한 HTML 태그 제거 끝
 
     useEffect(() => {
-        console.log(5)
         if (diary.likers.includes(user_id)) {
             setLiked(true)
         } else {

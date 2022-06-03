@@ -44,6 +44,7 @@ const DiaryListView = (props) => {
 
     React.useEffect(() => {
         if(items.length !== 0){
+            console.log(2);
             setItemData()
         }
     }, [items, date])
@@ -51,7 +52,6 @@ const DiaryListView = (props) => {
     const setItemData = () => {
         let val = {};
         let isSelected = false;
-        console.log(2);
         items.forEach(item => {
             const itemDate = item.date.split('T')[0]
             if (itemDate === date) {
@@ -66,13 +66,20 @@ const DiaryListView = (props) => {
             val[date] = ({ selected: true, disableTouchEvent: true, selectedColor: 'yellowgreen' })
 
         }
+        console.log(val)
         setMarkedDates(val)
+        // console.log(123)
+    }
+
+    const changeDate = (date) => {
+        setSelectedDate(date);
+        console.log(date)
     }
 
     const getitems = () => {
-        let result = []
         const year = date.split('-')[0]
         const month = date.split('-')[1]
+        console.log(month);
         axios.post(config.ip + ':5000/diariesRouter/findOwnPerMonth', {
             data: {
                 user_id: user_Id,
@@ -80,13 +87,8 @@ const DiaryListView = (props) => {
                 month: month
             }
         }).then((response) => {
-            if (response.data.length > 0) {
-                response.data.forEach((item) => {
-                    result.push(item);
-                });
-            }
-            setItems(result);
-            // console.log(result);
+            // console.log(response.data);
+            setItems(response.data);
         }).catch(function (error) {
             console.log(error);
         })
@@ -106,7 +108,7 @@ const DiaryListView = (props) => {
     }
     return (
         <>
-            <CalendarView selectedDate={date} setSelectedDate={setSelectedDate} markedDates={markedDates} getitems={getitems} items={items}/>
+            <CalendarView selectedDate={date} setSelectedDate={changeDate} markedDates={markedDates} getitems={getitems} items={items}/>
             <DiaryList selectedDate={date} navigation={props.navigation} user_Id={user_Id} items={items} getitems={getitems} type={'calendar'} profileImg={profileImg} />
             <Fab
                 renderInPortal={false}

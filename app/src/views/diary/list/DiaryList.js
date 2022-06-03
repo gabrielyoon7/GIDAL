@@ -37,6 +37,7 @@ const DiaryList = (props, navigation) => {
 
     //첫 렌더링에만 호출됨
     useEffect(() => {
+        console.log(3)
         if (props.type === 'calendar') {
             props.getitems();
         } else {
@@ -46,6 +47,7 @@ const DiaryList = (props, navigation) => {
     }, [isFocused, user_id]);
 
     useEffect(() => {
+        console.log(4)
         let index = props.items.findIndex((item, idx) => {
             return item.date.substr(0, 10) === props.selectedDate
         })

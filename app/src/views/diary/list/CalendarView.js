@@ -6,9 +6,10 @@ import { useToast } from 'native-base';
 const CalendarView = (props) => {
     const toast = useToast();
     const id = "calender-select-toast";
-    const [month, setMonth] = useState(props.date);
+    const [changeMonth, setChangeMonth] = useState(false);
 
     const changeDate = (date) => {
+        console.log('m')
         props.setSelectedDate(date.dateString);
         if (!toast.isActive(id)) {
             toast.show({
@@ -20,12 +21,16 @@ const CalendarView = (props) => {
 
     const monthChanged = (date) => {
         props.setSelectedDate(date.dateString);
-        setMonth(date.month);
+        setChangeMonth(true);
     }
 
     useEffect(() => {
-        props.getitems();
-    }, [month]);
+        if(changeMonth){
+            console.log(6);
+            props.getitems();
+            setChangeMonth(false);
+        }
+    }, [changeMonth]);
 
     return (
         <View style={{ height: 310 }}>

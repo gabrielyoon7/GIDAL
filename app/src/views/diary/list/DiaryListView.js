@@ -25,6 +25,7 @@ const DiaryListView = (props) => {
     // console.log(user_Id);
 
     React.useEffect(() => {
+        console.log(1);
         try {
             AsyncStorage.getItem('userInfo')
                 .then(value => {
@@ -44,6 +45,7 @@ const DiaryListView = (props) => {
     React.useEffect(() => {
         let val = {};
         let isSelected = false;
+        console.log(2);
         items.forEach(item => {
             const itemDate = item.date.split('T')[0]
             if (itemDate === date) {
@@ -78,7 +80,7 @@ const DiaryListView = (props) => {
                 });
             }
             setItems(result);
-            console.log(result);
+            // console.log(result);
         }).catch(function (error) {
             console.log(error);
         })

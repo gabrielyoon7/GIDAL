@@ -11,6 +11,7 @@ import { useIsFocused } from '@react-navigation/native';
 const DiaryListView = (props) => {
     const isFocused = useIsFocused(); // isFoucesd Define
     const [date, setSelectedDate] = React.useState(props.selectedDate);
+    const [preDate, setPreSelectedDate] = React.useState(props.selectedDate);
     const [markedDates, setMarkedDates] = React.useState({
         [props.selectedDate]: {
             selected: true,
@@ -47,7 +48,30 @@ const DiaryListView = (props) => {
             console.log(2);
             setItemData()
         }
-    }, [items, date])
+    }, [items])
+
+    React.useEffect(() => {
+        if(preDate.split('-')[1] !== date.split('-')[1]){
+            setPreSelectedDate(date);
+        }
+        else {
+            const selectItem = markedDates[date]
+            const preSelectItem = markedDates[preDate]
+            const nextItems = markedDates
+            const nextItem = {
+                ...selectItem,
+                selected: true, disableTouchEvent: true, selectedColor: 'yellowgreen'
+            }
+            const preItem = {
+                ...preSelectItem,
+                selected: false, disableTouchEvent: false, selectedColor: 'none'
+            }
+            nextItems[date]=nextItem
+            nextItems[preDate]=preItem
+            setPreSelectedDate(date);
+            setMarkedDates(nextItems);
+        }
+    }, [date])
 
     const setItemData = () => {
         let val = {};
@@ -66,20 +90,26 @@ const DiaryListView = (props) => {
             val[date] = ({ selected: true, disableTouchEvent: true, selectedColor: 'yellowgreen' })
 
         }
-        console.log(val)
+        // console.log(val)
         setMarkedDates(val)
         // console.log(123)
     }
 
     const changeDate = (date) => {
+        // if(preDate.split('-')[1] !== date.split('-')[1] ){
+        //     setSelectedDate(date);
+        // }
+        // else{
+        //     setSelectedDate(date);
+        // }
         setSelectedDate(date);
-        console.log(date)
+        // console.log(date)
     }
 
     const getitems = () => {
         const year = date.split('-')[0]
         const month = date.split('-')[1]
-        console.log(month);
+        // console.log(month);
         axios.post(config.ip + ':5000/diariesRouter/findOwnPerMonth', {
             data: {
                 user_id: user_Id,

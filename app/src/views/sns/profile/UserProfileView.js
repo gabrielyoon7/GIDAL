@@ -233,7 +233,7 @@ export default function UserProfileView(props) {
   const ProfileHeader = () => {
     return (
       <View style={styles.header}>
-        <BackButton navigation={props.navigation} />
+        <BackButton navigation={props.navigation} color="white" />
 
         <HStack alignItems='center' justifyContent='center'>
           <Box style={styles.avatarBox}>

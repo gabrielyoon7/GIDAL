@@ -43,6 +43,12 @@ const DiaryListView = (props) => {
     }, [isFocused])
 
     React.useEffect(() => {
+        if(items.length !== 0){
+            setItemData()
+        }
+    }, [items, date])
+
+    const setItemData = () => {
         let val = {};
         let isSelected = false;
         console.log(2);
@@ -61,7 +67,7 @@ const DiaryListView = (props) => {
 
         }
         setMarkedDates(val)
-    }, [items, date])
+    }
 
     const getitems = () => {
         let result = []

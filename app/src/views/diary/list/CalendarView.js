@@ -8,8 +8,16 @@ const CalendarView = (props) => {
     const id = "calender-select-toast";
     const [changeMonth, setChangeMonth] = useState(false);
 
+    useEffect(() => {
+        if(changeMonth){
+            console.log(6);
+            props.getitems();
+            setChangeMonth(false);
+        }
+    }, [changeMonth]);
+
     const changeDate = (date) => {
-        console.log('m')
+        console.log('d')
         props.setSelectedDate(date.dateString);
         if (!toast.isActive(id)) {
             toast.show({
@@ -20,17 +28,10 @@ const CalendarView = (props) => {
     }
 
     const monthChanged = (date) => {
+        console.log('m')
         props.setSelectedDate(date.dateString);
         setChangeMonth(true);
     }
-
-    useEffect(() => {
-        if(changeMonth){
-            console.log(6);
-            props.getitems();
-            setChangeMonth(false);
-        }
-    }, [changeMonth]);
 
     return (
         <View style={{ height: 310 }}>

@@ -140,7 +140,7 @@ const FancyDiaryCard = ({ item: diary, user_id, pressCommentIcon, profileImg, on
                         <Box
                             maxW={diaryWidth}
                             minW={diaryWidth}
-                            height={190}
+                            // height={190}
                             borderWidth="1"
                             borderColor="coolGray.300"
                             shadow="3"

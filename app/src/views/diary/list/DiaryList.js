@@ -37,7 +37,7 @@ const DiaryList = (props, navigation) => {
 
     //첫 렌더링에만 호출됨
     useEffect(() => {
-        if(user_id !== ''){
+        if (user_id !== '') {
             console.log(3)
             if (props.type === 'calendar') {
                 props.getitems();
@@ -106,8 +106,18 @@ const DiaryList = (props, navigation) => {
         <View style={styles.container}>
             {isLoaded
                 ?
-                props.items.length > 0
+                props.items.length == 0
                     ?
+                    <Center>
+                        {
+                            props.isEmpty
+                                ?
+                                <Text>이번 달에 작성한 일기가 없습니다.</Text>
+                                :
+                                <LoadingSpinner />
+                        }
+                    </Center>
+                    :
                     <FlatList
                         onScrollToIndexFailed={info => {
                             const wait = new Promise(resolve => setTimeout(resolve, 700));
@@ -124,10 +134,6 @@ const DiaryList = (props, navigation) => {
                         numColumns={numOfCol}
                         initialNumToRender={3}
                     />
-                    :
-                    <Center>
-                        <Text>이번 달에 작성된 일기가 없습니다.</Text>
-                    </Center>
                 :
                 <LoadingSpinner />
             }

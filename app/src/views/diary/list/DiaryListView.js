@@ -25,6 +25,8 @@ const DiaryListView = (props) => {
     const [profileImg, setProfileImg] = React.useState('');
     // console.log(user_Id);
 
+    const [isEmpty, setEmpty] = React.useState(false);
+
     React.useEffect(() => {
         if(isFocused){
             console.log(1);
@@ -113,6 +115,7 @@ const DiaryListView = (props) => {
         const month = date.split('-')[1]
         // console.log(month);
         setItems([]);
+        setEmpty(false);
         axios.post(config.ip + ':5000/diariesRouter/findOwnPerMonth', {
             data: {
                 user_id: user_Id,
@@ -122,6 +125,9 @@ const DiaryListView = (props) => {
         }).then((response) => {
             console.log(response.data);
             setItems(response.data);
+            if(response.data.length==0){
+                setEmpty(true);
+            }
         }).catch(function (error) {
             console.log(error);
         })
@@ -141,8 +147,23 @@ const DiaryListView = (props) => {
     }
     return (
         <>
-            <CalendarView selectedDate={date} setSelectedDate={changeDate} markedDates={markedDates} getitems={getitems} items={items}/>
-            <DiaryList selectedDate={date} navigation={props.navigation} user_Id={user_Id} items={items} getitems={getitems} type={'calendar'} profileImg={profileImg} />
+            <CalendarView
+             selectedDate={date}
+             setSelectedDate={changeDate} 
+             markedDates={markedDates} 
+             getitems={getitems} 
+             items={items}
+            />
+            <DiaryList
+             selectedDate={date} 
+             navigation={props.navigation} 
+             user_Id={user_Id} 
+             items={items} 
+             getitems={getitems} 
+             type={'calendar'} 
+             profileImg={profileImg} 
+             isEmpty={isEmpty}
+            />
             <Fab
                 renderInPortal={false}
                 shadow={2}

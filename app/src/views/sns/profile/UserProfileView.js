@@ -18,8 +18,8 @@ export default function UserProfileView(props) {
 
   const [date, setSelectedDate] = React.useState(props.selectedDate);
   const [profileImg, setProfileImg] = useState('https://cdn-icons-png.flaticon.com/512/1/1247.png');
-  const [user_Id, setUserId] = useState('loading');
-  const [currentId, setCurrentId] = useState('헤헤');
+  const [user_Id, setUserId] = useState('');
+  const [currentId, setCurrentId] = useState('');
   const [userFollower, setUserFollower] = useState([]);
   const [userFollowing, setUserFollowing] = useState([]);
   const [userFollowerNum, setuserFollowerNum] = useState(0);

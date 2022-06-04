@@ -16,8 +16,10 @@ const Tab = createBottomTabNavigator();
 
 export default function FollowListView(props) {
   const [search, setSearch] = useState('');
-  const [filteredDataSource, setFilteredDataSource] = useState([]);
-  const [masterDataSource, setMasterDataSource] = useState([]);
+  const [filteredFollowings, setFilteredFollowings] = useState([]);
+  const [masterFollowings, setMasterFollowings] = useState([]);
+  const [filteredFollowers, setFilteredFollowers] = useState([]);
+  const [masterFollowers, setMasterFollowers] = useState([]);
   const [user_Id, setUserId] = React.useState('');
   const [followings, setFollowings] = useState([]);
   const [followers, setFollowers] = useState([]);
@@ -39,60 +41,66 @@ export default function FollowListView(props) {
 
   // console.log(props.user_id);
 
-  useEffect(() => {
-    console.log(15)
-    // getData();
-    try {
-      AsyncStorage.getItem('userInfo')
-        .then(value => {
-          if (value != null) {
-            const UserInfo = JSON.parse(value);
-            setUserId(UserInfo.user_id);
-          }
-        }
-        )
-    } catch (error) {
-      console.log(error);
-    }
-  }, [])
+  // useEffect(() => {
+  //   console.log(15)
+  //   // getData();
+  //   try {
+  //     AsyncStorage.getItem('userInfo')
+  //       .then(value => {
+  //         if (value != null) {
+  //           const UserInfo = JSON.parse(value);
+  //           console.log('1',UserInfo.user_id)
+  //           setUserId(UserInfo.user_id);
+  //         }
+  //       }
+  //       )
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }, [])
 
   useEffect(() => {
-    if (user_Id === '') {
-      return;
+    if (props.user_id !== '') {
+      console.log(props.user_id)
+      console.log(14)
+      axios.post(config.ip + ':5000/usersRouter/findOne/', {
+        data: {
+          user_id: props.user_id,
+        }
+      })
+        .then((response) => {
+          setFollowings(response.data[0].following);
+          setFollowers(response.data[0].follower);
+        }).catch(function (error) {
+          console.log(error);
+        });
     }
-    console.log(14)
-    axios.post(config.ip + ':5000/usersRouter/findOne/', {
-      data: {
-        user_id: props.user_id,
-      }
-    })
-      .then((response) => {
-        // console.log(response.data[0].following);
-        setFollowings(response.data[0].following);
-        setFollowers(response.data[0].follower);
-        // console.log("*****following******");
-        // console.log(followings);
-        // console.log("*****follower******");
-        // console.log(followers);
-      }).catch(function (error) {
-        console.log(error);
-      });
-  }, [user_Id]);
+  }, [props.user_id]);
 
 
   useEffect(() => {
     let data = followers;
     // init_page == 'Following' ? data = followings : data = followers;
+    if(followers.length !== 0){
+      console.log(13)
+      setFilteredFollowings(data);
+      setMasterFollowings(data);
+    }
+  }, [followings]);
+
+  useEffect(() => {
+    let data = followings;
+    // init_page == 'Following' ? data = followings : data = followers;
     if (init_page === 'Following') {
-      data = followings;
+      // data = followings;
       setIndex(1);
     }
-    if(followers.length !== 0 || followings.length !== 0){
-      console.log(13)
-      setFilteredDataSource(data);
-      setMasterDataSource(data);
+    if(followings.length !== 0){
+      console.log(131)
+      setFilteredFollowers(data);
+      setMasterFollowers(data);
     }
-  }, [followings, followers]);
+  }, [followers]);
 
   const searchFilter = (text) => {
     if (text) {
@@ -103,38 +111,26 @@ export default function FollowListView(props) {
         const textData = text.toUpperCase();
         return itemData.indexOf(textData) > -1;
       });
-      setFilteredDataSource(newData);
+      // setFilteredFollowings(newData);
       setSearch(text);
     } else {
-      setFilteredDataSource(masterDataSource);
+      // setFilteredFollowings(masterDataSource);
       setSearch(text);
     }
   };
 
   const selectOther = (item) => {
-    // console.log(item);
-    // props.navigation.navigate('UserProfile', {
-    //   user_id: item.user_id
-    // })
     props.navigation.dispatch(CommonActions.navigate({ name: 'UserProfile', params: { user_id: item.user_id, }, }))
-
-    // if (props.user_id === user_Id) {
-    //   props.navigation.navigate('DmRead', {
-    //     userName: item.name
-    //   })
-    // } else {
-    //   props.navigation.navigate('UserProfile', {
-    //     user_id: item.name
-    //   })
-    // }
   }
-  console.log(filteredDataSource);
+
+  console.log(filteredFollowers);
+  
   const Followings = () => {
     return (
       <View style={styles.body} >
         <FlatList
           enableEmptySections={true}
-          data={filteredDataSource}
+          data={filteredFollowings}
           keyExtractor={(item) => {
             return item.user_id;
           }}
@@ -142,7 +138,30 @@ export default function FollowListView(props) {
             return (
               <TouchableOpacity onPress={() => selectOther(item)} >
                 <View style={styles.box} >
-                  <Image style={styles.image} source={{ uri: item.img }} />
+                  <Image style={styles.image} source={{ uri: item.img ?  item.img : 'https://cdn-icons-png.flaticon.com/512/1/1247.png'}} />
+                  <Text style={styles.username}>{item.name}</Text>
+                </View>
+              </TouchableOpacity>
+            )
+          }} />
+      </View>
+    )
+  }
+
+  const Followers = () => {
+    return (
+      <View style={styles.body} >
+        <FlatList
+          enableEmptySections={true}
+          data={filteredFollowers}
+          keyExtractor={(item) => {
+            return item.user_id;
+          }}
+          renderItem={({ item }) => {
+            return (
+              <TouchableOpacity onPress={() => selectOther(item)} >
+                <View style={styles.box} >
+                  <Image style={styles.image} source={{ uri: item.img ?  item.img : 'https://cdn-icons-png.flaticon.com/512/1/1247.png'}} />
                   <Text style={styles.username}>{item.name}</Text>
                 </View>
               </TouchableOpacity>
@@ -171,7 +190,7 @@ export default function FollowListView(props) {
       // your code here
     }
     return (
-      <Followings navigation={props.navigation} />
+      <Followers navigation={props.navigation} />
     )
   }
   const FirstRoute = () => (
@@ -205,11 +224,13 @@ export default function FollowListView(props) {
   );
 
   const setPage = (id) => {
-    if (id === 1) {
-      setFilteredDataSource(followings);
-    } else {
-      setFilteredDataSource(followers);
-    }
+    setFilteredFollowings(followings);
+    setFilteredFollowers(followers);
+    // if (id === 1) {
+    //   setFilteredFollowings(followings);
+    // } else {
+    //   setFilteredFollowers(followers);
+    // }
     setIndex(id);
   }
 

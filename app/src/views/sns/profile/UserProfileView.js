@@ -56,9 +56,9 @@ export default function UserProfileView(props) {
       } catch (error) {
       }
     }
-    // return () => {
+    return () => {
 
-    // }
+    }
   }, [isFocused]);
 
   React.useEffect(() => {

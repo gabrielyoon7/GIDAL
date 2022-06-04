@@ -62,19 +62,19 @@ export default function UserProfileView(props) {
   }, [isFocused]);
 
   React.useEffect(() => {
-    console.log(11)
     // console.log(user_Id, ' ', imgChange)
-    if (user_Id !== 'loading') {
+    if (user_Id !== '') {
+      console.log(11)
       getUserData(user_Id);
     }
   }, [user_Id, imgChange]);
 
   React.useEffect(() => {
-    console.log(12)
     let objectFollowing = Object.values(userFollower).map(item => item.user_id)
     // console.log("objectFollowing : " + objectFollowing);
     // console.log(currentId);
     if (objectFollowing.includes(currentId)) {
+      console.log(12)
       // console.log("이미 팔로우 되어있음")
       setFollowText(
         <HStack>

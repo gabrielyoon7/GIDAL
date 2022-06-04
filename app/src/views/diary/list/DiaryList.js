@@ -49,19 +49,21 @@ const DiaryList = (props, navigation) => {
     }, [isFocused, user_id]);
 
     useEffect(() => {
-        console.log(4)
-        let index = props.items.findIndex((item, idx) => {
-            return item.date.substr(0, 10) === props.selectedDate
-        })
+        if (props.type === 'calendar'){
+            console.log(4)
+            let index = props.items.findIndex((item, idx) => {
+                return item.date.substr(0, 10) === props.selectedDate
+            })
 
-        // setData(index);
-        if (ref === null || props.items.length < 1) {
-            return;
-        }
-        if (index <= 0) {
-            ref.scrollToIndex({ animated: true, index: 0, viewPosition: 0 });
-        } else {
-            ref.scrollToIndex({ animated: true, index: index, viewPosition: 0 });
+            // setData(index);
+            if (ref === null || props.items.length < 1) {
+                return;
+            }
+            if (index <= 0) {
+                ref.scrollToIndex({ animated: true, index: 0, viewPosition: 0 });
+            } else {
+                ref.scrollToIndex({ animated: true, index: index, viewPosition: 0 });
+            }
         }
     }, [props.selectedDate]);
 

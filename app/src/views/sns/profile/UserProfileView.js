@@ -24,7 +24,7 @@ export default function UserProfileView(props) {
   const [userFollowing, setUserFollowing] = useState([]);
   const [userFollowerNum, setuserFollowerNum] = useState(0);
   const [userFollowingNum, setuserFollowingNum] = useState(0);
-  const [followText, setFollowText] = useState('loading');
+  const [followed, setFollowed] = useState(false);
   const [imgChange, setImgChange] = useState("");
   const new_routes = useNavigationState(state => state.routes);
   const [items, setItems] = React.useState([]);
@@ -76,20 +76,10 @@ export default function UserProfileView(props) {
     if (objectFollowing.includes(currentId)) {
       console.log(12)
       // console.log("이미 팔로우 되어있음")
-      setFollowText(
-        <HStack>
-          <Feather name="check" size={20} color="green" />
-          <Text style={{ alignSelf: 'center', marginHorizontal: 9, fontSize: 15, color: 'green' }}>팔로잉</Text>
-        </HStack>
-      )
+      setFollowed(true);
     } else {
       // console.log("아직 팔로우 안되어있음")
-      setFollowText(
-        <HStack>
-          <Ionicons name="person-add" size={19} color="green" />
-          <Text style={{ alignSelf: 'center', marginHorizontal: 9, fontSize: 15, color: 'green' }}>팔로우</Text>
-        </HStack>
-      )
+      setFollowed(false);
     }
   }, [userFollower])
 
@@ -121,7 +111,7 @@ export default function UserProfileView(props) {
     }
     let objectFollowing = Object.values(userFollower).map(item => item.user_id)
     console.log("follow : " + objectFollowing);
-    if (objectFollowing.includes(currentId)) {
+    if (followed) {
       // Alert.alert('팔로우 끊기 axios가 나와야 함')      
       axios.post(config.ip + ':5000/usersRouter/userFollowingDelete', {
         data: data
@@ -130,7 +120,7 @@ export default function UserProfileView(props) {
         data: data
       })
         .then((response) => {
-          setFollowText(<Ionicons name="person-add" size={19} color="green" />)
+          setFollowed(!followed)
           getUserData(user_Id);
         }).catch(function (error) {
           console.log(error);
@@ -144,7 +134,7 @@ export default function UserProfileView(props) {
         data: data
       })
         .then((response) => {
-          setFollowText(<Feather name="check" size={20} color="green" />)
+          setFollowed(!followed)
           getUserData(user_Id);
         }).catch(function (error) {
           console.log(error);
@@ -206,7 +196,18 @@ export default function UserProfileView(props) {
     return (
       <HStack justifyContent={'center'} >
         <Button mt="1" mr="3" onPress={() => follow()} colorScheme="yellow" style={styles.followButton}>
-          {followText}
+          {/* {followText} */}
+          <HStack>
+            {followed ?
+              <>
+                <Feather name="check" size={20} color="green" />
+                <Text style={{ alignSelf: 'center', marginHorizontal: 9, fontSize: 15, color: 'green' }}>팔로잉</Text>
+              </> :
+              <>
+                <Ionicons name="person-add" size={19} color="green" />
+                <Text style={{ alignSelf: 'center', marginHorizontal: 9, fontSize: 15, color: 'green' }}>팔로우</Text>
+              </>}
+          </HStack>
         </Button>
         <Button mt="1" mr="3" style={styles.followButton} onPress={
           () => props.navigation.navigate('Profile', {

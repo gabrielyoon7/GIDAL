@@ -9,14 +9,17 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Heading } from 'native-base';
 
 const FeedView = (props) => {
-    const [date, setSelectedDate] = React.useState(props.selectedDate);    
+    // const [date, setSelectedDate] = React.useState(props.selectedDate);    
     // const [user_Id, setUserId] = React.useState('');
-    const user_Id = ""
+    // const user_Id = ""
 
     return (
         <>
             <Heading style={styles.heading}>모두의 일기</Heading>
-            <FeedDiaryList selectedDate={date} navigation={props.navigation} />
+            <FeedDiaryList
+                //  selectedDate={date} 
+                navigation={props.navigation}
+            />
         </>
     )
 }

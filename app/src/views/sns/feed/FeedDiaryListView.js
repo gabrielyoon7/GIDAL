@@ -25,10 +25,10 @@ const FeedDiaryList = (props, navigation) => {
                     setFollowers(UserInfo[0].follower);
                 }
             })
-    },[])
+    }, [])
 
     const getitems = () => {
-        let result = []
+        let result = [];
 
         axios.post(config.ip + ':5000/diariesRouter/findPublic')
             .then((response) => {
@@ -55,26 +55,8 @@ const FeedDiaryList = (props, navigation) => {
         getitems();
     }, [isFocused]);
 
-    //메인화면에서 선택한 날짜에 맞는 리스트를 보여주기 위한 코드였음. 이곳에서는 안쓰일 것 같아 주석처리함
-    // useEffect(() => {
-    //     let index = items.findIndex((item, idx) => {
-    //         return item.date.substr(0, 10) === props.selectedDate
-    //     })
-
-    //     setData(index);
-    //     if (ref === null || items.length < 1) {
-    //         return;
-    //     }
-    //     if (index <= 0) {
-    //         ref.scrollToIndex({ animated: true, index: 0, viewPosition: 0 });
-    //     } else {
-    //         ref.scrollToIndex({ animated: true, index: index, viewPosition: 0 });
-    //     }
-    // })
-
     const pressCommentIcon = (item) => {
-        props.navigation.navigate('DiaryComment'
-        , {
+        props.navigation.navigate('DiaryComment', {
             diary: item,
             user_id: userId,
             profileImg: profileImg,
@@ -87,10 +69,10 @@ const FeedDiaryList = (props, navigation) => {
         let newData = backupData;
         newData = backupData.filter((item) => {
             //통합 검색을 위한 처리 시작
-            let intergratedData = item.user_id+item.title+item.content;
+            let intergratedData = item.user_id + item.title + item.content;
             item.tags.forEach(
                 (tag) => (
-                    intergratedData+=tag
+                    intergratedData += tag
                 )
             )
             //통합 검색을 위한 처리 끝
@@ -141,7 +123,7 @@ const FeedDiaryList = (props, navigation) => {
 
     const windowHeight = Dimensions.get('window').height;
     const windowWidth = Dimensions.get('window').width;
-    const numOfCol=windowWidth>700?2:1;
+    const numOfCol = windowWidth > 700 ? 2 : 1;
 
     return (
         <>
@@ -163,7 +145,7 @@ const FeedDiaryList = (props, navigation) => {
                 />
             </View>
             <KeyboardAvoidingView
-                style={{backgroundColor:'#FFFFFF'}}
+                style={{ backgroundColor: '#FFFFFF' }}
                 behavior={Platform.OS === "ios" ? "padding" : "height"}
             >
                 <SearchBar
@@ -176,7 +158,7 @@ const FeedDiaryList = (props, navigation) => {
                     onClearPress={() => {
                         filterList("");
                     }}
-                    style ={{margin:12, borderWidth:1,borderColor:'gray'}}
+                    style={{ margin: 12, borderWidth: 1, borderColor: 'gray' }}
                 />
             </KeyboardAvoidingView>
         </>

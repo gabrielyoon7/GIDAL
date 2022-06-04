@@ -14,11 +14,14 @@ export default function FollowListView(props) {
   const [masterFollowings, setMasterFollowings] = useState([]);
   const [filteredFollowers, setFilteredFollowers] = useState([]);
   const [masterFollowers, setMasterFollowers] = useState([]);
-  const [followings, setFollowings] = useState([]);
-  const [followers, setFollowers] = useState([]);
 
   const new_routes = useNavigationState(state => state.routes);
   let init_page = new_routes[0].params.screen;
+  const userFollower = new_routes[0].params.userFollower;
+  const userFollowing = new_routes[0].params.userFollowing;
+
+  const [followings, setFollowings] = useState(userFollowing);
+  const [followers, setFollowers] = useState(userFollower);
 
   //시작
   const [index, setIndex] = React.useState(0);
@@ -28,42 +31,17 @@ export default function FollowListView(props) {
   ]);
 
   useEffect(() => {
-    if (props.user_id !== '') {
-      console.log(14)
-      axios.post(config.ip + ':5000/usersRouter/findOne/', {
-        data: {
-          user_id: props.user_id,
-        }
-      })
-        .then((response) => {
-          setFollowings(response.data[0].following);
-          setFollowers(response.data[0].follower);
-        }).catch(function (error) {
-          console.log(error);
-        });
-    }
-  }, [props.user_id]);
-
-
-  useEffect(() => {
-    let data = followings;
-    if(followings.length !== 0){
-      console.log(13)
-      setFilteredFollowings(data);
-      setMasterFollowings(data);
-    }
+    setFilteredFollowings(followings);
+    setMasterFollowings(followings);
   }, [followings]);
 
   useEffect(() => {
-    let data = followers;
     if (init_page === 'Following') {
       setIndex(1);
     }
-    if(followers.length !== 0){
-      console.log(131)
-      setFilteredFollowers(data);
-      setMasterFollowers(data);
-    }
+
+    setFilteredFollowers(followers);
+    setMasterFollowers(followers);
   }, [followers]);
 
   const searchFilter = (text) => {
@@ -249,31 +227,12 @@ export default function FollowListView(props) {
 }
 
 const styles = StyleSheet.create({
-  avatar: {
-    width: 130,
-    height: 130,
-    borderRadius: 63,
-    borderWidth: 4,
-    borderColor: "#FFFFFF",
-    marginBottom: 10,
-  },
   image: {
     width: 60,
     height: 60,
   },
-  name: {
-    fontSize: 22,
-    color: "#FFFFFF",
-    fontWeight: '600',
-  },
   body: {
     padding: 15,
-
-
-  },
-  flatListStyle: {
-    // backgroundColor: '#fff',
-    margin: 20,
   },
   box: {
     padding: 3,
@@ -292,13 +251,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginLeft: 10
   },
-  textInput: {
-    height: 40,
-    borderWidth: 1,
-    paddingLeft: 20,
-    margin: 5,
-    backgroundColor: 'white'
-  },
   searchbar: {
     margin: 7,
     borderWidth: 1,
@@ -308,5 +260,4 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "white"
   },
-
 });

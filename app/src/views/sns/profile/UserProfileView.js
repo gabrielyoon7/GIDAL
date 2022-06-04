@@ -254,6 +254,8 @@ export default function UserProfileView(props) {
                         screen: 'Follower',
                         user_id: user_Id,
                         // init_page: 'Follower',
+                        userFollower: userFollower,
+                        userFollowing: userFollowing,
                       }
                     })
                   }
@@ -271,6 +273,8 @@ export default function UserProfileView(props) {
                         screen: 'Following',
                         user_id: user_Id,
                         // init_page: 'Following',
+                        userFollower: userFollower,
+                        userFollowing: userFollowing,
                       }
                     })
                   }

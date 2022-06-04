@@ -102,14 +102,14 @@ const DiaryReadView = (props) => {
             "삭제 확인",
             "해당 일기를 삭제하시겠습니까?",
             [
-              {
-                text: "취소",
-                onPress: () => console.log("취소"),
-                style: "cancel"
-              },
-              { text: "확인", onPress: () => deleteDiary() }
+                {
+                    text: "취소",
+                    onPress: () => console.log("취소"),
+                    style: "cancel"
+                },
+                { text: "확인", onPress: () => deleteDiary() }
             ]
-          );
+        );
     }
 
     const source = {

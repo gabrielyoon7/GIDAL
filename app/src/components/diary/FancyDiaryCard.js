@@ -99,17 +99,6 @@ const FancyDiaryCard = ({ item: diary, user_id, pressCommentIcon, profileImg, on
                         ))
                         :
                         null
-                        // <Badge
-                        //     colorScheme="gray"
-                        //     _text={{
-                        //         color: "white"
-                        //     }}
-                        //     variant="solid"
-                        //     rounded="4"
-                        //     mr="1"
-                        // >
-                        //     등록된 태그가 없는 일기입니다.
-                        // </Badge>
                 }
                 <Spacer />
 

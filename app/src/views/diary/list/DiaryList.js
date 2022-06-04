@@ -30,7 +30,7 @@ const DiaryList = (props, navigation) => {
         })
     }
 
-    const [data, setData] = useState(0);
+    // const [data, setData] = useState(0);
     const [selectedId, setSelectedId] = useState(null);
     const [ref, setRef] = useState(null);
     const isFocused = useIsFocused(); // isFoucesd Define
@@ -54,7 +54,7 @@ const DiaryList = (props, navigation) => {
             return item.date.substr(0, 10) === props.selectedDate
         })
 
-        setData(index);
+        // setData(index);
         if (ref === null || props.items.length < 1) {
             return;
         }
@@ -122,6 +122,7 @@ const DiaryList = (props, navigation) => {
                         renderItem={renderItem}
                         keyExtractor={(item) => item._id}
                         numColumns={numOfCol}
+                        initialNumToRender={3}
                     />
                     :
                     <Center>

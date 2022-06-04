@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, View, SafeAreaView, FlatList, StyleSheet, Alert } from 'react-native';
+import { Button, View, SafeAreaView, FlatList, StyleSheet, Alert, ScrollView } from 'react-native';
 import { Badge, Box, Divider, Flex, HStack, Pressable, Spacer, Text, } from 'native-base';
 import axios from 'axios';
 import { config } from '../../../../config'
@@ -21,11 +21,11 @@ const TodoDetailView = (props) => {
     const [backupData, setBackupData] = useState([]);
     const [sortedDate, setSortedDate] = useState([]);
     const [dateResult, setDateResult] = useState([]);
-    const [month, setMonth] = useState(new Date().getMonth()+1)
+    const [month, setMonth] = useState(new Date().getMonth() + 1)
 
     useEffect(() => {
         getItems();
-      }, [user_id, isFocused]);
+    }, [user_id, isFocused]);
 
     const getItems = () => {
         let dateList = []
@@ -36,16 +36,16 @@ const TodoDetailView = (props) => {
             }
         }).then((response) => {
             let result = response.data[0].to_do_list
-            .sort((a,b) => new Date(a.date) - new Date(b.date));
+                .sort((a, b) => new Date(a.date) - new Date(b.date));
             response.data[0].to_do_list.forEach((item) => {
                 dateList.push(item.date)
             });
             setItems(result);
             setBackupData(result);
-            let sortDate = dateList.sort().filter(function(item, idx, array){
-                return !idx || item != array[idx-1];
+            let sortDate = dateList.sort().filter(function (item, idx, array) {
+                return !idx || item != array[idx - 1];
             })
-            for (let i=0; i<sortDate.length; i++){
+            for (let i = 0; i < sortDate.length; i++) {
                 dateResult.push({
                     key: i,
                     date: sortDate[i]
@@ -66,7 +66,7 @@ const TodoDetailView = (props) => {
         let newData = backupData;
         newData = backupData.filter((item) => {
             //통합 검색을 위한 처리 시작
-            let intergratedData = item.date+item.value
+            let intergratedData = item.date + item.value
             //통합 검색을 위한 처리 끝
             const itemData = intergratedData.toLowerCase();
             const textData = text.toLowerCase();
@@ -74,69 +74,69 @@ const TodoDetailView = (props) => {
         })
         setItems(newData);
     }
-    
+
     const insideRenderItem = ({ item }) => (
         <FancyTodoCard
-                item={item}
-                textColor="black"
-            />
-      );
+            item={item}
+            textColor="black"
+        />
+    );
 
     const renderItem = ({ item }) => {
         return (
             <>
-            {item.date.split('-')[1] == month &&
-            <Box alignItems="center" py="1" px="1">
-            <Pressable>
-                {({
-                    isHovered,
-                    isFocused,
-                    isPressed
-                }) => {
-                    return (
-                        <Box
-                            maxW="96%"
-                            minW="96%"
-                            borderWidth="1"
-                            borderColor="coolGray.300"
-                            shadow="1"
-                            bg={ isHovered ? "coolGray.200" : "coolGray.100"}
-                            p="5"
-                            rounded="8"
-                            style={{
-                                transform: [{
-                                    scale: isPressed ? 0.96 : 1
-                                }]
+                {item.date.split('-')[1] == month &&
+                    <Box alignItems="center" py="1" px="1">
+                        <Pressable>
+                            {({
+                                isHovered,
+                                isFocused,
+                                isPressed
+                            }) => {
+                                return (
+                                    <Box
+                                        maxW="96%"
+                                        minW="96%"
+                                        borderWidth="1"
+                                        borderColor="coolGray.300"
+                                        shadow="1"
+                                        bg={isHovered ? "coolGray.200" : "coolGray.100"}
+                                        p="5"
+                                        rounded="8"
+                                        style={{
+                                            transform: [{
+                                                scale: isPressed ? 0.96 : 1
+                                            }]
+                                        }}
+                                    >
+                                        <Text fontSize={15} color="coolGray.800" padding={1}>
+                                            {item.date}
+                                        </Text>
+                                        <Divider />
+                                        {isLoaded ?
+                                            <FlatList
+                                                onScrollToIndexFailed={info => {
+                                                    const wait = new Promise(resolve => setTimeout(resolve, 700));
+                                                    wait.then(() => {
+                                                        fListRef.current?.scrollToIndex({ index: info.index, animated: true / false });
+                                                    });
+                                                }}
+                                                data={items.filter(data => data.date == item.date)}
+                                                renderItem={insideRenderItem}
+                                                keyExtractor={(item) => item._id}
+                                            />
+                                            :
+                                            <LoadingSpinner />
+                                        }
+                                    </Box>
+
+                                )
                             }}
-                        >
-                                <Text fontSize={15} color="coolGray.800" padding={1}>
-                                    {item.date}
-                                </Text>
-                            <Divider />
-                            {isLoaded ? 
-                            <FlatList
-                                onScrollToIndexFailed={info => {
-                                const wait = new Promise(resolve => setTimeout(resolve, 700));
-                                wait.then(() => {
-                                    fListRef.current?.scrollToIndex({ index: info.index, animated: true / false });
-                                });
-                            }}
-                            data={items.filter(data=> data.date==item.date)}
-                            renderItem={insideRenderItem}
-                            keyExtractor={(item) => item._id}
-                            />
-                            :
-                            <LoadingSpinner />
-                            }
-                                </Box>
-                        
-                            )
-                }}
-            </Pressable>
-        </Box>
-            }
+                        </Pressable>
+                    </Box>
+                }
             </>
-            
+
         );
     };
 
@@ -147,20 +147,24 @@ const TodoDetailView = (props) => {
 
     // let da = items.filter(data=> data.date.split('-')[1]==month)
     // console.log(da[0]==null);
-        return (
-            <>
-                <View style={styles.container}>
-                    <BackButton navigation={props.navigation} />
-                    
-                
-                { items.filter(data=> data.date.split('-')[1]==month)[0] == null ? <EmptyMonth month={month} />: 
-                <FlatList
-                    data={dateResult}
-                    renderItem={renderItem}
-                    keyExtractor={item => item.key}
-                />
+    return (
+        <>
+            <View style={styles.container}>
+                <BackButton navigation={props.navigation} />
+                {
+                    items.filter(data => data.date.split('-')[1] == month)[0] == null
+                        ?
+                        <ScrollView>
+                            <EmptyMonth month={month} />
+                        </ScrollView>
+                        :
+                        <FlatList
+                            data={dateResult}
+                            renderItem={renderItem}
+                            keyExtractor={item => item.key}
+                        />
                 }
-                <MonthSelector submitHandler={submitHandler}/>
+                <MonthSelector submitHandler={submitHandler} />
                 <SearchBar
                     placeholder="검색어를 입력하세요."
                     // onPress={() => alert("onPress")}
@@ -171,11 +175,11 @@ const TodoDetailView = (props) => {
                     onClearPress={() => {
                         filterList("");
                     }}
-                    style ={{margin:12, borderWidth:1,borderColor:'gray'}}
+                    style={{ margin: 12, borderWidth: 1, borderColor: 'gray' }}
                 />
-                </View>
-            </>
-         )
+            </View>
+        </>
+    )
 }
 
 const styles = StyleSheet.create({

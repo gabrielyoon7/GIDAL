@@ -4,7 +4,7 @@ import styled from "styled-components";
 export default function EmptyMonth({month}) {
   return (
     <ComponentContainer>
-      <EmptyText>{month}월에는 할 일이 없습니다.</EmptyText>
+      <EmptyText>{month}월에는 계획한 일이 없습니다.</EmptyText>
     </ComponentContainer>
   );
 }

@@ -73,7 +73,7 @@ const PickModal = ({ user_Id, profileImg, changeProfile }) => {
             <HStack>
 
               {img.map(profile => (
-                <TouchableOpacity onPress={profile.uri !== "" ? () => pressImg(profile.uri) : null}>
+                <TouchableOpacity key={profile.uri} onPress={profile.uri !== "" ? () => pressImg(profile.uri) : null}>
                   <Avatar bg="green.500" mr={1} source={profile.uri !== "" ? { uri: profile.uri } : null} key={profile.id}></Avatar>
                 </TouchableOpacity>
               ))}

@@ -123,7 +123,7 @@ const DiaryListView = (props) => {
                 month: month
             }
         }).then((response) => {
-            console.log(response.data);
+            // console.log(response.data);
             setItems(response.data);
             if(response.data.length==0){
                 setEmpty(true);

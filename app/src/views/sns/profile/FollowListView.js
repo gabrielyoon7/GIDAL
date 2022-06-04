@@ -81,15 +81,17 @@ export default function FollowListView(props) {
 
 
   useEffect(() => {
-    console.log(13)
     let data = followers;
     // init_page == 'Following' ? data = followings : data = followers;
     if (init_page === 'Following') {
       data = followings;
       setIndex(1);
     }
-    setFilteredDataSource(data);
-    setMasterDataSource(data);
+    if(followers.length !== 0 || followings.length !== 0){
+      console.log(13)
+      setFilteredDataSource(data);
+      setMasterDataSource(data);
+    }
   }, [followings, followers]);
 
   const searchFilter = (text) => {

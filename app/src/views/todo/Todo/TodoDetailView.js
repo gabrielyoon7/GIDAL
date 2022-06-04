@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, View, SafeAreaView, FlatList, StyleSheet, Alert, ScrollView } from 'react-native';
+import { Button, View, SafeAreaView, FlatList, StyleSheet, Alert, ScrollView, KeyboardAvoidingView } from 'react-native';
 import { Badge, Box, Divider, Flex, HStack, Pressable, Spacer, Text, } from 'native-base';
 import axios from 'axios';
 import { config } from '../../../../config'
@@ -164,19 +164,21 @@ const TodoDetailView = (props) => {
                             keyExtractor={item => item.key}
                         />
                 }
-                <MonthSelector submitHandler={submitHandler} />
-                <SearchBar
-                    placeholder="검색어를 입력하세요."
-                    // onPress={() => alert("onPress")}
-                    onChangeText={(text) => {
-                        console.log(text)
-                        filterList(text);
-                    }}
-                    onClearPress={() => {
-                        filterList("");
-                    }}
-                    style={{ margin: 12, borderWidth: 1, borderColor: 'gray' }}
-                />
+                <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} >
+                    <MonthSelector submitHandler={submitHandler} />
+                    <SearchBar
+                        placeholder="검색어를 입력하세요."
+                        // onPress={() => alert("onPress")}
+                        onChangeText={(text) => {
+                            console.log(text)
+                            filterList(text);
+                        }}
+                        onClearPress={() => {
+                            filterList("");
+                        }}
+                        style={{ margin: 12, borderWidth: 1, borderColor: 'gray' }}
+                    />
+                </KeyboardAvoidingView>
             </View>
         </>
     )

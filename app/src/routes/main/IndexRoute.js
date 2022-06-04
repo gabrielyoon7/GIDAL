@@ -205,7 +205,7 @@ const IndexRoute = () => {
         name="TodoCalendar"
         component={TodoCalendarScreen}
         options={{
-          cardStyleInterpolator: CardStyleInterpolators.forRevealFromBottomAndroid,
+          cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
         }}
       />
     </Stack.Navigator>

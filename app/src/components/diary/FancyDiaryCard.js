@@ -1,7 +1,7 @@
 import { Dimensions, StyleSheet, TouchableOpacity, } from 'react-native';
 import { Avatar, Badge, Box, Divider, Flex, HStack, Pressable, Spacer, Text, } from 'native-base';
 import { Ionicons } from "@expo/vector-icons";
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const FancyDiaryCard = ({ item: diary, user_id, pressCommentIcon, profileImg, onPress, followers, backgroundColor, textColor }) => {
     const [liked, setLiked] = useState(false);
@@ -163,7 +163,7 @@ const FancyDiaryCard = ({ item: diary, user_id, pressCommentIcon, profileImg, on
         </Box>
     )
 }
-export default FancyDiaryCard;
+export default React.memo(FancyDiaryCard);
 
 const styles = StyleSheet.create({
     diary: {

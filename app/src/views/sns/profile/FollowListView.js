@@ -39,7 +39,7 @@ export default function FollowListView(props) {
 
   // console.log(props.user_id);
 
-  React.useEffect(() => {
+  useEffect(() => {
     // getData();
     try {
       AsyncStorage.getItem('userInfo')
@@ -198,32 +198,8 @@ export default function FollowListView(props) {
       style={{ backgroundColor: '#27ae60' }}
     />
   );
-  //     const [following, setFollowing] = useState();
-  //     const [profileImg, setProfileImg] = useState();
-  //     const [date, setSelectedDate] = React.useState(props.selectedDate);    
-
-  //     const callback = (data) => {
-  //       setFollowing(data.following);
-  //       setProfileImg(data.profile_image)
-  //     }
-
-  //     useEffect(()=>{
-  //       axios.get(config.ip+':5000/usersRouter/findOne/',{
-  //         params: {
-  //           user_id: config.user[0].user_id,
-  //         }
-  //       })
-  //     .then((response) => {
-  //       callback(response.data);
-  //     }).catch(function (error) {
-  //       console.log(error);
-  //     });
-  //   },[])
 
   const setPage = (id) => {
-    // if(init_page === 'Followeing'){
-    //   setIndex(1)
-    // }
     if (id === 1) {
       setFilteredDataSource(followings);
     } else {
@@ -260,44 +236,7 @@ export default function FollowListView(props) {
         style={styles.container}
 
       />
-
-      {/* <Tab.Navigator
-        screenOptions={{ headerShown: false }}
-      >
-        <Tab.Screen
-          name="Follower"
-          component={FollowerScreen}
-          listeners={{
-            tabPress: () => {
-              //버튼 눌렀을 때 메인으로 가게 해주는 기능.
-              //참고로 이 listner 기능은 navigation v6부터 가능함
-              setFilteredDataSource(followers);
-              setMasterDataSource(followers);
-            },
-          }}
-        />
-        <Tab.Screen
-          name="Following"
-          component={FollowingScreen}
-          listeners={{
-            tabPress: () => {
-              //버튼 눌렀을 때 메인으로 가게 해주는 기능.
-              //참고로 이 listner 기능은 navigation v6부터 가능함
-              setFilteredDataSource(followings);
-              setMasterDataSource(followings);
-            },
-          }}
-        />
-      </Tab.Navigator> */}
-
     </>
-    // <View style={styles.container} >
-    //   <BackButton navigation={props.navigation} />
-    //   <Button onPress={() => { setFilteredDataSource(followings); setMasterDataSource(followings); }}>following</Button>
-    //   <Button onPress={() => { setFilteredDataSource(followers); setMasterDataSource(followers); }}>follower</Button>
-    //   <Followings navigation={props.navigation} />
-    // </View>
-
   )
 }
 

@@ -14,8 +14,6 @@ import ImagePicker from "./ImagePicker"
 
 
 export default function UserProfileView(props) {
-
-
   const isFocused = useIsFocused();
 
   const [date, setSelectedDate] = React.useState(props.selectedDate);
@@ -72,26 +70,6 @@ export default function UserProfileView(props) {
     }
   }, [user_Id, imgChange]);
 
-  const getUserData = (user_Id) => {
-    axios.post(config.ip + ':5000/usersRouter/findOne', {
-      data: {
-        user_id: user_Id,
-      }
-    })
-      .then((response) => {
-        const following = response.data[0].following;
-        const follower = response.data[0].follower;
-        const profileImg = response.data[0].profile_image;
-        setUserFollowing(following);
-        setUserFollower(follower);
-        setuserFollowingNum(following.length)
-        setuserFollowerNum(follower.length)
-        setProfileImg(profileImg)
-      }).catch(function (error) {
-        // console.log(error);
-      });
-  };
-
   React.useEffect(() => {
     let objectFollowing = Object.values(userFollower).map(item => item.user_id)
     // console.log("objectFollowing : " + objectFollowing);
@@ -114,6 +92,26 @@ export default function UserProfileView(props) {
       )
     }
   }, [userFollower])
+
+  const getUserData = (user_Id) => {
+    axios.post(config.ip + ':5000/usersRouter/findOne', {
+      data: {
+        user_id: user_Id,
+      }
+    })
+      .then((response) => {
+        const following = response.data[0].following;
+        const follower = response.data[0].follower;
+        const profileImg = response.data[0].profile_image;
+        setUserFollowing(following);
+        setUserFollower(follower);
+        setuserFollowingNum(following.length)
+        setuserFollowerNum(follower.length)
+        setProfileImg(profileImg)
+      }).catch(function (error) {
+        console.log(error);
+      });
+  };
 
   const follow = () => {
     const data = {
@@ -284,12 +282,6 @@ export default function UserProfileView(props) {
           </Box>
         </HStack>
         <View style={{ marginVertical: 10 }}>
-          {/* {currentId == user_Id ? 
-            // <ImagePicker style={styles.picker} user_Id={user_Id} changeProfile={changeProfile}/>
-            <MyPageActionView />
-            // : null
-            : <ProfileActionView />
-          } */}
           <ProfileActionView />
         </View>
       </View>

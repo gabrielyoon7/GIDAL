@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState } from 'react';
+﻿import React, { useCallback, useEffect, useState } from 'react';
 import { FlatList, View, StatusBar, StyleSheet, Text, TouchableOpacity, RefreshControl, KeyboardAvoidingView, Dimensions } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import axios from 'axios';
@@ -83,7 +83,7 @@ const FeedDiaryList = (props, navigation) => {
         setItems(newData);
     }
 
-    const renderItem = ({ item }) => {
+    const renderItem = useCallback( ({ item }) => {
         return (
             <FancyDiaryCard
                 item={item}
@@ -104,7 +104,7 @@ const FeedDiaryList = (props, navigation) => {
                 textColor="black"
             />
         );
-    };
+    });
 
 
     const wait = (timeout) => {
@@ -142,6 +142,7 @@ const FeedDiaryList = (props, navigation) => {
                         />
                     }
                     numColumns={numOfCol}
+                    initialNumToRender={5}
                 />
             </View>
             <KeyboardAvoidingView

@@ -14,14 +14,12 @@ import ImagePicker from "./ImagePicker"
 
 
 export default function UserProfileView(props) {
-
-
   const isFocused = useIsFocused();
 
   const [date, setSelectedDate] = React.useState(props.selectedDate);
   const [profileImg, setProfileImg] = useState('https://cdn-icons-png.flaticon.com/512/1/1247.png');
-  const [user_Id, setUserId] = useState('loading');
-  const [currentId, setCurrentId] = useState('헤헤');
+  const [user_Id, setUserId] = useState('');
+  const [currentId, setCurrentId] = useState('');
   const [userFollower, setUserFollower] = useState([]);
   const [userFollowing, setUserFollowing] = useState([]);
   const [userFollowerNum, setuserFollowerNum] = useState(0);
@@ -34,6 +32,7 @@ export default function UserProfileView(props) {
   React.useEffect(() => {
     //초기 프로필 아이디 수신부
     if (isFocused) {
+      console.log(10)
       try {
 
         const idx = new_routes.findIndex(r => r.name === "UserProfile")
@@ -50,53 +49,32 @@ export default function UserProfileView(props) {
                 }
               }
               )
-
           }
           catch (e) {
-
           }
         }
       } catch (error) {
-
       }
     }
-    return () => {
+    // return () => {
 
-    }
+    // }
   }, [isFocused]);
 
   React.useEffect(() => {
-    console.log(user_Id, ' ', imgChange)
-    if (user_Id !== 'loading') {
+    // console.log(user_Id, ' ', imgChange)
+    if (user_Id !== '') {
+      console.log(11)
       getUserData(user_Id);
     }
   }, [user_Id, imgChange]);
-
-  const getUserData = (user_Id) => {
-    axios.post(config.ip + ':5000/usersRouter/findOne', {
-      data: {
-        user_id: user_Id,
-      }
-    })
-      .then((response) => {
-        const following = response.data[0].following;
-        const follower = response.data[0].follower;
-        const profileImg = response.data[0].profile_image;
-        setUserFollowing(following);
-        setUserFollower(follower);
-        setuserFollowingNum(following.length)
-        setuserFollowerNum(follower.length)
-        setProfileImg(profileImg)
-      }).catch(function (error) {
-        // console.log(error);
-      });
-  };
 
   React.useEffect(() => {
     let objectFollowing = Object.values(userFollower).map(item => item.user_id)
     // console.log("objectFollowing : " + objectFollowing);
     // console.log(currentId);
     if (objectFollowing.includes(currentId)) {
+      console.log(12)
       // console.log("이미 팔로우 되어있음")
       setFollowText(
         <HStack>
@@ -114,6 +92,26 @@ export default function UserProfileView(props) {
       )
     }
   }, [userFollower])
+
+  const getUserData = (user_Id) => {
+    axios.post(config.ip + ':5000/usersRouter/findOne', {
+      data: {
+        user_id: user_Id,
+      }
+    })
+      .then((response) => {
+        const following = response.data[0].following;
+        const follower = response.data[0].follower;
+        const profileImg = response.data[0].profile_image;
+        setUserFollowing(following);
+        setUserFollower(follower);
+        setuserFollowingNum(following.length)
+        setuserFollowerNum(follower.length)
+        setProfileImg(profileImg)
+      }).catch(function (error) {
+        console.log(error);
+      });
+  };
 
   const follow = () => {
     const data = {
@@ -284,12 +282,6 @@ export default function UserProfileView(props) {
           </Box>
         </HStack>
         <View style={{ marginVertical: 10 }}>
-          {/* {currentId == user_Id ? 
-            // <ImagePicker style={styles.picker} user_Id={user_Id} changeProfile={changeProfile}/>
-            <MyPageActionView />
-            // : null
-            : <ProfileActionView />
-          } */}
           <ProfileActionView />
         </View>
       </View>

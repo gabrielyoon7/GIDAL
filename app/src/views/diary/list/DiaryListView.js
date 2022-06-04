@@ -26,20 +26,22 @@ const DiaryListView = (props) => {
     // console.log(user_Id);
 
     React.useEffect(() => {
-        console.log(1);
-        try {
-            AsyncStorage.getItem('userInfo')
-                .then(value => {
-                    if (value != null) {
-                        const UserInfo = JSON.parse(value);
-                        setUserId(UserInfo[0].user_id);
-                        setProfileImg(UserInfo[0].profile_image);
-                        // console.log(UserInfo[0].profile_image);
+        if(isFocused){
+            console.log(1);
+            try {
+                AsyncStorage.getItem('userInfo')
+                    .then(value => {
+                        if (value != null) {
+                            const UserInfo = JSON.parse(value);
+                            setUserId(UserInfo[0].user_id);
+                            setProfileImg(UserInfo[0].profile_image);
+                            // console.log(UserInfo[0].profile_image);
+                        }
                     }
-                }
-                )
-        } catch (error) {
-            console.log(error);
+                    )
+            } catch (error) {
+                console.log(error);
+            }
         }
     }, [isFocused])
 

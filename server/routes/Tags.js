@@ -264,7 +264,6 @@ router.post('/makeFriendsStatistics', async function (req, res, next) {
 /* GET. */
 router.post('/makeAnonymousStatistics', function (req, res, next) {
     let receivedData = req.body.data;
-    console.log(receivedData);
     TagLog.aggregate([
         { $match: { question_id: receivedData.question_id } },
         { $sortByCount: "$tag" }

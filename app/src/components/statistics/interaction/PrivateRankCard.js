@@ -17,7 +17,7 @@ const PrivateRankCard = (props) => {
         props.tagLogArr.map((tag) => (
             itemTemp.push({ value: tag.count, label: tag._id })
         ))
-        console.log(itemTemp);
+        // console.log(itemTemp);
 
         let countTemp = [];
         props.tagLogArr.map((tag) => (
@@ -36,7 +36,7 @@ const PrivateRankCard = (props) => {
     return (
         <>
             {
-                props.tagLogArr.length==0 
+                items.length === 0 
                 ?
                 <View>
                     <Text>Loading...</Text>

@@ -67,16 +67,24 @@ const FriendsRankCard = (props) => {
 
   return (
     <>
-      <BarChart
-        width={340}
-        rotateLabel
-        noOfSections={5}
-        spacing={30}
-        stackData={stackData}
-        barBorderRadius={4}
-        maxValue={maxValue}
-        hideRules
-      />
+      {
+        stackData.length === 0
+          ?
+          <View>
+            <Text>Loading...</Text>
+          </View>
+          :
+          <BarChart
+            width={340}
+            rotateLabel
+            noOfSections={5}
+            spacing={30}
+            stackData={stackData}
+            barBorderRadius={4}
+            maxValue={maxValue}
+            hideRules
+          />
+      }
     </>
   )
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { FlatList, View, StatusBar, StyleSheet, Text, TouchableOpacity, Dimensions } from 'react-native';
 import axios from 'axios';
 import { config } from '../../../../config'
@@ -75,7 +75,7 @@ const DiaryList = (props, navigation) => {
         )
     }
 
-    const renderItem = ({ item }) => {
+    const renderItem = useCallback(({ item }) => {
         return (
             <FancyDiaryCard
                 item={item}
@@ -96,7 +96,7 @@ const DiaryList = (props, navigation) => {
                 textColor="black"
             />
         );
-    };
+    });
 
     const windowHeight = Dimensions.get('window').height;
     const windowWidth = Dimensions.get('window').width;

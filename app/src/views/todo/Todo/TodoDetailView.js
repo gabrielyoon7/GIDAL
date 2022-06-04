@@ -9,6 +9,7 @@ import LoadingSpinner from '../../../components/common/LoadingSpinner';
 import FancyTodoCard from '../../../components/todo/FancyTodoCard';
 import SearchBar from "react-native-dynamic-search-bar";
 import MonthSelector from '../../../components/todo/MonthSelector';
+import EmptyMonth from "./EmptyMonth";
 
 const TodoDetailView = (props) => {
     // console.log(props.pickedDate);
@@ -144,11 +145,23 @@ const TodoDetailView = (props) => {
         console.log(value);
     };
 
+    // let da = items.filter(data=> data.date.split('-')[1]==month)
+    // console.log(da[0]==null);
         return (
             <>
                 <View style={styles.container}>
                     <BackButton navigation={props.navigation} />
-                    <SearchBar
+                    
+                
+                { items.filter(data=> data.date.split('-')[1]==month)[0] == null ? <EmptyMonth month={month} />: 
+                <FlatList
+                    data={dateResult}
+                    renderItem={renderItem}
+                    keyExtractor={item => item.key}
+                />
+                }
+                <MonthSelector submitHandler={submitHandler}/>
+                <SearchBar
                     placeholder="검색어를 입력하세요."
                     // onPress={() => alert("onPress")}
                     onChangeText={(text) => {
@@ -159,12 +172,6 @@ const TodoDetailView = (props) => {
                         filterList("");
                     }}
                     style ={{margin:12, borderWidth:1,borderColor:'gray'}}
-                />
-                <MonthSelector submitHandler={submitHandler}/>
-                    <FlatList
-                    data={dateResult}
-                    renderItem={renderItem}
-                    keyExtractor={item => item.key}
                 />
                 </View>
             </>

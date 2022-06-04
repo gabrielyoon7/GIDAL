@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function Empty() {
+export default function EmptyMonth({month}) {
   return (
     <ComponentContainer>
-      <EmptyText>할 일이 없습니다.</EmptyText>
+      <EmptyText>{month}월에는 할 일이 없습니다.</EmptyText>
     </ComponentContainer>
   );
 }
@@ -12,7 +12,7 @@ export default function Empty() {
 const ComponentContainer = styled.View`
   align-items: center;
   justify-content: center;
-  height: 630px;
+  height: 540px;
   font-color:red;
   background-color: #ffffff;
 `;

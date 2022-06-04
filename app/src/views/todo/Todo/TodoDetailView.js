@@ -151,7 +151,17 @@ const TodoDetailView = (props) => {
             <>
                 <View style={styles.container}>
                     <BackButton navigation={props.navigation} />
-                    <SearchBar
+                    
+                
+                { items.filter(data=> data.date.split('-')[1]==month)[0] == null ? <EmptyMonth month={month} />: 
+                <FlatList
+                    data={dateResult}
+                    renderItem={renderItem}
+                    keyExtractor={item => item.key}
+                />
+                }
+                <MonthSelector submitHandler={submitHandler}/>
+                <SearchBar
                     placeholder="검색어를 입력하세요."
                     // onPress={() => alert("onPress")}
                     onChangeText={(text) => {
@@ -163,14 +173,6 @@ const TodoDetailView = (props) => {
                     }}
                     style ={{margin:12, borderWidth:1,borderColor:'gray'}}
                 />
-                <MonthSelector submitHandler={submitHandler}/>
-                { items.filter(data=> data.date.split('-')[1]==month)[0] == null ? <EmptyMonth month={month} />: 
-                <FlatList
-                    data={dateResult}
-                    renderItem={renderItem}
-                    keyExtractor={item => item.key}
-                />
-                }
                 </View>
             </>
          )

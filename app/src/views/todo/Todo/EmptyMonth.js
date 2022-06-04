@@ -12,7 +12,7 @@ export default function EmptyMonth({month}) {
 const ComponentContainer = styled.View`
   align-items: center;
   justify-content: center;
-  height: 630px;
+  height: 540px;
   font-color:red;
   background-color: #ffffff;
 `;

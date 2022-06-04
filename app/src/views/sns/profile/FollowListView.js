@@ -79,9 +79,9 @@ export default function FollowListView(props) {
 
 
   useEffect(() => {
-    let data = followers;
+    let data = followings;
     // init_page == 'Following' ? data = followings : data = followers;
-    if(followers.length !== 0){
+    if(followings.length !== 0){
       console.log(13)
       setFilteredFollowings(data);
       setMasterFollowings(data);
@@ -89,13 +89,13 @@ export default function FollowListView(props) {
   }, [followings]);
 
   useEffect(() => {
-    let data = followings;
+    let data = followers;
     // init_page == 'Following' ? data = followings : data = followers;
     if (init_page === 'Following') {
       // data = followings;
       setIndex(1);
     }
-    if(followings.length !== 0){
+    if(followers.length !== 0){
       console.log(131)
       setFilteredFollowers(data);
       setMasterFollowers(data);
@@ -224,8 +224,8 @@ export default function FollowListView(props) {
   );
 
   const setPage = (id) => {
-    setFilteredFollowings(followings);
-    setFilteredFollowers(followers);
+    // setFilteredFollowings(followings);
+    // setFilteredFollowers(followers);
     // if (id === 1) {
     //   setFilteredFollowings(followings);
     // } else {

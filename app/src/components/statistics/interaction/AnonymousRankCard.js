@@ -16,7 +16,7 @@ const AnonymousRankCard = (props) => {
         props.tagLogArr.map((tag) => (
             itemTemp.push({ value: tag.count, label: tag._id })
         ))
-        console.log(itemTemp);
+        // console.log(itemTemp);
 
         let countTemp = [];
         props.tagLogArr.map((tag) => (

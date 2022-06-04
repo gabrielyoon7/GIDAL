@@ -17,10 +17,13 @@ const AnonymousStatPreView = (props) => {
     const [questionId, setQuestionId] = useState(props.id);
     const [tagLogArr, setTagLogArr] = useState([]);
     const [reRequestCount, setReRequestCount] = useState(0);
+    const [haveData, setIsHaveData] = useState(false);
 
     useEffect(() => {
-        getStatisticsPreview();
-    }, [questionId]);
+        if(props.id !== 'hihi'){
+            getStatisticsPreview();
+        }
+    }, [props.id]);
 
     const getStatisticsPreview = () => {
         axios.post(config.ip + ':5000/tagsRouter/makeAnonymousStatistics', {
@@ -30,7 +33,9 @@ const AnonymousStatPreView = (props) => {
             }
         }).then((response) => {
             let temp = response.data;
-            setTagLogArr([...temp]); //re-rendering 시 매우 중요함
+            if(temp.length !== 0){
+                setTagLogArr([...temp]); //re-rendering 시 매우 중요함
+            }
         }).catch(function (error) {
             console.log(error);
         })
@@ -38,10 +43,10 @@ const AnonymousStatPreView = (props) => {
 
     useEffect(() => {
         setIsLoaded(true);
-        if (tagLogArr.length == 0) {
-            getStatisticsPreview();
-            setReRequestCount(reRequestCount + 1);
-        }
+        // if (tagLogArr.length == 0) {
+        //     getStatisticsPreview();
+        //     setReRequestCount(reRequestCount + 1);
+        // }
     }, [tagLogArr]);
 
     return (

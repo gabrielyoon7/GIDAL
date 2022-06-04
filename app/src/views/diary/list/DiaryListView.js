@@ -120,7 +120,7 @@ const DiaryListView = (props) => {
                 month: month
             }
         }).then((response) => {
-            console.log(response.data);
+            // console.log(response.data);
             setItems(response.data);
         }).catch(function (error) {
             console.log(error);

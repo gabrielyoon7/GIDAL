@@ -32,6 +32,7 @@ export default function UserProfileView(props) {
   React.useEffect(() => {
     //초기 프로필 아이디 수신부
     if (isFocused) {
+      console.log(10)
       try {
 
         const idx = new_routes.findIndex(r => r.name === "UserProfile")
@@ -48,29 +49,28 @@ export default function UserProfileView(props) {
                 }
               }
               )
-
           }
           catch (e) {
-
           }
         }
       } catch (error) {
-
       }
     }
-    return () => {
+    // return () => {
 
-    }
+    // }
   }, [isFocused]);
 
   React.useEffect(() => {
-    console.log(user_Id, ' ', imgChange)
+    console.log(11)
+    // console.log(user_Id, ' ', imgChange)
     if (user_Id !== 'loading') {
       getUserData(user_Id);
     }
   }, [user_Id, imgChange]);
 
   React.useEffect(() => {
+    console.log(12)
     let objectFollowing = Object.values(userFollower).map(item => item.user_id)
     // console.log("objectFollowing : " + objectFollowing);
     // console.log(currentId);

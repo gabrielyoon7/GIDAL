@@ -40,6 +40,7 @@ export default function FollowListView(props) {
   // console.log(props.user_id);
 
   useEffect(() => {
+    console.log(15)
     // getData();
     try {
       AsyncStorage.getItem('userInfo')
@@ -59,6 +60,7 @@ export default function FollowListView(props) {
     if (user_Id === '') {
       return;
     }
+    console.log(14)
     axios.post(config.ip + ':5000/usersRouter/findOne/', {
       data: {
         user_id: props.user_id,
@@ -79,6 +81,7 @@ export default function FollowListView(props) {
 
 
   useEffect(() => {
+    console.log(13)
     let data = followers;
     // init_page == 'Following' ? data = followings : data = followers;
     if (init_page === 'Following') {

@@ -37,7 +37,7 @@ const DiaryList = (props, navigation) => {
 
     //첫 렌더링에만 호출됨
     useEffect(() => {
-        if(user_id !== ''){
+        if(user_id !== '' && isFocused){
             console.log(3)
             if (props.type === 'calendar') {
                 props.getitems();

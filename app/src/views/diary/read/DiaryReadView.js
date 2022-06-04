@@ -22,7 +22,7 @@ const DiaryReadView = (props) => {
     const [userId, setUserId] = React.useState('');
     const { width } = useWindowDimensions();
     const new_routes = useNavigationState(state => state.routes);
-    console.log(new_routes);
+    // console.log(new_routes);
     const defaultData = {
         "__v": 0,
         "_id": "626f78c19ee18cdc829a10de",

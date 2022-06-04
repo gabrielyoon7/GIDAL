@@ -1,17 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Dimensions, StyleSheet, StatusBar, Text, TextInput, View, TouchableOpacity, SafeAreaView, ScrollView, Image, Alert, Modal, Pressable, ImageBackground, FlatList, } from 'react-native';
+import { Dimensions, StyleSheet, Text, View, TouchableOpacity, Image, FlatList } from 'react-native';
 import SearchBar from "react-native-dynamic-search-bar";
 import axios from 'axios'
 import { config } from '../../../../config'
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Button, Center, Avatar } from 'native-base';
 import BackButton from '../../../components/common/BackButton';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { CommonActions, useIsFocused, useNavigationState } from "@react-navigation/native";
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
-
-const Tab = createBottomTabNavigator();
-
 
 
 export default function FollowListView(props) {
@@ -20,7 +14,6 @@ export default function FollowListView(props) {
   const [masterFollowings, setMasterFollowings] = useState([]);
   const [filteredFollowers, setFilteredFollowers] = useState([]);
   const [masterFollowers, setMasterFollowers] = useState([]);
-  const [user_Id, setUserId] = React.useState('');
   const [followings, setFollowings] = useState([]);
   const [followers, setFollowers] = useState([]);
 
@@ -34,34 +27,8 @@ export default function FollowListView(props) {
     { key: 'second', title: '팔로잉' },
   ]);
 
-  // const [init, setInit] = useState('Following');
-  // const [data, setData] = useState(followings)
-
-  // console.log(props.navigation.state);
-
-  // console.log(props.user_id);
-
-  // useEffect(() => {
-  //   console.log(15)
-  //   // getData();
-  //   try {
-  //     AsyncStorage.getItem('userInfo')
-  //       .then(value => {
-  //         if (value != null) {
-  //           const UserInfo = JSON.parse(value);
-  //           console.log('1',UserInfo.user_id)
-  //           setUserId(UserInfo.user_id);
-  //         }
-  //       }
-  //       )
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }, [])
-
   useEffect(() => {
     if (props.user_id !== '') {
-      console.log(props.user_id)
       console.log(14)
       axios.post(config.ip + ':5000/usersRouter/findOne/', {
         data: {
@@ -80,7 +47,6 @@ export default function FollowListView(props) {
 
   useEffect(() => {
     let data = followings;
-    // init_page == 'Following' ? data = followings : data = followers;
     if(followings.length !== 0){
       console.log(13)
       setFilteredFollowings(data);
@@ -90,9 +56,7 @@ export default function FollowListView(props) {
 
   useEffect(() => {
     let data = followers;
-    // init_page == 'Following' ? data = followings : data = followers;
     if (init_page === 'Following') {
-      // data = followings;
       setIndex(1);
     }
     if(followers.length !== 0){
@@ -148,7 +112,7 @@ export default function FollowListView(props) {
     props.navigation.dispatch(CommonActions.navigate({ name: 'UserProfile', params: { user_id: item.user_id, }, }))
   }
 
-  console.log(filteredFollowers);
+  // console.log(filteredFollowers);
   
   const Followings = () => {
     return (
@@ -249,13 +213,6 @@ export default function FollowListView(props) {
   );
 
   const setPage = (id) => {
-    // setFilteredFollowings(followings);
-    // setFilteredFollowers(followers);
-    // if (id === 1) {
-    //   setFilteredFollowings(followings);
-    // } else {
-    //   setFilteredFollowers(followers);
-    // }
     setIndex(id);
   }
 

@@ -103,21 +103,46 @@ export default function FollowListView(props) {
   }, [followers]);
 
   const searchFilter = (text) => {
+    if (index === 0){
+      searchInFollwers(text);
+    } else {
+      searchInFollwings(text);
+    }
+  };
+
+  const searchInFollwers = (text) => {
     if (text) {
-      const newData = masterDataSource.filter(function (item) {
+      const newData = masterFollowers.filter(function (item) {
         const itemData = item.name
           ? item.name.toUpperCase()
           : ''.toUpperCase();
         const textData = text.toUpperCase();
         return itemData.indexOf(textData) > -1;
       });
-      // setFilteredFollowings(newData);
+      setFilteredFollowers(newData);
       setSearch(text);
     } else {
-      // setFilteredFollowings(masterDataSource);
+      setFilteredFollowers(masterFollowers);
       setSearch(text);
     }
-  };
+  }
+
+  const searchInFollwings = (text) => {
+    if (text) {
+      const newData = masterFollowings.filter(function (item) {
+        const itemData = item.name
+          ? item.name.toUpperCase()
+          : ''.toUpperCase();
+        const textData = text.toUpperCase();
+        return itemData.indexOf(textData) > -1;
+      });
+      setFilteredFollowings(newData);
+      setSearch(text);
+    } else {
+      setFilteredFollowings(masterFollowings);
+      setSearch(text);
+    }
+  }
 
   const selectOther = (item) => {
     props.navigation.dispatch(CommonActions.navigate({ name: 'UserProfile', params: { user_id: item.user_id, }, }))

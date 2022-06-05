@@ -11,9 +11,16 @@ const FeedDiaryList = (props, navigation) => {
     const [items, setItems] = useState([]);
     const [backupData, setBackupData] = useState([]);
     const [userId, setUserId] = useState('');
+
     const isFocused = useIsFocused(); // isFoucesd Define
     const [profileImg, setProfileImg] = useState('https://cdn-icons-png.flaticon.com/512/1/1247.png');
     const [followers, setFollowers] = useState([]);
+
+    const windowHeight = Dimensions.get('window').height;
+    const windowWidth = Dimensions.get('window').width;
+    const numOfCol = windowWidth > 700 ? 2 : 1;
+    const diaryWidth= numOfCol>1? windowWidth*0.5*0.96 : windowWidth*0.96;
+
 
     useEffect(() => {
         AsyncStorage.getItem('userInfo')
@@ -91,6 +98,7 @@ const FeedDiaryList = (props, navigation) => {
                 profileImg={profileImg}
                 followers={followers}
                 pressCommentIcon={() => pressCommentIcon(item)}
+                diaryWidth={diaryWidth}
                 onPress={
                     () => {
                         props.navigation.push('DiaryRead', {
@@ -119,11 +127,6 @@ const FeedDiaryList = (props, navigation) => {
         //setRefreshing(false)瑜� getitems �궡遺��뿉�꽌 �빐二쇰룄濡� 蹂�寃� (�뜲�씠�꽣 �닔�떊 �꽦怨� �떆 濡쒕뵫 �몴�떆瑜� 媛뺤젣濡� 醫낅즺�븯寃� �븿)
         //   wait(2000).then(() => setRefreshing(false));
     }, []);
-
-
-    const windowHeight = Dimensions.get('window').height;
-    const windowWidth = Dimensions.get('window').width;
-    const numOfCol = windowWidth > 700 ? 2 : 1;
 
     return (
         <>

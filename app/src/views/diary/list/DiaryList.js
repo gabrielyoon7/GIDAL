@@ -10,7 +10,20 @@ import { useIsFocused } from '@react-navigation/native';
 const DiaryList = (props, navigation) => {
     const user_id = props.user_Id;
     const [isLoaded, setIsLoaded] = useState(false);
-    const profileImg = props.profileImg
+    const profileImg = props.profileImg;
+    
+    
+    // const [data, setData] = useState(0);
+    const [selectedId, setSelectedId] = useState(null);
+    const [ref, setRef] = useState(null);
+    const isFocused = useIsFocused(); // isFoucesd Define
+
+    const windowHeight = Dimensions.get('window').height;
+    const windowWidth = Dimensions.get('window').width;
+    const numOfCol = windowWidth > 700 ? 2 : 1;
+    const diaryWidth= numOfCol>1? windowWidth*0.5*0.96 : windowWidth*0.96;
+
+
 
     const getItems = () => {
         let result = []
@@ -29,11 +42,6 @@ const DiaryList = (props, navigation) => {
             console.log(error);
         })
     }
-
-    // const [data, setData] = useState(0);
-    const [selectedId, setSelectedId] = useState(null);
-    const [ref, setRef] = useState(null);
-    const isFocused = useIsFocused(); // isFoucesd Define
 
     //첫 렌더링에만 호출됨
     useEffect(() => {
@@ -85,6 +93,7 @@ const DiaryList = (props, navigation) => {
                 profileImg={profileImg}
                 followers={[]}
                 pressCommentIcon={() => pressCommentIcon(item)}
+                diaryWidth={diaryWidth}
                 onPress={
                     () => {
                         props.navigation.push('DiaryRead', {
@@ -99,10 +108,6 @@ const DiaryList = (props, navigation) => {
             />
         );
     });
-
-    const windowHeight = Dimensions.get('window').height;
-    const windowWidth = Dimensions.get('window').width;
-    const numOfCol = windowWidth > 700 ? 2 : 1;
 
     return (
         <View style={styles.container}>

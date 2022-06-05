@@ -3,7 +3,7 @@ import { Avatar, Badge, Box, Divider, Flex, HStack, Pressable, Spacer, Text, } f
 import { Ionicons } from "@expo/vector-icons";
 import React, { useEffect, useState } from 'react';
 
-const FancyDiaryCard = ({ item: diary, user_id, pressCommentIcon, profileImg, onPress, followers, backgroundColor, textColor }) => {
+const FancyDiaryCard = ({ item: diary, user_id, pressCommentIcon, profileImg, onPress, followers, backgroundColor, textColor, diaryWidth }) => {
     const [liked, setLiked] = useState(false);
 
     // 정규식을 이용한 HTML 태그 제거 시작
@@ -123,10 +123,10 @@ const FancyDiaryCard = ({ item: diary, user_id, pressCommentIcon, profileImg, on
         )
     }
 
-    const windowHeight = Dimensions.get('window').height;
-    const windowWidth = Dimensions.get('window').width;
-    const numOfCol=windowWidth>700?2:1;
-    const diaryWidth= numOfCol>1? windowWidth*0.5*0.96 : windowWidth*0.96;
+    // const windowHeight = Dimensions.get('window').height;
+    // const windowWidth = Dimensions.get('window').width;
+    // const numOfCol=windowWidth>700?2:1;
+    // const diaryWidth= numOfCol>1? windowWidth*0.5*0.96 : windowWidth*0.96;
 
     return (
         <Box alignItems="center" py="1" px="1">

@@ -59,14 +59,12 @@ useEffect(() => {
     }).then((response) => {
       console.log(response.data[0].receivedDm);
       if(isMounted ) {
-        return response
+        setReceivedDmList(response.data[0].receivedDm)
+        setSentDmList(response.data[0].sentDm)
+        setDmData(response.data[0].receivedDm)
+        setProfileImg(response.data[0].profile_image);
+        setFollowers(response.data[0].follower)
       }
-  }).then((response) => {
-    setReceivedDmList(response.data[0].receivedDm)
-    setSentDmList(response.data[0].sentDm)
-    setDmData(response.data[0].receivedDm)
-    setProfileImg(response.data[0].profile_image);
-    setFollowers(response.data[0].follower)
   })
   return () => {
     isMounted = false;

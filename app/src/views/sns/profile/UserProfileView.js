@@ -296,7 +296,15 @@ export default function UserProfileView(props) {
   return (
     <>
       <ProfileHeader />
-      <DiaryList selectedDate={date} navigation={props.navigation} user_Id={user_Id} type={'profile'} items={items} setItems={setItems} profileImg={profileImg} />
+      <DiaryList 
+      selectedDate={date} 
+      navigation={props.navigation} 
+      user_Id={user_Id} 
+      type={'profile'} 
+      items={items} 
+      setItems={setItems} 
+      profileImg={profileImg} 
+      />
     </>
   )
 }

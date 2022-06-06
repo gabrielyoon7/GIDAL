@@ -11,7 +11,7 @@ const DiaryList = (props, navigation) => {
     const user_id = props.user_Id;
     const [isLoaded, setIsLoaded] = useState(false);
     const profileImg = props.profileImg;
-    
+    const [isEmpty, setEmpty] = useState(false);
     
     // const [data, setData] = useState(0);
     const [selectedId, setSelectedId] = useState(null);
@@ -23,10 +23,9 @@ const DiaryList = (props, navigation) => {
     const numOfCol = windowWidth > 700 ? 2 : 1;
     const diaryWidth= numOfCol>1? windowWidth*0.5*0.96 : windowWidth*0.96;
 
-
-
     const getItems = () => {
         let result = []
+        setEmpty(false);
         axios.post(config.ip + ':5000/diariesRouter/findOwn', {
             data: {
                 user_id: user_id
@@ -36,6 +35,8 @@ const DiaryList = (props, navigation) => {
                 response.data.forEach((item) => {
                     result.push(item);
                 });
+            } else if (response.data.length==0){
+                setEmpty(true);
             }
             props.setItems(result);
         }).catch(function (error) {
@@ -120,7 +121,8 @@ const DiaryList = (props, navigation) => {
                             props.isEmpty
                                 ?
                                 <Text>이번 달에 작성한 일기가 없습니다.</Text>
-                                :
+                                : isEmpty ? 
+                                <Text>작성한 일기가 없습니다.</Text> :
                                 <LoadingSpinner />
                         }
                     </Center>

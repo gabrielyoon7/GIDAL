@@ -57,7 +57,7 @@ useEffect(() => {
         user_id: user_Id,
       }
     }).then((response) => {
-      console.log(response.data[0].receivedDm);
+      // console.log(response.data[0].receivedDm);
       if(isMounted ) {
         setReceivedDmList(response.data[0].receivedDm)
         setSentDmList(response.data[0].sentDm)

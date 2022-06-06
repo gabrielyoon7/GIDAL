@@ -45,26 +45,35 @@ const DmListView = (props) => {
           })
   },[isFocused])
 
-  useEffect(()=>{
-   getUserDmData()
-},[props])
+//   useEffect(()=>{
+//    getUserDmData()
+// },[isFocused])
 
-const getUserDmData = () => {
+useEffect(() => {
+  let isMounted = true;
+  // const getUserDmData = () => {
     axios.post(config.ip + ':5000/usersRouter/findOne', {
       data: {
         user_id: user_Id,
       }
     }).then((response) => {
-      console.log(response.data[0].sentDm);
-      setReceivedDmList(response.data[0].receivedDm)
-      setSentDmList(response.data[0].sentDm)
-      setDmData(response.data[0].receivedDm)
-      setProfileImg(response.data[0].profile_image);
-      setFollowers(response.data[0].follower);
-  }).catch(function (error) {
-    console.log(error);
-  });
-}
+      console.log(response.data[0].receivedDm);
+      if(isMounted ) {
+        return response
+      }
+  }).then((response) => {
+    setReceivedDmList(response.data[0].receivedDm)
+    setSentDmList(response.data[0].sentDm)
+    setDmData(response.data[0].receivedDm)
+    setProfileImg(response.data[0].profile_image);
+    setFollowers(response.data[0].follower)
+  })
+  return () => {
+    isMounted = false;
+    };
+// }
+}, [isFocused])
+
 
 const filteredPersonsId = dmData.filter( item => (item.opponent_id == props.userName ))
 
@@ -86,6 +95,7 @@ const filteredPersonsId = dmData.filter( item => (item.opponent_id == props.user
     const touchButtont = () => {
       setbutton(true)
     }
+
   const
   DmListReadView = () => {
     // const renderItem = useCallback(({ item, index }) => (
@@ -110,6 +120,7 @@ const filteredPersonsId = dmData.filter( item => (item.opponent_id == props.user
     //   }
     //   </TouchableOpacity> 
     // ), []);
+
     const renderItem = ({ item }) => {
       return (
         // <View>

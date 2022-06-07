@@ -55,7 +55,7 @@ const AnonymousStatDetailView = (props) => {
             <TagChart />
             <Box my={10} mx={5}>
                 {props.tagLogArr.map((tag) => (
-                    <HStack>
+                    <HStack key={tag._id}>
                         <Badge colorScheme="green" _text={{
                             color: "white"
                         }} variant="solid" rounded="4"

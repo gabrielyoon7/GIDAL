@@ -64,7 +64,7 @@ const FriendsStatDetailView = (props) => {
                     {friend.statics.length !== 0 ? <TagChart statics={friend.statics} /> : <Text style={styles.item}>작성한 일기가 없습니다</Text>}
                     
                     {friend?.statics?.map((tag) => (
-                        <Box mx={5}>
+                        <Box mx={5} key={tag._id}>
                             <HStack>
                                 <Badge colorScheme="green" _text={{
                                 color: "white"

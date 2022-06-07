@@ -3,7 +3,7 @@ import { Avatar, Badge, Box, Divider, Flex, HStack, Pressable, Spacer, Text, } f
 import { Ionicons } from "@expo/vector-icons";
 import { useEffect, useState } from 'react';
 
-const FancyDMCard = ({ item: diary, user_id, profileImg, onPress, followers, writer }) => {
+const FancyDMCard = ({ item: diary, user_id, profileImg, onPress, followers, writer, onLongPress }) => {
 
     // 정규식을 이용한 HTML 태그 제거 시작
 
@@ -77,7 +77,7 @@ const FancyDMCard = ({ item: diary, user_id, profileImg, onPress, followers, wri
 
     return (
         <Box alignItems="center" py="1" px="1">
-            <Pressable onPress={onPress}>
+            <Pressable onPress={onPress} onLongPress={onLongPress}>
                 {({
                     isHovered,
                     isFocused,

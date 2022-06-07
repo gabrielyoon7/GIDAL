@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
-import { FlatList, View, StyleSheet, Text, TouchableOpacity, RefreshControl } from 'react-native';
+import { FlatList, View, StyleSheet, Text, TouchableOpacity, RefreshControl, Alert  } from 'react-native';
 import { HStack } from 'native-base'
 import axios from 'axios'
 import { config } from '../../../../config'
@@ -15,11 +15,6 @@ const wait = (timeout) => {
 const DmListView = (props) => {
     const partner = props.userName;
     const [user_Id, setUserId] = React.useState('');
-    const [sentDmList, setSentDmList] = useState([]);
-    const [receivedDmList, setReceivedDmList] = useState([]);
-    const [dmData, setDmData] = useState([]);
-    const [profileImg, setProfileImg] = useState('');
-    const [followers, setFollowers] = useState([]);
     const isFocused = useIsFocused(); // isFoucesd Define
     const [writer, setWriter] = useState(props.userName);
     const [receivedBtnColor, setReceivedBtnColor] = useState("green")
@@ -27,6 +22,13 @@ const DmListView = (props) => {
     const [sentBtnColor, setSentBtnColor] = useState("white")
     const [sentTextColor, setSentTextColor] = useState("green")
     const [refreshing, setRefreshing] = React.useState(false);
+  const [sentDmList, setSentDmList] = useState([]);
+  const [receivedDmList, setReceivedDmList] = useState([]);
+  const [dmData, setDmData] = useState([]);
+  const [profileImg, setProfileImg] = useState('');
+  const [followers, setFollowers] = useState([]);
+  const [items, setItems] = useState([]);
+
 
     React.useEffect(() => {
       AsyncStorage.getItem('userInfo')
@@ -66,12 +68,17 @@ const getItems = () => {
     }).then((response) => {
       // console.log(response.data[0].receivedDm);
       if(isMounted ) {
-        setReceivedDmList(response.data[0].receivedDm)
-        setSentDmList(response.data[0].sentDm)
-        setDmData(response.data[0].receivedDm)
-        setProfileImg(response.data[0].profile_image);
-        setFollowers(response.data[0].follower)
+        if (response.data.length > 0) {
+          setReceivedDmList(response.data[0].receivedDm)
+          setSentDmList(response.data[0].sentDm)
+          setDmData(response.data[0].receivedDm)
+          setProfileImg(response.data[0].profile_image);
+          setFollowers(response.data[0].follower)
+          // response.data.forEach((item) => {
+          //     result.push(item);
+          // });
       }
+        } 
   })
   return () => {
     isMounted = false;
@@ -114,10 +121,25 @@ const filteredPersonsId = dmData.filter( item => (item.opponent_id == props.user
                       })
                   }
               }
+              onLongPress={() =>longPressDelete()}
               textColor="black"
           />
       );
   };
+
+  const longPressDelete = () =>
+    Alert.alert(
+      "해당 DM을 삭제 하시겠습니까?",
+      "",
+      [
+        {
+          text: "취소",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "삭제", onPress: () => console.log("OK Pressed") }
+      ]
+    );
 
     return (
       <FlatList 

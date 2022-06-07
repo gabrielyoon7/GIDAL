@@ -3,66 +3,66 @@ import React from "react";
 import { actions, RichEditor, RichToolbar } from "react-native-pell-rich-editor";
 
 const InputContent = (props) => {
-    const richText = React.useRef();
-    return (
-        <>
-                    <RichToolbar
-                editor={richText}
-                actions={[
-                  actions.undo,
-                  actions.redo,
-                  actions.insertVideo,
-                  actions.insertImage,
-                  actions.setStrikethrough,
-                  // actions.checkboxList,
-                  actions.insertOrderedList,
-                  actions.blockquote,
-                  actions.alignLeft,
-                  actions.alignCenter,
-                  actions.alignRight,
-                  actions.code,
-                  actions.line,
-      
-                  actions.foreColor,
-                  actions.hiliteColor,
-                  actions.heading1,
-                  actions.heading4,
-                  'insertEmoji',
-                  'insertHTML',
-                  'fontSize',
-                ]} // default defaultActions
-                iconMap={{ [actions.heading1]: ({ tintColor }) => (<Text style={[{ color: tintColor }]}>H1</Text>), }}
-            />
-            <ScrollView style={{height:500}}>
-                <RichEditor
-                    // initialFocus={true}
-                    // disabled={disabled}
-                    // editorStyle={contentStyle} // default light style
-                    ref={richText}
-                    // style={styles.rich}
-                    useContainer={true}
-                    initialHeight={200}
-                    enterKeyHint={'done'}
-                    // containerStyle={{borderRadius: 24}}
-                    placeholder={'오늘의 하루는 어땠나요?'}
-                    initialContentHTML={props.content}
-                    // editorInitializedCallback={editorInitializedCallback}
-                    // onChange={handleChange}
-                    // onHeightChange={handleHeightChange}
-                    // onPaste={handlePaste}
-                    // onKeyUp={handleKeyUp}
-                    // onKeyDown={handleKeyDown}
-                    // onInput={handleInput}
-                    // onMessage={handleMessage}
-                    // onFocus={handleFocus}
-                    // onBlur={handleBlur}
-                    // onCursorPosition={handleCursorPosition}
-                    pasteAsPlainText={true}
-                    onChange={(content) => { props.setContent(content); }}
-            
-                />
-            </ScrollView>
-            {/* <RichToolbar
+  const richText = React.useRef();
+  return (
+    <>
+      <RichToolbar
+        editor={richText}
+        actions={[
+          actions.undo,
+          actions.redo,
+          actions.insertVideo,
+          actions.insertImage,
+          actions.setStrikethrough,
+          // actions.checkboxList,
+          actions.insertOrderedList,
+          actions.blockquote,
+          actions.alignLeft,
+          actions.alignCenter,
+          actions.alignRight,
+          actions.code,
+          actions.line,
+
+          actions.foreColor,
+          actions.hiliteColor,
+          actions.heading1,
+          actions.heading4,
+          'insertEmoji',
+          'insertHTML',
+          'fontSize',
+        ]} // default defaultActions
+        iconMap={{ [actions.heading1]: ({ tintColor }) => (<Text style={[{ color: tintColor }]}>H1</Text>), }}
+      />
+      <ScrollView style={{ height: 500 }}>
+        <RichEditor
+          // initialFocus={true}
+          // disabled={disabled}
+          // editorStyle={contentStyle} // default light style
+          ref={richText}
+          // style={styles.rich}
+          useContainer={true}
+          initialHeight={200}
+          enterKeyHint={'done'}
+          // containerStyle={{borderRadius: 24}}
+          placeholder={'오늘의 하루는 어땠나요?'}
+          initialContentHTML={props.content}
+          // editorInitializedCallback={editorInitializedCallback}
+          // onChange={handleChange}
+          // onHeightChange={handleHeightChange}
+          // onPaste={handlePaste}
+          // onKeyUp={handleKeyUp}
+          // onKeyDown={handleKeyDown}
+          // onInput={handleInput}
+          // onMessage={handleMessage}
+          // onFocus={handleFocus}
+          // onBlur={handleBlur}
+          // onCursorPosition={handleCursorPosition}
+          pasteAsPlainText={true}
+          onChange={(content) => { props.setContent(content); }}
+
+        />
+      </ScrollView>
+      {/* <RichToolbar
           // 현재 잘 동작이 안됨
           style={[styles.richBar, dark && styles.richBarDark]}
           flatContainerStyle={styles.flatStyle}
@@ -119,7 +119,7 @@ const InputContent = (props) => {
         // foreColor={handleForeColor}
         // hiliteColor={handleHiliteColor}
         /> */}
-            {/* <RichToolbar
+      {/* <RichToolbar
                 editor={richText}
                 actions={[
                   actions.undo,
@@ -146,8 +146,8 @@ const InputContent = (props) => {
                 ]} // default defaultActions
                 iconMap={{ [actions.heading1]: ({ tintColor }) => (<Text style={[{ color: tintColor }]}>H1</Text>), }}
             /> */}
-        </>
-    )
+    </>
+  )
 }
 
 export default InputContent;

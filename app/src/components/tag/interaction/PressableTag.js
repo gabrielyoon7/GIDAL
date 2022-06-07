@@ -16,7 +16,7 @@ const PressableTag = (props) => {
   },[])
 
   const onPressTag = () => {
-    props.selectTags({ question_id: props.item._id, tag: props.tag })
+    props.selectTags({ question_id: props.item.question_id, tag: props.tag })
     setIsPressed(!isPressed);
     isPressed?setButtonColor(buttonStyles.buttonColorNormal):setButtonColor(buttonStyles.buttonColorPressed)
   }

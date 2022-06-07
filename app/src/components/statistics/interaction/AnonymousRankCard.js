@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import { BarChart } from "react-native-gifted-charts";
+import LoadingSpinner from '../../../components/common/LoadingSpinner';
 
 const AnonymousRankCard = (props) => {
 
@@ -36,7 +37,7 @@ const AnonymousRankCard = (props) => {
                 props.tagLogArr.length==0 
                 ?
                 <View>
-                    <Text>Loading...</Text>
+                    <LoadingSpinner />
                 </View>
                 :
                 <BarChart

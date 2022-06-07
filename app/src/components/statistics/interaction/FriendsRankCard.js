@@ -2,6 +2,7 @@ import { Badge, Box } from "native-base";
 import { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import { BarChart } from "react-native-gifted-charts";
+import LoadingSpinner from "../../common/LoadingSpinner";
 
 const FriendsRankCard = (props) => {
   const [stackData, setStackData] = useState([]);
@@ -71,7 +72,7 @@ const FriendsRankCard = (props) => {
         stackData.length === 0
           ?
           <View>
-            <Text>Loading...</Text>
+            <LoadingSpinner />
           </View>
           :
           <BarChart

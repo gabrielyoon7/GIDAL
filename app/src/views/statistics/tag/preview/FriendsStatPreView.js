@@ -34,7 +34,9 @@ const FriendsStatPreView = (props) => {
     }, []);
 
     useEffect(() => {
-        getUserData(user_Id);
+        if(user_Id !== ''){
+            getUserData(user_Id);
+        }
     }, [user_Id]);
 
     useEffect(() => {

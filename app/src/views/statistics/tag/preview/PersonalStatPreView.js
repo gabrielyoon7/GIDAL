@@ -33,7 +33,9 @@ const PersonalStatPreView = (props) => {
     }, []);
 
     useEffect(() => {
-        getStatisticsPreview(user_Id);
+        if(user_Id !== ''){
+            getStatisticsPreview(user_Id);
+        }
     }, [user_Id]);
 
     const getStatisticsPreview = (user_id) => {

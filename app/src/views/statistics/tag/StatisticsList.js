@@ -29,7 +29,7 @@ const StatisticsList = (props) => {
 
     const renderItem = ({ item }) => {
         return (
-            <StatisticsCard question={item.question} id={item._id} navigation={props.navigation} />
+            <StatisticsCard question={item.question} id={item.question_id} navigation={props.navigation} />
         );
     };
 

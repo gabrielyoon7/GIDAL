@@ -8,12 +8,12 @@ import PressableTag from './PressableTag';
 const SearchTags = (props) => {
 
     const [ref, setRef] = useState(null);
-    const renderItem = ({ item }) => {
+    const renderItem = useCallback(({ item }) => {
         return (
             // <PressableTag key={item} tag={item} selectTags={props.selectTags} styles={buttonStyles} />
             <PressableTag key={item} item={props.item} tag={item} selectTags={props.selectTags} selectedtags={props.selectedtags} />
         );
-    };
+    });
     const [dataSource, setDataSource] = useState(props.tags);
     const filterList = (text) => {
         let newData = props.tags;

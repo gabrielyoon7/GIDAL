@@ -6,11 +6,13 @@ import { config } from '../../../../config'
 import FancyDiaryCard from '../../../components/diary/FancyDiaryCard';
 import SearchBar from "react-native-dynamic-search-bar";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import LoadingSpinner from '../../../components/common/LoadingSpinner';
 
 const FeedDiaryList = (props, navigation) => {
     const [items, setItems] = useState([]);
     const [backupData, setBackupData] = useState([]);
     const [userId, setUserId] = useState('');
+    const [isEmpty, setEmpty] = useState(false);
 
     const isFocused = useIsFocused(); // isFoucesd Define
     const [profileImg, setProfileImg] = useState('https://cdn-icons-png.flaticon.com/512/1/1247.png');
@@ -19,7 +21,7 @@ const FeedDiaryList = (props, navigation) => {
     const windowHeight = Dimensions.get('window').height;
     const windowWidth = Dimensions.get('window').width;
     const numOfCol = windowWidth > 700 ? 2 : 1;
-    const diaryWidth= numOfCol>1? windowWidth*0.5*0.96 : windowWidth*0.96;
+    const diaryWidth = numOfCol > 1 ? windowWidth * 0.5 * 0.96 : windowWidth * 0.96;
 
 
     useEffect(() => {
@@ -35,8 +37,9 @@ const FeedDiaryList = (props, navigation) => {
     }, [])
 
     const getitems = () => {
+        setItems([]);
+        setEmpty(false);
         let result = [];
-
         axios.post(config.ip + ':5000/diariesRouter/findPublic')
             .then((response) => {
                 if (response.data.length > 0) {
@@ -44,8 +47,12 @@ const FeedDiaryList = (props, navigation) => {
                         result.push(item);
                     });
                 }
+                else{
+                    setEmpty(true);
+                }
                 setItems(result);
                 setBackupData(result);
+                console.log(result);
                 setRefreshing(false);
             }).catch(function (error) {
                 console.log(error);
@@ -61,6 +68,7 @@ const FeedDiaryList = (props, navigation) => {
         console.log(1);
         getitems();
     }, [isFocused]);
+   
 
     const pressCommentIcon = (item) => {
         props.navigation.navigate('DiaryComment', {
@@ -70,7 +78,6 @@ const FeedDiaryList = (props, navigation) => {
         }
         )
     }
-
 
     const filterList = (text) => {
         let newData = backupData;
@@ -90,7 +97,7 @@ const FeedDiaryList = (props, navigation) => {
         setItems(newData);
     }
 
-    const renderItem = useCallback( ({ item }) => {
+    const renderItem = useCallback(({ item }) => {
         return (
             <FancyDiaryCard
                 item={item}
@@ -131,22 +138,28 @@ const FeedDiaryList = (props, navigation) => {
     return (
         <>
             <View style={styles.container}>
-                <FlatList
-                    data={items}
-                    ref={(ref) => {
-                        setRef(ref);
-                    }}
-                    renderItem={renderItem}
-                    keyExtractor={(item) => item._id}
-                    refreshControl={
-                        <RefreshControl
-                            refreshing={refreshing}
-                            onRefresh={onRefresh}
+                {
+                    items.length == 0
+                        ?
+                        isEmpty?<Text>아무도 일기를 작성하지 않았네요.</Text>:<LoadingSpinner />
+                        :
+                        <FlatList
+                            data={items}
+                            ref={(ref) => {
+                                setRef(ref);
+                            }}
+                            renderItem={renderItem}
+                            keyExtractor={(item) => item._id}
+                            refreshControl={
+                                <RefreshControl
+                                    refreshing={refreshing}
+                                    onRefresh={onRefresh}
+                                />
+                            }
+                            numColumns={numOfCol}
+                            initialNumToRender={5}
                         />
-                    }
-                    numColumns={numOfCol}
-                    initialNumToRender={5}
-                />
+                }
             </View>
             <KeyboardAvoidingView
                 style={{ backgroundColor: '#FFFFFF' }}

@@ -20,7 +20,7 @@ const AnonymousStatPreView = (props) => {
     const [haveData, setIsHaveData] = useState(false);
 
     useEffect(() => {
-        if(props.id !== 'hihi'){
+        if (props.id !== 'hihi') {
             getStatisticsPreview();
         }
     }, [props.id]);
@@ -33,7 +33,7 @@ const AnonymousStatPreView = (props) => {
             }
         }).then((response) => {
             let temp = response.data;
-            if(temp.length !== 0){
+            if (temp.length !== 0) {
                 setTagLogArr([...temp]); //re-rendering 시 매우 중요함
             }
         }).catch(function (error) {
@@ -43,10 +43,6 @@ const AnonymousStatPreView = (props) => {
 
     useEffect(() => {
         setIsLoaded(true);
-        // if (tagLogArr.length == 0) {
-        //     getStatisticsPreview();
-        //     setReRequestCount(reRequestCount + 1);
-        // }
     }, [tagLogArr]);
 
     return (

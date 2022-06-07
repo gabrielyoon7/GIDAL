@@ -12,6 +12,7 @@ const UserStatDetailView = (props) => {
     const [data, setData] = useState({"title": "ㅇㅇ", "type": "ㅇㅇ"});
     const [tagLogArr, setTagLogArr] = useState([]);
     const new_routes = useNavigationState(state => state.routes);
+    
     useEffect(() => {
         //초기 질문 id 수신부
         try {
@@ -25,6 +26,7 @@ const UserStatDetailView = (props) => {
             // console.log(error);
         }
     }, []);
+
     useEffect(() => {
         // console.log(statType);
     },[statType]);
@@ -55,9 +57,7 @@ const UserStatDetailView = (props) => {
         <View style={{ flex: 1, backgroundColor: 'white' }}>
             <BackButton navigation={props.navigation} />
             <ScrollView>
-                {/* <Text>상세 통계 표시</Text> */}
                 <StatDeatilView/>
-                {/* {type[statType]?(<View>{type[statType].interaction}</View>):(<View><Text>Wrong type</Text></View>)} */}
             </ScrollView>
         </View>
     )

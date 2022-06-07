@@ -15,7 +15,6 @@ const StatisticsCard = (props) => {
                 <HStack>
                     <Text fontSize="xl">할 일 통계</Text>
                     <Spacer />
-                    {/* <Text alignSelf={'center'}>에 대한 통계 보러가기</Text> */}
                 </HStack>
             </View>
         </TouchableOpacity>
@@ -25,14 +24,13 @@ const StatisticsCard = (props) => {
 export default StatisticsCard;
 
 const styles = StyleSheet.create({
-
     card: {
         marginVertical: 10,
         marginHorizontal: 10,
         padding: 23,
-        marginLeft:13,
-        marginRight:13,
-        paddingLeft:30,
+        marginLeft: 13,
+        marginRight: 13,
+        paddingLeft: 30,
         height: 85,
         marginBottom: 5,
         backgroundColor: '#E8D9FF',
@@ -43,5 +41,4 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: "#d1d2d1",
     },
-
 });

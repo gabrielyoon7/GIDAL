@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { FlatList, Text, View } from "react-native";
 import { config } from "../../../../config";
 import StatisticsCard from "../../../components/statistics/StatisticsCard";
+
 const StatisticsList = (props) => {
     const [items, setItems] = useState([]);
     const [ref, setRef] = useState(null);
@@ -11,10 +12,6 @@ const StatisticsList = (props) => {
     useEffect(() => {
         getTags();
     }, []);
-
-    useEffect(() => {
-
-    }, [items]);
 
     const getTags = () => {
 
@@ -41,7 +38,6 @@ const StatisticsList = (props) => {
             }}
             renderItem={renderItem}
             keyExtractor={(item) => item._id}
-        // extraData={selectedId}
         />
     )
 }

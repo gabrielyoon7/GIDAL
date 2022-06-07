@@ -18,7 +18,6 @@ const PrivateRankCard = (props) => {
         props.tagLogArr.map((tag) => (
             itemTemp.push({ value: tag.count, label: tag._id })
         ))
-        // console.log(itemTemp);
 
         let countTemp = [];
         props.tagLogArr.map((tag) => (
@@ -26,7 +25,6 @@ const PrivateRankCard = (props) => {
         ))
         countTemp = Math.max.apply(null, countTemp);
         countTemp = Math.ceil(countTemp / 5);
-        // console.log(countTemp);
 
         setItems(itemTemp);
         setMaxValue(countTemp * 5);
@@ -37,27 +35,23 @@ const PrivateRankCard = (props) => {
     return (
         <>
             {
-                items.length === 0 
-                ?
-                <View>
-                    <LoadingSpinner />
-                </View>
-                :
-                <BarChart
-                    frontColor={'#91d653'}
-                    barBorderRadius={4}
-                    data={items}
-                    height={120}
-                    width={280}
-                    maxValue={maxValue} //MaxValue = noOfSections여야함
-                    noOfSections={5}
-                    hideRules
-                />
+                items.length === 0
+                    ?
+                    <View>
+                        <LoadingSpinner />
+                    </View>
+                    :
+                    <BarChart
+                        frontColor={'#91d653'}
+                        barBorderRadius={4}
+                        data={items}
+                        height={120}
+                        width={280}
+                        maxValue={maxValue} //MaxValue = noOfSections여야함
+                        noOfSections={5}
+                        hideRules
+                    />
             }
-
-            {/* {props.tagLogArr && props.tagLogArr.slice(0, 5).map((tag) => (
-                <Text key={tag._id}>{tag._id}{tag.count}</Text>
-            ))} */}
         </>
     )
 }

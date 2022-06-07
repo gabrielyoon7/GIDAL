@@ -57,7 +57,7 @@ const FriendsStatPreView = (props) => {
                 following.map(user => followingArr.push(user.user_id));
                 setUserFollowing(followingArr);
             }).catch(function (error) {
-                // console.log(error);
+                console.log(error);
             });
     };
 

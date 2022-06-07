@@ -20,7 +20,6 @@ const PersonalStatDetailView = (props) => {
         props.tagLogArr.map((tag) => (
             itemTemp.push({ value: tag.count, label: tag._id, frontColor: '#91d653' })
         ))
-        // console.log(itemTemp);
 
         let countTemp = [];
         props.tagLogArr.map((tag) => (
@@ -28,7 +27,6 @@ const PersonalStatDetailView = (props) => {
         ))
         countTemp = Math.max.apply(null, countTemp);
         countTemp = Math.ceil(countTemp / 5);
-        // console.log(countTemp);
 
         setItems(itemTemp);
         setMaxValue(countTemp * 5);
@@ -63,7 +61,7 @@ const PersonalStatDetailView = (props) => {
                         <Badge colorScheme="green" _text={{
                             color: "white"
                         }} variant="solid" rounded="4"
-                        style={{marginVertical: 3}}>
+                            style={{ marginVertical: 3 }}>
                             {tag._id}
                         </Badge>
                         <Spacer />

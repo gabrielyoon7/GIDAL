@@ -18,9 +18,8 @@ const AnonymousStatDetailView = (props) => {
     const getData = () => {
         let itemTemp = [];
         props.tagLogArr.map((tag) => (
-            itemTemp.push({ value: tag.count, label: tag._id, frontColor: '#91d653' }) //#4ABFF4
+            itemTemp.push({ value: tag.count, label: tag._id, frontColor: '#91d653' })
         ))
-        // console.log(itemTemp);
 
         let countTemp = [];
         props.tagLogArr.map((tag) => (
@@ -28,7 +27,6 @@ const AnonymousStatDetailView = (props) => {
         ))
         countTemp = Math.max.apply(null, countTemp);
         countTemp = Math.ceil(countTemp / 5);
-        // console.log(countTemp);
 
         setItems(itemTemp);
         setMaxValue(countTemp * 5);
@@ -51,7 +49,7 @@ const AnonymousStatDetailView = (props) => {
         );
     }
 
-    return(
+    return (
         <Box p={5}>
             <Heading mb={5} >{props.data.title}</Heading>
             <TagChart />
@@ -61,7 +59,7 @@ const AnonymousStatDetailView = (props) => {
                         <Badge colorScheme="green" _text={{
                             color: "white"
                         }} variant="solid" rounded="4"
-                        style={{marginVertical: 3}}>
+                            style={{ marginVertical: 3 }}>
                             {tag._id}
                         </Badge>
                         <Spacer />

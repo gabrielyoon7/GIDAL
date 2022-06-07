@@ -44,7 +44,6 @@ const PersonalStatPreView = (props) => {
                     user_id: user_id,
                 }
             }).then((response) => {
-                // console.log(response.data);
                 setTagLogArr(response.data);
             }).catch(function (error) {
                 console.log(error);
@@ -55,7 +54,7 @@ const PersonalStatPreView = (props) => {
 
     return (
         <View>
-            <TagRankCard data={data} tagLogArr={tagLogArr} navigation={props.navigation}/>
+            <TagRankCard data={data} tagLogArr={tagLogArr} navigation={props.navigation} />
         </View>
     )
 }

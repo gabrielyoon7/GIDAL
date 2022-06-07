@@ -18,7 +18,6 @@ const TagChart = (props) => {
         props.statics.map((tag) => (
             itemTemp.push({ value: tag.count, label: tag._id, frontColor: '#91d653' })
         ))
-        // console.log(itemTemp);
 
         let countTemp = [];
         props.statics.map((tag) => (
@@ -26,7 +25,6 @@ const TagChart = (props) => {
         ))
         countTemp = Math.max.apply(null, countTemp);
         countTemp = Math.ceil(countTemp / 5);
-        // console.log(countTemp);
 
         setItems(itemTemp);
         setMaxValue(countTemp * 5);
@@ -65,9 +63,7 @@ const FriendsStatDetailView = (props) => {
 
                     {friend.statics.length !== 0 ? <TagChart statics={friend.statics} /> : <Text style={styles.item}>작성한 일기가 없습니다</Text>}
                     
-                    {/* <Text></Text> */}
                     {friend?.statics?.map((tag) => (
-                        // <Text style={styles.item} key={tag._id}>{tag._id} {tag.count}</Text>
                         <Box mx={5}>
                             <HStack>
                                 <Badge colorScheme="green" _text={{
@@ -88,10 +84,6 @@ const FriendsStatDetailView = (props) => {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        paddingTop: 22
-    },
     sectionHeader: {
         paddingTop: 2,
         paddingLeft: 10,

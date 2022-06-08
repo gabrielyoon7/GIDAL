@@ -10,26 +10,9 @@ const DiarySnsFeedView = () => {
     const [value, onChange] = useState(new Date());
     const [items, setItems] = useState([]);
     const [mostLikersItems, setMostLikersItems] = useState([]);
-    const defaultData = {
-        "__v": 0,
-        "_id": "626f78c19ee18cdc829a10de",
-        "accessible_user": [],
-        "comments": [],
-        "content": "loading...",
-        "date": "2022-05-02T00:00:00.000Z",
-        "disclosure": "private",
-        "likes": 0,
-        "stickers": [],
-        "tags": [],
-        "likers": [],
-        "title": "loading...",
-        "user_id": "loading...",
-    };
-    const [diary, setDiary] = useState(defaultData);
-
+    const [diary, setDiary] = useState(null);
     useEffect(() => {
         getitems();
-        // getMostLikersItems();
     }, []);
 
     useEffect(() => {
@@ -99,11 +82,6 @@ const DiarySnsFeedView = () => {
 
                 <div className="col-md-4">
                     <div className="position-sticky">
-                        {/* <div> */}
-                        {/* <div className="p-4 mb-3 bg-light rounded">
-                            <h4 className="fw-bold">About</h4>
-                            <p className="mb-0">Customize this section to tell your visitors a little bit about your publication, writers, content, or something else entirely. Totally up to you.</p>
-                        </div> */}
 
                         <div className="p-4">
                             <h4 className="fw-bold">인기 일기</h4>

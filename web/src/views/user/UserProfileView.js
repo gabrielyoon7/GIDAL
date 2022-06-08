@@ -10,24 +10,7 @@ const UserProfileView = () => {
     const params = useParams();
     const user_id = params.id;
     const [items, setItems] = useState([]);
-
-
-    const defaultData = {
-        "__v": 0,
-        "_id": "626f78c19ee18cdc829a10de",
-        "accessible_user": [],
-        "comments": [],
-        "content": "loading...",
-        "date": "2022-05-02T00:00:00.000Z",
-        "disclosure": "private",
-        "likes": 0,
-        "stickers": [],
-        "tags": [],
-        "likers": [],
-        "title": "loading...",
-        "user_id": "loading...",
-    };
-    const [diary, setDiary] = useState(defaultData);
+    const [diary, setDiary] = useState(null);
 
     useEffect(() => {
         getitems();

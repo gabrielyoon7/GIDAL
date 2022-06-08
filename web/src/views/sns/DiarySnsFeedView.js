@@ -89,14 +89,14 @@ const DiarySnsFeedView = () => {
                                 formatDay={(locale, date) => moment(date).format("DD")}
                                 className="mx-auto w-full text-sm border-b"
                             />
-                            <ol className="list-unstyled mt-4">
+                            <div className="list-unstyled mt-4">
                                 {mostLikersItems.map((diary) => (
                                     <a href="#" className="text-decoration-none text-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => setDiary(diary)} key={diary._id} >
-                                        <DiaryPostCard diary={diary}/>
+                                        <DiaryPostCard diary={diary} />
                                     </a>
                                 )
                                 )}
-                            </ol>
+                            </div>
                         </div>
 
                         <div className="p-4">
@@ -112,7 +112,7 @@ const DiarySnsFeedView = () => {
             {/* <!-- Modal --> */}
             <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
-                    <div className="modal-content" style={{width:'430px'}}>
+                    <div className="modal-content" style={{ width: '430px' }}>
                         <div className="modal-body bg-dark rounded-3">
                             <DiaryMobileReadView diary={diary} />
                         </div>

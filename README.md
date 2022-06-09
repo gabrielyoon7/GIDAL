@@ -1,7 +1,7 @@
 
 # 기록의 달인 : GIDAL
 
-2022 경기대학교 컴퓨터공학심화캡스톤 6조
+2022 경기대학교 컴퓨터공학심화캡스톤 목123 6조
 
 차세대 일기 작성 애플리케이션 : Next Generation Diary Writing Application
 
@@ -68,6 +68,8 @@ routes에 삽입할 view를 모아놓는 폴더
 - 일기 CRUD
   - 일기 작성하기
     - 태그 선택기
+      - 버튼형
+      - 검색형
     - 제목 작성하기 [![ㅇㅇ](https://img.shields.io/badge/Web-yellow)]()
     - WYSIWYG 편집기 [![ㅇㅇ](https://img.shields.io/badge/Web-yellow)]()
     - 공개 여부 설정 [![ㅇㅇ](https://img.shields.io/badge/Web-yellow)]()
@@ -75,16 +77,19 @@ routes에 삽입할 view를 모아놓는 폴더
   - 일기 수정하기
   - 일기 삭제하기
 - 모두의 일기
-  - 일기 목록 조회 [![ㅇㅇ](https://img.shields.io/badge/Web-yellow)]()
-  - 일기 목록 새로 고침 [![ㅇㅇ](https://img.shields.io/badge/Web-yellow)]()
-  - 일기 검색하기
-  - 일기 좋아요
-  - 일기 댓글
-  - 구독(팔로우/팔로잉)
-  - 구독 조회
-  - 프로필 [![ㅇㅇ](https://img.shields.io/badge/Web-yellow)]()
-  - 교환 일기 작성
-  - 교환 일기 조회
+    - 일기
+        - 일기 목록 조회 [![ㅇㅇ](https://img.shields.io/badge/Web-yellow)]()
+        - 일기 목록 새로 고침 [![ㅇㅇ](https://img.shields.io/badge/Web-yellow)]()
+        - 일기 검색하기
+        - 일기 좋아요
+        - 일기 댓글
+    - 프로필
+        - 구독(팔로우/팔로잉)
+        - 구독 조회
+        - 프로필 조회 [![ㅇㅇ](https://img.shields.io/badge/Web-yellow)]()
+    - 교환 일기
+        - 교환 일기 작성
+        - 교환 일기 조회
 - 할 일
   - 할 일 등록
   - 할 일 확인(체크)
@@ -99,16 +104,17 @@ routes에 삽입할 view를 모아놓는 폴더
   - 로그인/로그아웃 [![ㅇㅇ](https://img.shields.io/badge/Web-yellow)]()
   - 회원가입 [![ㅇㅇ](https://img.shields.io/badge/Web-yellow)]()
 
-## Demo
+## Demo and Screenshots
 
-gif가 올 자리
+![App Screenshot](app/screenshots/%EC%95%B1_%EB%AA%A8%EB%91%90%EC%9D%98%20%EC%9D%BC%EA%B8%B0.gif)
+![App Screenshot](app/screenshots/%EC%95%B1_%EB%8C%93%EA%B8%80%20%EB%8B%AC%EA%B8%B0.gif)
+![App Screenshot](app/screenshots/%EC%95%B1_%EC%9D%BC%EA%B8%B0%20%EB%A9%94%EC%9D%B8.gif)
+![App Screenshot](app/screenshots/%EC%95%B1_%EC%9D%BC%EA%B8%B0%20%EC%9D%BD%EA%B8%B0.gif)
+![App Screenshot](app/screenshots/%EC%95%B1_%EC%9D%BC%EA%B8%B0%20%EC%9E%91%EC%84%B1.gif)
+![App Screenshot](app/screenshots/%EC%95%B1_%ED%8C%94%EB%A1%9C%EC%9A%B0.gif)
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
-
-## Screenshots
-
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![Web Screenshot](web/screenshots/%EC%9B%B9_%EC%9D%BC%EA%B8%B0%20%EC%9D%BD%EA%B8%B0.gif)
+![Web Screenshot](web/screenshots/%EC%9B%B9_%EC%9D%BC%EA%B8%B0%20%EC%9E%91%EC%84%B1.gif)
 
 
 ## Environment Variables
@@ -180,7 +186,7 @@ Expo는 Android나 iOS에 설치 후 스마트폰에서 직접 실행이 가능�
 
 ## Documentation
 
-[2022 한국정보기술학회 하계 대학생논문경진대회](https://나중에수정)
+- [2022 한국정보기술학회 하계 대학생논문경진대회](https://ki-it.or.kr/%EA%B3%B5%EC%A7%80%EC%82%AC%ED%95%AD/11345517)
 
 
 ## License

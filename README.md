@@ -65,14 +65,45 @@ routes에 삽입할 view를 모아놓는 폴더
 
 ## Features
 
-- 전통적인 일기 방식
-- 기본적인 SNS 기능
-- 태그 데이터를 통한 일기 통계 산출 기능 구현
-- 일정 관리 및 통계 산출
+- 일기 CRUD
+  - 일기 작성하기
+    - 태그 선택기
+    - 제목 작성하기 [![ㅇㅇ](https://img.shields.io/badge/Web-yellow)]()
+    - WYSIWYG 편집기 [![ㅇㅇ](https://img.shields.io/badge/Web-yellow)]()
+    - 공개 여부 설정 [![ㅇㅇ](https://img.shields.io/badge/Web-yellow)]()
+  - 일기 읽기 [![ㅇㅇ](https://img.shields.io/badge/Web-yellow)]()
+  - 일기 수정하기
+  - 일기 삭제하기
+- 모두의 일기
+  - 일기 목록 조회 [![ㅇㅇ](https://img.shields.io/badge/Web-yellow)]()
+  - 일기 목록 새로 고침 [![ㅇㅇ](https://img.shields.io/badge/Web-yellow)]()
+  - 일기 검색하기
+  - 일기 좋아요
+  - 일기 댓글
+  - 구독(팔로우/팔로잉)
+  - 구독 조회
+  - 프로필 [![ㅇㅇ](https://img.shields.io/badge/Web-yellow)]()
+  - 교환 일기 작성
+  - 교환 일기 조회
+- 할 일
+  - 할 일 등록
+  - 할 일 확인(체크)
+  - 할 일 월별 모아보기
+- 통계
+  - 할 일 통계
+  - 일기 태그 통계
+    - 개인 통계
+    - 친구 통계
+    - 익명 통계
+- 기타
+  - 로그인/로그아웃 [![ㅇㅇ](https://img.shields.io/badge/Web-yellow)]()
+  - 회원가입 [![ㅇㅇ](https://img.shields.io/badge/Web-yellow)]()
 
 ## Demo
 
 gif가 올 자리
+
+![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
 
 
 ## Screenshots
@@ -135,9 +166,9 @@ package.json에 있는 npm 설치 이력을 토대로 본인 컴퓨터에 패키
 > **Note: 아래 `install 명령어`를 먼저 실행할 필요가 있을 수도 있습니다.**
 
 이 프로그램을 실행하게 합니다.
-실행에 성공하면 EXPO가 자동으로 실행됩니다.
+실행에 성공하면 Expo가 자동으로 실행됩니다.
 
-EXPO는 Android나 iOS에 설치 후 스마트폰에서 직접 실행이 가능합니다.
+Expo는 Android나 iOS에 설치 후 스마트폰에서 직접 실행이 가능합니다.
 
 이 프로젝트를 수정하고 저장하면 자동으로 리로딩이 됩니다.
 오류가 발생하면 터미널 콘솔창에 찍힙니다. (터미널에 찍히지 않는 경우에는 웹 브라우저에서 확인)

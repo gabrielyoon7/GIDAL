@@ -27,7 +27,8 @@ export default function UserProfileView(props) {
   const [followed, setFollowed] = useState(false);
   const [imgChange, setImgChange] = useState("");
   const new_routes = useNavigationState(state => state.routes);
-  const [items, setItems] = React.useState([]);
+  const [items, setItems] = useState([]);
+  const [isHeaderLoaded, setHeaderLoaded] = useState(false);
 
   React.useEffect(() => {
     //초기 프로필 아이디 수신부
@@ -95,9 +96,10 @@ export default function UserProfileView(props) {
         const profileImg = response.data[0].profile_image;
         setUserFollowing(following);
         setUserFollower(follower);
-        setuserFollowingNum(following.length)
-        setuserFollowerNum(follower.length)
-        setProfileImg(profileImg)
+        setuserFollowingNum(following.length);
+        setuserFollowerNum(follower.length);
+        setProfileImg(profileImg);
+        setHeaderLoaded(true);
       }).catch(function (error) {
         console.log(error);
       });
@@ -160,13 +162,14 @@ export default function UserProfileView(props) {
     }
 
     return (
-      <View>{
-        (currentId == user_Id)
-          ?
-          (<MyPageActionView />)
-          :
-          (<OtherPageActionView />)
-      }
+      <View>
+        {
+          (currentId == user_Id)
+            ?
+            (<MyPageActionView />)
+            :
+            (<OtherPageActionView />)
+        }
       </View>
     )
   }
@@ -214,7 +217,7 @@ export default function UserProfileView(props) {
             screen: 'DmList',
             params: {
               user_id: currentId,
-              userName: user_Id              
+              userName: user_Id
               // init_page: 'Follower',
             }
           })
@@ -297,15 +300,19 @@ export default function UserProfileView(props) {
   return (
     <>
       <ProfileHeader />
-      <DiaryList
-        selectedDate={date}
-        navigation={props.navigation}
-        user_Id={user_Id}
-        type={'profile'}
-        items={items}
-        setItems={setItems}
-        profileImg={profileImg}
-      />
+      {
+        isHeaderLoaded
+        &&
+        <DiaryList
+          selectedDate={date}
+          navigation={props.navigation}
+          user_Id={user_Id}
+          type={'profile'}
+          items={items}
+          setItems={setItems}
+          profileImg={profileImg}
+        />
+      }
     </>
   )
 }

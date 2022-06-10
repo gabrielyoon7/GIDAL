@@ -26,6 +26,7 @@ const DmListView = (props) => {
   const [followers, setFollowers] = useState([]);
   const [selectedType, setSelectedType] = useState(true); //true: received, false: send
   const [isLoaded, setIsLoaded] = useState(false);
+  const [filteredPersonsId, setFilteredPersonsId] = useState([]);
 
 
   // React.useEffect(() => {
@@ -54,13 +55,23 @@ const DmListView = (props) => {
   useEffect(() => {
     if (user_Id !== '' && isFocused) {
       console.log('sdfsdfdf');
-         getItems();
-         setIsLoaded(true);
-       }
-   return () => {
+      getItems();
+      setIsLoaded(true);
+    }
+    return () => {
 
-   }
- }, [isFocused])
+    }
+  }, [isFocused])
+
+  useEffect(() => {
+    if (dmData.length !== 0) {
+      if (selectedType) {
+        setFilteredPersonsId(dmData.filter(item => (item.opponent_id == props.user_id)));
+      } else {
+        setFilteredPersonsId(dmData.filter(item => (item.opponent_id == props.userName)));
+      }
+    }
+  }, [dmData])
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
@@ -94,22 +105,12 @@ const DmListView = (props) => {
     };
   }
 
+  // const filteredPersonsId = dmData.filter(item => (item.opponent_id == props.userName))
 
-
-
-  const filteredPersonsId = dmData.filter(item => (item.opponent_id == props.userName))
-
-  // console.log(dmData);
-  // console.log('==============================');
-  // console.log(filteredPersonsId);
 
   const DmListReadView = () => {
     const renderItem = ({ item }) => {
       return (
-        // <View>
-        //   <Text>{writer}</Text>
-        //   <Text>{item.title}</Text>
-        // </View>
         <FancyDMCard
           item={item}
           user_id={user_Id}

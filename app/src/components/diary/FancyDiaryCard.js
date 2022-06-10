@@ -68,6 +68,7 @@ const FancyDiaryCard = ({ item: diary, user_id, pressCommentIcon, profileImg, on
                     color="coolGray.700"
                     numberOfLines={2}
                     ellipsizeMode='tail'
+                    minH={10}
                 >
                     {content}
                 </Text>

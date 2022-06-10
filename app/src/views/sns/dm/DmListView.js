@@ -3,7 +3,6 @@ import { FlatList, View, StyleSheet, Text, TouchableOpacity, RefreshControl, Ale
 import { HStack } from 'native-base'
 import axios from 'axios'
 import { config } from '../../../../config'
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused } from '@react-navigation/native';
 import BackButton from '../../../components/common/BackButton'
 import FancyDMCard from '../../../components/dm/FancyDMCard';
@@ -16,7 +15,7 @@ const wait = (timeout) => {
 const DmListView = (props) => {
   const partner = props.userName;
   const user_Id = props.user_id;
-  console.log(props);
+  // console.log(props);
   const isFocused = useIsFocused(); // isFoucesd Define
   const [writer, setWriter] = useState(props.userName);
   const [refreshing, setRefreshing] = React.useState(false);
@@ -25,7 +24,7 @@ const DmListView = (props) => {
   const [dmData, setDmData] = useState([]);
   const [profileImg, setProfileImg] = useState('');
   const [followers, setFollowers] = useState([]);
-  const [items, setItems] = useState([]);
+  const [selectedType, setSelectedType] = useState(true); //true: received, false: send
   const [isLoaded, setIsLoaded] = useState(false);
 
 
@@ -74,36 +73,21 @@ const DmListView = (props) => {
   const getItems = () => {
     let result = []
     let isMounted = true;
-    // const getUserDmData = () => {
     axios.post(config.ip + ':5000/dmsRouter/findDM', {
       data: {
         user_id: user_Id,
         partner: partner
       }
     }).then((response) => {
-      // console.log(response.data[0].receivedDm);
-      console.log(response.data);
-      setSentDmList(response.data.sentDms)
-      setReceivedDmList(response.data.receivedDms)
-      // if (isMounted) {
-        
-      //   if (response.data.length > 0) {
-      //     response.data.forEach((item) => {
-      //         result.push(item);
-      //     });
-      // }
-      // console.log(result);
-      // setItems(result)
-      //     // setReceivedDmList(response.data[0].receivedDm)
-      //     // setSentDmList(response.data[0].sentDm)
-      //     // setDmData(response.data[0].receivedDm)
-      //     // setProfileImg(response.data[0].profile_image);
-      //     // setFollowers(response.data[0].follower)
-      //     // response.data.forEach((item) => {
-      //     //     result.push(item);
-      //     // });
-        
-      // }
+      if (isMounted) {
+        setSentDmList(response.data.sentDms);
+        setReceivedDmList(response.data.receivedDms);
+      }
+      if (selectedType){
+        setDmData(response.data.receivedDms);
+      } else {
+        setDmData(response.data.sentDms);
+      }
     })
     return () => {
       isMounted = false;
@@ -207,6 +191,7 @@ const DmListView = (props) => {
   }
 
   const receivedDm = () => {
+    setSelectedType(true);
     setDmData(receivedDmList)
     setWriter(partner)
     // setCurrentUser(partner)
@@ -215,6 +200,7 @@ const DmListView = (props) => {
 
   const sentDm = () => {
     // console.log(dmData);
+    setSelectedType(false);
     setDmData(sentDmList)
     setWriter(user_Id)
     // setCurrentUser(user_Id)

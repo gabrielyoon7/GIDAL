@@ -7,6 +7,7 @@ const diariesRouter = require('./routes/diaries');
 const usersRouter = require('./routes/users');
 const todoRouter = require('./routes/todo');
 const tagsRouter = require('./routes/tags');
+const dmsRouter = require('./routes/DMs');
 const testTodoRouter = require('./routes/TestTodo')
 const exampleRouter = require('./routes/Examples')
 
@@ -68,5 +69,6 @@ app.use('/diariesRouter', diariesRouter);
 app.use('/usersRouter', usersRouter);
 app.use('/todoRouter', todoRouter);
 app.use('/tagsRouter', tagsRouter);
+app.use('/dmsRouter', tagsRouter);
 app.use('/testTodoRouter', testTodoRouter);
 app.use('/exampleRouter', exampleRouter);

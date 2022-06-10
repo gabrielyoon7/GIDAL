@@ -27,10 +27,10 @@ const dmSchema = mongoose.Schema({
         type: Date,
         required: true
     },
-    time: [{
+    time: {
         type: String,
         required: true
-    }]
+    }
 })
 
 const DM = mongoose.model('DM', dmSchema)

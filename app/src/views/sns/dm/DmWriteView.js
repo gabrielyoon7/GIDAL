@@ -37,18 +37,19 @@ const DmWriteView = (props) => {
 
   const saveDiary = () => {
     const data = {
-      user_id: user_Id,
-      dmRecipient_id: props.userName,
+      sender: user_Id,
+      opponent_id: props.userName,
       title: Title,
       content: Content,
-      date: todayDate.toJSON().split('T')[0]
+      date: todayDate.toJSON().split('T')[0],
+      time: new Date().toLocaleTimeString()
     }
-    axios.post(config.ip + ':5000/usersRouter/userSentDm', {
+    axios.post(config.ip + ':5000/dmsRouter/userSentDm', {
       data: data
-    })
-    axios.post(config.ip + ':5000/usersRouter/userReceivedDm', {
-      data: data
-    }).then(() => {
+    // })
+    // axios.post(config.ip + ':5000/usersRouter/userReceivedDm', {
+    //   data: data
+    }).then((response) => {
       Alert.alert("작성 완료")
       props.navigation.pop();
   }).catch(function (error) {

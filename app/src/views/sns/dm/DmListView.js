@@ -94,6 +94,7 @@ const DmListView = (props) => {
         setSentDmList(response.data.sentDms);
         setReceivedDmList(response.data.receivedDms);
       }
+      console.log(response.data.receivedDms)
       if (selectedType){
         setDmData(response.data.receivedDms);
       } else {
@@ -141,7 +142,8 @@ const DmListView = (props) => {
       } else {
         type = "deleteReceivedDM/"
       }
-      axios.post(config.ip + ':5000/usersRouter/'+type, {
+      // axios.post(config.ip + ':5000/usersRouter/'+type, {
+      axios.post(config.ip + ':5000/dmsRouter/deleteDM', {
         data: {
             user_id: user_Id,
             id: id,
@@ -153,19 +155,24 @@ const DmListView = (props) => {
     })
     }
 
-    const longPressDelete = (id, writer) =>
+    const longPressDelete = (id, writer) => {
+      if(writer !== user_Id){
+        return;
+      }
       Alert.alert(
         "해당 DM을 삭제 하시겠습니까?",
-        "나에게서만 삭제 됩니다.",
+        // "나에게서만 삭제 됩니다.",
+        "삭제된 일기는 복구할 수 없습니다.",
         [
           {
             text: "취소",
             onPress: () => console.log("Cancel Pressed"),
             style: "cancel"
           },
-          { text: "삭제", onPress: () => deleteDM(id, writer)}
+          { text: "삭제", onPress: () => deleteDM(id, writer) }
         ]
       );
+    }
 
     return (
       <View style={styles.container}>

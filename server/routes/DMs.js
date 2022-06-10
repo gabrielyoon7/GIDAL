@@ -38,47 +38,42 @@ router.post('/findDM/', async function(req, res, next) {
     res.json({sentDms: sentDms, receivedDms: receivedDms})
 });
 
-  router.post('/deleteReceivedDM/', function(req, res, next) {
+  router.post('/deleteDM/', function(req, res, next) {
       console.log("re");
     // 삭제
-    DM.updateMany(
-        { user_id: req.body.data.user_id }, 
-        {$pull : {
-            receivedDm : {
-                "_id": req.body.data.id
-            }
-        }})
+    DM.deleteOne(
+        { _id: req.body.data.id })
         .exec((error, user)=>{
             if(error){
                 console.log(error);
                 res.json({status: 'error', error})
             }else{
-                console.log('Saved!')
+                console.log('Deleted!')
                 res.json({status: 'success'})
             }
         });
 });
 
-router.post('/deleteSentDM/', function(req, res, next) {
-    console.log("sernt");
-    // 삭제
-    DM.updateMany(
-        { user_id: req.body.data.user_id }, 
-        {$pull : {
-            sentDm : {
-                "_id": req.body.data.id
-            }
-        }})
-        .exec((error, user)=>{
-            if(error){
-                console.log(error);
-                res.json({status: 'error', error})
-            }else{
-                console.log('Saved!')
-                res.json({status: 'success'})
-            }
-        });
-});
+// router.post('/deleteSentDM/', function(req, res, next) {
+//     console.log("sernt");
+//     // 삭제
+//     DM.updateMany(
+//         { user_id: req.body.data.user_id }, 
+//         {$pull : {
+//             sentDm : {
+//                 "_id": req.body.data.id
+//             }
+//         }})
+//         .exec((error, user)=>{
+//             if(error){
+//                 console.log(error);
+//                 res.json({status: 'error', error})
+//             }else{
+//                 console.log('Saved!')
+//                 res.json({status: 'success'})
+//             }
+//         });
+// });
 
 
 module.exports = router;

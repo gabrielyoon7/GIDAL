@@ -7,6 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused } from '@react-navigation/native';
 import BackButton from '../../../components/common/BackButton'
 import FancyDMCard from '../../../components/dm/FancyDMCard';
+import LoadingSpinner from '../../../components/common/LoadingSpinner';
 
 const wait = (timeout) => {
   return new Promise(resolve => setTimeout(resolve, timeout));
@@ -14,7 +15,8 @@ const wait = (timeout) => {
 
 const DmListView = (props) => {
   const partner = props.userName;
-  const [user_Id, setUserId] = React.useState('');
+  const user_Id = props.user_id;
+  console.log(props);
   const isFocused = useIsFocused(); // isFoucesd Define
   const [writer, setWriter] = useState(props.userName);
   const [refreshing, setRefreshing] = React.useState(false);
@@ -24,30 +26,42 @@ const DmListView = (props) => {
   const [profileImg, setProfileImg] = useState('');
   const [followers, setFollowers] = useState([]);
   const [items, setItems] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
 
-  React.useEffect(() => {
-    AsyncStorage.getItem('userInfo')
-      .then(value => {
-        if (value != null) {
-          const UserInfo = JSON.parse(value);
-          setUserId(UserInfo[0].user_id);
-          // getUserDmData()
-          setReceivedDmList(UserInfo[0].receivedDm)
-          setSentDmList(UserInfo[0].sentDm)
-          setDmData(UserInfo[0].receivedDm)
-          setProfileImg(UserInfo[0].profile_image);
-          setFollowers(UserInfo[0].follower);
-        }
-      })
-      return () => {
+  // React.useEffect(() => {
+  //   AsyncStorage.getItem('userInfo')
+  //     .then(value => {
+  //       if (value != null) {
+  //         const UserInfo = JSON.parse(value);
+  //         setUserId(UserInfo[0].user_id);
+  //         // getUserDmData()
+  //         // setReceivedDmList(UserInfo[0].receivedDm)
+  //         // setSentDmList(UserInfo[0].sentDm)
+  //         // setDmData(UserInfo[0].receivedDm)
+  //         // setProfileImg(UserInfo[0].profile_image);
+  //         // setFollowers(UserInfo[0].follower);
+  //       }
+  //     })
+  //     return () => {
 
-      }
-  }, [isFocused])
+  //     }
+  // }, [isFocused])
 
   //   useEffect(()=>{
   //    getUserDmData()
   // },[isFocused])
+
+  useEffect(() => {
+    if (user_Id !== '' && isFocused) {
+      console.log('sdfsdfdf');
+         getItems();
+         setIsLoaded(true);
+       }
+   return () => {
+
+   }
+ }, [isFocused])
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
@@ -58,25 +72,34 @@ const DmListView = (props) => {
   }, []);
 
   const getItems = () => {
+    let result = []
     let isMounted = true;
     // const getUserDmData = () => {
-    axios.post(config.ip + ':5000/usersRouter/findOne', {
+    axios.post(config.ip + ':5000/usersRouter/findDM', {
       data: {
         user_id: user_Id,
       }
     }).then((response) => {
       // console.log(response.data[0].receivedDm);
+      console.log(response.data);
       if (isMounted) {
+        
         if (response.data.length > 0) {
-          setReceivedDmList(response.data[0].receivedDm)
-          setSentDmList(response.data[0].sentDm)
-          setDmData(response.data[0].receivedDm)
-          setProfileImg(response.data[0].profile_image);
-          setFollowers(response.data[0].follower)
+          response.data.forEach((item) => {
+              result.push(item);
+          });
+      }
+      console.log(result);
+      setItems(result)
+          // setReceivedDmList(response.data[0].receivedDm)
+          // setSentDmList(response.data[0].sentDm)
+          // setDmData(response.data[0].receivedDm)
+          // setProfileImg(response.data[0].profile_image);
+          // setFollowers(response.data[0].follower)
           // response.data.forEach((item) => {
           //     result.push(item);
           // });
-        }
+        
       }
     })
     return () => {
@@ -84,12 +107,7 @@ const DmListView = (props) => {
     };
   }
 
-  useEffect(() => {
-    getItems();
-    return () => {
 
-    }
-  }, [isFocused])
 
 
   const filteredPersonsId = dmData.filter(item => (item.opponent_id == props.userName))
@@ -162,6 +180,9 @@ const DmListView = (props) => {
       );
 
     return (
+      <View style={styles.container}>
+          {isLoaded
+          ?
       <FlatList
         enableEmptySections={true}
         data={filteredPersonsId}
@@ -177,6 +198,8 @@ const DmListView = (props) => {
         }
         style={{ height: '100%' }}
       />
+      :  <LoadingSpinner />}
+      </View>
     )
   }
 
@@ -185,6 +208,7 @@ const DmListView = (props) => {
     setWriter(partner)
     // setCurrentUser(partner)
   }
+
 
   const sentDm = () => {
     // console.log(dmData);
@@ -226,6 +250,12 @@ const DmListView = (props) => {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    // alignItems: 'center',
+    justifyContent: 'center',
+},
   btnNew: {
     backgroundColor: '#27ae60',
     borderRadius: 8,

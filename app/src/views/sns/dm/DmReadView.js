@@ -1,13 +1,8 @@
-import { Box, Input, Text, TextArea, Stack, Button, HStack, Badge, Spacer, Avatar, Divider, ScrollView, useDisclose, Actionsheet, Icon, Image, Center, Stagger, IconButton } from 'native-base';
+import { Box, Input, Text, HStack, Badge, Spacer, Avatar, Divider, Image } from 'native-base';
 import * as React from 'react';
 import { Dimensions, StyleSheet, View, TouchableOpacity, FlatList } from 'react-native';
-import axios from 'axios';
-import { config } from '../../../../config'
 import { useWindowDimensions } from 'react-native';
 import RenderHtml from 'react-native-render-html';
-import { LinearGradient } from 'expo-linear-gradient'
-import moment from 'moment';
-import { Path } from "react-native-svg";
 import { AntDesign, MaterialCommunityIcons, MaterialIcons, FontAwesome5, Ionicons } from "@expo/vector-icons";
 // import DiaryReadStaggerButton from './DiaryReadStaggerButton';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';

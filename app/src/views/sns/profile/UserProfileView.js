@@ -213,7 +213,8 @@ export default function UserProfileView(props) {
           () => props.navigation.navigate('Profile', {
             screen: 'DmList',
             params: {
-              userName: user_Id
+              user_id: currentId,
+              userName: user_Id              
               // init_page: 'Follower',
             }
           })

@@ -27,6 +27,7 @@ const DiaryMobileReadView = (props) => {
                     createMarkup={createMarkup}
                     likes={props.diary.likers.length}
                     comments={props.diary.comments.length}
+                    tags={props.diary.tags}
                 />
             }
         </>

@@ -61,6 +61,11 @@ const MobileUI = (props) => {
                         </a>
                     </div>
                     <hr></hr>
+                    <div className="row d-inline-block ms-1">
+                        {props.tags.map((tag) => (
+                            <button key={tag} type="button" className="btn btn-outline-success btn-sm disabled me-1 mt-1 col-auto">{tag}</button>
+                        ))}
+                    </div>
                 </div>
             </div>
             {/* <!-- Modal --> */}

@@ -24,6 +24,7 @@ const DiaryPreview = (props) => {
                 createMarkup={props.createMarkup}
                 likes={99}
                 comments={99}
+                tags={[]}
             />
         </div>
     )

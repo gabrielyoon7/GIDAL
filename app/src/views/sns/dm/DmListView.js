@@ -75,32 +75,33 @@ const DmListView = (props) => {
     let result = []
     let isMounted = true;
     // const getUserDmData = () => {
-    axios.post(config.ip + ':5000/usersRouter/findDM', {
+    axios.post(config.ip + ':5000/dmsRouter/findDM', {
       data: {
         user_id: user_Id,
+        partner: partner
       }
     }).then((response) => {
       // console.log(response.data[0].receivedDm);
       console.log(response.data);
-      if (isMounted) {
+      // if (isMounted) {
         
-        if (response.data.length > 0) {
-          response.data.forEach((item) => {
-              result.push(item);
-          });
-      }
-      console.log(result);
-      setItems(result)
-          // setReceivedDmList(response.data[0].receivedDm)
-          // setSentDmList(response.data[0].sentDm)
-          // setDmData(response.data[0].receivedDm)
-          // setProfileImg(response.data[0].profile_image);
-          // setFollowers(response.data[0].follower)
-          // response.data.forEach((item) => {
-          //     result.push(item);
-          // });
+      //   if (response.data.length > 0) {
+      //     response.data.forEach((item) => {
+      //         result.push(item);
+      //     });
+      // }
+      // console.log(result);
+      // setItems(result)
+      //     // setReceivedDmList(response.data[0].receivedDm)
+      //     // setSentDmList(response.data[0].sentDm)
+      //     // setDmData(response.data[0].receivedDm)
+      //     // setProfileImg(response.data[0].profile_image);
+      //     // setFollowers(response.data[0].follower)
+      //     // response.data.forEach((item) => {
+      //     //     result.push(item);
+      //     // });
         
-      }
+      // }
     })
     return () => {
       isMounted = false;

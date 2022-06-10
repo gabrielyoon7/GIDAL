@@ -14,8 +14,9 @@ import DmReadView from '../../views/sns/dm/DmReadView';
 
 const DmListScreen = ({ route, navigation }) => {
   const { userName } = route.params;
+  const { user_id } = route.params;
   return (
-    <DmListView navigation={navigation} userName = {userName}/>
+    <DmListView navigation={navigation} userName = {userName}  user_id = {user_id}/>
   )
 }
 

@@ -46,12 +46,14 @@ const DmWriteView = (props) => {
     }
     axios.post(config.ip + ':5000/dmsRouter/userSentDm', {
       data: data
-    // })
-    // axios.post(config.ip + ':5000/usersRouter/userReceivedDm', {
-    //   data: data
     }).then((response) => {
-      Alert.alert("작성 완료")
-      props.navigation.pop();
+      if(response.data.status === 'success'){
+        Alert.alert("작성 완료")
+        props.navigation.pop();
+      }
+      else {
+        Alert.alert("작성 내용을 확인해주세요.")
+      }
   }).catch(function (error) {
     console.log(error);
   });

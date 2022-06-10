@@ -83,6 +83,8 @@ const DmListView = (props) => {
     }).then((response) => {
       // console.log(response.data[0].receivedDm);
       console.log(response.data);
+      setSentDmList(response.data.sentDms)
+      setReceivedDmList(response.data.receivedDms)
       // if (isMounted) {
         
       //   if (response.data.length > 0) {

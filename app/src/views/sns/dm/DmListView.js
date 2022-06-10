@@ -17,10 +17,6 @@ const DmListView = (props) => {
   const [user_Id, setUserId] = React.useState('');
   const isFocused = useIsFocused(); // isFoucesd Define
   const [writer, setWriter] = useState(props.userName);
-  const [receivedBtnColor, setReceivedBtnColor] = useState("green")
-  const [receivedTextColor, setReceivedTextColor] = useState("white")
-  const [sentBtnColor, setSentBtnColor] = useState("white")
-  const [sentTextColor, setSentTextColor] = useState("green")
   const [refreshing, setRefreshing] = React.useState(false);
   const [sentDmList, setSentDmList] = useState([]);
   const [receivedDmList, setReceivedDmList] = useState([]);
@@ -126,23 +122,42 @@ const DmListView = (props) => {
               })
             }
           }
-          onLongPress={() => longPressDelete()}
+          onLongPress={() => longPressDelete(item._id, writer)}
           textColor="black"
         />
       );
     };
 
-    const longPressDelete = () =>
+    const deleteDM = (id) => {
+      let type = "";
+      if(writer == user_Id){
+        type = "deleteSentDM/"
+      } else {
+        type = "deleteReceivedDM/"
+      }
+      axios.post(config.ip + ':5000/usersRouter/'+type, {
+        data: {
+            user_id: user_Id,
+            id: id,
+        }
+    }).then(() => {
+      getItems();
+    }).catch(function (error) {
+        console.log(error);
+    })
+    }
+
+    const longPressDelete = (id, writer) =>
       Alert.alert(
         "해당 DM을 삭제 하시겠습니까?",
-        "",
+        "나에게서만 삭제 됩니다.",
         [
           {
             text: "취소",
             onPress: () => console.log("Cancel Pressed"),
             style: "cancel"
           },
-          { text: "삭제", onPress: () => console.log("OK Pressed") }
+          { text: "삭제", onPress: () => deleteDM(id, writer)}
         ]
       );
 
@@ -169,10 +184,6 @@ const DmListView = (props) => {
     setDmData(receivedDmList)
     setWriter(partner)
     // setCurrentUser(partner)
-    setReceivedBtnColor('green')
-    setReceivedTextColor('white')
-    setSentBtnColor('white')
-    setSentTextColor('green')
   }
 
   const sentDm = () => {
@@ -180,17 +191,9 @@ const DmListView = (props) => {
     setDmData(sentDmList)
     setWriter(user_Id)
     // setCurrentUser(user_Id)
-    setReceivedBtnColor('white')
-    setReceivedTextColor('green')
-    setSentBtnColor('green')
-    setSentTextColor('white')
   }
 
   const writePage = () => {
-    setReceivedBtnColor('green')
-    setReceivedTextColor('white')
-    setSentBtnColor('white')
-    setSentTextColor('green')
     props.navigation.navigate('DmWrite', {
       userName: partner
     })
@@ -201,11 +204,11 @@ const DmListView = (props) => {
       <BackButton navigation={props.navigation} />
       <View style={{ flex: 1 }}>
         <HStack style={{ justifyContent: 'center' }}>
-          <TouchableOpacity onPress={() => receivedDm()} style={[styles.btnMini, { borderRightColor: 'white', borderRightWidth: 1, backgroundColor: receivedBtnColor }]}>
-            <Text style={[styles.btnText, { color: receivedTextColor }]}>받은 DM</Text>
+          <TouchableOpacity onPress={() => receivedDm()} style={[styles.btnMini, { borderRightColor: 'white', borderRightWidth: 1 }]}>
+            <Text style={[styles.btnText]}>받은 DM</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => sentDm()} style={[styles.btnMini, { borderRightColor: 'white', borderRightWidth: 1, backgroundColor: sentBtnColor }]}>
-            <Text style={[styles.btnText, { color: sentTextColor }]}>보낸 DM</Text>
+          <TouchableOpacity onPress={() => sentDm()} style={[styles.btnMini, { borderRightColor: 'white', borderRightWidth: 1 }]}>
+            <Text style={[styles.btnText]}>보낸 DM</Text>
           </TouchableOpacity>
         </HStack>
         <DmListReadView />
@@ -236,14 +239,14 @@ const styles = StyleSheet.create({
     padding: 1
   },
   btnMini: {
-    // backgroundColor: '#27ae60',
+    backgroundColor: '#27ae60',
     borderRadius: 0,
     width: '50%',
     marginBottom: 10,
     padding: 3
   },
   btnText: {
-    // color: 'white',
+    color: 'white',
     fontSize: 15,
     padding: 8,
     textAlign: 'center',

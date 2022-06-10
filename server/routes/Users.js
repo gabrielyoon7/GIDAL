@@ -140,7 +140,7 @@ router.post('/findOne/', function(req, res, next) {
     console.log('[로그인 요청] '+user_id);
     User.find().where('user_id').equals(user_id)
     .then( (users) => {
-        console.log(users);
+        // console.log(users);
         res.json(users);
     }).catch( (err) => {
         console.log(err);
@@ -266,6 +266,48 @@ router.post('/userFollowingDelete', (req,res) => {
             }
         });
   })
+
+  router.post('/deleteReceivedDM/', function(req, res, next) {
+      console.log("re");
+    // 삭제
+    User.updateMany(
+        { user_id: req.body.data.user_id }, 
+        {$pull : {
+            receivedDm : {
+                "_id": req.body.data.id
+            }
+        }})
+        .exec((error, user)=>{
+            if(error){
+                console.log(error);
+                res.json({status: 'error', error})
+            }else{
+                console.log('Saved!')
+                res.json({status: 'success'})
+            }
+        });
+});
+
+router.post('/deleteSentDM/', function(req, res, next) {
+    console.log("sernt");
+    // 삭제
+    User.updateMany(
+        { user_id: req.body.data.user_id }, 
+        {$pull : {
+            sentDm : {
+                "_id": req.body.data.id
+            }
+        }})
+        .exec((error, user)=>{
+            if(error){
+                console.log(error);
+                res.json({status: 'error', error})
+            }else{
+                console.log('Saved!')
+                res.json({status: 'success'})
+            }
+        });
+});
 
 // const formData = new FormData();
 // formData.append("selectImg", image);

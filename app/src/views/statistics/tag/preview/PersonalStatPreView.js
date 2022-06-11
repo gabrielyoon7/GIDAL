@@ -13,7 +13,6 @@ const PersonalStatPreView = (props) => {
         title: "개인 통계",
     }
     const [user_Id, setUserId] = useState('');
-    const [questionId, setQuestionId] = useState(props.id);
     const [tagLogArr, setTagLogArr] = useState([]);
 
     const [isEmpty, setEmpty] = useState(false);

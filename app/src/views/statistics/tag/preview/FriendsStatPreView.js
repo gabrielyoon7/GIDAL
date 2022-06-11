@@ -3,6 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Text, View } from "react-native"
 import { config } from "../../../../../config";
+import LoadingSpinner from "../../../../components/common/LoadingSpinner";
 import TagRankCard from "../../../../components/statistics/TagRankCard";
 
 
@@ -14,7 +15,6 @@ const FriendsStatPreView = (props) => {
     }
     const [user_Id, setUserId] = useState('');
     const [userFollowing, setUserFollowing] = useState([]);
-    const [questionId, setQuestionId] = useState(props.id);
     const [tagLogArr, setTagLogArr] = useState([]);
     const [tags, setTags] = useState([]);
     const [isEmpty, setEmpty] = useState(false);
@@ -45,7 +45,9 @@ const FriendsStatPreView = (props) => {
     }, [props.id]);
 
     useEffect(() => {
-        getStatisticsPreview(userFollowing);
+        if(userFollowing.length !== 0){
+            getStatisticsPreview(userFollowing);
+        }
     }, [userFollowing]);
 
     const getUserData = (user_Id) => {
@@ -59,6 +61,9 @@ const FriendsStatPreView = (props) => {
                 let followingArr = [];
                 following.map(user => followingArr.push(user.user_id));
                 setUserFollowing(followingArr);
+                if(followingArr.length === 0) {
+                    setEmpty(true)
+                }
             }).catch(function (error) {
                 console.log(error);
             });
@@ -87,8 +92,11 @@ const FriendsStatPreView = (props) => {
                     userFollowing: userFollowing,
                 }
             }).then((response) => {
+                let statistics = response.data.filter(friend => friend.statics.length > 0);
+                if(statistics.length === 0) {
+                    setEmpty(true)
+                }
                 setTagLogArr(response.data);
-                console.log(response.data);
             }).catch(function (error) {
                 console.log(error);
             })

@@ -47,58 +47,60 @@ const PickModal = ({ user_Id, profileImg, changeProfile }) => {
     }
   }
 
-  return <Center style={styles.picker}>
-    {/* <TouchableOpacity onPress={() => setShowModal(true)}> */}
-    {/* <Image style={styles.avatar} source={{ uri: image }} /> */}
-    {/* <Button title="프로필 수정"  onPress={() => setShowModal(true)}>프로필 수정</Button> */}
-    <TouchableOpacity onPress={() => setShowModal(true)}>
-      <HStack>
-        <Text>
-          <Icon name="edit" size={20} color="green" />
-        </Text>
-        <Text style={{ alignSelf: 'center', marginHorizontal: 9, fontSize: 15, color: 'green' }}>프로필 수정</Text>
-      </HStack>
-    </TouchableOpacity>
-    {/* </TouchableOpacity> */}
-    <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
-      <Modal.Content maxWidth="450px">
-        <Modal.CloseButton />
-        <Modal.Body>
-          <View style={styles.avatarContainer}>
-            <Image style={styles.avatarPick} source={{ uri: image }} />
-            {/* <Avatar bg="green.500" style={styles.avatar} mr={1} source={{uri: image}} textAlign=""></Avatar>  */}
-            <Text style={styles.selected}>선택된 프로필</Text>
-          </View>
-          <ScrollView horizontal={true}>
+  return (
+    <>
+      <View style={styles.picker}>
+        <TouchableOpacity onPress={() => setShowModal(true)}>
+          <Center>
             <HStack>
-
-              {img.map(profile => (
-                <TouchableOpacity key={profile.uri} onPress={profile.uri !== "" ? () => pressImg(profile.uri) : null}>
-                  <Avatar bg="green.500" mr={1} source={profile.uri !== "" ? { uri: profile.uri } : null} key={profile.id}></Avatar>
-                </TouchableOpacity>
-              ))}
+              <Text>
+                <Icon name="edit" size={20} color="green" />
+              </Text>
+              <Text style={{ alignSelf: 'center', marginHorizontal: 9, fontSize: 15, color: 'green' }}>프로필 수정</Text>
             </HStack>
+          </Center>
+        </TouchableOpacity>
+      </View>
+      <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
+        <Modal.Content maxWidth="450px">
+          <Modal.CloseButton />
+          <Modal.Body>
+            <View style={styles.avatarContainer}>
+              <Image style={styles.avatarPick} source={{ uri: image }} />
+              {/* <Avatar bg="green.500" style={styles.avatar} mr={1} source={{uri: image}} textAlign=""></Avatar>  */}
+              <Text style={styles.selected}>선택된 프로필</Text>
+            </View>
+            <ScrollView horizontal={true}>
+              <HStack>
 
-          </ScrollView>
+                {img.map(profile => (
+                  <TouchableOpacity key={profile.uri} onPress={profile.uri !== "" ? () => pressImg(profile.uri) : null}>
+                    <Avatar bg="green.500" mr={1} source={profile.uri !== "" ? { uri: profile.uri } : null} key={profile.id}></Avatar>
+                  </TouchableOpacity>
+                ))}
+              </HStack>
 
-        </Modal.Body>
-        <Modal.Footer>
-          <Button.Group space={2}>
-            <Button variant="ghost" colorScheme="green" onPress={() => {
-              setShowModal(false);
-            }}>
-              취소
-            </Button>
-            <Button colorScheme="green" onPress={() => {
-              saveProfile();
-            }}>
-              저장
-            </Button>
-          </Button.Group>
-        </Modal.Footer>
-      </Modal.Content>
-    </Modal>
-  </Center>
+            </ScrollView>
+
+          </Modal.Body>
+          <Modal.Footer>
+            <Button.Group space={2}>
+              <Button variant="ghost" colorScheme="green" onPress={() => {
+                setShowModal(false);
+              }}>
+                취소
+              </Button>
+              <Button colorScheme="green" onPress={() => {
+                saveProfile();
+              }}>
+                저장
+              </Button>
+            </Button.Group>
+          </Modal.Footer>
+        </Modal.Content>
+      </Modal>
+    </>
+  )
 };
 
 export default function ImagePicker({ user_Id, profileImg, changeProfile }) {

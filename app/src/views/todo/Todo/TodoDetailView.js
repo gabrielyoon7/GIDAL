@@ -164,7 +164,10 @@ const TodoDetailView = (props) => {
                             keyExtractor={item => item.key}
                         />
                 }
-                <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} >
+                <KeyboardAvoidingView
+                 keyboardVerticalOffset = {20}
+                 behavior={Platform.OS === "ios" ? "padding" : "height"} 
+                 >
                     <MonthSelector submitHandler={submitHandler} />
                     <SearchBar
                         placeholder="검색어를 입력하세요."

@@ -224,7 +224,10 @@ const Todo = ({ props }) => { // 진짜
             <TodoList item={item} deleteItem={deleteItem} changeIsDone={changeIsDone} />
           )} />
       </View>
-      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} >
+      <KeyboardAvoidingView
+        keyboardVerticalOffset = {20}
+        behavior={Platform.OS === "ios" ? "padding" : "height"} 
+       >
         <AddInput submitHandler={submitHandler} />
       </KeyboardAvoidingView>
       <DateTimePickerModal

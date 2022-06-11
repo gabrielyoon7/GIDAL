@@ -14,7 +14,10 @@ export default function InputComment({ saveHandler }) {
     }
 
     return (
-        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} >
+        <KeyboardAvoidingView
+         keyboardVerticalOffset = {20}
+         behavior={Platform.OS === "ios" ? "padding" : "height"} 
+         >
             <View style={styles.ComponentContainer}>
                 <View style={styles.inputContainer}>
                     <TextInput style={styles.input} placeholder="댓글을 입력하세요" value={inputComment} onChangeText={onChangeText} />

@@ -164,6 +164,7 @@ const FeedDiaryList = (props, navigation) => {
             </View>
             <KeyboardAvoidingView
                 style={{ backgroundColor: '#FFFFFF' }}
+                keyboardVerticalOffset = {20}
                 behavior={Platform.OS === "ios" ? "padding" : "height"}
             >
                 <SearchBar

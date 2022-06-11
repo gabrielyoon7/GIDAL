@@ -165,7 +165,7 @@ const TodoDetailView = (props) => {
                         />
                 }
                 <KeyboardAvoidingView
-                 keyboardVerticalOffset = {20}
+                 keyboardVerticalOffset = {40}
                  behavior={Platform.OS === "ios" ? "padding" : "height"} 
                  >
                     <MonthSelector submitHandler={submitHandler} />

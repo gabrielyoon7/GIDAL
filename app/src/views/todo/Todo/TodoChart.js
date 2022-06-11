@@ -28,13 +28,14 @@ export default function TodoChart(props) {
 
     useEffect(() => {
         if (statistics.length !== 0) {
-            console.log(statistics)
             let dataArr = [];
             let legendArr = [];
             let total = 0
             statistics.forEach(function (element, idx) {
                 total += element.count
-                dataArr.push({ value: element.count, color: element.color })
+                if(element.count !== 0 ){
+                    dataArr.push({ value: element.count, color: element.color })
+                }
                 legendArr.push({ type: element.type, color: element.color, key: idx })
             });
             if(total === 0){
@@ -47,7 +48,6 @@ export default function TodoChart(props) {
 
     useEffect(() => {
         if(data.length !== 0) {
-            // console.log("data",data)
             setShowChart(true);
         }
     },[data])
@@ -55,13 +55,10 @@ export default function TodoChart(props) {
     const ShowChart = () => {
         return(
             <PieChart
-                    strokeColor="white"
-                    strokeWidth={4}
                     donut={true}
                     data={data}
-                    innerCircleColor="#f7d2fa"
-                    innerCircleBorderWidth={4}
-                    innerCircleBorderColor={'white'}
+                    // innerCircleBorderWidth={4}
+                    // innerCircleBorderColor={'white'}
                     showValuesAsLabels={true}
                     showText
                     textSize={18}
@@ -80,7 +77,6 @@ export default function TodoChart(props) {
                     borderRadius: 10,
                     padding:10,
                     // paddingVertical: 30,
-                    backgroundColor: '#f7d2fa',
                     justifyContent: 'center',
                     alignItems: 'center',
                 }}>

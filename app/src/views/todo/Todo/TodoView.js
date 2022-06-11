@@ -14,14 +14,14 @@ import axios from 'axios'
 import { config } from '../../../../config'
 import { Feather } from '@expo/vector-icons';
 
-let today = new Date().toJSON().split('T')[0];
+let today = new Date();
 
 const Todo = ({ props }) => { // 진짜
   const [user_Id, setUserId] = useState('');
   const [data, setData] = useState([]);
   const [firstRecord, setFirstRecord] = useState(true); // 처음 todolist 사용하는 유저 구분
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-  const [pickedDate, setPickedDate] = useState(today)
+  const [pickedDate, setPickedDate] = useState(today.format("yyyy-MM-dd"))
 
   React.useEffect(() => {
     // getData();
@@ -185,8 +185,8 @@ const Todo = ({ props }) => { // 진짜
   };
 
   const handleConfirm = (date) => {
-    console.log(date);
-    setPickedDate(date.toJSON().split('T')[0])
+    console.log("dateFormat: ", date.format("yyyy-MM-dd"));
+    setPickedDate(date.format("yyyy-MM-dd"))
     hideDatePicker();
   };
 

@@ -74,7 +74,7 @@ const DiarySnsFeedView = () => {
                     </div>
 
                     <nav className="blog-pagination" aria-label="Pagination">
-                        <a className="btn btn-outline-primary" href="#">Up</a>
+                        <a className="btn btn-outline-primary" href="#">Top</a>
                         {/* <a className="btn btn-outline-secondary disabled">Newer</a> */}
                     </nav>
 

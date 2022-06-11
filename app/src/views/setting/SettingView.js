@@ -5,7 +5,7 @@ import { Alert, Button, FlatList, StyleSheet, Text, TouchableOpacity, View } fro
 
 //아래 처럼 기괴하게 설계된 이유는 React Native 자체에 버그가 있기 때문임
 const menu = [
-    { key: 0, type: 'nav_index', menu: '테스트 페이지', argument: 'Test', extra: null },
+    // { key: 0, type: 'nav_index', menu: '테스트 페이지', argument: 'Test', extra: null },
     // { key: 1, type: 'nav', menu: '마이페이지', argument: 'Sns', extra: 'Profile' },
     { key: 1, type: 'nav_index', menu: '마이페이지', argument: 'UserProfile', extra: null },
     { key: 2, type: 'logout', menu: '로그아웃', argument: 'User', extra: null },

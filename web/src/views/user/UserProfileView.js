@@ -87,8 +87,7 @@ const UserProfileView = () => {
 
 
                         <nav className="blog-pagination" aria-label="Pagination">
-                            <a className="btn btn-outline-primary" href="#">Older</a>
-                            <a className="btn btn-outline-secondary disabled">Newer</a>
+                            <a className="btn btn-outline-primary" href="#">Top</a>
                         </nav>
 
                     </div>
@@ -104,8 +103,8 @@ const UserProfileView = () => {
                                     <a href="#" className="stretched-link text-decoration-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                         <p className="text-dark">팔로워 {followersNum}명 | 팔로잉 {followingsNum}명</p>
                                         <p className="d-flex justify-content-center">
-                                            <a className="btn btn-secondary mx-2" href="#">팔로우</a>
-                                            <a className="btn btn-secondary mx-2" href="#">디엠</a>
+                                            <a className="btn btn-secondary mx-2" href="#">확인하기</a>
+                                            {/* <a className="btn btn-secondary mx-2" href="#">교환일기</a> */}
                                         </p>
                                     </a>
                                 </div>

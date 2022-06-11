@@ -1,13 +1,11 @@
 import { Link } from "react-router-dom";
 
 const Footer = () => {
-    return (
-        <footer className="blog-footer">
-        <p>Blog template built for <a href="https://getbootstrap.com/">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
-        <p>
-          <Link to="#">Back to top</Link>
-        </p>
-      </footer>
-    )
+  return (
+    <footer className="blog-footer">
+      <hr/>
+      <p> 경기대학교 컴퓨터공학부 심화캡스톤 목123 6팀 <a href="https://github.com/gabrielyoon7/GIDAL">기록의 달인</a>.</p>
+    </footer>
+  )
 }
 export default Footer;

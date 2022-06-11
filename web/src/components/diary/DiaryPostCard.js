@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import DiaryMobileReadView from "../../views/diary/read/DiaryMobileReadView";
+import profileImg from '../../assets/user.png';  
+
 
 const DiaryPostCard = ({ diary }) => {
 
@@ -19,7 +21,7 @@ const DiaryPostCard = ({ diary }) => {
                 <div className="col p-4 d-flex flex-column position-static">
                     <div className="d-flex justify-content-between">
                         <div>
-                            <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" className="me-2 rounded-circle" alt="Avatar" style={{ height: '30px' }} />
+                            <img src={profileImg} className="me-2 rounded-circle" alt="Avatar" style={{ height: '30px' }} />
                             <strong className="d-inline-block mb-2 text-primary">{diary.user_id}</strong>
                         </div>
                         <div className="mb-1 text-muted">{diary.date.substr(0, 10)}</div>

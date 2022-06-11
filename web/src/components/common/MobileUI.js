@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Ad from "./Ad";
+import profileImg from '../../assets/user.png';  
 
 const MobileUI = (props) => {
     const [time, setTime] = useState(new Date());
@@ -51,7 +52,7 @@ const MobileUI = (props) => {
                         {props.time}
                     </div>
                     <div className="my-1">
-                        <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" className="me-2 rounded-circle" alt="Avatar" style={{ height: '30px' }} />
+                        <img src={profileImg} className="me-2 rounded-circle" alt="Avatar" style={{ height: '30px' }} />
                         <a href={"/user/"+props.userId}>
                             <strong className="d-inline-block mb-2 text-primary">{props.userId}</strong>
                         </a>

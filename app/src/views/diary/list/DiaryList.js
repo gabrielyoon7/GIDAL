@@ -111,7 +111,7 @@ const DiaryList = (props, navigation) => {
     });
 
     return (
-        <View style={styles.container}>
+        <View style={props.items.length === 1 ? styles.container2 : styles.container}>
             {isLoaded
                 ?
                 props.items.length == 0
@@ -157,5 +157,9 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
+    },
+    container2: {
+        flex: 1,
+        backgroundColor: '#fff',
     },
 });

@@ -14,7 +14,7 @@ export default function TodoList({ item, deleteItem, changeIsDone }) {
           {/* <Entypo name="circle" size={20} color="midnightblue" /> */}
           <Checkbox value={item.isDone} onChange={(val) => changeIsDone(item, val)}> </Checkbox>
         </CirlceContainer>
-        <View style={{marginTop: 8}}>
+        <View style={{flex:1}}>
           <TextItem>{item.value}</TextItem>
         </View>
         <IconContainer onPress={() => deleteItem(item)}>
@@ -29,7 +29,8 @@ export default function TodoList({ item, deleteItem, changeIsDone }) {
 const ListContainer = styled.TouchableOpacity`
   background-color: #b8e994;
   height: auto;
-  width: 350px;
+  width: 90%
+  minWidth: 370px;
   margin-top:20px
   margin-bottom: 0.1px;
   border-radius: 8px;
@@ -46,11 +47,11 @@ const ComponentContainer = styled.View`
 
 const TextItem = styled.Text`
   color: black;
-  width: 240px;
+  width: auto;
   height: auto;
   font-size: 20px;
-  margin-top: 10px;
-  margin-right:1px;
+  margin-top: auto;
+  margin-bottom: auto;
 `;
 
 const TextDate = styled.Text`
@@ -66,6 +67,7 @@ const IconContainer = styled.TouchableOpacity`
   justify-content: center;
   height: 60px;
   padding-right: 10px;
+  padding-left: 10px;
   padding-top: 1px;
 `;
 
@@ -73,5 +75,4 @@ const CirlceContainer = styled.View`
   align-items: center;
   justify-content: center;
   padding-left: 15px;
-
 `;

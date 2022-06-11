@@ -35,6 +35,7 @@ const DiaryModifyView = (props) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [disclosure, setDisclosure] = useState(defaultData.disclosure);
   const [tags, setTags] = useState([]);
+  const [user_id, setUserId] = useState(defaultData.user_id);
 
   const new_routes = useNavigationState(state => state.routes);
   const [diary, setDiary] = React.useState(defaultData);
@@ -44,6 +45,7 @@ const DiaryModifyView = (props) => {
       const idx = new_routes.findIndex(r => r.name === "DiaryModify")
       const new_diary = new_routes[idx].params.diary;
       getTags(new_diary.user_id, new_diary._id);
+      setUserId(new_diary.user_id);
       setDiary(new_diary);
       console.log(new_diary);
       setDate(new_diary.date);
@@ -53,13 +55,13 @@ const DiaryModifyView = (props) => {
     } catch (error) {
       // console.log(error);
     }
-  }, [Date]);
+  }, []);
 
   const getTags = (user_id, diary_id) => {
     axios.post(config.ip + ':5000/tagsRouter/getTagLog', {
       data: {
         diary_id: diary_id,
-        user_id: user_id
+        user_id: user_id,
       }
     }).then((response) => {
       setTags(response.data)
@@ -77,9 +79,9 @@ const DiaryModifyView = (props) => {
   };
 
   const handleConfirm = (date) => {
-    console.warn("dateFormat: ", date.format("yyyy/MM/dd"));
-    hideDatePicker();
+    console.log("dateFormat: ", date.format("yyyy-MM-dd"));
     setDate(date.format("yyyy-MM-dd"))
+    hideDatePicker();
   };
 
   const selectTags = (selectedTag) => {
@@ -146,6 +148,7 @@ const DiaryModifyView = (props) => {
           if (response.data.status === 'success') {
             props.navigation.replace('DiaryRead', {
               diary: modifieddiary,
+              user_id: user_id,
             });
           }
         }).catch(function (error) {

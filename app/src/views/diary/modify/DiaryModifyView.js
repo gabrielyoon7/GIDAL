@@ -117,10 +117,11 @@ const DiaryModifyView = (props) => {
   }
 
   const modifyDiary = () => {
-    let tagTextOnlyArray = [];
+    let tagTextOnlySet = new Set();
     tags.forEach(element => {
-      tagTextOnlyArray.push(element.split('-/-/-')[1]);
+      tagTextOnlySet.add(element.split('-/-/-')[1]);
     });
+    const tagTextOnlyArray = Array.from(tagTextOnlySet);
 
     axios.post(config.ip + ':5000/diariesRouter/modify', {
       data: {

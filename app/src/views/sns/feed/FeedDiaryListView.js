@@ -7,6 +7,7 @@ import FancyDiaryCard from '../../../components/diary/FancyDiaryCard';
 import SearchBar from "react-native-dynamic-search-bar";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoadingSpinner from '../../../components/common/LoadingSpinner';
+import { Center } from 'native-base';
 
 const FeedDiaryList = (props, navigation) => {
     const [items, setItems] = useState([]);
@@ -141,7 +142,7 @@ const FeedDiaryList = (props, navigation) => {
                 {
                     items.length == 0
                         ?
-                        isEmpty?<Text>아무도 일기를 작성하지 않았네요.</Text>:<LoadingSpinner />
+                        isEmpty?<Center><Text>아무도 일기를 작성하지 않았네요.</Text></Center>:<LoadingSpinner />
                         :
                         <FlatList
                             data={items}

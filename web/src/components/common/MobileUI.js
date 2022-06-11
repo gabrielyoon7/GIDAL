@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import Ad from "./Ad";
 
 const MobileUI = (props) => {
@@ -51,7 +52,9 @@ const MobileUI = (props) => {
                     </div>
                     <div className="my-1">
                         <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" className="me-2 rounded-circle" alt="Avatar" style={{ height: '30px' }} />
-                        <strong className="d-inline-block mb-2 text-primary">{props.userId}</strong>
+                        <a href={"/user/"+props.userId}>
+                            <strong className="d-inline-block mb-2 text-primary">{props.userId}</strong>
+                        </a>
                         <hr></hr>
                     </div>
                     <div className="preview" dangerouslySetInnerHTML={props.createMarkup(props.convertedContent)} style={{ minHeight: '300px' }}></div>

@@ -16,6 +16,8 @@ const PersonalStatPreView = (props) => {
     const [questionId, setQuestionId] = useState(props.id);
     const [tagLogArr, setTagLogArr] = useState([]);
 
+    const [isEmpty, setEmpty] = useState(false);
+
     useEffect(() => {
         try {
             AsyncStorage.getItem('userInfo')
@@ -47,6 +49,9 @@ const PersonalStatPreView = (props) => {
                 }
             }).then((response) => {
                 setTagLogArr(response.data);
+                if(response.data.length==0){
+                    setEmpty(true);
+                }
             }).catch(function (error) {
                 console.log(error);
             })
@@ -56,7 +61,7 @@ const PersonalStatPreView = (props) => {
 
     return (
         <View>
-            <TagRankCard data={data} tagLogArr={tagLogArr} navigation={props.navigation} />
+            <TagRankCard data={data} tagLogArr={tagLogArr} isEmpty={isEmpty} navigation={props.navigation} />
         </View>
     )
 }

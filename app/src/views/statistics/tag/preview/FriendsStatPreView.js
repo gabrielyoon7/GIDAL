@@ -17,6 +17,7 @@ const FriendsStatPreView = (props) => {
     const [questionId, setQuestionId] = useState(props.id);
     const [tagLogArr, setTagLogArr] = useState([]);
     const [tags, setTags] = useState([]);
+    const [isEmpty, setEmpty] = useState(false);
 
     useEffect(() => {
         try {
@@ -87,6 +88,7 @@ const FriendsStatPreView = (props) => {
                 }
             }).then((response) => {
                 setTagLogArr(response.data);
+                console.log(response.data);
             }).catch(function (error) {
                 console.log(error);
             })
@@ -96,7 +98,7 @@ const FriendsStatPreView = (props) => {
 
     return (
         <View>
-            <TagRankCard data={data} tagLogArr={tagLogArr} tags={tags} navigation={props.navigation} />
+            <TagRankCard data={data} tagLogArr={tagLogArr} tags={tags} isEmpty={isEmpty} navigation={props.navigation} />
         </View>
     )
 }

@@ -18,6 +18,7 @@ const AnonymousStatPreView = (props) => {
     const [tagLogArr, setTagLogArr] = useState([]);
     const [reRequestCount, setReRequestCount] = useState(0);
     const [haveData, setIsHaveData] = useState(false);
+    const [isEmpty, setEmpty] = useState(false);
 
     useEffect(() => {
         if (props.id !== 'hihi') {
@@ -36,6 +37,9 @@ const AnonymousStatPreView = (props) => {
             if (temp.length !== 0) {
                 setTagLogArr([...temp]); //re-rendering 시 매우 중요함
             }
+            if(response.data.length==0){
+                setEmpty(true);
+            }
         }).catch(function (error) {
             console.log(error);
         })
@@ -49,7 +53,7 @@ const AnonymousStatPreView = (props) => {
         <View>
             {isLoaded
                 ?
-                <TagRankCard data={data} tagLogArr={tagLogArr} navigation={props.navigation} />
+                <TagRankCard data={data} tagLogArr={tagLogArr} isEmpty={isEmpty}  navigation={props.navigation} />
                 :
                 <LoadingSpinner />
             }

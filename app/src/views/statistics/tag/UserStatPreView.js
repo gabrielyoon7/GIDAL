@@ -11,7 +11,7 @@ const UserStatPreView = (props) => {
     const new_routes = useNavigationState(state => state.routes);
     const [id, setId] = useState('hihi');
     const [question, setQuestion] = useState('hihi2');
-    const [isLoaded, setIsLoaded] = useState(false);
+    // const [isLoaded, setIsLoaded] = useState(false);
     useEffect(() => {
         //초기 질문 id 수신부
         try {
@@ -20,7 +20,7 @@ const UserStatPreView = (props) => {
             setQuestion(new_routes[idx].params.question)
             // 여기에서 백엔드로 통계 자료 요청해야함
             // 수신 직후에 loaded를 true로 전환해줄 것
-            setIsLoaded(true);
+            // setIsLoaded(true);
         } catch (error) {
             // console.log(error);
         }

@@ -1,4 +1,4 @@
-import { Box, Heading, HStack, Pressable, Spacer, View } from "native-base";
+import { Box, Center, Heading, HStack, Pressable, Spacer, View } from "native-base";
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import AnonymousRankCard from "./interaction/AnonymousRankCard";
@@ -27,12 +27,18 @@ const TagRankCard = (props) => {
         <Box alignItems="center" py="1" px="1">
             <Pressable
                 onPress={
-                    () => {
-                        props.navigation.navigate('UserStatisticsDetail', {
-                            data: props.data,
-                            tagLogArr: props.tagLogArr,
-                        })
-                    }
+                    props.isEmpty
+                        ?
+                        () => {
+                            // console.log('데이터 없음');
+                        }
+                        :
+                        () => {
+                            props.navigation.navigate('UserStatisticsDetail', {
+                                data: props.data,
+                                tagLogArr: props.tagLogArr,
+                            })
+                        }
                 }
             >
                 {({
@@ -62,10 +68,22 @@ const TagRankCard = (props) => {
                                         {props.data.title}
                                     </Heading>
                                     <Spacer />
-                                    <Text>자세히 보기</Text>
+                                    {
+                                        props.isEmpty
+                                            ?
+                                            <Text></Text>
+                                            :
+                                            <Text>자세히 보기</Text>
+                                    }
                                 </HStack>
                                 <Box mt={3}>
-                                    {card_type ? (<View style={styles.interaction}>{card_type.interaction}</View>) : (<View><Text>Wrong type</Text></View>)}
+                                    {
+                                        props.isEmpty
+                                            ?
+                                            <View><Center><Text>데이터가 없습니다.</Text></Center></View>
+                                            :
+                                            card_type ? (<View style={styles.interaction}>{card_type.interaction}</View>) : (<View><Text>Wrong type</Text></View>)
+                                    }
                                 </Box>
                             </Box>
 

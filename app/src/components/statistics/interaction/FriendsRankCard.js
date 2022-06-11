@@ -1,4 +1,3 @@
-import { Badge, Box, Center } from "native-base";
 import { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import { BarChart } from "react-native-gifted-charts";
@@ -72,7 +71,7 @@ const FriendsRankCard = (props) => {
         stackData.length === 0
           ?
           <View>
-            <View><Center><Text>데이터가 없습니다.</Text></Center></View>
+            <LoadingSpinner />
           </View>
           :
           <BarChart

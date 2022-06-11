@@ -13,11 +13,7 @@ const AnonymousStatPreView = (props) => {
         title: "익명 통계",
     }
 
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [questionId, setQuestionId] = useState(props.id);
     const [tagLogArr, setTagLogArr] = useState([]);
-    const [reRequestCount, setReRequestCount] = useState(0);
-    const [haveData, setIsHaveData] = useState(false);
     const [isEmpty, setEmpty] = useState(false);
 
     useEffect(() => {
@@ -37,7 +33,7 @@ const AnonymousStatPreView = (props) => {
             if (temp.length !== 0) {
                 setTagLogArr([...temp]); //re-rendering 시 매우 중요함
             }
-            if(response.data.length==0){
+            if(response.data.length === 0){
                 setEmpty(true);
             }
         }).catch(function (error) {
@@ -45,18 +41,9 @@ const AnonymousStatPreView = (props) => {
         })
     }
 
-    useEffect(() => {
-        setIsLoaded(true);
-    }, [tagLogArr]);
-
     return (
         <View>
-            {isLoaded
-                ?
-                <TagRankCard data={data} tagLogArr={tagLogArr} isEmpty={isEmpty}  navigation={props.navigation} />
-                :
-                <LoadingSpinner />
-            }
+            <TagRankCard data={data} tagLogArr={tagLogArr} isEmpty={isEmpty} navigation={props.navigation} />
         </View>
     )
 }

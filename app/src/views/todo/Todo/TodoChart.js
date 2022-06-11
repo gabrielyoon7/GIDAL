@@ -7,10 +7,11 @@ export default function TodoChart(props) {
     const [data, setData] = useState([]);
     const [legends, setLegends] = useState([]);
     const [showChart, setShowChart] = useState(false);
+    const [isEmpty, setEmpty] = useState(false);
 
     const RenderLegend = (props) => {
         return (
-            <View style={{ flexDirection: 'row', marginBottom: 12,  }}>
+            <View key={props.key} style={{ flexDirection: 'row', marginBottom: 12,  }}>
                 <View
                     style={{
                         height: 18,
@@ -27,13 +28,18 @@ export default function TodoChart(props) {
 
     useEffect(() => {
         if (statistics.length !== 0) {
-            // console.log(statistics)
+            console.log(statistics)
             let dataArr = [];
             let legendArr = [];
+            let total = 0
             statistics.forEach(function (element, idx) {
+                total += element.count
                 dataArr.push({ value: element.count, color: element.color })
                 legendArr.push({ type: element.type, color: element.color, key: idx })
             });
+            if(total === 0){
+                setEmpty(true);
+            }
             setData(dataArr);
             setLegends(legendArr);
         }
@@ -66,8 +72,8 @@ export default function TodoChart(props) {
         )
     }
 
-    return (
-        <View >
+    const ShowStatics = () => {
+        return (
             <View
                 style={{
                     marginVertical: 10,
@@ -93,6 +99,17 @@ export default function TodoChart(props) {
                     ))}
                 </View>
             </View>
+        )
+    }
+
+    return (
+        <View >
+            {isEmpty
+            ?
+            <Text>등록한 할 일이 없습니다.</Text>
+            :
+            <ShowStatics />
+            }
         </View>
     );
 }

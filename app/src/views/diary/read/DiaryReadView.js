@@ -272,23 +272,13 @@ const DiaryReadView = (props) => {
                         <TouchableOpacity onPress={() => pressHeart()}>
                             <HStack>
                                 {liked ? <Ionicons name="heart" size={24} color="red" /> : <Ionicons name="md-heart-outline" size={24} color="gray" />}
-                                <Text>좋아요 {likeCount}개</Text>
+                                <Text>좋아요 {diary.likes}개</Text>
                             </HStack>
                         </TouchableOpacity>
                     </HStack>
                     <Divider my="5" />
 
                     <HStack alignItems="center">
-                        {/* <FlatList
-                            horizontal={true}
-                            data={diary.tags}
-                            ref={(ref) => {
-                                setRef(ref);
-                            }}
-                            renderItem={renderItem}
-                            keyExtractor={(item) => item}
-                            extraData={diary.tags}
-                        /> */}
 
                         {diary.tags.map((tag) => (
                             <Badge

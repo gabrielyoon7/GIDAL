@@ -117,7 +117,7 @@ const FancyDiaryCard = ({ item: diary, user_id, pressCommentIcon, profileImg, on
                 <TouchableOpacity>
                     <HStack>
                         {liked ? <Ionicons name="heart" size={24} color="red" /> : <Ionicons name="md-heart-outline" size={24} color="grey" />}
-                        <Text>좋아요 {diary.likers.length}</Text>
+                        <Text>좋아요 {diary.likes}</Text>
                     </HStack>
                 </TouchableOpacity>
             </HStack>

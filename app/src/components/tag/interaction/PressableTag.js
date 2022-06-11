@@ -8,10 +8,11 @@ const PressableTag = (props) => {
   const [buttonColor, setButtonColor] = useState(buttonStyles.buttonColorNormal);
 
   useEffect(() => {
-    const tag = props.selectedtags
-    if (tag &&  tag.includes(props.item._id + "-/-/-" + props.tag)) {
-      setIsPressed(!isPressed);
-      isPressed?setButtonColor(buttonStyles.buttonColorNormal):setButtonColor(buttonStyles.buttonColorPressed)
+    const tags = props.selectedtags
+    const tag = props.item.question_id + "-/-/-" + props.tag
+    if (tags &&  tags.includes(tag)) {
+      setIsPressed(true);
+      setButtonColor(buttonStyles.buttonColorPressed)
     }
   },[])
 

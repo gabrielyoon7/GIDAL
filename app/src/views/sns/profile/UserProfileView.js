@@ -330,13 +330,6 @@ const styles = StyleSheet.create({
     // 헤더  색상
     backgroundColor: "#27ae60",
   },
-  headerContent: {
-    padding: 10,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    // paddingLeft: 150
-  },
   avatar: {
     width: 90,
     height: 90,
@@ -353,39 +346,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginHorizontal: 30
   },
-  image: {
-    width: 60,
-    height: 60,
-  },
   name: {
     fontSize: 22,
     color: "#FFFFFF",
     fontWeight: '600',
-  },
-  body: {
-    padding: 30,
-    backgroundColor: "#E6E6FA",
-    marginBottom: 20
-  },
-  box: {
-    padding: 5,
-    marginTop: 5,
-    marginBottom: 5,
-    backgroundColor: '#FFFFFF',
-    flexDirection: 'row',
-    shadowColor: 'black',
-    shadowOpacity: .2,
-    shadowOffset: {
-      height: 1,
-      width: -2
-    },
-    elevation: 2
-  },
-  username: {
-    color: "#20B2AA",
-    fontSize: 22,
-    alignSelf: 'center',
-    marginLeft: 10
   },
   followText: {
     fontSize: 14,
@@ -399,12 +363,4 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     width: '40%'
   },
-  iconContainer: {
-    justifyContent: "right",
-    alignItems: "right",
-
-  },
-  followBtn: {
-    // left: 50
-  }
 });

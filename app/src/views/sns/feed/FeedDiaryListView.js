@@ -188,6 +188,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#FFFFFF', //sns 화면 배경색
-        justifyContent: 'center',
+        alignItems: 'center'
     },
 });

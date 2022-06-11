@@ -1,7 +1,6 @@
 
 import React, { useState } from "react";
-import {View, TextInput, Text, TouchableOpacity} from 'react-native'
-import styled from "styled-components";
+import {View, TextInput, Text, TouchableOpacity, StyleSheet} from 'react-native'
 
 export default function AddInput({ submitHandler }) {
   const [value, setValue] = useState("");
@@ -15,53 +14,52 @@ export default function AddInput({ submitHandler }) {
   };
 
   return (
-    <ComponentContainer>
-    <InputContainer>
-      <Input placeholder="할 일을 입력하세요" value={value} onChangeText={onChangeText} />
-    </InputContainer>
-    <SubmitButton onPress={() => addData()}>
-      <Text>+</Text>
-    </SubmitButton>
-  </ComponentContainer>
+    <View style={styles.ComponentContainer}>
+      <View style={styles.inputContainer}>
+        <TextInput style={styles.input} placeholder="할 일을 입력하세요" value={value} onChangeText={onChangeText} />
+      </View>
+      <TouchableOpacity style={styles.SubmitButton} onPress={() => addData()}>
+        <Text>추가</Text>
+      </TouchableOpacity>
+    </View>
   );
 }
 
-const ComponentContainer = styled.View`
-  flex-direction: row;
-  background-color: #ffffff;
-  padding:10px;
-  justify-content: center;
-`;
-
-const InputContainer = styled.View`
-  flex-direction: row;
-  border-radius: 8px;
-  border: 1px;
-  width: 320px;
-  height: 50px;
-  margin-bottom: 5px;
-  border-color:gray;
-
-`;
-
-const Input = styled.TextInput`
-  font-size: 15px;
-  background-color: white;
-  width: 300px;
-  margin-right: 20px;
-  padding: 10px;
-  margin-bottom: 5px;
-  border-radius: 10px;
-`;
-
-const SubmitButton = styled.TouchableOpacity`
-  width: 50px;
-  justify-content: center;
-  align-items: center;
-  background-color: whitesmoke;
-  margin-bottom: 5px;
-  margin-left: 5px;
-  border-radius: 8px;
-  background-color:#27ae60;
-
-`;
+const styles = StyleSheet.create({
+  ComponentContainer: {
+      flexDirection: "row",
+      backgroundColor: "#ffffff",
+      padding: 10,
+      justifyContent: "center",
+  },
+  inputContainer: {
+      borderRadius: 8,
+      borderWidth: 1,
+      flex: 1,
+      minWidth: 320,
+      height: 50,
+      marginBottom: 5,
+      borderColor: "gray",
+  },
+  input: {
+      fontSize: 15,
+      backgroundColor: "white",
+      alignItems: 'stretch',
+      flex: 1,
+      minWidth: 300,
+      marginRight: 20,
+      padding: 10,
+      marginBottom: 5,
+      borderRadius: 10,
+  },
+  SubmitButton: {
+      width: 50,
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "whitesmoke",
+      marginBottom: 5,
+      marginLeft: 5,
+      borderRadius: 8,
+      backgroundColor: "#27ae60",
+  }
+})

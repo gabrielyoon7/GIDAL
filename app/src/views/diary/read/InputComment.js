@@ -38,10 +38,10 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     inputContainer: {
-        // flexDirection: "row",
         borderRadius: 8,
         borderWidth: 1,
-        width: 320,
+        flex: 1,
+        minWidth: 320,
         height: 50,
         marginBottom: 5,
         borderColor: "gray",
@@ -49,7 +49,9 @@ const styles = StyleSheet.create({
     input: {
         fontSize: 15,
         backgroundColor: "white",
-        width: 300,
+        alignItems: 'stretch',
+        flex: 1,
+        minWidth: 300,
         marginRight: 20,
         padding: 10,
         marginBottom: 5,

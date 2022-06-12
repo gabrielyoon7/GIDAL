@@ -54,7 +54,6 @@ const DmListView = (props) => {
 
   useEffect(() => {
     if (user_Id !== '' && isFocused) {
-      console.log('sdfsdfdf');
       getItems();
       setIsLoaded(true);
     }
@@ -64,12 +63,10 @@ const DmListView = (props) => {
   }, [isFocused])
 
   useEffect(() => {
-    if (dmData.length !== 0) {
-      if (selectedType) {
-        setFilteredPersonsId(dmData.filter(item => (item.opponent_id == props.user_id)));
-      } else {
-        setFilteredPersonsId(dmData.filter(item => (item.opponent_id == props.userName)));
-      }
+    if (selectedType) {
+      setFilteredPersonsId(dmData.filter(item => (item.opponent_id == props.user_id)));
+    } else {
+      setFilteredPersonsId(dmData.filter(item => (item.opponent_id == props.userName)));
     }
   }, [dmData])
 
@@ -94,7 +91,6 @@ const DmListView = (props) => {
         setSentDmList(response.data.sentDms);
         setReceivedDmList(response.data.receivedDms);
       }
-      console.log(response.data.receivedDms)
       if (selectedType){
         setDmData(response.data.receivedDms);
       } else {

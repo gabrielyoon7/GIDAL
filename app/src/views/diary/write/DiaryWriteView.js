@@ -133,7 +133,7 @@ const DiaryWriteView = (props) => {
         <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ flex: 1, flexDirection: 'row', alignSelf: 'center' }} >
           <AntDesign style={styles.allowIcon} name="left" size={24} color="black" />
         </TouchableOpacity>
-        <Text style={styles.dateText} onPress={showDatePicker}>{Date}</Text>
+        <Text style={styles.dateText} onPress={showDatePicker}>{Date} <AntDesign name="down" size={13} color="black" style={{ alignSelf: 'center', left: -13 }} /></Text>
         <Box alignItems="center">
           <Button onPress={() => { saveDiary(); }} colorScheme="green">작성하기</Button>
         </Box>

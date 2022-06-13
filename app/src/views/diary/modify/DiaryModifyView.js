@@ -166,7 +166,7 @@ const DiaryModifyView = (props) => {
         <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ flex: 1, flexDirection: 'row', alignSelf: 'center' }} >
           <AntDesign style={styles.allowIcon} name="left" size={24} color="black" />
         </TouchableOpacity>
-        <Text style={styles.dateText} onPress={showDatePicker}>{Date.substr(0, 10)}</Text>
+        <Text style={styles.dateText} onPress={showDatePicker}>{Date.substr(0, 10)} <AntDesign name="down" size={13} color="black" style={{ alignSelf: 'center', left: -13 }} /></Text>
         <Box alignItems="center">
           <Button onPress={() => { modifyDiary(); }} colorScheme="green">수정하기</Button>
         </Box>

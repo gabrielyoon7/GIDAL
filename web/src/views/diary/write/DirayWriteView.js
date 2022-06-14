@@ -42,7 +42,7 @@ const DirayWriteView = () => {
   };
   const saveDiary = () => {
     let currentContentAsHTML = convertToHTML(editorState.getCurrentContent());
-    alert(currentContentAsHTML);
+    // alert(currentContentAsHTML);
     axios.post('/diariesRouter/save', {
       data: {
         user_id: userId,
@@ -54,7 +54,8 @@ const DirayWriteView = () => {
       }
     }).then((response) => {
       if (response.data.status === 'success') {
-        alert('잘 등록 됨')
+        // alert('잘 등록 됨')
+        window.location.href = "/";
       }
       else(
         alert('에러 발생')

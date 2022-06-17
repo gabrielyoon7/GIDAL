@@ -2,6 +2,7 @@
 # 기록의 달인 : GIDAL
 
 2022 경기대학교 컴퓨터공학심화캡스톤 목123 6조
+https://www.youtube.com/watch?v=aWmifIxTD5U
 
 차세대 일기 작성 애플리케이션 : Next Generation Diary Writing Application
 

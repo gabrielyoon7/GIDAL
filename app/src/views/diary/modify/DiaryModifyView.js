@@ -47,7 +47,6 @@ const DiaryModifyView = (props) => {
       getTags(new_diary.user_id, new_diary._id);
       setUserId(new_diary.user_id);
       setDiary(new_diary);
-      console.log(new_diary);
       setDate(new_diary.date);
       setTitle(new_diary.title);
       setContent(new_diary.content);
@@ -79,7 +78,6 @@ const DiaryModifyView = (props) => {
   };
 
   const handleConfirm = (date) => {
-    console.log("dateFormat: ", date.format("yyyy-MM-dd"));
     setDate(date.format("yyyy-MM-dd"))
     hideDatePicker();
   };
@@ -95,14 +93,11 @@ const DiaryModifyView = (props) => {
       if (idx > -1) {
         newSet.splice(idx, 1)
       }
-      console.log(newSet);
       setTags([...newSet]); //리렌더링 사용시 매우 중요함
     } else {
       newSet.push(newTag);
-      console.log(newSet);
       setTags([...newSet]); //리렌더링 사용시 매우 중요함
     }
-    // console.log(tags);
   }
 
   const makeTagLog = (diary) => {
@@ -137,7 +132,6 @@ const DiaryModifyView = (props) => {
       }
     }).then((response) => {
       if (response.data.status === 'success') {
-        console.log(response.data)
         const modifieddiary = response.data.diary;
         axios.post(config.ip + ':5000/tagsRouter/modify', {
           data: {

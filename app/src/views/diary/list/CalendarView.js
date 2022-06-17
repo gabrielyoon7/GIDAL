@@ -10,14 +10,12 @@ const CalendarView = (props) => {
 
     useEffect(() => {
         if(changeMonth){
-            console.log(6);
             props.getitems();
             setChangeMonth(false);
         }
     }, [changeMonth]);
 
     const changeDate = (date) => {
-        console.log('d')
         props.setSelectedDate(date.dateString);
         if (!toast.isActive(id)) {
             toast.show({
@@ -28,7 +26,6 @@ const CalendarView = (props) => {
     }
 
     const monthChanged = (date) => {
-        console.log('m',date.dateString)
         props.setSelectedDate(date.dateString);
         setChangeMonth(true);
     }

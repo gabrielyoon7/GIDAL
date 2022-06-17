@@ -23,13 +23,11 @@ const DiaryListView = (props) => {
     const [items, setItems] = React.useState([]);
     const [user_Id, setUserId] = React.useState('');
     const [profileImg, setProfileImg] = React.useState('');
-    // console.log(user_Id);
 
     const [isEmpty, setEmpty] = React.useState(false);
 
     React.useEffect(() => {
         if(isFocused){
-            console.log(1);
             try {
                 AsyncStorage.getItem('userInfo')
                     .then(value => {
@@ -37,7 +35,6 @@ const DiaryListView = (props) => {
                             const UserInfo = JSON.parse(value);
                             setUserId(UserInfo[0].user_id);
                             setProfileImg(UserInfo[0].profile_image);
-                            // console.log(UserInfo[0].profile_image);
                         }
                     }
                     )
@@ -49,7 +46,6 @@ const DiaryListView = (props) => {
 
     React.useEffect(() => {
         if(items.length !== 0){
-            console.log(2);
             setItemData()
         }
     }, [items])
@@ -94,26 +90,16 @@ const DiaryListView = (props) => {
             val[date] = ({ selected: true, disableTouchEvent: true, selectedColor: 'yellowgreen' })
 
         }
-        // console.log(val)
         setMarkedDates(val)
-        // console.log(123)
     }
 
     const changeDate = (date) => {
-        // if(preDate.split('-')[1] !== date.split('-')[1] ){
-        //     setSelectedDate(date);
-        // }
-        // else{
-        //     setSelectedDate(date);
-        // }
         setSelectedDate(date);
-        // console.log(date)
     }
 
     const getitems = () => {
         const year = date.split('-')[0]
         const month = date.split('-')[1]
-        // console.log(month);
         setEmpty(false);
         setItems([]);
         axios.post(config.ip + ':5000/diariesRouter/findOwnPerMonth', {
@@ -123,7 +109,6 @@ const DiaryListView = (props) => {
                 month: month
             }
         }).then((response) => {
-            // console.log(response.data);
             setItems(response.data);
             if(response.data.length==0){
                 setEmpty(true);
